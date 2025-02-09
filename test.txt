@@ -1,5 +1,5 @@
 title: 星合の空 # 站点标题
-description: My Blog based on Kan Wu's Blog
+description: Kan Wu's Personal Blog
 baseurl: "" # 假如你的博客是建在某个目录下的，请在这里加上目录名，并且下面配置的所有链接里的`/assets`前也要加，即`/your_baseurl/assets`。这一项结尾不要有'/'。
 
 defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/front-matter-defaults/>功能进行配置
@@ -34,6 +34,18 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
           dark-theme: dark
           menu:
             nav: # 导航部分的内容，你也可以自己增加对应的链接
+              - title: '首页 / Index'
+                href: /
+              - title: '留言 / Comments'
+                href: /comments/
+              - title: '归档 / Archive'
+                href: /archive/
+              - title: '标签 / Tags'
+                href: /tags/
+              - title: '捐赠 / Donate'
+                href: /donate/
+              - title: '简历 / Resume'
+                href: https://resume.wu-kan.cn/
               - title: 'GitHub'
                 href: https://github.com/wu-kan
               - title: 'Bilibili'
@@ -44,6 +56,8 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
                 href: https://scholar.google.com/citations?user=aU9P37UAAAAJ
               - title: 'Vjudge'
                 href: https://vjudge.net/user/WuK
+              - title: 'jekyll-theme-WuK'
+                href: https://jekyll-theme-WuK.wu-kan.cn/
             footer: | # 页面统计
               <div>
                 <span id="busuanzi_container_site_pv">
@@ -173,12 +187,12 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
             - | # 网站小图标，可换成你自己的图片，改href中的部分即可
               <link
                 rel="apple-touch-icon-precomposed"
-                href="https://fastly.jsdelivr.net/gh/tkzzzzzz6/imagehost@main/blog/1739084411495th.jpg
+                href="https://gravatar.loli.net/avatar/289efba375d63424de3c49569c446744?s=320"
               />
               <link
                 rel="shortcut
                 icon"
-                href="https://fastly.jsdelivr.net/gh/tkzzzzzz6/imagehost@main/blog/1739084411495th.jpg"
+                href="https://gravatar.loli.net/avatar/289efba375d63424de3c49569c446744?s=32"
               />
             - | # 来自primer/css的页面样式，不要改
               <link
@@ -344,6 +358,7 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
             </a>
             （除特别声明或转载文章外）
             <br/>
+            <a target="_blank" href="/donate/">如果这篇博客帮助到你，可以请我喝一杯咖啡~</a>
           related_posts:
             enable: true
         home: # 展示页的配置可跳过，详见<https://revealjs.com/>
