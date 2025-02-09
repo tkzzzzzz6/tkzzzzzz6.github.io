@@ -13,19 +13,20 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
               Loading comments...
             </div>
             <script src="https://giscus.app/client.js"
-              data-repo="tkzzzzzz6/tkzzzzzz6.github.io"
-              data-repo-id="R_kgDON2nSFA"
-              data-category="Announcements"
-              data-category-id="DIC_kwDON2nSFM4CmzRw"
-              data-mapping="url"
-              data-strict="0"
-              data-reactions-enabled="1"
-              data-emit-metadata="0"
-              data-input-position="top"
-              data-theme="preferred_color_scheme"
-              data-lang="en"
-              crossorigin="anonymous"
-              async>
+                    data-repo="tkzzzzzz6/tkzzzzzz6.github.io"
+                    data-repo-id="R_kgDON2nSFA"
+                    data-category="Announcements"
+                    data-category-id="DIC_kwDON2nSFM4CmzRw"
+                    data-mapping="url"
+                    data-strict="0"
+                    data-reactions-enabled="1"
+                    data-emit-metadata="0"
+                    data-input-position="top"
+                    data-theme="preferred_color_scheme"
+                    data-lang="zh-CN"
+                    data-loading="lazy"
+                    crossorigin="anonymous"
+                    async>
             </script>
         default:
           html_lang: zh # <https://www.w3school.com.cn/tags/html_ref_language_codes.asp>
@@ -70,9 +71,6 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
                   src="https://cdn.jsdelivr.net/npm/busuanzi@2.3/bsz.pure.mini.js"
                   async="async"
                 ></script>
-              </div>
-              <div>
-                (C) 2017-2024 wu-kan
               </div>
             jekyll-toc: # <https://github.com/allejo/jekyll-toc>
               enable: true
@@ -188,8 +186,7 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
                 href="https://fastly.jsdelivr.net/gh/tkzzzzzz6/imagehost@main/blog/1739084411495th.jpg
               />
               <link
-                rel="shortcut
-                icon"
+                rel="shortcut icon"
                 href="https://fastly.jsdelivr.net/gh/tkzzzzzz6/imagehost@main/blog/1739084411495th.jpg"
               />
             - | # 来自primer/css的页面样式，不要改
