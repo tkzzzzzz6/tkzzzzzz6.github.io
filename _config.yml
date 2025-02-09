@@ -1,5 +1,5 @@
-title: 星合の空 # 站点标题
-description: My Blog based on Kan Wu's Blog
+title: TKの小站 # 站点标题
+description: Based on Kan Wu's Blog
 baseurl: "" # 假如你的博客是建在某个目录下的，请在这里加上目录名，并且下面配置的所有链接里的`/assets`前也要加，即`/your_baseurl/assets`。这一项结尾不要有'/'。
 
 defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/front-matter-defaults/>功能进行配置
@@ -13,10 +13,10 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
               Loading comments...
             </div>
             <script src="https://giscus.app/client.js"
-              data-repo="wu-kan/wu-kan.github.io"
-              data-repo-id="MDEwOlJlcG9zaXRvcnkxNzIxMzc1OTQ="
+              data-repo="tkzzzzzz6/tkzzzzzz6.github.io"
+              data-repo-id="R_kgDON2nSFA"
               data-category="Announcements"
-              data-category-id="DIC_kwDOCkKces4Clz9j"
+              data-category-id="DIC_kwDON2nSFM4CmzRw"
               data-mapping="url"
               data-strict="0"
               data-reactions-enabled="1"
@@ -34,16 +34,28 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
           dark-theme: dark
           menu:
             nav: # 导航部分的内容，你也可以自己增加对应的链接
+              - title: '首页 / Index'
+                href: /
+              - title: '留言 / Comments'
+                href: /comments/
+              - title: '归档 / Archive'
+                href: /archive/
+              - title: '标签 / Tags'
+                href: /tags/
+              - title: '捐赠 / Donate'
+                href: /donate/
+              - title: '简历 / Resume'
+                href: https://www.canva.cn/design/DAGaB3lu4qk/GHyS4FPs1GsQzhEJz3nXxg/edit?ui=eyJEIjp7IlAiOnsiQiI6ZmFsc2V9fX0
               - title: 'GitHub'
-                href: https://github.com/wu-kan
+                href: https://github.com/tkzzzzzz6
               - title: 'Bilibili'
-                href: https://space.bilibili.com/166390020
+                href: https://space.bilibili.com/336136731
               - title: 'Zhihu'
-                href: https://www.zhihu.com/people/wukan0621
+                href: https://www.zhihu.com/people/tkzzz3
               - title: 'Google Scholar'
-                href: https://scholar.google.com/citations?user=aU9P37UAAAAJ
+                href: 
               - title: 'Vjudge'
-                href: https://vjudge.net/user/WuK
+                href: https://vjudge.net/user/tkzzzzzz6
             footer: | # 页面统计
               <div>
                 <span id="busuanzi_container_site_pv">
