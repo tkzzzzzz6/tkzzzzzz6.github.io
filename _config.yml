@@ -381,30 +381,66 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
             <a target="_blank" href="/donate/">如果这篇博客帮助到你，可以请我喝一杯咖啡~</a>
           related_posts:
             enable: true
-        home: # 展示页的配置可跳过，详见<https://revealjs.com/>
+        home: # 主页展示配置
           append_to_section_tag:
-            - key: data-markdown
-            - key: data-separator # 水平展示页分隔符
-              value: <!-- .slide -->
-            - key: data-separator-vertical # 垂直展示页分隔符
-              value: <!-- .slide vertical=true -->
+            - key: data-markdown # 支持Markdown格式
           prepend: |
-            <link
-              rel="stylesheet"
-              href="https://cdn.jsdelivr.net/combine/npm/reveal.js@5.1.0/dist/reveal.min.css,npm/reveal.js@5.1.0/dist/theme/serif.min.css"
-            />
             <style>
-              .reveal {
-                --r-main-font: "Monaspace Xenon", "极影毁片文宋 Medium", var(--fontStack-monospace), monospace;
-                --r-heading-font: var(--r-main-font);
-                --r-code-font: var(--r-main-font);
-                --r-main-color: var(--fgColor-default, var(--color-fg-default));
-                --r-heading-color: var(--fgColor-default, var(--color-fg-default));
-                --r-link-color: var(--fgColor-accent, var(--color-accent-fg));
-                --r-background-color: var(--bgColor-default, var(--color-canvas-default));
+              .home-wrapper {
+                max-width: 1012px;
+                margin: 0 auto;
+                padding: 32px;
               }
-              .reveal .slides {
-                text-align: left;
+              .home-header {
+                padding-bottom: 24px;
+                margin-bottom: 24px;
+                border-bottom: 1px solid var(--borderColor-default, var(--color-border-default));
+              }
+              .home-title {
+                margin: 0;
+                font-size: 32px;
+                font-weight: 600;
+                line-height: 1.25;
+              }
+              .home-description {
+                margin-top: 8px;
+                font-size: 16px;
+                color: var(--fgColor-muted, var(--color-fg-muted));
+              }
+              .home-content {
+                font-family: "Monaspace Xenon", "极影毁片文宋 Medium", var(--fontStack-monospace), monospace;
+              }
+              .home-content h1,
+              .home-content h2,
+              .home-content h3 {
+                margin-top: 24px;
+                margin-bottom: 16px;
+                font-weight: 600;
+                line-height: 1.25;
+              }
+              .home-content h1 {
+                padding-bottom: 0.3em;
+                font-size: 2em;
+                border-bottom: 1px solid var(--borderColor-default, var(--color-border-default));
+              }
+              .home-content h2 {
+                padding-bottom: 0.3em;
+                font-size: 1.5em;
+                border-bottom: 1px solid var(--borderColor-default, var(--color-border-default));
+              }
+              .home-content h3 {
+                font-size: 1.25em;
+              }
+              .home-content p {
+                margin-top: 0;
+                margin-bottom: 16px;
+              }
+              .home-content a {
+                color: var(--fgColor-accent, var(--color-accent-fg));
+                text-decoration: none;
+              }
+              .home-content a:hover {
+                text-decoration: underline;
               }
             </style>
           append: |
