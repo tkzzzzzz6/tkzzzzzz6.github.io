@@ -106,28 +106,29 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
                 </form>
           append_to_head: # 通过内嵌html的方式引入并定制插件，删改前确定知道自己在做什么。定制插件的方式可以参考这篇文章 <https://wu-kan.cn/_posts/2019-01-18-基于Jekyll搭建个人博客/>
             - | # 页面加载动画，可在 <https://css-loaders.com/> 挑选
-              <style>
                 .loader {
-                  width: calc(6*30px);
-                  height: 50px;
-                  display: flex;
-                  filter: drop-shadow(30px 25px 0 currentColor) drop-shadow(60px 0 0 currentColor) drop-shadow(120px 0 0 currentColor);
-                  clip-path: inset(0 100% 0 0);
-                  animation: l12 2s infinite steps(7);
+                  width: fit-content;
+                  font-size: 40px;
+                  font-family: system-ui,sans-serif;
+                  font-weight: bold;
+                  text-transform: uppercase;
+                  color: #0000;
+                  -webkit-text-stroke: 1px #000;
+                  background:
+                    radial-gradient(0.71em at 50% 1em,#000 99%,#0000 101%) calc(50% - 1em) 1em/2em 200% repeat-x text,
+                    radial-gradient(0.71em at 50% -0.5em,#0000 99%,#000 101%) 50% 1.5em/2em 200% repeat-x text;
+                  animation: 
+                    l10-0 .8s linear infinite alternate,
+                    l10-1  4s linear infinite;
                 }
                 .loader:before {
-                  content: "";
-                  width: 30px;
-                  height: 25px;
-                  --c:no-repeat radial-gradient(farthest-side,currentColor 92%,#0000);
-                  background:
-                    var(--c) left /70% 70%,
-                    var(--c) right/20% 20%,
-                    var(--c) top    0 right 15%/20% 20%,
-                    var(--c) bottom 0 right 15%/20% 20%;
+                  content: "Loading";
                 }
-                @keyframes l12 {
-                  100% {clip-path: inset(0 -30px 0 0)}
+                @keyframes l10-0 {
+                  to {background-position-x: 50%,calc(50% + 1em)}
+                }
+                @keyframes l10-1 {
+                  to {background-position-y: -.5em,0}
                 }
                 #wrap-loader {
                   width: 100%;
