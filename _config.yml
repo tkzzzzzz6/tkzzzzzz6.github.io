@@ -228,12 +228,59 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
             - | # 网站小图标，可换成你自己的图片，改href中的部分即可
               <link
                 rel="apple-touch-icon-precomposed"
-                href="https://fastly.jsdelivr.net/gh/tkzzzzzz6/imagehost@main/blog/1739084411495th.jpg
+                href="https://fastly.jsdelivr.net/gh/tkzzzzzz6/imagehost@main/blog/1739084411495th.jpg"
               />
               <link
                 rel="shortcut icon"
                 href="https://fastly.jsdelivr.net/gh/tkzzzzzz6/imagehost@main/blog/1739084411495th.jpg"
               />
+            - | # 背景图片设置
+              <style>
+                /* 重置基础样式 */
+                html {
+                  height: 100%;
+                }
+                
+                /* 设置背景容器 */
+                .layout-wrapper {
+                  position: relative;
+                  min-height: 100vh;
+                }
+                
+                /* 背景图片层 */
+                .layout-wrapper::before {
+                  content: '';
+                  position: fixed;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
+                  background-image: url('https://fastly.jsdelivr.net/gh/tkzzzzzz6/imagehost@main/blog/1739340406785wallhaven-579jp3_3840x2160.png');
+                  background-position: center;
+                  background-size: cover;
+                  background-repeat: no-repeat;
+                  opacity: 0.8;
+                  z-index: -2;
+                }
+                
+                /* 遮罩层 */
+                .layout-wrapper::after {
+                  content: '';
+                  position: fixed;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
+                  background: rgba(13, 17, 23, 0.85);
+                  z-index: -1;
+                }
+                
+                /* 确保内容可见 */
+                .container-lg {
+                  position: relative;
+                  z-index: 1;
+                }
+              </style>
             - | # 来自primer/css的页面样式，不要改
               <link
                 rel="stylesheet"
@@ -264,6 +311,19 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
                   min-height: 100vh;
                 }
               </style>
+            - | # 调试样式
+              <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                  console.log('Background style loaded');
+                  // 检查布局结构
+                  console.log('Layout wrapper:', document.querySelector('.layout-wrapper'));
+                  // 检查背景图片是否加载
+                  const img = new Image();
+                  img.onload = () => console.log('Background image loaded successfully');
+                  img.onerror = () => console.log('Background image failed to load');
+                  img.src = 'https://fastly.jsdelivr.net/gh/tkzzzzzz6/imagehost@main/blog/1739340406785wallhaven-579jp3_3840x2160.png';
+                });
+              </script>
         page:
           title: # 为每个页面自动生成一个 H1 title
             enable: true
