@@ -154,6 +154,36 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
                 #wrap-loader {
                   background-color: var(--bgColor-default);
                 }
+                /* 全局背景图片设置 */
+                body {
+                  background-image: url('https://fastly.jsdelivr.net/gh/tkzzzzzz6/imagehost@main/blog/wallhaven-579jp3_3840x2160.png');
+                  background-position: center;
+                  background-attachment: fixed;
+                  background-size: cover;
+                  background-repeat: no-repeat;
+                }
+                
+                /* 背景遮罩层 */
+                body::before {
+                  content: '';
+                  position: fixed;
+                  top: 0;
+                  left: 0;
+                  right: 0;
+                  bottom: 0;
+                  background: linear-gradient(
+                    rgba(13, 17, 23, 0.7),
+                    rgba(13, 17, 23, 0.7)
+                  );
+                  z-index: -1;
+                  pointer-events: none;
+                }
+                
+                /* 确保内容在遮罩层之上 */
+                #wrap-content {
+                  position: relative;
+                  z-index: 1;
+                }
               </style>
               <script>
                 document.addEventListener("DOMContentLoaded", (event) => {
