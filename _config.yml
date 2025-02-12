@@ -102,7 +102,54 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
                   })'
                   ></script>
                 </form>
-          append_to_head: # 通过内嵌html的方式引入并定制插件，删改前确定知道自己在做什么。定制插件的方式可以参考这篇文章 <https://wu-kan.cn/_posts/2019-01-18-基于Jekyll搭建个人博客/>
+          append_to_head:
+            - | # 全局背景图片设置
+              <style>
+                html, body {
+                  min-height: 100vh;
+                  margin: 0;
+                  padding: 0;
+                }
+                
+                body {
+                  position: relative;
+                  color: var(--text-primary);
+                }
+                
+                /* 背景图片容器 */
+                body::before {
+                  content: '';
+                  position: fixed;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
+                  background-image: url('https://fastly.jsdelivr.net/gh/tkzzzzzz6/imagehost@main/blog/1739340406785wallhaven-579jp3_3840x2160.png');
+                  background-position: center;
+                  background-attachment: fixed;
+                  background-size: cover;
+                  background-repeat: no-repeat;
+                  z-index: -2;
+                }
+                
+                /* 背景遮罩层 */
+                body::after {
+                  content: '';
+                  position: fixed;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
+                  background: rgba(13, 17, 23, 0.85);
+                  z-index: -1;
+                }
+                
+                /* 确保内容在最上层 */
+                #wrap-content {
+                  position: relative;
+                  z-index: 1;
+                }
+              </style>
             - | # 页面加载动画，可在 <https://css-loaders.com/> 挑选
               <style>
                 .loader {
@@ -153,36 +200,6 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
                 }
                 #wrap-loader {
                   background-color: var(--bgColor-default);
-                }
-                /* 全局背景图片设置 */
-                body {
-                  background-image: url('https://fastly.jsdelivr.net/gh/tkzzzzzz6/imagehost@main/blog/1739340406785wallhaven-579jp3_3840x2160.png');
-                  background-position: center;
-                  background-attachment: fixed;
-                  background-size: cover;
-                  background-repeat: no-repeat;
-                }
-                
-                /* 背景遮罩层 */
-                body::before {
-                  content: '';
-                  position: fixed;
-                  top: 0;
-                  left: 0;
-                  right: 0;
-                  bottom: 0;
-                  background: linear-gradient(
-                    rgba(13, 17, 23, 0.7),
-                    rgba(13, 17, 23, 0.7)
-                  );
-                  z-index: -1;
-                  pointer-events: none;
-                }
-                
-                /* 确保内容在遮罩层之上 */
-                #wrap-content {
-                  position: relative;
-                  z-index: 1;
                 }
               </style>
               <script>
