@@ -1,5 +1,5 @@
-title: TKの小站 # 站点标题
-description: Based on Kan Wu's Blog
+title: "TKの小站"
+description: "技术探索者，专注于开发实用工具和分享技术经验"
 baseurl: "" # 假如你的博客是建在某个目录下的，请在这里加上目录名，并且下面配置的所有链接里的`/assets`前也要加，即`/your_baseurl/assets`。这一项结尾不要有'/'。
 
 defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/front-matter-defaults/>功能进行配置
@@ -513,3 +513,12 @@ kramdown: # 见<https://kramdown.gettalong.org/options.html>
 #kramdown:
 #  math_engine: mathjax
 #  syntax_highlighter: rouge
+
+# 社交链接
+social:
+  github: "https://github.com/tkzzzzzz6"
+
+# 关于信息
+about: >
+  这里是TK的技术博客，主要分享编程开发、系统运维和工具使用方面的经验。
+  关注前沿技术，探索最佳实践。
