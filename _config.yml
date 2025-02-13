@@ -476,7 +476,7 @@ plugins: # <https://jekyllrb.com/docs/plugins/>
   - jekyll-redirect-from # 站点页面重定向
   - jekyll-remote-theme # 使用remote_theme插件实现主题的前后分离，详见<https://github.com/benbalter/jekyll-remote-theme/>
 
-remote_theme: tkzzzzzz6/jekyll-theme-KeTan 
+remote_theme: tkzzzzzz6/jekyll-theme-KeTan
 
 readme_index: # 缺失index.md和index.html时，使用README.md代替之
   with_frontmatter: true # 支持带有yaml头的README
@@ -507,7 +507,7 @@ kramdown: # 见<https://kramdown.gettalong.org/options.html>
 #safe: true # 禁用自定义插件
 #source: [your repo's top level directory] # Jekyll 读取文件的路径
 #incremental: false # 增量生成
-#highlighter: rouge # 代码高亮器
+highlighter: rouge # 代码高亮器
 #gist:
 #  noscript: false
 #kramdown:
