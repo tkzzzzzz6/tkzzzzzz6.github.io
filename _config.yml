@@ -1,5 +1,5 @@
-title: TKの小站 # 站点标题
-description: Based on Kan Wu's Blog
+title: "TKの小站"
+description: "技术探索者，专注于开发实用工具和分享技术经验"
 baseurl: "" # 假如你的博客是建在某个目录下的，请在这里加上目录名，并且下面配置的所有链接里的`/assets`前也要加，即`/your_baseurl/assets`。这一项结尾不要有'/'。
 
 defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/front-matter-defaults/>功能进行配置
@@ -476,7 +476,7 @@ plugins: # <https://jekyllrb.com/docs/plugins/>
   - jekyll-redirect-from # 站点页面重定向
   - jekyll-remote-theme # 使用remote_theme插件实现主题的前后分离，详见<https://github.com/benbalter/jekyll-remote-theme/>
 
-remote_theme: tkzzzzzz6/jekyll-theme-KeTan #使用固定版本号以防止主题更新导致站点显示错乱
+remote_theme: tkzzzzzz6/jekyll-theme-KeTan
 
 readme_index: # 缺失index.md和index.html时，使用README.md代替之
   with_frontmatter: true # 支持带有yaml头的README
@@ -507,9 +507,19 @@ kramdown: # 见<https://kramdown.gettalong.org/options.html>
 #safe: true # 禁用自定义插件
 #source: [your repo's top level directory] # Jekyll 读取文件的路径
 #incremental: false # 增量生成
-#highlighter: rouge # 代码高亮器
+highlighter: rouge # 代码高亮器
 #gist:
 #  noscript: false
 #kramdown:
 #  math_engine: mathjax
 #  syntax_highlighter: rouge
+
+
+# 社交链接
+social:
+  github: "https://github.com/tkzzzzzz6"
+
+# 关于信息
+about: >
+  这里是TK的技术博客，主要分享编程开发、系统运维和工具使用方面的经验。
+  关注前沿技术，探索最佳实践。
