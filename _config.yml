@@ -43,8 +43,8 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
                 href: /archive/
               - title: '标签 / Tags'
                 href: /tags/
-              - title: '捐赠 / Donate'
-                href: /donate/
+              # - title: '捐赠 / Donate'
+              #   href: /donate/
               - title: 'GitHub'
                 href: https://github.com/tkzzzzzz6
               - title: 'Bilibili'
