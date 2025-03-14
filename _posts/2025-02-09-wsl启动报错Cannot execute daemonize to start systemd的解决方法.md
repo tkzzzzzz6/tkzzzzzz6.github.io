@@ -1,6 +1,6 @@
 ---
 title: WSL 启动报错 "Cannot execute daemonize to start systemd" 的解决方法
-tags: 报错解决
+tags: 问题解决
 ---
 
 ## 问题背景
