@@ -1,5 +1,5 @@
 ---
-title: 2025-03-13-VitPose 基于 vit 的姿态评估模型
+title: 2025-03-18-VitPose 基于 vit 的姿态评估模型
 tags: 
     深度学习
     论文阅读
