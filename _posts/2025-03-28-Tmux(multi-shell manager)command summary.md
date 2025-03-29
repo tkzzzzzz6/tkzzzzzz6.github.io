@@ -14,7 +14,7 @@ tags:
 
 启动新会话：
 
-```
+```bash
 tmux [new -s 会话名 -n 窗口名]
 ```
 
@@ -26,19 +26,19 @@ tmux at [-t 会话名]
 
 列出所有会话：
 
-```
+```bash
 tmux ls
 ```
 
 关闭会话：
 
-```
+```bash
 tmux kill-session -t 会话名
 ```
 
 关闭所有会话：
 
-```
+```bash
 tmux ls | grep : | cut -d. -f1 | awk '{print substr($1, 0, length($1)-1)}' | xargs kill
 ```
 
@@ -46,7 +46,7 @@ tmux ls | grep : | cut -d. -f1 | awk '{print substr($1, 0, length($1)-1)}' | xar
 
 ## **会话**
 
-```
+```bash
 :new<回车>  启动新会话
 s           列出所有会话
 $           重命名当前会话
@@ -54,7 +54,7 @@ $           重命名当前会话
 
 ## **窗口 (标签页)**
 
-```
+```bash
 c  创建新窗口
 w  列出所有窗口
 n  后一个窗口
@@ -66,7 +66,7 @@ f  查找窗口
 
 ## **调整窗口排序**
 
-```
+```bash
 swap-window -s 3 -t 1  交换 3 号和 1 号窗口
 swap-window -t 1       交换当前和 1 号窗口
 move-window -t 1       移动当前窗口到 1 号
@@ -74,7 +74,7 @@ move-window -t 1       移动当前窗口到 1 号
 
 ## **窗格（分割窗口）**
 
-```
+```bash
 %  垂直分割
 "  水平分割
 o  交换窗格
@@ -90,7 +90,7 @@ z 切换窗格最大化/最小化
 
 这么做可以切换到想要的窗口，输入 Tmux 前缀和一个冒号呼出命令提示行，然后输入：
 
-```
+```bash
 :setw synchronize-panes
 ```
 
@@ -100,7 +100,7 @@ z 切换窗格最大化/最小化
 
 如果你不喜欢默认布局，可以重调窗格的尺寸。虽然这很容易实现，但一般不需要这么干。这几个命令用来调整窗格：
 
-```
+```bash
 PREFIX : resize-pane -D          当前窗格向下扩大 1 格
 PREFIX : resize-pane -U          当前窗格向上扩大 1 格
 PREFIX : resize-pane -L          当前窗格向左扩大 1 格
@@ -113,7 +113,7 @@ PREFIX : resize-pane -t 2 -L 20  编号为 2 的窗格向左扩大 20 格
 
 按下 `PREFIX-[` 进入文本复制模式。可以使用方向键在屏幕中移动光标。默认情况下，方向键是启用的。在配置文件中启用 Vim 键盘布局来切换窗口、调整窗格大小。Tmux 也支持 Vi 模式。要是想启用 Vi 模式，只需要把下面这一行添加到 .tmux.conf 中：
 
-```
+```bash
 setw -g mode-keys vi
 ```
 
@@ -125,7 +125,7 @@ setw -g mode-keys vi
 
 例如，可以使用 w 键逐词移动，使用 b 键逐词回退。使用 f 键加上任意字符跳转到当前行第一次出现该字符的位置，使用 F 键达到相反的效果。
 
-```
+```bash
 vi             emacs        功能
 ^              M-m          反缩进
 Escape         C-g          清除选定内容
@@ -161,7 +161,7 @@ Space          C-Space      开始选中
 
 ## **杂项：**
 
-```
+```bash
 d  退出 tmux（tmux 仍在后台运行）
 t  窗口中央显示一个数字时钟
 ?  列出所有快捷键
@@ -170,7 +170,7 @@ t  窗口中央显示一个数字时钟
 
 ## **配置选项：**
 
-```
+```bash
 # 鼠标支持 - 设置为 on 来启用鼠标(与 2.1 之前的版本有区别，请自行查阅 man page)
 * set -g mouse on
 
@@ -192,7 +192,7 @@ bind Down last-window \; swap-pane -s tmp.1 \; kill-window -t tmp
 
 ## **参考配置文件（~/.tmux.conf）：**
 
-```
+```bash
 # -----------------------------------------------------------------------------# Tmux 基本配置 - 要求 Tmux >= 2.3# 如果不想使用插件，只需要将此节的内容写入 ~/.tmux.conf 即可# -----------------------------------------------------------------------------# C-b 和 VIM 冲突，修改 Prefix 组合键为 Control-Z，按键距离近set -g prefix C-z
 
 set -g base-index         1     # 窗口编号从 1 开始计数
