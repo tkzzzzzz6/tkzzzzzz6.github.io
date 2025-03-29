@@ -5,8 +5,11 @@ tags:
 ---
 
 > [Tmux Cheat Sheet & Quick Reference | Session, window, pane and more](https://tmuxcheatsheet.com/)
+>
 > [https://www.youtube.com/watch?v=nTqu6w2wc68&ab_channel=NetworkChuck](https://www.youtube.com/watch?v=nTqu6w2wc68&ab_channel=NetworkChuck)(教学视频)
+>
 > [Tmux 使用手册](https://louiszhai.github.io/2017/09/30/tmux/)
+>
 > [Tmux 快捷键 & 速查表 & 简明教程](https://gist.github.com/ryerh/14b7c24dfd623ef8edc7)
 
 启动新会话：
