@@ -1,0 +1,809 @@
+{
+    "Table": [
+        {
+            "rowcount": 357
+        }
+    ],
+    "Table1": [
+        {
+            "rownum": 1,
+            "storeName": "江宁餐厅",
+            "addressDetail": "江宁开发区秦淮路11号欧尚超市一楼",
+            "pro": "点唱机,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 2,
+            "storeName": "应天餐厅",
+            "addressDetail": "应天大街866号大润发超市1楼",
+            "pro": "点唱机,礼品卡,手机点餐",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 3,
+            "storeName": "正洪",
+            "addressDetail": "中山南路79号中央商场二楼",
+            "pro": "Wi-Fi,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 4,
+            "storeName": "新华",
+            "addressDetail": "新华路520号",
+            "pro": "24小时,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 5,
+            "storeName": "珍珠",
+            "addressDetail": "珠江路389号珍珠饭店一层",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 6,
+            "storeName": "汉中",
+            "addressDetail": "汉中路209号",
+            "pro": "24小时,Wi-Fi,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 7,
+            "storeName": "光华 （025-84624156）",
+            "addressDetail": "御道街113号 84624156",
+            "pro": "24小时,Wi-Fi,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 8,
+            "storeName": "广州",
+            "addressDetail": "广州路104号",
+            "pro": "24小时,Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 9,
+            "storeName": "正兴",
+            "addressDetail": "贡院街119号",
+            "pro": "Wi-Fi,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 10,
+            "storeName": "热河",
+            "addressDetail": "热河路2号025-58806953",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 11,
+            "storeName": "南京商厦",
+            "addressDetail": "龙蟠路2号",
+            "pro": "24小时,Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 12,
+            "storeName": "东山025-52188133（大市口东域城1楼）",
+            "addressDetail": "东山镇土山路2号（华意泰富广场南）",
+            "pro": "24小时,Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 13,
+            "storeName": "润发",
+            "addressDetail": "龙蟠中路260号",
+            "pro": "Wi-Fi,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 14,
+            "storeName": "龙江润发",
+            "addressDetail": "草场门大街99号金润发一楼",
+            "pro": "24小时,Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 15,
+            "storeName": "迈皋桥",
+            "addressDetail": "和燕路346号025-85231769（沃尔玛超市一楼）",
+            "pro": "24小时,Wi-Fi,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 16,
+            "storeName": "太平南路84454439",
+            "addressDetail": "太平南路304-330号",
+            "pro": "24小时,Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 17,
+            "storeName": "金浦",
+            "addressDetail": "珠江镇文德路金浦假日百货一层",
+            "pro": "24小时,Wi-Fi,点唱机,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 18,
+            "storeName": "金利",
+            "addressDetail": "新华路138号鑫乐广场（北京华联超市旁）",
+            "pro": "Wi-Fi,店内参观,礼品卡,手机点餐",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 19,
+            "storeName": "仙林文苑",
+            "addressDetail": "仙林文苑路108号大成名店一楼",
+            "pro": "24小时,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 20,
+            "storeName": "新世纪",
+            "addressDetail": "太平南路1号",
+            "pro": "Wi-Fi,点唱机,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 21,
+            "storeName": "瑞金餐厅-瑞金路48号",
+            "addressDetail": "瑞金路48号",
+            "pro": "24小时,Wi-Fi,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 22,
+            "storeName": "大桥家乐福 ",
+            "addressDetail": "大桥南路7号 025-58833304",
+            "pro": "24小时,Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 23,
+            "storeName": "花园",
+            "addressDetail": "花园路17号",
+            "pro": "24小时,Wi-Fi,点唱机,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 24,
+            "storeName": "龙津",
+            "addressDetail": "龙津路8号金宁广场中区一层",
+            "pro": "24小时,Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 25,
+            "storeName": "胜太52146152",
+            "addressDetail": "将军大道9号一层（近胜太西路）",
+            "pro": "24小时,点唱机,礼品卡,手机点餐",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 26,
+            "storeName": "南京站",
+            "addressDetail": "龙蟠路111号南京火车站候车室3楼",
+            "pro": "24小时,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 27,
+            "storeName": "大桥北路（025-57033696）",
+            "addressDetail": "大桥北路48号华东茂A1层(家居馆旁边)",
+            "pro": "24小时,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 28,
+            "storeName": "虹桥",
+            "addressDetail": "中山北路281-2号1-2层",
+            "pro": "Wi-Fi,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 29,
+            "storeName": "河西绿轴 ",
+            "addressDetail": "绿轴餐厅 025-87771262",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 30,
+            "storeName": "红山",
+            "addressDetail": "和燕路252号",
+            "pro": "24小时,Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 31,
+            "storeName": "新城市餐厅（86304012）",
+            "addressDetail": "草场门大街新城市广场南门一楼",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 32,
+            "storeName": "安德门",
+            "addressDetail": "地铁一号线安德门地铁站一层2号出口",
+            "pro": "Wi-Fi,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 33,
+            "storeName": "高淳宏达",
+            "addressDetail": "通贤街28-3号宏达大厦1-2层，百货大厦对面",
+            "pro": "24小时,Wi-Fi,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 34,
+            "storeName": "山西路",
+            "addressDetail": "中山北路107号1-2层(山西路百货大楼)",
+            "pro": "24小时,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 35,
+            "storeName": "天元",
+            "addressDetail": "天元路388号义乌小商品城A区1栋一层",
+            "pro": "24小时,Wi-Fi,点唱机,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 36,
+            "storeName": "石鼓路86795392",
+            "addressDetail": "石鼓路33号86795392",
+            "pro": "24小时,Wi-Fi,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 37,
+            "storeName": "河西万达",
+            "addressDetail": "建邺区万达广场D门（孩子王对面）",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 38,
+            "storeName": "紫金",
+            "addressDetail": "铁匠营地块的君临紫金商业项目07幢一层01、02号",
+            "pro": "24小时,Wi-Fi,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 39,
+            "storeName": "仙林金鹰",
+            "addressDetail": "学海路1号1层4-102商铺",
+            "pro": "点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 40,
+            "storeName": "铁心桥餐厅52355370",
+            "addressDetail": "铁心桥大街26号 电话:52355591",
+            "pro": "24小时,Wi-Fi,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 41,
+            "storeName": "五星年华",
+            "addressDetail": "汉中路141-145号一层",
+            "pro": "Wi-Fi,点唱机,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 42,
+            "storeName": "绿洲",
+            "addressDetail": "梅山街道203道口旁商务楼一层",
+            "pro": "24小时,Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 43,
+            "storeName": "21世纪",
+            "addressDetail": "江宁区天元中路苏果超市一楼肯德基",
+            "pro": "24小时,Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 44,
+            "storeName": "孝陵卫地铁站",
+            "addressDetail": "地铁2号线孝陵卫站",
+            "pro": "Wi-Fi,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 45,
+            "storeName": "尧佳路",
+            "addressDetail": "尧化门街179号",
+            "pro": "24小时,Wi-Fi,点唱机,店内参观,礼品卡,手机点餐",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 46,
+            "storeName": "南京高铁一",
+            "addressDetail": "高铁一店 站外 长途汽车站旁",
+            "pro": "手机点餐",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 47,
+            "storeName": "文鼎广场 52262863",
+            "addressDetail": "江宁区科学园文鼎广场8号楼一层",
+            "pro": "24小时,Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 48,
+            "storeName": "弘阳广场",
+            "addressDetail": "弘阳广场B2馆游乐场旁",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 49,
+            "storeName": "仁恒 ",
+            "addressDetail": "楠溪江东街78号18951887615",
+            "pro": "24小时,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 50,
+            "storeName": "同曦万尚",
+            "addressDetail": "江宁开发区双龙大道以东同曦万尚城",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 51,
+            "storeName": "中山南路84702677",
+            "addressDetail": "汉中路1号东方商城1楼",
+            "pro": "Wi-Fi,精选店,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 52,
+            "storeName": "中央门3",
+            "addressDetail": "龙蟠路111号火车站一楼软席候车室",
+            "pro": "精选店,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 53,
+            "storeName": "金源百货",
+            "addressDetail": "迈皋桥栖霞大道28号万寿综合大楼一层",
+            "pro": "24小时,Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 54,
+            "storeName": "南京瞻园",
+            "addressDetail": "瞻园路9号",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 55,
+            "storeName": "通济街",
+            "addressDetail": "通济街8号",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 56,
+            "storeName": "东城汇",
+            "addressDetail": "文苑路与学思路交叉口仙林东城汇",
+            "pro": "店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 57,
+            "storeName": "华电",
+            "addressDetail": "迈皋桥街道高家村42号3幢1-2层",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 58,
+            "storeName": "水晶",
+            "addressDetail": "大光路142号际华广场",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 59,
+            "storeName": "中山门",
+            "addressDetail": "中山门大街9号苜蓿园地铁站",
+            "pro": "Wi-Fi,店内参观,手机点餐",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 60,
+            "storeName": "虹悦城025-52275991",
+            "addressDetail": "应天大街619号德盈广场负一层52275991",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 61,
+            "storeName": "玉桥",
+            "addressDetail": "建宁路8号",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 62,
+            "storeName": "石林百货",
+            "addressDetail": "联合村147号一层",
+            "pro": "Wi-Fi,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 63,
+            "storeName": "双龙DT52452080",
+            "addressDetail": "宁溧公路288号麦德龙超市旁",
+            "pro": "Wi-Fi,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 64,
+            "storeName": "金宝DT",
+            "addressDetail": "东新南路金宝大市场",
+            "pro": "24小时,Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 65,
+            "storeName": "凤凰餐厅",
+            "addressDetail": "凤凰东街150号",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 66,
+            "storeName": "高淳淳溪餐厅",
+            "addressDetail": "淳溪镇天河路西侧襟湖路北侧39号",
+            "pro": "礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 67,
+            "storeName": "马群-83463096",
+            "addressDetail": "中山门大街马群地铁站1号出口外",
+            "pro": "24小时,Wi-Fi,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 68,
+            "storeName": "大观餐厅",
+            "addressDetail": "建宁路300号一层58706972",
+            "pro": "Wi-Fi,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 69,
+            "storeName": "天迈餐厅",
+            "addressDetail": "地铁2号线油坊桥站",
+            "pro": "点唱机,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 70,
+            "storeName": "天润餐厅",
+            "addressDetail": "柳州东路1号天润广场一层52417900",
+            "pro": "24小时,Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 71,
+            "storeName": "河西雨润中央",
+            "addressDetail": "江东中路237号 58705972",
+            "pro": "24小时,Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 72,
+            "storeName": "南京南站二",
+            "addressDetail": "高铁二店 站内 B1-3检票口楼上",
+            "pro": null,
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 73,
+            "storeName": "河西苏宁环球",
+            "addressDetail": "清江路99号1层",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 74,
+            "storeName": "六合紫晶餐厅",
+            "addressDetail": "六合区雄州镇龙津路紫金广场一区5号楼苏果超市一楼",
+            "pro": "点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 75,
+            "storeName": "禄口机场新站楼",
+            "addressDetail": "江宁区禄口机场T2航站楼安检外美食广场",
+            "pro": null,
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 76,
+            "storeName": "南京站北广场 ",
+            "addressDetail": "火车站北广场3楼3-1-1号",
+            "pro": "礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 77,
+            "storeName": "天泰",
+            "addressDetail": "秣陵街道将军大道62号",
+            "pro": "24小时,Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 78,
+            "storeName": "溧水大润发(大润发一层肯德基）57210726",
+            "addressDetail": "溧水区天生桥大道与致远路交汇处",
+            "pro": "24小时,Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 79,
+            "storeName": "殷巷苏果",
+            "addressDetail": "诚信大道与双龙大道交汇处",
+            "pro": "Wi-Fi,点唱机,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 80,
+            "storeName": "丰盛",
+            "addressDetail": "软件大道119号",
+            "pro": "Wi-Fi,店内参观",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 81,
+            "storeName": "中山陵",
+            "addressDetail": "中山陵步行街8-12",
+            "pro": "Wi-Fi,点唱机,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 82,
+            "storeName": "学府",
+            "addressDetail": "丹凤街39号",
+            "pro": "礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 83,
+            "storeName": "龙华路站",
+            "addressDetail": "地铁10号线2号出口-58883195",
+            "pro": "Wi-Fi,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 84,
+            "storeName": "砂之船",
+            "addressDetail": "江宁区秣周东路18号砂之船奥特莱斯艺术广场4B-11",
+            "pro": null,
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 85,
+            "storeName": "汤山奥莱",
+            "addressDetail": "圣汤大道99号10号楼3栋106和107商铺",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 86,
+            "storeName": "天悦城",
+            "addressDetail": "悦购超市一楼58106057",
+            "pro": "Wi-Fi,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 87,
+            "storeName": "长兴餐厅",
+            "addressDetail": "长兴大街515—679号金宝市场滨江商贸中心",
+            "pro": "Wi-Fi,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 88,
+            "storeName": "六合时代",
+            "addressDetail": "华欧大道8号龙湖时代广场一层",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 89,
+            "storeName": "黄金海岸餐厅",
+            "addressDetail": "金箔路999号",
+            "pro": "Wi-Fi,点唱机,店内参观",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 90,
+            "storeName": "经贸苏果石门坎104号6-22",
+            "addressDetail": "石门坎104号",
+            "pro": "Wi-Fi,店内参观",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 91,
+            "storeName": "江浦大润发",
+            "addressDetail": "新浦路126号超市一楼",
+            "pro": "Wi-Fi,店内参观",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 92,
+            "storeName": "柳洲东路站",
+            "addressDetail": "3号线柳洲东路站（柳洲东路与江山路交叉口西北角）02583378710",
+            "pro": "Wi-Fi,店内参观",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 93,
+            "storeName": "华侨城",
+            "addressDetail": "泰山镇大桥北路1号",
+            "pro": "Wi-Fi,店内参观",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 94,
+            "storeName": "百利广场餐厅",
+            "addressDetail": "来凤路9号百利广场104、105、201商铺",
+            "pro": "点唱机",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 95,
+            "storeName": "万辰餐厅",
+            "addressDetail": "宝塔路18-11号",
+            "pro": "24小时,Wi-Fi,店内参观,礼品卡",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 96,
+            "storeName": "夫子庙地铁站025-85718517",
+            "addressDetail": "地铁3号线夫子庙站3号口025-85718517",
+            "pro": "24小时,Wi-Fi,点唱机",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 97,
+            "storeName": "南京铁发",
+            "addressDetail": "高铁四店 站外 南售票大厅楼上",
+            "pro": "Wi-Fi,点唱机",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 98,
+            "storeName": "常发广场",
+            "addressDetail": "红山路88号",
+            "pro": "Wi-Fi,点唱机",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 99,
+            "storeName": "麒麟BHG",
+            "addressDetail": "麒麟街道新大街悦民路128号东方红郡商业广场",
+            "pro": "Wi-Fi,点唱机,店内参观",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        },
+        {
+            "rownum": 100,
+            "storeName": "澳林购物广场",
+            "addressDetail": "浦珠路126号 87781084",
+            "pro": "24小时,Wi-Fi,店内参观",
+            "provinceName": "江苏省",
+            "cityName": "南京市"
+        }
+    ]
+}

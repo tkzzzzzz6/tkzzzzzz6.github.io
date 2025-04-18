@@ -1,0 +1,809 @@
+{
+    "Table": [
+        {
+            "rowcount": 963
+        }
+    ],
+    "Table1": [
+        {
+            "rownum": 1,
+            "storeName": "茂名",
+            "addressDetail": "吴江路269号2层",
+            "pro": "店内参观,礼品卡,手机点餐,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 2,
+            "storeName": "翔川",
+            "addressDetail": "妙镜路1118号E号商铺",
+            "pro": "点唱机,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 3,
+            "storeName": "动力南广场（汇金奥特莱斯B1层）",
+            "addressDetail": "石龙路750-3号上海南站地下商场南馆",
+            "pro": "礼品卡",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 4,
+            "storeName": "江苏",
+            "addressDetail": "长宁区江苏路398号1F（舜元弘基大厦 2号线江苏路站）",
+            "pro": "店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 5,
+            "storeName": "威宁",
+            "addressDetail": "天山路352号101和201",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 6,
+            "storeName": "思贤",
+            "addressDetail": "思贤路778--780号",
+            "pro": "礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 7,
+            "storeName": "惠乐",
+            "addressDetail": "惠南镇人民西路955号",
+            "pro": "礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 8,
+            "storeName": "柳州",
+            "addressDetail": "沪闵路9001号上海南站站厅层",
+            "pro": "礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 9,
+            "storeName": "真北",
+            "addressDetail": "桃浦路328号",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 10,
+            "storeName": "马陆弘基",
+            "addressDetail": "马陆镇沪宜公路2398/2400号",
+            "pro": "礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 11,
+            "storeName": "南方商城",
+            "addressDetail": "沪闵路7388号5层",
+            "pro": "店内参观,礼品卡",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 12,
+            "storeName": "银霄",
+            "addressDetail": "银霄路393号百安居龙阳店一层",
+            "pro": "店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 13,
+            "storeName": "吴中",
+            "addressDetail": "吴中路1109号一层A商铺",
+            "pro": "24小时,点唱机,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 14,
+            "storeName": "阳光港",
+            "addressDetail": "佘山林湖路888号-1阳光港区9号",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 15,
+            "storeName": "新福海",
+            "addressDetail": "四川北路1318号地下一层103单元",
+            "pro": "Wi-Fi,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 16,
+            "storeName": "年家浜",
+            "addressDetail": "周浦镇沪南公路3449弄1幢32号236-1,236-2号、240号",
+            "pro": "Wi-Fi,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 17,
+            "storeName": "三阳",
+            "addressDetail": "南京东路626-636号一层和二层",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 18,
+            "storeName": "长岛38920284",
+            "addressDetail": "长岛路1150号1层",
+            "pro": "Wi-Fi,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 19,
+            "storeName": "金桥",
+            "addressDetail": "浦东新区张杨路3611弄1号123,124,216室",
+            "pro": "Wi-Fi,点唱机,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 20,
+            "storeName": "保乐",
+            "addressDetail": "闵行华漕镇繁兴路399弄2号",
+            "pro": "24小时,Wi-Fi,点唱机,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 21,
+            "storeName": "新港汇",
+            "addressDetail": "虹桥路1号五层536铺位",
+            "pro": "点唱机,礼品卡,手机点餐",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 22,
+            "storeName": "名都",
+            "addressDetail": "都市路5001号仲盛世界B1肯德基",
+            "pro": "Wi-Fi,点唱机,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 23,
+            "storeName": "香港广场",
+            "addressDetail": "淮海中路282号香港广场商场北座地下一层NBL04室",
+            "pro": "Wi-Fi,点唱机,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 24,
+            "storeName": "柳州2",
+            "addressDetail": "南站站层（商铺号C102）",
+            "pro": "Wi-Fi,点唱机,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 25,
+            "storeName": "高青",
+            "addressDetail": "长清路1200弄大润发肯德基",
+            "pro": "Wi-Fi,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 26,
+            "storeName": "谷阳",
+            "addressDetail": "松汇中路568号上海鹿都商业广场",
+            "pro": "Wi-Fi,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 27,
+            "storeName": "南广场",
+            "addressDetail": "秣陵路303号上海火车站西南出口一侧（学生工招募中）",
+            "pro": "Wi-Fi,礼品卡",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 28,
+            "storeName": "锦尊",
+            "addressDetail": "成山路1957号、锦尊路499弄2号203，204室",
+            "pro": "店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 29,
+            "storeName": "机场西楼安检",
+            "addressDetail": "虹桥机场T2航站楼3楼出发禁区50号登机口旁",
+            "pro": null,
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 30,
+            "storeName": "机场西楼到达",
+            "addressDetail": "虹桥机场西航站楼到达层",
+            "pro": null,
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 31,
+            "storeName": "瑞金",
+            "addressDetail": "徐家汇路618号B2层商铺号B2-F-13",
+            "pro": "Wi-Fi,点唱机,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 32,
+            "storeName": "市百",
+            "addressDetail": "西藏中路462号-500号一百商城（新楼）",
+            "pro": "礼品卡,手机点餐,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 33,
+            "storeName": "北广场",
+            "addressDetail": "秣陵路303号上海站北广场北立面1F大厅入口西侧位置",
+            "pro": "Wi-Fi",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 34,
+            "storeName": "东安路站",
+            "addressDetail": "东安路270号轨道交通七号线东安路站站厅层",
+            "pro": "点唱机,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 35,
+            "storeName": "新凌云",
+            "addressDetail": "凌云路365号1F，2F",
+            "pro": "点唱机,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 36,
+            "storeName": "坂桥",
+            "addressDetail": "卫清西路168弄99号一层B103及B104",
+            "pro": "点唱机,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 37,
+            "storeName": "新天山",
+            "addressDetail": "天山路900号118号商铺1层+B1层",
+            "pro": "24小时,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 38,
+            "storeName": "虹桥高铁",
+            "addressDetail": "虹桥火车站到达层B1-5~B1-8号商铺虹桥高铁餐厅",
+            "pro": null,
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 39,
+            "storeName": "正大精选",
+            "addressDetail": "陆家嘴西路168号正大广场8楼",
+            "pro": "精选店,礼品卡",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 40,
+            "storeName": "磁浮精选",
+            "addressDetail": "机场站磁悬浮站第二层编号为A07商铺",
+            "pro": "Wi-Fi,精选店,礼品卡",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 41,
+            "storeName": "南站精选（火车站站内）",
+            "addressDetail": "沪闵路9001号上海南站候车大厅",
+            "pro": "精选店,礼品卡",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 42,
+            "storeName": "上海滩",
+            "addressDetail": "佘山林湖路888号-1上海滩区5号",
+            "pro": "Wi-Fi,精选店,礼品卡",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 43,
+            "storeName": "金矿镇",
+            "addressDetail": "佘山林湖路888号-1金矿镇区1号",
+            "pro": "Wi-Fi,精选店,礼品卡",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 44,
+            "storeName": "太平洋精选",
+            "addressDetail": "衡山路932号地下一层",
+            "pro": "精选店,礼品卡",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 45,
+            "storeName": "港汇精选",
+            "addressDetail": "虹桥路1号港汇广场B108M",
+            "pro": "精选店,礼品卡",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 46,
+            "storeName": "高铁精选",
+            "addressDetail": "虹桥站出发层3F-JC-C10号商铺高铁精选餐厅",
+            "pro": "精选店",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 47,
+            "storeName": "动力南精选（3号线2号出口）",
+            "addressDetail": "沪闵路9001号上海南站（1F三角地A-1）一层",
+            "pro": "精选店,礼品卡",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 48,
+            "storeName": "政民",
+            "addressDetail": "政民路300号",
+            "pro": "店内参观,礼品卡",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 49,
+            "storeName": "昌平",
+            "addressDetail": "常德路778号102商铺",
+            "pro": "Wi-Fi,点唱机,礼品卡,手机点餐,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 50,
+            "storeName": "塘桥",
+            "addressDetail": "浦建路15号",
+            "pro": "24小时,Wi-Fi,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 51,
+            "storeName": "百齐",
+            "addressDetail": "南桥镇百齐路228、288号1层",
+            "pro": "店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 52,
+            "storeName": "联明",
+            "addressDetail": "轨道交通六号线上南路站站厅层（1号出口处）",
+            "pro": "礼品卡",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 53,
+            "storeName": "金谊（金谊广场）",
+            "addressDetail": "上南路4467弄20号",
+            "pro": "Wi-Fi,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 54,
+            "storeName": "蒙山",
+            "addressDetail": "卫清西路477号",
+            "pro": "点唱机,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 55,
+            "storeName": "永业",
+            "addressDetail": "蒙自路25号",
+            "pro": "Wi-Fi,点唱机,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 56,
+            "storeName": "华绣",
+            "addressDetail": "高科西路2110号山姆会员店1楼肯德基",
+            "pro": null,
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 57,
+            "storeName": "泗宝",
+            "addressDetail": "泗泾镇横港路18弄68号1层1号商铺",
+            "pro": "Wi-Fi,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 58,
+            "storeName": "中华新",
+            "addressDetail": "Tel：36532971，静安区中华新路567号",
+            "pro": "Wi-Fi,点唱机,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 59,
+            "storeName": "石龙",
+            "addressDetail": "石龙路728号",
+            "pro": "点唱机,礼品卡",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 60,
+            "storeName": "沪西",
+            "addressDetail": "曹杨路520号",
+            "pro": "店内参观,礼品卡",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 61,
+            "storeName": "美兰",
+            "addressDetail": "罗芬路1088号",
+            "pro": "礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 62,
+            "storeName": "莘龙",
+            "addressDetail": "沪闵路6088号龙之梦商场B1肯德基",
+            "pro": "Wi-Fi,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 63,
+            "storeName": "邯郸",
+            "addressDetail": "邯郸路585号地下一层B-2、B-8-1、B-8-3",
+            "pro": "礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 64,
+            "storeName": "叶榭",
+            "addressDetail": "叶榭镇求仁路149号1层",
+            "pro": "Wi-Fi,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 65,
+            "storeName": "嘉华",
+            "addressDetail": "大华路352号106-107室",
+            "pro": "礼品卡",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 66,
+            "storeName": "光大",
+            "addressDetail": "漕宝路78号",
+            "pro": "点唱机,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 67,
+            "storeName": "龙翔",
+            "addressDetail": "蒙山北路399号",
+            "pro": "点唱机,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 68,
+            "storeName": "宋园",
+            "addressDetail": "虹桥路1286号",
+            "pro": "Wi-Fi,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 69,
+            "storeName": "高行",
+            "addressDetail": "东靖路1881号万嘉商业广场1963/1969号",
+            "pro": "店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 70,
+            "storeName": "云岭",
+            "addressDetail": "大渡河路588号",
+            "pro": "礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 71,
+            "storeName": "金运（021-60767052）",
+            "addressDetail": "金沙江西路1051弄1063室",
+            "pro": "礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 72,
+            "storeName": "顾村",
+            "addressDetail": "水产西路957号",
+            "pro": "24小时,Wi-Fi,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 73,
+            "storeName": "昌里",
+            "addressDetail": "上南路1160号",
+            "pro": "24小时,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 74,
+            "storeName": "虹许",
+            "addressDetail": "吴中路729苏宁电器一层",
+            "pro": "礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 75,
+            "storeName": "曹安",
+            "addressDetail": "曹安公路1588号",
+            "pro": "Wi-Fi,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 76,
+            "storeName": "华新餐厅",
+            "addressDetail": "华强街239号B02商铺1、2层",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 77,
+            "storeName": "长风大悦城",
+            "addressDetail": "普陀区大渡河路196号",
+            "pro": "店内参观,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 78,
+            "storeName": "新宜街",
+            "addressDetail": "宜山路700号84幢A1号楼商铺101-102",
+            "pro": "点唱机,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 79,
+            "storeName": "秀山",
+            "addressDetail": "番愚路872号一层",
+            "pro": "点唱机,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 80,
+            "storeName": "中兴",
+            "addressDetail": "秣陵路303号新客站北广场站屋一层",
+            "pro": "Wi-Fi,礼品卡",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 81,
+            "storeName": "古棕",
+            "addressDetail": "古棕路574号",
+            "pro": "Wi-Fi,点唱机,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 82,
+            "storeName": "安亭新镇",
+            "addressDetail": "安亭镇墨玉南路1055号嘉亭荟生活广场110室",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 83,
+            "storeName": "西渡",
+            "addressDetail": "西渡沪杭公路238弄（近西闸路）连城商业广场1号",
+            "pro": "Wi-Fi,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 84,
+            "storeName": "嘉定城北",
+            "addressDetail": "平城路1188号",
+            "pro": "礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 85,
+            "storeName": "宝山万达",
+            "addressDetail": "一二八纪念路988弄（万达广场401-2商铺）",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 86,
+            "storeName": "芷江",
+            "addressDetail": "Tel：56379299，静安区芷江西路398号",
+            "pro": "点唱机,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 87,
+            "storeName": "城湘",
+            "addressDetail": "梅家浜路1500弄101号",
+            "pro": "点唱机,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 88,
+            "storeName": "亭坊",
+            "addressDetail": "九亭镇涞坊路589号",
+            "pro": "24小时,点唱机,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 89,
+            "storeName": "恒达广场",
+            "addressDetail": "白丽路263-267号",
+            "pro": "Wi-Fi,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 90,
+            "storeName": "长江南路",
+            "addressDetail": "长江南路5号",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 91,
+            "storeName": "明兴 ",
+            "addressDetail": "新桥镇明兴路口家乐福新南路购物中心101号商铺",
+            "pro": "Wi-Fi,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 92,
+            "storeName": "上丰",
+            "addressDetail": "上丰路1772-1784号一层",
+            "pro": "店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 93,
+            "storeName": "江文",
+            "addressDetail": "江文路589号一层A商铺",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 94,
+            "storeName": "合庆",
+            "addressDetail": "庆南路8号58371855",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 95,
+            "storeName": "亭枫",
+            "addressDetail": "朱泾镇沈浦泾路28号",
+            "pro": "点唱机,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 96,
+            "storeName": "芳汇",
+            "addressDetail": "长寿路1118号（芳汇广场2楼）",
+            "pro": "Wi-Fi,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 97,
+            "storeName": "枫泾",
+            "addressDetail": "枫泾镇白牛路280号",
+            "pro": "点唱机,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 98,
+            "storeName": "车墩",
+            "addressDetail": "车墩镇影维路258弄2号一、二层",
+            "pro": "店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 99,
+            "storeName": "上海肯德基有限公司华泾",
+            "addressDetail": "徐汇区华泾路509号7幢101商铺",
+            "pro": "点唱机,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        },
+        {
+            "rownum": 100,
+            "storeName": "鸿音",
+            "addressDetail": "南汇南芦公路1755号4-5幢20966950",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡,溯源",
+            "provinceName": "上海市",
+            "cityName": "上海市"
+        }
+    ]
+}

@@ -1,0 +1,809 @@
+{
+    "Table": [
+        {
+            "rowcount": 260
+        }
+    ],
+    "Table1": [
+        {
+            "rownum": 1,
+            "storeName": "慈溪中心（早餐7:00）",
+            "addressDetail": "上林坊解放中街266-276号    0574-63810933",
+            "pro": "点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 2,
+            "storeName": "周巷兴业",
+            "addressDetail": "周巷镇兴业南路1号",
+            "pro": "点唱机,店内参观,礼品卡,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 3,
+            "storeName": "象山天安",
+            "addressDetail": "天安路与建设路交叉口",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 4,
+            "storeName": "欧尚沧海",
+            "addressDetail": "百丈东路1188号",
+            "pro": "Wi-Fi,点唱机,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 5,
+            "storeName": "慈溪虞波(人民医院对面）",
+            "addressDetail": "浒山街道新城大道271-279号人民医院对面",
+            "pro": "24小时,点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 6,
+            "storeName": "宁波万达",
+            "addressDetail": "鄞州四明中路999号万达广场2号门",
+            "pro": "点唱机,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 7,
+            "storeName": "泗门慈客隆",
+            "addressDetail": "泗门镇镇北路109号",
+            "pro": "24小时,店内参观,礼品卡,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 8,
+            "storeName": "石浦金山",
+            "addressDetail": "象山县石浦镇金山路102号",
+            "pro": "点唱机,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 9,
+            "storeName": "北仑长江",
+            "addressDetail": "明州路725-729号",
+            "pro": "点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 10,
+            "storeName": "观海卫海卫",
+            "addressDetail": "观海卫镇观海卫路243号贞观商厦一楼",
+            "pro": "Wi-Fi,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 11,
+            "storeName": "宁海金昌",
+            "addressDetail": "中山中路69-73号",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 12,
+            "storeName": "逍林樟新",
+            "addressDetail": "逍林镇樟新南路919号北侧",
+            "pro": "24小时,Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 13,
+            "storeName": "奉化太平洋",
+            "addressDetail": "南山路174号",
+            "pro": "点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 14,
+            "storeName": "慈溪大润发",
+            "addressDetail": "慈溪大润发肯德基24小时63032260",
+            "pro": "24小时,Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 15,
+            "storeName": "奉化大润发",
+            "addressDetail": "南山路8号龙津尚都",
+            "pro": "点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 16,
+            "storeName": "北仑君临",
+            "addressDetail": "黄山路857号",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 17,
+            "storeName": "宁波中兴",
+            "addressDetail": "中兴路138号世纪联华超左侧",
+            "pro": "点唱机,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 18,
+            "storeName": "余姚四明",
+            "addressDetail": "四明西路486-490号",
+            "pro": "24小时,Wi-Fi,点唱机,店内参观,礼品卡,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 19,
+            "storeName": "宁波泰富",
+            "addressDetail": "桑田路291号-299号",
+            "pro": "Wi-Fi,店内参观,礼品卡,手机点餐",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 20,
+            "storeName": "宁波百丈",
+            "addressDetail": "百丈东路86-2号",
+            "pro": "点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 21,
+            "storeName": "慈溪香格(早餐7:00）",
+            "addressDetail": "新城大道北路２７７－２８５号（华润万家超旁）",
+            "pro": "Wi-Fi,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 22,
+            "storeName": "鄞州乐购 (24小时营业)",
+            "addressDetail": "海曙区雅戈尔大道洛兹广场一楼肯德基",
+            "pro": "24小时,Wi-Fi,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 23,
+            "storeName": "宁波江北万达(10：00-22：00APP更优惠）",
+            "addressDetail": "江北大道188号江北万达广场一楼29号",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 24,
+            "storeName": "宁波联盛",
+            "addressDetail": "鄞州宁南北路1288号联盛广场A座",
+            "pro": "点唱机,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 25,
+            "storeName": "宁波桑德兹",
+            "addressDetail": "天童南路与日丽中路交叉处南部商务区桑德兹大厦一楼",
+            "pro": "礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 26,
+            "storeName": "江北世纪联华",
+            "addressDetail": "江北区康庄南路72号",
+            "pro": "店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 27,
+            "storeName": "宁波世纪东方",
+            "addressDetail": "中山东路1083号世纪东方广场一楼",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 28,
+            "storeName": "宁波洪塘海德（早餐7点供应）",
+            "addressDetail": "洪塘街道洪塘中路258号银亿海德商业中心一楼",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 29,
+            "storeName": "骆驼欧尚",
+            "addressDetail": "骆驼街道东邑北路558号-1076号商铺",
+            "pro": "24小时,Wi-Fi,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 30,
+            "storeName": "象山大润发",
+            "addressDetail": "象山县丹南路570号大润发超一楼肯德基餐厅",
+            "pro": "点唱机,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 31,
+            "storeName": "慈溪银泰（早餐07:00）",
+            "addressDetail": "银泰城南城路163号一楼",
+            "pro": "Wi-Fi,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 32,
+            "storeName": "余姚嘉悦",
+            "addressDetail": "文山路730号嘉悦国际广场",
+            "pro": "24小时,Wi-Fi,点唱机,店内参观,礼品卡,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 33,
+            "storeName": "宁海大观园",
+            "addressDetail": "宁海县兴宁中路296号",
+            "pro": "24小时,Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 34,
+            "storeName": "奉化银泰",
+            "addressDetail": "南山路150号奉化银泰城3号门",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 35,
+            "storeName": "宁波来福士",
+            "addressDetail": "大庆南路99号来福士广场地下一层",
+            "pro": "点唱机,礼品卡,手机点餐",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 36,
+            "storeName": "宁波马园(24小时营业)",
+            "addressDetail": "马园路271号",
+            "pro": "24小时,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 37,
+            "storeName": "镇海华润",
+            "addressDetail": "世贸中心A座（蛟川街道镇宁东路3—21号）",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 38,
+            "storeName": "慈溪环城（早餐6:00)",
+            "addressDetail": "浒山街道慈百路７３号",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 39,
+            "storeName": "宁波万成",
+            "addressDetail": "雅戈尔大道429号",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 40,
+            "storeName": "观海卫福山汽车穿梭",
+            "addressDetail": "观海卫329国道南侧蒋家村",
+            "pro": "Wi-Fi,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 41,
+            "storeName": "创新128广场汽车穿梭餐厅",
+            "addressDetail": "潘火街道启明路818号",
+            "pro": "Wi-Fi,点唱机,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 42,
+            "storeName": "鄞州印象城",
+            "addressDetail": "钱湖北路288号印象城B1-16号",
+            "pro": "Wi-Fi,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 43,
+            "storeName": "宁波下应乐购",
+            "addressDetail": "大道下应段227号培罗成广场一楼",
+            "pro": "点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 44,
+            "storeName": "溪口武岭",
+            "addressDetail": "溪口镇百丈路1-3号",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 45,
+            "storeName": "余姚龙山",
+            "addressDetail": "南滨江路150号",
+            "pro": "Wi-Fi,点唱机,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 46,
+            "storeName": "余姚华联",
+            "addressDetail": "余姚市新建路55号华联商厦1楼",
+            "pro": "24小时,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 47,
+            "storeName": "青少年宫（63803544）",
+            "addressDetail": "青少年宫路93号",
+            "pro": "24小时,Wi-Fi,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 48,
+            "storeName": "镇海招宝",
+            "addressDetail": "镇海西街8-10号",
+            "pro": "店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 49,
+            "storeName": "彩虹",
+            "addressDetail": "百丈路198号",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 50,
+            "storeName": "北仑明州",
+            "addressDetail": "北仑明州路22号（邮电大楼对面）",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 51,
+            "storeName": "富巷",
+            "addressDetail": "阳明西路271-273号",
+            "pro": "24小时,Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 52,
+            "storeName": "宁波外滩",
+            "addressDetail": "中马街道人民路88号",
+            "pro": "Wi-Fi,点唱机,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 53,
+            "storeName": "宁波联丰（24小时营业）",
+            "addressDetail": "环城西路南段256号",
+            "pro": "24小时,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 54,
+            "storeName": "宁海新人民",
+            "addressDetail": "人民路9号宁海大厦1楼",
+            "pro": "点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 55,
+            "storeName": "宁波学府",
+            "addressDetail": "高教园区钱湖南路666号华茂赛德广场B座",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 56,
+            "storeName": "北仑大润发",
+            "addressDetail": "新大路1229号大润发大卖场1F",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡,手机点餐",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 57,
+            "storeName": "宁波欧尚",
+            "addressDetail": "翠柏路208号",
+            "pro": "点唱机,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 58,
+            "storeName": "余姚乐客多",
+            "addressDetail": "子陵路53号",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 59,
+            "storeName": "宁波文化广场",
+            "addressDetail": "河清北路宁波文化广场D区101",
+            "pro": "点唱机,店内参观,礼品卡,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 60,
+            "storeName": "北仑银泰",
+            "addressDetail": "北仑中河路399号",
+            "pro": "点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 61,
+            "storeName": "余姚五彩城",
+            "addressDetail": "余姚市城东路与金型路交叉口华润五彩城一楼",
+            "pro": "店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 62,
+            "storeName": "观海卫大润发",
+            "addressDetail": "观海卫镇观海卫路580号",
+            "pro": "Wi-Fi,点唱机,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 63,
+            "storeName": "杭州湾世纪金源餐厅",
+            "addressDetail": "杭州湾新区金源大道19号世纪金源购物中心一楼",
+            "pro": "Wi-Fi,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 64,
+            "storeName": "宁波新星欧尚",
+            "addressDetail": "新星路111号122B",
+            "pro": "店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 65,
+            "storeName": "慈溪保利",
+            "addressDetail": "三北西大街1555号，保利滨湖天地商业广场一层",
+            "pro": "点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 66,
+            "storeName": "港隆欧尚",
+            "addressDetail": "高新区沧海路1号港隆时代广场二号楼101、201",
+            "pro": "Wi-Fi,点唱机,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 67,
+            "storeName": "宁波环球城银泰精选",
+            "addressDetail": "天童南路1008号425号",
+            "pro": "Wi-Fi,精选店,礼品卡,手机点餐",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 68,
+            "storeName": "五乡爱民DT",
+            "addressDetail": "五乡镇蟠龙村",
+            "pro": "店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 69,
+            "storeName": "集士港杉井奥莱",
+            "addressDetail": "集士港镇春华路1399号杉井奥特莱斯广场B12200号商铺",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 70,
+            "storeName": "宁波新天伦",
+            "addressDetail": "中兴路268号新天伦时代广场126号商铺",
+            "pro": "Wi-Fi,点唱机,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 71,
+            "storeName": "宁波环球城银泰",
+            "addressDetail": "天童南路1008号145号",
+            "pro": "Wi-Fi,点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 72,
+            "storeName": "宁波新水街",
+            "addressDetail": "海曙区天一广场新水街（必胜客边）",
+            "pro": "Wi-Fi,点唱机,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 73,
+            "storeName": "象山太平洋",
+            "addressDetail": "丹东街道丹峰东路740号",
+            "pro": null,
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 74,
+            "storeName": "宁波华楼",
+            "addressDetail": "华楼巷36、40、46号一层(苹果手机店后）",
+            "pro": "Wi-Fi,点唱机",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 75,
+            "storeName": "海曙恒一",
+            "addressDetail": "海曙恒一广场一层",
+            "pro": null,
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 76,
+            "storeName": "宁波古林",
+            "addressDetail": "古林镇联丰中路235号",
+            "pro": "点唱机,店内参观",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 77,
+            "storeName": "钱湖天地餐厅",
+            "addressDetail": "中河街道钱湖北路433号",
+            "pro": "24小时,点唱机,店内参观,礼品卡",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 78,
+            "storeName": "宁波扬帆汽车穿梭餐厅",
+            "addressDetail": "扬帆路455号扬帆广场6号楼一层",
+            "pro": "Wi-Fi,点唱机,店内参观",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 79,
+            "storeName": "宁波东部银泰城",
+            "addressDetail": "邱隘镇东部新城内宁波东部新城银泰城一层105号商铺",
+            "pro": "点唱机,店内参观",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 80,
+            "storeName": "宁波东鼓道",
+            "addressDetail": "宁波地铁1号线东鼓道鼓楼地铁站厅B1，7-8铺",
+            "pro": null,
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 81,
+            "storeName": "宁波鼓楼餐厅(24小时营业)",
+            "addressDetail": "中山西路61号",
+            "pro": "24小时,店内参观",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 82,
+            "storeName": "宁波梅墟金沙",
+            "addressDetail": "高新区江南路2000号1-219、2-261一层",
+            "pro": "Wi-Fi,点唱机,店内参观",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 83,
+            "storeName": "宁波长丰",
+            "addressDetail": "钟公庙街道金家漕村聚亿商业中心",
+            "pro": "Wi-Fi,点唱机",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 84,
+            "storeName": "宁波世茂日湖餐厅",
+            "addressDetail": "环城北路西段茂悦商业中心60号1-4商铺",
+            "pro": "Wi-Fi,点唱机",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 85,
+            "storeName": "宁波奉化万达广场",
+            "addressDetail": "奉化市中山东路299号万达广场1059号商铺",
+            "pro": "Wi-Fi,店内参观",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 86,
+            "storeName": "北仑影秀城",
+            "addressDetail": "大碶宝山路1298号中青文化广场文化中心（博地影秀城）一层（铺位号2号）",
+            "pro": "Wi-Fi,点唱机,店内参观",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 87,
+            "storeName": "慈溪爱琴海（爱琴海早餐7:00）",
+            "addressDetail": "新城大道北路爱琴海购物广场一楼肯德基",
+            "pro": "Wi-Fi,点唱机,店内参观",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 88,
+            "storeName": "慈溪吉利中心（内部）",
+            "addressDetail": "杭州湾新区吉利研发中心1期生活区",
+            "pro": "Wi-Fi,店内参观",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 89,
+            "storeName": "慈溪爱琴海甜品站",
+            "addressDetail": "白沙街道上周塘村、古塘街道太屺村慈溪爱琴海购物公园三层",
+            "pro": "Wi-Fi",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 90,
+            "storeName": "宁海桃源广场肯德基",
+            "addressDetail": "宁海县气象北路398号桃源广场一楼",
+            "pro": "Wi-Fi,点唱机,店内参观",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 91,
+            "storeName": "慈溪吾悦",
+            "addressDetail": "新城大道南路1449号新城吾悦广场一层1023号商铺",
+            "pro": "Wi-Fi",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 92,
+            "storeName": "象山壹街区",
+            "addressDetail": "壹街区广场东南角（天安路248号）",
+            "pro": "Wi-Fi,点唱机,店内参观",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 93,
+            "storeName": "骆驼爱琴海",
+            "addressDetail": "骆驼街道汶骆路48-52号一层",
+            "pro": "Wi-Fi,点唱机,店内参观",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 94,
+            "storeName": "春晓龙湖DT",
+            "addressDetail": "北仑市明月路807/809号一层",
+            "pro": "Wi-Fi,点唱机,店内参观",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 95,
+            "storeName": "宁波浙海DT",
+            "addressDetail": "鄞州区高桥镇学院路1、5、9号、联丰中路1300号房产101室",
+            "pro": "店内参观",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 96,
+            "storeName": "龙山甬隆",
+            "addressDetail": "龙山镇伏龙路1号一层1-15,1-16号商铺",
+            "pro": "店内参观",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 97,
+            "storeName": "宁波中体城",
+            "addressDetail": "康庄南路299号8号楼一楼",
+            "pro": "Wi-Fi,点唱机,店内参观",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 98,
+            "storeName": "周巷嘉悦",
+            "addressDetail": "周巷镇镇东路企业路交叉口周巷嘉悦购物广场",
+            "pro": "店内参观",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 99,
+            "storeName": "骆驼银泰",
+            "addressDetail": "镇海大道中段699号镇海银泰L1-12号商铺",
+            "pro": "Wi-Fi,店内参观",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        },
+        {
+            "rownum": 100,
+            "storeName": "宁波大学云创小镇",
+            "addressDetail": "江北区风华路928弄云创1986青年小镇13#117-120及13#211-213",
+            "pro": "点唱机,店内参观",
+            "provinceName": "浙江省",
+            "cityName": "宁波市"
+        }
+    ]
+}
