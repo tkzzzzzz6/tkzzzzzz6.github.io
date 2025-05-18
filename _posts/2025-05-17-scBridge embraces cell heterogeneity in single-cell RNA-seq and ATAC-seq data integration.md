@@ -1,5 +1,5 @@
 ---
-title:  2025-05-17-scBridge embraces cell heterogeneity in single-cell RNA-seq and ATAC-seq data integration
+title:  2025-05-17-scBridge
 tags: 论文阅读
 深度学习
 ---
