@@ -91,7 +91,6 @@ scBridge 将标注的 scRNA-seq 与未标注的 scATAC-seq 数据看作源域与
 
 ### umap_PBMC_CellType
 
-
 ### umap_PBMC_Domain
 
 ![](static/YzVibvyJhoS3Cexix0AcdNFDn6d.png)
