@@ -7,7 +7,7 @@ tags: 问题解决
 在启动 WSL2 时遇到以下错误：  
 `Cannot execute daemonize to start systemd`  
 
-![报错截图](https://fastly.jsdelivr.net/gh/tkzzzzzz6/imagehost@main/blog/17390777698341739077769078.png)
+![报错截图](https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17390777698341739077769078.png)
 
 > 解决思路来源:https://github.com/DamionGans/ubuntu-wsl2-systemd-script/issues/37
 

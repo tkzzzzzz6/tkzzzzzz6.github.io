@@ -21,7 +21,7 @@ tags:
 > 概述:
 > scBridge 是一套面向单细胞多组学数据（scRNA-seq 与 scATAC-seq）整合的半监督异构迁移学习框架。它的核心策略是：先用标注的 scRNA-seq 数据“热身”（warm-up）一个深度编码器和分类器，然后根据每个 scATAC-seq 细胞与 RNA 原型的相似度和分类置信度，评估其在组学整合中的“可靠性”，再借助可靠的 ATAC 细胞对齐 RNA 原型；如此迭代，从“易”到“难”逐步缩小 RNA/ATAC 之间的调制差距。大量 benchmark 测试表明，scBridge 在嵌入质量、标签转移准确性和对注释稀缺、技术噪声的鲁棒性方面，均显著优于六种代表性方法（Harmony、Seurat、scJoint、Portal、GLUE、Conos）([Nature](https://www.nature.com/articles/s41467-023-41795-5))。
 
-![1747738599339BegjbomkVoa7Hpx1yEScx3mRn8f.png](https://fastly.jsdelivr.net/gh/tkzzzzzz6/imagehost@main/blog/1747738599339BegjbomkVoa7Hpx1yEScx3mRn8f.png)
+![1747738599339BegjbomkVoa7Hpx1yEScx3mRn8f.png](https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1747738599339BegjbomkVoa7Hpx1yEScx3mRn8f.png)
 
 ## 单细胞多组学整合的必要性
 
@@ -97,4 +97,4 @@ scBridge 将标注的 scRNA-seq 与未标注的 scATAC-seq 数据看作源域与
 
 ### umap_PBMC_Reliability
 
-![](static/KgrdbEYNSoTVI1xchbYccC0WnYb.png)![1747738616339KgrdbEYNSoTVI1xchbYccC0WnYb.png](https://fastly.jsdelivr.net/gh/tkzzzzzz6/imagehost@main/blog/1747738616339KgrdbEYNSoTVI1xchbYccC0WnYb.png)
+![](static/KgrdbEYNSoTVI1xchbYccC0WnYb.png)![1747738616339KgrdbEYNSoTVI1xchbYccC0WnYb.png](https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1747738616339KgrdbEYNSoTVI1xchbYccC0WnYb.png)

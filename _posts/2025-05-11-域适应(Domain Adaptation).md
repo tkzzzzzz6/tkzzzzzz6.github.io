@@ -16,7 +16,7 @@ tags: 深度学习
 
 # Motivation:
 
-![1746952370351MppybvXJRo4cHvxum83cqcgcnbc.png](https://fastly.jsdelivr.net/gh/tkzzzzzz6/imagehost@main/blog/1746952370351MppybvXJRo4cHvxum83cqcgcnbc.png)
+![1746952370351MppybvXJRo4cHvxum83cqcgcnbc.png](https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1746952370351MppybvXJRo4cHvxum83cqcgcnbc.png)
 
 减少源领域和目标领域之间的分布差异，使得模型能够在目标领域上有效地应用，即使目标领域的数据分布与源领域有所不同。
 
@@ -30,7 +30,7 @@ DAT 通过构建一个 **对抗神经网络架构** 来减少源领域和目标�
 2. **领域判别器**（Domain Classifier）：这个模块的任务是区分数据来自源领域还是目标领域。模型的目标是让领域判别器无法判断出数据的来源，即源领域和目标领域的特征应该是不可区分的。
 3. **任务分类器**（Task Classifier）：这是模型的主任务部分，例如图像分类器、语音识别模型等。它负责根据输入数据做出相应的任务预测（如分类、回归等）,在下面的图中就是对应的 Label predictor。
 
-![1746952390480CRNkbVepCoqqFqxtObocM5vEnKd.png](https://fastly.jsdelivr.net/gh/tkzzzzzz6/imagehost@main/blog/1746952390480CRNkbVepCoqqFqxtObocM5vEnKd.png)
+![1746952390480CRNkbVepCoqqFqxtObocM5vEnKd.png](https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1746952390480CRNkbVepCoqqFqxtObocM5vEnKd.png)
 
 > - 图中 Generator 和 Discriminator 的目标是相反的,对应的结构和 Gan 网络的结构非常的类似
 > - 公式 $\theta_f^*=\min {L-L_d}$中 $L_{d}$不是越小越好,因为$L_{d}$太小的话,从另外的角度 Generator 还是能够识别出 S 与 T 域之间的区别,而我们的任务是要实现 L 低的同时,Discriminator 无法识别 S 与 T 域之间的区别,但是实际训练中,对应的公式还是够用的
@@ -47,7 +47,7 @@ DAT 通过构建一个 **对抗神经网络架构** 来减少源领域和目标�
 
 ## 2_Desicion Boundary(决策边界)
 
-![1746952402479IPMwbL6jAonV7NxDa8Lcu92wn6d.png](https://fastly.jsdelivr.net/gh/tkzzzzzz6/imagehost@main/blog/1746952402479IPMwbL6jAonV7NxDa8Lcu92wn6d.png)
+![1746952402479IPMwbL6jAonV7NxDa8Lcu92wn6d.png](https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1746952402479IPMwbL6jAonV7NxDa8Lcu92wn6d.png)
 
 1. **特征提取器（Feature Extractor）**：这是一个用于从输入图像中提取特征的模块。在图片中，未标记的图像输入通过特征提取器后，送入到后续的标签预测器中。
 2. **标签预测器（Label Predictor）**：这个模块负责根据从特征提取器获得的特征，预测标签。预测的标签是一个类别分布。
