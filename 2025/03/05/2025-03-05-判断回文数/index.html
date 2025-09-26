@@ -1,25 +1,24 @@
-<!DOCTYPE html>
-<html lang="zh">
-  <head>
+<!DOCTYPE html><html lang="zh"><head>
     
     <meta charset="UTF-8">
     <title>2025-03-05-判断回文数 - TK的小站</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
-    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192">
     
-<link rel="stylesheet" href="/static/kico.css">
-<link rel="stylesheet" href="/static/hingle.css">
+
+
 
     
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:site_name" content="TK的小站">
-    <meta property="og:title" content="2025-03-05-判断回文数"/>
+    <meta property="og:title" content="2025-03-05-判断回文数">
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></noscript></head>
 
   <body>
     <header>
@@ -37,7 +36,7 @@
     <nav class="head-menu">
         <a href="/">首页</a>
         <div class="has-child">
-            <a href>分类</a>
+            <a href="">分类</a>
             <div class="sub-menu">
                 
             </div>
@@ -66,45 +65,45 @@
             <h1 id="2025-03-05-判断回文数"><a href="#2025-03-05-判断回文数" class="headerlink" title="2025-03-05-判断回文数"></a>2025-03-05-判断回文数</h1><blockquote>
 <p>参考博客<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/74799938">判断回文数算法</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qwerty200696/article/details/79053770">判断回文数(三种解法)—— Leetcode(9)_求回文数-CSDN 博客</a></p>
 </blockquote>
-<p><a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=104751474&content_type=Article&match_order=1&q=%E5%9B%9E%E6%96%87%E6%95%B0&zhida_source=entity">回文数</a>是指正序（从左到右）读和倒序（从右到左）读都是一样的整数。</p>
+<p><a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=104751474&amp;content_type=Article&amp;match_order=1&amp;q=%E5%9B%9E%E6%96%87%E6%95%B0&amp;zhida_source=entity">回文数</a>是指正序（从左到右）读和倒序（从右到左）读都是一样的整数。</p>
 <p>比如形如 121，1221，13531 的数字都是回文数，但 -121，10，25 等等都不是回文数。</p>
 <h1 id="取反对比"><a href="#取反对比" class="headerlink" title="取反对比"></a>取反对比</h1><blockquote>
 <p>一种容易想到的方法是：将整个数取反后看和原来的数是否相同。</p>
 </blockquote>
-<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">bool isPalindrome(<span class="built_in">int</span> x) &#123;  </span><br><span class="line">    <span class="keyword">if</span> (x&lt;<span class="number">0</span>)  </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;  </span><br><span class="line">    <span class="built_in">long</span> <span class="built_in">long</span> <span class="keyword">sum</span> =<span class="number">0</span>;  </span><br><span class="line">    <span class="built_in">long</span> <span class="built_in">long</span> origin = x;  </span><br><span class="line">    <span class="keyword">while</span>(x)  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="built_in">int</span> num = x %<span class="number">10</span>;  </span><br><span class="line">        <span class="keyword">sum</span> = <span class="keyword">sum</span>*<span class="number">10</span> + num;  </span><br><span class="line">        x/=<span class="number">10</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">sum</span> == origin)  </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;  </span><br><span class="line">    <span class="keyword">else</span>  </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight axapta"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">bool isPalindrome(<span class="built_in">int</span> x) {  </span><br><span class="line">    <span class="keyword">if</span> (x&lt;<span class="number">0</span>)  </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;  </span><br><span class="line">    <span class="built_in">long</span> <span class="built_in">long</span> <span class="keyword">sum</span> =<span class="number">0</span>;  </span><br><span class="line">    <span class="built_in">long</span> <span class="built_in">long</span> origin = x;  </span><br><span class="line">    <span class="keyword">while</span>(x)  </span><br><span class="line">    {  </span><br><span class="line">        <span class="built_in">int</span> num = x %<span class="number">10</span>;  </span><br><span class="line">        <span class="keyword">sum</span> = <span class="keyword">sum</span>*<span class="number">10</span> + num;  </span><br><span class="line">        x/=<span class="number">10</span>;  </span><br><span class="line">    }  </span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">sum</span> == origin)  </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;  </span><br><span class="line">    <span class="keyword">else</span>  </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;  </span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <h1 id="左右翻转"><a href="#左右翻转" class="headerlink" title="左右翻转"></a>左右翻转</h1><blockquote>
 <p>根据回文数的特点，我们只需要判断左边一半和翻转后的右边一半是否相等即可。</p>
 </blockquote>
-<figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bool</span> isPalindrome(int <span class="variable language_">x</span>) &#123;</span><br><span class="line">    <span class="comment">// 负数肯定不是，以及首尾不对称的非0数</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="variable language_">x</span> &lt; <span class="number">0</span> || (<span class="variable language_">x</span> % <span class="number">10</span> == <span class="number">0</span> &amp;&amp; <span class="variable language_">x</span> != <span class="number">0</span>))</span><br><span class="line">        <span class="keyword">return</span> <span class="symbol">false</span>;</span><br><span class="line"></span><br><span class="line">    int rev = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> ( <span class="variable language_">x</span> &gt; rev)&#123;</span><br><span class="line">        rev = rev * <span class="number">10</span> + <span class="variable language_">x</span> % <span class="number">10</span>; <span class="comment">//将低位一半的数取反。</span></span><br><span class="line">        <span class="variable language_">x</span> = int (<span class="variable language_">x</span> / <span class="number">10</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//有rev &gt;= x， 奇数情况下需要除去10</span></span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">x</span> == rev || <span class="variable language_">x</span> == int(rev/<span class="number">10</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight gml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bool</span> isPalindrome(int <span class="variable language_">x</span>) {</span><br><span class="line">    <span class="comment">// 负数肯定不是，以及首尾不对称的非0数</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="variable language_">x</span> &lt; <span class="number">0</span> || (<span class="variable language_">x</span> % <span class="number">10</span> == <span class="number">0</span> &amp;&amp; <span class="variable language_">x</span> != <span class="number">0</span>))</span><br><span class="line">        <span class="keyword">return</span> <span class="symbol">false</span>;</span><br><span class="line"></span><br><span class="line">    int rev = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> ( <span class="variable language_">x</span> &gt; rev){</span><br><span class="line">        rev = rev * <span class="number">10</span> + <span class="variable language_">x</span> % <span class="number">10</span>; <span class="comment">//将低位一半的数取反。</span></span><br><span class="line">        <span class="variable language_">x</span> = int (<span class="variable language_">x</span> / <span class="number">10</span>);</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">//有rev &gt;= x， 奇数情况下需要除去10</span></span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">x</span> == rev || <span class="variable language_">x</span> == int(rev/<span class="number">10</span>); </span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <h1 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h1><blockquote>
 <p>在循环体中，不断地比较第 i 位和倒数第 i 位，直到遇到最中间的 1 个数字(输入为奇数个数字)或者遇到最中间的 2 个数字(输入为偶数个数字)时结束。</p>
 </blockquote>
-<figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bool</span> isPalindrome(int <span class="variable language_">x</span>) &#123;  </span><br><span class="line">  <span class="keyword">if</span> (<span class="variable language_">x</span> &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="symbol">false</span>;  </span><br><span class="line">  int <span class="keyword">div</span> = <span class="number">1</span>;  </span><br><span class="line">  <span class="keyword">while</span> (<span class="variable language_">x</span> / <span class="keyword">div</span> &gt;= <span class="number">10</span>) &#123;  </span><br><span class="line">    <span class="keyword">div</span> *= <span class="number">10</span>;  </span><br><span class="line">  &#125;          </span><br><span class="line">  <span class="keyword">while</span> (<span class="variable language_">x</span> != <span class="number">0</span>) &#123;  </span><br><span class="line">    int l = <span class="variable language_">x</span> / <span class="keyword">div</span>;  </span><br><span class="line">    int r = <span class="variable language_">x</span> % <span class="number">10</span>;  </span><br><span class="line">    <span class="keyword">if</span> (l != r) <span class="keyword">return</span> <span class="symbol">false</span>;  </span><br><span class="line">    <span class="variable language_">x</span> = (<span class="variable language_">x</span> % <span class="keyword">div</span>) / <span class="number">10</span>;  <span class="comment">//去掉两边的数</span></span><br><span class="line">    <span class="keyword">div</span> /= <span class="number">100</span>;  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="keyword">return</span> <span class="symbol">true</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight gml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bool</span> isPalindrome(int <span class="variable language_">x</span>) {  </span><br><span class="line">  <span class="keyword">if</span> (<span class="variable language_">x</span> &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="symbol">false</span>;  </span><br><span class="line">  int <span class="keyword">div</span> = <span class="number">1</span>;  </span><br><span class="line">  <span class="keyword">while</span> (<span class="variable language_">x</span> / <span class="keyword">div</span> &gt;= <span class="number">10</span>) {  </span><br><span class="line">    <span class="keyword">div</span> *= <span class="number">10</span>;  </span><br><span class="line">  }          </span><br><span class="line">  <span class="keyword">while</span> (<span class="variable language_">x</span> != <span class="number">0</span>) {  </span><br><span class="line">    int l = <span class="variable language_">x</span> / <span class="keyword">div</span>;  </span><br><span class="line">    int r = <span class="variable language_">x</span> % <span class="number">10</span>;  </span><br><span class="line">    <span class="keyword">if</span> (l != r) <span class="keyword">return</span> <span class="symbol">false</span>;  </span><br><span class="line">    <span class="variable language_">x</span> = (<span class="variable language_">x</span> % <span class="keyword">div</span>) / <span class="number">10</span>;  <span class="comment">//去掉两边的数</span></span><br><span class="line">    <span class="keyword">div</span> /= <span class="number">100</span>;  </span><br><span class="line">  }  </span><br><span class="line">  <span class="keyword">return</span> <span class="symbol">true</span>;  </span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <blockquote>
 <p>补充:<strong>一个证明,有偶数位的回文数能被 11 整除</strong></p>
 <ol>
 <li><strong>考虑偶数位的回文数</strong>：假设我们有一个有偶数位的回文数 $N $，设其位数为  $2k$ （其中 $k$是正整数）。我们可以将 $N $ 表示为：</li>
 </ol>
-<p>$$<br>N &#x3D; a_1a_2 \ldots a_ka_{k+1} \ldots a_{2k}<br>$$</p>
-<p>其中 $a_1 &#x3D; a_{2k}， a_2 &#x3D; a_{2k-1}，\ldots， a_k &#x3D; a_{k+1}$ 。</p>
+<p>$$<br>N = a_1a_2 \ldots a_ka_{k+1} \ldots a_{2k}<br>$$</p>
+<p>其中 $a_1 = a_{2k}， a_2 = a_{2k-1}，\ldots， a_k = a_{k+1}$ 。</p>
 <ol>
 <li><strong>将回文数表示为数学形式</strong>：我们可以将  $N$  写成：</li>
 </ol>
-<p>$$<br>N &#x3D; a_1 \cdot 10^{2k-1} + a_2 \cdot 10^{2k-2} + \cdots + a_k \cdot 10^k + a_k \cdot 10^{k-1} + \cdots + a_2 \cdot 10 + a_1<br>$$</p>
+<p>$$<br>N = a_1 \cdot 10^{2k-1} + a_2 \cdot 10^{2k-2} + \cdots + a_k \cdot 10^k + a_k \cdot 10^{k-1} + \cdots + a_2 \cdot 10 + a_1<br>$$</p>
 <p>这可以重写为：</p>
-<p>$$<br>N &#x3D; a_1 (10^{2k-1} + 1) + a_2 (10^{2k-2} + 10) + \cdots + a_k (10^k + 10^{k-1})<br>$$</p>
+<p>$$<br>N = a_1 (10^{2k-1} + 1) + a_2 (10^{2k-2} + 10) + \cdots + a_k (10^k + 10^{k-1})<br>$$</p>
 <ol>
 <li><strong>提取公因数</strong>：注意到每一项 $10^{2i-1} + 10^{2i-2}$   都可以提取公因数 $10^{i-1}$  ：</li>
 </ol>
-<p>$$<br>N &#x3D; a_1 (10^{2k-1} + 1) + a_2 \cdot 10 (10^{2k-3} + 1) + \cdots + a_k \cdot 10^{k-1} (10 + 1)<br>$$</p>
+<p>$$<br>N = a_1 (10^{2k-1} + 1) + a_2 \cdot 10 (10^{2k-3} + 1) + \cdots + a_k \cdot 10^{k-1} (10 + 1)<br>$$</p>
 <p>这可以进一步简化为：</p>
-<p>$$<br>N &#x3D; \textcolor{blue}{[}a_1 (10^{2k-1} + 1) + a_2 \cdot 10 (10^{2k-3} + 1)\textcolor{blue}{]} + \cdots + a_k \cdot 10^{k-1} \cdot 11<br>$$</p>
+<p>$$<br>N = \textcolor{blue}{[}a_1 (10^{2k-1} + 1) + a_2 \cdot 10 (10^{2k-3} + 1)\textcolor{blue}{]} + \cdots + a_k \cdot 10^{k-1} \cdot 11<br>$$</p>
 <ol>
-<li><strong>分离公因数 11</strong>：由于 $10 + 1 &#x3D; 11$  ，我们可以看到 $N$ 可以被11整除。因此，$N$ 有一个因子 11。</li>
-<li><strong>结论</strong>：因为 $N$ 有因子 11，所以 $N$ 不是质数，除非 $N &#x3D; 11 $。但是题目中已经排除了 11 的情况。<br>因此，有偶数位的回文数（除了 11）必然不是质数。</li>
+<li><strong>分离公因数 11</strong>：由于 $10 + 1 = 11$  ，我们可以看到 $N$ 可以被11整除。因此，$N$ 有一个因子 11。</li>
+<li><strong>结论</strong>：因为 $N$ 有因子 11，所以 $N$ 不是质数，除非 $N = 11 $。但是题目中已经排除了 11 的情况。<br>因此，有偶数位的回文数（除了 11）必然不是质数。</li>
 </ol>
 </blockquote>
 
@@ -128,7 +127,7 @@
         <section class="post-author">
         
             <figure class="author-avatar">
-                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&r=X&d=" alt="ttkqwe" />
+                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&amp;r=X&amp;d=" alt="ttkqwe">
             </figure>
         
             <div class="author-info">
@@ -168,11 +167,13 @@
 </footer>
 
 
-<script src="/static/kico.js"></script>
-<script src="/static/hingle.js"></script>
 
 
-<script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>
 
-  </body>
-</html>
+
+
+
+  
+
+<script src="/bundle.js"></script><script>var hingle = new Paul_Hingle({"copyright":false,"night":true});;
+L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

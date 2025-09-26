@@ -1,25 +1,24 @@
-<!DOCTYPE html>
-<html lang="zh">
-  <head>
+<!DOCTYPE html><html lang="zh"><head>
     
     <meta charset="UTF-8">
     <title>2025-04-15-二进制思想在计算机科学中的应用 - TK的小站</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
-    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192">
     
-<link rel="stylesheet" href="/static/kico.css">
-<link rel="stylesheet" href="/static/hingle.css">
+
+
 
     
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:site_name" content="TK的小站">
-    <meta property="og:title" content="2025-04-15-二进制思想在计算机科学中的应用"/>
+    <meta property="og:title" content="2025-04-15-二进制思想在计算机科学中的应用">
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></noscript></head>
 
   <body>
     <header>
@@ -37,7 +36,7 @@
     <nav class="head-menu">
         <a href="/">首页</a>
         <div class="has-child">
-            <a href>分类</a>
+            <a href="">分类</a>
             <div class="sub-menu">
                 
             </div>
@@ -66,8 +65,8 @@
 </blockquote>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010674101/article/details/142599519?spm=1001.2101.3001.6650.3&utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-3-142599519-blog-131889184.235%5Ev43%5Epc_blog_bottom_relevance_base8&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-3-142599519-blog-131889184.235%5Ev43%5Epc_blog_bottom_relevance_base8&utm_relevant_index=6">二进制、八进制、十进制、十六进制使用场景_八进制应用在什么地方-CSDN 博客</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xuehuadalao/article/details/107611093?spm=1001.2101.3001.6650.4&utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-4-107611093-blog-131889184.235%5Ev43%5Epc_blog_bottom_relevance_base8&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-4-107611093-blog-131889184.235%5Ev43%5Epc_blog_bottom_relevance_base8&utm_relevant_index=9">计算机中不同进制的使用说明_计算机不同进制数怎么使用-CSDN 博客</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010674101/article/details/142599519?spm=1001.2101.3001.6650.3&amp;utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-3-142599519-blog-131889184.235%5Ev43%5Epc_blog_bottom_relevance_base8&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-3-142599519-blog-131889184.235%5Ev43%5Epc_blog_bottom_relevance_base8&amp;utm_relevant_index=6">二进制、八进制、十进制、十六进制使用场景_八进制应用在什么地方-CSDN 博客</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xuehuadalao/article/details/107611093?spm=1001.2101.3001.6650.4&amp;utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-4-107611093-blog-131889184.235%5Ev43%5Epc_blog_bottom_relevance_base8&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-4-107611093-blog-131889184.235%5Ev43%5Epc_blog_bottom_relevance_base8&amp;utm_relevant_index=9">计算机中不同进制的使用说明_计算机不同进制数怎么使用-CSDN 博客</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yilang/p/11067886.html">现代计算机爱上二进制—-为什么要用二进制 - 活着的虫子 - 博客园</a></li>
 </ul>
 </blockquote>
@@ -87,16 +86,16 @@
 <li>RSA、ECC 等算法依赖超大二进制整数的运算（如模幂运算、椭圆曲线点运算）。</li>
 </ul>
 <blockquote>
-<p>示例：RSA 加密中，公钥加密过程本质是计算 $C &#x3D; M^e \mod n$，其中 $ M, e, n $ 均为二进制大整数。</p>
+<p>示例：RSA 加密中，公钥加密过程本质是计算 $C = M^e \mod n$，其中 $ M, e, n $ 均为二进制大整数。</p>
 </blockquote>
 </li>
 <li><p>二进制优化</p>
 <ul>
-<li>快速幂模运算通过二进制分解指数（如 $e &#x3D; 2^k + 2^{k-1} + … $）加速计算。<br>假设指数$e$是一个正整数，它可以表示为二进制形式。例如，假设 $e &#x3D; 13$，其二进制表示为 $1101_2$。这意味着：</li>
+<li>快速幂模运算通过二进制分解指数（如 $e = 2^k + 2^{k-1} + … $）加速计算。<br>假设指数$e$是一个正整数，它可以表示为二进制形式。例如，假设 $e = 13$，其二进制表示为 $1101_2$。这意味着：</li>
 </ul>
-<p>$$<br>e &#x3D; 1 \times 2^3 + 1 \times 2^2 + 0 \times 2^1 + 1 \times 2^0<br>$$</p>
+<p>$$<br>e = 1 \times 2^3 + 1 \times 2^2 + 0 \times 2^1 + 1 \times 2^0<br>$$</p>
 <p>因此，可以将$e$写成：</p>
-<p>$$<br>e &#x3D; 2^3 + 2^2 + 2^0<br>$$</p>
+<p>$$<br>e = 2^3 + 2^2 + 2^0<br>$$</p>
 <p>然后分别计算 $2^3$、$2^2$以及 $2^0<br>$ 与求和即可</p>
 </li>
 </ul>
@@ -134,50 +133,50 @@
 <li><a target="_blank" rel="noopener" href="https://www.zhihu.com/column/p/30103832">权限控制 | 使用二进制做权限控制功能</a></li>
 </ul>
 </blockquote>
-<h4 id="使用位运算的权限控制-bitmask"><a href="#使用位运算的权限控制-bitmask" class="headerlink" title="使用位运算的权限控制(bitmask)"></a>使用位运算的权限控制(bitmask)</h4><h5 id="Linux-权限的二进制表示"><a href="#Linux-权限的二进制表示" class="headerlink" title="Linux 权限的二进制表示"></a><strong>Linux 权限的二进制表示</strong></h5><p>Linux 中每个文件&#x2F;目录的权限分为 <strong>所有者（User）、所属组（Group）、其他用户（Others）</strong> 三个角色，每个角色对应 <strong>读（r）、写（w）、执行（x）</strong> 三种权限，分别用 <strong>3 位二进制</strong> 表示：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rwx r-x r-- → 二进制：111 101 100 → 八进制：754</span><br><span class="line">   ↑   ↑   ↑</span><br><span class="line">  用户 组  其他</span><br></pre></td></tr></table></figure>
+<h4 id="使用位运算的权限控制-bitmask"><a href="#使用位运算的权限控制-bitmask" class="headerlink" title="使用位运算的权限控制(bitmask)"></a>使用位运算的权限控制(bitmask)</h4><h5 id="Linux-权限的二进制表示"><a href="#Linux-权限的二进制表示" class="headerlink" title="Linux 权限的二进制表示"></a><strong>Linux 权限的二进制表示</strong></h5><p>Linux 中每个文件/目录的权限分为 <strong>所有者（User）、所属组（Group）、其他用户（Others）</strong> 三个角色，每个角色对应 <strong>读（r）、写（w）、执行（x）</strong> 三种权限，分别用 <strong>3 位二进制</strong> 表示：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rwx r-x r-- → 二进制：111 101 100 → 八进制：754</span><br><span class="line">   ↑   ↑   ↑</span><br><span class="line">  用户 组  其他</span><br></pre></td></tr></tbody></table></figure>
 
 <p>• 每个权限位映射：</p>
 <p>• <code>r</code>（读）：二进制第 2 位（值 4）</p>
 <p>• <code>w</code>（写）：二进制第 1 位（值 2）</p>
 <p>• <code>x</code>（执行）：二进制第 0 位（值 1）</p>
 <p>• 权限组合：通过二进制位或运算（<code>|</code>）实现，例如：</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">rw</span>- = <span class="number">4</span>（r） + <span class="number">2</span>（w） = <span class="number">6</span> → 二进制 <span class="number">110</span></span><br><span class="line"><span class="attribute">rwx</span> = <span class="number">4</span> + <span class="number">2</span> + <span class="number">1</span> = <span class="number">7</span> → 二进制 <span class="number">111</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">rw</span>- = <span class="number">4</span>（r） + <span class="number">2</span>（w） = <span class="number">6</span> → 二进制 <span class="number">110</span></span><br><span class="line"><span class="attribute">rwx</span> = <span class="number">4</span> + <span class="number">2</span> + <span class="number">1</span> = <span class="number">7</span> → 二进制 <span class="number">111</span></span><br></pre></td></tr></tbody></table></figure>
 
 <hr>
 <h5 id="权限操作的核心逻辑"><a href="#权限操作的核心逻辑" class="headerlink" title="权限操作的核心逻辑"></a><strong>权限操作的核心逻辑</strong></h5><p><strong>权限验证</strong></p>
 <p>Linux 内核通过 <strong>按位与运算（&amp;）</strong> 判断用户是否拥有某权限。例如，检查用户是否有执行权限：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 检查 st_mode 是否包含用户执行权限位</span></span><br><span class="line"><span class="keyword">if</span> (st_mode &amp; S_IXUSR) &#123; <span class="comment">/* 允许执行 */</span> &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 检查 st_mode 是否包含用户执行权限位</span></span><br><span class="line"><span class="keyword">if</span> (st_mode &amp; S_IXUSR) { <span class="comment">/* 允许执行 */</span> }</span><br></pre></td></tr></tbody></table></figure>
 
 <p>• 权限位宏定义：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> S_IRUSR 0400  <span class="comment">// 用户读权限（二进制：100 000 000）</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> S_IWUSR 0200  <span class="comment">// 用户写权限（二进制：010 000 000）</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> S_IXUSR 0100  <span class="comment">// 用户执行权限（二进制：001 000 000）</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> S_IRUSR 0400  <span class="comment">// 用户读权限（二进制：100 000 000）</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> S_IWUSR 0200  <span class="comment">// 用户写权限（二进制：010 000 000）</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> S_IXUSR 0100  <span class="comment">// 用户执行权限（二进制：001 000 000）</span></span></span><br></pre></td></tr></tbody></table></figure>
 
 <h5 id="权限修改"><a href="#权限修改" class="headerlink" title="权限修改"></a><strong>权限修改</strong></h5><p>通过 <strong>按位或（|）赋予权限</strong> 和 <strong>按位与非（&amp; ~）移除权限</strong> 实现动态调整：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 添加用户写权限</span><br><span class="line">st_mode |= S_IWUSR;</span><br><span class="line"></span><br><span class="line">// 移除用户执行权限</span><br><span class="line">st_mode &amp;= ~S_IXUSR;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 添加用户写权限</span><br><span class="line">st_mode |= S_IWUSR;</span><br><span class="line"></span><br><span class="line">// 移除用户执行权限</span><br><span class="line">st_mode &amp;= ~S_IXUSR;</span><br></pre></td></tr></tbody></table></figure>
 
 <hr>
 <h5 id="用户视角的权限管理"><a href="#用户视角的权限管理" class="headerlink" title="用户视角的权限管理"></a><strong>用户视角的权限管理</strong></h5><ul>
 <li><strong>chmod</strong>** 命令的底层实现**</li>
 </ul>
 <p>• 符号模式：直接操作权限位</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> u+x file    <span class="comment"># 添加用户执行权限（位或运算）</span></span><br><span class="line"><span class="built_in">chmod</span> g-w file    <span class="comment"># 移除组写权限（位与非运算）</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> u+x file    <span class="comment"># 添加用户执行权限（位或运算）</span></span><br><span class="line"><span class="built_in">chmod</span> g-w file    <span class="comment"># 移除组写权限（位与非运算）</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>• 八进制模式：直接指定二进制掩码</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> 755 file    <span class="comment"># rwxr-xr-x → 二进制 111 101 101 → 八进制 755</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> 755 file    <span class="comment"># rwxr-xr-x → 二进制 111 101 101 → 八进制 755</span></span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
 <li><strong>权限继承与默认值</strong></li>
 </ul>
 <p>• umask 值：通过二进制掩码定义默认权限的补码</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">umask</span> 022         <span class="comment"># 默认创建文件权限为 644（777 &amp; ~022 = 755）</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">umask</span> 022         <span class="comment"># 默认创建文件权限为 644（777 &amp; ~022 = 755）</span></span><br></pre></td></tr></tbody></table></figure>
 
 <hr>
 <h5 id="扩展应用：特殊权限位"><a href="#扩展应用：特殊权限位" class="headerlink" title="扩展应用：特殊权限位"></a><strong>扩展应用：特殊权限位</strong></h5><p>Linux 还扩展了 <strong>SUID、SGID、Sticky Bit</strong> 等权限，仍基于二进制位掩码设计：</p>
 <p>• SUID（Set User ID）：二进制第 11 位（八进制 4000）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> u+s /usr/bin/passwd  <span class="comment"># 设置SUID，允许普通用户以root权限修改密码</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> u+s /usr/bin/passwd  <span class="comment"># 设置SUID，允许普通用户以root权限修改密码</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>• Sticky Bit：二进制第 9 位（八进制 1000）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +t /tmp              <span class="comment"># 仅文件所有者可删除自己的文件</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +t /tmp              <span class="comment"># 仅文件所有者可删除自己的文件</span></span><br></pre></td></tr></tbody></table></figure>
 
 <hr>
 <ol>
@@ -187,21 +186,21 @@
 <li><strong>可扩展性</strong>：通过扩展位掩码（如 SUID）支持复杂权限需求。</li>
 </ol>
 <p><strong>这一设计充分体现了二进制在权限控制中的核心价值——简洁、高效、灵活。</strong></p>
-<h5 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> S_IXUSR = <span class="number">0400</span>;_ <span class="comment">// 用户读权限（二进制：100 000 000）_</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> S_IWUSR = <span class="number">0200</span>;_ <span class="comment">// 用户写权限（二进制：010 000 000）_</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> S_IXUSR = <span class="number">0100</span>;_ <span class="comment">// 用户执行权限（二进制：001 000 000）_</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">check_permission</span><span class="params">(<span class="type">int</span> st_mode)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">_    <span class="comment">// 检查 st_mode 是否包含用户执行权限位_</span></span><br><span class="line">    <span class="keyword">if</span> (st_mode &amp; S_IXUSR)</span><br><span class="line">    &#123;</span><br><span class="line">_         <span class="comment">/* 允许执行 */</span>_</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h5><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> S_IXUSR = <span class="number">0400</span>;_ <span class="comment">// 用户读权限（二进制：100 000 000）_</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> S_IWUSR = <span class="number">0200</span>;_ <span class="comment">// 用户写权限（二进制：010 000 000）_</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> S_IXUSR = <span class="number">0100</span>;_ <span class="comment">// 用户执行权限（二进制：001 000 000）_</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">check_permission</span><span class="params">(<span class="type">int</span> st_mode)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">_    <span class="comment">// 检查 st_mode 是否包含用户执行权限位_</span></span><br><span class="line">    <span class="keyword">if</span> (st_mode &amp; S_IXUSR)</span><br><span class="line">    {</span><br><span class="line">_         <span class="comment">/* 允许执行 */</span>_</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <h4 id="企业级框架的权限控制"><a href="#企业级框架的权限控制" class="headerlink" title="企业级框架的权限控制"></a>企业级框架的权限控制</h4><h3 id="算法上的应用"><a href="#算法上的应用" class="headerlink" title="算法上的应用"></a>算法上的应用</h3><h4 id="原码反码补码"><a href="#原码反码补码" class="headerlink" title="原码反码补码"></a>原码反码补码</h4><p>在计算机中，带符号整数通常用 <strong>补码</strong> 表示，其转换流程为：</p>
 <ol>
-<li>正数的补码 &#x3D; 原码；</li>
-<li>负数的补码 &#x3D; （原码取反）+ 1。</li>
+<li>正数的补码 = 原码；</li>
+<li>负数的补码 = （原码取反）+ 1。</li>
 </ol>
 <table>
+<tbody><tr>
+<td>值<br></td><td>原码（二进制）<br></td><td>反码<br></td><td>补码<br></td></tr>
 <tr>
-<td>值<br/></td><td>原码（二进制）<br/></td><td>反码<br/></td><td>补码<br/></td></tr>
+<td>+5<br></td><td>00000101<br></td><td>—<br></td><td>00000101<br></td></tr>
 <tr>
-<td>+5<br/></td><td>00000101<br/></td><td>—<br/></td><td>00000101<br/></td></tr>
-<tr>
-<td>–5<br/></td><td>10000101<br/></td><td>11111010<br/></td><td>11111011<br/></td></tr>
-</table>
+<td>–5<br></td><td>10000101<br></td><td>11111010<br></td><td>11111011<br></td></tr>
+</tbody></table>
 
 <p>补码的好处是：加减运算都能统一为加法，省去了符号位处理的特殊逻辑，也天然支持异或、与或等位运算。</p>
 <h4 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h4><ul>
@@ -212,47 +211,47 @@
 <li><strong>左移（&lt;&lt;）与右移（&gt;&gt;）</strong>：将二进制整体左移或右移，等价于乘／除以 2 的幂。</li>
 </ul>
 <p>例如，下面函数高效判断一个整数是否是 2 的幂次方：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isPowerOfTwo</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x &gt; <span class="number">0</span> &amp;&amp; (x &amp; (x - <span class="number">1</span>)) == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isPowerOfTwo</span><span class="params">(<span class="type">int</span> x)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> x &gt; <span class="number">0</span> &amp;&amp; (x &amp; (x - <span class="number">1</span>)) == <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">is_power_of_two</span>(<span class="params">x: <span class="built_in">int</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">    <span class="keyword">return</span> x &gt; <span class="number">0</span> <span class="keyword">and</span> (x &amp; (x - <span class="number">1</span>)) == <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">is_power_of_two</span>(<span class="params">x: <span class="built_in">int</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">    <span class="keyword">return</span> x &gt; <span class="number">0</span> <span class="keyword">and</span> (x &amp; (x - <span class="number">1</span>)) == <span class="number">0</span></span><br></pre></td></tr></tbody></table></figure>
 
 <h4 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h4><blockquote>
 <p><a target="_blank" rel="noopener" href="https://oi-wiki.org/math/binary-exponentiation/">快速幂 - OI Wiki</a></p>
 </blockquote>
 <blockquote>
 <ul>
-<li>快速幂模运算通过二进制分解指数（如 $e &#x3D; 2^k + 2^{k-1} + … $）加速计算。<br>假设指数$e$是一个正整数，它可以表示为二进制形式。例如，假设 $e &#x3D; 13$，其二进制表示为 $1101_2$。这意味着：</li>
+<li>快速幂模运算通过二进制分解指数（如 $e = 2^k + 2^{k-1} + … $）加速计算。<br>假设指数$e$是一个正整数，它可以表示为二进制形式。例如，假设 $e = 13$，其二进制表示为 $1101_2$。这意味着：</li>
 </ul>
-<p>$$<br>e &#x3D; 1 \times 2^3 + 1 \times 2^2 + 0 \times 2^1 + 1 \times 2^0<br>$$</p>
+<p>$$<br>e = 1 \times 2^3 + 1 \times 2^2 + 0 \times 2^1 + 1 \times 2^0<br>$$</p>
 <p>因此，可以将$e$写成：</p>
-<p>$$<br>e &#x3D; 2^3 + 2^2 + 2^0<br>$$</p>
+<p>$$<br>e = 2^3 + 2^2 + 2^0<br>$$</p>
 <p>然后分别计算 $2^3$、$2^2$以及 $2^0<br>$ 与求和即可</p>
 </blockquote>
 <p>算法思想：</p>
 <ol>
 <li>维护结果 <code>res=1</code>；</li>
-<li>当最低位 $b_0&#x3D;1$ 时，<code>res *= a</code>；</li>
+<li>当最低位 $b_0=1$ 时，<code>res *= a</code>；</li>
 <li>每次循环后，<code>a *= a</code>（平方），并将 $e$ 右移一位；</li>
-<li>重复上述直到 $e&#x3D;0$，最终 <code>res</code> 即为 $a^e$。</li>
+<li>重复上述直到 $e=0$，最终 <code>res</code> 即为 $a^e$。</li>
 </ol>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">long</span> <span class="type">long</span> <span class="title">fast_pow</span><span class="params">(<span class="type">long</span> <span class="type">long</span> a, <span class="type">long</span> <span class="type">long</span> e)</span> </span>&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (e &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (e &amp; <span class="number">1</span>)            <span class="comment">// 若当前最低位为 1</span></span><br><span class="line">            res = res * a;</span><br><span class="line">        a = a * a;           <span class="comment">// 平方</span></span><br><span class="line">        e &gt;&gt;= <span class="number">1</span>;             <span class="comment">// 右移下一位</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">fast_pow</span>(<span class="number">2</span>, <span class="number">13</span>) &lt;&lt; std::endl;  <span class="comment">// 输出 8192</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">long</span> <span class="type">long</span> <span class="title">fast_pow</span><span class="params">(<span class="type">long</span> <span class="type">long</span> a, <span class="type">long</span> <span class="type">long</span> e)</span> </span>{</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (e &gt; <span class="number">0</span>) {</span><br><span class="line">        <span class="keyword">if</span> (e &amp; <span class="number">1</span>)            <span class="comment">// 若当前最低位为 1</span></span><br><span class="line">            res = res * a;</span><br><span class="line">        a = a * a;           <span class="comment">// 平方</span></span><br><span class="line">        e &gt;&gt;= <span class="number">1</span>;             <span class="comment">// 右移下一位</span></span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>{</span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">fast_pow</span>(<span class="number">2</span>, <span class="number">13</span>) &lt;&lt; std::endl;  <span class="comment">// 输出 8192</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <h4 id="异或运算"><a href="#异或运算" class="headerlink" title="异或运算"></a>异或运算</h4><ul>
 <li><strong>交换变量</strong>（无需临时变量）</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a ^= b; b ^= a; a ^= b;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a ^= b; b ^= a; a ^= b;</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
 <li><strong>找出唯一出现一次的数</strong></li>
 </ul>
 <p>对于一个数组中只有一个元素出现一次，其余元素都出现两次，用异或可线性时间、常数空间找出它：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">single_number</span>(<span class="params">nums</span>):</span><br><span class="line">    ans = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> nums:</span><br><span class="line">        ans ^= x</span><br><span class="line">    <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">single_number</span>(<span class="params">nums</span>):</span><br><span class="line">    ans = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> nums:</span><br><span class="line">        ans ^= x</span><br><span class="line">    <span class="keyword">return</span> ans</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
 <li><strong>按位翻转特定范围</strong></li>
 </ul>
 <p>将 <code>n</code> 的第 <code>i</code> 到 <code>j</code> 位全部翻转：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> mask = ((<span class="number">1</span> &lt;&lt; (j - i + <span class="number">1</span>)) - <span class="number">1</span>) &lt;&lt; i;</span><br><span class="line">n ^= mask;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> mask = ((<span class="number">1</span> &lt;&lt; (j - i + <span class="number">1</span>)) - <span class="number">1</span>) &lt;&lt; i;</span><br><span class="line">n ^= mask;</span><br></pre></td></tr></tbody></table></figure>
 
 <h3 id="数据的表示、计算、存储和传输"><a href="#数据的表示、计算、存储和传输" class="headerlink" title="数据的表示、计算、存储和传输"></a>数据的表示、计算、存储和传输</h3><h4 id="数据压缩"><a href="#数据压缩" class="headerlink" title="数据压缩"></a>数据压缩</h4><blockquote>
 <ul>
@@ -266,17 +265,17 @@
 <ol>
 <li><strong>gzip（无损）示例</strong>：</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gzip</span><br><span class="line"></span><br><span class="line">text = <span class="string">b&quot;Data compression example. &quot;</span> * <span class="number">100</span></span><br><span class="line"><span class="comment"># 压缩</span></span><br><span class="line">compressed = gzip.compress(text)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;原始大小：&quot;</span>, <span class="built_in">len</span>(text), <span class="string">&quot;压缩后大小：&quot;</span>, <span class="built_in">len</span>(compressed))</span><br><span class="line"><span class="comment"># 解压</span></span><br><span class="line">decompressed = gzip.decompress(compressed)</span><br><span class="line"><span class="keyword">assert</span> decompressed == text</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gzip</span><br><span class="line"></span><br><span class="line">text = <span class="string">b"Data compression example. "</span> * <span class="number">100</span></span><br><span class="line"><span class="comment"># 压缩</span></span><br><span class="line">compressed = gzip.compress(text)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"原始大小："</span>, <span class="built_in">len</span>(text), <span class="string">"压缩后大小："</span>, <span class="built_in">len</span>(compressed))</span><br><span class="line"><span class="comment"># 解压</span></span><br><span class="line">decompressed = gzip.decompress(compressed)</span><br><span class="line"><span class="keyword">assert</span> decompressed == text</span><br></pre></td></tr></tbody></table></figure>
 
 <p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749358101852VcESbqoZboQwALx8jarc7TRmnme.png" alt="1749358101852VcESbqoZboQwALx8jarc7TRmnme.png"></p>
 <p>以上示例使用 DEFLATE 算法，无损地将文本压缩并恢复</p>
 <ul>
-<li><strong>有损压缩</strong>则在压缩过程中丢弃“人眼&#x2F;人耳不易察觉”的冗余信息，如 JPEG 图像、MP3 音频，其解压后无法恢复到完全原始状态。</li>
+<li><strong>有损压缩</strong>则在压缩过程中丢弃“人眼/人耳不易察觉”的冗余信息，如 JPEG 图像、MP3 音频，其解压后无法恢复到完全原始状态。</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">img = Image.<span class="built_in">open</span>(<span class="string">&quot;input.png&quot;</span>)</span><br><span class="line">img.save(<span class="string">&quot;output.jpg&quot;</span>, quality=<span class="number">50</span>)  <span class="comment"># quality&lt;100 会丢失部分细节</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">img = Image.<span class="built_in">open</span>(<span class="string">"input.png"</span>)</span><br><span class="line">img.save(<span class="string">"output.jpg"</span>, quality=<span class="number">50</span>)  <span class="comment"># quality&lt;100 会丢失部分细节</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749357984852CVRfb86YNohpkSxhCM9cQd6bnOd.png" alt="1749357984852CVRfb86YNohpkSxhCM9cQd6bnOd.png"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对比文件体积</span></span><br><span class="line"><span class="built_in">ls</span> -lh input.jpg output.jpg</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对比文件体积</span></span><br><span class="line"><span class="built_in">ls</span> -lh input.jpg output.jpg</span><br></pre></td></tr></tbody></table></figure>
 
 <p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749358112853YAcabWie6oudnmxod0bcfX4PntU.png" alt="1749358112853YAcabWie6oudnmxod0bcfX4PntU.png"></p>
 <p>通过调整 <code>quality</code> 参数，JPEG 有损压缩可在保留较好视觉效果的同时大幅减小文件体积。</p>
@@ -284,24 +283,24 @@
 <p><a target="_blank" rel="noopener" href="https://colab.research.google.com/drive/1VpmC-vKrvaFusdNNuaavzvAk2YMhGWrW?usp=sharing(colab)">https://colab.research.google.com/drive/1VpmC-vKrvaFusdNNuaavzvAk2YMhGWrW?usp=sharing(colab</a> 链接)</p>
 </blockquote>
 <p>One-Hot 编码是一种将分类变量转换为稀疏二进制向量的技术，每个类别对应一个维度，只有所属类别位置为 1，其它位置为 0。</p>
-<h5 id="Pandas-实现示例："><a href="#Pandas-实现示例：" class="headerlink" title="Pandas 实现示例："></a><strong>Pandas 实现示例</strong>：</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.DataFrame(&#123;<span class="string">&quot;color&quot;</span>: [<span class="string">&quot;red&quot;</span>, <span class="string">&quot;blue&quot;</span>, <span class="string">&quot;green&quot;</span>, <span class="string">&quot;blue&quot;</span>]&#125;)</span><br><span class="line">one_hot = pd.get_dummies(df[<span class="string">&quot;color&quot;</span>], prefix=<span class="string">&quot;color&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(one_hot)</span><br></pre></td></tr></table></figure>
+<h5 id="Pandas-实现示例："><a href="#Pandas-实现示例：" class="headerlink" title="Pandas 实现示例："></a><strong>Pandas 实现示例</strong>：</h5><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.DataFrame({<span class="string">"color"</span>: [<span class="string">"red"</span>, <span class="string">"blue"</span>, <span class="string">"green"</span>, <span class="string">"blue"</span>]})</span><br><span class="line">one_hot = pd.get_dummies(df[<span class="string">"color"</span>], prefix=<span class="string">"color"</span>)</span><br><span class="line"><span class="built_in">print</span>(one_hot)</span><br></pre></td></tr></tbody></table></figure>
 
-<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">color_blue</span>  <span class="type">color_green</span>  <span class="type">color_red</span></span><br><span class="line"><span class="number">0</span>       <span class="built_in">False</span>        <span class="built_in">False</span>       <span class="built_in">True</span></span><br><span class="line"><span class="number">1</span>        <span class="built_in">True</span>        <span class="built_in">False</span>      <span class="built_in">False</span></span><br><span class="line"><span class="number">2</span>       <span class="built_in">False</span>         <span class="built_in">True</span>      <span class="built_in">False</span></span><br><span class="line"><span class="number">3</span>        <span class="built_in">True</span>        <span class="built_in">False</span>      <span class="built_in">False</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight mathematica"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">color_blue</span>  <span class="type">color_green</span>  <span class="type">color_red</span></span><br><span class="line"><span class="number">0</span>       <span class="built_in">False</span>        <span class="built_in">False</span>       <span class="built_in">True</span></span><br><span class="line"><span class="number">1</span>        <span class="built_in">True</span>        <span class="built_in">False</span>      <span class="built_in">False</span></span><br><span class="line"><span class="number">2</span>       <span class="built_in">False</span>         <span class="built_in">True</span>      <span class="built_in">False</span></span><br><span class="line"><span class="number">3</span>        <span class="built_in">True</span>        <span class="built_in">False</span>      <span class="built_in">False</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>此方法对小规模类别集非常高效，并集成于 Pandas。</p>
-<h4 id="Scikit-Learn-实现示例："><a href="#Scikit-Learn-实现示例：" class="headerlink" title="Scikit-Learn 实现示例："></a><strong>Scikit-Learn 实现示例</strong>：</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> OneHotEncoder</span><br><span class="line">enc = OneHotEncoder(sparse=<span class="literal">False</span>)</span><br><span class="line">X = enc.fit_transform(df[[<span class="string">&quot;color&quot;</span>]])</span><br><span class="line"><span class="built_in">print</span>(X)</span><br></pre></td></tr></table></figure>
+<h4 id="Scikit-Learn-实现示例："><a href="#Scikit-Learn-实现示例：" class="headerlink" title="Scikit-Learn 实现示例："></a><strong>Scikit-Learn 实现示例</strong>：</h4><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> OneHotEncoder</span><br><span class="line">enc = OneHotEncoder(sparse=<span class="literal">False</span>)</span><br><span class="line">X = enc.fit_transform(df[[<span class="string">"color"</span>]])</span><br><span class="line"><span class="built_in">print</span>(X)</span><br></pre></td></tr></tbody></table></figure>
 
-<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">[<span class="comment">[0. 0. 1.]</span></span></span><br><span class="line"><span class="comment"> <span class="comment">[1. 0. 0.]</span></span></span><br><span class="line"><span class="comment"> <span class="comment">[0. 1. 0.]</span></span></span><br><span class="line"><span class="comment"> <span class="comment">[1. 0. 0.]</span>]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight inform7"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">[<span class="comment">[0. 0. 1.]</span></span></span><br><span class="line"><span class="comment"> <span class="comment">[1. 0. 0.]</span></span></span><br><span class="line"><span class="comment"> <span class="comment">[0. 1. 0.]</span></span></span><br><span class="line"><span class="comment"> <span class="comment">[1. 0. 0.]</span>]</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p><code>OneHotEncoder</code> 支持 <code>handle_unknown</code> 参数，用于处理训练外出现的新类别。</p>
 <hr>
 <h4 id="深度学习中数据与模型的二进制存储方法"><a href="#深度学习中数据与模型的二进制存储方法" class="headerlink" title="深度学习中数据与模型的二进制存储方法"></a>深度学习中数据与模型的二进制存储方法</h4><p>深度学习框架通常使用专门的二进制格式保存模型参数和网络结构，以提高读写性能并节省存储空间。</p>
 <ul>
-<li><strong>PyTorch</strong>：使用 Python 序列化（Pickle）将模型权重保存在 <code>.pt</code> 或 <code>.pth</code> 文件，通常调用 <code>torch.save(model.state_dict(), &#39;model.pth&#39;)</code> 和 <code>model.load_state_dict(torch.load(&#39;model.pth&#39;))</code>。</li>
-<li><strong>TensorFlow</strong>：采用 SavedModel 格式，目录中包含 <code>saved_model.pb</code>（Protobuf 二进制）与 <code>variables</code> 检查点文件，使用 <code>model.save(&#39;path&#39;)</code> 和 <code>tf.keras.models.load_model(&#39;path&#39;)</code> 进行读写。</li>
+<li><strong>PyTorch</strong>：使用 Python 序列化（Pickle）将模型权重保存在 <code>.pt</code> 或 <code>.pth</code> 文件，通常调用 <code>torch.save(model.state_dict(), 'model.pth')</code> 和 <code>model.load_state_dict(torch.load('model.pth'))</code>。</li>
+<li><strong>TensorFlow</strong>：采用 SavedModel 格式，目录中包含 <code>saved_model.pb</code>（Protobuf 二进制）与 <code>variables</code> 检查点文件，使用 <code>model.save('path')</code> 和 <code>tf.keras.models.load_model('path')</code> 进行读写。</li>
 <li><strong>安全张量（safetensors）</strong>：新兴格式，提供比 Pickle 更强的安全性与加载性能，示例：</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> safetensors.torch <span class="keyword">as</span> st</span><br><span class="line">st.save_file(model.state_dict(), <span class="string">&quot;model.safetensors&quot;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> safetensors.torch <span class="keyword">as</span> st</span><br><span class="line">st.save_file(model.state_dict(), <span class="string">"model.safetensors"</span>)</span><br></pre></td></tr></tbody></table></figure>
 
 <p>此外，ONNX（Open Neural Network Exchange）以 Protobuf 二进制保存跨框架模型结构与权重，易于在不同平台间互操作。</p>
 <h4 id="CSS-等设计方面的颜色编码"><a href="#CSS-等设计方面的颜色编码" class="headerlink" title="CSS 等设计方面的颜色编码"></a>CSS 等设计方面的颜色编码</h4><p>在前端设计中，颜色可通过多种编码表示，最常见的是 十六进制（Hex）、RGB(A) 与 <strong>HSL(A)</strong> 格式。</p>
@@ -311,10 +310,10 @@
 <li><strong>HSL</strong>：<code>hsl(320,100%,50%)</code>，直观调节色相、饱和度、亮度。</li>
 </ul>
 <p><strong>CSS 示例</strong>：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.button</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#3498db</span>;           <span class="comment">/* Hex */</span></span><br><span class="line">  <span class="attribute">color</span>: <span class="built_in">rgb</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>);     <span class="comment">/* RGB */</span></span><br><span class="line">  <span class="attribute">border-color</span>: <span class="built_in">hsl</span>(<span class="number">200</span>, <span class="number">70%</span>, <span class="number">50%</span>); <span class="comment">/* HSL */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.button</span> {</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#3498db</span>;           <span class="comment">/* Hex */</span></span><br><span class="line">  <span class="attribute">color</span>: <span class="built_in">rgb</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>);     <span class="comment">/* RGB */</span></span><br><span class="line">  <span class="attribute">border-color</span>: <span class="built_in">hsl</span>(<span class="number">200</span>, <span class="number">70%</span>, <span class="number">50%</span>); <span class="comment">/* HSL */</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p><strong>JavaScript 转换示例</strong>：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Hex to RGB</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">hexToRgb</span>(<span class="params">hex</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> m = hex.<span class="title function_">match</span>(<span class="regexp">/^#?([A-F\d]&#123;2&#125;)([A-F\d]&#123;2&#125;)([A-F\d]&#123;2&#125;)$/i</span>);</span><br><span class="line">  <span class="keyword">if</span> (!m) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">r</span>: <span class="built_in">parseInt</span>(m[<span class="number">1</span>], <span class="number">16</span>),</span><br><span class="line">    <span class="attr">g</span>: <span class="built_in">parseInt</span>(m[<span class="number">2</span>], <span class="number">16</span>),</span><br><span class="line">    <span class="attr">b</span>: <span class="built_in">parseInt</span>(m[<span class="number">3</span>], <span class="number">16</span>)</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">hexToRgb</span>(<span class="string">&quot;#ff00aa&quot;</span>)); <span class="comment">// &#123;r:255, g:0, b:170&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Hex to RGB</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">hexToRgb</span>(<span class="params">hex</span>) {</span><br><span class="line">  <span class="keyword">let</span> m = hex.<span class="title function_">match</span>(<span class="regexp">/^#?([A-F\d]{2})([A-F\d]{2})([A-F\d]{2})$/i</span>);</span><br><span class="line">  <span class="keyword">if</span> (!m) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">return</span> {</span><br><span class="line">    <span class="attr">r</span>: <span class="built_in">parseInt</span>(m[<span class="number">1</span>], <span class="number">16</span>),</span><br><span class="line">    <span class="attr">g</span>: <span class="built_in">parseInt</span>(m[<span class="number">2</span>], <span class="number">16</span>),</span><br><span class="line">    <span class="attr">b</span>: <span class="built_in">parseInt</span>(m[<span class="number">3</span>], <span class="number">16</span>)</span><br><span class="line">  };</span><br><span class="line">}</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">hexToRgb</span>(<span class="string">"#ff00aa"</span>)); <span class="comment">// {r:255, g:0, b:170}</span></span><br></pre></td></tr></tbody></table></figure>
 
 <h4 id="计算机网络-ip-地址"><a href="#计算机网络-ip-地址" class="headerlink" title="计算机网络 ip 地址"></a>计算机网络 ip 地址</h4><blockquote>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/50091071">计算机网络（一）基本概念（IP,子网掩码,默认网关,DNS）</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_45406092/article/details/118526894">【计算机网络】IP 协议、IP 地址、网段划分、子网划分、子网掩码、CIDR_ip cidr-CSDN 博客</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/537410069">IP 地址、子网掩码、网关、DNS 之间的关系</a></p>
@@ -323,7 +322,7 @@
 <p>IP 地址、子网掩码、默认网关与 DNS 协同完成局域网与互联网互联：</p>
 <ul>
 <li><strong>IP 地址</strong>：标识主机在子网中的唯一地址，如 <code>192.168.1.10/24</code>。</li>
-<li><strong>子网掩码</strong>：如 <code>255.255.255.0</code>（&#x2F;24），用于划分网络号与主机号。</li>
+<li><strong>子网掩码</strong>：如 <code>255.255.255.0</code>（/24），用于划分网络号与主机号。</li>
 <li><strong>默认网关</strong>：同子网内路由器接口地址，负责跨网段转发，如 <code>192.168.1.1</code>。</li>
 <li><strong>DNS</strong>：域名解析服务器，将域名映射至 IP（如 <code>8.8.8.8</code>）。</li>
 </ul>
@@ -332,10 +331,10 @@
 </ol>
 <blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://colab.research.google.com/drive/1rXH5_RbucvYiemz9kz4mfqlx1Uz3DWA2?usp=sharing(colab)">https://colab.research.google.com/drive/1rXH5_RbucvYiemz9kz4mfqlx1Uz3DWA2?usp&#x3D;sharing(colab</a> 链接)</li>
+<li><a target="_blank" rel="noopener" href="https://colab.research.google.com/drive/1rXH5_RbucvYiemz9kz4mfqlx1Uz3DWA2?usp=sharing(colab)">https://colab.research.google.com/drive/1rXH5_RbucvYiemz9kz4mfqlx1Uz3DWA2?usp=sharing(colab</a> 链接)</li>
 </ul>
 </blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ipaddress</span><br><span class="line"></span><br><span class="line">net = ipaddress.ip_network(<span class="string">&quot;192.168.1.10/24&quot;</span>, strict=<span class="literal">False</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;网络地址:&quot;</span>, net.network_address)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;广播地址:&quot;</span>, net.broadcast_address)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;可用主机:&quot;</span>, <span class="built_in">list</span>(net.hosts())[:<span class="number">3</span>], <span class="string">&quot;…共&quot;</span>, net.num_addresses - <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ipaddress</span><br><span class="line"></span><br><span class="line">net = ipaddress.ip_network(<span class="string">"192.168.1.10/24"</span>, strict=<span class="literal">False</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"网络地址:"</span>, net.network_address)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"广播地址:"</span>, net.broadcast_address)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"可用主机:"</span>, <span class="built_in">list</span>(net.hosts())[:<span class="number">3</span>], <span class="string">"…共"</span>, net.num_addresses - <span class="number">2</span>)</span><br></pre></td></tr></tbody></table></figure>
 
 <p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749358051852DGQZbu2FIoQK8txaq98c7aD8nCe.png" alt="1749358051852DGQZbu2FIoQK8txaq98c7aD8nCe.png"></p>
 
@@ -359,7 +358,7 @@
         <section class="post-author">
         
             <figure class="author-avatar">
-                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&r=X&d=" alt="ttkqwe" />
+                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&amp;r=X&amp;d=" alt="ttkqwe">
             </figure>
         
             <div class="author-info">
@@ -399,11 +398,13 @@
 </footer>
 
 
-<script src="/static/kico.js"></script>
-<script src="/static/hingle.js"></script>
 
 
-<script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>
 
-  </body>
-</html>
+
+
+
+  
+
+<script src="/bundle.js"></script><script>var hingle = new Paul_Hingle({"copyright":false,"night":true});;
+L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

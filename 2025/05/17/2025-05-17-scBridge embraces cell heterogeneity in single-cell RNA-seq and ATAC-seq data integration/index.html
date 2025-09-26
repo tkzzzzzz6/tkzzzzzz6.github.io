@@ -1,25 +1,24 @@
-<!DOCTYPE html>
-<html lang="zh">
-  <head>
+<!DOCTYPE html><html lang="zh"><head>
     
     <meta charset="UTF-8">
     <title>2025-05-17-scBridge - TK的小站</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
-    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192">
     
-<link rel="stylesheet" href="/static/kico.css">
-<link rel="stylesheet" href="/static/hingle.css">
+
+
 
     
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:site_name" content="TK的小站">
-    <meta property="og:title" content="2025-05-17-scBridge"/>
+    <meta property="og:title" content="2025-05-17-scBridge">
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></noscript></head>
 
   <body>
     <header>
@@ -37,7 +36,7 @@
     <nav class="head-menu">
         <a href="/">首页</a>
         <div class="has-child">
-            <a href>分类</a>
+            <a href="">分类</a>
             <div class="sub-menu">
                 
             </div>
@@ -68,7 +67,7 @@
 </blockquote>
 <p><a target="_blank" rel="noopener" href="https://github.com/GreenleafLab/MPAL-Single-Cell-2019">https://github.com/GreenleafLab/MPAL-Single-Cell-2019</a></p>
 <h1 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation:"></a>Motivation:</h1><blockquote>
-<p>概述:<br>scBridge 是一套面向单细胞多组学数据（scRNA-seq 与 scATAC-seq）整合的半监督异构迁移学习框架。它的核心策略是：先用标注的 scRNA-seq 数据“热身”（warm-up）一个深度编码器和分类器，然后根据每个 scATAC-seq 细胞与 RNA 原型的相似度和分类置信度，评估其在组学整合中的“可靠性”，再借助可靠的 ATAC 细胞对齐 RNA 原型；如此迭代，从“易”到“难”逐步缩小 RNA&#x2F;ATAC 之间的调制差距。大量 benchmark 测试表明，scBridge 在嵌入质量、标签转移准确性和对注释稀缺、技术噪声的鲁棒性方面，均显著优于六种代表性方法（Harmony、Seurat、scJoint、Portal、GLUE、Conos）(<a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41467-023-41795-5">Nature</a>)。</p>
+<p>概述:<br>scBridge 是一套面向单细胞多组学数据（scRNA-seq 与 scATAC-seq）整合的半监督异构迁移学习框架。它的核心策略是：先用标注的 scRNA-seq 数据“热身”（warm-up）一个深度编码器和分类器，然后根据每个 scATAC-seq 细胞与 RNA 原型的相似度和分类置信度，评估其在组学整合中的“可靠性”，再借助可靠的 ATAC 细胞对齐 RNA 原型；如此迭代，从“易”到“难”逐步缩小 RNA/ATAC 之间的调制差距。大量 benchmark 测试表明，scBridge 在嵌入质量、标签转移准确性和对注释稀缺、技术噪声的鲁棒性方面，均显著优于六种代表性方法（Harmony、Seurat、scJoint、Portal、GLUE、Conos）(<a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41467-023-41795-5">Nature</a>)。</p>
 </blockquote>
 <p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1747738599339BegjbomkVoa7Hpx1yEScx3mRn8f.png" alt="1747738599339BegjbomkVoa7Hpx1yEScx3mRn8f.png"></p>
 <h2 id="单细胞多组学整合的必要性"><a href="#单细胞多组学整合的必要性" class="headerlink" title="单细胞多组学整合的必要性"></a>单细胞多组学整合的必要性</h2><ul>
@@ -137,7 +136,7 @@
         <section class="post-author">
         
             <figure class="author-avatar">
-                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&r=X&d=" alt="ttkqwe" />
+                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&amp;r=X&amp;d=" alt="ttkqwe">
             </figure>
         
             <div class="author-info">
@@ -177,11 +176,13 @@
 </footer>
 
 
-<script src="/static/kico.js"></script>
-<script src="/static/hingle.js"></script>
 
 
-<script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>
 
-  </body>
-</html>
+
+
+
+  
+
+<script src="/bundle.js"></script><script>var hingle = new Paul_Hingle({"copyright":false,"night":true});;
+L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

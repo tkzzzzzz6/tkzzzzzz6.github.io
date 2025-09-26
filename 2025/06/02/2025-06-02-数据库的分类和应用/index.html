@@ -1,25 +1,24 @@
-<!DOCTYPE html>
-<html lang="zh">
-  <head>
+<!DOCTYPE html><html lang="zh"><head>
     
     <meta charset="UTF-8">
     <title>2025-06-02-数据库的分类和应用 - TK的小站</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
-    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192">
     
-<link rel="stylesheet" href="/static/kico.css">
-<link rel="stylesheet" href="/static/hingle.css">
+
+
 
     
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:site_name" content="TK的小站">
-    <meta property="og:title" content="2025-06-02-数据库的分类和应用"/>
+    <meta property="og:title" content="2025-06-02-数据库的分类和应用">
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></noscript></head>
 
   <body>
     <header>
@@ -37,7 +36,7 @@
     <nav class="head-menu">
         <a href="/">首页</a>
         <div class="has-child">
-            <a href>分类</a>
+            <a href="">分类</a>
             <div class="sub-menu">
                 
             </div>
@@ -86,14 +85,14 @@
 <h3 id="架构与事务"><a href="#架构与事务" class="headerlink" title="架构与事务"></a>架构与事务</h3><p>主流 RDBMS 如 MySQL（InnoDB 引擎）和 PostgreSQL 采用<strong>多版本并发控制（MVCC）实现高并发读写，同时提供行级锁、两阶段锁等机制保证隔离性 。在分布式部署中，一般通过主从复制</strong>、<strong>读写分离</strong>、<strong>分库分表</strong>或中间件 ShardingSphere 实现水平扩展，解决单机性能瓶颈。</p>
 <h3 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h3><ul>
 <li><strong>索引设计</strong>：B+ 树、哈希索引和全文索引，各有取舍；</li>
-<li><strong>查询优化</strong>：执行计划（EXPLAIN）、覆盖索引、分区表减少 I&#x2F;O；</li>
+<li><strong>查询优化</strong>：执行计划（EXPLAIN）、覆盖索引、分区表减少 I/O；</li>
 <li><strong>缓存机制</strong>：如 MySQL Query Cache（已弃用）与 Buffer Pool；</li>
 <li><strong>物理架构</strong>：SSD 替换 HDD、NUMA 拆分及内存调优 。</li>
 </ul>
 <h3 id="典型应用"><a href="#典型应用" class="headerlink" title="典型应用"></a>典型应用</h3><ul>
 <li><strong>电商订单系统</strong>：保证库存扣减的强一致性与事务原子性；</li>
 <li><strong>金融支付场景</strong>：对账、清分要求 ACID 特性；</li>
-<li><strong>企业级 CRM&#x2F;ERP</strong>：多表联动，复杂报表生成 。</li>
+<li><strong>企业级 CRM/ERP</strong>：多表联动，复杂报表生成 。</li>
 </ul>
 <hr>
 <h2 id="NoSQL-数据库"><a href="#NoSQL-数据库" class="headerlink" title="NoSQL 数据库"></a>NoSQL 数据库</h2><p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749363644852Vbg5bEP8gorZu8xdFGzcvskhn4e.png" alt="1749363644852Vbg5bEP8gorZu8xdFGzcvskhn4e.png"></p>
@@ -101,11 +100,11 @@
 <h3 id="键值存储（Key–Value）"><a href="#键值存储（Key–Value）" class="headerlink" title="键值存储（Key–Value）"></a>键值存储（Key–Value）</h3><p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749363668852Nb0IbN0C2oIFKqxLYXvcB6uTnvf.png" alt="1749363668852Nb0IbN0C2oIFKqxLYXvcB6uTnvf.png"><br><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749363676852HnxhbGx8kofa7uxydEEcpm5Ynrd.png" alt="1749363676852HnxhbGx8kofa7uxydEEcpm5Ynrd.png"></p>
 <p>键值数据库以唯一键（Key）直接定位值（Value），最典型产品是 Redis 与 Memcached 。</p>
 <ul>
-<li><strong>Redis</strong> 支持字符串、列表、集合、有序集合及哈希等多种数据类型，并提供持久化（RDB&#x2F;AOF）与主从复制功能，可用作缓存、分布式锁、消息队列等 。</li>
+<li><strong>Redis</strong> 支持字符串、列表、集合、有序集合及哈希等多种数据类型，并提供持久化（RDB/AOF）与主从复制功能，可用作缓存、分布式锁、消息队列等 。</li>
 <li><strong>Memcached</strong> 轻量且高性能，专注内存缓存，适合对持久化需求不高的场景 。</li>
 </ul>
 <h3 id="文档存储（Document）"><a href="#文档存储（Document）" class="headerlink" title="文档存储（Document）"></a>文档存储（Document）</h3><p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749363690852HH52bVf6RoelESxNCobcq4PonBe.png" alt="1749363690852HH52bVf6RoelESxNCobcq4PonBe.png"></p>
-<p>文档数据库以 JSON&#x2F;BSON 形式存储半结构化数据，Collections 与 Documents 对应 RDBMS 的表与行。</p>
+<p>文档数据库以 JSON/BSON 形式存储半结构化数据，Collections 与 Documents 对应 RDBMS 的表与行。</p>
 <ul>
 <li><strong>MongoDB</strong> 提供二级索引、聚合框架与复制集、分片集群，可动态 Schema、轻松存储嵌套对象，常用于内容管理、用户画像和配置中心 。</li>
 <li><strong>Amazon DocumentDB</strong>（兼容 MongoDB）则是托管型服务，简化集群管理 。</li>
@@ -129,10 +128,10 @@
 </ul>
 </blockquote>
 <h3 id="ORM-实例"><a href="#ORM-实例" class="headerlink" title="ORM 实例"></a>ORM 实例</h3><p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749363723088H85CbxxlqoFbC2xvZDxc3roZnXc.png" alt="1749363723088H85CbxxlqoFbC2xvZDxc3roZnXc.png"></p>
-<p><strong>简单说，ORM 就是通过实例对象的语法，完成关系型数据库的操作的技术，是”对象-关系映射”（Object&#x2F;Relational Mapping） 的缩写。</strong></p>
+<p><strong>简单说，ORM 就是通过实例对象的语法，完成关系型数据库的操作的技术，是”对象-关系映射”（Object/Relational Mapping） 的缩写。</strong></p>
 <p>ORM 把数据库映射成对象。</p>
 <p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749363730852LJKCbJUiPoMluPxXMtOcAHb1nQd.png" alt="1749363730852LJKCbJUiPoMluPxXMtOcAHb1nQd.png"></p>
-<p>面向对象数据库将 OOP 对象直接存储于数据库，支持类、继承与方法 。它适用于 <strong>CAD&#x2F;CAE</strong>、<strong>嵌入式系统</strong>与 <strong>GIS</strong> 等复杂对象场景，避免了 ORM 带来的映射开销。</p>
+<p>面向对象数据库将 OOP 对象直接存储于数据库，支持类、继承与方法 。它适用于 <strong>CAD/CAE</strong>、<strong>嵌入式系统</strong>与 <strong>GIS</strong> 等复杂对象场景，避免了 ORM 带来的映射开销。</p>
 <h3 id="层次式与网状数据库"><a href="#层次式与网状数据库" class="headerlink" title="层次式与网状数据库"></a>层次式与网状数据库</h3><ul>
 <li><strong>层次式数据库</strong>（IMS、Windows 注册表）使用父子一对多结构，检索效率高但缺乏灵活性 。</li>
 <li><strong>网状数据库</strong> 允许多对多父子关系，曾用于大型主机系统，如 IDMS，但因查询复杂逐步被关系型数据库取代 。</li>
@@ -157,23 +156,23 @@
 </ul>
 <h3 id="全文搜索与分析引擎"><a href="#全文搜索与分析引擎" class="headerlink" title="全文搜索与分析引擎"></a>全文搜索与分析引擎</h3><ul>
 <li><strong>Elasticsearch</strong> 基于 Lucene，支持倒排索引、聚合分析及 Near Real-Time（NRT）搜索 。</li>
-<li>常与 <strong>Logstash&#x2F;Beats&#x2F;Kibana</strong> 构建 ELK 堆栈，用于日志收集、处理与可视化 。</li>
+<li>常与 <strong>Logstash/Beats/Kibana</strong> 构建 ELK 堆栈，用于日志收集、处理与可视化 。</li>
 </ul>
 <hr>
 <h2 id="混合架构与选型指南"><a href="#混合架构与选型指南" class="headerlink" title="混合架构与选型指南"></a>混合架构与选型指南</h2><p>大型系统普遍采用 <strong>Polyglot Persistence</strong>，不同业务模块选用最合适的存储引擎：</p>
 <ul>
-<li><strong>缓存层</strong>：Redis&#x2F;Memcached 提升读写性能 。</li>
-<li><strong>核心事务</strong>：MySQL&#x2F;PostgreSQL 或 TiDB&#x2F;CockroachDB 保证 ACID 。</li>
+<li><strong>缓存层</strong>：Redis/Memcached 提升读写性能 。</li>
+<li><strong>核心事务</strong>：MySQL/PostgreSQL 或 TiDB/CockroachDB 保证 ACID 。</li>
 <li><strong>流式处理</strong>：Kafka、RabbitMQ 解耦异步；</li>
-<li><strong>实时 BI</strong>：Elasticsearch&#x2F;ClickHouse 提供快速聚合 。</li>
+<li><strong>实时 BI</strong>：Elasticsearch/ClickHouse 提供快速聚合 。</li>
 </ul>
 <h3 id="选型建议"><a href="#选型建议" class="headerlink" title="选型建议"></a>选型建议</h3><ol>
-<li><strong>强一致事务</strong> → 关系型&#x2F;NewSQL</li>
-<li><strong>超高并发缓存</strong> → Redis&#x2F;Memcached</li>
-<li><strong>半结构化文档</strong> → MongoDB&#x2F;DocumentDB</li>
-<li><strong>宽表稀疏存储</strong> → Cassandra&#x2F;HBase</li>
-<li><strong>复杂关系分析</strong> → Neo4j&#x2F;JanusGraph</li>
-<li><strong>时序数据</strong> → InfluxDB&#x2F;TimescaleDB</li>
+<li><strong>强一致事务</strong> → 关系型/NewSQL</li>
+<li><strong>超高并发缓存</strong> → Redis/Memcached</li>
+<li><strong>半结构化文档</strong> → MongoDB/DocumentDB</li>
+<li><strong>宽表稀疏存储</strong> → Cassandra/HBase</li>
+<li><strong>复杂关系分析</strong> → Neo4j/JanusGraph</li>
+<li><strong>时序数据</strong> → InfluxDB/TimescaleDB</li>
 <li><strong>全文检索</strong> → Elasticsearch</li>
 </ol>
 
@@ -197,7 +196,7 @@
         <section class="post-author">
         
             <figure class="author-avatar">
-                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&r=X&d=" alt="ttkqwe" />
+                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&amp;r=X&amp;d=" alt="ttkqwe">
             </figure>
         
             <div class="author-info">
@@ -237,11 +236,13 @@
 </footer>
 
 
-<script src="/static/kico.js"></script>
-<script src="/static/hingle.js"></script>
 
 
-<script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>
 
-  </body>
-</html>
+
+
+
+  
+
+<script src="/bundle.js"></script><script>var hingle = new Paul_Hingle({"copyright":false,"night":true});;
+L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

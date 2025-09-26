@@ -1,25 +1,24 @@
-<!DOCTYPE html>
-<html lang="zh">
-  <head>
+<!DOCTYPE html><html lang="zh"><head>
     
     <meta charset="UTF-8">
     <title>2025-05-11-域适应(Domain Adaptation) - TK的小站</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
-    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192">
     
-<link rel="stylesheet" href="/static/kico.css">
-<link rel="stylesheet" href="/static/hingle.css">
+
+
 
     
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:site_name" content="TK的小站">
-    <meta property="og:title" content="2025-05-11-域适应(Domain Adaptation)"/>
+    <meta property="og:title" content="2025-05-11-域适应(Domain Adaptation)">
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></noscript></head>
 
   <body>
     <header>
@@ -37,7 +36,7 @@
     <nav class="head-menu">
         <a href="/">首页</a>
         <div class="has-child">
-            <a href>分类</a>
+            <a href="">分类</a>
             <div class="sub-menu">
                 
             </div>
@@ -79,7 +78,7 @@
 <blockquote>
 <ul>
 <li>图中 Generator 和 Discriminator 的目标是相反的,对应的结构和 Gan 网络的结构非常的类似</li>
-<li>公式 $\theta_f^*&#x3D;\min {L-L_d}$中 $L_{d}$不是越小越好,因为$L_{d}$太小的话,从另外的角度 Generator 还是能够识别出 S 与 T 域之间的区别,而我们的任务是要实现 L 低的同时,Discriminator 无法识别 S 与 T 域之间的区别,但是实际训练中,对应的公式还是够用的</li>
+<li>公式 $\theta_f^*=\min {L-L_d}$中 $L_{d}$不是越小越好,因为$L_{d}$太小的话,从另外的角度 Generator 还是能够识别出 S 与 T 域之间的区别,而我们的任务是要实现 L 低的同时,Discriminator 无法识别 S 与 T 域之间的区别,但是实际训练中,对应的公式还是够用的</li>
 </ul>
 </blockquote>
 <h3 id="目标："><a href="#目标：" class="headerlink" title="目标："></a>目标：</h3><ul>
@@ -124,26 +123,26 @@
 <h4 id="目的：-1"><a href="#目的：-1" class="headerlink" title="目的："></a>目的：</h4><p><strong>MCD</strong> 的目标是使得模型在源领域和目标领域上能够学习到共同的、具有广泛适用性的特征表示，从而帮助模型更好地适应目标领域的数据，尤其是在目标领域数据少或没有标签的情况下。</p>
 <h1 id="Resources"><a href="#Resources" class="headerlink" title="Resources:"></a>Resources:</h1><p>因为我们后面主要研究的领域是多目标域适应,后面表格对应的都是这方面的论文</p>
 <blockquote>
-<p>这里提供一个 github 仓库,有除了 MTDA 的其他 DA 领域的论文资源总览<br><a target="_blank" rel="noopener" href="https://github.com/zhaoxin94/awesome-domain-adaptation">GitHub - zhaoxin94&#x2F;awesome-domain-adaptation: A collection of AWESOME things about domian adaptation</a></p>
+<p>这里提供一个 github 仓库,有除了 MTDA 的其他 DA 领域的论文资源总览<br><a target="_blank" rel="noopener" href="https://github.com/zhaoxin94/awesome-domain-adaptation">GitHub - zhaoxin94/awesome-domain-adaptation: A collection of AWESOME things about domian adaptation</a></p>
 </blockquote>
 <table>
+<tbody><tr>
+<td>[[1810.11547] Unsupervised Multi-Target Domain Adaptation: An Information Theoretic Approach](https://arxiv.org/abs/1810.11547)<br></td><td>[seqam-lab/MTDA-ITA: Code for Unsupervised Multi-Target Domain Adaptation: An Information Theoretic Approach](https://github.com/seqam-lab/MTDA-ITA)<br></td></tr>
 <tr>
-<td>[[1810.11547] Unsupervised Multi-Target Domain Adaptation: An Information Theoretic Approach](https://arxiv.org/abs/1810.11547)<br/></td><td>[seqam-lab/MTDA-ITA: Code for Unsupervised Multi-Target Domain Adaptation: An Information Theoretic Approach](https://github.com/seqam-lab/MTDA-ITA)<br/></td></tr>
+<td>[[2211.03876] CoNMix for Source-free Single and Multi-target Domain Adaptation](https://arxiv.org/abs/2211.03876)<br></td><td><br></td></tr>
 <tr>
-<td>[[2211.03876] CoNMix for Source-free Single and Multi-target Domain Adaptation](https://arxiv.org/abs/2211.03876)<br/></td><td><br/></td></tr>
+<td>[[2104.00808v1] Curriculum Graph Co-Teaching for Multi-Target Domain Adaptation](https://arxiv.org/abs/2104.00808v1)<br></td><td><br></td></tr>
 <tr>
-<td>[[2104.00808v1] Curriculum Graph Co-Teaching for Multi-Target Domain Adaptation](https://arxiv.org/abs/2104.00808v1)<br/></td><td><br/></td></tr>
+<td>[[2407.13771] Training-Free Model Merging for Multi-target Domain Adaptation](https://arxiv.org/abs/2407.13771)<br></td><td><br></td></tr>
 <tr>
-<td>[[2407.13771] Training-Free Model Merging for Multi-target Domain Adaptation](https://arxiv.org/abs/2407.13771)<br/></td><td><br/></td></tr>
+<td>[[2007.07077] Unsupervised Multi-Target Domain Adaptation Through Knowledge Distillation](https://arxiv.org/abs/2007.07077)<br></td><td><br></td></tr>
 <tr>
-<td>[[2007.07077] Unsupervised Multi-Target Domain Adaptation Through Knowledge Distillation](https://arxiv.org/abs/2007.07077)<br/></td><td><br/></td></tr>
+<td>[[2106.03418] Multi-Target Domain Adaptation with Collaborative Consistency Learning](https://arxiv.org/abs/2106.03418)<br></td><td><br></td></tr>
 <tr>
-<td>[[2106.03418] Multi-Target Domain Adaptation with Collaborative Consistency Learning](https://arxiv.org/abs/2106.03418)<br/></td><td><br/></td></tr>
+<td>[[2210.01578] Cooperative Self-Training for Multi-Target Adaptive Semantic Segmentation](https://arxiv.org/abs/2210.01578)<br></td><td><br></td></tr>
 <tr>
-<td>[[2210.01578] Cooperative Self-Training for Multi-Target Adaptive Semantic Segmentation](https://arxiv.org/abs/2210.01578)<br/></td><td><br/></td></tr>
-<tr>
-<td>[[2401.05465] D3GU: Multi-Target Active Domain Adaptation via Enhancing Domain Alignment](https://arxiv.org/abs/2401.05465)<br/></td><td>[lzhangbj/D3GU: [WACV 2024] D3GU: Multi-target Active Domain Adaptation via Enhancing Domain Alignment](https://github.com/lzhangbj/D3GU)<br/></td></tr>
-</table>
+<td>[[2401.05465] D3GU: Multi-Target Active Domain Adaptation via Enhancing Domain Alignment](https://arxiv.org/abs/2401.05465)<br></td><td>[lzhangbj/D3GU: [WACV 2024] D3GU: Multi-target Active Domain Adaptation via Enhancing Domain Alignment](https://github.com/lzhangbj/D3GU)<br></td></tr>
+</tbody></table>
 
         </article>
         <section class="post-near">
@@ -165,7 +164,7 @@
         <section class="post-author">
         
             <figure class="author-avatar">
-                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&r=X&d=" alt="ttkqwe" />
+                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&amp;r=X&amp;d=" alt="ttkqwe">
             </figure>
         
             <div class="author-info">
@@ -205,11 +204,13 @@
 </footer>
 
 
-<script src="/static/kico.js"></script>
-<script src="/static/hingle.js"></script>
 
 
-<script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>
 
-  </body>
-</html>
+
+
+
+  
+
+<script src="/bundle.js"></script><script>var hingle = new Paul_Hingle({"copyright":false,"night":true});;
+L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

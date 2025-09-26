@@ -1,25 +1,24 @@
-<!DOCTYPE html>
-<html lang="zh">
-  <head>
+<!DOCTYPE html><html lang="zh"><head>
     
     <meta charset="UTF-8">
     <title>2025-06-08-大模型底层技术分析 - TK的小站</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
-    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192">
     
-<link rel="stylesheet" href="/static/kico.css">
-<link rel="stylesheet" href="/static/hingle.css">
+
+
 
     
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:site_name" content="TK的小站">
-    <meta property="og:title" content="2025-06-08-大模型底层技术分析"/>
+    <meta property="og:title" content="2025-06-08-大模型底层技术分析">
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></noscript></head>
 
   <body>
     <header>
@@ -37,7 +36,7 @@
     <nav class="head-menu">
         <a href="/">首页</a>
         <div class="has-child">
-            <a href>分类</a>
+            <a href="">分类</a>
             <div class="sub-menu">
                 
             </div>
@@ -110,7 +109,7 @@
 <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="什么是语言模型-Language-Models-？"><a href="#什么是语言模型-Language-Models-？" class="headerlink" title="什么是语言模型 (Language Models)？"></a>什么是语言模型 (Language Models)？</h2><p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749366089085BNAubDynsogt1bxoYrPcAnBlnvh.png" alt="1749366089085BNAubDynsogt1bxoYrPcAnBlnvh.png"></p>
 <p>「语言模型」是一种「人工智能系统」，旨在处理、理解和生成类似人类的语言。它们从大型数据集中学习模式和结构，使得能够产生连贯且上下文相关的文本，应用于翻译、摘要、聊天机器人和内容生成等领域。</p>
 <h3 id="大型语言模型（LLMs）"><a href="#大型语言模型（LLMs）" class="headerlink" title="大型语言模型（LLMs）"></a>大型语言模型（LLMs）</h3><p>「语言模型」（LMs）和「大型语言模型」（LLMs）这两个术语虽然经常被互换使用，但实际上它们基于规模、架构、训练数据和能力指代不同的概念。LLMs 是 LMs 的一个子集，其规模显著更大，通常包含数十亿个参数（例如，GPT-3 拥有 1750 亿个参数）。这种更大的规模使 LLMs 能够在广泛的任务中表现出卓越的性能。“LLM”这一术语在 2018 至 2019 年间随着基于 Transformer 架构的模型（如 BERT 和 GPT-1）的出现开始受到关注。然而，在 2020 年 GPT-3 发布后，这个词才被广泛使用，展示了这些大规模模型的重大影响力和强大能力。</p>
-<h3 id="自回归语言模型-（Autoregressive-Language-Models）"><a href="#自回归语言模型-（Autoregressive-Language-Models）" class="headerlink" title="自回归语言模型 （Autoregressive Language Models）"></a><a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=255912486&content_type=Article&match_order=1&q=%E8%87%AA%E5%9B%9E%E5%BD%92%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B&zhida_source=entity">自回归语言模型</a> （Autoregressive Language Models）</h3><p>大多数 LLMs 以「自回归方式」(Autoregressive)操作，这意味着它们根据前面的「文本」预测下一个「字」（或 token／sub-word）的「概率分布」(propability distribution)。这种自回归特性使模型能够学习复杂的语言模式和依赖关系，从而善于「文本生成」。</p>
+<h3 id="自回归语言模型-（Autoregressive-Language-Models）"><a href="#自回归语言模型-（Autoregressive-Language-Models）" class="headerlink" title="自回归语言模型 （Autoregressive Language Models）"></a><a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=255912486&amp;content_type=Article&amp;match_order=1&amp;q=%E8%87%AA%E5%9B%9E%E5%BD%92%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B&amp;zhida_source=entity">自回归语言模型</a> （Autoregressive Language Models）</h3><p>大多数 LLMs 以「自回归方式」(Autoregressive)操作，这意味着它们根据前面的「文本」预测下一个「字」（或 token／sub-word）的「概率分布」(propability distribution)。这种自回归特性使模型能够学习复杂的语言模式和依赖关系，从而善于「文本生成」。</p>
 <p>$$<br>(\begin{array}{cc}w_1,w_2&amp;,\ldots,w_{n-1}\end{array})\left(w_{n}\right)P(w_{n}|w_1,w_2,\ldots,w_{n-1},\ldots,w_{n-1})<br>$$</p>
 <p>在文本生成任时，LLM 通过解码算法(Decoding Algorithm)来确定下一个输出的字。</p>
 <p>这一过程可以采用不同的策略：既可以选择概率最高的下个字（即贪婪搜索），也可以从预测的概率分布中随机采样一个字。后一种方法使得每次生成的文本都可能有所不同，这种特性与人类语言的多样性和随机性颇为相似。</p>
@@ -125,7 +124,7 @@
 <p>Vaswani 等人在 2017 年通过其开创性论文“Attention is All You Need”引入了 Transformer 架构，标志着 NLP 的一个分水岭时刻。它解决了早期模型如循环神经网络（RNNs）和长短期记忆网络（LSTMs）的关键限制，这些模型在长程依赖性和顺序处理方面存在困难。这些问题使得使用 RNN 或 LSTM 实现有效的语言模型变得困难，因为它们计算效率低下且容易出现梯度消失等问题。另一方面，Transformers 克服了这些障碍，彻底改变了这一领域，并为现代大型语言模型奠定了基础。</p>
 <p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749366139852ZnJWbnoMCojKUExcNMZcJaV4nod.png" alt="1749366139852ZnJWbnoMCojKUExcNMZcJaV4nod.png"></p>
 <h3 id="Transformer-架构的关键创新"><a href="#Transformer-架构的关键创新" class="headerlink" title="Transformer 架构的关键创新"></a>Transformer 架构的关键创新</h3><p>自注意力机制 (Self-Attention)：与按顺序处理标记并难以应对长程依赖性的 RNN 不同，Transformers 使用自注意力来权衡每个标记相对于其他标记的重要性。这使得模型能够动态关注输入的相关部分。数学上：</p>
-<p>$$<br>\mathrm{Attention}(\mathbf{Q},\mathbf{K},\mathbf{V})&#x3D;\mathrm{Softmax}\left(\frac{\mathbf{QK^T}}{\sqrt{d_k}}\right)\mathrm{V}<br>$$</p>
+<p>$$<br>\mathrm{Attention}(\mathbf{Q},\mathbf{K},\mathbf{V})=\mathrm{Softmax}\left(\frac{\mathbf{QK^T}}{\sqrt{d_k}}\right)\mathrm{V}<br>$$</p>
 <p>这里，Q、K、V 是查询(query)、键(key)和值(value)矩阵，dₖ 是键的维度。自注意力允许并行计算，加快训练速度，同时提高全局上下文理解。</p>
 <p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749366152088YWvebIv6soDVh2xSALYc4m2vnoc.png" alt="1749366152088YWvebIv6soDVh2xSALYc4m2vnoc.png"></p>
 <p>多头注意力：多个注意力头并行操作，每个头专注于输入的不同方面。它们的输出被连接并转换，从而实现更丰富的上下文表示。</p>
@@ -234,7 +233,7 @@
 <li>多标记预测 (Multi-Token Prediction — MTP)：增强模型生成连贯且上下文相关的输出的能力，特别是对于需要复杂序列生成的任务。</li>
 </ul>
 <p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749366364852VqXxb4bC3o4zcdxZ2IfcCiBTn8f.png" alt="1749366364852VqXxb4bC3o4zcdxZ2IfcCiBTn8f.png"></p>
-<p>DeepSeek-V3 的发布引发了全球科技抛售，危及 1 万亿美元的市值，并导致英伟达股票盘前下跌 13%。DeepSeek-V3 的价格为每百万输出标记 2.19 美元，约为 OpenAI 类似模型成本的 1&#x2F;30。</p>
+<p>DeepSeek-V3 的发布引发了全球科技抛售，危及 1 万亿美元的市值，并导致英伟达股票盘前下跌 13%。DeepSeek-V3 的价格为每百万输出标记 2.19 美元，约为 OpenAI 类似模型成本的 1/30。</p>
 <h4 id="DeepSeek-R1-Zero-和-DeepSeek-R1-2025–01"><a href="#DeepSeek-R1-Zero-和-DeepSeek-R1-2025–01" class="headerlink" title="DeepSeek-R1-Zero 和 DeepSeek-R1 (2025–01)"></a>DeepSeek-R1-Zero 和 DeepSeek-R1 (2025–01)</h4><p>仅仅一个月后，2025 年 1 月下旬，DeepSeek 通过发布 DeepSeek-R1-Zero 和 DeepSeek-R1 再次引起轰动，这些模型展示了卓越的推理能力，训练成本极低。</p>
 <p>利用先进的强化学习技术，这些模型证明了高性能推理可以在没有通常与尖端 AI 相关的巨额计算费用的情况下实现。这一突破巩固了 DeepSeek 作为高效和可扩展 AI 创新领导者的地位。</p>
 <ul>
@@ -278,7 +277,7 @@
         <section class="post-author">
         
             <figure class="author-avatar">
-                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&r=X&d=" alt="ttkqwe" />
+                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&amp;r=X&amp;d=" alt="ttkqwe">
             </figure>
         
             <div class="author-info">
@@ -318,11 +317,13 @@
 </footer>
 
 
-<script src="/static/kico.js"></script>
-<script src="/static/hingle.js"></script>
 
 
-<script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>
 
-  </body>
-</html>
+
+
+
+  
+
+<script src="/bundle.js"></script><script>var hingle = new Paul_Hingle({"copyright":false,"night":true});;
+L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

@@ -1,25 +1,24 @@
-<!DOCTYPE html>
-<html lang="zh">
-  <head>
+<!DOCTYPE html><html lang="zh"><head>
     
     <meta charset="UTF-8">
     <title>2025-03-16-水“镜”安澜——基于YOLO11的智能溺水检测系统软件 V1.0 设计说明文档 - TK的小站</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
-    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192">
     
-<link rel="stylesheet" href="/static/kico.css">
-<link rel="stylesheet" href="/static/hingle.css">
+
+
 
     
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:site_name" content="TK的小站">
-    <meta property="og:title" content="2025-03-16-水“镜”安澜——基于YOLO11的智能溺水检测系统软件 V1.0 设计说明文档"/>
+    <meta property="og:title" content="2025-03-16-水“镜”安澜——基于YOLO11的智能溺水检测系统软件 V1.0 设计说明文档">
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></noscript></head>
 
   <body>
     <header>
@@ -37,7 +36,7 @@
     <nav class="head-menu">
         <a href="/">首页</a>
         <div class="has-child">
-            <a href>分类</a>
+            <a href="">分类</a>
             <div class="sub-menu">
                 
             </div>
@@ -76,36 +75,36 @@
 <p>本项目旨在开发一个基于计算机视觉的智能溺水检测系统，利用深度学习技术实现对水域环境中人员行为的实时监控和分析。项目背景源于对提升水域安全管理效率和降低溺水事故发生率的迫切需求，通过采用先进的人工智能技术，为水域安全管理提供智能化的解决方案。</p>
 <p>本项目创新性地结合光学摄像头技术，实现高效、全天候的溺水检测系统。通过光学摄像头利用 YOLO11 模型进行河道水面的实例分割和人物的目标检测。系统可以通过计算水面与人物掩模的重合度，判断目标人物溺水状态，若超出设定重合度范围，自动判断其可能溺水，并及时发出警报。项目初衷在于应对夏季高发的溺水事故，传统人工检测存在注意力疲劳、反应时间长、视线受限等局限。项目旨在利用图像处理算法和 YOLO11 模型，研发一套智能溺水检测系统，实现实时监控、精准识别和快速响应。相较于已有的溺水检测方案，如青犀防溺水 AI 算法、DEWS 系统等，本项目方案在硬件和环境适应性上更为灵活。目前项目只适用于河道等地区青少年失足落水的情况，我们计算后期添加人物姿态评估算法，将人物的溺水状态精确到对应的姿态，提高系统的适用范围和准确率。</p>
 <h2 id="3-定义"><a href="#3-定义" class="headerlink" title="3. 定义"></a>3. 定义</h2><table>
+<tbody><tr>
+<td>专有名词<br></td><td>解释<br></td></tr>
 <tr>
-<td>专有名词<br/></td><td>解释<br/></td></tr>
+<td>YOLO (You Only Look Once)<br></td><td>一种高效的实时目标检测算法<br></td></tr>
 <tr>
-<td>YOLO (You Only Look Once)<br/></td><td>一种高效的实时目标检测算法<br/></td></tr>
+<td>CV (Computer Vision)<br></td><td> 计算机视觉技术，用于使机器“看”和处理图像<br></td></tr>
 <tr>
-<td>CV (Computer Vision)<br/></td><td> 计算机视觉技术，用于使机器“看”和处理图像<br/></td></tr>
+<td>GPU (Graphics Processing Unit)<br></td><td> 图形处理器，用于加速图像和视频处理任务<br></td></tr>
 <tr>
-<td>GPU (Graphics Processing Unit)<br/></td><td> 图形处理器，用于加速图像和视频处理任务<br/></td></tr>
+<td>CUDA(Compute Unified Device Architecture)<br></td><td> NVIDIA推出的并行计算平台和编程模型<br></td></tr>
 <tr>
-<td>CUDA(Compute Unified Device Architecture)<br/></td><td> NVIDIA推出的并行计算平台和编程模型<br/></td></tr>
-<tr>
-<td>FPS (Frames Per Second)<br/></td><td>每秒帧数，用于衡量视频处理和显示的性能<br/></td></tr>
-</table>
+<td>FPS (Frames Per Second)<br></td><td>每秒帧数，用于衡量视频处理和显示的性能<br></td></tr>
+</tbody></table>
 
 <h2 id="4-参考资料"><a href="#4-参考资料" class="headerlink" title="4. 参考资料"></a>4. 参考资料</h2><table>
+<tbody><tr>
+<td>资料名称名称<br></td><td>解释<br></td></tr>
 <tr>
-<td>资料名称名称<br/></td><td>解释<br/></td></tr>
+<td>https://pytorch.org/docs/<br></td><td>PyTorch官方文档<br></td></tr>
 <tr>
-<td>https://pytorch.org/docs/<br/></td><td>PyTorch官方文档<br/></td></tr>
+<td>https://github.com/ultralytics/ultralytics<br></td><td>YOLOv11官方网址<br></td></tr>
 <tr>
-<td>https://github.com/ultralytics/ultralytics<br/></td><td>YOLOv11官方网址<br/></td></tr>
+<td>https://docs.opencv.org/<br></td><td>OpenCV-Python官方文档<br></td></tr>
 <tr>
-<td>https://docs.opencv.org/<br/></td><td>OpenCV-Python官方文档<br/></td></tr>
+<td>https://ttsmp3.com/ai<br></td><td>AI生成系统报警语音<br></td></tr>
 <tr>
-<td>https://ttsmp3.com/ai<br/></td><td>AI生成系统报警语音<br/></td></tr>
+<td>https://webcamtests.com/<br></td><td>开发过程中用于测试网络摄像头的情况<br></td></tr>
 <tr>
-<td>https://webcamtests.com/<br/></td><td>开发过程中用于测试网络摄像头的情况<br/></td></tr>
-<tr>
-<td>https://github.com/tkzzzzzz6/downing_detect<br/></td><td>我们项目的github网址<br/></td></tr>
-</table>
+<td>https://github.com/tkzzzzzz6/downing_detect<br></td><td>我们项目的github网址<br></td></tr>
+</tbody></table>
 
 <h1 id="二、总体设计"><a href="#二、总体设计" class="headerlink" title="二、总体设计"></a>二、总体设计</h1><h2 id="需求概述"><a href="#需求概述" class="headerlink" title="需求概述"></a>需求概述</h2><p>我们的溺水检测项目旨在以高通 QCS6490 平台为边缘计算终端平台，通过结合人工智能技术和智能监控系统，实现高效、精准的溺水检测和预警。项目系统采用 YOLO11n 模型，高精度训练，提高 YOLO11 模型的精确度与鲁棒性。结合光学摄像头，能够在各种复杂环境和天气条件下提供全天候的高精度、低延迟、强适应的实时监控系统。我们的项目预计部署于泳池、海滩、湖泊以及河道等多种水域环境，以减少溺水事故的发生，目前项目只适用于河道等地区青少年失足落水的情况，我们计划后期添加人物姿态评估算法，将人物的溺水状态精确到对应的姿态，提高系统的适用范围和准确率。</p>
 <p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17421133300801742113329444.png" alt="17421133300801742113329444.png"></p>
@@ -136,7 +135,7 @@
 <h3 id="视频记录与回放"><a href="#视频记录与回放" class="headerlink" title="视频记录与回放"></a>视频记录与回放</h3><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17421137010841742113700957.png" alt="17421137010841742113700957.png"></p>
 <p>系统具备记录视频的能力，允许用户回放和审查过去的监控视频。这一功能对于事故分析和责任认定至关重要。视频记录还可以用于系统性能评估和优化，以提高溺水检测的准确性和可靠性。</p>
 <h2 id="软件结构"><a href="#软件结构" class="headerlink" title="软件结构"></a>软件结构</h2><p>系统采用模块化设计，主要包含以下模块：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">DOWNING_DETECT/</span><br><span class="line">├── model/</span><br><span class="line">│   ├── best_detect<span class="selector-class">.pt</span></span><br><span class="line">│   └── best_seg<span class="selector-class">.pt</span></span><br><span class="line">│</span><br><span class="line">├── output/</span><br><span class="line">│   └── output_video<span class="selector-class">.mp4</span></span><br><span class="line">│</span><br><span class="line">├── resource/</span><br><span class="line">│   ├── downing_warning<span class="selector-class">.mp3</span></span><br><span class="line">│   └── 检测到溺水危险<span class="selector-class">.mp3</span></span><br><span class="line">│</span><br><span class="line">├── <span class="attribute">src</span>/</span><br><span class="line">│   ├── __init__<span class="selector-class">.py</span></span><br><span class="line">│   ├── audio_manager<span class="selector-class">.py</span></span><br><span class="line">│   ├── detection_utils<span class="selector-class">.py</span></span><br><span class="line">│   ├── downing_detect_video<span class="selector-class">.py</span></span><br><span class="line">│   ├── downing_detect_webcam<span class="selector-class">.py</span></span><br><span class="line">│   ├── model_loader<span class="selector-class">.py</span></span><br><span class="line">│   └── video_processor<span class="selector-class">.py</span></span><br><span class="line">│</span><br><span class="line">├── LICENSE</span><br><span class="line">├── README<span class="selector-class">.md</span></span><br><span class="line">├── <span class="selector-tag">main</span><span class="selector-class">.py</span></span><br><span class="line">├── requirements<span class="selector-class">.txt</span></span><br><span class="line">└── train.py</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">DOWNING_DETECT/</span><br><span class="line">├── model/</span><br><span class="line">│   ├── best_detect<span class="selector-class">.pt</span></span><br><span class="line">│   └── best_seg<span class="selector-class">.pt</span></span><br><span class="line">│</span><br><span class="line">├── output/</span><br><span class="line">│   └── output_video<span class="selector-class">.mp4</span></span><br><span class="line">│</span><br><span class="line">├── resource/</span><br><span class="line">│   ├── downing_warning<span class="selector-class">.mp3</span></span><br><span class="line">│   └── 检测到溺水危险<span class="selector-class">.mp3</span></span><br><span class="line">│</span><br><span class="line">├── <span class="attribute">src</span>/</span><br><span class="line">│   ├── __init__<span class="selector-class">.py</span></span><br><span class="line">│   ├── audio_manager<span class="selector-class">.py</span></span><br><span class="line">│   ├── detection_utils<span class="selector-class">.py</span></span><br><span class="line">│   ├── downing_detect_video<span class="selector-class">.py</span></span><br><span class="line">│   ├── downing_detect_webcam<span class="selector-class">.py</span></span><br><span class="line">│   ├── model_loader<span class="selector-class">.py</span></span><br><span class="line">│   └── video_processor<span class="selector-class">.py</span></span><br><span class="line">│</span><br><span class="line">├── LICENSE</span><br><span class="line">├── README<span class="selector-class">.md</span></span><br><span class="line">├── <span class="selector-tag">main</span><span class="selector-class">.py</span></span><br><span class="line">├── requirements<span class="selector-class">.txt</span></span><br><span class="line">└── train.py</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
 <li><code>_pycache_/</code>: Python 的字节码缓存目录。</li>
@@ -167,27 +166,27 @@
 <h2 id="输入项目"><a href="#输入项目" class="headerlink" title="输入项目"></a>输入项目</h2><h3 id="视频文件"><a href="#视频文件" class="headerlink" title="视频文件"></a>视频文件</h3><p>系统能够处理多种格式的视频文件，包括但不限于 MP4、AVI 等常见格式。这些视频文件可以是预先录制的，也可以是实时生成的。系统支持从本地存储设备或网络位置读取视频文件，以供分析和处理。</p>
 <p>以下是我们溺水检测系统支持的视频格式类型:</p>
 <table>
+<tbody><tr>
+<td>格式<br></td><td>扩展名<br></td><td>描述<br></td></tr>
 <tr>
-<td>格式<br/></td><td>扩展名<br/></td><td>描述<br/></td></tr>
+<td>AVI<br></td><td>.avi<br></td><td>音频视频交错格式，支持多种编码方式<br></td></tr>
 <tr>
-<td>AVI<br/></td><td>.avi<br/></td><td>音频视频交错格式，支持多种编码方式<br/></td></tr>
+<td>MP4<br></td><td>.mp4<br></td><td>常用的压缩格式，兼容性强<br></td></tr>
 <tr>
-<td>MP4<br/></td><td>.mp4<br/></td><td>常用的压缩格式，兼容性强<br/></td></tr>
+<td>MKV<br></td><td>.mkv<br></td><td>开放格式，支持多种视频编码和字幕<br></td></tr>
 <tr>
-<td>MKV<br/></td><td>.mkv<br/></td><td>开放格式，支持多种视频编码和字幕<br/></td></tr>
+<td>MOV<br></td><td>.mov<br></td><td>Apple 的 QuickTime 视频格式<br></td></tr>
 <tr>
-<td>MOV<br/></td><td>.mov<br/></td><td>Apple 的 QuickTime 视频格式<br/></td></tr>
+<td>WMV<br></td><td>.wmv<br></td><td>Windows 媒体视频格式<br></td></tr>
 <tr>
-<td>WMV<br/></td><td>.wmv<br/></td><td>Windows 媒体视频格式<br/></td></tr>
+<td>FLV<br></td><td>.flv<br></td><td>Flash 视频格式<br></td></tr>
 <tr>
-<td>FLV<br/></td><td>.flv<br/></td><td>Flash 视频格式<br/></td></tr>
+<td>WEBM<br></td><td>.webm<br></td><td>针对网络优化的视频格式<br></td></tr>
 <tr>
-<td>WEBM<br/></td><td>.webm<br/></td><td>针对网络优化的视频格式<br/></td></tr>
+<td>MPEG<br></td><td>.mpeg<br></td><td>一种视频压缩标准，广泛使用<br></td></tr>
 <tr>
-<td>MPEG<br/></td><td>.mpeg<br/></td><td>一种视频压缩标准，广泛使用<br/></td></tr>
-<tr>
-<td>3GP<br/></td><td>.3gp<br/></td><td>移动设备视频格式<br/></td></tr>
-</table>
+<td>3GP<br></td><td>.3gp<br></td><td>移动设备视频格式<br></td></tr>
+</tbody></table>
 
 <h3 id="摄像头检测"><a href="#摄像头检测" class="headerlink" title="摄像头检测"></a>摄像头检测</h3><h4 id="实时摄像头视频流"><a href="#实时摄像头视频流" class="headerlink" title="实时摄像头视频流"></a>实时摄像头视频流</h4><p>系统设计支持从实时摄像头视频流中获取数据。这包括物理摄像头（如 CCTV 摄像头）以及虚拟网络摄像头。对于虚拟网络摄像头，系统可以利用网络技术访问同一局域网内的平板和手机摄像头。这种设计提供了更大的灵活性，允许在没有物理摄像头的情况下，使用移动设备的摄像头作为监控设备。</p>
 <p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17421138440811742113843683.png" alt="17421138440811742113843683.png"></p>
@@ -278,15 +277,15 @@
 <h3 id="资源文件：-resource"><a href="#资源文件：-resource" class="headerlink" title="资源文件：./resource/"></a>资源文件：<code>./resource/</code></h3><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17421140180851742114017407.png" alt="17421140180851742114017407.png"></p>
 <h3 id="源代码：-src"><a href="#源代码：-src" class="headerlink" title="源代码：./src/"></a>源代码：<code>./src/</code></h3><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17421140290841742114028567.png" alt="17421140290841742114028567.png"></p>
 <h2 id="限制条件"><a href="#限制条件" class="headerlink" title="限制条件"></a>限制条件</h2><table>
+<tbody><tr>
+<td>- Python 3.8+运行环境<br></td></tr>
 <tr>
-<td>- Python 3.8+运行环境<br/></td></tr>
+<td>- CUDA支持（推荐）<br></td></tr>
 <tr>
-<td>- CUDA支持（推荐）<br/></td></tr>
+<td>- 最小8GB内存<br></td></tr>
 <tr>
-<td>- 最小8GB内存<br/></td></tr>
-<tr>
-<td>- 支持OpenCV的操作系统<br/></td></tr>
-</table>
+<td>- 支持OpenCV的操作系统<br></td></tr>
+</tbody></table>
 
 <h2 id="测试要点"><a href="#测试要点" class="headerlink" title="测试要点"></a>测试要点</h2><h3 id="视频处理性能测试"><a href="#视频处理性能测试" class="headerlink" title="视频处理性能测试"></a>视频处理性能测试</h3><p>视频处理性能测试旨在评估系统处理视频流的能力，包括实时性、帧率和视频质量。测试将模拟不同的视频输入条件，如不同的分辨率、帧率和编码格式，以确保系统能够在各种情况下稳定运行。</p>
 <ul>
@@ -313,19 +312,19 @@
 <li>目标：确保系统能够连续运行至少 72 小时无故障。</li>
 <li>方法：让系统连续处理视频流，监控其性能和资源使用情况。</li>
 </ul>
-<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><h3 id="克隆仓库"><a href="#克隆仓库" class="headerlink" title="克隆仓库:"></a>克隆仓库:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/your-username/drowning-detection.git</span><br><span class="line"><span class="built_in">cd</span> drowning-detection</span><br></pre></td></tr></table></figure>
+<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><h3 id="克隆仓库"><a href="#克隆仓库" class="headerlink" title="克隆仓库:"></a>克隆仓库:</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/your-username/drowning-detection.git</span><br><span class="line"><span class="built_in">cd</span> drowning-detection</span><br></pre></td></tr></tbody></table></figure>
 
-<h3 id="创建并激活虚拟环境-推荐"><a href="#创建并激活虚拟环境-推荐" class="headerlink" title="创建并激活虚拟环境(推荐):"></a>创建并激活虚拟环境(推荐):</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python -m venv venv</span><br><span class="line"><span class="built_in">source</span> venv/bin/activate  <span class="comment"># 在Windows上使用 venv\Scripts\activate</span></span><br></pre></td></tr></table></figure>
+<h3 id="创建并激活虚拟环境-推荐"><a href="#创建并激活虚拟环境-推荐" class="headerlink" title="创建并激活虚拟环境(推荐):"></a>创建并激活虚拟环境(推荐):</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python -m venv venv</span><br><span class="line"><span class="built_in">source</span> venv/bin/activate  <span class="comment"># 在Windows上使用 venv\Scripts\activate</span></span><br></pre></td></tr></tbody></table></figure>
 
-<h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖:"></a>安装依赖:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖:"></a>安装依赖:</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></tbody></table></figure>
 
 <p>这将安装项目所需的所有依赖项,并确保版本与开发环境一致。</p>
 <blockquote>
 <p>注意: 如果您在安装过程中遇到任何问题,特别是与 CUDA 或 GPU 支持相关的问题,请参考 PyTorch 官方文档以获取适合您系统的安装说明。</p>
 </blockquote>
-<h2 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h2><h3 id="确保您有适当的视频文件用于检测。"><a href="#确保您有适当的视频文件用于检测。" class="headerlink" title="确保您有适当的视频文件用于检测。"></a>确保您有适当的视频文件用于检测。</h3><h3 id="修改-main-py-中的-video-path-变量-指向您的视频文件"><a href="#修改-main-py-中的-video-path-变量-指向您的视频文件" class="headerlink" title="修改 main.py 中的 video_path 变量,指向您的视频文件:"></a>修改 <code>main.py</code> 中的 <code>video_path</code> 变量,指向您的视频文件:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">video_path = <span class="string">&quot;path/to/your/video.mp4&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h2><h3 id="确保您有适当的视频文件用于检测。"><a href="#确保您有适当的视频文件用于检测。" class="headerlink" title="确保您有适当的视频文件用于检测。"></a>确保您有适当的视频文件用于检测。</h3><h3 id="修改-main-py-中的-video-path-变量-指向您的视频文件"><a href="#修改-main-py-中的-video-path-变量-指向您的视频文件" class="headerlink" title="修改 main.py 中的 video_path 变量,指向您的视频文件:"></a>修改 <code>main.py</code> 中的 <code>video_path</code> 变量,指向您的视频文件:</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">video_path = <span class="string">"path/to/your/video.mp4"</span></span><br></pre></td></tr></tbody></table></figure>
 
-<h3 id="运行主程序"><a href="#运行主程序" class="headerlink" title="运行主程序:"></a>运行主程序:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python main.py</span><br></pre></td></tr></table></figure>
+<h3 id="运行主程序"><a href="#运行主程序" class="headerlink" title="运行主程序:"></a>运行主程序:</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python main.py</span><br></pre></td></tr></tbody></table></figure>
 
 <h3 id="程序将开始处理视频-并在检测到潜在溺水危险时发出警告。"><a href="#程序将开始处理视频-并在检测到潜在溺水危险时发出警告。" class="headerlink" title="程序将开始处理视频,并在检测到潜在溺水危险时发出警告。"></a>程序将开始处理视频,并在检测到潜在溺水危险时发出警告。</h3><h3 id="按-‘q’-键退出程序。"><a href="#按-‘q’-键退出程序。" class="headerlink" title="按 ‘q’ 键退出程序。"></a>按 ‘q’ 键退出程序。</h3><h1 id="四、项目总结"><a href="#四、项目总结" class="headerlink" title="四、项目总结"></a>四、项目总结</h1><p>在反思这个溺水检测项目时，我们意识到技术的进步不仅仅是为了创新，更是为了解决实际问题，保护人们的生命安全。我们的项目通过结合最新的人工智能技术和多种监控手段，旨在减少溺水事故，这是一个极具社会价值的目标。我们认识到，尽管技术提供了强大的工具，但真正的挑战在于如何将这些工具有效地应用于实际场景中，以及如何确保系统的稳定性和可靠性。未来，我们将继续优化算法，提高系统的响应速度和准确性，同时，我们也将探索如何降低成本，使这项技术能够更广泛地应用于各种水域，从而保护更多人的生命。</p>
 <p>在推广方面，我们认为教育和意识提升同样重要。如果可行的话，我们将与学校、社区和地方政府合作，提高公众对溺水风险的认识，并教育他们如何使用我们的系统。此外，我们也将通过各种媒体渠道，如社交媒体、公共讲座和行业会议，来展示我们的技术成果，以吸引更多的关注和支持。我们相信，通过技术的推广和公众意识的提高，我们可以共同构建一个更安全的水上环境。让人类拥有更美好的未来！</p>
@@ -350,7 +349,7 @@
         <section class="post-author">
         
             <figure class="author-avatar">
-                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&r=X&d=" alt="ttkqwe" />
+                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&amp;r=X&amp;d=" alt="ttkqwe">
             </figure>
         
             <div class="author-info">
@@ -390,11 +389,13 @@
 </footer>
 
 
-<script src="/static/kico.js"></script>
-<script src="/static/hingle.js"></script>
 
 
-<script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>
 
-  </body>
-</html>
+
+
+
+  
+
+<script src="/bundle.js"></script><script>var hingle = new Paul_Hingle({"copyright":false,"night":true});;
+L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

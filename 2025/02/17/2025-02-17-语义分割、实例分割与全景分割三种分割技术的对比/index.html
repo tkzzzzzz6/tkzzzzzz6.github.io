@@ -1,25 +1,24 @@
-<!DOCTYPE html>
-<html lang="zh">
-  <head>
+<!DOCTYPE html><html lang="zh"><head>
     
     <meta charset="UTF-8">
     <title>语义分割、实例分割与全景分割三种分割技术的对比 - TK的小站</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
-    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192">
     
-<link rel="stylesheet" href="/static/kico.css">
-<link rel="stylesheet" href="/static/hingle.css">
+
+
 
     
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:site_name" content="TK的小站">
-    <meta property="og:title" content="语义分割、实例分割与全景分割三种分割技术的对比"/>
+    <meta property="og:title" content="语义分割、实例分割与全景分割三种分割技术的对比">
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></noscript></head>
 
   <body>
     <header>
@@ -37,7 +36,7 @@
     <nav class="head-menu">
         <a href="/">首页</a>
         <div class="has-child">
-            <a href>分类</a>
+            <a href="">分类</a>
             <div class="sub-menu">
                 
             </div>
@@ -69,83 +68,83 @@
 <p>随着技术的发展，Transformer 架构逐渐被引入到这些分割任务中，显著提升了模型的多尺度特征学习能力和整体性能。语义分割、实例分割和全景分割各有其独特的优势和应用场景，但在实际应用中，全景分割因其能够提供更完整的场景理解，逐渐成为研究和应用的热点方向。</p>
 <p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17402355054491740235504618.png" alt="17402355054491740235504618.png"></p>
 <table>
+<tbody><tr>
+<td>技术<br></td><td>方法简介<br></td><td>关注点<br></td></tr>
 <tr>
-<td>技术<br/></td><td>方法简介<br/></td><td>关注点<br/></td></tr>
+<td>语义分割<br></td><td>为图像中的每个像素分配特定类别标签。<br></td><td>关注“stuff”部分<br></td></tr>
 <tr>
-<td>语义分割<br/></td><td>为图像中的每个像素分配特定类别标签。<br/></td><td>关注“stuff”部分<br/></td></tr>
+<td>实例分割<br></td><td>在图像中检测并区分不同的物体实例。<br></td><td>关注“things”部分<br></td></tr>
 <tr>
-<td>实例分割<br/></td><td>在图像中检测并区分不同的物体实例。<br/></td><td>关注“things”部分<br/></td></tr>
-<tr>
-<td>全景分割<br/></td><td>结合语义分割和实例分割，为每个像素分配语义标签和实例标识符。<br/></td><td>同时关注“things”和“stuff”部分<br/></td></tr>
-</table>
+<td>全景分割<br></td><td>结合语义分割和实例分割，为每个像素分配语义标签和实例标识符。<br></td><td>同时关注“things”和“stuff”部分<br></td></tr>
+</tbody></table>
 
 <h1 id="评价指标"><a href="#评价指标" class="headerlink" title="评价指标"></a><strong>评价指标</strong></h1><table>
+<tbody><tr>
+<td>分割类型<br></td><td>评估指标<br></td><td>描述<br></td></tr>
 <tr>
-<td>分割类型<br/></td><td>评估指标<br/></td><td>描述<br/></td></tr>
+<td rowspan="4">语义分割<br></td><td>像素准确率（Pixel Accuracy）<br></td><td>计算所有像素中被正确分类的比例<br></td></tr>
 <tr>
-<td rowspan="4">语义分割<br/></td><td>像素准确率（Pixel Accuracy）<br/></td><td>计算所有像素中被正确分类的比例<br/></td></tr>
+<td>平均交并比（MIoU）<br></td><td>衡量预测分割与真实标注之间的重叠程度，是语义分割的核心指标<br></td></tr>
 <tr>
-<td>平均交并比（MIoU）<br/></td><td>衡量预测分割与真实标注之间的重叠程度，是语义分割的核心指标<br/></td></tr>
+<td>Dice 系数（Dice Coefficient）<br></td><td>衡量预测和真实分割的相似度，类似于 IoU<br></td></tr>
 <tr>
-<td>Dice 系数（Dice Coefficient）<br/></td><td>衡量预测和真实分割的相似度，类似于 IoU<br/></td></tr>
+<td>召回率（Recall）和精确率（Precision）<br></td><td>分别衡量模型对正样本的召回能力和预测正样本的准确性<br></td></tr>
 <tr>
-<td>召回率（Recall）和精确率（Precision）<br/></td><td>分别衡量模型对正样本的召回能力和预测正样本的准确性<br/></td></tr>
+<td rowspan="3">实例分割<br></td><td>平均精度均值（mAP）<br></td><td>通过不同交并比（IoU）阈值下的平均精度来评估模型性能，是实例分割的核心指标<br></td></tr>
 <tr>
-<td rowspan="3">实例分割<br/></td><td>平均精度均值（mAP）<br/></td><td>通过不同交并比（IoU）阈值下的平均精度来评估模型性能，是实例分割的核心指标<br/></td></tr>
+<td>平均交并比（MIoU）<br></td><td>衡量预测实例与真实实例之间的重叠程度<br></td></tr>
 <tr>
-<td>平均交并比（MIoU）<br/></td><td>衡量预测实例与真实实例之间的重叠程度<br/></td></tr>
+<td>目标级别的精确率和召回率<br></td><td>基于实例的 IoU 判断预测实例是否正确匹配真实实例<br></td></tr>
 <tr>
-<td>目标级别的精确率和召回率<br/></td><td>基于实例的 IoU 判断预测实例是否正确匹配真实实例<br/></td></tr>
+<td rowspan="3">全景分割<br></td><td>平均交并比（mIoU）<br></td><td>用于评估语义分割部分的性能<br></td></tr>
 <tr>
-<td rowspan="3">全景分割<br/></td><td>平均交并比（mIoU）<br/></td><td>用于评估语义分割部分的性能<br/></td></tr>
+<td>平均精度均值（mAP）<br></td><td>用于评估实例分割部分的性能<br></td></tr>
 <tr>
-<td>平均精度均值（mAP）<br/></td><td>用于评估实例分割部分的性能<br/></td></tr>
-<tr>
-<td>全景质量（Panoptic Quality, PQ）<br/></td><td>综合考虑语义分割的准确性和实例分割的完整性，是全景分割特有的评估指标<br/></td></tr>
-</table>
+<td>全景质量（Panoptic Quality, PQ）<br></td><td>综合考虑语义分割的准确性和实例分割的完整性，是全景分割特有的评估指标<br></td></tr>
+</tbody></table>
 
 <p>这些指标各有侧重点，具体选择取决于任务需求和数据集特性。</p>
 <ol>
 <li><strong>MIoU（Mean Intersection over Union）</strong></li>
 </ol>
 <p>MIoU 是一种常用的语义分割模型评价指标，它通过计算预测结果和真实标签的交集与并集之间的比值来衡量模型性能。MIoU 的计算公式为：</p>
-<p>$$<br>\mathrm{MIoU}&#x3D;\frac1N\sum_{i&#x3D;1}^N\frac{\mathrm{TP}_i}{\mathrm{TP}_i+\mathrm{FP}_i+\mathrm{FN}_i}<br>$$</p>
+<p>$$<br>\mathrm{MIoU}=\frac1N\sum_{i=1}^N\frac{\mathrm{TP}_i}{\mathrm{TP}_i+\mathrm{FP}_i+\mathrm{FN}_i}<br>$$</p>
 <p>其中 TP 表示真正例（True Positives），FP 表示假正例（False Positives），FN 表示假反例（False Negatives）。MIoU 能够综合考虑模型的像素级别预测准确度，对模型在处理不同类别、不同大小的目标时进行公平的评价。</p>
 <ol>
 <li><strong>IoU（Intersection over Union）</strong></li>
 </ol>
 <p>IoU 指标即交并比，是语义分割中常用的标准度量。它衡量的是预测结果与真实标签之间的交集与并集之比。IoU 的计算公式为：</p>
-<p>$$<br>\mathrm{IoU}&#x3D;\frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FP}+\mathrm{FN}}<br>$$</p>
+<p>$$<br>\mathrm{IoU}=\frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FP}+\mathrm{FN}}<br>$$</p>
 <ol>
 <li><strong>Accuracy（准确率）</strong></li>
 </ol>
-<p>$$<br>\mathrm{Accuracy}&#x3D;\frac{\mathrm{TP+TN}}{\mathrm{TP+FP+FN+TN}}<br>$$</p>
+<p>$$<br>\mathrm{Accuracy}=\frac{\mathrm{TP+TN}}{\mathrm{TP+FP+FN+TN}}<br>$$</p>
 <p>准确率是指预测正确的样本数量占全部样本的百分比。然而，当数据类别分布不平衡时，准确率可能无法准确评价模型的好坏。因此，在语义分割任务中，准确率通常与其他指标结合使用。</p>
 <ol>
 <li><strong>Precision（查准率,精确率）</strong></li>
 </ol>
-<p>$$<br>\text{Precision}&#x3D;\frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FP}}<br>$$</p>
+<p>$$<br>\text{Precision}=\frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FP}}<br>$$</p>
 <p>查准率表示模型预测为正例的所有样本中，预测正确（真实标签为正）样本的占比。在语义分割中，查准率反映了模型对正样本的识别能力。</p>
 <ol>
 <li><strong>Recall（查全率,召回率）</strong></li>
 </ol>
-<p>$$<br>\mathrm{Recall}&#x3D;\frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FN}}<br>$$</p>
+<p>$$<br>\mathrm{Recall}=\frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FN}}<br>$$</p>
 <p>查全率表示所有真实标签为正的样本中，有多大百分比被模型预测出来。在语义分割任务中，查全率衡量了模型对正样本的覆盖程度。</p>
 <ol>
 <li><strong>F1-Score</strong></li>
 </ol>
 <p>F1-Score 是查准率和查全率的调和平均数，用于综合评估模型的性能。它的计算公式为：</p>
-<p>$$<br>\text{F1-Score}&#x3D;2\cdot\frac{\text{Precision}\cdot\text{Recall}}{\text{Precision}+\text{Recall}}<br>$$</p>
+<p>$$<br>\text{F1-Score}=2\cdot\frac{\text{Precision}\cdot\text{Recall}}{\text{Precision}+\text{Recall}}<br>$$</p>
 <p>F1-Score 的优点在于它综合考虑了精确度和召回率，使得模型在不平衡分类问题中的性能评估更为准确。在语义分割任务中，F1-Score 能够帮助我们了解模型在各类别上的综合表现。</p>
 <ol>
 <li><strong>像素准确率（Pixel Accuracy）</strong></li>
 </ol>
-<p>$$<br>\text{Pixel Accuracy}&#x3D;\frac{\mathrm{TP+TN}}{\text{Total Pixels}}<br>$$</p>
+<p>$$<br>\text{Pixel Accuracy}=\frac{\mathrm{TP+TN}}{\text{Total Pixels}}<br>$$</p>
 <p>像素准确率是指模型预测正确的像素数量占总像素数量的比例。它是一个简单的指标，用于衡量模型在像素级别上的整体分类准确性。然而，像素准确率对类别不平衡的数据集不够敏感，因此通常与其他指标结合使用。</p>
 <ol>
 <li><strong>平均精度均值（mAP）</strong></li>
 </ol>
-<p>$$<br>\mathrm{mAP}&#x3D;\frac1N\sum_{i&#x3D;1}^N\mathrm{AP}_i<br>$$</p>
+<p>$$<br>\mathrm{mAP}=\frac1N\sum_{i=1}^N\mathrm{AP}_i<br>$$</p>
 <p>mAP（Mean Average Precision）是一种广泛用于目标检测和实例分割任务的评价指标，也适用于全景分割。它通过计算不同类别上的平均精度（AP），并取这些值的平均值得到。mAP 综合考虑了模型的精确度（Precision）和召回率（Recall），能够更全面地评估模型在不同类别上的性能。</p>
 <ol>
 <li><strong>全景质量（Panoptic Quality, PQ）</strong></li>
@@ -157,12 +156,12 @@
 <ul>
 <li><strong>分割质量（Segmentation Quality, SQ）</strong><br>SQ 衡量的是预测分割掩码与真实分割掩码之间的平均交并比（IoU）。具体来说，它反映了匹配成功的预测实例与真实实例之间的重叠程度。SQ 的计算公式为:</li>
 </ul>
-<p>$$<br>\mathrm{SQ}&#x3D;\frac{\sum_{(g_k,p_l)\in\mathrm{TP}}\mathrm{IoU}(g_k,p_l)}{|\mathrm{TP}|}<br>$$</p>
+<p>$$<br>\mathrm{SQ}=\frac{\sum_{(g_k,p_l)\in\mathrm{TP}}\mathrm{IoU}(g_k,p_l)}{|\mathrm{TP}|}<br>$$</p>
 <p>其中，$gk$表示真实实例, $p_l$ 表示预测实例，TP 表示真正例（True Positives），即预测与真实实例匹配成功的对。</p>
 <ul>
 <li><strong>识别质量（Recognition Quality, RQ）</strong><br>RQ 衡量的是模型对目标实例的识别能力，类似于目标检测中的 F1 分数。它通过平衡精确率（Precision）和召回率（Recall）来评估模型对实例的识别效果。RQ 的计算公式为：</li>
 </ul>
-<p>$$<br>\mathrm{RQ}&#x3D;\frac{|\mathrm{TP}|}{|\mathrm{TP}|+\frac12|\mathrm{FP}|+\frac12|\mathrm{FP}|+\frac12|\mathrm{FN}|}<br>$$</p>
+<p>$$<br>\mathrm{RQ}=\frac{|\mathrm{TP}|}{|\mathrm{TP}|+\frac12|\mathrm{FP}|+\frac12|\mathrm{FP}|+\frac12|\mathrm{FN}|}<br>$$</p>
 <p>其中，FP 表示假正例（False Positives），FN 表示假反例（False Negatives）。</p>
 </blockquote>
 <ul>
@@ -180,11 +179,11 @@
 </thead>
 <tbody><tr>
 <td>项目</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/bubbliiing/unet-pytorch">bubbliiing&#x2F;unet-pytorch</a></td>
+<td><a target="_blank" rel="noopener" href="https://github.com/bubbliiing/unet-pytorch">bubbliiing/unet-pytorch</a></td>
 </tr>
 <tr>
 <td>项目</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/bubbliiing/pspnet-pytorch">bubbliiing&#x2F;pspnet-pytorch</a></td>
+<td><a target="_blank" rel="noopener" href="https://github.com/bubbliiing/pspnet-pytorch">bubbliiing/pspnet-pytorch</a></td>
 </tr>
 <tr>
 <td>项目</td>
@@ -192,7 +191,7 @@
 </tr>
 <tr>
 <td>项目</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/bonlime/keras-deeplab-v3-plus">bonlime&#x2F;keras-deeplab-v3-plus</a></td>
+<td><a target="_blank" rel="noopener" href="https://github.com/bonlime/keras-deeplab-v3-plus">bonlime/keras-deeplab-v3-plus</a></td>
 </tr>
 <tr>
 <td>项目</td>
@@ -245,7 +244,7 @@
         <section class="post-author">
         
             <figure class="author-avatar">
-                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&r=X&d=" alt="ttkqwe" />
+                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&amp;r=X&amp;d=" alt="ttkqwe">
             </figure>
         
             <div class="author-info">
@@ -285,11 +284,13 @@
 </footer>
 
 
-<script src="/static/kico.js"></script>
-<script src="/static/hingle.js"></script>
 
 
-<script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>
 
-  </body>
-</html>
+
+
+
+  
+
+<script src="/bundle.js"></script><script>var hingle = new Paul_Hingle({"copyright":false,"night":true});;
+L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

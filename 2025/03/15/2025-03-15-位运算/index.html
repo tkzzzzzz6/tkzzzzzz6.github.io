@@ -1,25 +1,24 @@
-<!DOCTYPE html>
-<html lang="zh">
-  <head>
+<!DOCTYPE html><html lang="zh"><head>
     
     <meta charset="UTF-8">
     <title>2025-03-15-位运算 - TK的小站</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
-    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192">
     
-<link rel="stylesheet" href="/static/kico.css">
-<link rel="stylesheet" href="/static/hingle.css">
+
+
 
     
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:site_name" content="TK的小站">
-    <meta property="og:title" content="2025-03-15-位运算"/>
+    <meta property="og:title" content="2025-03-15-位运算">
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></noscript></head>
 
   <body>
     <header>
@@ -37,7 +36,7 @@
     <nav class="head-menu">
         <a href="/">首页</a>
         <div class="has-child">
-            <a href>分类</a>
+            <a href="">分类</a>
             <div class="sub-menu">
                 
             </div>
@@ -73,7 +72,7 @@
 <li><strong>按位异或（</strong><code>^</code>）：两个二进制位相同为 0，不同为 1。</li>
 </ul>
 <blockquote>
-<p>异或运算的逆运算是它本身，也就是说两次异或同一个数最后结果不变，即 $a\oplus b\oplus b&#x3D;a$</p>
+<p>异或运算的逆运算是它本身，也就是说两次异或同一个数最后结果不变，即 $a\oplus b\oplus b=a$</p>
 </blockquote>
 <ul>
 <li><strong>按位取反（</strong><code>~</code>）：将二进制位的 0 变为 1，1 变为 0。</li>
@@ -90,24 +89,24 @@
 <li><strong>集合操作</strong>：利用位运算表示集合，常用于状态压缩动态规划（状压 DP）。</li>
 <li><strong>特定问题的优化</strong>：例如，快速求解汉明权重（二进制中 1 的个数）。</li>
 </ul>
-<h3 id="5-位运算的实用技巧"><a href="#5-位运算的实用技巧" class="headerlink" title="5. 位运算的实用技巧"></a>5. 位运算的实用技巧</h3><h4 id="5-1-取绝对值"><a href="#5-1-取绝对值" class="headerlink" title="5.1 取绝对值"></a>5.1 取绝对值</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">Abs</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (n ^ (n &gt;&gt; <span class="number">31</span>)) - (n &gt;&gt; <span class="number">31</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-位运算的实用技巧"><a href="#5-位运算的实用技巧" class="headerlink" title="5. 位运算的实用技巧"></a>5. 位运算的实用技巧</h3><h4 id="5-1-取绝对值"><a href="#5-1-取绝对值" class="headerlink" title="5.1 取绝对值"></a>5.1 取绝对值</h4><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">Abs</span><span class="params">(<span class="type">int</span> n)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> (n ^ (n &gt;&gt; <span class="number">31</span>)) - (n &gt;&gt; <span class="number">31</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>通过位运算实现取绝对值，避免分支判断。</p>
-<h4 id="5-2-求最大-最小值"><a href="#5-2-求最大-最小值" class="headerlink" title="5.2 求最大&#x2F;最小值"></a>5.2 求最大&#x2F;最小值</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">max</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (b &amp; ((a - b) &gt;&gt; <span class="number">31</span>)) | (a &amp; (~(a - b) &gt;&gt; <span class="number">31</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="5-2-求最大-最小值"><a href="#5-2-求最大-最小值" class="headerlink" title="5.2 求最大/最小值"></a>5.2 求最大/最小值</h4><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">max</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> (b &amp; ((a - b) &gt;&gt; <span class="number">31</span>)) | (a &amp; (~(a - b) &gt;&gt; <span class="number">31</span>));</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>利用位运算实现高效的求最大值和最小值操作。</p>
-<h4 id="5-3-判断符号是否相同"><a href="#5-3-判断符号是否相同" class="headerlink" title="5.3 判断符号是否相同"></a>5.3 判断符号是否相同</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isSameSign</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (x ^ y) &gt;= <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="5-3-判断符号是否相同"><a href="#5-3-判断符号是否相同" class="headerlink" title="5.3 判断符号是否相同"></a>5.3 判断符号是否相同</h4><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isSameSign</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> (x ^ y) &gt;= <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>通过异或运算判断两个数的符号是否相同。</p>
 <h4 id="5-4-操作二进制位"><a href="#5-4-操作二进制位" class="headerlink" title="5.4 操作二进制位"></a>5.4 操作二进制位</h4><ul>
 <li><p>获取某一位的值：</p>
-  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">getBit</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123; <span class="keyword">return</span> (a &gt;&gt; b) &amp; <span class="number">1</span>; &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+  <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">getBit</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>{ <span class="keyword">return</span> (a &gt;&gt; b) &amp; <span class="number">1</span>; }</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 </li>
 <li><p>设置某一位为0或1：</p>
-  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">unsetBit</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123; <span class="keyword">return</span> a &amp; ~(<span class="number">1</span> &lt;&lt; b); &#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">setBit</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123; <span class="keyword">return</span> a | (<span class="number">1</span> &lt;&lt; b); &#125;</span><br></pre></td></tr></table></figure></li>
+  <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">unsetBit</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>{ <span class="keyword">return</span> a &amp; ~(<span class="number">1</span> &lt;&lt; b); }</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">setBit</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>{ <span class="keyword">return</span> a | (<span class="number">1</span> &lt;&lt; b); }</span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
 <h3 id="6-汉明权重与二进制操作"><a href="#6-汉明权重与二进制操作" class="headerlink" title="6. 汉明权重与二进制操作"></a>6. 汉明权重与二进制操作</h3><p>汉明权重是指一个二进制数中 1 的个数。可以通过循环或 <code>lowbit</code> 操作快速求解：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">popcount</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (x) &#123;</span><br><span class="line">        cnt++;</span><br><span class="line">        x -= x &amp; -x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">popcount</span><span class="params">(<span class="type">int</span> x)</span> </span>{</span><br><span class="line">    <span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (x) {</span><br><span class="line">        cnt++;</span><br><span class="line">        x -= x &amp; -x;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> cnt;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <h3 id="7-内建函数"><a href="#7-内建函数" class="headerlink" title="7. 内建函数"></a>7. 内建函数</h3><p>GCC 提供了一些位运算相关的内建函数，例如：</p>
 <ul>
@@ -144,7 +143,7 @@
         <section class="post-author">
         
             <figure class="author-avatar">
-                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&r=X&d=" alt="ttkqwe" />
+                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&amp;r=X&amp;d=" alt="ttkqwe">
             </figure>
         
             <div class="author-info">
@@ -184,11 +183,13 @@
 </footer>
 
 
-<script src="/static/kico.js"></script>
-<script src="/static/hingle.js"></script>
 
 
-<script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>
 
-  </body>
-</html>
+
+
+
+  
+
+<script src="/bundle.js"></script><script>var hingle = new Paul_Hingle({"copyright":false,"night":true});;
+L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

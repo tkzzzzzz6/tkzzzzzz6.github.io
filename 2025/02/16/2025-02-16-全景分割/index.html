@@ -1,25 +1,24 @@
-<!DOCTYPE html>
-<html lang="zh">
-  <head>
+<!DOCTYPE html><html lang="zh"><head>
     
     <meta charset="UTF-8">
     <title>2025-02-16-全景分割 - TK的小站</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
-    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192">
     
-<link rel="stylesheet" href="/static/kico.css">
-<link rel="stylesheet" href="/static/hingle.css">
+
+
 
     
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:site_name" content="TK的小站">
-    <meta property="og:title" content="2025-02-16-全景分割"/>
+    <meta property="og:title" content="2025-02-16-全景分割">
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></noscript></head>
 
   <body>
     <header>
@@ -37,7 +36,7 @@
     <nav class="head-menu">
         <a href="/">首页</a>
         <div class="has-child">
-            <a href>分类</a>
+            <a href="">分类</a>
             <div class="sub-menu">
                 
             </div>
@@ -105,7 +104,7 @@
 </ol>
 <h4 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h4><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1740407421645ZhT6bgJLvom4n8xIAnzcdyG1n2b.png" alt="1740407421645ZhT6bgJLvom4n8xIAnzcdyG1n2b.png"><br>Mask2Former 是一种通用的图像分割架构，能够同时处理全景分割、实例分割和语义分割任务。其网络结构主要由以下三个核心部分组成：</p>
 <h3 id="1-Backbone（骨干网络）"><a href="#1-Backbone（骨干网络）" class="headerlink" title="1. Backbone（骨干网络）"></a>1. <strong>Backbone（骨干网络）</strong></h3><p>骨干网络用于从输入图像中提取低分辨率的特征图。Mask2Former 可以使用多种流行的骨干网络，例如 ResNet 或 Swin Transformer。这些特征图将被传递到后续模块以进行进一步处理。</p>
-<h3 id="2-Pixel-Decoder（像素解码器）"><a href="#2-Pixel-Decoder（像素解码器）" class="headerlink" title="2. Pixel Decoder（像素解码器）"></a>2. <strong>Pixel Decoder（像素解码器）</strong></h3><p>像素解码器的作用是将骨干网络提取的低分辨率特征逐步上采样到高分辨率特征图。这一模块通过多尺度特征金字塔处理不同分辨率的特征，并生成高分辨率的逐像素特征嵌入。例如，Mask2Former 使用了多尺度可变形注意力（MSDeformAttn）作为像素解码器的结构，处理 1&#x2F;8、1&#x2F;16、1&#x2F;32 大小的特征图，并通过上采样生成 1&#x2F;4 分辨率的特征图。</p>
+<h3 id="2-Pixel-Decoder（像素解码器）"><a href="#2-Pixel-Decoder（像素解码器）" class="headerlink" title="2. Pixel Decoder（像素解码器）"></a>2. <strong>Pixel Decoder（像素解码器）</strong></h3><p>像素解码器的作用是将骨干网络提取的低分辨率特征逐步上采样到高分辨率特征图。这一模块通过多尺度特征金字塔处理不同分辨率的特征，并生成高分辨率的逐像素特征嵌入。例如，Mask2Former 使用了多尺度可变形注意力（MSDeformAttn）作为像素解码器的结构，处理 1/8、1/16、1/32 大小的特征图，并通过上采样生成 1/4 分辨率的特征图。</p>
 <h3 id="3-Transformer-Decoder（Transformer-解码器）"><a href="#3-Transformer-Decoder（Transformer-解码器）" class="headerlink" title="3. Transformer Decoder（Transformer 解码器）"></a>3. <strong>Transformer Decoder（Transformer 解码器）</strong></h3><p>Transformer 解码器是 Mask2Former 的核心模块，负责处理对象查询（object queries）并生成最终的分割掩码。Mask2Former 引入了掩码注意力（masked attention），将交叉注意力的范围限制在预测的掩码区域内，从而提取局部特征。此外，解码器还进行了多项优化：</p>
 <ul>
 <li><strong>掩码注意力</strong>：通过限制交叉注意力的范围，提高模型对小目标的分割性能。</li>
@@ -121,14 +120,14 @@
 <p>Q:<strong>Mask2Former 是如何通过掩码注意力（Masked Attention）提升实例分割性能的呢？</strong></p>
 </blockquote>
 <h4 id="相关资源"><a href="#相关资源" class="headerlink" title="相关资源"></a>相关资源</h4><h5 id="项目"><a href="#项目" class="headerlink" title="项目"></a><strong>项目</strong></h5><ol>
-<li><a target="_blank" rel="noopener" href="https://github.com/facebookresearch/Mask2Former?tab=readme-ov-file">facebookresearch&#x2F;Mask2Former: Code release for &#34;Masked-attention Mask Transformer for Universal Image Segmentation&#34;</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/facebookresearch/Mask2Former?tab=readme-ov-file">facebookresearch/Mask2Former: Code release for "Masked-attention Mask Transformer for Universal Image Segmentation"</a></li>
 <li><a target="_blank" rel="noopener" href="https://huggingface.co/spaces/hugging-fellows/mask2former-demo">Mask2former Demo - a Hugging Face Space by hugging-fellows</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/zzubqh/Mask2Former-Simplify?tab=readme-ov-file">zzubqh&#x2F;Mask2Former-Simplify</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/zzubqh/Mask2Former-Simplify?tab=readme-ov-file">zzubqh/Mask2Former-Simplify</a></li>
 <li><a target="_blank" rel="noopener" href="https://bowenc0221.github.io/maskformer/">https://bowenc0221.github.io/maskformer/</a></li>
 </ol>
 <h5 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h5><ol>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wzk4869/article/details/131378109">【计算机视觉】MaskFormer:将语义分割和实例分割作为同一任务进行训练_语义分割标签作为输入-CSDN 博客</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/theseventhson/p/18513038">LLM 大模型: Maskformer&#x2F;Mask2Former 语义分割原理详解 - 第七子 007 - 博客园</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/theseventhson/p/18513038">LLM 大模型: Maskformer/Mask2Former 语义分割原理详解 - 第七子 007 - 博客园</a></li>
 </ol>
 <h5 id="论文"><a href="#论文" class="headerlink" title="论文"></a>论文</h5><ol>
 <li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2112.01527">[2112.01527] Masked-attention Mask Transformer for Universal Image Segmentation</a></li>
@@ -155,7 +154,7 @@
         <section class="post-author">
         
             <figure class="author-avatar">
-                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&r=X&d=" alt="ttkqwe" />
+                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&amp;r=X&amp;d=" alt="ttkqwe">
             </figure>
         
             <div class="author-info">
@@ -195,11 +194,13 @@
 </footer>
 
 
-<script src="/static/kico.js"></script>
-<script src="/static/hingle.js"></script>
 
 
-<script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>
 
-  </body>
-</html>
+
+
+
+  
+
+<script src="/bundle.js"></script><script>var hingle = new Paul_Hingle({"copyright":false,"night":true});;
+L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

@@ -1,25 +1,24 @@
-<!DOCTYPE html>
-<html lang="zh">
-  <head>
+<!DOCTYPE html><html lang="zh"><head>
     
     <meta charset="UTF-8">
     <title>2025-04-20-CPU-GPU-NPU 的区别及应用前景 - TK的小站</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
-    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192">
     
-<link rel="stylesheet" href="/static/kico.css">
-<link rel="stylesheet" href="/static/hingle.css">
+
+
 
     
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:site_name" content="TK的小站">
-    <meta property="og:title" content="2025-04-20-CPU-GPU-NPU 的区别及应用前景"/>
+    <meta property="og:title" content="2025-04-20-CPU-GPU-NPU 的区别及应用前景">
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></noscript></head>
 
   <body>
     <header>
@@ -37,7 +36,7 @@
     <nav class="head-menu">
         <a href="/">首页</a>
         <div class="has-child">
-            <a href>分类</a>
+            <a href="">分类</a>
             <div class="sub-menu">
                 
             </div>
@@ -65,13 +64,13 @@
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36944952/article/details/125951835">CPU、GPU、NPU 的区别_npu 和 gpu 区别-CSDN 博客</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.qnap.com/zh/%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82-cpu-gpu-npu-tpu-%E6%98%AF%E4%BB%80%E9%BA%BC/">一文看懂 CPU， GPU， NPU， TPU 是什麼？</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/geekbruce/articles/18675150">NPU 的概念理解，以及和 CPU&#x2F;GPU 的区别解析。 - AlphaGeek - 博客园</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/geekbruce/articles/18675150">NPU 的概念理解，以及和 CPU/GPU 的区别解析。 - AlphaGeek - 博客园</a></li>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/670414115">AI 实验室：CPU、GPU、TPU 和 NPU 的发展历程和区别</a></li>
-<li><a target="_blank" rel="noopener" href="https://arthurchiao.github.io/blog/gpu-advanced-notes-3-zh/">GPU 进阶笔记（三）:华为 NPU&#x2F;GPU 演进（2024）</a></li>
+<li><a target="_blank" rel="noopener" href="https://arthurchiao.github.io/blog/gpu-advanced-notes-3-zh/">GPU 进阶笔记（三）:华为 NPU/GPU 演进（2024）</a></li>
 </ul>
 </blockquote>
 <hr>
-<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>现代的计算机， 大多遵守<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%86%AF%E8%AF%BA%E4%BE%9D%E6%9B%BC&spm=1001.2101.3001.7020">冯诺依曼</a>体系结构，即</p>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>现代的计算机， 大多遵守<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%86%AF%E8%AF%BA%E4%BE%9D%E6%9B%BC&amp;spm=1001.2101.3001.7020">冯诺依曼</a>体系结构，即</p>
 <p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749359273853C1PzbOGpLoF9vXxxxUccT9IHnhd.png" alt="1749359273853C1PzbOGpLoF9vXxxxUccT9IHnhd.png"></p>
 <blockquote>
 <ul>
@@ -84,11 +83,11 @@
 <hr>
 <p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749359294853F2FQbuNabouwzVxKPSvcLOzmnV2.png" alt="1749359294853F2FQbuNabouwzVxKPSvcLOzmnV2.png"></p>
 <p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749359311853Wotpb6o17oqdBExt6LEckgMHnLF.png" alt="1749359311853Wotpb6o17oqdBExt6LEckgMHnLF.png"></p>
-<p>CPU&#x2F;GPU&#x2F;NPU 等等都是硬件芯片，简单来说，晶体管既可以用来实现逻辑控制单元， 也可以用来实现运算单元（算力）。 在芯片总面积一定的情况下，就看控制和算力怎么分。</p>
+<p>CPU/GPU/NPU 等等都是硬件芯片，简单来说，晶体管既可以用来实现逻辑控制单元， 也可以用来实现运算单元（算力）。 在芯片总面积一定的情况下，就看控制和算力怎么分。</p>
 <ul>
 <li>CPU：通用目的处理器，重逻辑控制；</li>
 <li>GPU：通用目的并行处理器（GPGPU），图形处理器；</li>
-<li>NPU：专用处理器，相比 CPU&#x2F;GPU，擅长执行更具体的计算任务。</li>
+<li>NPU：专用处理器，相比 CPU/GPU，擅长执行更具体的计算任务。</li>
 </ul>
 <h2 id="CPU（Central-Processing-Unit，中央处理器）"><a href="#CPU（Central-Processing-Unit，中央处理器）" class="headerlink" title="CPU（Central Processing Unit，中央处理器）"></a>CPU<strong>（Central Processing Unit，中央处理器）</strong></h2><blockquote>
 <ul>
@@ -103,8 +102,8 @@
 <p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749359324854FWMObJX3so9xi5xe9VMcloVunZf.png" alt="1749359324854FWMObJX3so9xi5xe9VMcloVunZf.png"><br><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749359334854NddybhxCNo9zTuxUlTBcd35vnxf.png" alt="1749359334854NddybhxCNo9zTuxUlTBcd35vnxf.png"><br><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749359345855XWfSbujSDoQ6AjxMu3gceQJRn1d.png" alt="1749359345855XWfSbujSDoQ6AjxMu3gceQJRn1d.png"></p>
 <p>大部分芯片面积都用在了逻辑单元，因此逻辑控制能力强，算力弱（相对 GPU,NPU）。</p>
 <h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><ul>
-<li><strong>操作系统与通用计算</strong>：执行各种应用程序逻辑、文件 I&#x2F;O、网络请求等。</li>
-<li><strong>轻量级 AI 推理</strong>：CPU 在推理任务中仍可胜任一些场景（如桌面级简单模型），但效率不及 GPU&#x2F;NPU。</li>
+<li><strong>操作系统与通用计算</strong>：执行各种应用程序逻辑、文件 I/O、网络请求等。</li>
+<li><strong>轻量级 AI 推理</strong>：CPU 在推理任务中仍可胜任一些场景（如桌面级简单模型），但效率不及 GPU/NPU。</li>
 <li><strong>控制流程复杂的任务</strong>：诸如数据库事务处理、复杂分支逻辑的软件。</li>
 </ul>
 <h2 id="GPU（Graphics-Processing-Unit，图形处理器）"><a href="#GPU（Graphics-Processing-Unit，图形处理器）" class="headerlink" title="GPU（Graphics Processing Unit，图形处理器）"></a>GPU<strong>（Graphics Processing Unit，图形处理器）</strong></h2><blockquote>
@@ -124,11 +123,11 @@
 <p>大部分芯片面积用在了计算单元，因此并行计算能力强，但逻辑控制弱。 适合图像渲染、矩阵计算之类的并行计算场景。作为协处理器，需要在 CPU 的指挥下工作。</p>
 <p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749359412854Ct5AbHn4MopusoxweETcLJoXnYc.png" alt="1749359412854Ct5AbHn4MopusoxweETcLJoXnYc.png"></p>
 <h3 id="应用场景-1"><a href="#应用场景-1" class="headerlink" title="应用场景"></a>应用场景</h3><ul>
-<li><strong>图形渲染与游戏</strong>：2D&#x2F;3D 渲染、物理特效计算。</li>
+<li><strong>图形渲染与游戏</strong>：2D/3D 渲染、物理特效计算。</li>
 <li><strong>深度学习训练</strong>：TensorFlow、PyTorch 等框架常将张量运算 offload 到 GPU，借助其大规模并行加速矩阵运算。</li>
-<li><strong>科学与工程计算</strong>：大规模数值仿真、视频转码、加密&#x2F;解密算法（通过 CUDA&#x2F;OpenCL）。</li>
+<li><strong>科学与工程计算</strong>：大规模数值仿真、视频转码、加密/解密算法（通过 CUDA/OpenCL）。</li>
 </ul>
-<h3 id="CUDA"><a href="#CUDA" class="headerlink" title="CUDA"></a>CUDA</h3><p>CUDA 是 NVIDIA 推出的并行计算平台与编程模型，允许开发者使用 C&#x2F;C++（以及其他语言绑定）直接在 GPU 上编写并行代码，将大量浮点与整数运算分配给成百上千个并行执行的 CUDA 核心，从而在深度学习训练、科学计算、图像处理等领域显著提升计算性能。</p>
+<h3 id="CUDA"><a href="#CUDA" class="headerlink" title="CUDA"></a>CUDA</h3><p>CUDA 是 NVIDIA 推出的并行计算平台与编程模型，允许开发者使用 C/C++（以及其他语言绑定）直接在 GPU 上编写并行代码，将大量浮点与整数运算分配给成百上千个并行执行的 CUDA 核心，从而在深度学习训练、科学计算、图像处理等领域显著提升计算性能。</p>
 <p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749359428857MbQjb1NEHodtObxEWX7cXdavnQe.png" alt="1749359428857MbQjb1NEHodtObxEWX7cXdavnQe.png"></p>
 <p>在这个框架下，CUDA 就像一座“软件桥梁”：它对上层开发者提供了一套统一的 API，开发者只需在 Python、C++ 中调用相应接口，就能将运算任务提交给 GPU；对下层，CUDA 又会自动将这些高层调用翻译成不同 GPU 架构所需的低阶指令。</p>
 <p>不论是图形渲染、AI 推理，还是流体模拟等数值运算，都要经过这层“中介”，由 CUDA 负责调度和分派运算到各个并行核心。这样一来，开发者无需关心底层硬件如何切分任务、如何分配资源，只需调用高层接口，就能一键触发 GPU 的海量并行加速，极大简化了并行编程的复杂度。</p>
@@ -147,7 +146,7 @@
 <blockquote>
 <p>如果还不清楚什么是神经网络，可以看看 <a target="_blank" rel="noopener" href="https://arthurchiao.art/blog/cnn-intuitive-explanation-zh/">以图像识别为例，关于卷积神经网络（CNN）的直观解释</a><a target="_blank" rel="noopener" href="https://arthurchiao.art/blog/cnn-intuitive-explanation-zh/">（2016）</a>。</p>
 </blockquote>
-<p>在这些特殊任务上，比 CPU&#x2F;GPU 这种通用处理器效率更高，功耗更小，响应更快（比如一个时钟周期内可以完成几十万个乘法运算）， 因此适合用在手机、边缘计算、物联网等等场景。</p>
+<p>在这些特殊任务上，比 CPU/GPU 这种通用处理器效率更高，功耗更小，响应更快（比如一个时钟周期内可以完成几十万个乘法运算）， 因此适合用在手机、边缘计算、物联网等等场景。</p>
 <h3 id="应用场景-2"><a href="#应用场景-2" class="headerlink" title="应用场景"></a>应用场景</h3><ul>
 <li><strong>边缘端 AI 推理</strong>：智能手机（人脸识别、AI 拍照、语音助手）、智能摄像头（实时目标检测、行为分析）、物联网设备（智能音箱、家居安防）。</li>
 <li><strong>数据中心推理加速</strong>：在服务器侧为海量请求提供低延迟 AI 预测（如推荐系统、在线广告投放）。</li>
@@ -162,7 +161,7 @@
 </blockquote>
 <p>TPU：这里特制 Google 的 Tensor Processing Unit，目的跟 NPU 差不多。对 TPU 和 GPU 的使用场景区别有一个非常形象的比喻：</p>
 <blockquote>
-<p>如果外面下雨了，你其实并不需要知道每秒到底有多少滴雨， 而只要知道雨是大还是小。 与此类似，神经网络通常不需要 16&#x2F;32bit 浮点数做精确计算，可能 8bit 整型预测的精度就足以满足需求了。</p>
+<p>如果外面下雨了，你其实并不需要知道每秒到底有多少滴雨， 而只要知道雨是大还是小。 与此类似，神经网络通常不需要 16/32bit 浮点数做精确计算，可能 8bit 整型预测的精度就足以满足需求了。</p>
 </blockquote>
 <h3 id="RISC，CISC-和-TPU-指令集"><a href="#RISC，CISC-和-TPU-指令集" class="headerlink" title="RISC，CISC 和 TPU 指令集"></a>RISC，CISC 和 TPU 指令集</h3><p>可编程性是 TPU 的另一个重要设计目标。TPU 不是设计用来运行某一种神经网络，而是要能加速许多不同类型的模型。</p>
 <p>大多数当代 CPU 都采用了精简指令集(RISC)。但 Google 选择复杂指令集(CISC)作为 TPU 指令集的基础，这一指令集侧重于运行更复杂的任务。</p>
@@ -187,16 +186,16 @@
 <h1 id="发展现状与应用前景"><a href="#发展现状与应用前景" class="headerlink" title="发展现状与应用前景"></a>发展现状与应用前景</h1><h2 id="CPU-未来动向"><a href="#CPU-未来动向" class="headerlink" title="CPU 未来动向"></a>CPU 未来动向</h2><ul>
 <li><strong>专用指令集扩展</strong>：为了更好地兼顾 AI 推理性能，现代 CPU 已在向量指令（如 Intel AVX-512、ARM SVE）倾斜。</li>
 <li><strong>异构集成</strong>：如 AMD 的 APU、Intel 的集成显卡（iGPU），未来更多 SoC 将把 CPU、GPU、NPU 三者集成在一个芯片内，形成协同加速。</li>
-<li><strong>边缘侧轻量化 AI 推理</strong>：通过框架优化（如 ONNX Runtime）在 CPU 上做低精度推理（INT8&#x2F;FP16），降低能耗。</li>
+<li><strong>边缘侧轻量化 AI 推理</strong>：通过框架优化（如 ONNX Runtime）在 CPU 上做低精度推理（INT8/FP16），降低能耗。</li>
 </ul>
 <h2 id="GPU-的发展趋势"><a href="#GPU-的发展趋势" class="headerlink" title="GPU 的发展趋势"></a>GPU 的发展趋势</h2><ul>
-<li><strong>Tensor 核心与混合精度</strong>：从 NVIDIA 的 Volta 架构开始，GPU 内已集成专用张量核心（Tensor Core），提高深度学习训练&#x2F;推理效率。</li>
+<li><strong>Tensor 核心与混合精度</strong>：从 NVIDIA 的 Volta 架构开始，GPU 内已集成专用张量核心（Tensor Core），提高深度学习训练/推理效率。</li>
 <li><strong>异构并行</strong>：更多厂商（AMD、Intel、以及新兴的 AI 芯片公司）推出专用于 AI 的 GPU 级别加速器，支持 FP16、INT8、INT4 等低精度运算。</li>
 <li><strong>云端与数据中心规模化部署</strong>：GPU 在云计算平台（AWS、Azure、Google Cloud）作为主力推理与训练设备，将继续占据主流地位。</li>
 </ul>
 <h2 id="NPU-的前景展望"><a href="#NPU-的前景展望" class="headerlink" title="NPU 的前景展望"></a>NPU 的前景展望</h2><ul>
 <li><strong>能效领先</strong>：随着 5G+IoT+AIoT 的普及，边缘端对低功耗高效能的 AI 芯片需求激增，NPU 市场规模将持续扩大。</li>
-<li><strong>集成化与定制化</strong>：手机 SoC（如华为麒麟、苹果 A 系列）以及汽车&#x2F;工业级芯片中将越来越普遍地集成 NPU；同时，也会出现多种定制化 NPU（例如自动驾驶专用 NPU、医疗影像专用 NPU）。</li>
+<li><strong>集成化与定制化</strong>：手机 SoC（如华为麒麟、苹果 A 系列）以及汽车/工业级芯片中将越来越普遍地集成 NPU；同时，也会出现多种定制化 NPU（例如自动驾驶专用 NPU、医疗影像专用 NPU）。</li>
 <li><strong>GPNPU（GPU + NPU 的融合）</strong>：未来会有更多将 GPU 与 NPU 功能融合在一颗芯片上的设计，以兼顾通用并行计算与 AI 推理效率，推动 AI 端云协同。</li>
 <li><strong>生态与软件栈完善</strong>：从硬件到软件框架（如 TensorRT、OpenVINO、NNAdapter、CAMERA），都将围绕 NPU 优化，使开发者可以更方便地将模型部署到 NPU 上。</li>
 </ul>
@@ -232,7 +231,7 @@
         <section class="post-author">
         
             <figure class="author-avatar">
-                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&r=X&d=" alt="ttkqwe" />
+                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&amp;r=X&amp;d=" alt="ttkqwe">
             </figure>
         
             <div class="author-info">
@@ -272,11 +271,13 @@
 </footer>
 
 
-<script src="/static/kico.js"></script>
-<script src="/static/hingle.js"></script>
 
 
-<script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>
 
-  </body>
-</html>
+
+
+
+  
+
+<script src="/bundle.js"></script><script>var hingle = new Paul_Hingle({"copyright":false,"night":true});;
+L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

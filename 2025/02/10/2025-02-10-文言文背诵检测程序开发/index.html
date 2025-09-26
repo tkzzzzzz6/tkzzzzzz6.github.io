@@ -1,25 +1,24 @@
-<!DOCTYPE html>
-<html lang="zh">
-  <head>
+<!DOCTYPE html><html lang="zh"><head>
     
     <meta charset="UTF-8">
     <title>文言文背诵检测程序开发 - TK的小站</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
-    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192">
     
-<link rel="stylesheet" href="/static/kico.css">
-<link rel="stylesheet" href="/static/hingle.css">
+
+
 
     
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:site_name" content="TK的小站">
-    <meta property="og:title" content="文言文背诵检测程序开发"/>
+    <meta property="og:title" content="文言文背诵检测程序开发">
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></noscript></head>
 
   <body>
     <header>
@@ -37,7 +36,7 @@
     <nav class="head-menu">
         <a href="/">首页</a>
         <div class="has-child">
-            <a href>分类</a>
+            <a href="">分类</a>
             <div class="sub-menu">
                 
             </div>
@@ -154,24 +153,24 @@
 </ol>
 </li>
 </ul>
-<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">└── ReciteHelper/</span><br><span class="line">    ├── Dockerfile</span><br><span class="line">    ├── README.md</span><br><span class="line">    ├── config.py</span><br><span class="line">    ├── main.py</span><br><span class="line">    ├── requirements.txt</span><br><span class="line">    └── texts</span><br><span class="line">        ├── 买油翁.txt</span><br><span class="line">        ├── 孙权劝学.txt</span><br><span class="line">        └── 木兰诗.txt</span><br></pre></td></tr></table></figure>
+<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">└── ReciteHelper/</span><br><span class="line">    ├── Dockerfile</span><br><span class="line">    ├── README.md</span><br><span class="line">    ├── config.py</span><br><span class="line">    ├── main.py</span><br><span class="line">    ├── requirements.txt</span><br><span class="line">    └── texts</span><br><span class="line">        ├── 买油翁.txt</span><br><span class="line">        ├── 孙权劝学.txt</span><br><span class="line">        └── 木兰诗.txt</span><br></pre></td></tr></tbody></table></figure>
 
 <h2 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>使用以下方法安装 ReciteHelper：</p>
 <ol>
 <li>克隆 ReciteHelper 仓库：</li>
 </ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/tkzzzzzz6/ReciteHelper</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/tkzzzzzz6/ReciteHelper</span><br></pre></td></tr></tbody></table></figure>
 
 <ol start="2">
 <li>进入项目目录：</li>
 </ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ReciteHelper</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ReciteHelper</span><br></pre></td></tr></tbody></table></figure>
 
 <ol start="3">
 <li>配置环境</li>
 </ol>
 <p>推荐使用 conda 虚拟环境：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda create -n beisong python=3.10 -y</span><br><span class="line">conda activate beisong</span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda create -n beisong python=3.10 -y</span><br><span class="line">conda activate beisong</span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></tbody></table></figure>
 
 <ol start="4">
 <li>配置API密钥</li>
@@ -181,16 +180,16 @@
 <li>获取 API Key 和 Secret Key</li>
 <li>修改 config.py 文件：</li>
 </ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#语音识别配置</span></span><br><span class="line">APP_ID = <span class="string">&#x27;你的APP ID&#x27;</span>      <span class="comment"># 应用ID</span></span><br><span class="line">API_KEY = <span class="string">&#x27;你的API Key&#x27;</span>    <span class="comment"># API Key</span></span><br><span class="line">SECRET_KEY = <span class="string">&#x27;你的API Key&#x27;</span>    <span class="comment"># API Key</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#百度NLP配置</span></span><br><span class="line">NLP_APP_ID = <span class="string">&#x27;你的APP ID&#x27;</span> </span><br><span class="line">NLP_API_KEY = <span class="string">&#x27;你的API Key&#x27;</span>    <span class="comment"># API Key</span></span><br><span class="line">NLP_SECRET_KEY = <span class="string">&#x27;你的API Key&#x27;</span>    <span class="comment"># API Key</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#语音识别配置</span></span><br><span class="line">APP_ID = <span class="string">'你的APP ID'</span>      <span class="comment"># 应用ID</span></span><br><span class="line">API_KEY = <span class="string">'你的API Key'</span>    <span class="comment"># API Key</span></span><br><span class="line">SECRET_KEY = <span class="string">'你的API Key'</span>    <span class="comment"># API Key</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#百度NLP配置</span></span><br><span class="line">NLP_APP_ID = <span class="string">'你的APP ID'</span> </span><br><span class="line">NLP_API_KEY = <span class="string">'你的API Key'</span>    <span class="comment"># API Key</span></span><br><span class="line">NLP_SECRET_KEY = <span class="string">'你的API Key'</span>    <span class="comment"># API Key</span></span><br></pre></td></tr></tbody></table></figure>
 
 <ol start="5">
 <li>添加背诵文本</li>
 </ol>
-<p>将文言文文本保存为 txt 文件，放置于 &#x2F;texts 目录下（程序已内置《孙权劝学》《卖油翁》《木兰诗》示例文本）</p>
+<p>将文言文文本保存为 txt 文件，放置于 /texts 目录下（程序已内置《孙权劝学》《卖油翁》《木兰诗》示例文本）</p>
 <ol start="6">
 <li>运行程序</li>
 </ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python main.py</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python main.py</span><br></pre></td></tr></tbody></table></figure>
 
         </article>
         <section class="post-near">
@@ -199,7 +198,7 @@
                     <li>上一篇: <a href="/2025/02/11/2025-02-11-%E6%95%B0%E6%A8%A1%E7%AC%94%E8%AE%B0_%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E4%B8%8E%E5%B7%AE%E5%88%86%E6%96%B9%E7%A8%8B/">2025-02-11-数模笔记_微分方程与差分方程</a></li>
                 
                 
-                    <li>下一篇: <a href="/2025/02/09/2025-02-09-wsl%E5%90%AF%E5%8A%A8%E6%8A%A5%E9%94%99Cannot%20execute%20daemonize%20to%20start%20systemd%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">WSL 启动报错 &#34;Cannot execute daemonize to start systemd&#34; 的解决方法</a></li>
+                    <li>下一篇: <a href="/2025/02/09/2025-02-09-wsl%E5%90%AF%E5%8A%A8%E6%8A%A5%E9%94%99Cannot%20execute%20daemonize%20to%20start%20systemd%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">WSL 启动报错 "Cannot execute daemonize to start systemd" 的解决方法</a></li>
                 
             </ul>
         </section>
@@ -212,7 +211,7 @@
         <section class="post-author">
         
             <figure class="author-avatar">
-                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&r=X&d=" alt="ttkqwe" />
+                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&amp;r=X&amp;d=" alt="ttkqwe">
             </figure>
         
             <div class="author-info">
@@ -252,11 +251,13 @@
 </footer>
 
 
-<script src="/static/kico.js"></script>
-<script src="/static/hingle.js"></script>
 
 
-<script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>
 
-  </body>
-</html>
+
+
+
+  
+
+<script src="/bundle.js"></script><script>var hingle = new Paul_Hingle({"copyright":false,"night":true});;
+L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

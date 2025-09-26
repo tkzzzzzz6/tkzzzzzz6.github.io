@@ -1,25 +1,24 @@
-<!DOCTYPE html>
-<html lang="zh">
-  <head>
+<!DOCTYPE html><html lang="zh"><head>
     
     <meta charset="UTF-8">
-    <title>WSL 启动报错 &#34;Cannot execute daemonize to start systemd&#34; 的解决方法 - TK的小站</title>
+    <title>WSL 启动报错 "Cannot execute daemonize to start systemd" 的解决方法 - TK的小站</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
-    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192">
     
-<link rel="stylesheet" href="/static/kico.css">
-<link rel="stylesheet" href="/static/hingle.css">
+
+
 
     
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:site_name" content="TK的小站">
-    <meta property="og:title" content="WSL 启动报错 &#34;Cannot execute daemonize to start systemd&#34; 的解决方法"/>
+    <meta property="og:title" content="WSL 启动报错 &quot;Cannot execute daemonize to start systemd&quot; 的解决方法">
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></noscript></head>
 
   <body>
     <header>
@@ -37,7 +36,7 @@
     <nav class="head-menu">
         <a href="/">首页</a>
         <div class="has-child">
-            <a href>分类</a>
+            <a href="">分类</a>
             <div class="sub-menu">
                 
             </div>
@@ -53,7 +52,7 @@
     <main>
     <div class="wrap min">
         <section class="post-title">
-            <h2>WSL 启动报错 &#34;Cannot execute daemonize to start systemd&#34; 的解决方法</h2>
+            <h2>WSL 启动报错 "Cannot execute daemonize to start systemd" 的解决方法</h2>
             <div class="post-meta">
                 <time class="date">2025.02.09</time>
             
@@ -72,9 +71,9 @@
 <hr>
 <h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><h3 id="1-检查-daemonize-是否安装"><a href="#1-检查-daemonize-是否安装" class="headerlink" title="1. 检查 daemonize 是否安装"></a>1. 检查 daemonize 是否安装</h3><ol>
 <li><p><strong>以 root 身份登录 WSL</strong>：在 Windows 的 CMD 或 PowerShell 中执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl -u root</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl -u root</span><br></pre></td></tr></tbody></table></figure></li>
 <li><p><strong>验证 daemonize 是否存在</strong>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> daemonize</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> daemonize</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
 <li>如果无输出，则表示未安装。</li>
@@ -82,25 +81,25 @@
 </li>
 </ol>
 <hr>
-<h3 id="2-安装-daemonize"><a href="#2-安装-daemonize" class="headerlink" title="2. 安装 daemonize"></a>2. 安装 daemonize</h3><h4 id="步骤一：更新软件源"><a href="#步骤一：更新软件源" class="headerlink" title="步骤一：更新软件源"></a>步骤一：更新软件源</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br></pre></td></tr></table></figure>
+<h3 id="2-安装-daemonize"><a href="#2-安装-daemonize" class="headerlink" title="2. 安装 daemonize"></a>2. 安装 daemonize</h3><h4 id="步骤一：更新软件源"><a href="#步骤一：更新软件源" class="headerlink" title="步骤一：更新软件源"></a>步骤一：更新软件源</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br></pre></td></tr></tbody></table></figure>
 
-<h4 id="步骤二：尝试安装-daemonize"><a href="#步骤二：尝试安装-daemonize" class="headerlink" title="步骤二：尝试安装 daemonize"></a>步骤二：尝试安装 daemonize</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install daemonize</span><br></pre></td></tr></table></figure>
+<h4 id="步骤二：尝试安装-daemonize"><a href="#步骤二：尝试安装-daemonize" class="headerlink" title="步骤二：尝试安装 daemonize"></a>步骤二：尝试安装 daemonize</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install daemonize</span><br></pre></td></tr></tbody></table></figure>
 
 <hr>
 <h3 id="3-处理安装报错-E-Unable-to-locate-package-daemonize"><a href="#3-处理安装报错-E-Unable-to-locate-package-daemonize" class="headerlink" title="3. 处理安装报错 E: Unable to locate package daemonize"></a>3. 处理安装报错 <code>E: Unable to locate package daemonize</code></h3><p>若出现此错误，可能是软件源未正确配置。需手动更新软件源：</p>
-<h4 id="方案一：使用-Ubuntu-官方源（推荐国际用户）"><a href="#方案一：使用-Ubuntu-官方源（推荐国际用户）" class="headerlink" title="方案一：使用 Ubuntu 官方源（推荐国际用户）"></a>方案一：使用 Ubuntu 官方源（推荐国际用户）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> sh -c <span class="string">&#x27;echo &quot;deb http://archive.ubuntu.com/ubuntu/ jammy main restricted universe multiverse&quot; &gt; /etc/apt/sources.list&#x27;</span></span><br><span class="line"><span class="built_in">sudo</span> sh -c <span class="string">&#x27;echo &quot;deb http://archive.ubuntu.com/ubuntu/ jammy-updates main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.list&#x27;</span></span><br><span class="line"><span class="built_in">sudo</span> sh -c <span class="string">&#x27;echo &quot;deb http://archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.list&#x27;</span></span><br><span class="line"><span class="built_in">sudo</span> sh -c <span class="string">&#x27;echo &quot;deb http://security.ubuntu.com/ubuntu/ jammy-security main restricted universe multiverse&quot; &gt;&gt; /etc/apt/sources.list&#x27;</span></span><br></pre></td></tr></table></figure>
+<h4 id="方案一：使用-Ubuntu-官方源（推荐国际用户）"><a href="#方案一：使用-Ubuntu-官方源（推荐国际用户）" class="headerlink" title="方案一：使用 Ubuntu 官方源（推荐国际用户）"></a>方案一：使用 Ubuntu 官方源（推荐国际用户）</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> sh -c <span class="string">'echo "deb http://archive.ubuntu.com/ubuntu/ jammy main restricted universe multiverse" &gt; /etc/apt/sources.list'</span></span><br><span class="line"><span class="built_in">sudo</span> sh -c <span class="string">'echo "deb http://archive.ubuntu.com/ubuntu/ jammy-updates main restricted universe multiverse" &gt;&gt; /etc/apt/sources.list'</span></span><br><span class="line"><span class="built_in">sudo</span> sh -c <span class="string">'echo "deb http://archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse" &gt;&gt; /etc/apt/sources.list'</span></span><br><span class="line"><span class="built_in">sudo</span> sh -c <span class="string">'echo "deb http://security.ubuntu.com/ubuntu/ jammy-security main restricted universe multiverse" &gt;&gt; /etc/apt/sources.list'</span></span><br></pre></td></tr></tbody></table></figure>
 
 <h4 id="方案二：使用国内镜像源（推荐中国用户）"><a href="#方案二：使用国内镜像源（推荐中国用户）" class="headerlink" title="方案二：使用国内镜像源（推荐中国用户）"></a>方案二：使用国内镜像源（推荐中国用户）</h4><p>例如替换为清华源：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> sed -i <span class="string">&quot;s@http://.*archive.ubuntu.com@https://mirrors.tuna.tsinghua.edu.cn@g&quot;</span> /etc/apt/sources.list</span><br><span class="line"><span class="built_in">sudo</span> sed -i <span class="string">&quot;s@http://.*security.ubuntu.com@https://mirrors.tuna.tsinghua.edu.cn@g&quot;</span> /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> sed -i <span class="string">"s@http://.*archive.ubuntu.com@https://mirrors.tuna.tsinghua.edu.cn@g"</span> /etc/apt/sources.list</span><br><span class="line"><span class="built_in">sudo</span> sed -i <span class="string">"s@http://.*security.ubuntu.com@https://mirrors.tuna.tsinghua.edu.cn@g"</span> /etc/apt/sources.list</span><br></pre></td></tr></tbody></table></figure>
 
-<h4 id="更新并安装"><a href="#更新并安装" class="headerlink" title="更新并安装"></a>更新并安装</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update &amp;&amp; <span class="built_in">sudo</span> apt upgrade -y</span><br><span class="line"><span class="built_in">sudo</span> apt install daemonize</span><br></pre></td></tr></table></figure>
+<h4 id="更新并安装"><a href="#更新并安装" class="headerlink" title="更新并安装"></a>更新并安装</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update &amp;&amp; <span class="built_in">sudo</span> apt upgrade -y</span><br><span class="line"><span class="built_in">sudo</span> apt install daemonize</span><br></pre></td></tr></tbody></table></figure>
 
 <hr>
 <h3 id="4-验证安装并重启-WSL"><a href="#4-验证安装并重启-WSL" class="headerlink" title="4. 验证安装并重启 WSL"></a>4. 验证安装并重启 WSL</h3><ol>
 <li><p><strong>确认 daemonize 路径</strong>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> daemonize  <span class="comment"># 应输出 /usr/bin/daemonize</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> daemonize  <span class="comment"># 应输出 /usr/bin/daemonize</span></span><br></pre></td></tr></tbody></table></figure></li>
 <li><p><strong>重启 WSL</strong>：<br>关闭 WSL 并重新启动：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsl --shutdown</span><br><span class="line">wsl</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsl --shutdown</span><br><span class="line">wsl</span><br></pre></td></tr></tbody></table></figure></li>
 </ol>
 <hr>
 <h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><h3 id="为什么需要-systemd？"><a href="#为什么需要-systemd？" class="headerlink" title="为什么需要 systemd？"></a>为什么需要 systemd？</h3><ul>
@@ -108,10 +107,10 @@
 <li>WSL2 默认不启用 systemd，但部分工具（如 Docker Desktop、snap）依赖它。</li>
 </ul>
 <h3 id="可选：永久启用-systemd"><a href="#可选：永久启用-systemd" class="headerlink" title="可选：永久启用 systemd"></a>可选：永久启用 systemd</h3><p>若需在 WSL 中默认启用 systemd，可修改 <code>/etc/wsl.conf</code>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">tee</span> /etc/wsl.conf &lt;&lt;<span class="string">EOF</span></span><br><span class="line"><span class="string">[boot]</span></span><br><span class="line"><span class="string">systemd=true</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">tee</span> /etc/wsl.conf &lt;&lt;<span class="string">EOF</span></span><br><span class="line"><span class="string">[boot]</span></span><br><span class="line"><span class="string">systemd=true</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>重启 WSL 生效：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsl --shutdown</span><br><span class="line">wsl</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsl --shutdown</span><br><span class="line">wsl</span><br></pre></td></tr></tbody></table></figure>
 
 <hr>
 <h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h4 id="Q1-安装后仍报错怎么办？"><a href="#Q1-安装后仍报错怎么办？" class="headerlink" title="Q1: 安装后仍报错怎么办？"></a>Q1: 安装后仍报错怎么办？</h4><ul>
@@ -145,7 +144,7 @@
         <section class="post-author">
         
             <figure class="author-avatar">
-                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&r=X&d=" alt="ttkqwe" />
+                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&amp;r=X&amp;d=" alt="ttkqwe">
             </figure>
         
             <div class="author-info">
@@ -185,11 +184,13 @@
 </footer>
 
 
-<script src="/static/kico.js"></script>
-<script src="/static/hingle.js"></script>
 
 
-<script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>
 
-  </body>
-</html>
+
+
+
+  
+
+<script src="/bundle.js"></script><script>var hingle = new Paul_Hingle({"copyright":false,"night":true});;
+L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

@@ -1,25 +1,24 @@
-<!DOCTYPE html>
-<html lang="zh">
-  <head>
+<!DOCTYPE html><html lang="zh"><head>
     
     <meta charset="UTF-8">
     <title>2025-06-04-低代码平台及相关技术介绍应用 - TK的小站</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
-    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192">
     
-<link rel="stylesheet" href="/static/kico.css">
-<link rel="stylesheet" href="/static/hingle.css">
+
+
 
     
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:site_name" content="TK的小站">
-    <meta property="og:title" content="2025-06-04-低代码平台及相关技术介绍应用"/>
+    <meta property="og:title" content="2025-06-04-低代码平台及相关技术介绍应用">
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></noscript></head>
 
   <body>
     <header>
@@ -37,7 +36,7 @@
     <nav class="head-menu">
         <a href="/">首页</a>
         <div class="has-child">
-            <a href>分类</a>
+            <a href="">分类</a>
             <div class="sub-menu">
                 
             </div>
@@ -80,7 +79,7 @@
 </ol>
 <h4 id="代码生成器"><a href="#代码生成器" class="headerlink" title="代码生成器"></a>代码生成器</h4><p>早期的低代码开发平台大多采用代码生成器的技术方案。低代码平台将可视化操作直接翻译成对应的可执行语言（如 Java）。这种做法开发难度低，曾经一度成为低代码的主流。</p>
 <p>但随着应用的深入，人们发现这种方式存在封装程度低、开发效率提升有效、可维护性弱等技术问题。更重要的是，一旦开发者使用其他开发工具对这些编译后的源代码进行修改后，往往无法再同步回低代码开发平台的可视化开发环境，致使无法持续使用可视化的方式对应用进行开发和维护，让低代码平台成为了“一次性工具”。这显然违背了低代码开发平台的初衷。</p>
-<h4 id="元数据驱动"><a href="#元数据驱动" class="headerlink" title="元数据驱动"></a>元数据驱动</h4><p>目前主流的低代码平台已经从生成可直接执行的程序代码（如 Java、C#），逐步切换为生成特定格式的元数据（格式为 XML、JSON）。这些元数据无法脱离平台运行，就像 Java 无法脱离 JRE&#x2F;JDK 一样。</p>
+<h4 id="元数据驱动"><a href="#元数据驱动" class="headerlink" title="元数据驱动"></a>元数据驱动</h4><p>目前主流的低代码平台已经从生成可直接执行的程序代码（如 Java、C#），逐步切换为生成特定格式的元数据（格式为 XML、JSON）。这些元数据无法脱离平台运行，就像 Java 无法脱离 JRE/JDK 一样。</p>
 <blockquote>
 <p>但 JSON 的优点就是它的缺点，因为它的用途是数据交换而不是人工编写，导致基于 JSON 构建 DSL 不方便编辑，会有以下 3 个问题：</p>
 <ul>
@@ -101,7 +100,7 @@
 <p>于是，部分低代码平台开始迎合这一趋势，在用户建立表关联的时候，设计器不再生成创建外键的 SQL 语句，而是在元数据中描述这一关联，并提供给设计器和运行时使用。如在设计器中可以直接绑定子表或主数据的字段，在运行时实现级联删除等。</p>
 <h4 id="查询视图"><a href="#查询视图" class="headerlink" title="查询视图"></a>查询视图</h4><p>查询视图可以在数据表的基础上封装常用的数据能力。相比于在业务逻辑层做数据处理，运行在数据库上的视图性能更高。视图中新增的字段主要有两种类型：基于当前行中其他字段的值进行计算得出的计算字段，以及基于外键关系，对子表进行统计计算得出的聚合字段。</p>
 <p>值得一提的是，为了降低开发者的工作量，部分低代码开发平台会将查询视图的设计能力整合到表结构设计中，当用户在表结构设计器中创建计算字段或聚合字段时，平台会为该表创建一个查询视图，用户设置的公式会被转义成视图中的查询语句。在业务逻辑层对该表进行查询操作时，平台会自动寻找对应的视图，让开发者可以像读取表中其他字段一样，查询计算字段或聚合字段的值。</p>
-<h3 id="WebAPI-业务逻辑"><a href="#WebAPI-业务逻辑" class="headerlink" title="WebAPI &#x2F; 业务逻辑"></a>WebAPI &#x2F; 业务逻辑</h3><p>业务处理逻辑的可视化设计是低代码开发平台的技术难点之一。在传统编码开发中，可视化的应用范围通常不会涉及这一部分。所以，各低代码厂商在业务逻辑的可视化设计领域采用了不同的设计思想，为开发者提供了差异化的设计体验，同样实现了基于可视化设计的结果自动化生成代码的效果。低代码平台通常将可视化设计的业务逻辑存储为 Meta 元数据，常见的形式有 JSON 和 XML。在服务器程序启动时，运行时会读取元数据，在内存中构建业务逻辑的执行路径，监听对应的端口，准备响应来自客户端的 HTTP 请求。</p>
+<h3 id="WebAPI-业务逻辑"><a href="#WebAPI-业务逻辑" class="headerlink" title="WebAPI / 业务逻辑"></a>WebAPI / 业务逻辑</h3><p>业务处理逻辑的可视化设计是低代码开发平台的技术难点之一。在传统编码开发中，可视化的应用范围通常不会涉及这一部分。所以，各低代码厂商在业务逻辑的可视化设计领域采用了不同的设计思想，为开发者提供了差异化的设计体验，同样实现了基于可视化设计的结果自动化生成代码的效果。低代码平台通常将可视化设计的业务逻辑存储为 Meta 元数据，常见的形式有 JSON 和 XML。在服务器程序启动时，运行时会读取元数据，在内存中构建业务逻辑的执行路径，监听对应的端口，准备响应来自客户端的 HTTP 请求。</p>
 <h4 id="可视化设计"><a href="#可视化设计" class="headerlink" title="可视化设计"></a>可视化设计</h4><p>在可视化设计层面，低代码平台通常会在“图”和“树”中选择一个实现方案。</p>
 <ul>
 <li><strong>图</strong>：使用流程图的形式描述业务逻辑的历史可以追溯到软件行业诞生之初。直到今天，依然有大量需求方采用 Microsoft Visio 等软件绘制业务处理流程图，并将其提交给开发方作为核心需求文件。所以，在低代码开发平台中提供类似于流程图的设计体验就成了部分低代码厂商的首选方案。在节点较少、判断和循环规则简单的应用场景中，这种开发体验产出的结果更直观，非常适合开发方与需求方基于该结果进行讨论和确认。采用该方案的典型产品有：Mendix、轻流</li>
@@ -111,9 +110,9 @@
 <h4 id="用来描述业务处理逻辑的元数据"><a href="#用来描述业务处理逻辑的元数据" class="headerlink" title="用来描述业务处理逻辑的元数据"></a>用来描述业务处理逻辑的元数据</h4><p>首先，低代码平台会根据自身的能力边界和封装粒度，将用来承载业务逻辑的要件（也称业务能力）抽象成元数据定义，如数据库操作、判断、循环、文件处理、钉钉推送等。开发者在设计器上编排和操作对这些要件；设计器将这些要件的顺序、配置信息等保存为元数据；运行时通过加载这些元数据，还原出业务逻辑处理的规则和实现方式，并最终形成可执行的程序。</p>
 <p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749364849852NCzGbmsjxoreJoxDVqac9FwDnPg.png" alt="1749364849852NCzGbmsjxoreJoxDVqac9FwDnPg.png"></p>
 <p>具体而言，低代码平台用来描述业务逻辑的元数据通常由若干有顺序的“操作”构成，每个操作中包含操作类型、配置参数、输入参数、输出参数等。如从向数据库中特定表插入数据的操作，在元数据中可描述为：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;$type&quot;</span>: <span class="string">&quot;Forguncy.Model.UpdateDataTableCommand, ServerDesignerCommon&quot;</span>,</span><br><span class="line">    <span class="string">&quot;TableName&quot;</span>: <span class="string">&quot;表名&quot;</span>,</span><br><span class="line">    <span class="string">&quot;UpdateType&quot;</span>: <span class="string">&quot;add&quot;</span>,</span><br><span class="line">    <span class="string">&quot;UpdateValues&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">&quot;ColumnName&quot;</span>: <span class="string">&quot;字段名&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Value&quot;</span>: <span class="string">&quot;=arg0&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">    <span class="string">"$type"</span>: <span class="string">"Forguncy.Model.UpdateDataTableCommand, ServerDesignerCommon"</span>,</span><br><span class="line">    <span class="string">"TableName"</span>: <span class="string">"表名"</span>,</span><br><span class="line">    <span class="string">"UpdateType"</span>: <span class="string">"add"</span>,</span><br><span class="line">    <span class="string">"UpdateValues"</span>: [</span><br><span class="line">        {</span><br><span class="line">            <span class="string">"ColumnName"</span>: <span class="string">"字段名"</span>,</span><br><span class="line">            <span class="string">"Value"</span>: <span class="string">"=arg0"</span></span><br><span class="line">        }</span><br><span class="line">    ],</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<h3 id="页面"><a href="#页面" class="headerlink" title="页面"></a>页面</h3><p>不同的低代码平台大多采用类似的技术原理，即使用 JSON&#x2F;XML 格式的元数据描述前端组件的属性和页面布局。在设计体验上，低代码平台大多在固定布局和栅格布局两种方案中进行选择，少数低代码平台选择融合两者布局方案的网格布局（Grid Layout）。</p>
+<h3 id="页面"><a href="#页面" class="headerlink" title="页面"></a>页面</h3><p>不同的低代码平台大多采用类似的技术原理，即使用 JSON/XML 格式的元数据描述前端组件的属性和页面布局。在设计体验上，低代码平台大多在固定布局和栅格布局两种方案中进行选择，少数低代码平台选择融合两者布局方案的网格布局（Grid Layout）。</p>
 <h4 id="从可执行代码到元数据"><a href="#从可执行代码到元数据" class="headerlink" title="从可执行代码到元数据"></a>从可执行代码到元数据</h4><p>页面设计的可视化与数据库可视化设计的历史类似，可以追溯到 1990 年代，随着 Visual Basic 的火热，传统编码开发领域涌现出了大量以拖拽的方式构建程序界面的开发工具。直至今日，很多开发者在提及可视化开发时，第一反应还是那个时代的 Visual Basic、Visual C++、PowerBuilder 等工具。这一阶段的页面设计以固定布局为主，开发者通过拖拽的方式摆放和配置页面元素，开发工具则根据这些信息自动生成可执行的程序代码，包含创建控件等页面元素、设置元素的位置、调整元素的样式等。在程序运行时，这些程序代码会被调用，逐步还原开发者的拖拽操作，最终展示出应用的界面。</p>
 <p>随着技术的进步，标记型语言和解释引擎的技术方案从 Web 页面走向更多终端。除了 Android 和 iOS 两个新的终端类型，Windows 上也出现了采用标记型语言设计页面的 WPF 技术，开发者拖拽生成后的页面，在编译时不再转义为顺序执行的程序语言，而是描述最终显示结果的标记型语言。同样是将可视化设计的结果转换为代码，标记型语言比顺序执行的代码语言更直观地展示页面中元素的层次和样式，开发工具需要处理的复杂度更低，可以给开发者开放更多能力，设计出更丰富的布局和样式，产出的质量也更加稳定；与之对应的代价则是相比于直接执行程序代码，通过解析引擎分析和展示标记型语言会带来额外的性能开销。在终端性能过剩的当下，程序代码方案的优势已经不在。在此背景下，诞生于 2010 年代以后的低代码开发平台绝大多数选择了生成标记型语言的技术方案，生成的格式主要为 XML 和 JSON。与上文中介绍的业务逻辑开发类似，界面交互开发也从生成程序代码走上了生成元数据的道路。</p>
 <h4 id="元数据，不只是-HTML"><a href="#元数据，不只是-HTML" class="headerlink" title="元数据，不只是 HTML"></a>元数据，不只是 HTML</h4><p>绝大多数低代码开发平台都诞生于 2010 年之后，所以，元数据成了他们承载页面设计的不二之选。这导致了低代码平台在页面层的技术原理大同小异。与业务逻辑的可视化开发类似，低代码平台厂商为了帮助提升开发效率，也提供了大量前端交互组件，这些组件基于 HTML，但封装粒度更粗，如部分低代码平台将“表格”作为一个前端组件，开发者在设计器上为页面添加一个表格，就可以得到由大量 HTML 元素和 JavaScript 脚本实现的数据展示、分页、列头过滤器、Excel 数据复制粘贴等功能。这就意味着低代码平台需要定义一套与 HTML 不同的元数据标准，来描述这些封装好的组件。</p>
@@ -129,7 +128,7 @@
 </ul>
 <h3 id="按技术栈"><a href="#按技术栈" class="headerlink" title="按技术栈"></a>按技术栈</h3><ul>
 <li><strong>Web 前端驱动</strong>：大多数低代码平台以前端框架（如 React、Vue）为基础，生成富交互单页应用。</li>
-<li><strong>后端无缝集成</strong>：通过内置数据库模型和微服务框架，自动生成 REST&#x2F;GraphQL 接口，同时支持与第三方系统（ERP、CRM）的接口联动。</li>
+<li><strong>后端无缝集成</strong>：通过内置数据库模型和微服务框架，自动生成 REST/GraphQL 接口，同时支持与第三方系统（ERP、CRM）的接口联动。</li>
 </ul>
 <h2 id="平台功能模块"><a href="#平台功能模块" class="headerlink" title="平台功能模块"></a>平台功能模块</h2><h3 id="可视化开发"><a href="#可视化开发" class="headerlink" title="可视化开发"></a>可视化开发</h3><ul>
 <li>拖拽式表单设计器、流程设计器和仪表盘构建器。</li>
@@ -140,12 +139,12 @@
 <li>自动生成数据库表、API 接口和数据验证规则。</li>
 </ul>
 <h3 id="业务流程引擎"><a href="#业务流程引擎" class="headerlink" title="业务流程引擎"></a>业务流程引擎</h3><ul>
-<li>提供 BPEL&#x2F;RBAC 流程引擎，支持审批流、定时任务与分支逻辑。</li>
+<li>提供 BPEL/RBAC 流程引擎，支持审批流、定时任务与分支逻辑。</li>
 <li>支持多租户和权限精细化控制。</li>
 </ul>
 <h3 id="部署与运维"><a href="#部署与运维" class="headerlink" title="部署与运维"></a>部署与运维</h3><ul>
 <li>一键发布至测试、预生产与生产环境。</li>
-<li>集成 CI&#x2F;CD、日志监控和性能分析，保障应用稳定运行。</li>
+<li>集成 CI/CD、日志监控和性能分析，保障应用稳定运行。</li>
 </ul>
 <h2 id="主流低代码平台对比"><a href="#主流低代码平台对比" class="headerlink" title="主流低代码平台对比"></a>主流低代码平台对比</h2><blockquote>
 <ul>
@@ -185,7 +184,7 @@
         <section class="post-author">
         
             <figure class="author-avatar">
-                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&r=X&d=" alt="ttkqwe" />
+                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&amp;r=X&amp;d=" alt="ttkqwe">
             </figure>
         
             <div class="author-info">
@@ -225,11 +224,13 @@
 </footer>
 
 
-<script src="/static/kico.js"></script>
-<script src="/static/hingle.js"></script>
 
 
-<script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>
 
-  </body>
-</html>
+
+
+
+  
+
+<script src="/bundle.js"></script><script>var hingle = new Paul_Hingle({"copyright":false,"night":true});;
+L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

@@ -1,25 +1,24 @@
-<!DOCTYPE html>
-<html lang="zh">
-  <head>
+<!DOCTYPE html><html lang="zh"><head>
     
     <meta charset="UTF-8">
     <title>2025-04-23-基于上下位机结构的系统实例分析 - TK的小站</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
-    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192">
     
-<link rel="stylesheet" href="/static/kico.css">
-<link rel="stylesheet" href="/static/hingle.css">
+
+
 
     
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:site_name" content="TK的小站">
-    <meta property="og:title" content="2025-04-23-基于上下位机结构的系统实例分析"/>
+    <meta property="og:title" content="2025-04-23-基于上下位机结构的系统实例分析">
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></noscript></head>
 
   <body>
     <header>
@@ -37,7 +36,7 @@
     <nav class="head-menu">
         <a href="/">首页</a>
         <div class="has-child">
-            <a href>分类</a>
+            <a href="">分类</a>
             <div class="sub-menu">
                 
             </div>
@@ -73,7 +72,7 @@
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiketang/p/15305637.html">上位机那些事儿 - 常哥说编程</a></li>
 </ul>
 </blockquote>
-<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>在现代工业自动化、物联网和智能控制领域，上下位机结构是一种核心的分层控制架构。上位机（Upper Computer）通常是功能强大的计算机，如个人电脑、工业 PC 或服务器，负责监控、数据处理、用户交互和决策制定。下位机（Lower Computer）是直接与物理设备（如传感器、执行器）连接的控制器，如可编程逻辑控制器（PLC）、单片机或嵌入式系统，负责执行具体任务和数据采集。这种结构通过通信协议（如 Modbus、TCP&#x2F;IP）实现高效协作，广泛应用于工业、物联网和嵌入式系统等领域。</p>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>在现代工业自动化、物联网和智能控制领域，上下位机结构是一种核心的分层控制架构。上位机（Upper Computer）通常是功能强大的计算机，如个人电脑、工业 PC 或服务器，负责监控、数据处理、用户交互和决策制定。下位机（Lower Computer）是直接与物理设备（如传感器、执行器）连接的控制器，如可编程逻辑控制器（PLC）、单片机或嵌入式系统，负责执行具体任务和数据采集。这种结构通过通信协议（如 Modbus、TCP/IP）实现高效协作，广泛应用于工业、物联网和嵌入式系统等领域。</p>
 <p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749360238852HJiCbmVvbojFg4xx4DbcUta2nYf.png" alt="1749360238852HJiCbmVvbojFg4xx4DbcUta2nYf.png"></p>
 <p>基于上下位机结构的软件示例</p>
 <h1 id="上下位机结构概述"><a href="#上下位机结构概述" class="headerlink" title="上下位机结构概述"></a>上下位机结构概述</h1><p>上下位机系统，也称为主从（Master-Slave）系统，是一种分层控制架构。它由一个处于控制地位的“上位机”（Master）和一个或多个受其控制的“下位机”（Slave）组成。</p>
@@ -94,25 +93,25 @@
 <p>如果系统没有完整的上位机层，也无妨，因为上位机仅用于监控和管理，并非直接负责执行 。广义上，“上位机”指所有基于 PC 的监控管理系统（如 SCADA、MES、ERP）；狭义上，多指 SCADA 本身，用于实时监控和数据采集。</p>
 <h2 id="通信协议与通信-API"><a href="#通信协议与通信-API" class="headerlink" title="通信协议与通信 API"></a>通信协议与通信 API</h2><h3 id="通信协议（通信方式）"><a href="#通信协议（通信方式）" class="headerlink" title="通信协议（通信方式）"></a>通信协议（通信方式）</h3><p>上位机和下位机之间的通信协议有很多，只要能完成通信的协议都可以用在上位机与下位机之间。</p>
 <p>比如：</p>
-<p>通信协议：RS232&#x2F;RS485 串行通信、USB、蓝牙、网络 UDP&#x2F;TCP</p>
+<p>通信协议：RS232/RS485 串行通信、USB、蓝牙、网络 UDP/TCP</p>
 <p>这个通信协议也是实现上位机与下位机之间数据交换的基本通道。</p>
 <p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749360261852Nz3rbIyZno5yunxpGgVcvX9HnXd.png" alt="1749360261852Nz3rbIyZno5yunxpGgVcvX9HnXd.png"><br><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749360271853AkrsbvBSxoFHdFxOkKjcvwFqnug.png" alt="1749360271853AkrsbvBSxoFHdFxOkKjcvwFqnug.png"></p>
 <h3 id="通信-API"><a href="#通信-API" class="headerlink" title="通信 API"></a>通信 API</h3><p>在通信协议的基础上，具体发送什么数据即发送什么指令，还需要规定各个功能所对应的指令（上位机发给下位机的指令）。</p>
 <p>每个功能所对应的指令叫做 API（Application Programming Interface）, 在实际工作中常称这个 api 为“私有通信协议”。</p>
 <p>举例一条获取温度的 api：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[包头 + 获取温度对应的命令编码（编号）+ 校验位 + 包尾]</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[包头 + 获取温度对应的命令编码（编号）+ 校验位 + 包尾]</span><br></pre></td></tr></tbody></table></figure>
 
 <p>api 的命令格式，是自定义的一种固定的数据组合格式。不受任何通信方式和通信平台的限制。这就意味着，只要通信协议（通信方式）可以建立，上位机软件可以是任意开发语言和任意开发平台，下位机也可以使用任意类型的单片机。</p>
 <p>上位机主要是对接 PLC、仪表、运动控制卡、视觉等，通信方式包括通信协议、OPC、API 或 SDK，如下图所示：</p>
 <p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749360284853ZrjUbb7O6oWXLyxl0ezcsZsvnbc.png" alt="1749360284853ZrjUbb7O6oWXLyxl0ezcsZsvnbc.png"></p>
 <h2 id="定义与功能"><a href="#定义与功能" class="headerlink" title="定义与功能"></a>定义与功能</h2><p>上位机和下位机在控制系统中分工明确，功能互补：</p>
-<p>上位机作为系统的“大脑”，处理复杂任务并与用户交互；下位机作为“执行者”，确保实时性和精确性。两者通过串口（RS232&#x2F;RS485）、以太网或无线协议通信，形成高效的控制体系。</p>
+<p>上位机作为系统的“大脑”，处理复杂任务并与用户交互；下位机作为“执行者”，确保实时性和精确性。两者通过串口（RS232/RS485）、以太网或无线协议通信，形成高效的控制体系。</p>
 <h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749360295853Wqq4bMNQAot40JxAMsfch8w5ntd.png" alt="1749360295853Wqq4bMNQAot40JxAMsfch8w5ntd.png"></p>
 <p>上位机发送的指令会首先传递给下位机，下位机收到后将其解析为相应的时序信号，从而直接驱动具体的设备运行。下位机会不断采集设备的状态数据（通常为模拟量），并将这些数据转换为数字信号，上报给上位机进行监控与处理 。</p>
 <p>上下位机均需进行编程开发，且各自拥有针对性的开发环境与工具，下位机常见于 PLC、单片机或智能模块等，而上位机通常为基于 PC 的监控管理系统 。</p>
 <p>在系统架构层面，上位机相当于“控制者”和“服务提供者”，负责发出控制指令并处理反馈；下位机则扮演“被控制者”和“服务执行者”，直接与现场设备交互，实现具体控制逻辑。两者之间的通信方式多样，通常由下位机来决定其所支持的专有协议，以保证数据传输的可靠性与实时性，例如常见的 RS232、RS485、MODBUS、PROFIBUS 等 。</p>
 <p>下位机在出厂时一般会附带详细的通信手册，其中定义了该设备专用的协议格式与帧结构，开发人员在进行上位机编程时只需调用相应的 API 或驱动库即可快速实现通信对接。因此，主机与从机的关系不仅体现在控制与被控上，更体现在两者通信协议的配合与适配上，以确保工业现场系统的稳定运行与高效协同。</p>
-<h1 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h1><p>上位机开发通常使用 C&#x2F;C++（Qt、MFC）、C#（.NET 平下的 WinForms&#x2F;WPF）、VB。其中就目前的情况来看，Qt 和 WinForms 应该是目前应用相对比较广的。VB 和 MFC 比较老旧，做的界面也比较有年代感。其中，新版本的 Qt 还支持用 Python 来编写。而 WPF 算是后起之秀，也逐渐替代 WinForms，其制作的上位机界面较新式。其他，一些组态软件是专门做上位机软件的，像组态王、力控，相当于是二次开发，门槛较低一些，操作也比较简单，但是拓展性差。</p>
+<h1 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h1><p>上位机开发通常使用 C/C++（Qt、MFC）、C#（.NET 平下的 WinForms/WPF）、VB。其中就目前的情况来看，Qt 和 WinForms 应该是目前应用相对比较广的。VB 和 MFC 比较老旧，做的界面也比较有年代感。其中，新版本的 Qt 还支持用 Python 来编写。而 WPF 算是后起之秀，也逐渐替代 WinForms，其制作的上位机界面较新式。其他，一些组态软件是专门做上位机软件的，像组态王、力控，相当于是二次开发，门槛较低一些，操作也比较简单，但是拓展性差。</p>
 <h1 id="系统实例分析"><a href="#系统实例分析" class="headerlink" title="系统实例分析"></a>系统实例分析</h1><h2 id="工业自动化控制系统"><a href="#工业自动化控制系统" class="headerlink" title="工业自动化控制系统"></a><strong>工业自动化控制系统</strong></h2><p>在工厂的自动化生产线上，上位机通常是工控机（Industrial PC）或 PLC（可编程逻辑控制器），负责监控和协调整个生产过程。下位机则是各种执行机构，如机械臂、传感器、电机驱动器等。</p>
 <ul>
 <li><strong>例子：</strong> 假设一条饮料灌装生产线。上位机通过人机界面接收生产指令（例如，灌装多少瓶、什么类型的饮料等）。然后，上位机向下位机的各个模块发送指令：<ul>
@@ -190,7 +189,7 @@
         <section class="post-author">
         
             <figure class="author-avatar">
-                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&r=X&d=" alt="ttkqwe" />
+                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&amp;r=X&amp;d=" alt="ttkqwe">
             </figure>
         
             <div class="author-info">
@@ -230,11 +229,13 @@
 </footer>
 
 
-<script src="/static/kico.js"></script>
-<script src="/static/hingle.js"></script>
 
 
-<script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>
 
-  </body>
-</html>
+
+
+
+  
+
+<script src="/bundle.js"></script><script>var hingle = new Paul_Hingle({"copyright":false,"night":true});;
+L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

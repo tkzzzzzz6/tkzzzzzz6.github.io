@@ -1,25 +1,24 @@
-<!DOCTYPE html>
-<html lang="zh">
-  <head>
+<!DOCTYPE html><html lang="zh"><head>
     
     <meta charset="UTF-8">
     <title>2025-05-01-决策树算法及应用 - TK的小站</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
-    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192">
     
-<link rel="stylesheet" href="/static/kico.css">
-<link rel="stylesheet" href="/static/hingle.css">
+
+
 
     
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:site_name" content="TK的小站">
-    <meta property="og:title" content="2025-05-01-决策树算法及应用"/>
+    <meta property="og:title" content="2025-05-01-决策树算法及应用">
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></noscript></head>
 
   <body>
     <header>
@@ -37,7 +36,7 @@
     <nav class="head-menu">
         <a href="/">首页</a>
         <div class="has-child">
-            <a href>分类</a>
+            <a href="">分类</a>
             <div class="sub-menu">
                 
             </div>
@@ -63,7 +62,7 @@
         
             <h1 id="决策树算法及应用"><a href="#决策树算法及应用" class="headerlink" title="决策树算法及应用"></a>决策树算法及应用</h1><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><blockquote>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/zhaoyichanghong/machine_learing_algo_python">GitHub - zhaoyichanghong&#x2F;machine_learing_algo_python: implement the machine learning algorithms by p</a>(机器学习相关的 github 仓库)</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/zhaoyichanghong/machine_learing_algo_python">GitHub - zhaoyichanghong/machine_learing_algo_python: implement the machine learning algorithms by p</a>(机器学习相关的 github 仓库)</li>
 <li><a target="_blank" rel="noopener" href="https://aibydoing.com/notebooks/chapter02-10-lab-decision-tree-implementation-and-applications">决策树实现与应用</a></li>
 <li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-cn/%E5%86%B3%E7%AD%96%E6%A0%91">决策树</a></li>
 </ul>
@@ -74,7 +73,7 @@
 </blockquote>
 <p>决策树具有以下特点：</p>
 <ul>
-<li><strong>易于理解与可视化</strong>：生成后以树状图呈现，人类可直观理解每个分类&#x2F;回归决策过程。</li>
+<li><strong>易于理解与可视化</strong>：生成后以树状图呈现，人类可直观理解每个分类/回归决策过程。</li>
 <li><strong>无需大量数据预处理</strong>：对数值型与类别型特征均可处理，无需像线性模型那样对特征做严格的标准化、归一化。</li>
 <li><strong>自动进行特征选择</strong>：在划分过程中会自动选出最能区分正负样本或最能减少误差的特征。</li>
 </ul>
@@ -109,13 +108,13 @@
 <li>又称决策节点（Decision Node），表示一个根据某个特征进行划分的测试。</li>
 </ul>
 <ol>
-<li><strong>叶节点 (Leaf &#x2F; Terminal Node)</strong></li>
+<li><strong>叶节点 (Leaf / Terminal Node)</strong></li>
 </ol>
 <ul>
 <li>表示最终的类别（分类树）或数值（回归树）。</li>
 </ul>
 <ol>
-<li><strong>分支 (Branch &#x2F; Edge)</strong></li>
+<li><strong>分支 (Branch / Edge)</strong></li>
 </ol>
 <ul>
 <li>从父节点到子节点的连线，通常对应该节点特征的某个取值或取值范围。</li>
@@ -140,19 +139,19 @@
 <ul>
 <li>节点 $D$ 信息熵：</li>
 </ul>
-<p>$$<br>H(D) &#x3D; -\sum_{k&#x3D;1}^K p_k \log_2 p_k,\quad p_k &#x3D; \frac{|D_k|}{|D|}<br>$$</p>
+<p>$$<br>H(D) = -\sum_{k=1}^K p_k \log_2 p_k,\quad p_k = \frac{|D_k|}{|D|}<br>$$</p>
 <p>其中 $|D_k|$ 是类别 $C_k$ 在 $D$ 中的样本数。</p>
 <ul>
-<li>若使用特征 $A$ 进行划分，且 $A$ 共有 $v$ 个互斥取值 ${a_1,\dots,a_v}$，则在 $A&#x3D;a_i$ 处的子集记为 $D_i$。</li>
+<li>若使用特征 $A$ 进行划分，且 $A$ 共有 $v$ 个互斥取值 ${a_1,\dots,a_v}$，则在 $A=a_i$ 处的子集记为 $D_i$。</li>
 </ul>
 <p>划分后加权平均的信息熵：</p>
-<p>$$<br>H(D \mid A) &#x3D; \sum_{i&#x3D;1}^v \frac{|D_i|}{|D|} H(D_i)<br>$$</p>
+<p>$$<br>H(D \mid A) = \sum_{i=1}^v \frac{|D_i|}{|D|} H(D_i)<br>$$</p>
 <ul>
 <li><strong>信息增益</strong>：即划分前后熵的减少量：</li>
 </ul>
-<p>$$<br>\text{Gain}(A) &#x3D; H(D) - H(D \mid A)<br>$$</p>
+<p>$$<br>\text{Gain}(A) = H(D) - H(D \mid A)<br>$$</p>
 <p><strong>ID3 算法</strong>选择信息增益最大的特征进行划分——即令：</p>
-<p>$$<br>A^* &#x3D; \arg\max_{A} \text{Gain}(A)<br>$$</p>
+<p>$$<br>A^* = \arg\max_{A} \text{Gain}(A)<br>$$</p>
 <blockquote>
 <p><strong>缺点</strong>：信息增益偏向取值多的特征（类别型变量有大量不同取值时容易过拟合）。</p>
 </blockquote>
@@ -160,31 +159,31 @@
 <ol>
 <li><strong>分裂信息</strong>（或称固有信息）：</li>
 </ol>
-<p>$$<br>\text{SplitInfo}(A) &#x3D; -\sum_{i&#x3D;1}^v \frac{|D_i|}{|D|} \log_2 \frac{|D_i|}{|D|}<br>$$</p>
+<p>$$<br>\text{SplitInfo}(A) = -\sum_{i=1}^v \frac{|D_i|}{|D|} \log_2 \frac{|D_i|}{|D|}<br>$$</p>
 <ol>
 <li><strong>信息增益率</strong>：</li>
 </ol>
-<p>$$<br>\text{GainRatio}(A) &#x3D; \frac{\text{Gain}(A)}{\text{SplitInfo}(A) + \epsilon}<br>$$</p>
+<p>$$<br>\text{GainRatio}(A) = \frac{\text{Gain}(A)}{\text{SplitInfo}(A) + \epsilon}<br>$$</p>
 <p>通常选择信息增益率最高的特征进行划分。</p>
 <blockquote>
 <p>C4.5 同时支持对连续性（数值型）特征的二元划分：先对候选切分点进行排序，再遍历所有相邻两值中点，选取使增益率最大的切分点。</p>
 </blockquote>
 <h4 id="基尼不纯度-Gini-Impurity-——CART"><a href="#基尼不纯度-Gini-Impurity-——CART" class="headerlink" title="基尼不纯度 (Gini Impurity) ——CART"></a>基尼不纯度 (Gini Impurity) ——CART</h4><p>CART（Classification And Regression Tree）算法采用基尼不纯度作为划分依据。对于节点 $$D$$，基尼不纯度定义为：</p>
-<p>$$<br>\mathrm{Gini}(D) &#x3D; 1 - \sum_{k&#x3D;1}^K p_k^2, \quad p_k &#x3D; \frac{|D_k|}{|D|}<br>$$</p>
+<p>$$<br>\mathrm{Gini}(D) = 1 - \sum_{k=1}^K p_k^2, \quad p_k = \frac{|D_k|}{|D|}<br>$$</p>
 <ul>
 <li>若使用特征 $A$ 将 $D$ 划分为两个子集（CART 传统上构建二叉树），设划分后两部分分别为 $D_\text{left}, D_\text{right}$，则划分后的基尼系数为加权平均：</li>
 </ul>
-<p>$$<br>\mathrm{Gini}(D, A, s) &#x3D; \frac{|D_\text{left}|}{|D|}\mathrm{Gini}(D_\text{left}) + \frac{|D_\text{right}|}{|D|}\mathrm{Gini}(D_\text{right})<br>$$</p>
+<p>$$<br>\mathrm{Gini}(D, A, s) = \frac{|D_\text{left}|}{|D|}\mathrm{Gini}(D_\text{left}) + \frac{|D_\text{right}|}{|D|}\mathrm{Gini}(D_\text{right})<br>$$</p>
 <ul>
 <li>**基尼增益 (Gini Gain)**（或称基尼减少量）:</li>
 </ul>
-<p>$$<br>\Delta \mathrm{Gini}(A, s) &#x3D; \mathrm{Gini}(D) - \mathrm{Gini}(D, A, s)<br>$$</p>
+<p>$$<br>\Delta \mathrm{Gini}(A, s) = \mathrm{Gini}(D) - \mathrm{Gini}(D, A, s)<br>$$</p>
 <p>CART 选择使基尼不纯度下降最多（即 $\Delta \mathrm{Gini}$ 最大）的特征和切分点。</p>
 <blockquote>
 <p><strong>CART 区别</strong>：</p>
 <ul>
 <li>使用基尼而非熵；</li>
-<li>通常只考虑二元（yes&#x2F;no）划分，即每个节点形成左右两个子节点。</li>
+<li>通常只考虑二元（yes/no）划分，即每个节点形成左右两个子节点。</li>
 <li>对数值型特征遍历所有可能切分点；对类别型特征可先将类别编码为虚拟变量 (One-Hot) 或按某种顺序处理。</li>
 </ul>
 </blockquote>
@@ -193,14 +192,14 @@
 <li><strong>离散(类别)特征</strong></li>
 </ol>
 <ul>
-<li>ID3&#x2F;C4.5 直接按每个取值划分；CART 需要将 $m$ 个类别先切分为两组（所有可能子集划分），计算基尼并选择最优。</li>
+<li>ID3/C4.5 直接按每个取值划分；CART 需要将 $m$ 个类别先切分为两组（所有可能子集划分），计算基尼并选择最优。</li>
 </ul>
 <ol>
 <li><strong>连续（数值）特征</strong></li>
 </ol>
 <ul>
 <li>首先对该特征在当前节点的所有样本的取值排序：$x_{(1)} \le x_{(2)} \le \dots \le x_{(n)}$。</li>
-<li>对每个相邻取值对 ${x_{(i)}, x_{(i+1)}}$，将其中点 $s &#x3D; \tfrac{x_{(i)}+x_{(i+1)}}{2}$ 作为候选切分点。</li>
+<li>对每个相邻取值对 ${x_{(i)}, x_{(i+1)}}$，将其中点 $s = \tfrac{x_{(i)}+x_{(i+1)}}{2}$ 作为候选切分点。</li>
 <li>分别计算按 $A \le s$ 与 $A &gt; s$ 两部分划分后的信息增益（或基尼减少量），选择最优 $s^*$。</li>
 </ul>
 <ol>
@@ -208,7 +207,7 @@
 </ol>
 <ul>
 <li>从根节点开始，对当前节点所有候选特征（及可能的切分点）分别计算划分指标；</li>
-<li>选出指标最优的特征&#x2F;切分点，将样本划分到子节点；</li>
+<li>选出指标最优的特征/切分点，将样本划分到子节点；</li>
 <li>对每个子节点递归执行，同样进行“特征选择 → 划分 → 递归”，直到满足停止条件。</li>
 </ul>
 <hr>
@@ -258,7 +257,7 @@
 <h3 id="CART-（Breiman-等，1984）"><a href="#CART-（Breiman-等，1984）" class="headerlink" title="CART （Breiman 等，1984）"></a>CART （Breiman 等，1984）</h3><ul>
 <li><strong>核心思想</strong>：</li>
 <li>使用基尼不纯度 (Gini) 作为划分标准；</li>
-<li>构建二叉树：每个节点仅有 “是&#x2F;否” 两个分支；</li>
+<li>构建二叉树：每个节点仅有 “是/否” 两个分支；</li>
 <li>同时支持分类树 (Classification Tree) 和回归树 (Regression Tree)。</li>
 <li><strong>分类树流程</strong>：</li>
 </ul>
@@ -274,8 +273,8 @@
 <li><strong>回归树流程</strong>：</li>
 <li>用 MSE（均方误差）或绝对误差作为节点不纯度度量：</li>
 </ul>
-<p>$$<br>\mathrm{MSE}(D) &#x3D; \frac{1}{|D|}\sum_{i\in D} (y_i - \bar y)^2,\quad \bar y &#x3D; \frac{1}{|D|}\sum_{i\in D} y_i<br>$$</p>
-<p>$$<br>\mathrm{MSE}(D) &#x3D; \frac{1}{|D|}\sum_{i\in D} (y_i - \bar y)^2,\quad \bar y &#x3D; \frac{1}{|D|}\sum_{i\in D} y_i<br>$$</p>
+<p>$$<br>\mathrm{MSE}(D) = \frac{1}{|D|}\sum_{i\in D} (y_i - \bar y)^2,\quad \bar y = \frac{1}{|D|}\sum_{i\in D} y_i<br>$$</p>
+<p>$$<br>\mathrm{MSE}(D) = \frac{1}{|D|}\sum_{i\in D} (y_i - \bar y)^2,\quad \bar y = \frac{1}{|D|}\sum_{i\in D} y_i<br>$$</p>
 <ul>
 <li>对数值型特征 $A$ 遍历二元切分点，分别计算左右子集的 MSE 加权平均。</li>
 <li>选取使 MSE 降低最多的切分。</li>
@@ -287,7 +286,7 @@
 <ol>
 <li><strong>最小样本数</strong>：若节点样本数小于某阈值，停止划分；</li>
 <li><strong>最大深度</strong>：树深度达到设定上限，停止；</li>
-<li><strong>信息增益&#x2F;基尼减少阈值</strong>：若最优划分的增益（或减少量）小于阈值，则不再划分；</li>
+<li><strong>信息增益/基尼减少阈值</strong>：若最优划分的增益（或减少量）小于阈值，则不再划分；</li>
 <li><strong>统计检验</strong>：基于卡方检验等统计检验判定划分是否显著。</li>
 </ol>
 <blockquote>
@@ -326,7 +325,7 @@
 <li><strong>自动特征选择</strong></li>
 </ol>
 <ul>
-<li>在划分过程中自动评估并选取对分类&#x2F;回归最有价值的特征。</li>
+<li>在划分过程中自动评估并选取对分类/回归最有价值的特征。</li>
 </ul>
 <ol>
 <li><strong>鲁棒性强</strong></li>
@@ -381,7 +380,7 @@
 <h2 id="决策树在实际中的应用场景"><a href="#决策树在实际中的应用场景" class="headerlink" title="决策树在实际中的应用场景"></a>决策树在实际中的应用场景</h2><h3 id="相关代码示例"><a href="#相关代码示例" class="headerlink" title="相关代码示例"></a>相关代码示例</h3><blockquote>
 <p>由于还包含了 c45,cart,id3 为划分指标的决策树代码,我整理在了一个 github 仓库中,下面只展示了 decision_stump.py 的代码<br><a target="_blank" rel="noopener" href="https://github.com/tkzzzzzz6/MLandDL">https://github.com/tkzzzzzz6/MLandDL</a></p>
 </blockquote>
-<h4 id="decision-stump-py-主要模块"><a href="#decision-stump-py-主要模块" class="headerlink" title="decision_stump.py(主要模块)"></a>decision_stump.py(主要模块)</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DecisionStump</span>():</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__update_parameter</span>(<span class="params">self, h, feature_index, threshold, direction, err_value</span>):</span><br><span class="line">        <span class="variable language_">self</span>.**__min_err_value** = err_value</span><br><span class="line">        <span class="variable language_">self</span>.**__feature_index** = feature_index</span><br><span class="line">        <span class="variable language_">self</span>.**__threshold** = threshold</span><br><span class="line">        <span class="variable language_">self</span>.**__direction** = direction</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__select_direction</span>(<span class="params">self, feature_index, threshold, X, y, w</span>):</span><br><span class="line">        <span class="keyword">for</span> direction <span class="keyword">in</span> [<span class="string">&#x27;greater&#x27;</span>, <span class="string">&#x27;less&#x27;</span>]:</span><br><span class="line">            h = np.ones_like(y)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> direction == <span class="string">&#x27;greater&#x27;</span>:</span><br><span class="line">                h[np.flatnonzero(X[:, feature_index] &lt; threshold)] = -<span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                h[np.flatnonzero(X[:, feature_index] &gt;= threshold)] = -<span class="number">1</span></span><br><span class="line"></span><br><span class="line">            err_value = np.<span class="built_in">sum</span>(w[np.flatnonzero(h != y)])</span><br><span class="line">            <span class="keyword">if</span> err_value &lt; <span class="variable language_">self</span>.**__min_err_value**:</span><br><span class="line">                <span class="variable language_">self</span>.__update_parameter(h, feature_index, threshold, <span class="string">&#x27;greater&#x27;</span>, err_value)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__select_threshold</span>(<span class="params">self, feature_index, X, y, w</span>):</span><br><span class="line">        n_samples = X.shape[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n_samples):</span><br><span class="line">            <span class="variable language_">self</span>.__select_direction(feature_index, X[i, feature_index], X, y, w)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__select_feature</span>(<span class="params">self, X, y, w</span>):</span><br><span class="line">        n_features = X.shape[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n_features):</span><br><span class="line">            <span class="variable language_">self</span>.__select_threshold(i, X, y, w)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fit</span>(<span class="params">self, X, y, w</span>):</span><br><span class="line">        <span class="variable language_">self</span>.**__feature_index** = <span class="literal">None</span></span><br><span class="line">        <span class="variable language_">self</span>.**__threshold** = <span class="literal">None</span></span><br><span class="line">        <span class="variable language_">self</span>.**__direction** = <span class="literal">None</span></span><br><span class="line">        <span class="variable language_">self</span>.**__min_err_value** = np.**inf**</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.__select_feature(X, y, w)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">predict</span>(<span class="params">self, X</span>):</span><br><span class="line">        n_samples = X.shape[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">        y_pred = np.ones(n_samples)</span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.**__direction** == <span class="string">&#x27;greater&#x27;</span>:</span><br><span class="line">            y_pred[np.flatnonzero(X[:, <span class="variable language_">self</span>.**__feature_index**] &lt; <span class="variable language_">self</span>.**__threshold**)] = -<span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            y_pred[np.flatnonzero(X[:, <span class="variable language_">self</span>.**__feature_index**] &gt;= <span class="variable language_">self</span>.**__threshold**)] = -<span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> y_pred</span><br></pre></td></tr></table></figure>
+<h4 id="decision-stump-py-主要模块"><a href="#decision-stump-py-主要模块" class="headerlink" title="decision_stump.py(主要模块)"></a>decision_stump.py(主要模块)</h4><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DecisionStump</span>():</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__update_parameter</span>(<span class="params">self, h, feature_index, threshold, direction, err_value</span>):</span><br><span class="line">        <span class="variable language_">self</span>.**__min_err_value** = err_value</span><br><span class="line">        <span class="variable language_">self</span>.**__feature_index** = feature_index</span><br><span class="line">        <span class="variable language_">self</span>.**__threshold** = threshold</span><br><span class="line">        <span class="variable language_">self</span>.**__direction** = direction</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__select_direction</span>(<span class="params">self, feature_index, threshold, X, y, w</span>):</span><br><span class="line">        <span class="keyword">for</span> direction <span class="keyword">in</span> [<span class="string">'greater'</span>, <span class="string">'less'</span>]:</span><br><span class="line">            h = np.ones_like(y)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> direction == <span class="string">'greater'</span>:</span><br><span class="line">                h[np.flatnonzero(X[:, feature_index] &lt; threshold)] = -<span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                h[np.flatnonzero(X[:, feature_index] &gt;= threshold)] = -<span class="number">1</span></span><br><span class="line"></span><br><span class="line">            err_value = np.<span class="built_in">sum</span>(w[np.flatnonzero(h != y)])</span><br><span class="line">            <span class="keyword">if</span> err_value &lt; <span class="variable language_">self</span>.**__min_err_value**:</span><br><span class="line">                <span class="variable language_">self</span>.__update_parameter(h, feature_index, threshold, <span class="string">'greater'</span>, err_value)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__select_threshold</span>(<span class="params">self, feature_index, X, y, w</span>):</span><br><span class="line">        n_samples = X.shape[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n_samples):</span><br><span class="line">            <span class="variable language_">self</span>.__select_direction(feature_index, X[i, feature_index], X, y, w)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__select_feature</span>(<span class="params">self, X, y, w</span>):</span><br><span class="line">        n_features = X.shape[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n_features):</span><br><span class="line">            <span class="variable language_">self</span>.__select_threshold(i, X, y, w)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fit</span>(<span class="params">self, X, y, w</span>):</span><br><span class="line">        <span class="variable language_">self</span>.**__feature_index** = <span class="literal">None</span></span><br><span class="line">        <span class="variable language_">self</span>.**__threshold** = <span class="literal">None</span></span><br><span class="line">        <span class="variable language_">self</span>.**__direction** = <span class="literal">None</span></span><br><span class="line">        <span class="variable language_">self</span>.**__min_err_value** = np.**inf**</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.__select_feature(X, y, w)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">predict</span>(<span class="params">self, X</span>):</span><br><span class="line">        n_samples = X.shape[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">        y_pred = np.ones(n_samples)</span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.**__direction** == <span class="string">'greater'</span>:</span><br><span class="line">            y_pred[np.flatnonzero(X[:, <span class="variable language_">self</span>.**__feature_index**] &lt; <span class="variable language_">self</span>.**__threshold**)] = -<span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            y_pred[np.flatnonzero(X[:, <span class="variable language_">self</span>.**__feature_index**] &gt;= <span class="variable language_">self</span>.**__threshold**)] = -<span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> y_pred</span><br></pre></td></tr></tbody></table></figure>
 
 <h4 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749360718079T62Tbr1DOojvcLxBIxqcFCvHnlg.png" alt="1749360718079T62Tbr1DOojvcLxBIxqcFCvHnlg.png"></p>
 <p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749360730852Tfdmbz1oOo6vFpxAAfkcoEBGnXc.png" alt="1749360730852Tfdmbz1oOo6vFpxAAfkcoEBGnXc.png"><br><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749360750853Zeg3bB0PioEDr0x9taMclxgOnmh.png" alt="1749360750853Zeg3bB0PioEDr0x9taMclxgOnmh.png"></p>
@@ -411,7 +410,7 @@
 </ol>
 <ul>
 <li>业务场景：根据邮件内容特征（关键字出现次数、发送人是否在白名单）、邮件长度、附件类型等判断是否为垃圾邮件。</li>
-<li>应用：决策树可快速处理离散&#x2F;连续特征，常用于构建初期的规则或与其他模型结合（如 Random Forest）。</li>
+<li>应用：决策树可快速处理离散/连续特征，常用于构建初期的规则或与其他模型结合（如 Random Forest）。</li>
 </ul>
 <h3 id="回归任务"><a href="#回归任务" class="headerlink" title="回归任务"></a>回归任务</h3><ol>
 <li><strong>房价预测 (House Price Prediction)</strong></li>
@@ -455,7 +454,7 @@
 <hr>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
 <li><strong>决策树</strong> 是一种简单、易理解且可处理混合型特征的模型，既可做分类，也可做回归。</li>
-<li><strong>核心步骤</strong>：选择合适的划分指标（信息增益 &#x2F; 信息增益率 &#x2F; 基尼不纯度）、确定最佳划分点，递归生成树，并通过剪枝降低过拟合。</li>
+<li><strong>核心步骤</strong>：选择合适的划分指标（信息增益 / 信息增益率 / 基尼不纯度）、确定最佳划分点，递归生成树，并通过剪枝降低过拟合。</li>
 <li><strong>常见算法</strong>：</li>
 </ol>
 <ul>
@@ -499,7 +498,7 @@
         <section class="post-author">
         
             <figure class="author-avatar">
-                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&r=X&d=" alt="ttkqwe" />
+                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&amp;r=X&amp;d=" alt="ttkqwe">
             </figure>
         
             <div class="author-info">
@@ -539,11 +538,13 @@
 </footer>
 
 
-<script src="/static/kico.js"></script>
-<script src="/static/hingle.js"></script>
 
 
-<script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>
 
-  </body>
-</html>
+
+
+
+  
+
+<script src="/bundle.js"></script><script>var hingle = new Paul_Hingle({"copyright":false,"night":true});;
+L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
