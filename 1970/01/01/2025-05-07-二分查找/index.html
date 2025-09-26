@@ -1,176 +1,67 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-    <head>
-  <!-- 元数据 -->
-  <meta charset="utf-8">
-  
-  
-  <title>2025-05-07-二分查找 | TK的小站</title>
-  <link rel="canonical" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-05-07-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">
-  <meta name="author" content="TK" />
-  <meta http-equiv="Cache-Control" content="no-transform" />
-  <meta http-equiv="Cache-Control" content="no-siteapp" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="robots" content="index,follow" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <meta name="format-detection" content="telphone=no, email=no" />
-  
-    <meta name="keywords" content="算法学习" />
-  
-  <meta name="description" content="2025-05-07-二分查找 参考博客代码随想录  使用二分法的前提条件  元素有序且不重复  希望通过这道题目，大家会发现平时写二分法，为什么总写不好，就是因为对区间定义不清楚。 确定要查找的区间到底是左闭右开[left, right)，还是左闭又闭[left, right]，这就是不变量。 然后在二分查找的循环中，坚持循环不变量的原则，很多细节问题，自然会知道如何处理了。 704. 二分查找">
-<meta property="og:type" content="article">
-<meta property="og:title" content="2025-05-07-二分查找">
-<meta property="og:url" content="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-05-07-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/index.html">
-<meta property="og:site_name" content="TK的小站">
-<meta property="og:description" content="2025-05-07-二分查找 参考博客代码随想录  使用二分法的前提条件  元素有序且不重复  希望通过这道题目，大家会发现平时写二分法，为什么总写不好，就是因为对区间定义不清楚。 确定要查找的区间到底是左闭右开[left, right)，还是左闭又闭[left, right]，这就是不变量。 然后在二分查找的循环中，坚持循环不变量的原则，很多细节问题，自然会知道如何处理了。 704. 二分查找">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="1970-01-01T00:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-07T14:33:44.090Z">
-<meta property="article:author" content="TK">
-<meta property="article:tag" content="算法学习">
-<meta name="twitter:card" content="summary">
-  
-  <!-- 样式表文件 -->
-  <link rel="stylesheet" id="kratos-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-core.min.css" media="all"></link>
-  
-    <link rel="stylesheet" id="highlight-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/highlight/highlight.js/night-eighties.min.css" media="all"></link>
-  
-  <link rel="stylesheet" id="theme-light-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/light.min.css" media="all"></link>
-  <link rel="stylesheet" id="theme-dark-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/dark.min.css" media="(prefers-color-scheme: dark)"></link>
-  <script src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-theme.min.js"></script>
-  <link rel="stylesheet" id="fontawe-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></link>
-  
-    <link rel="stylesheet" id="nprogress-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.css" media="all"></link>
-  
-  
-    <link rel="stylesheet" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.css"></link>
-  
-  <!-- 不得不预先加载的一些JS文件 -->
-  
-    <script src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
-  
-  <!-- 自定义站点横幅和背景 -->
-  <style>
+<html lang="zh">
+  <head>
     
-      .kratos-cover.kratos-cover-2 {
-        background-image: url('');
-      }
-      html[data-theme="dark"] .kratos-cover.kratos-cover-2 {
-        background-image: url('');
-      }
+    <meta charset="UTF-8">
+    <title>2025-05-07-二分查找 - TK的小站</title>
+    <link rel="shortcut icon" href="/tkzzzzzz6/tkzzzzzz6.github.io/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
     
-    
-      @media(min-width:768px) {
-        body.custom-background {
-          background-image: url('');
-        }
-        html[data-theme="dark"] body.custom-background {
-          background-image: url('');
-        }
-      }
-    
-    
-      .widget-kratos-about .photo-background {
-        background-image: url('/images/default.webp');
-      }
-      html[data-theme="dark"] .widget-kratos-about .photo-background {
-        background-image: url('/images/default.webp');
-      }
-    
-  </style>
+<link rel="stylesheet" href="/tkzzzzzz6/tkzzzzzz6.github.io/static/kico.css">
+<link rel="stylesheet" href="/tkzzzzzz6/tkzzzzzz6.github.io/static/hingle.css">
 
-  <!-- 额外的追加注入项 -->
-  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-05-07-二分查找"/>
+    
 <meta name="generator" content="Hexo 7.3.0"></head>
 
-    <body class="custom-background">
-        <div id="kratos-wrapper">
-    <div id="kratos-page">
-        <div id="kratos-header">
-            <header id="kratos-desktop-topnav" class="kratos-topnav">
-                <div class="container">
-                    <div class="nav-header">
-                        <nav id="kratos-menu-wrap">
-                            <ul id="kratos-primary-menu" class="sf-menu">
-                                
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </header>
-            <header id="kratos-mobile-topnav" class="kratos-topnav">
-                <div class="container">
-                    <div class="color-logo"><a href="/tkzzzzzz6/tkzzzzzz6.github.io/">TK的小站</a></div>
-                    <div id="kratos-nav-toggle-wrapper" class="nav-toggle">
-                        <a id="kratos-nav-toggle" class="kratos-nav-toggle">
-                            <i></i>
-                        </a>
-                    </div>
-                </div>
-            </header>
-        </div>
-        <div class="kratos-start kratos-hero-2">
-            <!-- <div class="kratos-overlay"></div> -->
-            <div class="kratos-cover kratos-cover-2 text-center">
-                <div class="desc desc2 animate-box">
-                    <a href="/tkzzzzzz6/tkzzzzzz6.github.io/">
-                        <h2>TK的小站</h2> <br />
-                        <span></span>
-                    </a>
-                </div>
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/tkzzzzzz6/tkzzzzzz6.github.io/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                
             </div>
         </div>
-
-        <div id="kratos-blog-post">
-            <div class="container">
-                <div id="main" class="row">
-
-
         
-
-            
-
-            <section class="kr-main-col col-md-8">
-
+            <a href="/tkzzzzzz6/tkzzzzzz6.github.io/about">关于我</a>
         
+            <a href="/tkzzzzzz6/tkzzzzzz6.github.io/friends">朋友们</a>
+        
+    </nav>
+</header>
 
-            <article itemscope itemtype="https://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-05-07-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">
-    <div class="kratos-hentry kratos-page-inner clearfix">
-        <header class="kratos-page-header">
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-05-07-二分查找</h2>
+            <div class="post-meta">
+                <time class="date">1970.01.01</time>
             
-                <h1 class="kratos-page-title text-center" itemprop="name headline">2025-05-07-二分查找</h1>
-            
-            <ul class="kratos-page-meta text-center">
-                <li><time datetime="1970-01-01T00:00:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 1970-01-01</time></li>
-                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
-                    <i class="fa fa-user"></i> 作者 <span itemprop="name">TK</span>
-                </li>
-                
-                    <li>
-                        <i class="fa fa-edit"></i> 
-                        
-                        
-                            ~5.23K
-                        
-                        字
-                    </li>
-                
-                
-                    <li>
-                        <i class="fa fa-eye"></i>
-                         次阅读
-                    </li>
-                
-                
-            </ul>
-        </header>
-        <div class="kratos-page-content kr-post">
-            
-            
-            
-            <hr />
-            <div itemprop="articleBody"><h1 id="2025-05-07-二分查找"><a href="#2025-05-07-二分查找" class="headerlink" title="2025-05-07-二分查找"></a>2025-05-07-二分查找</h1><blockquote>
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <blockquote>这篇文章上次修改于 20358 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+        
+            <h1 id="2025-05-07-二分查找"><a href="#2025-05-07-二分查找" class="headerlink" title="2025-05-07-二分查找"></a>2025-05-07-二分查找</h1><blockquote>
 <p>参考博客<br><a target="_blank" rel="noopener" href="https://programmercarl.com/0704.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.html#%E6%80%9D%E8%B7%AF">代码随想录</a></p>
 </blockquote>
 <p>使用二分法的前提条件</p>
@@ -224,203 +115,72 @@
 
 
 
-</div>
-        </div>
-        
-        <footer class="kratos-entry-footer clearfix">
-            
-            
-            
-                <div class="post-actions text-center clearfix" id="post-actions">
-                
-                    <a class="donate" href="javascript:;" onclick="krOpenDonateModal()"><i class="fa fa-bitcoin"></i> 打赏</a>
-                
-                
-                    <a class="share" href="javascript:;" onclick="krOpenShareModal()"><i class="fa fa-share-alt"></i> 分享</a>
-                
-                </div>
-            
-            <div class="footer-tag clearfix">
-                <div class="pull-left">
-                <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" rel="tag">算法学习</a>
-                </div>
-                <div class="pull-date">
-                    <time datetime="2025-05-07T14:33:44.090Z" itemprop="dateModified">最后编辑：2025-05-07</time>
-                </div>
-            </div>
-        </footer>
-    </div>
-    
-        <nav class="navigation post-navigation clearfix" role="navigation">
-            
-            <div class="nav-previous clearfix">
-                <a title=" 2025-05-11-域适应(Domain Adaptation)" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-05-11-域适应(Domain Adaptation)/"><i class="fa fa-angle-left"></i> 上一篇</a>
-            </div>
-            
-            
-            <div class="nav-next clearfix">
-                <a title=" 2025-05-06-Windows 系统将安装过系统镜像的固态硬盘恢复" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-05-06-Windows系统将安装过系统镜像的固态硬盘恢复/">下一篇 <i class="fa fa-angle-right"></i></a>
-            </div>
-            
-        </nav>
-    
-    
-        <div class="comment-post">
-            
-        </div>
-    
-</article>
 
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-05-06-Windows%E7%B3%BB%E7%BB%9F%E5%B0%86%E5%AE%89%E8%A3%85%E8%BF%87%E7%B3%BB%E7%BB%9F%E9%95%9C%E5%83%8F%E7%9A%84%E5%9B%BA%E6%80%81%E7%A1%AC%E7%9B%98%E6%81%A2%E5%A4%8D/">2025-05-06-Windows 系统将安装过系统镜像的固态硬盘恢复</a></li>
+                
+                
+                    <li>下一篇: <a href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-05-08-deepseek%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%83%A8%E7%BD%B2/">2025-05-08-deepseek 本地化部署</a></li>
+                
+            </ul>
+        </section>
         
-
+            <section class="post-tags">
+            <a class="-none-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" rel="tag">算法学习</a>
             </section>
-
-            
-                
-
-<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
-    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
-    
-        <div class="sticky-area">
-    
-    
-    </div>
-</section>
-            
-
         
-
-                </div>
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&r=X&d=" alt="Hingle" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>Hingle</h4>
+                <p>请在这里设置你的作者信息</p>
+            </div>
+        </section>
+    
     </div>
-</div>
+</main>
 
-<footer>
-    <div id="footer">
-        <div class="container">
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
             <div class="row">
-                <div class="col-md-6 col-md-offset-3 footer-list text-center">
-                    <ul class="kratos-social-icons">
-                        
-                    </ul>
-                    <ul class="kratos-copyright">
-                        <div>
-                            <li>&copy; 2025 TK的小站 版权所有.</li>
-                            <li>本站已运行<span id="kr-since">Loading...</span></li>
-                        </div>
-                        <div>
-                            <li>自豪地使用 <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a> 主题</li>
-                            <li>站点由 TK 用 <i class="fa fa-heart" style="color:#d43f57"></i> 搭建</li>
-                        </div>
-                        <!-- 额外的追加注入项 -->
-                        
-                    </ul>
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-09-wsl%E5%90%AF%E5%8A%A8%E6%8A%A5%E9%94%99Cannot%20execute%20daemonize%20to%20start%20systemd%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">WSL 启动报错 "Cannot execute daemonize to start systemd" 的解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-08-%E6%8F%90%E7%A4%BA%E8%AF%8D/">2025-02-08-提示词</a></li><li class="post-list-item"><a class="post-list-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-11-%E6%95%B0%E6%A8%A1%E7%AC%94%E8%AE%B0_%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E4%B8%8E%E5%B7%AE%E5%88%86%E6%96%B9%E7%A8%8B/">2025-02-11-数模笔记_微分方程与差分方程</a></li><li class="post-list-item"><a class="post-list-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-15-%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">语义分割</a></li><li class="post-list-item"><a class="post-list-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-10-%E6%96%87%E8%A8%80%E6%96%87%E8%83%8C%E8%AF%B5%E6%A3%80%E6%B5%8B%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/">文言文背诵检测程序开发</a></li><li class="post-list-item"><a class="post-list-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-17-%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E3%80%81%E5%AE%9E%E4%BE%8B%E5%88%86%E5%89%B2%E4%B8%8E%E5%85%A8%E6%99%AF%E5%88%86%E5%89%B2%E4%B8%89%E7%A7%8D%E5%88%86%E5%89%B2%E6%8A%80%E6%9C%AF%E7%9A%84%E5%AF%B9%E6%AF%94/">语义分割、实例分割与全景分割三种分割技术的对比</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/archives/1970/01/">一月 1970</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 10px;">深度学习 程序开发</a> <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">深度学习 论文阅读</a> <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 14px;">程序开发</a> <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
                 </div>
             </div>
-        </div>
-        <div class="kr-tool text-center">
-            <div class="tool">
-                
-                    <div class="box search-box">
-                        <a href="/tkzzzzzz6/tkzzzzzz6.github.io/search">
-                            <span class="fa fa-search"></span>
-                        </a>
-                    </div>
-                
-                <div class="box theme-box" id="theme-toggle">
-                    <span class="fa fa-adjust"></span>
-                </div>
-            </div>
-            <div id="gotop-box" class="box gotop-box">
-                <span class="fa fa-chevron-up"></span>
-            </div>
-        </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2025 <a href="/tkzzzzzz6/tkzzzzzz6.github.io/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
     </div>
 </footer>
-</div>
-</div>
 
 
-    <div id="kr-donate-modal" class="kr-modal">
-    <div class="kr-modal-bg" onclick="krCloseDonateModal()"></div>
-    <div class="kr-modal-content">
-        <div class="kr-modal-header">
-            <div class="kr-modal-icon">
-                <i class="fa fa-bitcoin"></i>
-            </div>
-            <div class="kr-modal-title">打赏</div>
-            <button class="kr-modal-close" onclick="krCloseDonateModal()">
-                <i class="fa fa-times-circle"></i>
-            </button>
-        </div>
-        <div class="kr-modal-body">
-            <div class="kr-donate-message">打赏提示信息</div>
-            <div class="kr-donate-qr" id="kr-donate-qr">
-                
-            </div>
-            <div class="kr-donate-platforms">
-                
-            </div>
-        </div>
-    </div>
-</div>
-<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/donate.min.js"></script>
+<script src="/tkzzzzzz6/tkzzzzzz6.github.io/static/kico.js"></script>
+<script src="/tkzzzzzz6/tkzzzzzz6.github.io/static/hingle.js"></script>
 
 
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
 
-
-    <div id="kr-share-modal" class="kr-modal">
-    <div class="kr-modal-bg" onclick="krCloseShareModal()"></div>
-    <div class="kr-modal-content">
-        <div class="kr-modal-header">
-            <div class="kr-modal-icon">
-                <i class="fa fa-share-alt"></i>
-            </div>
-            <div class="kr-modal-title">分享</div>
-            <button class="kr-modal-close" onclick="krCloseShareModal()">
-                <i class="fa fa-times-circle"></i>
-            </button>
-        </div>
-        <div class="kr-modal-body">
-            <div class="kr-share-message">分享提示信息</div>
-            <div class="kr-share-qr" id="kr-share-qr"></div>
-            <div class="kr-share-platforms">
-                
-            </div>
-        </div>
-    </div>
-</div>
-<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/share.min.js"></script>
-
-
-
-<!-- 额外的追加注入项 -->
-
-
-        <script>
-    if (!window.kr) {
-        window.kr = {};
-    }
-    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
-    window.kr.siteRoot = "/tkzzzzzz6/tkzzzzzz6.github.io/";
-</script>
-
-
-  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.js"></script>
-
-
-
-  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.js"></script>
-
-
-<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-core.min.js"></script>
-
-
-  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-pjax.min.js"></script>
-
-
-<!-- 额外的追加注入项 -->
-
-
-    </body>
+  </body>
 </html>

@@ -1,191 +1,67 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-    <head>
-  <!-- 元数据 -->
-  <meta charset="utf-8">
-  
-  
-  <title>2025-02-11-数模笔记_微分方程与差分方程 | TK的小站</title>
-  <link rel="canonical" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-11-%E6%95%B0%E6%A8%A1%E7%AC%94%E8%AE%B0_%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E4%B8%8E%E5%B7%AE%E5%88%86%E6%96%B9%E7%A8%8B/">
-  <meta name="author" content="TK" />
-  <meta http-equiv="Cache-Control" content="no-transform" />
-  <meta http-equiv="Cache-Control" content="no-siteapp" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="robots" content="index,follow" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <meta name="format-detection" content="telphone=no, email=no" />
-  
-    <meta name="keywords" content="数学建模" />
-  
-  <meta name="description" content="微分方程与差分方程一、概述    年份 题目 相关方法或理论    1996 年 A: 最优捕鱼策略问题 微分方程的问题    B: 节水洗衣机的程序设计问题 偏微分方程，也可以用优化   2003 年 A: SARS 的传播问题 预测类问题，可用差分方程、微分方程    D: 抢渡长江问题 微分方程、优化问题   2004 年 C: 酒后开车问题 微分方程   2008 年 A: 数码相机定位（">
-<meta property="og:type" content="article">
-<meta property="og:title" content="2025-02-11-数模笔记_微分方程与差分方程">
-<meta property="og:url" content="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-11-%E6%95%B0%E6%A8%A1%E7%AC%94%E8%AE%B0_%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E4%B8%8E%E5%B7%AE%E5%88%86%E6%96%B9%E7%A8%8B/index.html">
-<meta property="og:site_name" content="TK的小站">
-<meta property="og:description" content="微分方程与差分方程一、概述    年份 题目 相关方法或理论    1996 年 A: 最优捕鱼策略问题 微分方程的问题    B: 节水洗衣机的程序设计问题 偏微分方程，也可以用优化   2003 年 A: SARS 的传播问题 预测类问题，可用差分方程、微分方程    D: 抢渡长江问题 微分方程、优化问题   2004 年 C: 酒后开车问题 微分方程   2008 年 A: 数码相机定位（">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17393373960371739337395061.png">
-<meta property="og:image" content="https://files.catbox.moe/uk2rco.png">
-<meta property="og:image" content="https://files.catbox.moe/vopq8o.png">
-<meta property="og:image" content="https://files.catbox.moe/43qanr.png">
-<meta property="og:image" content="https://files.catbox.moe/4ufuyo.png">
-<meta property="og:image" content="https://files.catbox.moe/jkyrhf.png">
-<meta property="og:image" content="https://files.catbox.moe/potjqt.png">
-<meta property="og:image" content="https://files.catbox.moe/upnnn3.png">
-<meta property="og:image" content="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17393389691728c9d5531aed64ccb881b7886773b424b.png">
-<meta property="og:image" content="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1739338986650311b4ff45f134c2c84cb248ba699a0a1.png">
-<meta property="og:image" content="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1739339031385fbb865dcb636407682dda5b02724f9bf.png">
-<meta property="og:image" content="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1739339098264762c0aa149f14ae599a418c4309aa91a.png">
-<meta property="og:image" content="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17393391272532c0a5ec759324803b6b1d6f399985c6d.png">
-<meta property="og:image" content="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/173933914986904ee6ddfd517468d93120f3cfe746ffd.png">
-<meta property="article:published_time" content="1970-01-01T00:00:00.000Z">
-<meta property="article:modified_time" content="2025-09-22T07:55:44.470Z">
-<meta property="article:author" content="TK">
-<meta property="article:tag" content="数学建模">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17393373960371739337395061.png">
-  
-  <!-- 样式表文件 -->
-  <link rel="stylesheet" id="kratos-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-core.min.css" media="all"></link>
-  
-    <link rel="stylesheet" id="highlight-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/highlight/highlight.js/night-eighties.min.css" media="all"></link>
-  
-  <link rel="stylesheet" id="theme-light-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/light.min.css" media="all"></link>
-  <link rel="stylesheet" id="theme-dark-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/dark.min.css" media="(prefers-color-scheme: dark)"></link>
-  <script src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-theme.min.js"></script>
-  <link rel="stylesheet" id="fontawe-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></link>
-  
-    <link rel="stylesheet" id="nprogress-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.css" media="all"></link>
-  
-  
-    <link rel="stylesheet" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.css"></link>
-  
-  <!-- 不得不预先加载的一些JS文件 -->
-  
-    <script src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
-  
-  <!-- 自定义站点横幅和背景 -->
-  <style>
+<html lang="zh">
+  <head>
     
-      .kratos-cover.kratos-cover-2 {
-        background-image: url('');
-      }
-      html[data-theme="dark"] .kratos-cover.kratos-cover-2 {
-        background-image: url('');
-      }
+    <meta charset="UTF-8">
+    <title>2025-02-11-数模笔记_微分方程与差分方程 - TK的小站</title>
+    <link rel="shortcut icon" href="/tkzzzzzz6/tkzzzzzz6.github.io/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
     
-    
-      @media(min-width:768px) {
-        body.custom-background {
-          background-image: url('');
-        }
-        html[data-theme="dark"] body.custom-background {
-          background-image: url('');
-        }
-      }
-    
-    
-      .widget-kratos-about .photo-background {
-        background-image: url('/images/default.webp');
-      }
-      html[data-theme="dark"] .widget-kratos-about .photo-background {
-        background-image: url('/images/default.webp');
-      }
-    
-  </style>
+<link rel="stylesheet" href="/tkzzzzzz6/tkzzzzzz6.github.io/static/kico.css">
+<link rel="stylesheet" href="/tkzzzzzz6/tkzzzzzz6.github.io/static/hingle.css">
 
-  <!-- 额外的追加注入项 -->
-  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-02-11-数模笔记_微分方程与差分方程"/>
+    
 <meta name="generator" content="Hexo 7.3.0"></head>
 
-    <body class="custom-background">
-        <div id="kratos-wrapper">
-    <div id="kratos-page">
-        <div id="kratos-header">
-            <header id="kratos-desktop-topnav" class="kratos-topnav">
-                <div class="container">
-                    <div class="nav-header">
-                        <nav id="kratos-menu-wrap">
-                            <ul id="kratos-primary-menu" class="sf-menu">
-                                
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </header>
-            <header id="kratos-mobile-topnav" class="kratos-topnav">
-                <div class="container">
-                    <div class="color-logo"><a href="/tkzzzzzz6/tkzzzzzz6.github.io/">TK的小站</a></div>
-                    <div id="kratos-nav-toggle-wrapper" class="nav-toggle">
-                        <a id="kratos-nav-toggle" class="kratos-nav-toggle">
-                            <i></i>
-                        </a>
-                    </div>
-                </div>
-            </header>
-        </div>
-        <div class="kratos-start kratos-hero-2">
-            <!-- <div class="kratos-overlay"></div> -->
-            <div class="kratos-cover kratos-cover-2 text-center">
-                <div class="desc desc2 animate-box">
-                    <a href="/tkzzzzzz6/tkzzzzzz6.github.io/">
-                        <h2>TK的小站</h2> <br />
-                        <span></span>
-                    </a>
-                </div>
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/tkzzzzzz6/tkzzzzzz6.github.io/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                
             </div>
         </div>
-
-        <div id="kratos-blog-post">
-            <div class="container">
-                <div id="main" class="row">
-
-
         
-
-            
-
-            <section class="kr-main-col col-md-8">
-
+            <a href="/tkzzzzzz6/tkzzzzzz6.github.io/about">关于我</a>
         
+            <a href="/tkzzzzzz6/tkzzzzzz6.github.io/friends">朋友们</a>
+        
+    </nav>
+</header>
 
-            <article itemscope itemtype="https://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-11-%E6%95%B0%E6%A8%A1%E7%AC%94%E8%AE%B0_%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E4%B8%8E%E5%B7%AE%E5%88%86%E6%96%B9%E7%A8%8B/">
-    <div class="kratos-hentry kratos-page-inner clearfix">
-        <header class="kratos-page-header">
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-02-11-数模笔记_微分方程与差分方程</h2>
+            <div class="post-meta">
+                <time class="date">1970.01.01</time>
             
-                <h1 class="kratos-page-title text-center" itemprop="name headline">2025-02-11-数模笔记_微分方程与差分方程</h1>
-            
-            <ul class="kratos-page-meta text-center">
-                <li><time datetime="1970-01-01T00:00:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 1970-01-01</time></li>
-                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
-                    <i class="fa fa-user"></i> 作者 <span itemprop="name">TK</span>
-                </li>
-                
-                    <li>
-                        <i class="fa fa-edit"></i> 
-                        
-                        
-                            ~18.20K
-                        
-                        字
-                    </li>
-                
-                
-                    <li>
-                        <i class="fa fa-eye"></i>
-                         次阅读
-                    </li>
-                
-                
-            </ul>
-        </header>
-        <div class="kratos-page-content kr-post">
-            
-            
-            
-            <hr />
-            <div itemprop="articleBody"><h1 id="微分方程与差分方程"><a href="#微分方程与差分方程" class="headerlink" title="微分方程与差分方程"></a>微分方程与差分方程</h1><h1 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h1><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17393373960371739337395061.png" alt="17393373960371739337395061.png"></p>
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <blockquote>这篇文章上次修改于 20358 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+        
+            <h1 id="微分方程与差分方程"><a href="#微分方程与差分方程" class="headerlink" title="微分方程与差分方程"></a>微分方程与差分方程</h1><h1 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h1><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17393373960371739337395061.png" alt="17393373960371739337395061.png"></p>
 <table>
 <thead>
 <tr>
@@ -639,203 +515,72 @@
 </ol>
 </blockquote>
 <h2 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义常数(这些常数可以根据特定情况进行设置)</span></span><br><span class="line">k = <span class="number">1.0</span>  <span class="comment"># 扩散系数</span></span><br><span class="line">alpha = <span class="number">1.0</span>  <span class="comment"># 参数alpha</span></span><br><span class="line">Q = <span class="number">1.0</span>  <span class="comment"># 炮弹释放的烟雾总量</span></span><br><span class="line">mu = <span class="number">0.01</span>  <span class="comment"># 仪器灵敏度</span></span><br><span class="line">pi = np.pi</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义不透光区域边界半径 r(t)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">r</span>(<span class="params">t</span>):</span><br><span class="line">    <span class="keyword">return</span> np.sqrt(<span class="number">4</span> * k * t * np.log(alpha * Q / (<span class="number">4</span> * pi * k * mu * t)))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算最大边界半径和相关时间点</span></span><br><span class="line">t1 = alpha * Q / (<span class="number">4</span> * pi * k * mu * np.e)</span><br><span class="line">r_max = np.sqrt(Q / (pi * mu * np.e))</span><br><span class="line">t2 = alpha * Q / (<span class="number">4</span> * pi * k * mu)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 时间范围</span></span><br><span class="line">t = np.linspace(<span class="number">0.1</span>, t2 * <span class="number">1.5</span>, <span class="number">500</span>)  <span class="comment"># 从小于 t2 的时间开始</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制不透光区域边界随时间的变化</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">plt.plot(t, r(t), label=<span class="string">r&#x27;$r(t) = \sqrt&#123;4 kt **\l**n **\f**rac&#123;**\a**lpha Q&#125;&#123;4 **\p**i k **\m**u t&#125;&#125;$&#x27;</span>)</span><br><span class="line">plt.axvline(t1, color=<span class="string">&#x27;r&#x27;</span>, linestyle=<span class="string">&#x27;--&#x27;</span>, label=<span class="string">r&#x27;$t_1 = **\f**rac&#123;**\a**lpha Q&#125;&#123;4 **\p**i k **\m**u e&#125;$&#x27;</span>)</span><br><span class="line">plt.axhline(r_max, color=<span class="string">&#x27;g&#x27;</span>, linestyle=<span class="string">&#x27;--&#x27;</span>, label=<span class="string">r&#x27;$r_m = \sqrt&#123;**\f**rac&#123;Q&#125;&#123;**\p**i **\m**u e&#125;&#125;$&#x27;</span>)</span><br><span class="line">plt.axvline(t2, color=<span class="string">&#x27;b&#x27;</span>, linestyle=<span class="string">&#x27;--&#x27;</span>, label=<span class="string">r&#x27;$t_2 = **\f**rac&#123;**\a**lpha Q&#125;&#123;4 **\p**i k **\m**u&#125;$&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;Time t&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;Boundary Radius r(t)&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Smoke Diffusion and Dissipation Model&#x27;</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.grid(<span class="literal">True</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出最大边界半径和相关时间点</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;最大不透光区域边界半径 r_max = <span class="subst">&#123;r_max:<span class="number">.4</span>f&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;边界达到最大值的时间 t1 = <span class="subst">&#123;t1:<span class="number">.4</span>f&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;烟雾完全消失的时间 t2 = <span class="subst">&#123;t2:<span class="number">.4</span>f&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
-</div>
-        </div>
-        
-        <footer class="kratos-entry-footer clearfix">
-            
-            
-            
-                <div class="post-actions text-center clearfix" id="post-actions">
-                
-                    <a class="donate" href="javascript:;" onclick="krOpenDonateModal()"><i class="fa fa-bitcoin"></i> 打赏</a>
-                
-                
-                    <a class="share" href="javascript:;" onclick="krOpenShareModal()"><i class="fa fa-share-alt"></i> 分享</a>
-                
-                </div>
-            
-            <div class="footer-tag clearfix">
-                <div class="pull-left">
-                <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" rel="tag">数学建模</a>
-                </div>
-                <div class="pull-date">
-                    <time datetime="2025-09-22T07:55:44.470Z" itemprop="dateModified">最后编辑：2025-09-22</time>
-                </div>
-            </div>
-        </footer>
-    </div>
-    
-        <nav class="navigation post-navigation clearfix" role="navigation">
-            
-            <div class="nav-previous clearfix">
-                <a title=" 全景分割" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-16-全景分割/"><i class="fa fa-angle-left"></i> 上一篇</a>
-            </div>
-            
-            
-            <div class="nav-next clearfix">
-                <a title=" 语义分割" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-15-语义分割/">下一篇 <i class="fa fa-angle-right"></i></a>
-            </div>
-            
-        </nav>
-    
-    
-        <div class="comment-post">
-            
-        </div>
-    
-</article>
 
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-08-%E6%8F%90%E7%A4%BA%E8%AF%8D/"></a></li>
+                
+                
+                    <li>下一篇: <a href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-15-%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">语义分割</a></li>
+                
+            </ul>
+        </section>
         
-
+            <section class="post-tags">
+            <a class="-none-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" rel="tag">数学建模</a>
             </section>
-
-            
-                
-
-<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
-    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
-    
-        <div class="sticky-area">
-    
-    
-    </div>
-</section>
-            
-
         
-
-                </div>
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&r=X&d=" alt="Hingle" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>Hingle</h4>
+                <p>请在这里设置你的作者信息</p>
+            </div>
+        </section>
+    
     </div>
-</div>
+</main>
 
-<footer>
-    <div id="footer">
-        <div class="container">
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
             <div class="row">
-                <div class="col-md-6 col-md-offset-3 footer-list text-center">
-                    <ul class="kratos-social-icons">
-                        
-                    </ul>
-                    <ul class="kratos-copyright">
-                        <div>
-                            <li>&copy; 2025 TK的小站 版权所有.</li>
-                            <li>本站已运行<span id="kr-since">Loading...</span></li>
-                        </div>
-                        <div>
-                            <li>自豪地使用 <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a> 主题</li>
-                            <li>站点由 TK 用 <i class="fa fa-heart" style="color:#d43f57"></i> 搭建</li>
-                        </div>
-                        <!-- 额外的追加注入项 -->
-                        
-                    </ul>
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-09-wsl%E5%90%AF%E5%8A%A8%E6%8A%A5%E9%94%99Cannot%20execute%20daemonize%20to%20start%20systemd%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">WSL 启动报错 "Cannot execute daemonize to start systemd" 的解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-08-%E6%8F%90%E7%A4%BA%E8%AF%8D/">2025-02-08-提示词</a></li><li class="post-list-item"><a class="post-list-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-11-%E6%95%B0%E6%A8%A1%E7%AC%94%E8%AE%B0_%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E4%B8%8E%E5%B7%AE%E5%88%86%E6%96%B9%E7%A8%8B/">2025-02-11-数模笔记_微分方程与差分方程</a></li><li class="post-list-item"><a class="post-list-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-15-%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">语义分割</a></li><li class="post-list-item"><a class="post-list-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-10-%E6%96%87%E8%A8%80%E6%96%87%E8%83%8C%E8%AF%B5%E6%A3%80%E6%B5%8B%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/">文言文背诵检测程序开发</a></li><li class="post-list-item"><a class="post-list-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-17-%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E3%80%81%E5%AE%9E%E4%BE%8B%E5%88%86%E5%89%B2%E4%B8%8E%E5%85%A8%E6%99%AF%E5%88%86%E5%89%B2%E4%B8%89%E7%A7%8D%E5%88%86%E5%89%B2%E6%8A%80%E6%9C%AF%E7%9A%84%E5%AF%B9%E6%AF%94/">语义分割、实例分割与全景分割三种分割技术的对比</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/archives/1970/01/">一月 1970</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 10px;">深度学习 程序开发</a> <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">深度学习 论文阅读</a> <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 14px;">程序开发</a> <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
                 </div>
             </div>
-        </div>
-        <div class="kr-tool text-center">
-            <div class="tool">
-                
-                    <div class="box search-box">
-                        <a href="/tkzzzzzz6/tkzzzzzz6.github.io/search">
-                            <span class="fa fa-search"></span>
-                        </a>
-                    </div>
-                
-                <div class="box theme-box" id="theme-toggle">
-                    <span class="fa fa-adjust"></span>
-                </div>
-            </div>
-            <div id="gotop-box" class="box gotop-box">
-                <span class="fa fa-chevron-up"></span>
-            </div>
-        </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2025 <a href="/tkzzzzzz6/tkzzzzzz6.github.io/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
     </div>
 </footer>
-</div>
-</div>
 
 
-    <div id="kr-donate-modal" class="kr-modal">
-    <div class="kr-modal-bg" onclick="krCloseDonateModal()"></div>
-    <div class="kr-modal-content">
-        <div class="kr-modal-header">
-            <div class="kr-modal-icon">
-                <i class="fa fa-bitcoin"></i>
-            </div>
-            <div class="kr-modal-title">打赏</div>
-            <button class="kr-modal-close" onclick="krCloseDonateModal()">
-                <i class="fa fa-times-circle"></i>
-            </button>
-        </div>
-        <div class="kr-modal-body">
-            <div class="kr-donate-message">打赏提示信息</div>
-            <div class="kr-donate-qr" id="kr-donate-qr">
-                
-            </div>
-            <div class="kr-donate-platforms">
-                
-            </div>
-        </div>
-    </div>
-</div>
-<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/donate.min.js"></script>
+<script src="/tkzzzzzz6/tkzzzzzz6.github.io/static/kico.js"></script>
+<script src="/tkzzzzzz6/tkzzzzzz6.github.io/static/hingle.js"></script>
 
 
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
 
-
-    <div id="kr-share-modal" class="kr-modal">
-    <div class="kr-modal-bg" onclick="krCloseShareModal()"></div>
-    <div class="kr-modal-content">
-        <div class="kr-modal-header">
-            <div class="kr-modal-icon">
-                <i class="fa fa-share-alt"></i>
-            </div>
-            <div class="kr-modal-title">分享</div>
-            <button class="kr-modal-close" onclick="krCloseShareModal()">
-                <i class="fa fa-times-circle"></i>
-            </button>
-        </div>
-        <div class="kr-modal-body">
-            <div class="kr-share-message">分享提示信息</div>
-            <div class="kr-share-qr" id="kr-share-qr"></div>
-            <div class="kr-share-platforms">
-                
-            </div>
-        </div>
-    </div>
-</div>
-<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/share.min.js"></script>
-
-
-
-<!-- 额外的追加注入项 -->
-
-
-        <script>
-    if (!window.kr) {
-        window.kr = {};
-    }
-    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
-    window.kr.siteRoot = "/tkzzzzzz6/tkzzzzzz6.github.io/";
-</script>
-
-
-  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.js"></script>
-
-
-
-  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.js"></script>
-
-
-<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-core.min.js"></script>
-
-
-  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-pjax.min.js"></script>
-
-
-<!-- 额外的追加注入项 -->
-
-
-    </body>
+  </body>
 </html>

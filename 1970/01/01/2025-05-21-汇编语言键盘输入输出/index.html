@@ -1,178 +1,67 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-    <head>
-  <!-- 元数据 -->
-  <meta charset="utf-8">
-  
-  
-  <title>2025-05-21-汇编语言键盘输入输出 | TK的小站</title>
-  <link rel="canonical" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-05-21-%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%94%AE%E7%9B%98%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/">
-  <meta name="author" content="TK" />
-  <meta http-equiv="Cache-Control" content="no-transform" />
-  <meta http-equiv="Cache-Control" content="no-siteapp" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="robots" content="index,follow" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <meta name="format-detection" content="telphone=no, email=no" />
-  
-    <meta name="keywords" content="课程学习" />
-  
-  <meta name="description" content="2025-05-21-汇编语言键盘输入输出 参考博客 任务 1 把数据段中 1 维数组 AA_1 变量地址中连续 7 个数（1,3,5,7,2,4,6）读出，把每个数加 2 后再存入到数据段中 BB_1 数组开始的标号地址中去，并显示出 BB_1 数组中每个数来（之间用空格分开）  1234567891011121314151617181920212223242526272829303132333">
-<meta property="og:type" content="article">
-<meta property="og:title" content="2025-05-21-汇编语言键盘输入输出">
-<meta property="og:url" content="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-05-21-%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%94%AE%E7%9B%98%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/index.html">
-<meta property="og:site_name" content="TK的小站">
-<meta property="og:description" content="2025-05-21-汇编语言键盘输入输出 参考博客 任务 1 把数据段中 1 维数组 AA_1 变量地址中连续 7 个数（1,3,5,7,2,4,6）读出，把每个数加 2 后再存入到数据段中 BB_1 数组开始的标号地址中去，并显示出 BB_1 数组中每个数来（之间用空格分开）  1234567891011121314151617181920212223242526272829303132333">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17478844701641747884469368.png">
-<meta property="article:published_time" content="1970-01-01T00:00:00.000Z">
-<meta property="article:modified_time" content="2025-09-22T07:55:44.493Z">
-<meta property="article:author" content="TK">
-<meta property="article:tag" content="课程学习">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17478844701641747884469368.png">
-  
-  <!-- 样式表文件 -->
-  <link rel="stylesheet" id="kratos-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-core.min.css" media="all"></link>
-  
-    <link rel="stylesheet" id="highlight-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/highlight/highlight.js/night-eighties.min.css" media="all"></link>
-  
-  <link rel="stylesheet" id="theme-light-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/light.min.css" media="all"></link>
-  <link rel="stylesheet" id="theme-dark-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/dark.min.css" media="(prefers-color-scheme: dark)"></link>
-  <script src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-theme.min.js"></script>
-  <link rel="stylesheet" id="fontawe-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></link>
-  
-    <link rel="stylesheet" id="nprogress-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.css" media="all"></link>
-  
-  
-    <link rel="stylesheet" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.css"></link>
-  
-  <!-- 不得不预先加载的一些JS文件 -->
-  
-    <script src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
-  
-  <!-- 自定义站点横幅和背景 -->
-  <style>
+<html lang="zh">
+  <head>
     
-      .kratos-cover.kratos-cover-2 {
-        background-image: url('');
-      }
-      html[data-theme="dark"] .kratos-cover.kratos-cover-2 {
-        background-image: url('');
-      }
+    <meta charset="UTF-8">
+    <title>2025-05-21-汇编语言键盘输入输出 - TK的小站</title>
+    <link rel="shortcut icon" href="/tkzzzzzz6/tkzzzzzz6.github.io/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
     
-    
-      @media(min-width:768px) {
-        body.custom-background {
-          background-image: url('');
-        }
-        html[data-theme="dark"] body.custom-background {
-          background-image: url('');
-        }
-      }
-    
-    
-      .widget-kratos-about .photo-background {
-        background-image: url('/images/default.webp');
-      }
-      html[data-theme="dark"] .widget-kratos-about .photo-background {
-        background-image: url('/images/default.webp');
-      }
-    
-  </style>
+<link rel="stylesheet" href="/tkzzzzzz6/tkzzzzzz6.github.io/static/kico.css">
+<link rel="stylesheet" href="/tkzzzzzz6/tkzzzzzz6.github.io/static/hingle.css">
 
-  <!-- 额外的追加注入项 -->
-  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-05-21-汇编语言键盘输入输出"/>
+    
 <meta name="generator" content="Hexo 7.3.0"></head>
 
-    <body class="custom-background">
-        <div id="kratos-wrapper">
-    <div id="kratos-page">
-        <div id="kratos-header">
-            <header id="kratos-desktop-topnav" class="kratos-topnav">
-                <div class="container">
-                    <div class="nav-header">
-                        <nav id="kratos-menu-wrap">
-                            <ul id="kratos-primary-menu" class="sf-menu">
-                                
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </header>
-            <header id="kratos-mobile-topnav" class="kratos-topnav">
-                <div class="container">
-                    <div class="color-logo"><a href="/tkzzzzzz6/tkzzzzzz6.github.io/">TK的小站</a></div>
-                    <div id="kratos-nav-toggle-wrapper" class="nav-toggle">
-                        <a id="kratos-nav-toggle" class="kratos-nav-toggle">
-                            <i></i>
-                        </a>
-                    </div>
-                </div>
-            </header>
-        </div>
-        <div class="kratos-start kratos-hero-2">
-            <!-- <div class="kratos-overlay"></div> -->
-            <div class="kratos-cover kratos-cover-2 text-center">
-                <div class="desc desc2 animate-box">
-                    <a href="/tkzzzzzz6/tkzzzzzz6.github.io/">
-                        <h2>TK的小站</h2> <br />
-                        <span></span>
-                    </a>
-                </div>
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/tkzzzzzz6/tkzzzzzz6.github.io/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                
             </div>
         </div>
-
-        <div id="kratos-blog-post">
-            <div class="container">
-                <div id="main" class="row">
-
-
         
-
-            
-
-            <section class="kr-main-col col-md-8">
-
+            <a href="/tkzzzzzz6/tkzzzzzz6.github.io/about">关于我</a>
         
+            <a href="/tkzzzzzz6/tkzzzzzz6.github.io/friends">朋友们</a>
+        
+    </nav>
+</header>
 
-            <article itemscope itemtype="https://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-05-21-%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%94%AE%E7%9B%98%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/">
-    <div class="kratos-hentry kratos-page-inner clearfix">
-        <header class="kratos-page-header">
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-05-21-汇编语言键盘输入输出</h2>
+            <div class="post-meta">
+                <time class="date">1970.01.01</time>
             
-                <h1 class="kratos-page-title text-center" itemprop="name headline">2025-05-21-汇编语言键盘输入输出</h1>
-            
-            <ul class="kratos-page-meta text-center">
-                <li><time datetime="1970-01-01T00:00:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 1970-01-01</time></li>
-                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
-                    <i class="fa fa-user"></i> 作者 <span itemprop="name">TK</span>
-                </li>
-                
-                    <li>
-                        <i class="fa fa-edit"></i> 
-                        
-                        
-                            ~11.89K
-                        
-                        字
-                    </li>
-                
-                
-                    <li>
-                        <i class="fa fa-eye"></i>
-                         次阅读
-                    </li>
-                
-                
-            </ul>
-        </header>
-        <div class="kratos-page-content kr-post">
-            
-            
-            
-            <hr />
-            <div itemprop="articleBody"><h1 id="2025-05-21-汇编语言键盘输入输出"><a href="#2025-05-21-汇编语言键盘输入输出" class="headerlink" title="2025-05-21-汇编语言键盘输入输出"></a>2025-05-21-汇编语言键盘输入输出</h1><blockquote>
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <blockquote>这篇文章上次修改于 20358 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+        
+            <h1 id="2025-05-21-汇编语言键盘输入输出"><a href="#2025-05-21-汇编语言键盘输入输出" class="headerlink" title="2025-05-21-汇编语言键盘输入输出"></a>2025-05-21-汇编语言键盘输入输出</h1><blockquote>
 <h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1></blockquote>
 <h1 id="任务-1"><a href="#任务-1" class="headerlink" title="任务 1"></a>任务 1</h1><blockquote>
 <p>把数据段中 1 维数组 AA_1 变量地址中连续 7 个数（1,3,5,7,2,4,6）读出，把每个数加 2 后再存入到数据段中 BB_1 数组开始的标号地址中去，并显示出 BB_1 数组中每个数来（之间用空格分开）</p>
@@ -238,203 +127,72 @@
 <li>使用 IDIV BX 命令前需要我们将 AX 使用 CBW 命令将 AL 扩展为 AX</li>
 </ul>
 <h2 id="进一步的修改"><a href="#进一步的修改" class="headerlink" title="进一步的修改"></a>进一步的修改</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br></pre></td><td class="code"><pre><span class="line">_; 简单计算器程序 - 对DATAX和DATAY中的有符号字节数据进行四则运算_</span><br><span class="line">_; 支持加(+)、减(-)、乘(*)、除(/)四种运算符_</span><br><span class="line"></span><br><span class="line">.MODEL SMALL</span><br><span class="line">.STACK 100H</span><br><span class="line"></span><br><span class="line">.DATA</span><br><span class="line">DATAX   DB  ?           _; 第一个操作数_</span><br><span class="line">DATAY   DB  ?           _; 第二个操作数_</span><br><span class="line">MSG1    DB  &#x27;Input first number: $&#x27;</span><br><span class="line">MSG2    DB  0DH, 0AH, &#x27;Input second number: $&#x27;</span><br><span class="line">MSG3    DB  0DH, 0AH, &#x27;Input operator (+, -, *, /): $&#x27;</span><br><span class="line">MSG4    DB  0DH, 0AH, &#x27;Result: $&#x27;</span><br><span class="line">MSG5    DB  0DH, 0AH, &#x27;Division by zero! $&#x27;</span><br><span class="line">TEMP    DW  ?           _; 临时存储乘法或除法结果_</span><br><span class="line">NEG_FLAG DB  0           _; 负数标志 (1表示结果为负)_</span><br><span class="line">BUF     DB  6 DUP(?)    _; 用于存储结果字符串_</span><br><span class="line">NEG_INPUT DB 0          _; 输入负号标志_</span><br><span class="line">VALUE     DB 0          _; 输入值_</span><br><span class="line"></span><br><span class="line">.CODE</span><br><span class="line">MAIN PROC</span><br><span class="line">    MOV AX, @DATA       _; 初始化数据段_</span><br><span class="line">    MOV DS, AX</span><br><span class="line"></span><br><span class="line">    _; 显示第一条提示消息_</span><br><span class="line">    LEA DX, MSG1</span><br><span class="line">    MOV AH, 09H</span><br><span class="line">    INT 21H</span><br><span class="line"></span><br><span class="line">    _; 输入第一个数字_</span><br><span class="line">    CALL INPUT_SIGNED_BYTE</span><br><span class="line">    MOV DATAX, AL</span><br><span class="line"></span><br><span class="line">    _; 显示第二条提示消息_</span><br><span class="line">    LEA DX, MSG2</span><br><span class="line">    MOV AH, 09H</span><br><span class="line">    INT 21H</span><br><span class="line"></span><br><span class="line">    _; 输入第二个数字_</span><br><span class="line">    CALL INPUT_SIGNED_BYTE</span><br><span class="line">    MOV DATAY, AL</span><br><span class="line"></span><br><span class="line">    _; 显示操作符提示消息_</span><br><span class="line">    LEA DX, MSG3</span><br><span class="line">    MOV AH, 09H</span><br><span class="line">    INT 21H</span><br><span class="line"></span><br><span class="line">    _; 输入操作符_</span><br><span class="line">    MOV AH, 01H</span><br><span class="line">    INT 21H</span><br><span class="line">    MOV BL, AL          _; 保存操作符在BL中_</span><br><span class="line"></span><br><span class="line">    _; 显示结果提示消息_</span><br><span class="line">    LEA DX, MSG4</span><br><span class="line">    MOV AH, 09H</span><br><span class="line">    INT 21H</span><br><span class="line"></span><br><span class="line">    _; 根据操作符执行相应运算_</span><br><span class="line">    CMP BL, &#x27;+&#x27;         _; 检查是否为加法_</span><br><span class="line">    JE  DO_ADD</span><br><span class="line">    CMP BL, &#x27;-&#x27;         _; 检查是否为减法_</span><br><span class="line">    JE  DO_SUB</span><br><span class="line">    CMP BL, &#x27;*&#x27;         _; 检查是否为乘法_</span><br><span class="line">    JE  DO_MUL</span><br><span class="line">    CMP BL, &#x27;/&#x27;         _; 检查是否为除法_</span><br><span class="line">    JE  DO_DIV</span><br><span class="line">    JMP EXIT            _; 如果不是有效操作符，直接退出_</span><br><span class="line"></span><br><span class="line">DO_ADD:</span><br><span class="line">    MOV AL, DATAX       _; 加法运算_</span><br><span class="line">    ADD AL, DATAY</span><br><span class="line">    JMP DISPLAY_RESULT</span><br><span class="line"></span><br><span class="line">DO_SUB:</span><br><span class="line">    MOV AL, DATAX       _; 减法运算_</span><br><span class="line">    SUB AL, DATAY</span><br><span class="line">    JMP DISPLAY_RESULT</span><br><span class="line"></span><br><span class="line">DO_MUL:</span><br><span class="line">    MOV AL, DATAX       _; 乘法运算_</span><br><span class="line">    MOV BL, DATAY</span><br><span class="line">    CALL SIGNED_MUL</span><br><span class="line">    JMP DISPLAY_AX</span><br><span class="line"></span><br><span class="line">DO_DIV:</span><br><span class="line">    MOV AL, DATAX       _; 除法运算_</span><br><span class="line">    MOV BL, DATAY</span><br><span class="line">    CALL SIGNED_DIV</span><br><span class="line">    JMP DISPLAY_AX</span><br><span class="line"></span><br><span class="line">DISPLAY_RESULT:</span><br><span class="line">    _; 结果在AL中，转换为字符串并显示_</span><br><span class="line">    MOV AH, 0           _; 清零AH，结果扩展到AX_</span><br><span class="line">    CMP AL, 0</span><br><span class="line">    JGE POSITIVE</span><br><span class="line">    NEG AL              _; 如果为负，取绝对值_</span><br><span class="line">    MOV NEG_FLAG, 1     _; 设置负数标志_</span><br><span class="line">    JMP CONTINUE</span><br><span class="line">POSITIVE:</span><br><span class="line">    MOV NEG_FLAG, 0     _; 清除负数标志_</span><br><span class="line">CONTINUE:</span><br><span class="line">    MOV AX, AX          _; AX中现在是结果的绝对值_</span><br><span class="line"></span><br><span class="line">DISPLAY_AX:</span><br><span class="line">    _; 显示AX中的有符号结果_</span><br><span class="line">    CALL DISPLAY_SIGNED_NUM</span><br><span class="line">  </span><br><span class="line">EXIT:</span><br><span class="line">    _; 程序结束_</span><br><span class="line">    MOV AH, 4CH</span><br><span class="line">    INT 21H</span><br><span class="line">MAIN ENDP</span><br><span class="line"></span><br><span class="line">_; 输入有符号字节的过程_</span><br><span class="line">INPUT_SIGNED_BYTE PROC</span><br><span class="line">    _; 检查第一个字符是否为负号_</span><br><span class="line">    MOV AH, 01H</span><br><span class="line">    INT 21H</span><br><span class="line">    CMP AL, &#x27;-&#x27;</span><br><span class="line">    JNE CHECK_DIGIT1</span><br><span class="line">    MOV NEG_INPUT, 1    _; 设置负号标志_</span><br><span class="line">    MOV AH, 01H         _; 再次读取一个字符_</span><br><span class="line">    INT 21H</span><br><span class="line">  </span><br><span class="line">CHECK_DIGIT1:</span><br><span class="line">    _; 检查输入字符是否为数字_</span><br><span class="line">    CMP AL, &#x27;0&#x27;</span><br><span class="line">    JL EXIT_INPUT       _; 如果小于&#x27;0&#x27;，不是数字_</span><br><span class="line">    CMP AL, &#x27;9&#x27;</span><br><span class="line">    JG EXIT_INPUT       _; 如果大于&#x27;9&#x27;，不是数字_</span><br><span class="line">  </span><br><span class="line">    _; 转换为数值并保存_</span><br><span class="line">    SUB AL, &#x27;0&#x27;</span><br><span class="line">    MOV VALUE, AL</span><br><span class="line">  </span><br><span class="line">    _; 读取可能存在的第二个数字_</span><br><span class="line">    MOV AH, 01H</span><br><span class="line">    INT 21H</span><br><span class="line">  </span><br><span class="line">    _; 检查第二个字符是否为数字_</span><br><span class="line">    CMP AL, &#x27;0&#x27;</span><br><span class="line">    JL EXIT_INPUT2      _; 如果小于&#x27;0&#x27;，不是数字_</span><br><span class="line">    CMP AL, &#x27;9&#x27;</span><br><span class="line">    JG EXIT_INPUT2      _; 如果大于&#x27;9&#x27;，不是数字_</span><br><span class="line">  </span><br><span class="line">    _; 处理第二个数字_</span><br><span class="line">    SUB AL, &#x27;0&#x27;</span><br><span class="line">    MOV BL, VALUE       _; 将第一个数字移到BL_</span><br><span class="line">    MOV BH, 0           _; 清零BH_</span><br><span class="line">    MOV CX, 10</span><br><span class="line">    MUL CX              _; 将BX乘以10_</span><br><span class="line">    ADD BL, AL          _; 加上第二个数字_</span><br><span class="line">    MOV VALUE, BL</span><br><span class="line">    JMP EXIT_INPUT</span><br><span class="line">  </span><br><span class="line">EXIT_INPUT2:</span><br><span class="line">    _; 如果第二个字符不是数字，将它放回缓冲区(模拟未读取)_</span><br><span class="line">    MOV DL, AL</span><br><span class="line">    MOV AH, 02H</span><br><span class="line">    INT 21H</span><br><span class="line">  </span><br><span class="line">EXIT_INPUT:</span><br><span class="line">    _; 返回结果_</span><br><span class="line">    MOV AL, VALUE</span><br><span class="line">    CMP NEG_INPUT, 1</span><br><span class="line">    JNE RETURN_INPUT</span><br><span class="line">    NEG AL              _; 如果有负号标志，取负值_</span><br><span class="line">  </span><br><span class="line">RETURN_INPUT:</span><br><span class="line">    RET</span><br><span class="line">INPUT_SIGNED_BYTE ENDP</span><br><span class="line"></span><br><span class="line">_; 有符号乘法过程 - 结果在AX中_</span><br><span class="line">SIGNED_MUL PROC</span><br><span class="line">    _; 保存符号_</span><br><span class="line">    MOV CL, AL          _; 保存第一个操作数_</span><br><span class="line">    MOV CH, BL          _; 保存第二个操作数_</span><br><span class="line">  </span><br><span class="line">    _; 取绝对值_</span><br><span class="line">    CMP AL, 0</span><br><span class="line">    JGE ABS1_DONE</span><br><span class="line">    NEG AL</span><br><span class="line">ABS1_DONE:</span><br><span class="line">    CMP BL, 0</span><br><span class="line">    JGE ABS2_DONE</span><br><span class="line">    NEG BL</span><br><span class="line">ABS2_DONE:</span><br><span class="line">  </span><br><span class="line">    _; 执行无符号乘法_</span><br><span class="line">    MUL BL              _; AX = AL * BL_</span><br><span class="line">  </span><br><span class="line">    _; 确定结果符号_</span><br><span class="line">    MOV BH, 0           _; 清零BH_</span><br><span class="line">    MOV BL, 0           _; 假设结果为正_</span><br><span class="line">  </span><br><span class="line">    CMP CL, 0           _; 检查第一个操作数符号_</span><br><span class="line">    JGE CHECK_OP2_MUL</span><br><span class="line">    XOR BL, 1           _; 翻转符号位_</span><br><span class="line">  </span><br><span class="line">CHECK_OP2_MUL:</span><br><span class="line">    CMP CH, 0           _; 检查第二个操作数符号_</span><br><span class="line">    JGE APPLY_SIGN_MUL</span><br><span class="line">    XOR BL, 1           _; 翻转符号位_</span><br><span class="line">  </span><br><span class="line">APPLY_SIGN_MUL:</span><br><span class="line">    CMP BL, 1           _; 检查是否需要取负_</span><br><span class="line">    JNE RETURN_MUL</span><br><span class="line">    NEG AX              _; 对结果取负_</span><br><span class="line">  </span><br><span class="line">RETURN_MUL:</span><br><span class="line">    RET</span><br><span class="line">SIGNED_MUL ENDP</span><br><span class="line"></span><br><span class="line">_; 有符号除法过程 - 结果在AX中_</span><br><span class="line">SIGNED_DIV PROC</span><br><span class="line">    _; 检查除数是否为零_</span><br><span class="line">    CMP BL, 0</span><br><span class="line">    JNE NOT_ZERO_DIV</span><br><span class="line">  </span><br><span class="line">    _; 除数为零处理_</span><br><span class="line">    LEA DX, MSG5        _; 显示除零错误消息_</span><br><span class="line">    MOV AH, 09H</span><br><span class="line">    INT 21H</span><br><span class="line">    MOV AX, 0           _; 返回0_</span><br><span class="line">    RET</span><br><span class="line">  </span><br><span class="line">NOT_ZERO_DIV:</span><br><span class="line">    _; 保存符号_</span><br><span class="line">    MOV CL, AL          _; 保存第一个操作数_</span><br><span class="line">    MOV CH, BL          _; 保存第二个操作数_</span><br><span class="line">  </span><br><span class="line">    _; 取绝对值_</span><br><span class="line">    CMP AL, 0</span><br><span class="line">    JGE ABS1_DIV_DONE</span><br><span class="line">    NEG AL</span><br><span class="line">ABS1_DIV_DONE:</span><br><span class="line">    CMP BL, 0</span><br><span class="line">    JGE ABS2_DIV_DONE</span><br><span class="line">    NEG BL</span><br><span class="line">ABS2_DIV_DONE:</span><br><span class="line">  </span><br><span class="line">    _; 执行无符号除法_</span><br><span class="line">    MOV AH, 0           _; 扩展AL到AX_</span><br><span class="line">    DIV BL              _; AL = AX / BL, AH = AX % BL_</span><br><span class="line">    MOV AH, 0           _; 清零AH(我们只关心商)_</span><br><span class="line">  </span><br><span class="line">    _; 确定结果符号_</span><br><span class="line">    MOV BH, 0           _; 清零BH_</span><br><span class="line">    MOV BL, 0           _; 假设结果为正_</span><br><span class="line">  </span><br><span class="line">    CMP CL, 0           _; 检查第一个操作数符号_</span><br><span class="line">    JGE CHECK_OP2_DIV</span><br><span class="line">    XOR BL, 1           _; 翻转符号位_</span><br><span class="line">  </span><br><span class="line">CHECK_OP2_DIV:</span><br><span class="line">    CMP CH, 0           _; 检查第二个操作数符号_</span><br><span class="line">    JGE APPLY_SIGN_DIV</span><br><span class="line">    XOR BL, 1           _; 翻转符号位_</span><br><span class="line">  </span><br><span class="line">APPLY_SIGN_DIV:</span><br><span class="line">    CMP BL, 1           _; 检查是否需要取负_</span><br><span class="line">    JNE RETURN_DIV</span><br><span class="line">    NEG AX              _; 对结果取负_</span><br><span class="line">  </span><br><span class="line">RETURN_DIV:</span><br><span class="line">    RET</span><br><span class="line">SIGNED_DIV ENDP</span><br><span class="line"></span><br><span class="line">_; 显示有符号数字_</span><br><span class="line">DISPLAY_SIGNED_NUM PROC</span><br><span class="line">    _; 检查符号_</span><br><span class="line">    CMP AX, 0</span><br><span class="line">    JGE POS_NUM</span><br><span class="line">  </span><br><span class="line">    _; 显示负号_</span><br><span class="line">    MOV DL, &#x27;-&#x27;</span><br><span class="line">    MOV AH, 02H</span><br><span class="line">    INT 21H</span><br><span class="line">    NEG AX              _; 取绝对值_</span><br><span class="line">  </span><br><span class="line">POS_NUM:</span><br><span class="line">    _; 将数字转换为字符串并显示_</span><br><span class="line">    MOV CX, 0           _; 初始化计数器_</span><br><span class="line">    MOV BX, 10          _; 基数(十进制)_</span><br><span class="line">  </span><br><span class="line">    _; 将数字转换为字符串(逆序)_</span><br><span class="line">CONVERT_LOOP:</span><br><span class="line">    MOV DX, 0           _; 清零DX_</span><br><span class="line">    DIV BX              _; AX / 10, 商在AX，余数在DX_</span><br><span class="line">    PUSH DX             _; 保存余数_</span><br><span class="line">    INC CX              _; 增加计数器_</span><br><span class="line">    CMP AX, 0           _; 检查商是否为0_</span><br><span class="line">    JNE CONVERT_LOOP    _; 如果不是0，继续转换_</span><br><span class="line">  </span><br><span class="line">    _; 显示字符串(正序)_</span><br><span class="line">DISPLAY_LOOP:</span><br><span class="line">    POP DX              _; 取出一个数字_</span><br><span class="line">    ADD DL, &#x27;0&#x27;         _; 转换为ASCII_</span><br><span class="line">    MOV AH, 02H         _; 显示字符功能_</span><br><span class="line">    INT 21H</span><br><span class="line">    LOOP DISPLAY_LOOP   _; 循环直到所有数字显示完毕_</span><br><span class="line">  </span><br><span class="line">    RET</span><br><span class="line">DISPLAY_SIGNED_NUM ENDP</span><br><span class="line"></span><br><span class="line">END MAIN</span><br></pre></td></tr></table></figure>
-</div>
-        </div>
-        
-        <footer class="kratos-entry-footer clearfix">
-            
-            
-            
-                <div class="post-actions text-center clearfix" id="post-actions">
-                
-                    <a class="donate" href="javascript:;" onclick="krOpenDonateModal()"><i class="fa fa-bitcoin"></i> 打赏</a>
-                
-                
-                    <a class="share" href="javascript:;" onclick="krOpenShareModal()"><i class="fa fa-share-alt"></i> 分享</a>
-                
-                </div>
-            
-            <div class="footer-tag clearfix">
-                <div class="pull-left">
-                <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" rel="tag">课程学习</a>
-                </div>
-                <div class="pull-date">
-                    <time datetime="2025-09-22T07:55:44.493Z" itemprop="dateModified">最后编辑：2025-09-22</time>
-                </div>
-            </div>
-        </footer>
-    </div>
-    
-        <nav class="navigation post-navigation clearfix" role="navigation">
-            
-            <div class="nav-previous clearfix">
-                <a title=" 2025-06-01-Hive 技术及应用介绍" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-06-01-Hive 技术及应用介绍/"><i class="fa fa-angle-left"></i> 上一篇</a>
-            </div>
-            
-            
-            <div class="nav-next clearfix">
-                <a title=" 2025-06-02-IP 地址规划及案例分析" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-06-02-IP 地址规划及案例分析/">下一篇 <i class="fa fa-angle-right"></i></a>
-            </div>
-            
-        </nav>
-    
-    
-        <div class="comment-post">
-            
-        </div>
-    
-</article>
 
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-05-11-%E9%93%B6%E8%A1%8C%E5%AE%B6%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/">2025-05-11-银行家算法分析</a></li>
+                
+                
+                    <li>下一篇: <a href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-05-11-%E5%9F%9F%E9%80%82%E5%BA%94(Domain%20Adaptation)/">2025-05-11-域适应(Domain Adaptation)</a></li>
+                
+            </ul>
+        </section>
         
-
+            <section class="post-tags">
+            <a class="-none-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" rel="tag">课程学习</a>
             </section>
-
-            
-                
-
-<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
-    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
-    
-        <div class="sticky-area">
-    
-    
-    </div>
-</section>
-            
-
         
-
-                </div>
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&r=X&d=" alt="Hingle" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>Hingle</h4>
+                <p>请在这里设置你的作者信息</p>
+            </div>
+        </section>
+    
     </div>
-</div>
+</main>
 
-<footer>
-    <div id="footer">
-        <div class="container">
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
             <div class="row">
-                <div class="col-md-6 col-md-offset-3 footer-list text-center">
-                    <ul class="kratos-social-icons">
-                        
-                    </ul>
-                    <ul class="kratos-copyright">
-                        <div>
-                            <li>&copy; 2025 TK的小站 版权所有.</li>
-                            <li>本站已运行<span id="kr-since">Loading...</span></li>
-                        </div>
-                        <div>
-                            <li>自豪地使用 <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a> 主题</li>
-                            <li>站点由 TK 用 <i class="fa fa-heart" style="color:#d43f57"></i> 搭建</li>
-                        </div>
-                        <!-- 额外的追加注入项 -->
-                        
-                    </ul>
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-09-wsl%E5%90%AF%E5%8A%A8%E6%8A%A5%E9%94%99Cannot%20execute%20daemonize%20to%20start%20systemd%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">WSL 启动报错 "Cannot execute daemonize to start systemd" 的解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-08-%E6%8F%90%E7%A4%BA%E8%AF%8D/">2025-02-08-提示词</a></li><li class="post-list-item"><a class="post-list-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-11-%E6%95%B0%E6%A8%A1%E7%AC%94%E8%AE%B0_%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E4%B8%8E%E5%B7%AE%E5%88%86%E6%96%B9%E7%A8%8B/">2025-02-11-数模笔记_微分方程与差分方程</a></li><li class="post-list-item"><a class="post-list-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-15-%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">语义分割</a></li><li class="post-list-item"><a class="post-list-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-10-%E6%96%87%E8%A8%80%E6%96%87%E8%83%8C%E8%AF%B5%E6%A3%80%E6%B5%8B%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/">文言文背诵检测程序开发</a></li><li class="post-list-item"><a class="post-list-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-17-%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E3%80%81%E5%AE%9E%E4%BE%8B%E5%88%86%E5%89%B2%E4%B8%8E%E5%85%A8%E6%99%AF%E5%88%86%E5%89%B2%E4%B8%89%E7%A7%8D%E5%88%86%E5%89%B2%E6%8A%80%E6%9C%AF%E7%9A%84%E5%AF%B9%E6%AF%94/">语义分割、实例分割与全景分割三种分割技术的对比</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/archives/1970/01/">一月 1970</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 10px;">深度学习 程序开发</a> <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">深度学习 论文阅读</a> <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 14px;">程序开发</a> <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
                 </div>
             </div>
-        </div>
-        <div class="kr-tool text-center">
-            <div class="tool">
-                
-                    <div class="box search-box">
-                        <a href="/tkzzzzzz6/tkzzzzzz6.github.io/search">
-                            <span class="fa fa-search"></span>
-                        </a>
-                    </div>
-                
-                <div class="box theme-box" id="theme-toggle">
-                    <span class="fa fa-adjust"></span>
-                </div>
-            </div>
-            <div id="gotop-box" class="box gotop-box">
-                <span class="fa fa-chevron-up"></span>
-            </div>
-        </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2025 <a href="/tkzzzzzz6/tkzzzzzz6.github.io/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
     </div>
 </footer>
-</div>
-</div>
 
 
-    <div id="kr-donate-modal" class="kr-modal">
-    <div class="kr-modal-bg" onclick="krCloseDonateModal()"></div>
-    <div class="kr-modal-content">
-        <div class="kr-modal-header">
-            <div class="kr-modal-icon">
-                <i class="fa fa-bitcoin"></i>
-            </div>
-            <div class="kr-modal-title">打赏</div>
-            <button class="kr-modal-close" onclick="krCloseDonateModal()">
-                <i class="fa fa-times-circle"></i>
-            </button>
-        </div>
-        <div class="kr-modal-body">
-            <div class="kr-donate-message">打赏提示信息</div>
-            <div class="kr-donate-qr" id="kr-donate-qr">
-                
-            </div>
-            <div class="kr-donate-platforms">
-                
-            </div>
-        </div>
-    </div>
-</div>
-<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/donate.min.js"></script>
+<script src="/tkzzzzzz6/tkzzzzzz6.github.io/static/kico.js"></script>
+<script src="/tkzzzzzz6/tkzzzzzz6.github.io/static/hingle.js"></script>
 
 
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
 
-
-    <div id="kr-share-modal" class="kr-modal">
-    <div class="kr-modal-bg" onclick="krCloseShareModal()"></div>
-    <div class="kr-modal-content">
-        <div class="kr-modal-header">
-            <div class="kr-modal-icon">
-                <i class="fa fa-share-alt"></i>
-            </div>
-            <div class="kr-modal-title">分享</div>
-            <button class="kr-modal-close" onclick="krCloseShareModal()">
-                <i class="fa fa-times-circle"></i>
-            </button>
-        </div>
-        <div class="kr-modal-body">
-            <div class="kr-share-message">分享提示信息</div>
-            <div class="kr-share-qr" id="kr-share-qr"></div>
-            <div class="kr-share-platforms">
-                
-            </div>
-        </div>
-    </div>
-</div>
-<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/share.min.js"></script>
-
-
-
-<!-- 额外的追加注入项 -->
-
-
-        <script>
-    if (!window.kr) {
-        window.kr = {};
-    }
-    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
-    window.kr.siteRoot = "/tkzzzzzz6/tkzzzzzz6.github.io/";
-</script>
-
-
-  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.js"></script>
-
-
-
-  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.js"></script>
-
-
-<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-core.min.js"></script>
-
-
-  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-pjax.min.js"></script>
-
-
-<!-- 额外的追加注入项 -->
-
-
-    </body>
+  </body>
 </html>
