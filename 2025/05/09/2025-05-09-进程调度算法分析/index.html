@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2025-05-09-进程调度算法分析 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-05-09-进程调度算法分析"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-05-09-进程调度算法分析</h2>
+            <div class="post-meta">
+                <time class="date">2025.05.09</time>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="进程调度算法分析"><a href="#进程调度算法分析" class="headerlink" title="进程调度算法分析"></a>进程调度算法分析</h1><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/543205467">一文看懂 Linux 内核调度分析（进程调度）一</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/661863529">Linux 内核中常见的进程调度算法</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41897304/article/details/130194906">Linux 进程调度算法_linux 调度算法-CSDN 博客</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaolincoding/p/13631224.html">大厂面试爱问的「调度算法」，20 张图一举拿下 - 小林 coding - 博客园</a></li>
+<li><a target="_blank" rel="noopener" href="https://gregsnotes.medium.com/how-do-cpus-execute-instructions-in-parallel-dfa15e87a86c">gregsnotes.medium.com</a></li>
+</ul>
+</blockquote>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="调度指标与目标"><a href="#调度指标与目标" class="headerlink" title="调度指标与目标"></a>调度指标与目标</h2><p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749361099852GUHDb2WbvordpDxnuNEcIg0zn0b.png" alt="1749361099852GUHDb2WbvordpDxnuNEcIg0zn0b.png"></p>
+<p>单核 CPU 处理多个进程和线程</p>
+<p>操作系统进程调度的核心目标在于合理分配 CPU 资源，使系统能够同时满足多个性能指标。常见的评估指标包括：</p>
+<ol>
+<li><strong>CPU 利用率（CPU Utilization）</strong></li>
+</ol>
+<ul>
+<li>CPU 在单位时间内非空闲状态的比例。理想情况下应尽量接近 100%。</li>
+</ul>
+<ol>
+<li><strong>吞吐量（Throughput）</strong></li>
+</ol>
+<ul>
+<li>单位时间内完成的作业（或进程）数量。吞吐量越高，单位时间完成任务越多。</li>
+</ul>
+<ol>
+<li><strong>周转时间（Turnaround Time）</strong></li>
+</ol>
+<ul>
+<li>从进程提交（到达）到完全执行结束所经历的总时间。</li>
+</ul>
+<p>$$<br>\text{Turnaround Time} &#x3D; \text{完成时间} - \text{到达时间}<br>$$</p>
+<ol>
+<li><strong>带权周转时间（Weighted Turnaround Time）</strong></li>
+</ol>
+<ul>
+<li>周转时间与执行时间之比，用于衡量短作业或长作业的相对等待公平性。</li>
+</ul>
+<p>$$<br>\text{Weighted Turnaround Time} &#x3D; \frac{\text{Turnaround Time}}{\text{执行时间}}<br>$$</p>
+<ol>
+<li><strong>等待时间（Waiting Time）</strong></li>
+</ol>
+<ul>
+<li>进程在就绪队列中等待 CPU 的累积时间。</li>
+</ul>
+<p>$$<br>\text{Waiting Time} &#x3D; \text{Turnaround Time} - \text{执行时间}<br>$$</p>
+<ol>
+<li><strong>响应时间（Response Time）</strong></li>
+</ol>
+<ul>
+<li>从进程提交到系统开始响应（第一次分配 CPU）的时间。</li>
+</ul>
+<p>$$<br>\text{Response Time} &#x3D; \text{第一次调度时间} - \text{到达时间}<br>$$</p>
+<ol>
+<li><strong>公平性</strong></li>
+</ol>
+<ul>
+<li>同类进程应获得相似的资源分配和等待时间；避免饥饿（Starvation）。</li>
+</ul>
+<p>不同的调度算法在上述指标上表现各异，系统应根据场景需求权衡：</p>
+<ul>
+<li><strong>交互式系统</strong>：关注响应时间（如 GUI 系统、服务器应用）。</li>
+<li><strong>批处理系统</strong>：关注吞吐量与周转时间（如科学计算、大规模数据处理）。</li>
+<li><strong>实时系统</strong>：关注任务能否在规定的截止时间前完成，使用实时调度算法（如 Rate Monotonic Scheduling、Earliest Deadline First）。</li>
+</ul>
+<hr>
+<h2 id="调度算法的分类"><a href="#调度算法的分类" class="headerlink" title="调度算法的分类"></a>调度算法的分类</h2><p>根据是否支持抢占（Preemptive）和队列策略，可将操作系统中的调度算法大致分为两类：</p>
+<ol>
+<li><strong>非抢占式调度（Non-preemptive Scheduling）</strong></li>
+</ol>
+<ul>
+<li>一旦进程被分配 CPU，直到该进程自愿放弃 CPU（如执行完成或进入 I&#x2F;O 阻塞）才会切换。</li>
+<li>算法典型：先来先服务 (FCFS)、短作业优先 (SJF，非抢占版本)、优先级非抢占。</li>
+</ul>
+<ol>
+<li><strong>抢占式调度（Preemptive Scheduling）</strong></li>
+</ol>
+<ul>
+<li>若有更高优先级的进程到达或某种时间片用尽，会强制剥夺当前进程的 CPU。</li>
+<li>算法典型：短剩余时间优先 (SRTF)、优先级抢占、时间片轮转 (RR)、多级反馈队列等。</li>
+</ul>
+<p>此外，按照就绪队列结构的不同，调度亦可分为：</p>
+<ul>
+<li><strong>单级队列（Single Queue）</strong>：所有就绪进程放在同一队列中，统一调度（上述 FCFS、SJF、RR 等）。</li>
+<li><strong>多级队列（Multi-Level Queue）</strong>：根据进程类型（交互式 vs 批处理）、优先级等分类，将进程放入多个队列，根据队列优先级逐级调度。</li>
+<li><strong>多级反馈队列（Multi-Level Feedback Queue, MLFQ）</strong>：在多级队列的基础上，允许进程在不同队列间动态迁移，从而兼顾响应时间和吞吐量。</li>
+</ul>
+<hr>
+<h2 id="常见单队列调度算法"><a href="#常见单队列调度算法" class="headerlink" title="常见单队列调度算法"></a>常见单队列调度算法</h2><h3 id="先来先服务-FCFS"><a href="#先来先服务-FCFS" class="headerlink" title="先来先服务 (FCFS)"></a>先来先服务 (FCFS)</h3><p><strong>概念</strong>：</p>
+<p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749361112852SlmPb1s55oPHr4xbKuxcR095nZc.png" alt="1749361112852SlmPb1s55oPHr4xbKuxcR095nZc.png"></p>
+<ul>
+<li>最简单的调度算法，类比数据结构中的队列,按照进程到达就绪队列的先后顺序分配 CPU，不做抢占。</li>
+<li>类似排队买票：先到先服务。</li>
+</ul>
+<p><strong>基本流程</strong>：</p>
+<ol>
+<li>就绪队列中，按照到达时间排序。</li>
+<li>CPU 空闲时，从队头取出第一个进程执行，运行完毕后再取下一个。</li>
+</ol>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>实现简单，易于理解和维护。</li>
+<li>进程切换开销少，无抢占导致的上下文切换开销。</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li><strong>等待时间不可控</strong>：一旦前面有一个长作业，后续短作业就会被“长作业阻塞”（Convoy Effect），导致平均等待时间变长。</li>
+<li><strong>平均周转时间较大</strong>：对短作业不友好。</li>
+<li><strong>无差别对待</strong>：不支持优先级，易造成关键任务延迟。</li>
+</ul>
+<p><strong>适用场景</strong>：</p>
+<ul>
+<li>适合批处理系统中长时间运行、无需交互的作业调度。</li>
+</ul>
+<hr>
+<h3 id="短作业优先-SJF-与-最短剩余时间优先-SRTF"><a href="#短作业优先-SJF-与-最短剩余时间优先-SRTF" class="headerlink" title="短作业优先 (SJF) 与 最短剩余时间优先 (SRTF)"></a>短作业优先 (SJF) 与 最短剩余时间优先 (SRTF)</h3><h4 id="短作业优先-SJF-Shortest-Job-First"><a href="#短作业优先-SJF-Shortest-Job-First" class="headerlink" title="短作业优先 (SJF, Shortest Job First)"></a>短作业优先 (SJF, Shortest Job First)</h4><p><strong>概念</strong>：</p>
+<p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749361121852DiHgbhn6Lo2tr7xuqvscwpi2nxg.png" alt="1749361121852DiHgbhn6Lo2tr7xuqvscwpi2nxg.png"></p>
+<ul>
+<li>按照进程的估计执行时间（CPU Burst）长短来调度，优先选择执行时间最短的进程（非抢占）。</li>
+<li>可以最大化减少平均等待时间。</li>
+</ul>
+<p><strong>流程</strong>：</p>
+<ol>
+<li>当 CPU 空闲时，从就绪队列中选择执行时间最短的进程。</li>
+<li>该进程运行至完成，然后再次从剩余进程中选择最短的继续。</li>
+</ol>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>平均等待时间最小（经证明）。</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li><strong>需要预知执行时间</strong>：在实际系统中很难准确知道每个进程的执行时间，只能通过历史统计或猜测。</li>
+<li><strong>可能导致饥饿</strong>：如果系统中不断有短作业到来，长作业可能一直得不到执行机会。</li>
+</ul>
+<h4 id="最短剩余时间优先-SRTF-Shortest-Remaining-Time-First"><a href="#最短剩余时间优先-SRTF-Shortest-Remaining-Time-First" class="headerlink" title="最短剩余时间优先 (SRTF, Shortest Remaining Time First)"></a>最短剩余时间优先 (SRTF, Shortest Remaining Time First)</h4><p><strong>概念</strong>：</p>
+<ul>
+<li>是 SJF 的抢占式版本。</li>
+<li>当有新进程到达，若其估计总执行时间小于当前正在执行进程的剩余执行时间，则抢占当前进程，优先执行新进程。</li>
+</ul>
+<p><strong>流程</strong>：</p>
+<ol>
+<li>维护就绪队列中各进程的剩余执行时间。</li>
+<li>当新进程到达或某进程完成后，重新比较就绪队列中剩余时间最小的进程；若与当前执行进程不同，则进行抢占切换。</li>
+</ol>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>平均等待时间更小，响应更及时。</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li><strong>更频繁的上下文切换</strong>：可能每次新进程到来都要抢占，增加系统负载。</li>
+<li><strong>难以预测与饥饿问题</strong>：同样存在长进程饥饿风险。</li>
+</ul>
+<p><strong>适用场景</strong>：</p>
+<ul>
+<li>对平均等待时间要求很高、可接受大量切换开销的批处理环境。</li>
+</ul>
+<hr>
+<h3 id="优先级调度-Priority-Scheduling"><a href="#优先级调度-Priority-Scheduling" class="headerlink" title="优先级调度 (Priority Scheduling)"></a>优先级调度 (Priority Scheduling)</h3><p><strong>概念</strong>：</p>
+<p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749361133852G5ACbX27MoyabGxHSPOcVVCenIg.png" alt="1749361133852G5ACbX27MoyabGxHSPOcVVCenIg.png"></p>
+<ul>
+<li>每个进程都与一个优先级（Priority）相关联，调度时始终选择优先级最高（数值最小或最大，取决于实现约定）的进程执行。</li>
+<li>可分为非抢占式优先级调度和抢占式优先级调度：</li>
+<li><strong>非抢占式优先级</strong>：一旦进程被选中，直到它完成或自愿阻塞，其他高优先级进程到达也不能抢占。</li>
+<li><strong>抢占式优先级</strong>：如果有更高优先级的进程到达，会中断当前进程并调度高优先级进程执行。</li>
+</ul>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>可以根据任务重要程度分配资源，实现“关键任务优先”。</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li><strong>饥饿（Starvation）</strong>：低优先级进程可能长时间无法获得 CPU。如果系统中高优先级任务持续到达，则低优先级任务可能永远得不到服务。</li>
+<li><strong>优先级反转（Priority Inversion）</strong>：低优先级进程持有资源（如锁），阻止高优先级进程执行，造成高优先级任务等待。可通过“优先级继承”等机制缓解。</li>
+</ul>
+<p><strong>优先级分配策略</strong>：</p>
+<ul>
+<li><strong>静态优先级</strong>：在进程创建时分配，不随运行时变化。</li>
+<li><strong>动态优先级</strong>：随着进程运行行为或等待时间动态调整。例如：长时间在就绪队列中等待，优先级随时间递增；使用 “ aging” 技术防止饥饿。</li>
+</ul>
+<hr>
+<h3 id="时间片轮转-Round-Robin-RR"><a href="#时间片轮转-Round-Robin-RR" class="headerlink" title="时间片轮转 (Round Robin, RR)"></a>时间片轮转 (Round Robin, RR)</h3><p><strong>概念</strong>：</p>
+<p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749361149087XcrFbh95yoJy1VxxOlhcL4p3nne.png" alt="1749361149087XcrFbh95yoJy1VxxOlhcL4p3nne.png"></p>
+<ul>
+<li>将 CPU 时间分成若干固定长度的时间片（Time Quantum），系统维护一个进程就绪队列（通常是 FIFO）。</li>
+<li>每次调度时，将队头进程分配一个完整时间片或直到进程自行阻塞（I&#x2F;O）／完成。时间片用完后，将该进程移动到队尾，依此循环。</li>
+</ul>
+<p><strong>流程</strong>：</p>
+<ol>
+<li>初始化就绪队列，所有进程先按到达顺序加入队列。</li>
+<li>系统为队头进程分配时钟中断，每次时钟中断到来时：</li>
+</ol>
+<ul>
+<li>若进程尚未完成，且时间片已用完，则将其移动到队尾；</li>
+<li>若进程完成或主动阻塞，直接移除或放入相应 I&#x2F;O 等待队列。</li>
+</ul>
+<ol>
+<li>选取下一个队头进程，重复上述步骤。</li>
+</ol>
+<p><strong>关键参数</strong>：</p>
+<ul>
+<li>**时间片大小 (Quantum)**：</li>
+<li>小时间片 → 系统响应快，适合交互式处理；但上下文切换频繁，开销大。</li>
+<li>大时间片 → 切换开销小，但响应时间变长，接近 FCFS 效果。</li>
+<li>通常取值应使上下文切换开销远小于时间片时长（如上下文切换需要 1–2 μs，时间片一般设为 10–100 ms）。</li>
+</ul>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>对所有进程一视同仁，易于实现和理解；</li>
+<li>响应时间有保证（最坏响应时间 &#x3D; 时间片 × 就绪进程数）；</li>
+<li>无饥饿，进程最终会被分配 CPU。</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>需要设置合适时间片；</li>
+<li>上下文切换带来额外开销；</li>
+<li>对 CPU 密集型与 I&#x2F;O 密集型进程无区分，可能浪费时间片给 CPU 密集型作业；</li>
+<li>如果时间片与进程执行时间不匹配，则吞吐量和周转时间可能不理想。</li>
+</ul>
+<p><strong>适用场景</strong>：</p>
+<ul>
+<li>交互式系统，要求快速响应用户输入的环境（如终端、桌面交互系统）。</li>
+</ul>
+<hr>
+<h2 id="多级队列调度与多级反馈队列调度"><a href="#多级队列调度与多级反馈队列调度" class="headerlink" title="多级队列调度与多级反馈队列调度"></a>多级队列调度与多级反馈队列调度</h2><h3 id="4-1-多级队列调度-Multi-Level-Queue"><a href="#4-1-多级队列调度-Multi-Level-Queue" class="headerlink" title="4.1. 多级队列调度 (Multi-Level Queue)"></a>4.1. 多级队列调度 (Multi-Level Queue)</h3><p><strong>概念</strong>：</p>
+<ul>
+<li>根据进程的类别、优先级、服务需求等，将进程划分到不同的就绪队列中。每个队列可应用不同的调度算法或不同时间片长度。</li>
+<li>各队列本身也按照优先级排列。当 CPU 空闲时，始终从最高优先级队列调度，若高优先级队列为空，才调度低优先级队列。</li>
+</ul>
+<p><strong>队列示例</strong>：</p>
+<ul>
+<li><strong>系统交互进程队列</strong>：RR 调度，时间片短；</li>
+<li><strong>批处理进程队列</strong>：FCFS 调度；</li>
+<li><strong>守护进程队列</strong>：优先级调度或 FCFS；</li>
+</ul>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>不同类型进程获得不同的服务策略；</li>
+<li>各队列永久划分，不动态调整。</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>需要在设计阶段预先进行进程分类，不灵活；</li>
+<li>高优先级队列如果繁忙，低优先级队列可能饥饿。</li>
+</ul>
+<hr>
+<h3 id="多级反馈队列调度-Multi-Level-Feedback-Queue-MLFQ"><a href="#多级反馈队列调度-Multi-Level-Feedback-Queue-MLFQ" class="headerlink" title="多级反馈队列调度 (Multi-Level Feedback Queue, MLFQ)"></a>多级反馈队列调度 (Multi-Level Feedback Queue, MLFQ)</h3><p><strong>概念</strong>：</p>
+<p>时间片轮转和最高优先级算法的综合和拓展</p>
+<ul>
+<li>「多级」表示有多个队列，每个队列优先级从高到低，同时优先级越高时间片越短。</li>
+<li>「反馈」表示如果有新的进程加入优先级高的队列时，立刻停止当前正在运行的进程，转而去运行优先级高的队列；</li>
+</ul>
+<p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749361161852T6LZbQZ7Fon2d3xWr17cscH5nWw.png" alt="1749361161852T6LZbQZ7Fon2d3xWr17cscH5nWw.png"></p>
+<ul>
+<li>在多级队列基础上，为了提高灵活性，允许进程在不同队列间根据行为“反馈”向下或向上移动。</li>
+<li>目标：使得 I&#x2F;O 密集型（短 CPU burst）进程获得较高优先级，CPU 密集型（长 CPU burst）进程优先级逐渐降低，从而兼顾系统响应性和吞吐量。</li>
+</ul>
+<p><strong>常见策略参数</strong>：</p>
+<ol>
+<li>**队列数 (N)**：一般设为 3–5 级，从高到低优先级递减编号。</li>
+<li>**时间片 (Quantum)**：不同队列拥有不同时间片长度。一般高优先级队列时间片短（例如 8ms），中&#x2F;低级队列时间片依次加倍（16ms、32ms）。</li>
+<li><strong>晋升与降级规则</strong>：</li>
+</ol>
+<ul>
+<li><strong>降级</strong>：进程若在本级队列用完完整时间片（表明可能较 CPU 密集），则移动到下一低级队列；</li>
+<li><strong>晋升（或 Aging）</strong>：为了防止长期在低级队列的进程饥饿，可在一定条件下（如等待时间超过阈值）将其提升至更高级队列。</li>
+</ul>
+<p><strong>典型流程</strong>：</p>
+<ol>
+<li>所有进程初始进入最高优先级队列（队列 0）。</li>
+<li>CPU 空闲时，从优先级最高且非空队列选取队头进程执行一个时间片或至该进程阻塞&#x2F;完成。</li>
+<li>若用完时间片且仍未完成，则降级到下一级队列尾。</li>
+<li>若在某队列执行过程中阻塞（如进入 I&#x2F;O），则保持在当前队列级别（或执行完成后重新进入高优先级队列，具体实现可不同）。</li>
+<li>周期性或按需检查低级队列中的进程等待时间，执行晋升。</li>
+</ol>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>区分不同工作特征的进程（I&#x2F;O 密集 vs CPU 密集），提高响应速度；</li>
+<li>通过动态反馈减少饥饿。</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>参数较多（队列数、时间片长度、晋升&#x2F;降级阈值等），需要调优；</li>
+<li>实现复杂度较高；</li>
+<li>若设计不合理，仍可能出现低优先级进程饥饿。</li>
+</ul>
+<p><strong>适用场景</strong>：</p>
+<ul>
+<li>一般通用操作系统（如 Linux 的 O(1) 调度器、早期 UNIX 调度），可兼顾交互式任务与后台批处理任务。</li>
+<li>要求较高响应性的桌面系统或要求分时公平性的多用户系统。</li>
+</ul>
+<hr>
+<h2 id="调度算法的性能评估示例"><a href="#调度算法的性能评估示例" class="headerlink" title="调度算法的性能评估示例"></a>调度算法的性能评估示例</h2><p>下面通过假设的进程集合与到达时间、执行（CPU）时间示例，分别在 FCFS、SJF&#x2F;SRTF、RR、和多级反馈队列环境下进行调度，计算关键指标并进行比较。</p>
+<h3 id="示例流程与假设数据"><a href="#示例流程与假设数据" class="headerlink" title="示例流程与假设数据"></a>示例流程与假设数据</h3><p>假设有 5 个进程，属性如下：</p>
+<table>
+<tr>
+<td>进程 PID<br/></td><td>到达时间 (Arrival)<br/></td><td>CPU 执行时间 (Burst)<br/></td><td>优先级 (Priority)\*<br/></td></tr>
+<tr>
+<td>P1<br/></td><td>0<br/></td><td>8<br/></td><td>2<br/></td></tr>
+<tr>
+<td>P2<br/></td><td>1<br/></td><td>4<br/></td><td>1<br/></td></tr>
+<tr>
+<td>P3<br/></td><td>2<br/></td><td>9<br/></td><td>3<br/></td></tr>
+<tr>
+<td>P4<br/></td><td>3<br/></td><td>5<br/></td><td>2<br/></td></tr>
+<tr>
+<td>P5<br/></td><td>4<br/></td><td>2<br/></td><td>1<br/></td></tr>
+</table>
+
+<blockquote>
+<p>*仅在优先级调度或 MLFQ 中使用，数值越小优先级越高。</p>
+</blockquote>
+<ul>
+<li>假设系统在时刻 0 之后开始调度，并且已知所有进程到达时间与执行时间。</li>
+<li>时间单位可视为毫秒 (ms)。</li>
+</ul>
+<p>我们分别对以下调度算法进行分析：</p>
+<ol>
+<li>FCFS (非抢占)</li>
+<li>SJF (假设非抢占)</li>
+<li>SRTF (抢占式短作业优先)</li>
+<li>RR (时间片 &#x3D; 3)</li>
+<li>多级反馈队列 (3 级队列，时间片分别 4、8、∞；无晋升)</li>
+</ol>
+<h3 id="FCFS-调度示例分析"><a href="#FCFS-调度示例分析" class="headerlink" title="FCFS 调度示例分析"></a>FCFS 调度示例分析</h3><h4 id="调度顺序"><a href="#调度顺序" class="headerlink" title="调度顺序"></a>调度顺序</h4><table>
+<tr>
+<td>时间区间<br/></td><td>执行进程<br/></td></tr>
+<tr>
+<td>0–8<br/></td><td>P1<br/></td></tr>
+<tr>
+<td>8–12<br/></td><td>P2<br/></td></tr>
+<tr>
+<td>12–21<br/></td><td>P3<br/></td></tr>
+<tr>
+<td>21–26<br/></td><td>P4<br/></td></tr>
+<tr>
+<td>26–28<br/></td><td>P5<br/></td></tr>
+</table>
+
+<p>解释：</p>
+<ul>
+<li>时刻 0：P1 到达，分配 CPU；</li>
+<li>P1 用到时刻 8 才完成；</li>
+<li>时刻 1–4 期间，P2、P3、P4、P5 依序到达并进入队列；</li>
+<li>时刻 8：CPU 分配给队列头进程 P2（到达时间最早）；</li>
+<li>依此类推。</li>
+</ul>
+<h4 id="关键指标计算"><a href="#关键指标计算" class="headerlink" title="关键指标计算"></a>关键指标计算</h4><table>
+<tr>
+<td>PID<br/></td><td>到达时间<br/></td><td>完成时间 (Finish)<br/></td><td>周转时间 = Finish - Arrival<br/></td><td>执行时间 (Burst)<br/></td><td>等待时间 = Turnaround - Burst<br/></td></tr>
+<tr>
+<td>P1<br/></td><td>0<br/></td><td>8<br/></td><td>8<br/></td><td>8<br/></td><td>0<br/></td></tr>
+<tr>
+<td>P2<br/></td><td>1<br/></td><td>12<br/></td><td>11<br/></td><td>4<br/></td><td>7<br/></td></tr>
+<tr>
+<td>P3<br/></td><td>2<br/></td><td>21<br/></td><td>19<br/></td><td>9<br/></td><td>10<br/></td></tr>
+<tr>
+<td>P4<br/></td><td>3<br/></td><td>26<br/></td><td>23<br/></td><td>5<br/></td><td>18<br/></td></tr>
+<tr>
+<td>P5<br/></td><td>4<br/></td><td>28<br/></td><td>24<br/></td><td>2<br/></td><td>22<br/></td></tr>
+</table>
+
+<ul>
+<li><strong>平均周转时间</strong></li>
+</ul>
+<p>$$<br>\frac{8 + 11 + 19 + 23 + 24}{5} &#x3D; \frac{85}{5} &#x3D; 17<br>$$</p>
+<ul>
+<li><strong>平均等待时间</strong></li>
+</ul>
+<p>$$<br>\frac{0 + 7 + 10 + 18 + 22}{5} &#x3D; \frac{57}{5} &#x3D; 11.4<br>$$</p>
+<ul>
+<li><strong>平均带权周转时间</strong></li>
+</ul>
+<p>$$<br>\frac{8&#x2F;8 + 11&#x2F;4 + 19&#x2F;9 + 23&#x2F;5 + 24&#x2F;2}{5} &#x3D; \frac{1 + 2.75 + 2.11 + 4.6 + 12}{5} \approx \frac{22.46}{5} &#x3D; 4.49<br>$$</p>
+<hr>
+<h3 id="SJF-SRTF-调度示例分析"><a href="#SJF-SRTF-调度示例分析" class="headerlink" title="SJF&#x2F;SRTF 调度示例分析"></a>SJF&#x2F;SRTF 调度示例分析</h3><h4 id="非抢占式-SJF"><a href="#非抢占式-SJF" class="headerlink" title="非抢占式 SJF"></a>非抢占式 SJF</h4><ul>
+<li>排除尚未到达的进程，只在 CPU 空闲且队列中已有进程时进行选择。</li>
+</ul>
+<p><strong>调度顺序</strong>：</p>
+<ol>
+<li>时刻 0，P1 到达，CPU 分配给 P1。</li>
+<li>P1 执行到 8，期间 P2(1)、P3(2)、P4(3)、P5(4) 到达，队列内剩余执行时间分别 $P2:4, P3:9, P4:5, P5:2$。</li>
+<li>CPU 空闲时，于时刻 8 选择执行时间最短的 P5（Burst&#x3D;2），执行 8–10。</li>
+<li>时刻 10 选择剩余执行时间最短的 P2（Burst&#x3D;4），执行 10–14。</li>
+<li>时刻 14 选择 P4（Burst&#x3D;5），执行 14–19。</li>
+<li>最后执行 P3（Burst&#x3D;9），时刻 19–28。</li>
+</ol>
+<table>
+<tr>
+<td>时间区间<br/></td><td>执行进程<br/></td></tr>
+<tr>
+<td>0–8<br/></td><td>P1<br/></td></tr>
+<tr>
+<td>8–10<br/></td><td>P5<br/></td></tr>
+<tr>
+<td>10–14<br/></td><td>P2<br/></td></tr>
+<tr>
+<td>14–19<br/></td><td>P4<br/></td></tr>
+<tr>
+<td>19–28<br/></td><td>P3<br/></td></tr>
+</table>
+
+<h4 id="SJF-指标计算"><a href="#SJF-指标计算" class="headerlink" title="SJF 指标计算"></a>SJF 指标计算</h4><table>
+<tr>
+<td>PID<br/></td><td>到达<br/></td><td>完成<br/></td><td>周转 = 完成−到达<br/></td><td>执行<br/></td><td>等待 = 周转 − 执行<br/></td></tr>
+<tr>
+<td>P1<br/></td><td>0<br/></td><td>8<br/></td><td>8<br/></td><td>8<br/></td><td>0<br/></td></tr>
+<tr>
+<td>P2<br/></td><td>1<br/></td><td>14<br/></td><td>13<br/></td><td>4<br/></td><td>9<br/></td></tr>
+<tr>
+<td>P3<br/></td><td>2<br/></td><td>28<br/></td><td>26<br/></td><td>9<br/></td><td>17<br/></td></tr>
+<tr>
+<td>P4<br/></td><td>3<br/></td><td>19<br/></td><td>16<br/></td><td>5<br/></td><td>11<br/></td></tr>
+<tr>
+<td>P5<br/></td><td>4<br/></td><td>10<br/></td><td>6<br/></td><td>2<br/></td><td>4<br/></td></tr>
+</table>
+
+<ul>
+<li>平均周转时间：$(8 + 13 + 26 + 16 + 6)&#x2F;5 &#x3D; 69&#x2F;5 &#x3D; 13.8$</li>
+<li>平均等待时间：$(0 + 9 + 17 + 11 + 4)&#x2F;5 &#x3D; 41&#x2F;5 &#x3D; 8.2$</li>
+</ul>
+<p>相比 FCFS，SJF 平均周转、等待时间更低。</p>
+<hr>
+<h4 id="5-3-2-抢占式-SRTF"><a href="#5-3-2-抢占式-SRTF" class="headerlink" title="5.3.2. 抢占式 SRTF"></a>5.3.2. 抢占式 SRTF</h4><p>在 SJF 基础上，当有新进程到达且其剩余执行时间小于当前正在执行进程的剩余时间时，会发生抢占。</p>
+<p><strong>调度细节</strong>：</p>
+<ul>
+<li>时刻 0–1：P1 执行 0–1（剩余 7）</li>
+<li>时刻 1：P2 到达 (Burst&#x3D;4)，7 (P1 剩余) &gt; 4 → 抢占。P2 执行 1–2（剩余 3），P1 剩余 7</li>
+<li>时刻 2：P3 到达 (Burst&#x3D;9)，当前最短为 P2(3)，继续。P2 执行 2–3（剩余 2）</li>
+<li>时刻 3：P4 到达 (Burst&#x3D;5)，当前最短为 P2(2)，继续。P2 执行 3–4（剩余 1）</li>
+<li>时刻 4：P5 到达 (Burst&#x3D;2)，此时 P2(1) 与 P5(2)，P2 更短 → P2 执行 4–5（完成）</li>
+<li>较早完成 P2，队列剩余 P1(7)、P3(9)、P4(5)、P5(2)</li>
+<li>时刻 5：当前最短 P5(Burst&#x3D;2)，执行 5–7（完成）</li>
+<li>时刻 7：队列剩余 P1(7)、P3(9)、P4(5)，最短为 P4(5)，执行 7–12（剩余 0 → 完成）</li>
+<li>时刻 12：剩余 P1(7)、P3(9)，选择 P1(7)，执行 12–19（完成）</li>
+<li>时刻 19–28：最后 P3(9)，执行到 28（完成）</li>
+</ul>
+<table>
+<tr>
+<td>时间区间<br/></td><td>执行进程<br/></td></tr>
+<tr>
+<td>0–1<br/></td><td>P1<br/></td></tr>
+<tr>
+<td>1–4<br/></td><td>P2<br/></td></tr>
+<tr>
+<td>4–5<br/></td><td>P2<br/></td></tr>
+<tr>
+<td>5–7<br/></td><td>P5<br/></td></tr>
+<tr>
+<td>7–12<br/></td><td>P4<br/></td></tr>
+<tr>
+<td>12–19<br/></td><td>P1<br/></td></tr>
+<tr>
+<td>19–28<br/></td><td>P3<br/></td></tr>
+</table>
+
+<p>注意：由于多个时间点属于同一进程的继续执行，合并相邻时间段可简化为：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">P1</span>: <span class="number">0</span>−<span class="number">1</span>, <span class="number">12</span>−<span class="number">19</span>  </span><br><span class="line"><span class="attribute">P2</span>: <span class="number">1</span>−<span class="number">5</span>  </span><br><span class="line"><span class="attribute">P5</span>: <span class="number">5</span>−<span class="number">7</span>  </span><br><span class="line"><span class="attribute">P4</span>: <span class="number">7</span>−<span class="number">12</span>  </span><br><span class="line"><span class="attribute">P3</span>: <span class="number">19</span>−<span class="number">28</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="SRTF-指标计算"><a href="#SRTF-指标计算" class="headerlink" title="SRTF 指标计算"></a>SRTF 指标计算</h4><table>
+<tr>
+<td>PID<br/></td><td>到达<br/></td><td>完成<br/></td><td>周转 = 完成−到达<br/></td><td>执行时间<br/></td><td>等待 = 周转 − 执行<br/></td></tr>
+<tr>
+<td>P1<br/></td><td>0<br/></td><td>19<br/></td><td>19<br/></td><td>8<br/></td><td>11<br/></td></tr>
+<tr>
+<td>P2<br/></td><td>1<br/></td><td>5<br/></td><td>4<br/></td><td>4<br/></td><td>0<br/></td></tr>
+<tr>
+<td>P3<br/></td><td>2<br/></td><td>28<br/></td><td>26<br/></td><td>9<br/></td><td>17<br/></td></tr>
+<tr>
+<td>P4<br/></td><td>3<br/></td><td>12<br/></td><td>9<br/></td><td>5<br/></td><td>4<br/></td></tr>
+<tr>
+<td>P5<br/></td><td>4<br/></td><td>7<br/></td><td>3<br/></td><td>2<br/></td><td>1<br/></td></tr>
+</table>
+
+<ul>
+<li>平均周转时间：$(19 + 4 + 26 + 9 + 3)&#x2F;5 &#x3D; 61&#x2F;5 &#x3D; 12.2$</li>
+<li>平均等待时间：$(11 + 0 + 17 + 4 + 1)&#x2F;5 &#x3D; 33&#x2F;5 &#x3D; 6.6$</li>
+</ul>
+<p>相比 SJF，SRTF 的平均等待、周转时间略有改进，但切换开销更高。</p>
+<hr>
+<h3 id="RR-调度示例分析（时间片-3）"><a href="#RR-调度示例分析（时间片-3）" class="headerlink" title="RR 调度示例分析（时间片 &#x3D; 3）"></a>RR 调度示例分析（时间片 &#x3D; 3）</h3><p><strong>假设时间片（Quantum） &#x3D; 3</strong>。采用抢占式策略，时钟中断每 3 单位触发一次。</p>
+<h4 id="调度步骤"><a href="#调度步骤" class="headerlink" title="调度步骤"></a>调度步骤</h4><p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749361179853Sytlb2qLco04MixG0i5cz3AFnxd.png" alt="1749361179853Sytlb2qLco04MixG0i5cz3AFnxd.png"></p>
+<ol>
+<li><strong>时刻 0–1</strong></li>
+</ol>
+<ul>
+<li>P1 到达并开始执行。</li>
+<li>经过 1 单位（时刻 1），P2 到达，仍在 P1 时间片内继续。剩余时间：P1 (7)。</li>
+</ul>
+<ol>
+<li><strong>时刻 1–3</strong></li>
+</ol>
+<ul>
+<li>P1 继续执行至用完剩余时间片（3 单位），时刻 3 停止，剩余 P1(5)。</li>
+<li>队列顺序：P2 (到达时刻 1)、P3(2)、P4(3)。</li>
+</ul>
+<ol>
+<li><strong>时刻 3–6</strong></li>
+</ol>
+<ul>
+<li>从队头取 P2（执行 3 单位），时刻 6 剩余 P2（1）。</li>
+<li>新到达 P5(4) 已在队列尾。队列顺序：P3、P4、P5、P1（回到队尾）、P2(1)。</li>
+</ul>
+<ol>
+<li><strong>时刻 6–9</strong></li>
+</ol>
+<ul>
+<li>执行 P3 3 单位，时刻 9 剩余 P3(6)。队列：P4、P5、P1(5)、P2(1)、P3(6)。</li>
+</ul>
+<ol>
+<li><strong>时刻 9–12</strong></li>
+</ol>
+<ul>
+<li>执行 P4 3 单位，时刻 12 剩余 P4(2)。队列：P5、P1(5)、P2(1)、P3(6)、P4(2)。</li>
+</ul>
+<ol>
+<li><strong>时刻 12–14</strong></li>
+</ol>
+<ul>
+<li>执行 P5 2 单位（用完）、时刻 14 完成。队列：P1(5)、P2(1)、P3(6)、P4(2)。</li>
+</ul>
+<ol>
+<li><strong>时刻 14–17</strong></li>
+</ol>
+<ul>
+<li>执行 P1 3 单位，时刻 17 剩余 P1(2)。队列：P2(1)、P3(6)、P4(2)、P1(2)。</li>
+</ul>
+<ol>
+<li><strong>时刻 17–18</strong></li>
+</ol>
+<ul>
+<li>执行 P2 1 单位（完成），时刻 18。队列：P3(6)、P4(2)、P1(2)。</li>
+</ul>
+<ol>
+<li><strong>时刻 18–21</strong></li>
+</ol>
+<ul>
+<li>执行 P3 3 单位，时刻 21 剩余 P3(3)。队列：P4(2)、P1(2)、P3(3)。</li>
+</ul>
+<ol>
+<li><p><strong>时刻 21–23</strong></p>
+<ul>
+<li>执行 P4 2 单位（完成），时刻 23。队列：P1(2)、P3(3)。</li>
+</ul>
+</li>
+<li><p><strong>时刻 23–25</strong></p>
+<ul>
+<li>执行 P1 2 单位（完成），时刻 25。队列：P3(3)。</li>
+</ul>
+</li>
+<li><p><strong>时刻 25–28</strong></p>
+<ul>
+<li>执行 P3 3 单位（完成），时刻 28。队列空。</li>
+</ul>
+</li>
+</ol>
+<h4 id="调度时间线（Gantt-图）"><a href="#调度时间线（Gantt-图）" class="headerlink" title="调度时间线（Gantt 图）"></a>调度时间线（Gantt 图）</h4><p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749361187852I1ojbIWGEoHOfLxgZsJciFdWnqd.png" alt="1749361187852I1ojbIWGEoHOfLxgZsJciFdWnqd.png"></p>
+<p>合并表示为各个片段与时间区间：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[<span class="symbol">0−3</span>]: <span class="link">P1  </span></span><br><span class="line">[<span class="symbol">3−6</span>]: <span class="link">P2  </span></span><br><span class="line">[<span class="symbol">6−9</span>]: <span class="link">P3  </span></span><br><span class="line">[<span class="symbol">9−12</span>]: <span class="link">P4  </span></span><br><span class="line">[<span class="symbol">12−14</span>]: <span class="link">P5  </span></span><br><span class="line">[<span class="symbol">14−17</span>]: <span class="link">P1  </span></span><br><span class="line">[<span class="symbol">17−18</span>]: <span class="link">P2  </span></span><br><span class="line">[<span class="symbol">18−21</span>]: <span class="link">P3  </span></span><br><span class="line">[<span class="symbol">21−23</span>]: <span class="link">P4  </span></span><br><span class="line">[<span class="symbol">23−25</span>]: <span class="link">P1  </span></span><br><span class="line">[<span class="symbol">25−28</span>]: <span class="link">P3</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="RR-指标计算"><a href="#RR-指标计算" class="headerlink" title="RR 指标计算"></a>RR 指标计算</h4><table>
+<tr>
+<td>PID<br/></td><td>到达<br/></td><td>完成<br/></td><td>周转 = 完成−到达<br/></td><td>执行时间<br/></td><td>等待 = 周转−执行<br/></td></tr>
+<tr>
+<td>P1<br/></td><td>0<br/></td><td>25<br/></td><td>25<br/></td><td>8<br/></td><td>17<br/></td></tr>
+<tr>
+<td>P2<br/></td><td>1<br/></td><td>18<br/></td><td>17<br/></td><td>4<br/></td><td>13<br/></td></tr>
+<tr>
+<td>P3<br/></td><td>2<br/></td><td>28<br/></td><td>26<br/></td><td>9<br/></td><td>17<br/></td></tr>
+<tr>
+<td>P4<br/></td><td>3<br/></td><td>23<br/></td><td>20<br/></td><td>5<br/></td><td>15<br/></td></tr>
+<tr>
+<td>P5<br/></td><td>4<br/></td><td>14<br/></td><td>10<br/></td><td>2<br/></td><td>8<br/></td></tr>
+</table>
+
+<ul>
+<li>平均周转时间：$(25 + 17 + 26 + 20 + 10)&#x2F;5 &#x3D; 98&#x2F;5 &#x3D; 19.6$</li>
+<li>平均等待时间：$(17 + 13 + 17 + 15 + 8)&#x2F;5 &#x3D; 70&#x2F;5 &#x3D; 14$</li>
+</ul>
+<p>相比 FCFS、SJF&#x2F;SRTF，RR 的平均等待与周转时间更高，但响应时间更有保障（最坏响应时间为 3× 队列长度 ≈ 3×5 &#x3D; 15）。</p>
+<hr>
+<h3 id="多级反馈队列示例分析"><a href="#多级反馈队列示例分析" class="headerlink" title="多级反馈队列示例分析"></a>多级反馈队列示例分析</h3><h4 id="参数假设"><a href="#参数假设" class="headerlink" title="参数假设"></a>参数假设</h4><ul>
+<li><strong>队列数</strong>：3（Q0、Q1、Q2），优先级从高到低依次为 Q0 &gt; Q1 &gt; Q2。</li>
+<li><strong>时间片</strong>：</li>
+<li>Q0: 4</li>
+<li>Q1: 8</li>
+<li>Q2: FCFS（不再分时间片，相当于单独的 FCFS 队列）</li>
+<li><strong>进入队列规则</strong>：</li>
+</ul>
+<ol>
+<li>所有进程初始进入 Q0。</li>
+<li>在 Q0 中用完 4 单位还未完成，则降级到 Q1 队尾；</li>
+<li>在 Q1 中用完 8 单位还未完成，则降级到 Q2 队尾；</li>
+<li>在 Q2 中 FCFS 执行直至完成（不再降级）。</li>
+<li>未用满本级时间片而发生阻塞，则保持本级队列（按到达顺序放回队尾）。</li>
+<li>无晋升机制（简化模型）。</li>
+</ol>
+<h4 id="调度流程"><a href="#调度流程" class="headerlink" title="调度流程"></a>调度流程</h4><ol>
+<li><strong>时刻 0–4</strong></li>
+</ol>
+<ul>
+<li>Q0 队列：P1(8) → 执行 4 单位至 剩余 P1(4)，时刻 4，降级至 Q1 队尾。</li>
+<li>在时刻 1–4，P2(4)、P3(9)、P4(5)、P5(2) 先后到达，依次进入 Q0 队尾。</li>
+</ul>
+<ol>
+<li><strong>时刻 4–8</strong></li>
+</ol>
+<ul>
+<li>Q0 调度队头为 P2(4) → 执行 4 单位 完成，时刻 8。</li>
+<li>Q0 队列剩余：P3(9)、P4(5)、P5(2)</li>
+</ul>
+<ol>
+<li><strong>时刻 8–12</strong></li>
+</ol>
+<ul>
+<li>Q0 队头 P3(9) → 执行 4 单位，剩余 P3(5)，时刻 12，降级到 Q1 队尾。</li>
+<li>Q0 队列剩余：P4(5)、P5(2)</li>
+</ul>
+<ol>
+<li><strong>时刻 12–16</strong></li>
+</ol>
+<ul>
+<li>Q0 队头 P4(5) → 执行 4 单位，剩余 P4(1)，时刻 16，降级到 Q1 队尾。</li>
+<li>Q0 队列剩余：P5(2)</li>
+</ul>
+<ol>
+<li><strong>时刻 16–18</strong></li>
+</ol>
+<ul>
+<li>Q0 队头 P5(2) → 执行 2 单位 完成（未用满时片），时刻 18。</li>
+<li>Q0 队列空，此时切换到 Q1 队列。</li>
+</ul>
+<ol>
+<li><strong>Q1 轮询</strong></li>
+</ol>
+<ul>
+<li><p>Q1 队列：</p>
+<ol>
+<li>P1(4) → 执行 4 单位 完成，时刻 22（未用满时片、直接完成，出列）。</li>
+<li>P3(5) → 执行 5 单位 完成，时刻 27（未用满时片、直接完成）。</li>
+<li>P4(1) → 执行 1 单位 完成，时刻 28。</li>
+</ol>
+</li>
+</ul>
+<ol>
+<li><strong>Q2</strong></li>
+</ol>
+<ul>
+<li>对本示例数据，无进程在 Q1 用满 8 单位，因此 Q2 无进程。</li>
+</ul>
+<h4 id="调度时间线（简化）"><a href="#调度时间线（简化）" class="headerlink" title="调度时间线（简化）"></a>调度时间线（简化）</h4><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">0</span>−<span class="number">4</span>]   <span class="built_in">P1</span> (<span class="built_in">Q0</span>)  </span><br><span class="line">[<span class="number">4</span>−<span class="number">8</span>]   <span class="built_in">P2</span> (<span class="built_in">Q0</span>)  </span><br><span class="line">[<span class="number">8</span>−<span class="number">12</span>]  <span class="built_in">P3</span> (<span class="built_in">Q0</span>)  </span><br><span class="line">[<span class="number">12</span>−<span class="number">16</span>] <span class="built_in">P4</span> (<span class="built_in">Q0</span>)  </span><br><span class="line">[<span class="number">16</span>−<span class="number">18</span>] <span class="built_in">P5</span> (<span class="built_in">Q0</span>)  </span><br><span class="line">[<span class="number">18</span>−<span class="number">22</span>] <span class="built_in">P1</span> (<span class="built_in">Q1</span>)  </span><br><span class="line">[<span class="number">22</span>−<span class="number">27</span>] <span class="built_in">P3</span> (<span class="built_in">Q1</span>)  </span><br><span class="line">[<span class="number">27</span>−<span class="number">28</span>] <span class="built_in">P4</span> (<span class="built_in">Q1</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="多级反馈队列指标计算"><a href="#多级反馈队列指标计算" class="headerlink" title="多级反馈队列指标计算"></a>多级反馈队列指标计算</h4><table>
+<tr>
+<td>PID<br/></td><td>到达<br/></td><td>完成<br/></td><td>周转 = 完成−到达<br/></td><td>执行时间<br/></td><td>等待 = 周转 − 执行<br/></td></tr>
+<tr>
+<td>P1<br/></td><td>0<br/></td><td>22<br/></td><td>22<br/></td><td>8<br/></td><td>14<br/></td></tr>
+<tr>
+<td>P2<br/></td><td>1<br/></td><td>8<br/></td><td>7<br/></td><td>4<br/></td><td>3<br/></td></tr>
+<tr>
+<td>P3<br/></td><td>2<br/></td><td>27<br/></td><td>25<br/></td><td>9<br/></td><td>16<br/></td></tr>
+<tr>
+<td>P4<br/></td><td>3<br/></td><td>28<br/></td><td>25<br/></td><td>5<br/></td><td>20<br/></td></tr>
+<tr>
+<td>P5<br/></td><td>4<br/></td><td>18<br/></td><td>14<br/></td><td>2<br/></td><td>12<br/></td></tr>
+</table>
+
+<ul>
+<li>平均周转时间：$(22 + 7 + 25 + 25 + 14)&#x2F;5 &#x3D; 93&#x2F;5 &#x3D; 18.6$</li>
+<li>平均等待时间：$(14 + 3 + 16 + 20 + 12)&#x2F;5 &#x3D; 65&#x2F;5 &#x3D; 13$</li>
+</ul>
+<p>相比 FCFS、SJF、RR，MLFQ 在该示例中：</p>
+<ul>
+<li>短作业（P2、P5）在 Q0 快速完成，等待时间明显较少；</li>
+<li>长作业（P3、P4、P1）因在 Q0 多次降级，等待较长，但总周转时间依然优于简单 RR；</li>
+<li>综合考虑响应与吞吐，有一定折中效果。</li>
+</ul>
+<hr>
+<h2 id="调度算法的优缺点总结"><a href="#调度算法的优缺点总结" class="headerlink" title="调度算法的优缺点总结"></a>调度算法的优缺点总结</h2><table>
+<tr>
+<td>算法<br/></td><td>优点<br/></td><td>缺点<br/></td><td>适用场景<br/></td></tr>
+<tr>
+<td>FCFS<br/></td><td>实现简单；没有抢占开销<br/></td><td>平均等待/周转时间较大；易出现 Convoy Effect；无优先级区分<br/></td><td>批处理系统、后台任务<br/></td></tr>
+<tr>
+<td>SJF<br/></td><td>平均等待/周转时间最小<br/></td><td>需要预知执行时间；可能导致长作业饥饿<br/></td><td>静态或可预估作业的批处理<br/></td></tr>
+<tr>
+<td>SRTF<br/></td><td>响应迅速、平均等待较小<br/></td><td>抢占频繁，上下文切换开销大；同样存在饥饿<br/></td><td>对延迟敏感的批处理、实验环境<br/></td></tr>
+<tr>
+<td>优先级<br/></td><td>可根据重要性分配资源；实现灵活<br/></td><td>低优先级饥饿；优先级反转问题；需优先级分配策略<br/></td><td>实时系统、含不同优先级任务的系统<br/></td></tr>
+<tr>
+<td>RR<br/></td><td>公平分配、多用户响应快；无饥饿<br/></td><td>平均等待/周转时间偏大；需合理设置时间片<br/></td><td>交互式系统、时分多用户环境<br/></td></tr>
+<tr>
+<td>多级队列<br/></td><td>可对不同进程类型采用不同策略；实现简洁<br/></td><td>队列静态划分；低队列容易饥饿<br/></td><td>操作系统进程分层管理<br/></td></tr>
+<tr>
+<td>多级反馈队列<br/></td><td>综合考虑CPU/I-O 进程；响应与吞吐折中；防止饥饿<br/></td><td>参数较多，调优复杂；实现与维护开销大<br/></td><td>通用操作系统（如 Linux 早期调度）<br/></td></tr>
+<tr>
+<td>实时调度<br/></td><td>能保证任务在截止时间前完成；满足实时要求<br/></td><td>算法复杂；只能针对实时任务；可能牺牲吞吐量和公平性<br/></td><td>硬实时/软实时系统（如航天、工业控制）<br/></td></tr>
+</table>
+
+<hr>
+<h2 id="在实际操作系统中的典型应用"><a href="#在实际操作系统中的典型应用" class="headerlink" title="在实际操作系统中的典型应用"></a>在实际操作系统中的典型应用</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wanghuaijun/p/8046992.html">Linux，Windows 和 UNIX 的进程调度的分析 - 专注 it - 博客园</a></li>
+</ul>
+</blockquote>
+<ol>
+<li><strong>UNIX&#x2F;Linux 调度器</strong></li>
+</ol>
+<ul>
+<li>早期 UNIX 采用基于优先级的多级反馈队列调度（BSD 4.4 era）。</li>
+<li>Linux 2.6 → 3.x 采用 O(1) 调度器（使用固定数量队列和计时桶），基于多级反馈队列思想。</li>
+<li>从 Linux 2.6.23 以后，切换到 CFS（Completely Fair Scheduler，完全公平调度器），采用红黑树实现时间共享，极大提高公平性与可伸缩性。</li>
+</ul>
+<ol>
+<li><strong>Windows 调度器</strong></li>
+</ol>
+<ul>
+<li>采用最高响应优先级线程抢占 (preemptive, priority-based preemptive scheduling)，具有 32 级动态优先级和 1 级实时优先级。</li>
+<li>同时对 I&#x2F;O 密集型与 CPU 密集型线程进行动态优先级调整（I&#x2F;O 密集型短期优先，避免饥饿）。</li>
+</ul>
+<ol>
+<li><strong>实时操作系统（RTOS）</strong></li>
+</ol>
+<ul>
+<li>典型算法：固定优先级抢占调度（Rate Monotonic Scheduling, RMS）、最早截止时间优先 (Earliest Deadline First, EDF)。</li>
+<li>可保证在一定负载下满足硬实时任务的周期性执行约束。</li>
+</ul>
+<ol>
+<li><strong>虚拟化 &#x2F; 容器调度</strong></li>
+</ol>
+<ul>
+<li>Xen、KVM 等虚拟化平台需为每个虚拟 CPU 分配物理 CPU 时间片。</li>
+<li>Kubernetes 等容器编排系统中，每个容器对应多个线程&#x2F;进程，调度器采用 CFS，配合 cgroups 限制和调节 CPU 份额。</li>
+</ul>
+<hr>
+<h2 id="优化思路与扩展"><a href="#优化思路与扩展" class="headerlink" title="优化思路与扩展"></a>优化思路与扩展</h2><ol>
+<li><strong>自适应时间片</strong></li>
+</ol>
+<ul>
+<li>动态调整 RR 时间片大小：初始时给交互进程较小的时间片，若长时间占用则增大；</li>
+<li>可以减少上下文切换并兼顾 I&#x2F;O 密集型进程响应。</li>
+</ul>
+<ol>
+<li><strong>混合调度</strong></li>
+</ol>
+<ul>
+<li>在多级队列中对不同队列采用不同算法。例如：Q0 用 RR，Q1 用优先级，Q2 用 FCFS；</li>
+<li>结合实时任务与后台批处理任务，保证实时约束的同时兼顾吞吐。</li>
+</ul>
+<ol>
+<li><strong>基于负载的动态调度</strong></li>
+</ol>
+<ul>
+<li>在线监测系统负载、进程行为特征，对队列数、时间片长度、优先级自适应调整；</li>
+<li>典型做法：短进程优先、I&#x2F;O 密集任务优先、长时间等待任务提升优先级。</li>
+</ul>
+<ol>
+<li><strong>考虑缓存与上下文切换开销</strong></li>
+</ol>
+<ul>
+<li>在多核环境中，调度器需考虑缓存亲和性（CPU Affinity）、减少缓存抖动；</li>
+<li>结合软&#x2F;硬 NUMA 拓扑结构，将线程更合理地分配到 CPU 核心。</li>
+</ul>
+<ol>
+<li><strong>公平性与服务质量(QoS)</strong></li>
+</ol>
+<ul>
+<li>引入公平队列思路（如 CFS 红黑树），每个就绪线程按“虚拟运行时间”排序；</li>
+<li>在云&#x2F;容器环境中，根据配额&#x2F;优先级设定不同权重，保证租户公平与性能可预测。</li>
+</ul>
+<ol>
+<li><strong>能源感知 (Energy-aware Scheduling)</strong></li>
+</ol>
+<ul>
+<li>通过调度让低优先级进程在低频核上执行，高性能进程在高频核执行；</li>
+<li>动态调整 CPU 频率与电压（DVFS），配合负载情况与性能需求。</li>
+</ul>
+<hr>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li><strong>进程调度算法</strong>是操作系统核心组件之一，直接影响系统性能、响应速度和公平性。</li>
+<li>常见单队列算法（FCFS、SJF&#x2F;SRTF、优先级调度、RR）应用于不同场景，各有优缺点：</li>
+<li>FCFS 实现简单，适合批处理；</li>
+<li>SJF&#x2F;SRTF 平均等待最小，但需预估执行时间；</li>
+<li>优先级调度可区分任务重要性，但需防止饥饿；</li>
+<li>RR 公平且适合交互式系统，但需谨慎设置时间片。</li>
+<li>多级队列与多级反馈队列结合了多种策略，兼顾交互与吞吐，可在通用操作系统中灵活应用，但实现与调优复杂。</li>
+<li>实际操作系统中（Linux、Windows、RTOS）多采用多级&#x2F;公平调度或基于红黑树的 CFS，以满足多核、多租户、实时与能耗等综合需求。</li>
+<li><strong>调度器优化方向</strong>：</li>
+</ul>
+<ol>
+<li>提高公平性（如 CFS&#x2F;Fair Queue）；</li>
+<li>降低上下文切换与缓存抖动开销；</li>
+<li>引入实时、能耗、负载感知等扩展；</li>
+<li>动态自适应调度参数以应对多变负载。</li>
+</ol>
+<p>无论在桌面、服务器、嵌入式还是云环境中，选择合适的调度算法并进行针对性优化，都是提升系统响应能力与吞吐效率的关键环节。</p>
+<hr>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://www.wiley.com/en-us/Operating+System+Concepts%2C+10th+Edition-p-9781119320913">Silberschatz, A., Galvin, P. B., &amp; Gagne, G. (2018). </a><em>Operating System Concepts</em><a target="_blank" rel="noopener" href="https://www.wiley.com/en-us/Operating+System+Concepts%2C+10th+Edition-p-9781119320913"> (10th Edition). Wiley.</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.pearson.com/store/p/modern-operating-systems/P100000253296">Tanenbaum, A. S., &amp; Bos, H. (2014). </a><em>Modern Operating Systems</em><a target="_blank" rel="noopener" href="https://www.pearson.com/store/p/modern-operating-systems/P100000253296"> (4th Edition). Pearson.</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.pearson.com/store/p/operating-systems-internals-and-design-principles/P100000253343">Stallings, W. (2018). </a><em>Operating Systems: Internals and Design Principles</em><a target="_blank" rel="noopener" href="https://www.pearson.com/store/p/operating-systems-internals-and-design-principles/P100000253343"> (9th Edition). Pearson.</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.informit.com/store/linux-kernel-development-9780672329463">Love, R. (2010). </a><em>Linux Kernel Development</em><a target="_blank" rel="noopener" href="https://www.informit.com/store/linux-kernel-development-9780672329463"> (3rd Edition). Addison-Wesley.</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.oreilly.com/library/view/understanding-the-linux/0596005652/">Bovet, D. P., &amp; Cesati, M. (2005). </a><em>Understanding the Linux Kernel</em><a target="_blank" rel="noopener" href="https://www.oreilly.com/library/view/understanding-the-linux/0596005652/"> (3rd Edition). O’Reilly Media.</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.docker.com/config/containers/resource_constraints/">Docker 官方文档：“Resource Management and Scheduling”</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/mozilla/NSScheduler">Mozilla 开源项目 “NSScheduler” 源码与文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://rtems.org/rms">“Rate Monotonic Scheduling (RMS)” Tutorial, Real-Time Systems Community.</a></li>
+<li><a target="_blank" rel="noopener" href="https://rtems.org/edf">“Earliest Deadline First (EDF) Scheduling”, Real-Time Systems Tutorial.</a></li>
+</ul>
+<blockquote>
+<p><strong>延伸阅读方向</strong>：</p>
+<ul>
+<li>现代多核环境下的调度（例如 CFS 的 Red-Black Tree 结构）</li>
+<li>云计算平台中的容器&#x2F;虚拟机资源调度策略</li>
+<li>实时操作系统中固定优先级 vs 动态优先级调度算法对比</li>
+</ul>
+</blockquote>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2025/05/11/2025-05-11-%E9%93%B6%E8%A1%8C%E5%AE%B6%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/">2025-05-11-银行家算法分析</a></li>
+                
+                
+                    <li>下一篇: <a href="/2025/05/08/2025-05-08-deepseek%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%83%A8%E7%BD%B2/">2025-05-08-deepseek 本地化部署</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" rel="tag">课程学习</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&r=X&d=" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2025/07/29/2025-07-29-%E4%B9%9D%E6%A0%BC%E9%80%9A%E7%94%A8%E5%9F%BA%E7%A1%80%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">2025-07-29-九格通用基础大模型环境配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/07/03/2025-07-03-%E6%8B%AF%E6%95%91%E6%88%91%E7%9A%84%E2%80%9C%E9%AB%98%E7%83%A7%E2%80%9D%E6%88%98%E5%8F%8B%E2%80%94%E2%80%94Y7000P%202024%E7%89%88%E6%B8%85%E7%81%B0%E6%8D%A2%E7%A1%85%E8%84%82%E8%AE%B0%E5%BD%95/">2025-07-03-拯救我的“高烧”战友——Y7000P 2024 版清灰换硅脂记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/08/2025-06-08-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%95%E5%B1%82%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-08-大模型底层技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/05/2025-06-05-%E6%99%BA%E8%83%BD%E4%BD%93%E5%B9%B3%E5%8F%B0%E5%8F%8A%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-05-智能体平台及关键技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/04/2025-06-04-%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%B9%B3%E5%8F%B0%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D/">2025-06-04-低代码平台及相关技术介绍应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/03/2025-06-03-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/">2025-06-03-微信小程序开发框架详解</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 10px;">深度学习 程序开发</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">深度学习 论文阅读</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 16px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2025 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>
+
+  </body>
+</html>

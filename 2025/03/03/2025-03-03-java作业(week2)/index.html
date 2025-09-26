@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2025-03-03-java 学习 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-03-03-java 学习"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-03-03-java 学习</h2>
+            <div class="post-meta">
+                <time class="date">2025.03.03</time>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <blockquote>这篇文章上次修改于 208 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+        
+            <h1 id="2025-03-03-java-学习"><a href="#2025-03-03-java-学习" class="headerlink" title="2025-03-03-java 学习"></a>2025-03-03-java 学习</h1><h1 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h1><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1740984761380Um6XbA84PoE5OZxgGQmcbH7anbc.png" alt="1740984761380Um6XbA84PoE5OZxgGQmcbH7anbc.png"></p>
+<blockquote>
+<p>参考博客<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44178736/article/details/108380732">立方公式 及 完全立方公式-CSDN 博客</a></p>
+</blockquote>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1740984767380ZEywblubeoDIfnx53h1ccesknjd.png" alt="1740984767380ZEywblubeoDIfnx53h1ccesknjd.png"></p>
+<h1 id="基础任务"><a href="#基础任务" class="headerlink" title="基础任务"></a>基础任务</h1><blockquote>
+<p>由自然数前 n 项立方和公式:</p>
+<p>$$<br>1^{3}+2^{3}+\cdot \cdot \cdot+\mathrm{n}^{3}&#x3D;[\frac{\mathrm{n}*(\mathrm{n}+1)}{2}]^{2}&#x3D;(1+2+\cdot \cdot \cdot+\mathrm{n})^{2}<br>$$</p>
+<p>我们可以得到对于公式 1:只需验证 $$(\frac{5<em>6}{2})^2 -(\frac{2</em>3}{2})^2 &#x3D; 6^3$$</p>
+<p>对于公式 2:只需验证 $$(\frac{69<em>70}{2})^2 -(\frac{5</em>6}{2})^2 &#x3D; 180^3$$</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">// 验证基本等式</span></span><br><span class="line">        System._out_.println(<span class="string">&quot;验证基本等式...\n&quot;</span>);</span><br><span class="line">        _verifyBasicEquations_();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 附加任务</span></span><br><span class="line">        System._out_.println(<span class="string">&quot;寻找更多的满足条件的整数序列...&quot;</span>);</span><br><span class="line">        _findMoreSequences_();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 验证基本等式</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">verifyBasicEquations</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 使用自然数立方和公式验证</span></span><br><span class="line">        <span class="comment">// 公式：1^3 + 2^3 + ... + n^3 = [n(n+1)/2]^2</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 验证公式1: 3^3 + 4^3 + 5^3 = 6^3</span></span><br><span class="line">        <span class="comment">// 等价于 (5*6/2)^2 - (2*3/2)^2 = 6^3</span></span><br><span class="line">        <span class="type">double</span> <span class="variable">leftSide1</span> <span class="operator">=</span> Math._pow_(<span class="number">5</span> * <span class="number">6.0</span> / <span class="number">2</span>, <span class="number">2</span>) - Math._pow_(<span class="number">2</span> * <span class="number">3.0</span> / <span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line">        <span class="type">double</span> <span class="variable">rightSide1</span> <span class="operator">=</span> Math._pow_(<span class="number">6</span>, <span class="number">3</span>);</span><br><span class="line">        <span class="keyword">if</span> (Math._abs_(leftSide1 - rightSide1) &lt; <span class="number">1e-10</span>) &#123;</span><br><span class="line">            System._out_.println(<span class="string">&quot;公式1:3^3 + 4^3 + 5^3 = 6^3 成立&quot;</span>);</span><br><span class="line">            System._out_.printf(<span class="string">&quot;左边 = %.2f, 右边 = %.2f\n&quot;</span>, leftSide1, rightSide1);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System._out_.println(<span class="string">&quot;公式1:3^3 + 4^3 + 5^3 = 6^3 不成立&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 验证公式2: 6^3 + 7^3 + ... + 69^3 = 180^3</span></span><br><span class="line">        <span class="comment">// 等价于 (69*70/2)^2 - (5*6/2)^2 = 180^3</span></span><br><span class="line">        <span class="type">double</span> <span class="variable">leftSide2</span> <span class="operator">=</span> Math._pow_(<span class="number">69</span> * <span class="number">70.0</span> / <span class="number">2</span>, <span class="number">2</span>) - Math._pow_(<span class="number">5</span> * <span class="number">6.0</span> / <span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line">        <span class="type">double</span> <span class="variable">rightSide2</span> <span class="operator">=</span> Math._pow_(<span class="number">180</span>, <span class="number">3</span>);</span><br><span class="line">        <span class="keyword">if</span> (Math._abs_(leftSide2 - rightSide2) &lt; <span class="number">1e-10</span>) &#123;</span><br><span class="line">            System._out_.println(<span class="string">&quot;\n公式2:6^3 + 7^3 + ... + 69^3 = 180^3 成立&quot;</span>);</span><br><span class="line">            System._out_.printf(<span class="string">&quot;左边 = %.2f, 右边 = %.2f\n&quot;</span>, leftSide2, rightSide2);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System._out_.println(<span class="string">&quot;\n公式2:6^3 + 7^3 + ... + 69^3 = 180^3 不成立&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="附加任务"><a href="#附加任务" class="headerlink" title="附加任务"></a>附加任务</h1><blockquote>
+<p>我的思路是用两个嵌套循环,暴力搜索满足要求的整数序列,使用立方和公式化简来直接计算区间和，避免了循环计算每个数的立方：<br>对于区间[start, end]，使用 $(\frac{end(end+1)}{2})^2 - (\frac{(start-1)(start)}{2})^2$<br>代码避免了大量的立方计算，运行速度会比直接使用立方和 + 暴力搜索快。如果想要搜索更大范围的数，只需要修改循环中的上限（1000）即可。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">findMoreSequences</span><span class="params">()</span> &#123;</span><br><span class="line">    System._out_.println(<span class="string">&quot;找到的满足条件的整数序列：&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">start</span> <span class="operator">=</span> <span class="number">1</span>; start &lt; <span class="number">100</span>; start++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">end</span> <span class="operator">=</span> start; end &lt; <span class="number">100</span>; end++) &#123;  </span><br><span class="line">            <span class="comment">// 使用立方和公式计算区间[start, end]的立方和</span></span><br><span class="line">            <span class="type">double</span> <span class="variable">sum</span> <span class="operator">=</span> Math._pow_(end * (end + <span class="number">1.0</span>) / <span class="number">2</span>, <span class="number">2</span>) - </span><br><span class="line">                       Math._pow_((start - <span class="number">1</span>) * start / <span class="number">2.0</span>, <span class="number">2</span>);</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 计算立方根</span></span><br><span class="line">            <span class="type">double</span> <span class="variable">cubeRoot</span> <span class="operator">=</span> Math._cbrt_(sum);</span><br><span class="line">            <span class="comment">// 检查是否为整数</span></span><br><span class="line">            <span class="keyword">if</span> (Math._abs_(cubeRoot - Math._round_(cubeRoot)) &lt; <span class="number">1e-10</span>) &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">cubeRootInt</span> <span class="operator">=</span> (<span class="type">int</span>) Math._round_(cubeRoot);</span><br><span class="line">                <span class="comment">// 验证这个序列是否真的满足条件</span></span><br><span class="line">                <span class="type">double</span> <span class="variable">verification</span> <span class="operator">=</span> Math._pow_(cubeRootInt, <span class="number">3</span>);</span><br><span class="line">                <span class="keyword">if</span> (Math._abs_(verification - sum) &lt; <span class="number">1e-10</span>) &#123;</span><br><span class="line">                    <span class="comment">// 只输出有意义的序列（立方根大于序列中的所有数）</span></span><br><span class="line">                    <span class="keyword">if</span> (cubeRootInt &gt; end) &#123;</span><br><span class="line">                        System._out_.printf(<span class="string">&quot;%d^3 + %d^3 + ... + %d^3 = %d^3\n&quot;</span>, </span><br><span class="line">                            start, start + <span class="number">1</span>, end, cubeRootInt);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2025/03/04/2025-03-04-%E5%88%A4%E6%96%AD%E7%B4%A0%E6%95%B0/">2025-03-04-判断素数</a></li>
+                
+                
+                    <li>下一篇: <a href="/2025/03/01/2025-03-01-%E7%89%9B%E5%AE%A2%E5%91%A8%E8%B5%9B83/">2025-03-01-牛客周赛83</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" rel="tag">算法练习</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&r=X&d=" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2025/07/29/2025-07-29-%E4%B9%9D%E6%A0%BC%E9%80%9A%E7%94%A8%E5%9F%BA%E7%A1%80%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">2025-07-29-九格通用基础大模型环境配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/07/03/2025-07-03-%E6%8B%AF%E6%95%91%E6%88%91%E7%9A%84%E2%80%9C%E9%AB%98%E7%83%A7%E2%80%9D%E6%88%98%E5%8F%8B%E2%80%94%E2%80%94Y7000P%202024%E7%89%88%E6%B8%85%E7%81%B0%E6%8D%A2%E7%A1%85%E8%84%82%E8%AE%B0%E5%BD%95/">2025-07-03-拯救我的“高烧”战友——Y7000P 2024 版清灰换硅脂记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/08/2025-06-08-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%95%E5%B1%82%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-08-大模型底层技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/05/2025-06-05-%E6%99%BA%E8%83%BD%E4%BD%93%E5%B9%B3%E5%8F%B0%E5%8F%8A%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-05-智能体平台及关键技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/04/2025-06-04-%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%B9%B3%E5%8F%B0%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D/">2025-06-04-低代码平台及相关技术介绍应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/03/2025-06-03-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/">2025-06-03-微信小程序开发框架详解</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 10px;">深度学习 程序开发</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">深度学习 论文阅读</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 16px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2025 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>
+
+  </body>
+</html>
