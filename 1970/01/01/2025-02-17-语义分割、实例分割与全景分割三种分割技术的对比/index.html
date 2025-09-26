@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  
+  
+  <title>语义分割、实例分割与全景分割三种分割技术的对比 | TK的小站</title>
+  <link rel="canonical" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-17-%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E3%80%81%E5%AE%9E%E4%BE%8B%E5%88%86%E5%89%B2%E4%B8%8E%E5%85%A8%E6%99%AF%E5%88%86%E5%89%B2%E4%B8%89%E7%A7%8D%E5%88%86%E5%89%B2%E6%8A%80%E6%9C%AF%E7%9A%84%E5%AF%B9%E6%AF%94/">
+  <meta name="author" content="TK" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="深度学习" />
+  
+  <meta name="description" content="三种分割技术的对比语义分割、实例分割和全景分割是计算机视觉中三种重要的图像分割技术，各自有不同的任务目标、技术难点和应用场景。语义分割的目标是为图像中的每个像素分配一个类别标签，但不区分同一类别中的不同实例。它的技术难点在于需要精确的像素级分类，而对同一类别中的不同实例不进行区分。语义分割的主流方法包括 FCN、DeepLab 系列和 PSPNet，性能通常通过平均交并比（mIoU）来衡量。语义分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="语义分割、实例分割与全景分割三种分割技术的对比">
+<meta property="og:url" content="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-17-%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E3%80%81%E5%AE%9E%E4%BE%8B%E5%88%86%E5%89%B2%E4%B8%8E%E5%85%A8%E6%99%AF%E5%88%86%E5%89%B2%E4%B8%89%E7%A7%8D%E5%88%86%E5%89%B2%E6%8A%80%E6%9C%AF%E7%9A%84%E5%AF%B9%E6%AF%94/index.html">
+<meta property="og:site_name" content="TK的小站">
+<meta property="og:description" content="三种分割技术的对比语义分割、实例分割和全景分割是计算机视觉中三种重要的图像分割技术，各自有不同的任务目标、技术难点和应用场景。语义分割的目标是为图像中的每个像素分配一个类别标签，但不区分同一类别中的不同实例。它的技术难点在于需要精确的像素级分类，而对同一类别中的不同实例不进行区分。语义分割的主流方法包括 FCN、DeepLab 系列和 PSPNet，性能通常通过平均交并比（mIoU）来衡量。语义分">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17402355054491740235504618.png">
+<meta property="article:published_time" content="1970-01-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-22T07:55:44.486Z">
+<meta property="article:author" content="TK">
+<meta property="article:tag" content="深度学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17402355054491740235504618.png">
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-core.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="highlight-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/highlight/highlight.js/night-eighties.min.css" media="all"></link>
+  
+  <link rel="stylesheet" id="theme-light-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/light.min.css" media="all"></link>
+  <link rel="stylesheet" id="theme-dark-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/dark.min.css" media="(prefers-color-scheme: dark)"></link>
+  <script src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-theme.min.js"></script>
+  <link rel="stylesheet" id="fontawe-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="nprogress-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.css" media="all"></link>
+  
+  
+    <link rel="stylesheet" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.css"></link>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  
+    <script src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
+  
+  <!-- 自定义站点横幅和背景 -->
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+      html[data-theme="dark"] .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('');
+        }
+        html[data-theme="dark"] body.custom-background {
+          background-image: url('');
+        }
+      }
+    
+    
+      .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+      html[data-theme="dark"] .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+    
+  </style>
+
+  <!-- 额外的追加注入项 -->
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/tkzzzzzz6/tkzzzzzz6.github.io/">TK的小站</a></div>
+                    <div id="kratos-nav-toggle-wrapper" class="nav-toggle">
+                        <a id="kratos-nav-toggle" class="kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/tkzzzzzz6/tkzzzzzz6.github.io/">
+                        <h2>TK的小站</h2> <br />
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+
+
+        
+
+            
+
+            <section class="kr-main-col col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-17-%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E3%80%81%E5%AE%9E%E4%BE%8B%E5%88%86%E5%89%B2%E4%B8%8E%E5%85%A8%E6%99%AF%E5%88%86%E5%89%B2%E4%B8%89%E7%A7%8D%E5%88%86%E5%89%B2%E6%8A%80%E6%9C%AF%E7%9A%84%E5%AF%B9%E6%AF%94/">
+    <div class="kratos-hentry kratos-page-inner clearfix">
+        <header class="kratos-page-header">
+            
+                <h1 class="kratos-page-title text-center" itemprop="name headline">语义分割、实例分割与全景分割三种分割技术的对比</h1>
+            
+            <ul class="kratos-page-meta text-center">
+                <li><time datetime="1970-01-01T00:00:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 1970-01-01</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">TK</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~4.73K
+                        
+                        字
+                    </li>
+                
+                
+                    <li>
+                        <i class="fa fa-eye"></i>
+                         次阅读
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-page-content kr-post">
+            
+            
+            
+            <hr />
+            <div itemprop="articleBody"><h1 id="三种分割技术的对比"><a href="#三种分割技术的对比" class="headerlink" title="三种分割技术的对比"></a><strong>三种分割技术的对比</strong></h1><p>语义分割、实例分割和全景分割是计算机视觉中三种重要的图像分割技术，各自有不同的任务目标、技术难点和应用场景。语义分割的目标是为图像中的每个像素分配一个类别标签，但不区分同一类别中的不同实例。它的技术难点在于需要精确的像素级分类，而对同一类别中的不同实例不进行区分。语义分割的主流方法包括 FCN、DeepLab 系列和 PSPNet，性能通常通过平均交并比（mIoU）来衡量。语义分割模型结构相对简单，适合大规模像素级分类任务，广泛应用于自动驾驶、医学影像分析和卫星图像处理等领域。</p>
+<p>实例分割则进一步要求为图像中的每个目标实例生成独立的分割掩码，并区分同一类别中的不同实例。它的技术难点在于需要同时处理目标检测和像素级分割，尤其是在处理小目标和密集目标时，对分割精度的要求更高。实例分割的主流方法包括 Mask R-CNN、SOLO 系列和 BlendMask，性能指标通常包括掩码平均精度（mask AP）和实例分割精度。实例分割能够精确区分同一类别中的不同实例，适用于复杂场景，如自动驾驶和医学影像分析。</p>
+<p>全景分割结合了语义分割和实例分割的优点，旨在同时处理“Things”（可数目标）和“Stuff”（不可数目标），为每个像素分配类别和实例 ID。全景分割的技术难点在于需要统一处理前景目标和背景区域，避免分割结果的重叠和遗漏。其主流方法包括 Mask2Former 和 Panoptic-DeepLab，性能通过全景质量（PQ）、分割质量（SQ）和识别质量（RQ）来衡量。全景分割提供了一种更全面的场景理解方式，适用于自动驾驶、机器人视觉和视频监控等需要完整场景理解的应用场景。</p>
+<p>随着技术的发展，Transformer 架构逐渐被引入到这些分割任务中，显著提升了模型的多尺度特征学习能力和整体性能。语义分割、实例分割和全景分割各有其独特的优势和应用场景，但在实际应用中，全景分割因其能够提供更完整的场景理解，逐渐成为研究和应用的热点方向。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17402355054491740235504618.png" alt="17402355054491740235504618.png"></p>
+<table>
+<tr>
+<td>技术<br/></td><td>方法简介<br/></td><td>关注点<br/></td></tr>
+<tr>
+<td>语义分割<br/></td><td>为图像中的每个像素分配特定类别标签。<br/></td><td>关注“stuff”部分<br/></td></tr>
+<tr>
+<td>实例分割<br/></td><td>在图像中检测并区分不同的物体实例。<br/></td><td>关注“things”部分<br/></td></tr>
+<tr>
+<td>全景分割<br/></td><td>结合语义分割和实例分割，为每个像素分配语义标签和实例标识符。<br/></td><td>同时关注“things”和“stuff”部分<br/></td></tr>
+</table>
+
+<h1 id="评价指标"><a href="#评价指标" class="headerlink" title="评价指标"></a><strong>评价指标</strong></h1><table>
+<tr>
+<td>分割类型<br/></td><td>评估指标<br/></td><td>描述<br/></td></tr>
+<tr>
+<td rowspan="4">语义分割<br/></td><td>像素准确率（Pixel Accuracy）<br/></td><td>计算所有像素中被正确分类的比例<br/></td></tr>
+<tr>
+<td>平均交并比（MIoU）<br/></td><td>衡量预测分割与真实标注之间的重叠程度，是语义分割的核心指标<br/></td></tr>
+<tr>
+<td>Dice 系数（Dice Coefficient）<br/></td><td>衡量预测和真实分割的相似度，类似于 IoU<br/></td></tr>
+<tr>
+<td>召回率（Recall）和精确率（Precision）<br/></td><td>分别衡量模型对正样本的召回能力和预测正样本的准确性<br/></td></tr>
+<tr>
+<td rowspan="3">实例分割<br/></td><td>平均精度均值（mAP）<br/></td><td>通过不同交并比（IoU）阈值下的平均精度来评估模型性能，是实例分割的核心指标<br/></td></tr>
+<tr>
+<td>平均交并比（MIoU）<br/></td><td>衡量预测实例与真实实例之间的重叠程度<br/></td></tr>
+<tr>
+<td>目标级别的精确率和召回率<br/></td><td>基于实例的 IoU 判断预测实例是否正确匹配真实实例<br/></td></tr>
+<tr>
+<td rowspan="3">全景分割<br/></td><td>平均交并比（mIoU）<br/></td><td>用于评估语义分割部分的性能<br/></td></tr>
+<tr>
+<td>平均精度均值（mAP）<br/></td><td>用于评估实例分割部分的性能<br/></td></tr>
+<tr>
+<td>全景质量（Panoptic Quality, PQ）<br/></td><td>综合考虑语义分割的准确性和实例分割的完整性，是全景分割特有的评估指标<br/></td></tr>
+</table>
+
+<p>这些指标各有侧重点，具体选择取决于任务需求和数据集特性。</p>
+<ol>
+<li><strong>MIoU（Mean Intersection over Union）</strong></li>
+</ol>
+<p>MIoU 是一种常用的语义分割模型评价指标，它通过计算预测结果和真实标签的交集与并集之间的比值来衡量模型性能。MIoU 的计算公式为：</p>
+<p>$$<br>\mathrm{MIoU}&#x3D;\frac1N\sum_{i&#x3D;1}^N\frac{\mathrm{TP}_i}{\mathrm{TP}_i+\mathrm{FP}_i+\mathrm{FN}_i}<br>$$</p>
+<p>其中 TP 表示真正例（True Positives），FP 表示假正例（False Positives），FN 表示假反例（False Negatives）。MIoU 能够综合考虑模型的像素级别预测准确度，对模型在处理不同类别、不同大小的目标时进行公平的评价。</p>
+<ol>
+<li><strong>IoU（Intersection over Union）</strong></li>
+</ol>
+<p>IoU 指标即交并比，是语义分割中常用的标准度量。它衡量的是预测结果与真实标签之间的交集与并集之比。IoU 的计算公式为：</p>
+<p>$$<br>\mathrm{IoU}&#x3D;\frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FP}+\mathrm{FN}}<br>$$</p>
+<ol>
+<li><strong>Accuracy（准确率）</strong></li>
+</ol>
+<p>$$<br>\mathrm{Accuracy}&#x3D;\frac{\mathrm{TP+TN}}{\mathrm{TP+FP+FN+TN}}<br>$$</p>
+<p>准确率是指预测正确的样本数量占全部样本的百分比。然而，当数据类别分布不平衡时，准确率可能无法准确评价模型的好坏。因此，在语义分割任务中，准确率通常与其他指标结合使用。</p>
+<ol>
+<li><strong>Precision（查准率,精确率）</strong></li>
+</ol>
+<p>$$<br>\text{Precision}&#x3D;\frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FP}}<br>$$</p>
+<p>查准率表示模型预测为正例的所有样本中，预测正确（真实标签为正）样本的占比。在语义分割中，查准率反映了模型对正样本的识别能力。</p>
+<ol>
+<li><strong>Recall（查全率,召回率）</strong></li>
+</ol>
+<p>$$<br>\mathrm{Recall}&#x3D;\frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FN}}<br>$$</p>
+<p>查全率表示所有真实标签为正的样本中，有多大百分比被模型预测出来。在语义分割任务中，查全率衡量了模型对正样本的覆盖程度。</p>
+<ol>
+<li><strong>F1-Score</strong></li>
+</ol>
+<p>F1-Score 是查准率和查全率的调和平均数，用于综合评估模型的性能。它的计算公式为：</p>
+<p>$$<br>\text{F1-Score}&#x3D;2\cdot\frac{\text{Precision}\cdot\text{Recall}}{\text{Precision}+\text{Recall}}<br>$$</p>
+<p>F1-Score 的优点在于它综合考虑了精确度和召回率，使得模型在不平衡分类问题中的性能评估更为准确。在语义分割任务中，F1-Score 能够帮助我们了解模型在各类别上的综合表现。</p>
+<ol>
+<li><strong>像素准确率（Pixel Accuracy）</strong></li>
+</ol>
+<p>$$<br>\text{Pixel Accuracy}&#x3D;\frac{\mathrm{TP+TN}}{\text{Total Pixels}}<br>$$</p>
+<p>像素准确率是指模型预测正确的像素数量占总像素数量的比例。它是一个简单的指标，用于衡量模型在像素级别上的整体分类准确性。然而，像素准确率对类别不平衡的数据集不够敏感，因此通常与其他指标结合使用。</p>
+<ol>
+<li><strong>平均精度均值（mAP）</strong></li>
+</ol>
+<p>$$<br>\mathrm{mAP}&#x3D;\frac1N\sum_{i&#x3D;1}^N\mathrm{AP}_i<br>$$</p>
+<p>mAP（Mean Average Precision）是一种广泛用于目标检测和实例分割任务的评价指标，也适用于全景分割。它通过计算不同类别上的平均精度（AP），并取这些值的平均值得到。mAP 综合考虑了模型的精确度（Precision）和召回率（Recall），能够更全面地评估模型在不同类别上的性能。</p>
+<ol>
+<li><strong>全景质量（Panoptic Quality, PQ）</strong></li>
+</ol>
+<p>全景质量（PQ）是专门为全景分割任务设计的评价指标，用于综合评估模型在处理“Things”（可数目标）和“Stuff”（不可数背景）时的性能。PQ 指标结合了分割质量（Segmentation Quality, SQ）和识别质量（Recognition Quality, RQ），并通过以下公式计算：</p>
+<p>其中，SQ 衡量分割掩码的准确性，RQ 衡量实例识别的准确性。</p>
+<p>PQ 指标还分为单类别 PQ 和多类别 PQ（mPQ）。在某些竞赛中，还会使用 mPQ+，即对所有图像和类别进行加权平均的 PQ，以避免因某些类别在某些图像中缺失而导致的统计偏差。</p>
+<blockquote>
+<ul>
+<li><strong>分割质量（Segmentation Quality, SQ）</strong><br>SQ 衡量的是预测分割掩码与真实分割掩码之间的平均交并比（IoU）。具体来说，它反映了匹配成功的预测实例与真实实例之间的重叠程度。SQ 的计算公式为:</li>
+</ul>
+<p>$$<br>\mathrm{SQ}&#x3D;\frac{\sum_{(g_k,p_l)\in\mathrm{TP}}\mathrm{IoU}(g_k,p_l)}{|\mathrm{TP}|}<br>$$</p>
+<p>其中，$gk$表示真实实例, $p_l$ 表示预测实例，TP 表示真正例（True Positives），即预测与真实实例匹配成功的对。</p>
+<ul>
+<li><strong>识别质量（Recognition Quality, RQ）</strong><br>RQ 衡量的是模型对目标实例的识别能力，类似于目标检测中的 F1 分数。它通过平衡精确率（Precision）和召回率（Recall）来评估模型对实例的识别效果。RQ 的计算公式为：</li>
+</ul>
+<p>$$<br>\mathrm{RQ}&#x3D;\frac{|\mathrm{TP}|}{|\mathrm{TP}|+\frac12|\mathrm{FP}|+\frac12|\mathrm{FP}|+\frac12|\mathrm{FN}|}<br>$$</p>
+<p>其中，FP 表示假正例（False Positives），FN 表示假反例（False Negatives）。</p>
+</blockquote>
+<ul>
+<li><strong>SQ</strong>：关注分割掩码的准确性，即预测掩码与真实掩码的重叠程度。</li>
+<li><strong>RQ</strong>：关注实例识别的准确性，类似于目标检测中的 F1 分数。</li>
+<li><strong>PQ</strong>：通过结合 SQ 和 RQ，提供了一个综合评估全景分割模型性能的指标。</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h1><p>语义分割、实例分割和全景分割是深度学习在图像分割领域的三大重要技术。语义分割专注于像素级分类，能够识别图像中不同类别的物体，但无法区分同一类别中的不同实例，因此在某些场景中需要结合实例分割来进一步划分同类别的不同实例。实例分割则专注于目标实例的区分，能够将同一类别中的不同物体单独识别出来。全景分割则结合了语义分割和实例分割的优点，能够同时提供像素级分类和实例区分，从而实现更全面的场景理解。</p>
+<h1 id="其他资源"><a href="#其他资源" class="headerlink" title="其他资源"></a>其他资源</h1><table>
+<thead>
+<tr>
+<th>分类</th>
+<th>链接</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>项目</td>
+<td><a href="https://github.com/bubbliiing/unet-pytorch">bubbliiing&#x2F;unet-pytorch</a></td>
+</tr>
+<tr>
+<td>项目</td>
+<td><a href="https://github.com/bubbliiing/pspnet-pytorch">bubbliiing&#x2F;pspnet-pytorch</a></td>
+</tr>
+<tr>
+<td>项目</td>
+<td><a href="https://github.com/ultralytics/ultralytics">https://github.com/ultralytics/ultralytics</a></td>
+</tr>
+<tr>
+<td>项目</td>
+<td><a href="https://github.com/bonlime/keras-deeplab-v3-plus">bonlime&#x2F;keras-deeplab-v3-plus</a></td>
+</tr>
+<tr>
+<td>项目</td>
+<td><a target="_blank" rel="noopener" href="https://www.codewithgpu.com/i/bubbliiing/unet-pytorch/UNet-PyTorch">https://www.codewithgpu.com/i/bubbliiing/unet-pytorch/UNet-PyTorch</a></td>
+</tr>
+<tr>
+<td>博客</td>
+<td><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/303355997">https://zhuanlan.zhihu.com/p/303355997</a></td>
+</tr>
+<tr>
+<td>数据集</td>
+<td><a target="_blank" rel="noopener" href="https://app.roboflow.com/project-p0vpn/bubble-mclkq/1">bubble - v1 2025-01-23 12:27pm</a></td>
+</tr>
+<tr>
+<td>工具</td>
+<td><a target="_blank" rel="noopener" href="https://huggingface.co/spaces">https://huggingface.co/spaces</a></td>
+</tr>
+<tr>
+<td>工具</td>
+<td><a target="_blank" rel="noopener" href="https://ghfast.top/">GitHub Proxy 代理加速</a></td>
+</tr>
+<tr>
+<td>工具</td>
+<td><a target="_blank" rel="noopener" href="https://hf-mirror.com/">https://hf-mirror.com/</a></td>
+</tr>
+<tr>
+<td>工具</td>
+<td><a target="_blank" rel="noopener" href="https://www.autodl.com/">AutoDL算力云</a></td>
+</tr>
+</tbody></table>
+<p>希望这对你有帮助！</p>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+            
+            
+                <div class="post-actions text-center clearfix" id="post-actions">
+                
+                    <a class="donate" href="javascript:;" onclick="krOpenDonateModal()"><i class="fa fa-bitcoin"></i> 打赏</a>
+                
+                
+                    <a class="share" href="javascript:;" onclick="krOpenShareModal()"><i class="fa fa-share-alt"></i> 分享</a>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2025-09-22T07:55:44.486Z" itemprop="dateModified">最后编辑：2025-09-22</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 2025-02-23-Atcoder abc394" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-23-abc394/"><i class="fa fa-angle-left"></i> 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 实例分割" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-16-实例分割/">下一篇 <i class="fa fa-angle-right"></i></a>
+            </div>
+            
+        </nav>
+    
+    
+        <div class="comment-post">
+            
+        </div>
+    
+</article>
+
+        
+
+            </section>
+
+            
+                
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+        <div class="sticky-area">
+    
+    
+    </div>
+</section>
+            
+
+        
+
+                </div>
+    </div>
+</div>
+
+<footer>
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2025 TK的小站 版权所有.</li>
+                            <li>本站已运行<span id="kr-since">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>自豪地使用 <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a> 主题</li>
+                            <li>站点由 TK 用 <i class="fa fa-heart" style="color:#d43f57"></i> 搭建</li>
+                        </div>
+                        <!-- 额外的追加注入项 -->
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/tkzzzzzz6/tkzzzzzz6.github.io/search">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                <div class="box theme-box" id="theme-toggle">
+                    <span class="fa fa-adjust"></span>
+                </div>
+            </div>
+            <div id="gotop-box" class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+
+    <div id="kr-donate-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseDonateModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-bitcoin"></i>
+            </div>
+            <div class="kr-modal-title">打赏</div>
+            <button class="kr-modal-close" onclick="krCloseDonateModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-donate-message">打赏提示信息</div>
+            <div class="kr-donate-qr" id="kr-donate-qr">
+                
+            </div>
+            <div class="kr-donate-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/donate.min.js"></script>
+
+
+
+
+    <div id="kr-share-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseShareModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-share-alt"></i>
+            </div>
+            <div class="kr-modal-title">分享</div>
+            <button class="kr-modal-close" onclick="krCloseShareModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-share-message">分享提示信息</div>
+            <div class="kr-share-qr" id="kr-share-qr"></div>
+            <div class="kr-share-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/share.min.js"></script>
+
+
+
+<!-- 额外的追加注入项 -->
+
+
+        <script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/tkzzzzzz6/tkzzzzzz6.github.io/";
+</script>
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.js"></script>
+
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.js"></script>
+
+
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-core.min.js"></script>
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-pjax.min.js"></script>
+
+
+<!-- 额外的追加注入项 -->
+
+
+    </body>
+</html>

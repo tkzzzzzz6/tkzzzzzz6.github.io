@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  
+  
+  <title>2025-06-01-Hive 技术及应用介绍 | TK的小站</title>
+  <link rel="canonical" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-06-01-Hive%20%E6%8A%80%E6%9C%AF%E5%8F%8A%E5%BA%94%E7%94%A8%E4%BB%8B%E7%BB%8D/">
+  <meta name="author" content="TK" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="课程学习" />
+  
+  <meta name="description" content="Hive 技术及应用介绍参考资料  Hive 技术原理 Hive 架构及应用介绍 Hive - 小海哥哥 de - 博客园 https:&#x2F;&#x2F;cwiki.apache.org&#x2F;confluence&#x2F;display&#x2F;Hive&#x2F;Home(官方文档)   Apache Hive 是基于 Hadoop 构建的数据仓库工具，它为海量结构化数据提供类 SQL 的查询能力，并将查询翻译为 MapReduce、Te">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2025-06-01-Hive 技术及应用介绍">
+<meta property="og:url" content="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-06-01-Hive%20%E6%8A%80%E6%9C%AF%E5%8F%8A%E5%BA%94%E7%94%A8%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:site_name" content="TK的小站">
+<meta property="og:description" content="Hive 技术及应用介绍参考资料  Hive 技术原理 Hive 架构及应用介绍 Hive - 小海哥哥 de - 博客园 https:&#x2F;&#x2F;cwiki.apache.org&#x2F;confluence&#x2F;display&#x2F;Hive&#x2F;Home(官方文档)   Apache Hive 是基于 Hadoop 构建的数据仓库工具，它为海量结构化数据提供类 SQL 的查询能力，并将查询翻译为 MapReduce、Te">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749361719853NEWubQsOsob8hwxG164ce9SWnxe.png">
+<meta property="og:image" content="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749361730854XD25bKuMWocEPtxmRBQc1JaOn6c.png">
+<meta property="og:image" content="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749361740853ZjDRb5l8hozhtExpjCrcgQXFnzd.png">
+<meta property="og:image" content="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749361749853Rykybe2KzostXMxQrA2cx8pgnWh.png">
+<meta property="og:image" content="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749361758853Z6E0bN8eQofC9kxqkCmcz14ynBg.png">
+<meta property="og:image" content="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749361767853GqNBbN8ARo70Ijxlv3dcyQ5rn0v.png">
+<meta property="og:image" content="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749361778853RwFcbEGI7o1p7cxmwTNcbjjdn7c.png">
+<meta property="article:published_time" content="1970-01-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-08T08:00:45.759Z">
+<meta property="article:author" content="TK">
+<meta property="article:tag" content="课程学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749361719853NEWubQsOsob8hwxG164ce9SWnxe.png">
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-core.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="highlight-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/highlight/highlight.js/night-eighties.min.css" media="all"></link>
+  
+  <link rel="stylesheet" id="theme-light-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/light.min.css" media="all"></link>
+  <link rel="stylesheet" id="theme-dark-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/dark.min.css" media="(prefers-color-scheme: dark)"></link>
+  <script src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-theme.min.js"></script>
+  <link rel="stylesheet" id="fontawe-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="nprogress-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.css" media="all"></link>
+  
+  
+    <link rel="stylesheet" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.css"></link>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  
+    <script src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
+  
+  <!-- 自定义站点横幅和背景 -->
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+      html[data-theme="dark"] .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('');
+        }
+        html[data-theme="dark"] body.custom-background {
+          background-image: url('');
+        }
+      }
+    
+    
+      .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+      html[data-theme="dark"] .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+    
+  </style>
+
+  <!-- 额外的追加注入项 -->
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/tkzzzzzz6/tkzzzzzz6.github.io/">TK的小站</a></div>
+                    <div id="kratos-nav-toggle-wrapper" class="nav-toggle">
+                        <a id="kratos-nav-toggle" class="kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/tkzzzzzz6/tkzzzzzz6.github.io/">
+                        <h2>TK的小站</h2> <br />
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+
+
+        
+
+            
+
+            <section class="kr-main-col col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-06-01-Hive%20%E6%8A%80%E6%9C%AF%E5%8F%8A%E5%BA%94%E7%94%A8%E4%BB%8B%E7%BB%8D/">
+    <div class="kratos-hentry kratos-page-inner clearfix">
+        <header class="kratos-page-header">
+            
+                <h1 class="kratos-page-title text-center" itemprop="name headline">2025-06-01-Hive 技术及应用介绍</h1>
+            
+            <ul class="kratos-page-meta text-center">
+                <li><time datetime="1970-01-01T00:00:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 1970-01-01</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">TK</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~4.35K
+                        
+                        字
+                    </li>
+                
+                
+                    <li>
+                        <i class="fa fa-eye"></i>
+                         次阅读
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-page-content kr-post">
+            
+            
+            
+            <hr />
+            <div itemprop="articleBody"><h1 id="Hive-技术及应用介绍"><a href="#Hive-技术及应用介绍" class="headerlink" title="Hive 技术及应用介绍"></a>Hive 技术及应用介绍</h1><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://cshihong.github.io/2018/05/22/Hive%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/">Hive 技术原理</a></li>
+<li><a target="_blank" rel="noopener" href="http://xiaqunfeng.cc/2018/10/18/Hive/">Hive 架构及应用介绍</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaohaigegede/p/17725025.html">Hive - 小海哥哥 de - 博客园</a></li>
+<li><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/Home">https://cwiki.apache.org/confluence/display/Hive/Home</a>(官方文档)</li>
+</ul>
+</blockquote>
+<p>Apache Hive 是基于 Hadoop 构建的数据仓库工具，它为海量结构化数据提供类 SQL 的查询能力，并将查询翻译为 MapReduce、Tez 或 Spark 作业执行。Hive 简化了大数据批量分析的使用门槛，让熟悉 SQL 的开发者能够在 Hadoop 生态上轻松进行 ETL、OLAP 和 BI 分析。</p>
+<p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749361719853NEWubQsOsob8hwxG164ce9SWnxe.png" alt="1749361719853NEWubQsOsob8hwxG164ce9SWnxe.png"></p>
+<p>Hive 的执行流程</p>
+<h2 id="Hive-的背景与定位"><a href="#Hive-的背景与定位" class="headerlink" title="Hive 的背景与定位"></a>Hive 的背景与定位</h2><ul>
+<li><strong>背景</strong>：随着大数据时代到来，Hadoop 分布式文件系统（HDFS）与 MapReduce 为存储与计算提供了高吞吐的能力，但原生 MapReduce 编程复杂、开发成本高。</li>
+<li><strong>定位</strong>：Hive 通过 HiveQL（类似 SQL 的查询语言）屏蔽 MapReduce&#x2F;Tez&#x2F;Spark 的底层细节，将查询语句编译为执行计划并自动运行，适合批量离线分析，主要面向 ETL、数据聚合与多维分析。</li>
+</ul>
+<h3 id="Hive-在-Hadoop-生态系统中的位置"><a href="#Hive-在-Hadoop-生态系统中的位置" class="headerlink" title="Hive 在 Hadoop 生态系统中的位置"></a>Hive 在 Hadoop 生态系统中的位置</h3><p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749361730854XD25bKuMWocEPtxmRBQc1JaOn6c.png" alt="1749361730854XD25bKuMWocEPtxmRBQc1JaOn6c.png"></p>
+<p>Hive 的运行深度依赖于 Hadoop 的核心生态，包括其分布式文件系统 HDFS、计算框架 MapReduce 以及资源调度器 YARN，因此可以将 Hive 理解为一种构建在 Hadoop 之上的 “SQL on Hadoop” 应用。其核心工作机制是将用户输入的类 SQL 查询语句转换为底层的 MapReduce 任务来执行，也正是因为多了这一步从 SQL 到 MapReduce 的转化开销，所以在同等条件下，Hive 查询的执行效率通常会低于直接编写原生 MapReduce 程序。</p>
+<h2 id="Hive-体系结构"><a href="#Hive-体系结构" class="headerlink" title="Hive 体系结构"></a>Hive 体系结构</h2><p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749361740853ZjDRb5l8hozhtExpjCrcgQXFnzd.png" alt="1749361740853ZjDRb5l8hozhtExpjCrcgQXFnzd.png"><br><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749361749853Rykybe2KzostXMxQrA2cx8pgnWh.png" alt="1749361749853Rykybe2KzostXMxQrA2cx8pgnWh.png"></p>
+<p>Hive 的核心组件包括：</p>
+<ol>
+<li><p><strong>Hive 客户端（CLI、Beeline、JDBC&#x2F;ODBC）</strong></p>
+<ul>
+<li>支持交互式提交 HiveQL，或通过 JDBC&#x2F;ODBC 接入 BI 工具（如 Tableau、Power BI）。</li>
+</ul>
+</li>
+<li><p><strong>Driver</strong></p>
+<ul>
+<li>接收并解析 HiveQL，生成抽象语法树（AST），再进行优化和编译，生成执行计划（Execution Plan）。</li>
+</ul>
+</li>
+<li><p><strong>Compiler &#x2F; Optimizer</strong></p>
+<ul>
+<li>将 AST 转为逻辑计划，应用谓词下推、列裁剪等优化，再生成物理计划，拆分为一个或多个 MapReduce&#x2F;Tez&#x2F;Spark 任务。</li>
+</ul>
+</li>
+<li><p><strong>Execution Engine</strong></p>
+<ul>
+<li>将物理计划提交给底层执行框架（MapReduce、Tez 或 Spark），监控任务状态并返回结果。</li>
+</ul>
+</li>
+<li><p><strong>Metastore</strong></p>
+<ul>
+<li>存储表结构、分区信息、列类型、SerDe、统计信息等元数据，通常使用 MySQL、PostgreSQL 或 Derby。</li>
+</ul>
+</li>
+</ol>
+<h2 id="数据模型与存储格式"><a href="#数据模型与存储格式" class="headerlink" title="数据模型与存储格式"></a>数据模型与存储格式</h2><p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749361758853Z6E0bN8eQofC9kxqkCmcz14ynBg.png" alt="1749361758853Z6E0bN8eQofC9kxqkCmcz14ynBg.png"></p>
+<ul>
+<li><strong>表与分区</strong><ul>
+<li>Hive 将 HDFS 文件组织为表（Table）、分区（Partition）和桶（Bucket）。分区通常按日期、地域等字段维度存储，减少查询扫描量。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>数据库：创建表时如果不指定数据库，则默认为 default 数据库。<br>表：物理概念，实际对应 HDFS 上的一个目录。<br>分区：对应所在表所在目录下的一个子目录。<br>桶：对应表或分区所在路径的一个文件</p>
+</blockquote>
+<ul>
+<li><strong>文件格式</strong><ul>
+<li>支持文本（Text）、SequenceFile、ORC、Parquet、Avro 等列式与行式格式。列式格式（ORC、Parquet）通过压缩和列裁剪大幅提升查询性能。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 创建按日期分区的 ORC 表</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">EXTERNAL</span> <span class="keyword">TABLE</span> logs (</span><br><span class="line">  user_id <span class="type">BIGINT</span>,</span><br><span class="line">  action  STRING,</span><br><span class="line">  ts      <span class="type">TIMESTAMP</span></span><br><span class="line">)</span><br><span class="line">PARTITIONED <span class="keyword">BY</span> (dt STRING)</span><br><span class="line">STORED <span class="keyword">AS</span> ORC</span><br><span class="line">LOCATION <span class="string">&#x27;/data/logs/&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>SerDe（序列化&#x2F;反序列化）</strong><ul>
+<li>通过自定义 SerDe，Hive 能解析任意复杂格式（JSON、CSV、XML 等）。</li>
+</ul>
+</li>
+</ul>
+<h2 id="HiveQL-基本用法"><a href="#HiveQL-基本用法" class="headerlink" title="HiveQL 基本用法"></a>HiveQL 基本用法</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.slideshare.net/slideshow/hive-quick-start-tutorial/3555281">www.slideshare.net</a></li>
+</ul>
+</blockquote>
+<h3 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作"></a>数据操作</h3><h4 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> example.employee(</span><br><span class="line">Id <span class="type">INT</span> COMMENT <span class="string">&#x27;employeeid&#x27;</span>,</span><br><span class="line">Company STRING COMMENT <span class="string">&#x27;your company&#x27;</span>,</span><br><span class="line">Money <span class="type">FLOAT</span> COMMENT <span class="string">&#x27;work money&#x27;</span>,)</span><br><span class="line"><span class="type">ROW</span> FORMAT DELIMITED FIELDS TERMINATED <span class="keyword">BY</span> <span class="string">&#x27;,&#x27;</span> STORED <span class="keyword">AS</span> TEXTFILE;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>可以发现就是对应的 SQL 语句</p>
+</blockquote>
+<h4 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> id, name <span class="keyword">FROM</span> employee <span class="keyword">WHERE</span> salary <span class="operator">&gt;=</span> <span class="number">10000</span>;</span><br><span class="line"><span class="keyword">SELECT</span> department, <span class="built_in">avg</span>(salary) <span class="keyword">FROM</span> employee <span class="keyword">GROUP</span> <span class="keyword">BY</span> department;</span><br><span class="line"><span class="keyword">SELECT</span> id, salary, <span class="type">date</span> <span class="keyword">FROM</span> employee_a <span class="keyword">UNION</span> <span class="keyword">ALL</span></span><br><span class="line"><span class="keyword">SELECT</span> id, salary, <span class="type">date</span> <span class="keyword">FROM</span> employee_b;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 加载数据到表（分区）</span></span><br><span class="line"><span class="keyword">ALTER TABLE</span> logs <span class="keyword">ADD</span> <span class="keyword">PARTITION</span> (dt<span class="operator">=</span><span class="string">&#x27;2025-06-01&#x27;</span>);</span><br><span class="line">LOAD DATA INPATH <span class="string">&#x27;/raw/logs/2025-06-01/*.log&#x27;</span></span><br><span class="line"><span class="keyword">INTO</span> <span class="keyword">TABLE</span> logs <span class="keyword">PARTITION</span> (dt<span class="operator">=</span><span class="string">&#x27;2025-06-01&#x27;</span>);</span><br><span class="line"><span class="comment">-- 简单查询</span></span><br><span class="line"><span class="keyword">SELECT</span> user_id, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> cnt</span><br><span class="line"><span class="keyword">FROM</span> logs</span><br><span class="line"><span class="keyword">WHERE</span> dt<span class="operator">=</span><span class="string">&#x27;2025-06-01&#x27;</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> user_id</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> cnt <span class="keyword">DESC</span></span><br><span class="line">LIMIT <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="窗口函数与高级特性"><a href="#窗口函数与高级特性" class="headerlink" title="窗口函数与高级特性"></a>窗口函数与高级特性</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 统计每个用户每天的前 3 次操作</span></span><br><span class="line"><span class="keyword">SELECT</span> dt, user_id, action, ts,</span><br><span class="line">  <span class="built_in">ROW_NUMBER</span>() <span class="keyword">OVER</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> dt, user_id <span class="keyword">ORDER</span> <span class="keyword">BY</span> ts) <span class="keyword">AS</span> rn</span><br><span class="line"><span class="keyword">FROM</span> logs</span><br><span class="line"><span class="keyword">WHERE</span> dt <span class="operator">&gt;=</span> <span class="string">&#x27;2025-06-01&#x27;</span> <span class="keyword">AND</span> dt <span class="operator">&lt;=</span> <span class="string">&#x27;2025-06-07&#x27;</span></span><br><span class="line"><span class="keyword">AND</span> rn <span class="operator">&lt;=</span> <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="与-Spark-集成"><a href="#与-Spark-集成" class="headerlink" title="与 Spark 集成"></a>与 Spark 集成</h3><p>在 Hive on Spark 模式下，HiveQL 会被提交到 Spark 引擎执行，兼享 Spark 的低延迟与丰富算子。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- 启动 Hive 使用 Spark 执行引擎</span><br><span class="line"><span class="built_in">set</span> hive.execution.engine=spark;</span><br></pre></td></tr></table></figure>
+
+<h2 id="典型应用场景"><a href="#典型应用场景" class="headerlink" title="典型应用场景"></a>典型应用场景</h2><ol>
+<li><p><strong>ETL 批量处理</strong></p>
+<ul>
+<li>定时从日志系统、关系库导入数据，清洗、聚合后写入 Hive 数据仓库，用于下游 BI 报表。</li>
+</ul>
+</li>
+<li><p><strong>多维 OLAP 分析</strong></p>
+<ul>
+<li>基于 Hive 的 HiveCube 或第三方 OLAP 引擎（如 Apache Kylin）实现大规模多维分析。</li>
+</ul>
+</li>
+<li><p><strong>数据探索与报表</strong></p>
+<ul>
+<li>数据分析师通过 Beeline 或 BI 工具（Tableau、Power BI）直接查询 Hive 表。</li>
+</ul>
+</li>
+<li><p><strong>机器学习特征工程</strong></p>
+<ul>
+<li>使用 HiveQL 快速统计用户行为特征，然后将结果导出到 HDFS，再由 Spark&#x2F;MLlib 训练模型。</li>
+</ul>
+</li>
+</ol>
+<h2 id="性能优化要点"><a href="#性能优化要点" class="headerlink" title="性能优化要点"></a>性能优化要点</h2><ul>
+<li><p><strong>合理分区</strong></p>
+<ul>
+<li>按查询高频过滤字段分区（如按日期、地域），减少文件扫描。</li>
+</ul>
+</li>
+<li><p><strong>使用列式存储</strong></p>
+<ul>
+<li>ORC&#x2F;Parquet 格式支持列裁剪、矢量化读取和压缩。</li>
+</ul>
+</li>
+<li><p><strong>开启成本模型优化</strong></p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> hive.cbo.enable<span class="operator">=</span><span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>利用 Tez&#x2F;Spark</strong></p>
+<ul>
+<li>将执行引擎换为 Tez 或 Spark，降低 MapReduce 的启动开销与 I&#x2F;O 序列化成本。</li>
+</ul>
+</li>
+<li><p><strong>小文件合并</strong></p>
+<ul>
+<li>小文件过多会导致任务过多，建议合并或使用 HDFS 合并工具。</li>
+</ul>
+</li>
+</ul>
+<h2 id="示例：用户次日留存率统计"><a href="#示例：用户次日留存率统计" class="headerlink" title="示例：用户次日留存率统计"></a>示例：用户次日留存率统计</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 1. 计算用户首次活跃日期</span></span><br><span class="line"><span class="keyword">CREATE TABLE</span> user_first (</span><br><span class="line">  user_id <span class="type">BIGINT</span>,</span><br><span class="line">  first_dt STRING</span><br><span class="line">)</span><br><span class="line">STORED <span class="keyword">AS</span> ORC</span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> user_id, <span class="built_in">MIN</span>(dt) <span class="keyword">AS</span> first_dt</span><br><span class="line"><span class="keyword">FROM</span> logs</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> user_id;</span><br><span class="line"><span class="comment">-- 2. 次日留存：join 当天活跃用户与第一天活跃日期后一天</span></span><br><span class="line"><span class="keyword">SELECT</span> f.first_dt <span class="keyword">AS</span> reg_dt,</span><br><span class="line">       l.dt        <span class="keyword">AS</span> act_dt,</span><br><span class="line">       <span class="built_in">COUNT</span>(<span class="keyword">DISTINCT</span> f.user_id)      <span class="keyword">AS</span> reg_users,</span><br><span class="line">       <span class="built_in">COUNT</span>(<span class="keyword">DISTINCT</span> l.user_id)      <span class="keyword">AS</span> retained_users,</span><br><span class="line">       ROUND(<span class="built_in">COUNT</span>(<span class="keyword">DISTINCT</span> l.user_id) <span class="operator">/</span> <span class="built_in">COUNT</span>(<span class="keyword">DISTINCT</span> f.user_id), <span class="number">4</span>) <span class="keyword">AS</span> retention_rate</span><br><span class="line"><span class="keyword">FROM</span> user_first f</span><br><span class="line"><span class="keyword">JOIN</span> logs l</span><br><span class="line">  <span class="keyword">ON</span> f.user_id <span class="operator">=</span> l.user_id</span><br><span class="line"> <span class="keyword">AND</span> l.dt <span class="operator">=</span> date_add(f.first_dt, <span class="number">1</span>)</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> f.first_dt, l.dt</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> f.first_dt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h1><p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749361767853GqNBbN8ARo70Ijxlv3dcyQ5rn0v.png" alt="1749361767853GqNBbN8ARo70Ijxlv3dcyQ5rn0v.png"></p>
+<p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749361778853RwFcbEGI7o1p7cxmwTNcbjjdn7c.png" alt="1749361778853RwFcbEGI7o1p7cxmwTNcbjjdn7c.png"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li><strong>Hive</strong> 以 SQL 友好的方式在 Hadoop 集群上实现批量离线分析，适用于 ETL、OLAP、报表和特征工程。</li>
+<li>通过 Metastore 管理元数据，通过多种文件格式和执行引擎（MapReduce&#x2F;Tez&#x2F;Spark）兼顾兼容性与性能。</li>
+<li>合理分区、列式存储和成本模型优化可显著提升查询性能。</li>
+<li>Hive 与 Spark、Flink、Presto 等工具生态配合，为大数据平台提供灵活多样的计算选择。</li>
+</ul>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+            
+            
+                <div class="post-actions text-center clearfix" id="post-actions">
+                
+                    <a class="donate" href="javascript:;" onclick="krOpenDonateModal()"><i class="fa fa-bitcoin"></i> 打赏</a>
+                
+                
+                    <a class="share" href="javascript:;" onclick="krOpenShareModal()"><i class="fa fa-share-alt"></i> 分享</a>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" rel="tag">课程学习</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2025-06-08T08:00:45.759Z" itemprop="dateModified">最后编辑：2025-06-08</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 2025-05-17-scBridge" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-05-17-scBridge embraces cell heterogeneity in single-cell RNA-seq and ATAC-seq data integration/"><i class="fa fa-angle-left"></i> 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 2025-05-21-汇编语言键盘输入输出" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-05-21-汇编语言键盘输入输出/">下一篇 <i class="fa fa-angle-right"></i></a>
+            </div>
+            
+        </nav>
+    
+    
+        <div class="comment-post">
+            
+        </div>
+    
+</article>
+
+        
+
+            </section>
+
+            
+                
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+        <div class="sticky-area">
+    
+    
+    </div>
+</section>
+            
+
+        
+
+                </div>
+    </div>
+</div>
+
+<footer>
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2025 TK的小站 版权所有.</li>
+                            <li>本站已运行<span id="kr-since">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>自豪地使用 <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a> 主题</li>
+                            <li>站点由 TK 用 <i class="fa fa-heart" style="color:#d43f57"></i> 搭建</li>
+                        </div>
+                        <!-- 额外的追加注入项 -->
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/tkzzzzzz6/tkzzzzzz6.github.io/search">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                <div class="box theme-box" id="theme-toggle">
+                    <span class="fa fa-adjust"></span>
+                </div>
+            </div>
+            <div id="gotop-box" class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+
+    <div id="kr-donate-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseDonateModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-bitcoin"></i>
+            </div>
+            <div class="kr-modal-title">打赏</div>
+            <button class="kr-modal-close" onclick="krCloseDonateModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-donate-message">打赏提示信息</div>
+            <div class="kr-donate-qr" id="kr-donate-qr">
+                
+            </div>
+            <div class="kr-donate-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/donate.min.js"></script>
+
+
+
+
+    <div id="kr-share-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseShareModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-share-alt"></i>
+            </div>
+            <div class="kr-modal-title">分享</div>
+            <button class="kr-modal-close" onclick="krCloseShareModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-share-message">分享提示信息</div>
+            <div class="kr-share-qr" id="kr-share-qr"></div>
+            <div class="kr-share-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/share.min.js"></script>
+
+
+
+<!-- 额外的追加注入项 -->
+
+
+        <script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/tkzzzzzz6/tkzzzzzz6.github.io/";
+</script>
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.js"></script>
+
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.js"></script>
+
+
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-core.min.js"></script>
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-pjax.min.js"></script>
+
+
+<!-- 额外的追加注入项 -->
+
+
+    </body>
+</html>

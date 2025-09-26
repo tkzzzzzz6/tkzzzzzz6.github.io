@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  
+  
+  <title>查看动态 | TK的小站</title>
+  <link rel="canonical" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-08-%E6%8F%90%E7%A4%BA%E8%AF%8D/">
+  <meta name="author" content="TK" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="" />
+  
+  <meta name="description" content="可参考的提示词（Prompts）您可以将这些提示词组合或分步提供给AI，以生成文章的各个部分。 角色设定与总体任务 (Master Prompt) 你是一位资深的软件工程师和技术博主，擅长撰写清晰、易于理解的“手把手”教程。 我需要你帮我写一篇关于“本地化部署DeepSeek模型”的博客文章。 核心技术栈包括：Ollama、DeepSeek-1.5B模型、Open WebUI。目标平台：主要是在W">
+<meta property="og:type" content="article">
+<meta property="og:title" content="查看动态">
+<meta property="og:url" content="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-08-%E6%8F%90%E7%A4%BA%E8%AF%8D/index.html">
+<meta property="og:site_name" content="TK的小站">
+<meta property="og:description" content="可参考的提示词（Prompts）您可以将这些提示词组合或分步提供给AI，以生成文章的各个部分。 角色设定与总体任务 (Master Prompt) 你是一位资深的软件工程师和技术博主，擅长撰写清晰、易于理解的“手把手”教程。 我需要你帮我写一篇关于“本地化部署DeepSeek模型”的博客文章。 核心技术栈包括：Ollama、DeepSeek-1.5B模型、Open WebUI。目标平台：主要是在W">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="1970-01-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-08-20T08:06:10.136Z">
+<meta property="article:author" content="TK">
+<meta name="twitter:card" content="summary">
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-core.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="highlight-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/highlight/highlight.js/night-eighties.min.css" media="all"></link>
+  
+  <link rel="stylesheet" id="theme-light-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/light.min.css" media="all"></link>
+  <link rel="stylesheet" id="theme-dark-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/dark.min.css" media="(prefers-color-scheme: dark)"></link>
+  <script src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-theme.min.js"></script>
+  <link rel="stylesheet" id="fontawe-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="nprogress-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.css" media="all"></link>
+  
+  
+    <link rel="stylesheet" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.css"></link>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  
+    <script src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
+  
+  <!-- 自定义站点横幅和背景 -->
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+      html[data-theme="dark"] .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('');
+        }
+        html[data-theme="dark"] body.custom-background {
+          background-image: url('');
+        }
+      }
+    
+    
+      .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+      html[data-theme="dark"] .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+    
+  </style>
+
+  <!-- 额外的追加注入项 -->
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/tkzzzzzz6/tkzzzzzz6.github.io/">TK的小站</a></div>
+                    <div id="kratos-nav-toggle-wrapper" class="nav-toggle">
+                        <a id="kratos-nav-toggle" class="kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/tkzzzzzz6/tkzzzzzz6.github.io/">
+                        <h2>TK的小站</h2> <br />
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+
+
+        
+
+            
+
+            <section class="kr-main-col col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-08-%E6%8F%90%E7%A4%BA%E8%AF%8D/">
+    <div class="kratos-hentry kratos-page-inner clearfix">
+        <header class="kratos-page-header">
+            
+            <ul class="kratos-page-meta text-center">
+                <li><time datetime="1970-01-01T00:00:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 1970-01-01</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">TK</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~1.52K
+                        
+                        字
+                    </li>
+                
+                
+                    <li>
+                        <i class="fa fa-eye"></i>
+                         次阅读
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-page-content kr-post">
+            
+            
+            
+            <hr />
+            <div itemprop="articleBody"><h3 id="可参考的提示词（Prompts）"><a href="#可参考的提示词（Prompts）" class="headerlink" title="可参考的提示词（Prompts）"></a>可参考的提示词（Prompts）</h3><p>您可以将这些提示词组合或分步提供给AI，以生成文章的各个部分。</p>
+<h4 id="角色设定与总体任务-Master-Prompt"><a href="#角色设定与总体任务-Master-Prompt" class="headerlink" title="角色设定与总体任务 (Master Prompt)"></a><strong>角色设定与总体任务 (Master Prompt)</strong></h4><blockquote>
+<p>你是一位资深的软件工程师和技术博主，擅长撰写清晰、易于理解的“手把手”教程。</p>
+<p>我需要你帮我写一篇关于“<strong>本地化部署DeepSeek模型</strong>”的博客文章。</p>
+<p><strong>核心技术栈包括</strong>：Ollama、DeepSeek-1.5B模型、Open WebUI。<br><strong>目标平台</strong>：主要是在Windows 11本地部署，其次是在Linux服务器上部署。<br><strong>文章风格</strong>：面向有一定基础的开发者，步骤清晰，配有命令代码和截图占位符 <code>![截图描述]</code>。</p>
+<p><strong>文章需要包含以下几个部分</strong>：</p>
+<ol>
+<li>引言和准备工作（参考资料、实验目的）。</li>
+<li>Windows下的详细部署流程：安装Ollama -&gt; 拉取DeepSeek模型 -&gt; 通过命令行和Open WebUI（pip和Docker两种方式）进行交互。</li>
+<li>Linux服务器上的简化部署流程，指出与Windows的不同之处。</li>
+<li>一个总结，评价1.5B小模型的优缺点和适用场景。</li>
+</ol>
+<p>现在，请先为我生成文章的<strong>大纲</strong>和<strong>引言部分</strong>。</p>
+</blockquote>
+<h4 id="分步生成提示词-Step-by-Step-Prompts"><a href="#分步生成提示词-Step-by-Step-Prompts" class="headerlink" title="分步生成提示词 (Step-by-Step Prompts)"></a><strong>分步生成提示词 (Step-by-Step Prompts)</strong></h4><p><strong>第1步：生成引言和准备工作</strong></p>
+<blockquote>
+<p>根据我们之前定下的主题“本地化部署DeepSeek模型”，请为我撰写文章的<strong>引言</strong>、<strong>参考资料</strong>和<strong>实验目的</strong>部分。参考资料可以先用占位符链接。实验目的要清晰地列出我们计划完成的任务。</p>
+</blockquote>
+<p><strong>第2步：生成Windows部署 - Ollama和模型部分</strong></p>
+<blockquote>
+<p>接下来，请撰写“<strong>在Windows本地部署</strong>”的第一部分内容。</p>
+<ol>
+<li><strong>下载并安装Ollama</strong>：描述如何从 <code>ollama.com</code> 下载并安装Ollama，并为下载页面和安装过程各插入一个截图占位符。</li>
+<li><strong>通过Ollama拉取DeepSeek模型</strong>：说明我们将使用 <code>deepseek-r1:1.5b</code> 模型，提供 <code>ollama run</code> 命令，并附上一个查看更多版本的Ollama官网链接。最后插入一个命令成功执行的截图占位符。</li>
+</ol>
+</blockquote>
+<p><strong>第3步：生成Windows部署 - 交互方式部分</strong></p>
+<blockquote>
+<p>现在，请详细描述与本地模型交互的几种方式。</p>
+<ol>
+<li><strong>终端回答</strong>：简单描述这是最直接的方式，并插入一张终端对话的截图占位符。</li>
+<li><strong>使用open-webui</strong>：重点介绍这个方法。<ul>
+<li>先写一个“注意”块，提醒用户需要Python 3.11和Conda环境。</li>
+<li>写一个子标题“<strong>使用pip安装</strong>”，提供创建conda环境、pip安装和启动服务的完整命令，并说明如何访问（<code>localhost:8080</code>）。插入UI截图占位符。</li>
+<li>再写一个子标题“<strong>使用docker安装</strong>”，提供 <code>docker run</code> 命令，解释端口映射。说明如何访问（<code>localhost:3000</code>）。插入Docker运行状态和UI界面的截图占位符。</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<p><strong>第44步：生成Linux服务器部署部分</strong></p>
+<blockquote>
+<p>请为我撰写“<strong>linux服务器部署</strong>”章节。</p>
+<ul>
+<li>开头说明这个过程和Windows类似。</li>
+<li>提供在Linux下安装Ollama的 <code>curl</code> 命令和 <code>sudo snap install ollama</code> 备用命令。</li>
+<li>简要列出后续的 <code>ollama run</code> 和 <code>docker run</code> 命令。</li>
+<li>特别提醒用户访问时需要使用服务器的公网IP。</li>
+<li>最后插入一张在Linux上部署成功并访问的截图占位符。</li>
+</ul>
+</blockquote>
+<p><strong>第5步：生成总结部分</strong></p>
+<blockquote>
+<p>最后，请为整篇文章撰写一个<strong>总结</strong>。评价一下像DeepSeek-1.5B这样的小参数模型的<strong>优势</strong>（资源占用、延迟）和<strong>局限性</strong>（生成能力）。根据这些特点，给出你的<strong>最终建议</strong>：这类模型适合什么场景（如边缘计算、基础任务），而对于高质量的生产需求，应该选择什么样的模型。</p>
+</blockquote>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+            
+            
+                <div class="post-actions text-center clearfix" id="post-actions">
+                
+                    <a class="donate" href="javascript:;" onclick="krOpenDonateModal()"><i class="fa fa-bitcoin"></i> 打赏</a>
+                
+                
+                    <a class="share" href="javascript:;" onclick="krOpenShareModal()"><i class="fa fa-share-alt"></i> 分享</a>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    
+                </div>
+                <div class="pull-date">
+                    <time datetime="2025-08-20T08:06:10.136Z" itemprop="dateModified">最后编辑：2025-08-20</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" WSL 启动报错 &#34;Cannot execute daemonize to start systemd&#34; 的解决方法" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-09-wsl启动报错Cannot execute daemonize to start systemd的解决方法/"><i class="fa fa-angle-left"></i> 上一篇</a>
+            </div>
+            
+            
+        </nav>
+    
+    
+        <div class="comment-post">
+            
+        </div>
+    
+</article>
+
+        
+
+            </section>
+
+            
+                
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+        <div class="sticky-area">
+    
+    
+    </div>
+</section>
+            
+
+        
+
+                </div>
+    </div>
+</div>
+
+<footer>
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2025 TK的小站 版权所有.</li>
+                            <li>本站已运行<span id="kr-since">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>自豪地使用 <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a> 主题</li>
+                            <li>站点由 TK 用 <i class="fa fa-heart" style="color:#d43f57"></i> 搭建</li>
+                        </div>
+                        <!-- 额外的追加注入项 -->
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/tkzzzzzz6/tkzzzzzz6.github.io/search">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                <div class="box theme-box" id="theme-toggle">
+                    <span class="fa fa-adjust"></span>
+                </div>
+            </div>
+            <div id="gotop-box" class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+
+    <div id="kr-donate-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseDonateModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-bitcoin"></i>
+            </div>
+            <div class="kr-modal-title">打赏</div>
+            <button class="kr-modal-close" onclick="krCloseDonateModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-donate-message">打赏提示信息</div>
+            <div class="kr-donate-qr" id="kr-donate-qr">
+                
+            </div>
+            <div class="kr-donate-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/donate.min.js"></script>
+
+
+
+
+    <div id="kr-share-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseShareModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-share-alt"></i>
+            </div>
+            <div class="kr-modal-title">分享</div>
+            <button class="kr-modal-close" onclick="krCloseShareModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-share-message">分享提示信息</div>
+            <div class="kr-share-qr" id="kr-share-qr"></div>
+            <div class="kr-share-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/share.min.js"></script>
+
+
+
+<!-- 额外的追加注入项 -->
+
+
+        <script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/tkzzzzzz6/tkzzzzzz6.github.io/";
+</script>
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.js"></script>
+
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.js"></script>
+
+
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-core.min.js"></script>
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-pjax.min.js"></script>
+
+
+<!-- 额外的追加注入项 -->
+
+
+    </body>
+</html>

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  
+  
+  <title>2025-03-18-VitPose 基于 vit 的姿态评估模型 | TK的小站</title>
+  <link rel="canonical" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-03-18-VitPose%E5%9F%BA%E4%BA%8Evit%E7%9A%84%E5%A7%BF%E6%80%81%E8%AF%84%E4%BC%B0%E6%A8%A1%E5%9E%8B/">
+  <meta name="author" content="TK" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="深度学习 论文阅读" />
+  
+  <meta name="description" content="相关论文ViTPose: Simple Vision Transformer Baselines for Human Pose Estimation  Motivation 研究问题：这篇文章要解决的问题是如何利用简单的 ViT（Vision Transformer）进行人体姿态估计。尽管 ViT 在视觉识别任务中表现出色，但在姿态估计任务中的应用仍然有限。 研究难点：该问题的研究难点包括：如何">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2025-03-18-VitPose 基于 vit 的姿态评估模型">
+<meta property="og:url" content="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-03-18-VitPose%E5%9F%BA%E4%BA%8Evit%E7%9A%84%E5%A7%BF%E6%80%81%E8%AF%84%E4%BC%B0%E6%A8%A1%E5%9E%8B/index.html">
+<meta property="og:site_name" content="TK的小站">
+<meta property="og:description" content="相关论文ViTPose: Simple Vision Transformer Baselines for Human Pose Estimation  Motivation 研究问题：这篇文章要解决的问题是如何利用简单的 ViT（Vision Transformer）进行人体姿态估计。尽管 ViT 在视觉识别任务中表现出色，但在姿态估计任务中的应用仍然有限。 研究难点：该问题的研究难点包括：如何">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17423110798271742311079755.png">
+<meta property="article:published_time" content="1970-01-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-22T07:55:44.492Z">
+<meta property="article:author" content="TK">
+<meta property="article:tag" content="深度学习 论文阅读">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17423110798271742311079755.png">
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-core.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="highlight-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/highlight/highlight.js/night-eighties.min.css" media="all"></link>
+  
+  <link rel="stylesheet" id="theme-light-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/light.min.css" media="all"></link>
+  <link rel="stylesheet" id="theme-dark-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/dark.min.css" media="(prefers-color-scheme: dark)"></link>
+  <script src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-theme.min.js"></script>
+  <link rel="stylesheet" id="fontawe-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="nprogress-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.css" media="all"></link>
+  
+  
+    <link rel="stylesheet" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.css"></link>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  
+    <script src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
+  
+  <!-- 自定义站点横幅和背景 -->
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+      html[data-theme="dark"] .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('');
+        }
+        html[data-theme="dark"] body.custom-background {
+          background-image: url('');
+        }
+      }
+    
+    
+      .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+      html[data-theme="dark"] .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+    
+  </style>
+
+  <!-- 额外的追加注入项 -->
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/tkzzzzzz6/tkzzzzzz6.github.io/">TK的小站</a></div>
+                    <div id="kratos-nav-toggle-wrapper" class="nav-toggle">
+                        <a id="kratos-nav-toggle" class="kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/tkzzzzzz6/tkzzzzzz6.github.io/">
+                        <h2>TK的小站</h2> <br />
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+
+
+        
+
+            
+
+            <section class="kr-main-col col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-03-18-VitPose%E5%9F%BA%E4%BA%8Evit%E7%9A%84%E5%A7%BF%E6%80%81%E8%AF%84%E4%BC%B0%E6%A8%A1%E5%9E%8B/">
+    <div class="kratos-hentry kratos-page-inner clearfix">
+        <header class="kratos-page-header">
+            
+                <h1 class="kratos-page-title text-center" itemprop="name headline">2025-03-18-VitPose 基于 vit 的姿态评估模型</h1>
+            
+            <ul class="kratos-page-meta text-center">
+                <li><time datetime="1970-01-01T00:00:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 1970-01-01</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">TK</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~1.90K
+                        
+                        字
+                    </li>
+                
+                
+                    <li>
+                        <i class="fa fa-eye"></i>
+                         次阅读
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-page-content kr-post">
+            
+            
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>相关论文<br><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2204.12484">ViTPose: Simple Vision Transformer Baselines for Human Pose Estimation</a></p>
+</blockquote>
+<h1 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h1><ol>
+<li><strong>研究问题</strong>：这篇文章要解决的问题是如何利用简单的 ViT（Vision Transformer）进行人体姿态估计。尽管 ViT 在视觉识别任务中表现出色，但在姿态估计任务中的应用仍然有限。</li>
+<li><strong>研究难点</strong>：该问题的研究难点包括：如何在不使用复杂结构设计的情况下实现高性能的姿态估计；如何提高模型的规模可扩展性；如何在训练过程中保持灵活性；以及如何在不同模型之间有效地转移知识。</li>
+<li><strong>相关工作</strong>：该问题的研究相关工作有：PRTR、TokenPose、TransPose、HRFormer 等方法，这些方法通常采用 CNN 作为主干网络(传统的网络对于对于局部特征的提取能力很强大,但是全局特征信息提取能不很差)，然后使用复杂的变压器结构来细化特征和建模关键点之间的关系。然而，这些方法要么需要额外的 CNN 进行特征提取，要么需要对变压器结构进行精心设计以适应任务。</li>
+</ol>
+<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1><p>这篇论文提出了一个名为 ViTPose 的简单基线模型，用于解决人体姿态估计问题。具体来说，</p>
+<ol>
+<li><strong>模型结构</strong>：ViTPose 采用简单的非分层视觉变压器作为主干网络，用于提取给定人体实例的特征图。主干网络通过预训练的掩码图像建模（Masked Image Modeling, MAE）任务进行初始化。然后，一个轻量级解码器处理提取的特征，通过上采样特征图和回归关键点热图来进行姿态估计。解码器由两个反卷积层和一个预测层组成。</li>
+</ol>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17423110798271742311079755.png" alt="17423110798271742311079755.png"></p>
+<ol>
+<li><strong>可扩展性</strong>：通过堆叠不同数量的变压器层和增加或减少特征维度，可以轻松控制模型大小。例如，可以使用 ViT-B、ViT-L 或 ViT-H 来平衡推理速度和性能。</li>
+<li><strong>灵活性</strong>：ViTPose 在训练范式方面非常灵活，可以适应不同的输入分辨率和特征分辨率。通过添加额外的解码器，可以灵活地适应多个姿态数据集，从而实现联合训练管道并显著提高性能。此外，即使在使用较小的未标记数据集进行预训练或冻结注意力模块进行微调时，ViTPose 仍能获得 SOTA 性能。</li>
+<li><strong>知识转移</strong>：通过一个额外的可学习知识令牌，可以将大模型的知识转移到小模型中，从而提高小模型的性能。</li>
+</ol>
+<h1 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h1><ol>
+<li><strong>结构简单性和可扩展性</strong>：使用简单解码器的 ViTPose 在 MS COCO 验证集上的表现与使用复杂解码器的 ResNet-50 和 ResNet-152 相当，表明普通视觉变压器具有强大的表示能力。随着模型大小的增加，ViTPose 的性能一致提高，展示了其良好的可扩展性。</li>
+<li><strong>预训练数据灵活性</strong>：使用 MS COCO 和 AI Challenger 数据组合进行预训练的 ViTPose 在 MS COCO 验证集上的表现与使用 ImageNet-1K 数据预训练的模型相当，表明使用下游任务数据进行预训练具有更好的数据效率。</li>
+<li><strong>输入分辨率灵活性</strong>：随着输入分辨率的增加，ViTPose 的性能也相应提高。使用正方形输入尺寸并未带来显著的性能提升，可能是因为 MS COCO 中人体的平均宽高比为 4:3，正方形输入尺寸不符合统计特性。</li>
+<li><strong>注意力类型灵活性</strong>：使用全注意力机制的 ViTPose 在 MS COCO 验证集上获得了最佳的 77.4 AP，但存在较大的内存占用。通过使用窗口注意力并结合移位窗口和池化窗口机制，可以在不显著增加内存占用的前提下提高性能。</li>
+<li><strong>部分微调灵活性</strong>：在部分微调设置下，冻结 MHSA 模块的 ViTPose 性能仅略有下降，而冻结 FFN 模块则导致显著的性能下降，表明 FFN 模块对任务特定建模更为重要。</li>
+<li><strong>多数据集训练</strong>：使用多数据集训练的 ViTPose 在 MS COCO 验证集上的性能从 75.8 AP 提高到 77.1 AP，表明 ViTPose 可以很好地利用不同数据集中的多样性数据。</li>
+<li><strong>知识转移</strong>：通过知识令牌蒸馏，ViTPose-B 模型的 AP 提高了 0.2，而输出蒸馏则提高了 0.5，两种蒸馏方法相互补充，共同使用时可达到 76.6 AP，验证了 ViTPose 模型的良好可迁移性。</li>
+</ol>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://yuanbao.tencent.com/bot/app/share/deep-reading-tab/deepRead/4w6dL6ZYki6w">https://yuanbao.tencent.com/bot/app/share/deep-reading-tab/deepRead/4w6dL6ZYki6w</a></p>
+</blockquote>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://yuanbao.tencent.com/bot/app/share/deep-reading-tab/summary/Tzi4OLgzGSzl">https://yuanbao.tencent.com/bot/app/share/deep-reading-tab/summary/Tzi4OLgzGSzl</a></p>
+</blockquote>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+            
+            
+                <div class="post-actions text-center clearfix" id="post-actions">
+                
+                    <a class="donate" href="javascript:;" onclick="krOpenDonateModal()"><i class="fa fa-bitcoin"></i> 打赏</a>
+                
+                
+                    <a class="share" href="javascript:;" onclick="krOpenShareModal()"><i class="fa fa-share-alt"></i> 分享</a>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" rel="tag">深度学习 论文阅读</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2025-09-22T07:55:44.492Z" itemprop="dateModified">最后编辑：2025-09-22</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 2025-03-17-构造函数与析构函数" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-03-17-构造函数与析构函数/"><i class="fa fa-angle-left"></i> 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 2025-03-16-水“镜”安澜——基于YOLO11的智能溺水检测系统软件 V1.0 设计说明文档" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-03-16-水“镜”安澜——基于YOLO11的智能溺水检测系统软件 V1.0 设计说明文档/">下一篇 <i class="fa fa-angle-right"></i></a>
+            </div>
+            
+        </nav>
+    
+    
+        <div class="comment-post">
+            
+        </div>
+    
+</article>
+
+        
+
+            </section>
+
+            
+                
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+        <div class="sticky-area">
+    
+    
+    </div>
+</section>
+            
+
+        
+
+                </div>
+    </div>
+</div>
+
+<footer>
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2025 TK的小站 版权所有.</li>
+                            <li>本站已运行<span id="kr-since">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>自豪地使用 <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a> 主题</li>
+                            <li>站点由 TK 用 <i class="fa fa-heart" style="color:#d43f57"></i> 搭建</li>
+                        </div>
+                        <!-- 额外的追加注入项 -->
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/tkzzzzzz6/tkzzzzzz6.github.io/search">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                <div class="box theme-box" id="theme-toggle">
+                    <span class="fa fa-adjust"></span>
+                </div>
+            </div>
+            <div id="gotop-box" class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+
+    <div id="kr-donate-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseDonateModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-bitcoin"></i>
+            </div>
+            <div class="kr-modal-title">打赏</div>
+            <button class="kr-modal-close" onclick="krCloseDonateModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-donate-message">打赏提示信息</div>
+            <div class="kr-donate-qr" id="kr-donate-qr">
+                
+            </div>
+            <div class="kr-donate-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/donate.min.js"></script>
+
+
+
+
+    <div id="kr-share-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseShareModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-share-alt"></i>
+            </div>
+            <div class="kr-modal-title">分享</div>
+            <button class="kr-modal-close" onclick="krCloseShareModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-share-message">分享提示信息</div>
+            <div class="kr-share-qr" id="kr-share-qr"></div>
+            <div class="kr-share-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/share.min.js"></script>
+
+
+
+<!-- 额外的追加注入项 -->
+
+
+        <script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/tkzzzzzz6/tkzzzzzz6.github.io/";
+</script>
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.js"></script>
+
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.js"></script>
+
+
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-core.min.js"></script>
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-pjax.min.js"></script>
+
+
+<!-- 额外的追加注入项 -->
+
+
+    </body>
+</html>

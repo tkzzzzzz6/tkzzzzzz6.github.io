@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  
+  
+  <title>2025-05-12-虚函数 | TK的小站</title>
+  <link rel="canonical" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-05-12-%E8%99%9A%E5%87%BD%E6%95%B0/">
+  <meta name="author" content="TK" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="程序开发" />
+  
+  <meta name="description" content="2025-05-12-虚函数  参考资源对 C++ 虚函数不了解？看完这篇文章掌握虚函数的原理和作用 4-虚函数_哔哩哔哩_bilibili C++ 虚函数和纯虚函数的区别 C++ 多态–虚函数 virtual 及 override_虚函数 override-CSDN 博客 C++ 虚函数  虚函数是在父类中定义的一种特殊类型的函数，允许子类重写该函数以适应其自身需求。虚函数的调用取决于对象的实际">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2025-05-12-虚函数">
+<meta property="og:url" content="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-05-12-%E8%99%9A%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:site_name" content="TK的小站">
+<meta property="og:description" content="2025-05-12-虚函数  参考资源对 C++ 虚函数不了解？看完这篇文章掌握虚函数的原理和作用 4-虚函数_哔哩哔哩_bilibili C++ 虚函数和纯虚函数的区别 C++ 多态–虚函数 virtual 及 override_虚函数 override-CSDN 博客 C++ 虚函数  虚函数是在父类中定义的一种特殊类型的函数，允许子类重写该函数以适应其自身需求。虚函数的调用取决于对象的实际">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1747056760477QGSmb9FB5obI4CxbD3RcFRIynCe.png">
+<meta property="og:image" content="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1747056796676Ue1zbj8hco94t9xuRBRcd0jWnXg.png">
+<meta property="article:published_time" content="1970-01-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-22T07:55:44.492Z">
+<meta property="article:author" content="TK">
+<meta property="article:tag" content="程序开发">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1747056760477QGSmb9FB5obI4CxbD3RcFRIynCe.png">
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-core.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="highlight-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/highlight/highlight.js/night-eighties.min.css" media="all"></link>
+  
+  <link rel="stylesheet" id="theme-light-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/light.min.css" media="all"></link>
+  <link rel="stylesheet" id="theme-dark-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/dark.min.css" media="(prefers-color-scheme: dark)"></link>
+  <script src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-theme.min.js"></script>
+  <link rel="stylesheet" id="fontawe-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="nprogress-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.css" media="all"></link>
+  
+  
+    <link rel="stylesheet" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.css"></link>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  
+    <script src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
+  
+  <!-- 自定义站点横幅和背景 -->
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+      html[data-theme="dark"] .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('');
+        }
+        html[data-theme="dark"] body.custom-background {
+          background-image: url('');
+        }
+      }
+    
+    
+      .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+      html[data-theme="dark"] .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+    
+  </style>
+
+  <!-- 额外的追加注入项 -->
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/tkzzzzzz6/tkzzzzzz6.github.io/">TK的小站</a></div>
+                    <div id="kratos-nav-toggle-wrapper" class="nav-toggle">
+                        <a id="kratos-nav-toggle" class="kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/tkzzzzzz6/tkzzzzzz6.github.io/">
+                        <h2>TK的小站</h2> <br />
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+
+
+        
+
+            
+
+            <section class="kr-main-col col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-05-12-%E8%99%9A%E5%87%BD%E6%95%B0/">
+    <div class="kratos-hentry kratos-page-inner clearfix">
+        <header class="kratos-page-header">
+            
+                <h1 class="kratos-page-title text-center" itemprop="name headline">2025-05-12-虚函数</h1>
+            
+            <ul class="kratos-page-meta text-center">
+                <li><time datetime="1970-01-01T00:00:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 1970-01-01</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">TK</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~7.22K
+                        
+                        字
+                    </li>
+                
+                
+                    <li>
+                        <i class="fa fa-eye"></i>
+                         次阅读
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-page-content kr-post">
+            
+            
+            
+            <hr />
+            <div itemprop="articleBody"><p>2025-05-12-虚函数</p>
+<blockquote>
+<h1 id="参考资源"><a href="#参考资源" class="headerlink" title="参考资源"></a>参考资源</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/629281871">对 C++ 虚函数不了解？看完这篇文章掌握虚函数的原理和作用</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1QV4y1U73z/">4-虚函数_哔哩哔哩_bilibili</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/cpp-virtual-functions.html">C++ 虚函数和纯虚函数的区别</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/i_chaoren/article/details/77281785">C++ 多态–虚函数 virtual 及 override_虚函数 override-CSDN 博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/54145222">C++ 虚函数</a></p>
+</blockquote>
+<p>虚函数是在父类中定义的一种特殊类型的函数，允许子类重写该函数以适应其自身需求。虚函数的调用取决于对象的实际类型，而不是指针或引用类型。通过将函数声明为虚函数，可以使继承层次结构中的每个子类都能够使用其自己的实现，从而提高代码的可扩展性和灵活性。在 C++ 中，使用关键字”virtual”来定义虚函数。</p>
+<ul>
+<li>虚函数不代表函数为不被实现的函数。</li>
+<li>为了允许用基类的指针来调用子类的这个函数。</li>
+<li>定义一个函数为纯虚函数，才代表函数没有被实现。</li>
+<li>纯虚函数是为了实现一个接口，起到一个规范的作用，规范继承这个类的程序员必须实现这个函数。</li>
+</ul>
+<p>虚函数虚在所谓”推迟联编”或者”动态联编”上，一个类函数的调用并不是在编译时刻被确定的，而是在运行时刻被确定的。由于编写代码的时候并不能确定被调用的是基类的函数还是哪个派生类的函数，所以被成为”虚”函数。</p>
+<h1 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h1><p>虚函数可以让子类对象在运行时动态地继承和修改父类的成员函数，使得代码更加灵活、可重用，并且可以实现多态性和<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=227971983&content_type=Article&match_order=1&q=%E6%8A%BD%E8%B1%A1%E7%B1%BB&zhida_source=entity">抽象类</a>等高级特性。</p>
+<ol>
+<li>通过虚函数，可以实现多态性（Polymorphism），即同一个函数名可以在不同的子类中表现出不同的行为，这样可以提高代码的可重用性和灵活性。</li>
+<li>避免静态绑定，在使用父类指针或引用调用子类对象的成员函数时，如果没有使用虚函数，则会进行静态绑定（Static Binding），即只能调用父类的成员函数，无法调用子类特有的成员函数。</li>
+<li>虚函数的调用是<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=227971983&content_type=Article&match_order=1&q=%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A&zhida_source=entity">动态绑定</a>（Dynamic Binding）的，即在运行时根据指针或引用所指向的对象类型来选择调用哪个函数，从而实现动态多态性。</li>
+<li>抽象类是一种不能直接实例化的类，只能被其他类继承并实现其虚函数。通过定义<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=227971983&content_type=Article&match_order=1&q=%E7%BA%AF%E8%99%9A%E5%87%BD%E6%95%B0&zhida_source=entity">纯虚函数</a>（Pure Virtual Function），可以使得一个类成为抽象类，强制其子类必须实现该函数。</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 形状基类，定义了计算面积和周长的虚函数</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Shape</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">   <span class="comment">// 计算面积的虚函数，提供默认实</span></span><br><span class="line">   <span class="comment">// 使用virtual关键字，允许派生类重写</span></span><br><span class="line">   <span class="function"><span class="keyword">virtual</span> <span class="type">double</span> <span class="title">calculateArea</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="number">0.0</span>; <span class="comment">// 基类提供默认实现</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 计算周长的虚函数，提供默认实现</span></span><br><span class="line">   <span class="comment">// 使用virtual关键字，允许派生类重写</span></span><br><span class="line">   <span class="function"><span class="keyword">virtual</span> <span class="type">double</span> <span class="title">calculatePerimeter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="number">0.0</span>; <span class="comment">// 基类提供默认实现</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 虚析构函数，确保派生类对象正确释放</span></span><br><span class="line">   <span class="keyword">virtual</span> ~<span class="built_in">Shape</span>() &#123;&#125; <span class="comment">// 虚析构函数</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 矩形类，继承自Shape基类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Rectangle</span> : <span class="keyword">public</span> Shape &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">   <span class="comment">// 矩形的私有成员：宽和高</span></span><br><span class="line">   <span class="type">double</span> width;</span><br><span class="line">   <span class="type">double</span> height;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">   <span class="comment">// 构造函数，初始化矩形的宽和高</span></span><br><span class="line">   <span class="built_in">Rectangle</span>(<span class="type">double</span> w, <span class="type">double</span> h) : <span class="built_in">width</span>(w), <span class="built_in">height</span>(h) &#123;&#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 重写基类的calculateArea虚函数</span></span><br><span class="line">   <span class="comment">// override关键字确保正确重写基类虚函数</span></span><br><span class="line">   <span class="function"><span class="type">double</span> <span class="title">calculateArea</span><span class="params">()</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> width * height; <span class="comment">// 矩形面积计算</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 重写基类的calculatePerimeter虚函数</span></span><br><span class="line">   <span class="function"><span class="type">double</span> <span class="title">calculatePerimeter</span><span class="params">()</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="number">2</span> * (width + height); <span class="comment">// 矩形周长计算</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 圆形类，继承自Shape基类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Circle</span> : <span class="keyword">public</span> Shape &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">   <span class="comment">// 圆形的私有成员：半径</span></span><br><span class="line">   <span class="type">double</span> radius;</span><br><span class="line">   <span class="comment">// 圆周率常量</span></span><br><span class="line">   <span class="type">const</span> <span class="type">double</span> PI = <span class="number">3.14159</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">   <span class="comment">// 构造函数，初始化圆形的半径</span></span><br><span class="line">   <span class="built_in">Circle</span>(<span class="type">double</span> r) : <span class="built_in">radius</span>(r) &#123;&#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 重写基类的calculateArea虚函数</span></span><br><span class="line">   <span class="comment">// override关键字确保正确重写基类虚函数</span></span><br><span class="line">   <span class="function"><span class="type">double</span> <span class="title">calculateArea</span><span class="params">()</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> PI * radius * radius; <span class="comment">// 圆形面积计算</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 重写基类的calculatePerimeter虚函数</span></span><br><span class="line">   <span class="function"><span class="type">double</span> <span class="title">calculatePerimeter</span><span class="params">()</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="number">2</span> * PI * radius; <span class="comment">// 圆形周长计算</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h1><p><strong>虚函数只能借助于指针或者引用来达到多态的效果。</strong></p>
+<blockquote>
+<p><strong>多态</strong>的本质是“同一个函数调用，能够根据不同对象表现出不同的行为</p>
+</blockquote>
+<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1747056760477QGSmb9FB5obI4CxbD3RcFRIynCe.png" alt="1747056760477QGSmb9FB5obI4CxbD3RcFRIynCe.png"></p>
+<h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><h2 id="虚函数声明"><a href="#虚函数声明" class="headerlink" title="虚函数声明"></a>虚函数声明</h2><p>从简单的例子开始</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">shout</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;动物叫了一声\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span> : <span class="keyword">public</span> Animal</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">shout</span><span class="params">()</span> <span class="keyword">override</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;喵喵喵\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>解释：</strong></p>
+<ul>
+<li>代码通过 <code>Animal</code> 基类定义了一个虚函数 <code>shout()</code>，为派生类提供了一个默认实现。</li>
+<li><code>Cat</code> 类继承自 <code>Animal</code>，使用 <code>override</code> 关键字重写了 <code>shout()</code> 方法，展示了虚函数允许派生类提供自己的特定实现。</li>
+<li>这个示例体现了 C++ 多态性的基本原理：基类定义一个通用接口，派生类可以根据自身特性灵活地实现具体行为。</li>
+</ul>
+<blockquote>
+<p>需要注意的是，在子类中重写虚函数时，其访问权限不能更严格（即不能由 public 变为 private 或 protected），否则编译器会报错。</p>
+</blockquote>
+<h2 id="纯虚函数与抽象类"><a href="#纯虚函数与抽象类" class="headerlink" title="纯虚函数与抽象类"></a>纯虚函数与抽象类</h2><h3 id="纯虚函数"><a href="#纯虚函数" class="headerlink" title="纯虚函数"></a>纯虚函数</h3><p>纯虚函数是指在基类中定义的没有实现的虚函数。使用纯虚函数可以使该函数只有函数原型，而没有具体的实现。注：这里的“&#x3D;0”表示该函数为纯虚函数。</p>
+<p>纯虚函数的作用是让子类必须实现该函数，并且不能直接创建该类对象（即该类为抽象类）。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">func</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Shape</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">   <span class="comment">// 纯虚函数，没有默认实现</span></span><br><span class="line">   <span class="function"><span class="keyword">virtual</span> <span class="type">double</span> <span class="title">calculateArea</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">   </span><br><span class="line">   <span class="comment">// 包含纯虚函数的类成为抽象类</span></span><br><span class="line">   <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">draw</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Rectangle</span> : <span class="keyword">public</span> Shape &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">   <span class="comment">// 必须实现基类的纯虚函数</span></span><br><span class="line">   <span class="function"><span class="type">double</span> <span class="title">calculateArea</span><span class="params">()</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> width * height;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="function"><span class="type">void</span> <span class="title">draw</span><span class="params">()</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">       <span class="comment">// 绘制矩形的具体实现</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">   <span class="type">double</span> width;</span><br><span class="line">   <span class="type">double</span> height;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>解释：</strong></p>
+<ul>
+<li>代码通过 <code>Shape</code> 基类定义了两个纯虚函数 <code>calculateArea()</code> 和 <code>draw()</code>，使 <code>Shape</code> 成为一个抽象类。</li>
+<li>纯虚函数（<code>= 0</code>）没有默认实现，强制派生类必须提供具体实现。</li>
+<li><code>Rectangle</code> 类继承自 <code>Shape</code>，必须实现所有纯虚函数，否则仍将是抽象类。</li>
+<li>这个示例展示了纯虚函数作为接口的设计模式，确保派生类提供必要的具体行为。</li>
+</ul>
+<h3 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h3><p>抽象类是包含纯虚函数的类，它们不能被实例化，只能被继承。抽象类只能用作其他类的基类。如果一个类继承了抽象类，则必须实现所有的纯虚函数，否则该类也会成为抽象类。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Shape</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">_    <span class="comment">// 纯虚函数_</span></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">double</span> <span class="title">getArea</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">_<span class="comment">// 继承自抽象类Shape_</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Rectangle</span> : <span class="keyword">public</span> Shape</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">double</span> **width**;</span><br><span class="line">    <span class="type">double</span> **height**;</span><br><span class="line">    <span class="function"><span class="type">double</span> <span class="title">getArea</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> **width** * **height**; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">_<span class="comment">// 继承自抽象类Shape_</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Circle</span> : <span class="keyword">public</span> Shape</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">double</span> **radius**;</span><br><span class="line">    <span class="function"><span class="type">double</span> <span class="title">getArea</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="number">3.14</span> * **radius** * **radius**; &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Shape 为抽象类，其中包含纯虚函数 getArea()，Rectangle 和 Circle 均继承自 Shape，并且实现了 getArea()函数的具体内容。</p>
+<h3 id="多重继承中的虚函数"><a href="#多重继承中的虚函数" class="headerlink" title="多重继承中的虚函数"></a>多重继承中的虚函数</h3><p>在多重继承中，如果一个类同时继承了多个基类，而这些基类中都有同名的虚函数，那么子类必须对这些虚函数进行重写并实现。此时，需要使用作用域限定符来指明重写的是哪个基类的虚函数。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Base1</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123; cout &lt;&lt; <span class="string">&quot;Base1::func()&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Base2</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123; cout &lt;&lt; <span class="string">&quot;Base2::func()&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derived</span> : <span class="keyword">public</span> Base1, <span class="keyword">public</span> Base2</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">func</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Base1::<span class="built_in">func</span>();</span><br><span class="line">        Base2::<span class="built_in">func</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>派生类 Derived 同时继承了 Base1 和 Base2，这两个基类中都有名为 func 的虚函数。在 Derived 中，我们通过使用作用域限定符 Base1::和 Base2::，分别调用了两个基类中的虚函数。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3><ul>
+<li><p>优点：</p>
+<ul>
+<li>实现多态性：通过虚函数，可以在不知道对象具体类型的情况下，调用特定对象的方法。</li>
+<li>代码灵活性：虚函数允许子类覆盖父类的方法，并且不需要改变基类的代码。</li>
+<li>代码可维护性：虚函数使得代码易于维护和扩展，因为子类可以通过重载虚函数来实现自己的行为。</li>
+</ul>
+</li>
+<li><p>缺点：</p>
+<ul>
+<li>额外的开销：虚函数需要额外的开销来支持运行时的动态绑定和查找虚表。这可能会影响程序的性能。</li>
+<li>可能会引起混淆：由于虚函数的存在，同名的函数可能会被不同的类定义。如果没有正确的使用虚函数，可能会导致混淆和错误的结果。</li>
+<li>不适合于小型应用：虚函数对于小型应用来说可能过于复杂和冗余。在这种情况下，使用虚函数可能会导致更多的开销而不是提高效率。</li>
+</ul>
+</li>
+</ul>
+<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 基类Entity，定义了一个虚函数GetName()</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Entity</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">   <span class="comment">// 虚函数，返回一个默认的实体名称</span></span><br><span class="line">   <span class="comment">// 使用virtual关键字，允许派生类重写</span></span><br><span class="line">   <span class="function"><span class="keyword">virtual</span> std::string <span class="title">GetName</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="string">&quot;Entity&quot;</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 派生类Player，继承自Entity</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Player</span> : <span class="keyword">public</span> Entity &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">   <span class="comment">// 私有成员，存储玩家名称</span></span><br><span class="line">   std::string m_Name;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">   <span class="comment">// 构造函数，使用传入的名称初始化玩家</span></span><br><span class="line">   <span class="built_in">Player</span>(<span class="type">const</span> std::string&amp; name) :<span class="built_in">m_Name</span>(name) &#123;&#125;;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 重写基类的GetName()虚函数</span></span><br><span class="line">   <span class="comment">// override关键字确保正确重写基类虚函数</span></span><br><span class="line">   <span class="function">std::string <span class="title">GetName</span><span class="params">()</span> <span class="keyword">override</span> </span>&#123; <span class="keyword">return</span> m_Name; &#125;;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 设置玩家名称的成员函数</span></span><br><span class="line">   <span class="function"><span class="type">void</span> <span class="title">SetName</span><span class="params">(std::string name)</span> </span>&#123; m_Name = name; &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印实体名称的函数</span></span><br><span class="line"><span class="comment">// 接受一个Entity指针作为参数，体现了多态性</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">PrintName</span><span class="params">(Entity* entity)</span> </span>&#123;</span><br><span class="line">   <span class="comment">// 调用虚函数GetName()，实际执行的是对象的具体实现</span></span><br><span class="line">   std::cout &lt;&lt; entity-&gt;<span class="built_in">GetName</span>() &lt;&lt; std::endl;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="comment">// 创建一个基类Entity对象的指针</span></span><br><span class="line">   Entity* e = <span class="keyword">new</span> <span class="built_in">Entity</span>();</span><br><span class="line">   <span class="comment">// 调用PrintName()，将打印&quot;Entity&quot;</span></span><br><span class="line">   <span class="built_in">PrintName</span>(e);</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 创建一个Player对象，名称为&quot;tanke&quot;</span></span><br><span class="line">   Player* p = <span class="keyword">new</span> <span class="built_in">Player</span>(<span class="string">&quot;tanke&quot;</span>);</span><br><span class="line">   <span class="comment">// 调用PrintName()，将打印&quot;tanke&quot;</span></span><br><span class="line">   <span class="built_in">PrintName</span>(p);</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 修改Player对象的名称为&quot;wangjie&quot;</span></span><br><span class="line">   p-&gt;<span class="built_in">SetName</span>(<span class="string">&quot;wangjie&quot;</span>);</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 将Player指针赋值给基类指针，体现了多态性</span></span><br><span class="line">   Entity* e1 = p;</span><br><span class="line">   <span class="comment">// 调用PrintName()，将打印&quot;wangjie&quot;</span></span><br><span class="line">   <span class="built_in">PrintName</span>(p);</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 等待用户输入，保持窗口打开</span></span><br><span class="line">   std::cin.<span class="built_in">get</span>();</span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>解释：</strong></p>
+<ul>
+<li>代码通过 <code>Entity</code> 基类定义了一个虚函数 <code>GetName()</code>，为派生类提供了一个默认实现。</li>
+<li><code>Player</code> 类继承自 <code>Entity</code>，并使用 <code>override</code> 关键字重写了 <code>GetName()</code> 方法。</li>
+<li><code>PrintName()</code> 函数接受一个 <code>Entity</code> 指针，展示了 C++ 多态性的关键特征 - 可以通过基类指针调用派生类的具体实现。</li>
+</ul>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1747056796676Ue1zbj8hco94t9xuRBRcd0jWnXg.png" alt="1747056796676Ue1zbj8hco94t9xuRBRcd0jWnXg.png"></p>
+<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><ol>
+<li>虚函数应用于继承层次结构中的多态性，即通过基类指针或引用调用派生类对象的成员函数。</li>
+<li>可以将虚函数作为接口定义，让不同的派生类实现自己的版本，以满足各自的需求。</li>
+<li>避免在构造函数和析构函数中调用虚函数，因为此时对象还未完全构造或已经被销毁。</li>
+<li>虚函数的声明应该在公共部分（例如基类），而不是在私有部分（例如派生类）中声明。</li>
+<li>将虚函数的实现定义为 inline 可以提高程序的执行效率。</li>
+<li>在使用纯虚函数时，需要给出其具体实现。可以在派生类中实现，也可以在基类中实现。</li>
+<li>避免过度使用虚函数，因为虚函数会增加程序的开销。在没有必要的情况下，可以使用普通成员函数代替虚函数。</li>
+</ol>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+            
+            
+                <div class="post-actions text-center clearfix" id="post-actions">
+                
+                    <a class="donate" href="javascript:;" onclick="krOpenDonateModal()"><i class="fa fa-bitcoin"></i> 打赏</a>
+                
+                
+                    <a class="share" href="javascript:;" onclick="krOpenShareModal()"><i class="fa fa-share-alt"></i> 分享</a>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" rel="tag">程序开发</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2025-09-22T07:55:44.492Z" itemprop="dateModified">最后编辑：2025-09-22</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 2025-06-02-IP 地址规划及案例分析" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-06-02-IP 地址规划及案例分析/"><i class="fa fa-angle-left"></i> 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 2025-05-11-银行家算法分析" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-05-11-银行家算法分析/">下一篇 <i class="fa fa-angle-right"></i></a>
+            </div>
+            
+        </nav>
+    
+    
+        <div class="comment-post">
+            
+        </div>
+    
+</article>
+
+        
+
+            </section>
+
+            
+                
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+        <div class="sticky-area">
+    
+    
+    </div>
+</section>
+            
+
+        
+
+                </div>
+    </div>
+</div>
+
+<footer>
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2025 TK的小站 版权所有.</li>
+                            <li>本站已运行<span id="kr-since">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>自豪地使用 <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a> 主题</li>
+                            <li>站点由 TK 用 <i class="fa fa-heart" style="color:#d43f57"></i> 搭建</li>
+                        </div>
+                        <!-- 额外的追加注入项 -->
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/tkzzzzzz6/tkzzzzzz6.github.io/search">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                <div class="box theme-box" id="theme-toggle">
+                    <span class="fa fa-adjust"></span>
+                </div>
+            </div>
+            <div id="gotop-box" class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+
+    <div id="kr-donate-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseDonateModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-bitcoin"></i>
+            </div>
+            <div class="kr-modal-title">打赏</div>
+            <button class="kr-modal-close" onclick="krCloseDonateModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-donate-message">打赏提示信息</div>
+            <div class="kr-donate-qr" id="kr-donate-qr">
+                
+            </div>
+            <div class="kr-donate-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/donate.min.js"></script>
+
+
+
+
+    <div id="kr-share-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseShareModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-share-alt"></i>
+            </div>
+            <div class="kr-modal-title">分享</div>
+            <button class="kr-modal-close" onclick="krCloseShareModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-share-message">分享提示信息</div>
+            <div class="kr-share-qr" id="kr-share-qr"></div>
+            <div class="kr-share-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/share.min.js"></script>
+
+
+
+<!-- 额外的追加注入项 -->
+
+
+        <script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/tkzzzzzz6/tkzzzzzz6.github.io/";
+</script>
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.js"></script>
+
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.js"></script>
+
+
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-core.min.js"></script>
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-pjax.min.js"></script>
+
+
+<!-- 额外的追加注入项 -->
+
+
+    </body>
+</html>

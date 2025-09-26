@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  
+  
+  <title>2025-04-02-JAVA 作业_图书管理系统_week4 | TK的小站</title>
+  <link rel="canonical" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-04-02-JAVA%E4%BD%9C%E4%B8%9A_%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F_week4/">
+  <meta name="author" content="TK" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="程序开发" />
+  
+  <meta name="description" content="29_【项目】老马书城集合版-项目介绍_哔哩哔哩_bilibili(参考视频)   LibraryManagementSystem   【图书管理系统】(超详细附源码用 java 实现)_图书管理系统源码-CSDN 博客  图书馆管理系统项目说明项目概述我选择的是选题三图书馆：模拟一天的借阅过程,应该这个选题更加贴近现实开发,用于模拟图书馆日常的借阅管理流程。系统实现了图书馆基本的图书管理、读者">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2025-04-02-JAVA 作业_图书管理系统_week4">
+<meta property="og:url" content="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-04-02-JAVA%E4%BD%9C%E4%B8%9A_%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F_week4/index.html">
+<meta property="og:site_name" content="TK的小站">
+<meta property="og:description" content="29_【项目】老马书城集合版-项目介绍_哔哩哔哩_bilibili(参考视频)   LibraryManagementSystem   【图书管理系统】(超详细附源码用 java 实现)_图书管理系统源码-CSDN 博客  图书馆管理系统项目说明项目概述我选择的是选题三图书馆：模拟一天的借阅过程,应该这个选题更加贴近现实开发,用于模拟图书馆日常的借阅管理流程。系统实现了图书馆基本的图书管理、读者">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1743590162843CbQ4bP8FJoMZDCxRi9FcBNlonBh.png">
+<meta property="og:image" content="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1743590155844Lv5BbqXAFoDN2Wxo7MscZZCmngd.png">
+<meta property="og:image" content="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1743590165844WgHtbCCmRohtZwxwI1XcLqjYnvf.png">
+<meta property="article:published_time" content="1970-01-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-22T07:55:44.493Z">
+<meta property="article:author" content="TK">
+<meta property="article:tag" content="程序开发">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1743590162843CbQ4bP8FJoMZDCxRi9FcBNlonBh.png">
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-core.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="highlight-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/highlight/highlight.js/night-eighties.min.css" media="all"></link>
+  
+  <link rel="stylesheet" id="theme-light-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/light.min.css" media="all"></link>
+  <link rel="stylesheet" id="theme-dark-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/dark.min.css" media="(prefers-color-scheme: dark)"></link>
+  <script src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-theme.min.js"></script>
+  <link rel="stylesheet" id="fontawe-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="nprogress-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.css" media="all"></link>
+  
+  
+    <link rel="stylesheet" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.css"></link>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  
+    <script src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
+  
+  <!-- 自定义站点横幅和背景 -->
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+      html[data-theme="dark"] .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('');
+        }
+        html[data-theme="dark"] body.custom-background {
+          background-image: url('');
+        }
+      }
+    
+    
+      .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+      html[data-theme="dark"] .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+    
+  </style>
+
+  <!-- 额外的追加注入项 -->
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/tkzzzzzz6/tkzzzzzz6.github.io/">TK的小站</a></div>
+                    <div id="kratos-nav-toggle-wrapper" class="nav-toggle">
+                        <a id="kratos-nav-toggle" class="kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/tkzzzzzz6/tkzzzzzz6.github.io/">
+                        <h2>TK的小站</h2> <br />
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+
+
+        
+
+            
+
+            <section class="kr-main-col col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-04-02-JAVA%E4%BD%9C%E4%B8%9A_%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F_week4/">
+    <div class="kratos-hentry kratos-page-inner clearfix">
+        <header class="kratos-page-header">
+            
+                <h1 class="kratos-page-title text-center" itemprop="name headline">2025-04-02-JAVA 作业_图书管理系统_week4</h1>
+            
+            <ul class="kratos-page-meta text-center">
+                <li><time datetime="1970-01-01T00:00:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 1970-01-01</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">TK</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~6.16K
+                        
+                        字
+                    </li>
+                
+                
+                    <li>
+                        <i class="fa fa-eye"></i>
+                         次阅读
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-page-content kr-post">
+            
+            
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1sk4y1M7ru?vd_source=0ca07f837bf8ee7607324d7927199dcc&p=29&spm_id_from=333.788.videopod.episodes">29_【项目】老马书城集合版-项目介绍_哔哩哔哩_bilibili</a>(参考视频)</p>
+</blockquote>
+<blockquote>
+<p><a href="https://github.com/rongchenlin/LibraryManagementSystem">LibraryManagementSystem</a></p>
+</blockquote>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_64670207/article/details/136854580">【图书管理系统】(超详细附源码用 java 实现)_图书管理系统源码-CSDN 博客</a></p>
+</blockquote>
+<h1 id="图书馆管理系统项目说明"><a href="#图书馆管理系统项目说明" class="headerlink" title="图书馆管理系统项目说明"></a>图书馆管理系统项目说明</h1><h2 id="项目概述"><a href="#项目概述" class="headerlink" title="项目概述"></a>项目概述</h2><p>我选择的是选题三图书馆：模拟一天的借阅过程,应该这个选题更加贴近现实开发,用于模拟图书馆日常的借阅管理流程。系统实现了图书馆基本的图书管理、读者管理、借阅管理等功能。</p>
+<p>系统的架构设计如下：系统通过定义一个 Borrowable 接口，规范了可借阅物品的标准操作，包括借阅和归还等基本功能。LibraryItem 作为抽象类，实现了 Borrowable 接口，为所有可借阅物品提供了基础结构，包含标题、ID 等通用属性。具体类 Book 继承自 LibraryItem，扩展了图书特有的属性（如作者、ISBN）和行为。Reader 类负责管理读者信息，并跟踪读者的借阅记录。Library 类作为系统的核心管理类，负责处理图书和读者的注册，管理借阅和归还流程，并维护图书馆的开放状态。通过这种设计，系统实现了对图书馆资源和读者行为的高效管理。</p>
+<p>为了理清思路，我先了画出类图，梳理各个类之间的关系。在编码阶段，我遇到了不少问题。例如，在使用 HashMap 管理图书时，我错误地将 ISBN 作为字符串拼接，导致查询时出现空指针异常。我按照教程编写了 borrowBook() 方法，但运行时发现同一本书可以被多次借出。经过仔细检查，我意识到问题出在没有为 Book 类添加 isAvailable 标志位。在修正了这一问题后，我特意编写了多个测试用例，验证了各种边界情况，确保了借阅逻辑的正确性。</p>
+<h2 id="系统架构"><a href="#系统架构" class="headerlink" title="系统架构"></a>系统架构</h2><p>系统采用面向对象的设计方法，主要包含以下核心组件：</p>
+<h2 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h2><h2 id="技术特点"><a href="#技术特点" class="headerlink" title="技术特点"></a>技术特点</h2><ol>
+<li><p>面向对象设计</p>
+<ul>
+<li>使用继承（LibraryItem -&gt; Book）</li>
+<li>使用接口（Borrowable）</li>
+<li>封装（private 属性 + getter&#x2F;setter）</li>
+<li>多态（LibraryItem 的实现）</li>
+</ul>
+</li>
+<li><p>Java 语言特性</p>
+<ul>
+<li>使用 <code>abstract</code> 类</li>
+<li>使用 <code>interface</code></li>
+<li>使用 <code>@Override</code> 注解</li>
+<li>使用 <code>static</code> 和 <code>final</code> 修饰符</li>
+</ul>
+</li>
+<li><p>集合框架应用</p>
+<ul>
+<li>使用 <code>HashMap</code> 管理图书和读者</li>
+<li>使用 <code>ArrayList</code> 存储借阅记录</li>
+</ul>
+</li>
+</ol>
+<h2 id="运行说明"><a href="#运行说明" class="headerlink" title="运行说明"></a>运行说明</h2><ol>
+<li>编译方法</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> src</span><br><span class="line">javac *.java</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>运行方法</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java Main</span><br></pre></td></tr></table></figure>
+
+<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">src/</span><br><span class="line">├── Borrowable.java     // 可借阅接口</span><br><span class="line">├── LibraryItem.java    // 图书馆物品抽象类</span><br><span class="line">├── Book.java           // 图书类</span><br><span class="line">├── Reader.java         // 读者类</span><br><span class="line">├── Library.java        // 图书馆管理类</span><br><span class="line">└── Main.java           // 主程序入口</span><br></pre></td></tr></table></figure>
+
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li>系统使用 ISBN 作为图书的唯一标识</li>
+<li>读者 ID 格式为”R”+ 序号</li>
+<li>图书 ID 格式为”B”+ 序号</li>
+<li>图书馆闭馆时无法进行借还操作</li>
+</ol>
+<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1743590162843CbQ4bP8FJoMZDCxRi9FcBNlonBh.png" alt="1743590162843CbQ4bP8FJoMZDCxRi9FcBNlonBh.png"><br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1743590155844Lv5BbqXAFoDN2Wxo7MscZZCmngd.png" alt="1743590155844Lv5BbqXAFoDN2Wxo7MscZZCmngd.png"><br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1743590165844WgHtbCCmRohtZwxwI1XcLqjYnvf.png" alt="1743590165844WgHtbCCmRohtZwxwI1XcLqjYnvf.png"></p>
+<h2 id="Main-代码"><a href="#Main-代码" class="headerlink" title="Main 代码"></a>Main 代码</h2><blockquote>
+<p><a href="https://github.com/tkzzzzzz6/My_Java_homework">https://github.com/tkzzzzzz6/My_Java_homework</a>(完整代码链接)</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        _printHeader_(&quot;图书馆管理系统启动&quot;);</span><br><span class="line"></span><br><span class="line">        // 创建图书馆</span><br><span class="line">        Library library = new Library(&quot;我的图书馆&quot;);</span><br><span class="line">        </span><br><span class="line">        _printHeader_(&quot;初始化图书馆藏书&quot;);</span><br><span class="line">        // 添加图书</span><br><span class="line">        Book book1 = new Book(&quot;Java编程思想&quot;, &quot;B001&quot;, &quot;Bruce Eckel&quot;, &quot;9787111213826&quot;);</span><br><span class="line">        Book book2 = new Book(&quot;软件工程&quot;, &quot;B002&quot;, &quot;Erich Gamma&quot;, &quot;9787111346365&quot;);</span><br><span class="line">        Book book3 = new Book(&quot;算法导论&quot;, &quot;B003&quot;, &quot;Thomas H. Cormen&quot;, &quot;9787111187776&quot;);</span><br><span class="line">        Book book4 = new Book(&quot;计算机网络&quot;, &quot;B004&quot;, &quot;谢希仁&quot;, &quot;9787302424645&quot;);</span><br><span class="line">        Book book6 = new Book(&quot;深度学习&quot;, &quot;B006&quot;, &quot;Abraham Silberschatz&quot;, &quot;9787111187776&quot;);</span><br><span class="line">        Book comic1 = new Book(&quot;欢迎来到实力至上主义教室&quot;, &quot;C007&quot;, &quot;衣笠彰梧&quot;, &quot;9784861994950&quot;);</span><br><span class="line">        Book comic2 = new Book(&quot;进击的巨人&quot;, &quot;C004&quot;, &quot;谏山创&quot;, &quot;9787115270532&quot;);</span><br><span class="line"></span><br><span class="line">        // 添加图书到图书馆</span><br><span class="line">        library.addItem(book1);</span><br><span class="line">        library.addItem(book2);</span><br><span class="line">        library.addItem(book3);</span><br><span class="line">        library.addItem(book4);</span><br><span class="line">        library.addItem(book6);</span><br><span class="line">        library.addItem(comic1);</span><br><span class="line">        library.addItem(comic2);</span><br><span class="line"></span><br><span class="line">        System._out_.println(&quot;\n当前图书馆藏书总量：&quot; + library.getTotalItems() + &quot; 本&quot;);</span><br><span class="line"></span><br><span class="line">        _printHeader_(&quot;注册读者信息&quot;);</span><br><span class="line">        // 创建读者</span><br><span class="line">        Reader reader1 = new Reader(&quot;R001&quot;, &quot;张三&quot;);</span><br><span class="line">        Reader reader2 = new Reader(&quot;R002&quot;, &quot;李四&quot;);</span><br><span class="line">        Reader reader3 = new Reader(&quot;R003&quot;, &quot;王五&quot;);</span><br><span class="line"></span><br><span class="line">        // 添加读者到图书馆</span><br><span class="line">        library.addReader(reader1);</span><br><span class="line">        library.addReader(reader2);</span><br><span class="line">        library.addReader(reader3);</span><br><span class="line">        System._out_.println(&quot;\n当前注册读者总数：&quot; + library.getTotalReaders() + &quot; 人&quot;);</span><br><span class="line"></span><br><span class="line">        // 开馆</span><br><span class="line">        _printHeader_(&quot;图书馆开始营业&quot;);</span><br><span class="line">        library.openLibrary();</span><br><span class="line"></span><br><span class="line">        // 测试借阅</span><br><span class="line">        _printHeader_(&quot;借阅测试&quot;);</span><br><span class="line">        System._out_.println(&quot;场景1: &quot; + reader1.getName() + &quot; 借阅《&quot; + book1.getTitle() + &quot;》&quot;);</span><br><span class="line">        if (library.borrowItem(&quot;B001&quot;, &quot;R001&quot;)) &#123;</span><br><span class="line">            _printSuccess_(&quot;借阅成功&quot;);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            _printError_(&quot;借阅失败&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System._out_.println(&quot;\n场景2: &quot; + reader2.getName() + &quot; 尝试借阅已借出的《&quot; + book1.getTitle() + &quot;》&quot;);</span><br><span class="line">        if (library.borrowItem(&quot;B001&quot;, &quot;R002&quot;)) &#123;</span><br><span class="line">            _printSuccess_(&quot;借阅成功&quot;);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            _printError_(&quot;借阅失败：图书已被借出&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System._out_.println(&quot;\n场景3: &quot; + reader2.getName() + &quot; 借阅《&quot; + book2.getTitle() + &quot;》&quot;);</span><br><span class="line">        if (library.borrowItem(&quot;B002&quot;, &quot;R002&quot;)) &#123;</span><br><span class="line">            _printSuccess_(&quot;借阅成功&quot;);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            _printError_(&quot;借阅失败&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 测试归还</span><br><span class="line">        _printHeader_(&quot;归还测试&quot;);</span><br><span class="line">        System._out_.println(&quot;场景1: &quot; + reader1.getName() + &quot; 归还《&quot; + book1.getTitle() + &quot;》&quot;);</span><br><span class="line">        if (library.returnItem(&quot;B001&quot;, &quot;R001&quot;)) &#123;</span><br><span class="line">            _printSuccess_(&quot;归还成功&quot;);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            _printError_(&quot;归还失败&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System._out_.println(&quot;\n场景2: &quot; + reader2.getName() + &quot; 归还《&quot; + comic1.getTitle() + &quot;》&quot;);</span><br><span class="line">        if (library.returnItem(&quot;C007&quot;, &quot;R002&quot;)) &#123;</span><br><span class="line">            _printSuccess_(&quot;归还成功&quot;);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            _printError_(&quot;归还失败&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 显示可用图书</span><br><span class="line">        _printHeader_(&quot;当前可借阅图书列表&quot;);</span><br><span class="line">        library.printAvailableBooks();</span><br><span class="line"></span><br><span class="line">        // 闭馆</span><br><span class="line">        _printHeader_(&quot;图书馆闭馆&quot;);</span><br><span class="line">        library.closeLibrary();</span><br><span class="line">        </span><br><span class="line">        _printHeader_(&quot;系统运行结束&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 美化输出的辅助方法</span><br><span class="line">    private static void printHeader(String message) &#123;</span><br><span class="line">        System._out_.println(&quot;\n&quot; + &quot;=&quot;.repeat(50));</span><br><span class="line">        System._out_.println(&quot;&gt;&gt;&gt; &quot; + message);</span><br><span class="line">        System._out_.println(&quot;=&quot;.repeat(50));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static void printSuccess(String message) &#123;</span><br><span class="line">        System._out_.println(&quot;[成功] &quot; + message);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static void printError(String message) &#123;</span><br><span class="line">        System._out_.println(&quot;[失败] &quot; + message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+            
+            
+                <div class="post-actions text-center clearfix" id="post-actions">
+                
+                    <a class="donate" href="javascript:;" onclick="krOpenDonateModal()"><i class="fa fa-bitcoin"></i> 打赏</a>
+                
+                
+                    <a class="share" href="javascript:;" onclick="krOpenShareModal()"><i class="fa fa-share-alt"></i> 分享</a>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" rel="tag">程序开发</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2025-09-22T07:55:44.493Z" itemprop="dateModified">最后编辑：2025-09-22</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 2025-04-15-二进制思想在计算机科学中的应用" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-04-15-二进制思想在计算机科学中的应用/"><i class="fa fa-angle-left"></i> 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 2025-04-10 汇编实验1：利用DEBUG熟悉常用指令的使用" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-04-10-汇编语言实验1_debug命令/">下一篇 <i class="fa fa-angle-right"></i></a>
+            </div>
+            
+        </nav>
+    
+    
+        <div class="comment-post">
+            
+        </div>
+    
+</article>
+
+        
+
+            </section>
+
+            
+                
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+        <div class="sticky-area">
+    
+    
+    </div>
+</section>
+            
+
+        
+
+                </div>
+    </div>
+</div>
+
+<footer>
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2025 TK的小站 版权所有.</li>
+                            <li>本站已运行<span id="kr-since">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>自豪地使用 <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a> 主题</li>
+                            <li>站点由 TK 用 <i class="fa fa-heart" style="color:#d43f57"></i> 搭建</li>
+                        </div>
+                        <!-- 额外的追加注入项 -->
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/tkzzzzzz6/tkzzzzzz6.github.io/search">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                <div class="box theme-box" id="theme-toggle">
+                    <span class="fa fa-adjust"></span>
+                </div>
+            </div>
+            <div id="gotop-box" class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+
+    <div id="kr-donate-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseDonateModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-bitcoin"></i>
+            </div>
+            <div class="kr-modal-title">打赏</div>
+            <button class="kr-modal-close" onclick="krCloseDonateModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-donate-message">打赏提示信息</div>
+            <div class="kr-donate-qr" id="kr-donate-qr">
+                
+            </div>
+            <div class="kr-donate-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/donate.min.js"></script>
+
+
+
+
+    <div id="kr-share-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseShareModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-share-alt"></i>
+            </div>
+            <div class="kr-modal-title">分享</div>
+            <button class="kr-modal-close" onclick="krCloseShareModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-share-message">分享提示信息</div>
+            <div class="kr-share-qr" id="kr-share-qr"></div>
+            <div class="kr-share-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/share.min.js"></script>
+
+
+
+<!-- 额外的追加注入项 -->
+
+
+        <script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/tkzzzzzz6/tkzzzzzz6.github.io/";
+</script>
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.js"></script>
+
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.js"></script>
+
+
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-core.min.js"></script>
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-pjax.min.js"></script>
+
+
+<!-- 额外的追加注入项 -->
+
+
+    </body>
+</html>

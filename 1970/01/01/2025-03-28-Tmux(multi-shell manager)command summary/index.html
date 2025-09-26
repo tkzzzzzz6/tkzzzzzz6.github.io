@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  
+  
+  <title>2025-03-28-Tmux(多终端管理器)使用教程 | TK的小站</title>
+  <link rel="canonical" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-03-28-Tmux(multi-shell%20manager)command%20summary/">
+  <meta name="author" content="TK" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="问题解决" />
+  
+  <meta name="description" content="Tmux Cheat Sheet &amp; Quick Reference | Session, window, pane and more https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v&#x3D;nTqu6w2wc68&amp;ab_channel&#x3D;NetworkChuck(教学视频) Tmux 使用手册 Tmux 快捷键 &amp; 速查表 &amp; 简明教程  启动新会话：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2025-03-28-Tmux(多终端管理器)使用教程">
+<meta property="og:url" content="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-03-28-Tmux(multi-shell%20manager)command%20summary/index.html">
+<meta property="og:site_name" content="TK的小站">
+<meta property="og:description" content="Tmux Cheat Sheet &amp; Quick Reference | Session, window, pane and more https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v&#x3D;nTqu6w2wc68&amp;ab_channel&#x3D;NetworkChuck(教学视频) Tmux 使用手册 Tmux 快捷键 &amp; 速查表 &amp; 简明教程  启动新会话：">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="1970-01-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-29T01:54:36.619Z">
+<meta property="article:author" content="TK">
+<meta property="article:tag" content="问题解决">
+<meta name="twitter:card" content="summary">
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-core.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="highlight-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/highlight/highlight.js/night-eighties.min.css" media="all"></link>
+  
+  <link rel="stylesheet" id="theme-light-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/light.min.css" media="all"></link>
+  <link rel="stylesheet" id="theme-dark-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/dark.min.css" media="(prefers-color-scheme: dark)"></link>
+  <script src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-theme.min.js"></script>
+  <link rel="stylesheet" id="fontawe-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="nprogress-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.css" media="all"></link>
+  
+  
+    <link rel="stylesheet" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.css"></link>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  
+    <script src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
+  
+  <!-- 自定义站点横幅和背景 -->
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+      html[data-theme="dark"] .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('');
+        }
+        html[data-theme="dark"] body.custom-background {
+          background-image: url('');
+        }
+      }
+    
+    
+      .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+      html[data-theme="dark"] .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+    
+  </style>
+
+  <!-- 额外的追加注入项 -->
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/tkzzzzzz6/tkzzzzzz6.github.io/">TK的小站</a></div>
+                    <div id="kratos-nav-toggle-wrapper" class="nav-toggle">
+                        <a id="kratos-nav-toggle" class="kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/tkzzzzzz6/tkzzzzzz6.github.io/">
+                        <h2>TK的小站</h2> <br />
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+
+
+        
+
+            
+
+            <section class="kr-main-col col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-03-28-Tmux(multi-shell%20manager)command%20summary/">
+    <div class="kratos-hentry kratos-page-inner clearfix">
+        <header class="kratos-page-header">
+            
+                <h1 class="kratos-page-title text-center" itemprop="name headline">2025-03-28-Tmux(多终端管理器)使用教程</h1>
+            
+            <ul class="kratos-page-meta text-center">
+                <li><time datetime="1970-01-01T00:00:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 1970-01-01</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">TK</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~5.29K
+                        
+                        字
+                    </li>
+                
+                
+                    <li>
+                        <i class="fa fa-eye"></i>
+                         次阅读
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-page-content kr-post">
+            
+            
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p><a target="_blank" rel="noopener" href="https://tmuxcheatsheet.com/">Tmux Cheat Sheet &amp; Quick Reference | Session, window, pane and more</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=nTqu6w2wc68&ab_channel=NetworkChuck">https://www.youtube.com/watch?v=nTqu6w2wc68&ab_channel&#x3D;NetworkChuck</a>(教学视频)</p>
+<p><a target="_blank" rel="noopener" href="https://louiszhai.github.io/2017/09/30/tmux/">Tmux 使用手册</a></p>
+<p><a target="_blank" rel="noopener" href="https://gist.github.com/ryerh/14b7c24dfd623ef8edc7">Tmux 快捷键 &amp; 速查表 &amp; 简明教程</a></p>
+</blockquote>
+<p>启动新会话：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux [new -s 会话名 -n 窗口名]</span><br></pre></td></tr></table></figure>
+
+<p>恢复会话：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux at [-t 会话名]</span><br></pre></td></tr></table></figure>
+
+<p>列出所有会话：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux <span class="built_in">ls</span></span><br></pre></td></tr></table></figure>
+
+<p>关闭会话：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux kill-session -t 会话名</span><br></pre></td></tr></table></figure>
+
+<p>关闭所有会话：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmux <span class="built_in">ls</span> | grep : | <span class="built_in">cut</span> -d. -f1 | awk <span class="string">&#x27;&#123;print substr($1, 0, length($1)-1)&#125;&#x27;</span> | xargs <span class="built_in">kill</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="在-Tmux-中，按下-Tmux-前缀-ctrl-b-，然后："><a href="#在-Tmux-中，按下-Tmux-前缀-ctrl-b-，然后：" class="headerlink" title="在 Tmux 中，按下 Tmux 前缀 ctrl+b****，然后："></a><strong>在 Tmux 中，按下 Tmux 前缀</strong> <strong>ctrl+b****，然后：</strong></h1><h2 id="会话"><a href="#会话" class="headerlink" title="会话"></a><strong>会话</strong></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:new&lt;回车&gt;  启动新会话</span><br><span class="line">s           列出所有会话</span><br><span class="line">$           重命名当前会话</span><br></pre></td></tr></table></figure>
+
+<h2 id="窗口-标签页"><a href="#窗口-标签页" class="headerlink" title="窗口 (标签页)"></a><strong>窗口 (标签页)</strong></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">c  创建新窗口</span><br><span class="line">w  列出所有窗口</span><br><span class="line">n  后一个窗口</span><br><span class="line">p  前一个窗口</span><br><span class="line">f  查找窗口</span><br><span class="line">,  重命名当前窗口</span><br><span class="line">&amp;  关闭当前窗口</span><br></pre></td></tr></table></figure>
+
+<h2 id="调整窗口排序"><a href="#调整窗口排序" class="headerlink" title="调整窗口排序"></a><strong>调整窗口排序</strong></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">swap-window -s 3 -t 1  交换 3 号和 1 号窗口</span><br><span class="line">swap-window -t 1       交换当前和 1 号窗口</span><br><span class="line">move-window -t 1       移动当前窗口到 1 号</span><br></pre></td></tr></table></figure>
+
+<h2 id="窗格（分割窗口）"><a href="#窗格（分割窗口）" class="headerlink" title="窗格（分割窗口）"></a><strong>窗格（分割窗口）</strong></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">%  垂直分割</span><br><span class="line"><span class="string">&quot;  水平分割</span></span><br><span class="line"><span class="string">o  交换窗格</span></span><br><span class="line"><span class="string">x  关闭窗格</span></span><br><span class="line"><span class="string">⍽  左边这个符号代表空格键 - 切换布局</span></span><br><span class="line"><span class="string">q 显示每个窗格是第几个，当数字出现的时候按数字几就选中第几个窗格</span></span><br><span class="line"><span class="string">&#123; 与上一个窗格交换位置</span></span><br><span class="line"><span class="string">&#125; 与下一个窗格交换位置</span></span><br><span class="line"><span class="string">z 切换窗格最大化/最小化</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="同步窗格"><a href="#同步窗格" class="headerlink" title="同步窗格"></a><strong>同步窗格</strong></h2><p>这么做可以切换到想要的窗口，输入 Tmux 前缀和一个冒号呼出命令提示行，然后输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:setw synchronize-panes</span><br></pre></td></tr></table></figure>
+
+<p>你可以指定开或关，否则重复执行命令会在两者间切换。 这个选项值针对某个窗口有效，不会影响别的会话和窗口。 完事儿之后再次执行命令来关闭。<u>帮助</u></p>
+<h2 id="调整窗格尺寸"><a href="#调整窗格尺寸" class="headerlink" title="调整窗格尺寸"></a><strong>调整窗格尺寸</strong></h2><p>如果你不喜欢默认布局，可以重调窗格的尺寸。虽然这很容易实现，但一般不需要这么干。这几个命令用来调整窗格：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PREFIX : resize-pane -D          当前窗格向下扩大 1 格</span><br><span class="line">PREFIX : resize-pane -U          当前窗格向上扩大 1 格</span><br><span class="line">PREFIX : resize-pane -L          当前窗格向左扩大 1 格</span><br><span class="line">PREFIX : resize-pane -R          当前窗格向右扩大 1 格</span><br><span class="line">PREFIX : resize-pane -D 20       当前窗格向下扩大 20 格</span><br><span class="line">PREFIX : resize-pane -t 2 -L 20  编号为 2 的窗格向左扩大 20 格</span><br></pre></td></tr></table></figure>
+
+<h2 id="文本复制模式："><a href="#文本复制模式：" class="headerlink" title="文本复制模式："></a><strong>文本复制模式：</strong></h2><p>按下 <code>PREFIX-[</code> 进入文本复制模式。可以使用方向键在屏幕中移动光标。默认情况下，方向键是启用的。在配置文件中启用 Vim 键盘布局来切换窗口、调整窗格大小。Tmux 也支持 Vi 模式。要是想启用 Vi 模式，只需要把下面这一行添加到 .tmux.conf 中：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setw -g mode-keys vi</span><br></pre></td></tr></table></figure>
+
+<p>启用这条配置后，就可以使用 h、j、k、l 来移动光标了。</p>
+<p>想要退出文本复制模式的话，按下回车键就可以了。然后按下 <code>PREFIX-]</code> 粘贴刚才复制的文本。</p>
+<p>一次移动一格效率低下，在 Vi 模式启用的情况下，可以辅助一些别的快捷键高效工作。</p>
+<p>例如，可以使用 w 键逐词移动，使用 b 键逐词回退。使用 f 键加上任意字符跳转到当前行第一次出现该字符的位置，使用 F 键达到相反的效果。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">vi             emacs        功能</span><br><span class="line">^              M-m          反缩进</span><br><span class="line">Escape         C-g          清除选定内容</span><br><span class="line">Enter          M-w          复制选定内容</span><br><span class="line">j              Down         光标下移</span><br><span class="line">h              Left         光标左移</span><br><span class="line">l              Right        光标右移</span><br><span class="line">L                           光标移到尾行</span><br><span class="line">M              M-r          光标移到中间行</span><br><span class="line">H              M-R          光标移到首行</span><br><span class="line">k              Up           光标上移</span><br><span class="line">d              C-u          删除整行</span><br><span class="line">D              C-k          删除到行末</span><br><span class="line">$              C-e          移到行尾</span><br><span class="line">:              g            前往指定行</span><br><span class="line">C-d            M-Down       向下滚动半屏</span><br><span class="line">C-u            M-Up         向上滚动半屏</span><br><span class="line">C-f            Page down    下一页</span><br><span class="line">w              M-f          下一个词</span><br><span class="line">p              C-y          粘贴</span><br><span class="line">C-b            Page up      上一页</span><br><span class="line">b              M-b          上一个词</span><br><span class="line">q              Escape       退出</span><br><span class="line">C-Down or J    C-Down       向下翻</span><br><span class="line">C-Up or K      C-Up         向下翻</span><br><span class="line">n              n            继续搜索</span><br><span class="line">?              C-r          向前搜索</span><br><span class="line">/              C-s          向后搜索</span><br><span class="line">0              C-a          移到行首</span><br><span class="line">Space          C-Space      开始选中</span><br><span class="line">               C-t          字符调序</span><br></pre></td></tr></table></figure>
+
+<h2 id="杂项："><a href="#杂项：" class="headerlink" title="杂项："></a><strong>杂项：</strong></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d  退出 tmux（tmux 仍在后台运行）</span><br><span class="line">t  窗口中央显示一个数字时钟</span><br><span class="line">?  列出所有快捷键</span><br><span class="line">:  命令提示符</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置选项："><a href="#配置选项：" class="headerlink" title="配置选项："></a><strong>配置选项：</strong></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 鼠标支持 - 设置为 on 来启用鼠标(与 2.1 之前的版本有区别，请自行查阅 man page)</span></span><br><span class="line">* <span class="built_in">set</span> -g mouse on</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置默认终端模式为 256color</span></span><br><span class="line"><span class="built_in">set</span> -g default-terminal <span class="string">&quot;screen-256color&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启用活动警告</span></span><br><span class="line">setw -g monitor-activity on</span><br><span class="line"><span class="built_in">set</span> -g visual-activity on</span><br><span class="line"></span><br><span class="line"><span class="comment"># 居中窗口列表</span></span><br><span class="line"><span class="built_in">set</span> -g status-justify centre</span><br><span class="line"></span><br><span class="line"><span class="comment"># 最大化/恢复窗格</span></span><br><span class="line">unbind Up <span class="built_in">bind</span> Up new-window -d -n tmp \; swap-pane -s tmp.1 \; select-window -t tmp</span><br><span class="line">unbind Down</span><br><span class="line"><span class="built_in">bind</span> Down last-window \; swap-pane -s tmp.1 \; kill-window -t tmp</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考配置文件（-tmux-conf）："><a href="#参考配置文件（-tmux-conf）：" class="headerlink" title="参考配置文件（~&#x2F;.tmux.conf）："></a><strong>参考配置文件（~&#x2F;.tmux.conf）：</strong></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -----------------------------------------------------------------------------# Tmux 基本配置 - 要求 Tmux &gt;= 2.3# 如果不想使用插件，只需要将此节的内容写入 ~/.tmux.conf 即可# -----------------------------------------------------------------------------# C-b 和 VIM 冲突，修改 Prefix 组合键为 Control-Z，按键距离近set -g prefix C-z</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> -g base-index         1     <span class="comment"># 窗口编号从 1 开始计数</span></span><br><span class="line"><span class="built_in">set</span> -g display-panes-time 10000 <span class="comment"># PREFIX-Q 显示编号的驻留时长，单位 msset -g mouse              on    # 开启鼠标</span></span><br><span class="line"><span class="built_in">set</span> -g pane-base-index    1     <span class="comment"># 窗格编号从 1 开始计数</span></span><br><span class="line"><span class="built_in">set</span> -g renumber-windows   on    <span class="comment"># 关掉某个窗口后，编号重排</span></span><br><span class="line"></span><br><span class="line">setw -g allow-rename      off   <span class="comment"># 禁止活动进程修改窗口名</span></span><br><span class="line">setw -g automatic-rename  off   <span class="comment"># 禁止自动命名新窗口</span></span><br><span class="line">setw -g mode-keys         vi    <span class="comment"># 进入复制模式的时候使用 vi 键位（默认是 EMACS）# -----------------------------------------------------------------------------# 使用插件 - via tpm#   1. 执行 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm#   2. 执行 bash ~/.tmux/plugins/tpm/bin/install_plugins# -----------------------------------------------------------------------------</span></span><br><span class="line"></span><br><span class="line">setenv -g TMUX_PLUGIN_MANAGER_PATH <span class="string">&#x27;~/.tmux/plugins&#x27;</span># 推荐的插件（请去每个插件的仓库下读一读使用教程）</span><br><span class="line"><span class="built_in">set</span> -g @plugin <span class="string">&#x27;seebi/tmux-colors-solarized&#x27;</span></span><br><span class="line"><span class="built_in">set</span> -g @plugin <span class="string">&#x27;tmux-plugins/tmux-pain-control&#x27;</span></span><br><span class="line"><span class="built_in">set</span> -g @plugin <span class="string">&#x27;tmux-plugins/tmux-prefix-highlight&#x27;</span></span><br><span class="line"><span class="built_in">set</span> -g @plugin <span class="string">&#x27;tmux-plugins/tmux-resurrect&#x27;</span></span><br><span class="line"><span class="built_in">set</span> -g @plugin <span class="string">&#x27;tmux-plugins/tmux-sensible&#x27;</span></span><br><span class="line"><span class="built_in">set</span> -g @plugin <span class="string">&#x27;tmux-plugins/tmux-yank&#x27;</span></span><br><span class="line"><span class="built_in">set</span> -g @plugin <span class="string">&#x27;tmux-plugins/tpm&#x27;</span># tmux-resurrectset -g @resurrect-dir <span class="string">&#x27;~/.tmux/resurrect&#x27;</span># tmux-prefix-highlightset -g status-right <span class="string">&#x27;#&#123;prefix_highlight&#125; #H | %a %Y-%m-%d %H:%M&#x27;</span></span><br><span class="line"><span class="built_in">set</span> -g @prefix_highlight_show_copy_mode <span class="string">&#x27;on&#x27;</span></span><br><span class="line"><span class="built_in">set</span> -g @prefix_highlight_copy_mode_attr <span class="string">&#x27;fg=white,bg=blue&#x27;</span># 初始化 TPM 插件管理器 (放在配置文件的最后)</span><br><span class="line">run <span class="string">&#x27;~/.tmux/plugins/tpm/tpm&#x27;</span># -----------------------------------------------------------------------------# 结束# -----------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+            
+            
+                <div class="post-actions text-center clearfix" id="post-actions">
+                
+                    <a class="donate" href="javascript:;" onclick="krOpenDonateModal()"><i class="fa fa-bitcoin"></i> 打赏</a>
+                
+                
+                    <a class="share" href="javascript:;" onclick="krOpenShareModal()"><i class="fa fa-share-alt"></i> 分享</a>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">问题解决</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2025-03-29T01:54:36.619Z" itemprop="dateModified">最后编辑：2025-03-29</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 2025-04-10 汇编实验1：利用DEBUG熟悉常用指令的使用" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-04-10-汇编语言实验1_debug命令/"><i class="fa fa-angle-left"></i> 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 2025-03-18-使用 word 文档导出功能压缩图片的技巧" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-03-20-使用word文档导出功能压缩图片的技巧/">下一篇 <i class="fa fa-angle-right"></i></a>
+            </div>
+            
+        </nav>
+    
+    
+        <div class="comment-post">
+            
+        </div>
+    
+</article>
+
+        
+
+            </section>
+
+            
+                
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+        <div class="sticky-area">
+    
+    
+    </div>
+</section>
+            
+
+        
+
+                </div>
+    </div>
+</div>
+
+<footer>
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2025 TK的小站 版权所有.</li>
+                            <li>本站已运行<span id="kr-since">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>自豪地使用 <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a> 主题</li>
+                            <li>站点由 TK 用 <i class="fa fa-heart" style="color:#d43f57"></i> 搭建</li>
+                        </div>
+                        <!-- 额外的追加注入项 -->
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/tkzzzzzz6/tkzzzzzz6.github.io/search">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                <div class="box theme-box" id="theme-toggle">
+                    <span class="fa fa-adjust"></span>
+                </div>
+            </div>
+            <div id="gotop-box" class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+
+    <div id="kr-donate-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseDonateModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-bitcoin"></i>
+            </div>
+            <div class="kr-modal-title">打赏</div>
+            <button class="kr-modal-close" onclick="krCloseDonateModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-donate-message">打赏提示信息</div>
+            <div class="kr-donate-qr" id="kr-donate-qr">
+                
+            </div>
+            <div class="kr-donate-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/donate.min.js"></script>
+
+
+
+
+    <div id="kr-share-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseShareModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-share-alt"></i>
+            </div>
+            <div class="kr-modal-title">分享</div>
+            <button class="kr-modal-close" onclick="krCloseShareModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-share-message">分享提示信息</div>
+            <div class="kr-share-qr" id="kr-share-qr"></div>
+            <div class="kr-share-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/share.min.js"></script>
+
+
+
+<!-- 额外的追加注入项 -->
+
+
+        <script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/tkzzzzzz6/tkzzzzzz6.github.io/";
+</script>
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.js"></script>
+
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.js"></script>
+
+
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-core.min.js"></script>
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-pjax.min.js"></script>
+
+
+<!-- 额外的追加注入项 -->
+
+
+    </body>
+</html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  
+  
+  <title>文言文背诵检测程序开发 | TK的小站</title>
+  <link rel="canonical" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-10-%E6%96%87%E8%A8%80%E6%96%87%E8%83%8C%E8%AF%B5%E6%A3%80%E6%B5%8B%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/">
+  <meta name="author" content="TK" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="程序开发" />
+  
+  <meta name="description" content="目录 概述 项目结构 项目索引   开始使用 前提条件 安装    概述今天在侄儿子要求在我这里背书的时候,有点嫌麻烦,想用程序识别和检测他的背诵,在网上查找相关软件和网站发现只有一个滑板车背诵的软件效果还不错,但是还是感觉这个产业不太成熟,于是自己用ai基于百度AI接口开发了此背诵检测程序，实现以下功能：  语音转文本：实时录制背诵音频并转换为文字 相似度对比：通过自然语言处理（NLP）比对背诵">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文言文背诵检测程序开发">
+<meta property="og:url" content="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-10-%E6%96%87%E8%A8%80%E6%96%87%E8%83%8C%E8%AF%B5%E6%A3%80%E6%B5%8B%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="TK的小站">
+<meta property="og:description" content="目录 概述 项目结构 项目索引   开始使用 前提条件 安装    概述今天在侄儿子要求在我这里背书的时候,有点嫌麻烦,想用程序识别和检测他的背诵,在网上查找相关软件和网站发现只有一个滑板车背诵的软件效果还不错,但是还是感觉这个产业不太成熟,于是自己用ai基于百度AI接口开发了此背诵检测程序，实现以下功能：  语音转文本：实时录制背诵音频并转换为文字 相似度对比：通过自然语言处理（NLP）比对背诵">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="1970-01-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-02-11T04:04:29.197Z">
+<meta property="article:author" content="TK">
+<meta property="article:tag" content="程序开发">
+<meta name="twitter:card" content="summary">
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-core.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="highlight-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/highlight/highlight.js/night-eighties.min.css" media="all"></link>
+  
+  <link rel="stylesheet" id="theme-light-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/light.min.css" media="all"></link>
+  <link rel="stylesheet" id="theme-dark-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/dark.min.css" media="(prefers-color-scheme: dark)"></link>
+  <script src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-theme.min.js"></script>
+  <link rel="stylesheet" id="fontawe-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="nprogress-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.css" media="all"></link>
+  
+  
+    <link rel="stylesheet" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.css"></link>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  
+    <script src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
+  
+  <!-- 自定义站点横幅和背景 -->
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+      html[data-theme="dark"] .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('');
+        }
+        html[data-theme="dark"] body.custom-background {
+          background-image: url('');
+        }
+      }
+    
+    
+      .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+      html[data-theme="dark"] .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+    
+  </style>
+
+  <!-- 额外的追加注入项 -->
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/tkzzzzzz6/tkzzzzzz6.github.io/">TK的小站</a></div>
+                    <div id="kratos-nav-toggle-wrapper" class="nav-toggle">
+                        <a id="kratos-nav-toggle" class="kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/tkzzzzzz6/tkzzzzzz6.github.io/">
+                        <h2>TK的小站</h2> <br />
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+
+
+        
+
+            
+
+            <section class="kr-main-col col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-10-%E6%96%87%E8%A8%80%E6%96%87%E8%83%8C%E8%AF%B5%E6%A3%80%E6%B5%8B%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/">
+    <div class="kratos-hentry kratos-page-inner clearfix">
+        <header class="kratos-page-header">
+            
+                <h1 class="kratos-page-title text-center" itemprop="name headline">文言文背诵检测程序开发</h1>
+            
+            <ul class="kratos-page-meta text-center">
+                <li><time datetime="1970-01-01T00:00:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 1970-01-01</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">TK</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~2.31K
+                        
+                        字
+                    </li>
+                
+                
+                    <li>
+                        <i class="fa fa-eye"></i>
+                         次阅读
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-page-content kr-post">
+            
+            
+            
+            <hr />
+            <div itemprop="articleBody"><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><a href="#-%E6%A6%82%E8%BF%B0">概述</a></li>
+<li><a href="#-%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84">项目结构</a><ul>
+<li><a href="#-%E9%A1%B9%E7%9B%AE%E7%B4%A2%E5%BC%95">项目索引</a></li>
+</ul>
+</li>
+<li><a href="#-%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8">开始使用</a><ul>
+<li><a href="#-%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6">前提条件</a></li>
+<li><a href="#-%E5%AE%89%E8%A3%85">安装</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>今天在侄儿子要求在我这里背书的时候,有点嫌麻烦,想用程序识别和检测他的背诵,在网上查找相关软件和网站发现只有一个滑板车背诵的软件效果还不错,但是还是感觉这个产业不太成熟,于是自己用ai基于百度AI接口开发了此背诵检测程序，实现以下功能：</p>
+<ul>
+<li>语音转文本：实时录制背诵音频并转换为文字</li>
+<li>相似度对比：通过自然语言处理（NLP）比对背诵内容与原文</li>
+<li>准确率评分：输出整体匹配度和逐句差异分析<br>支持导入自定义文言文文本文件  <blockquote>
+<p>注意:<br><br>需提前申请百度语音API 和百度NPL API <br><br>目前识别效果和响应时间并不理想,需要一次性一句话一句话背诵</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="项目原理"><a href="#项目原理" class="headerlink" title="项目原理"></a>项目原理</h3><p>本程序基于Python开发，主要利用百度AI开放平台的语音识别和自然语言处理（NLP）技术，实现文言文背诵的自动检测。以下是程序的核心技术原理：</p>
+<ol>
+<li>语音转文本（语音识别）</li>
+</ol>
+<ul>
+<li>技术原理：<ul>
+<li>使用百度AI的语音识别API，将用户背诵的语音实时转换为文本。</li>
+<li>语音识别通过声学模型和语言模型，将音频信号转换为文字。声学模型负责将语音信号转换为音素，语言模型则根据上下文和语法生成最可能的文本结果。</li>
+<li>本程序采用百度AI的asr接口，支持实时语音识别，能够处理流式音频数据。</li>
+</ul>
+</li>
+<li>实现步骤：<ol>
+<li>音频采集：通过麦克风采集用户的语音，并将其转换为音频数据流。</li>
+<li>音频预处理：对音频数据进行降噪、归一化等预处理操作，提高识别准确率。</li>
+<li>语音识别：将预处理后的音频数据发送到百度AI语音识别API，获取识别结果。</li>
+<li>结果处理：对识别结果进行后处理，如去除多余空格、标点符号等。</li>
+</ol>
+</li>
+</ul>
+<ol start="2">
+<li>文本相似度分析（自然语言处理）</li>
+</ol>
+<ul>
+<li>技术原理：<ul>
+<li>使用百度AI的自然语言处理（NLP）技术，对背诵文本和原文进行相似度分析。</li>
+<li>相似度分析通过计算两个文本的语义相似度，判断背诵内容是否与原文一致。</li>
+<li>本程序采用百度AI的simnet接口，基于深度学习模型，能够准确计算文本之间的语义相似度。</li>
+</ul>
+</li>
+<li>实现步骤：<ol>
+<li>文本分句：将背诵文本和原文按句子分割，提取每个句子的文本内容。</li>
+<li>相似度计算：对每个句子的背诵文本和原文进行相似度计算，获取相似度分数。</li>
+<li>结果评估：根据相似度分数，判断背诵内容的准确性和完整性。</li>
+</ol>
+</li>
+</ul>
+<ol start="3">
+<li>准确率评分</li>
+</ol>
+<ul>
+<li>技术原理：<ul>
+<li>通过对比背诵文本和原文的相似度，计算整体匹配度和逐句差异分析。</li>
+<li>使用difflib库的SequenceMatcher类，计算两个文本的相似度分数。</li>
+<li>结合百度AI的语义相似度分析结果，生成最终的准确率评分。</li>
+</ul>
+</li>
+<li>实现步骤：<ol>
+<li>逐句对比：对每个句子的背诵文本和原文进行逐句对比，计算相似度分数。</li>
+<li>整体评分：根据逐句相似度分数，计算整体匹配度。</li>
+<li>差异分析：生成逐句差异分析报告，显示每句话的相似度分数和差异部分。</li>
+</ol>
+</li>
+</ul>
+<ol start="4">
+<li>实时反馈与进度显示</li>
+</ol>
+<ul>
+<li>技术原理：<ul>
+<li>使用Tkinter库创建图形用户界面（GUI），实时显示背诵进度和识别结果。</li>
+<li>通过多线程技术，实现语音识别、文本处理和UI更新的并行处理，确保程序的实时性和流畅性。</li>
+<li>使用进度条和计时器，显示背诵进度和剩余时间，帮助用户更好地掌握背诵节奏。</li>
+</ul>
+</li>
+<li>实现步骤：<ol>
+<li>UI设计：设计背诵界面，包括原文显示、识别结果显示、进度条和计时器等。</li>
+<li>多线程处理：创建多个线程，分别处理音频采集、语音识别、文本处理和UI更新。</li>
+<li>实时更新：根据识别结果和相似度分析，实时更新识别结果显示和进度条。</li>
+</ol>
+</li>
+</ul>
+<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">└── ReciteHelper/</span><br><span class="line">    ├── Dockerfile</span><br><span class="line">    ├── README.md</span><br><span class="line">    ├── config.py</span><br><span class="line">    ├── main.py</span><br><span class="line">    ├── requirements.txt</span><br><span class="line">    └── texts</span><br><span class="line">        ├── 买油翁.txt</span><br><span class="line">        ├── 孙权劝学.txt</span><br><span class="line">        └── 木兰诗.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>使用以下方法安装 ReciteHelper：</p>
+<ol>
+<li><p>克隆 ReciteHelper 仓库：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/tkzzzzzz6/ReciteHelper</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入项目目录：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ReciteHelper</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置环境</p>
+</li>
+</ol>
+<p>推荐使用 conda 虚拟环境：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda create -n beisong python=3.10 -y</span><br><span class="line">conda activate beisong</span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>配置API密钥</li>
+</ol>
+<ul>
+<li>前往百度AI控制台 创建应用</li>
+<li>获取 API Key 和 Secret Key</li>
+<li>修改 config.py 文件：<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#语音识别配置</span></span><br><span class="line">APP_ID = <span class="string">&#x27;你的APP ID&#x27;</span>      <span class="comment"># 应用ID</span></span><br><span class="line">API_KEY = <span class="string">&#x27;你的API Key&#x27;</span>    <span class="comment"># API Key</span></span><br><span class="line">SECRET_KEY = <span class="string">&#x27;你的API Key&#x27;</span>    <span class="comment"># API Key</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#百度NLP配置</span></span><br><span class="line">NLP_APP_ID = <span class="string">&#x27;你的APP ID&#x27;</span> </span><br><span class="line">NLP_API_KEY = <span class="string">&#x27;你的API Key&#x27;</span>    <span class="comment"># API Key</span></span><br><span class="line">NLP_SECRET_KEY = <span class="string">&#x27;你的API Key&#x27;</span>    <span class="comment"># API Key</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="5">
+<li>添加背诵文本</li>
+</ol>
+<p>将文言文文本保存为 txt 文件，放置于 &#x2F;texts 目录下<br>（程序已内置《孙权劝学》《卖油翁》《木兰诗》示例文本）</p>
+<ol start="6">
+<li>运行程序<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python main.py</span><br></pre></td></tr></table></figure></li>
+</ol>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+            
+            
+                <div class="post-actions text-center clearfix" id="post-actions">
+                
+                    <a class="donate" href="javascript:;" onclick="krOpenDonateModal()"><i class="fa fa-bitcoin"></i> 打赏</a>
+                
+                
+                    <a class="share" href="javascript:;" onclick="krOpenShareModal()"><i class="fa fa-share-alt"></i> 分享</a>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" rel="tag">程序开发</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2025-02-11T04:04:29.197Z" itemprop="dateModified">最后编辑：2025-02-11</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 语义分割" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-15-语义分割/"><i class="fa fa-angle-left"></i> 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" WSL 启动报错 &#34;Cannot execute daemonize to start systemd&#34; 的解决方法" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-09-wsl启动报错Cannot execute daemonize to start systemd的解决方法/">下一篇 <i class="fa fa-angle-right"></i></a>
+            </div>
+            
+        </nav>
+    
+    
+        <div class="comment-post">
+            
+        </div>
+    
+</article>
+
+        
+
+            </section>
+
+            
+                
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+        <div class="sticky-area">
+    
+    
+    </div>
+</section>
+            
+
+        
+
+                </div>
+    </div>
+</div>
+
+<footer>
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2025 TK的小站 版权所有.</li>
+                            <li>本站已运行<span id="kr-since">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>自豪地使用 <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a> 主题</li>
+                            <li>站点由 TK 用 <i class="fa fa-heart" style="color:#d43f57"></i> 搭建</li>
+                        </div>
+                        <!-- 额外的追加注入项 -->
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/tkzzzzzz6/tkzzzzzz6.github.io/search">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                <div class="box theme-box" id="theme-toggle">
+                    <span class="fa fa-adjust"></span>
+                </div>
+            </div>
+            <div id="gotop-box" class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+
+    <div id="kr-donate-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseDonateModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-bitcoin"></i>
+            </div>
+            <div class="kr-modal-title">打赏</div>
+            <button class="kr-modal-close" onclick="krCloseDonateModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-donate-message">打赏提示信息</div>
+            <div class="kr-donate-qr" id="kr-donate-qr">
+                
+            </div>
+            <div class="kr-donate-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/donate.min.js"></script>
+
+
+
+
+    <div id="kr-share-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseShareModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-share-alt"></i>
+            </div>
+            <div class="kr-modal-title">分享</div>
+            <button class="kr-modal-close" onclick="krCloseShareModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-share-message">分享提示信息</div>
+            <div class="kr-share-qr" id="kr-share-qr"></div>
+            <div class="kr-share-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/share.min.js"></script>
+
+
+
+<!-- 额外的追加注入项 -->
+
+
+        <script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/tkzzzzzz6/tkzzzzzz6.github.io/";
+</script>
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.js"></script>
+
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.js"></script>
+
+
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-core.min.js"></script>
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-pjax.min.js"></script>
+
+
+<!-- 额外的追加注入项 -->
+
+
+    </body>
+</html>

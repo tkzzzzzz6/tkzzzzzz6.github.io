@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  
+  
+  <title>2025-05-01-决策树算法及应用 | TK的小站</title>
+  <link rel="canonical" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-05-01-%E5%86%B3%E7%AD%96%E6%A0%91%E7%AE%97%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8/">
+  <meta name="author" content="TK" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="课程学习" />
+  
+  <meta name="description" content="决策树算法及应用参考资料  GitHub - zhaoyichanghong&#x2F;machine_learing_algo_python: implement the machine learning algorithms by p(机器学习相关的 github 仓库) 决策树实现与应用 决策树   概述机器学习算法分类决策树算法决策树是一种以树状结构对数据进行划分的分类（Classific">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2025-05-01-决策树算法及应用">
+<meta property="og:url" content="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-05-01-%E5%86%B3%E7%AD%96%E6%A0%91%E7%AE%97%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8/index.html">
+<meta property="og:site_name" content="TK的小站">
+<meta property="og:description" content="决策树算法及应用参考资料  GitHub - zhaoyichanghong&#x2F;machine_learing_algo_python: implement the machine learning algorithms by p(机器学习相关的 github 仓库) 决策树实现与应用 决策树   概述机器学习算法分类决策树算法决策树是一种以树状结构对数据进行划分的分类（Classific">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749360696852J52gbg16toig4zxF2PwcXPMynee.png">
+<meta property="og:image" content="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749360705910DCD5b5sUbootQ5xUESpcmfBRnDy.png">
+<meta property="og:image" content="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749360718079T62Tbr1DOojvcLxBIxqcFCvHnlg.png">
+<meta property="og:image" content="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749360730852Tfdmbz1oOo6vFpxAAfkcoEBGnXc.png">
+<meta property="og:image" content="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749360750853Zeg3bB0PioEDr0x9taMclxgOnmh.png">
+<meta property="article:published_time" content="1970-01-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-08T08:00:00.836Z">
+<meta property="article:author" content="TK">
+<meta property="article:tag" content="课程学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749360696852J52gbg16toig4zxF2PwcXPMynee.png">
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-core.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="highlight-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/highlight/highlight.js/night-eighties.min.css" media="all"></link>
+  
+  <link rel="stylesheet" id="theme-light-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/light.min.css" media="all"></link>
+  <link rel="stylesheet" id="theme-dark-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/dark.min.css" media="(prefers-color-scheme: dark)"></link>
+  <script src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-theme.min.js"></script>
+  <link rel="stylesheet" id="fontawe-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="nprogress-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.css" media="all"></link>
+  
+  
+    <link rel="stylesheet" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.css"></link>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  
+    <script src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
+  
+  <!-- 自定义站点横幅和背景 -->
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+      html[data-theme="dark"] .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('');
+        }
+        html[data-theme="dark"] body.custom-background {
+          background-image: url('');
+        }
+      }
+    
+    
+      .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+      html[data-theme="dark"] .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+    
+  </style>
+
+  <!-- 额外的追加注入项 -->
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/tkzzzzzz6/tkzzzzzz6.github.io/">TK的小站</a></div>
+                    <div id="kratos-nav-toggle-wrapper" class="nav-toggle">
+                        <a id="kratos-nav-toggle" class="kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/tkzzzzzz6/tkzzzzzz6.github.io/">
+                        <h2>TK的小站</h2> <br />
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+
+
+        
+
+            
+
+            <section class="kr-main-col col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-05-01-%E5%86%B3%E7%AD%96%E6%A0%91%E7%AE%97%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8/">
+    <div class="kratos-hentry kratos-page-inner clearfix">
+        <header class="kratos-page-header">
+            
+                <h1 class="kratos-page-title text-center" itemprop="name headline">2025-05-01-决策树算法及应用</h1>
+            
+            <ul class="kratos-page-meta text-center">
+                <li><time datetime="1970-01-01T00:00:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 1970-01-01</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">TK</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~9.62K
+                        
+                        字
+                    </li>
+                
+                
+                    <li>
+                        <i class="fa fa-eye"></i>
+                         次阅读
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-page-content kr-post">
+            
+            
+            
+            <hr />
+            <div itemprop="articleBody"><h1 id="决策树算法及应用"><a href="#决策树算法及应用" class="headerlink" title="决策树算法及应用"></a>决策树算法及应用</h1><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><blockquote>
+<ul>
+<li><a href="https://github.com/zhaoyichanghong/machine_learing_algo_python">GitHub - zhaoyichanghong&#x2F;machine_learing_algo_python: implement the machine learning algorithms by p</a>(机器学习相关的 github 仓库)</li>
+<li><a target="_blank" rel="noopener" href="https://aibydoing.com/notebooks/chapter02-10-lab-decision-tree-implementation-and-applications">决策树实现与应用</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-cn/%E5%86%B3%E7%AD%96%E6%A0%91">决策树</a></li>
+</ul>
+</blockquote>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="机器学习算法分类"><a href="#机器学习算法分类" class="headerlink" title="机器学习算法分类"></a>机器学习算法分类</h2><h2 id="决策树算法"><a href="#决策树算法" class="headerlink" title="决策树算法"></a>决策树算法</h2><p>决策树是一种以树状结构对数据进行划分的分类（Classification）或回归（Regression）模型。其核心思想是：</p>
+<blockquote>
+<p>通过“自上而下”的方式，根据某一特征对样本进行二叉或多叉划分，直至满足停止条件（如纯度高、样本数小于阈值等），构造一棵可解释性高的树形模型。在叶节点输出类别（分类树）或数值（回归树）。</p>
+</blockquote>
+<p>决策树具有以下特点：</p>
+<ul>
+<li><strong>易于理解与可视化</strong>：生成后以树状图呈现，人类可直观理解每个分类&#x2F;回归决策过程。</li>
+<li><strong>无需大量数据预处理</strong>：对数值型与类别型特征均可处理，无需像线性模型那样对特征做严格的标准化、归一化。</li>
+<li><strong>自动进行特征选择</strong>：在划分过程中会自动选出最能区分正负样本或最能减少误差的特征。</li>
+</ul>
+<p>从数据产生决策树的机器学习技术叫做<strong>决策树学习</strong>，通俗说就是<strong>决策树</strong>。</p>
+<p>一个决策树包含三种类型的节点：</p>
+<ol>
+<li>决策节点：通常用矩形框来表示</li>
+<li>机会节点：通常用圆圈来表示</li>
+<li>终结点：通常用三角形来表示</li>
+</ol>
+<p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749360696852J52gbg16toig4zxF2PwcXPMynee.png" alt="1749360696852J52gbg16toig4zxF2PwcXPMynee.png"></p>
+<p>决策树是一种特殊的树形结构，一般由节点和有向边组成。其中，节点表示特征、属性或者一个类，而有向边包含判断条件。决策树从根节点开始延伸，经过不同的判断条件后，到达不同的子节点。而上层子节点又可以作为父节点被进一步划分为下层子节点。一般情况下，我们从根节点输入数据，经过多次判断后，这些数据就会被分为不同的类别。这就构成了一颗简单的分类决策树。</p>
+<p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749360705910DCD5b5sUbootQ5xUESpcmfBRnDy.png" alt="1749360705910DCD5b5sUbootQ5xUESpcmfBRnDy.png"></p>
+<h3 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h3><p>其实决策树算法如同上面场景一样，其思想非常容易理解，具体的算法流程为：</p>
+<ol>
+<li>数据准备 → 通过数据清洗和数据处理，将数据整理为没有缺省值的向量。</li>
+<li>寻找最佳特征 → 遍历每个特征的每一种划分方式，找到最好的划分特征。</li>
+<li>生成分支 → 划分成两个或多个节点。</li>
+<li>生成决策树 → 对分裂后的节点分别继续执行 2-3 步，直到每个节点只有一种类别。</li>
+<li>决策分类 → 根据训练决策树模型，将预测数据进行分类。</li>
+</ol>
+<h2 id="决策树的基本概念"><a href="#决策树的基本概念" class="headerlink" title="决策树的基本概念"></a>决策树的基本概念</h2><h3 id="结点类型"><a href="#结点类型" class="headerlink" title="结点类型"></a>结点类型</h3><ol>
+<li><strong>根节点 (Root Node)</strong></li>
+</ol>
+<ul>
+<li>树的起始节点，包含了整个训练集。</li>
+</ul>
+<ol>
+<li><strong>内部节点 (Internal Node)</strong></li>
+</ol>
+<ul>
+<li>又称决策节点（Decision Node），表示一个根据某个特征进行划分的测试。</li>
+</ul>
+<ol>
+<li><strong>叶节点 (Leaf &#x2F; Terminal Node)</strong></li>
+</ol>
+<ul>
+<li>表示最终的类别（分类树）或数值（回归树）。</li>
+</ul>
+<ol>
+<li><strong>分支 (Branch &#x2F; Edge)</strong></li>
+</ol>
+<ul>
+<li>从父节点到子节点的连线，通常对应该节点特征的某个取值或取值范围。</li>
+</ul>
+<h3 id="树结构与术语"><a href="#树结构与术语" class="headerlink" title="树结构与术语"></a>树结构与术语</h3><ul>
+<li>**路径 (Path)**：从根节点到某个叶节点所经过的结点序列，即一个完整的决策逻辑分支。</li>
+<li>**深度 (Depth)**：根节点的深度定义为 0，子节点依次递增。树的最大深度称为 高度 (Height)。</li>
+<li>**样本纯度 (Purity)**：指一个节点中样本类别的一致性。</li>
+<li>比如在分类问题中，若节点仅包含同一类别样本，则称该节点纯度为 1（纯节点）。</li>
+<li>**叶子样本数 (Leaf Sample Count)**：用于限制过拟合，可设定：当某节点样本数不足阈值时，停止划分，将其设为叶节点。</li>
+<li><strong>划分停止条件</strong>：</li>
+</ul>
+<ol>
+<li>所有样本属于同一类别（分类树），或样本方差足够小（回归树）。</li>
+<li>树达到最大深度。</li>
+<li>节点中样本数量小于某个阈值。</li>
+<li>划分后信息增益或基尼系数提升不足阈值。</li>
+</ol>
+<hr>
+<h2 id="决策树构建的核心要素"><a href="#决策树构建的核心要素" class="headerlink" title="决策树构建的核心要素"></a>决策树构建的核心要素</h2><h3 id="划分指标"><a href="#划分指标" class="headerlink" title="划分指标"></a>划分指标</h3><p>决策树的关键在于如何选择最优划分特征与划分点。常见的三种指标为信息增益、信息增益率和基尼不纯度。</p>
+<h4 id="信息增益-Information-Gain-——ID3"><a href="#信息增益-Information-Gain-——ID3" class="headerlink" title="信息增益 (Information Gain) ——ID3"></a>信息增益 (Information Gain) ——ID3</h4><p>设当前节点样本集为 $D$，共有 $K$ 个类别 ${C_1, C_2, \dots, C_K}$。定义：</p>
+<ul>
+<li>节点 $D$ 信息熵：</li>
+</ul>
+<p>$$<br>H(D) &#x3D; -\sum_{k&#x3D;1}^K p_k \log_2 p_k,\quad p_k &#x3D; \frac{|D_k|}{|D|}<br>$$</p>
+<p>其中 $|D_k|$ 是类别 $C_k$ 在 $D$ 中的样本数。</p>
+<ul>
+<li>若使用特征 $A$ 进行划分，且 $A$ 共有 $v$ 个互斥取值 ${a_1,\dots,a_v}$，则在 $A&#x3D;a_i$ 处的子集记为 $D_i$。</li>
+</ul>
+<p>划分后加权平均的信息熵：</p>
+<p>$$<br>H(D \mid A) &#x3D; \sum_{i&#x3D;1}^v \frac{|D_i|}{|D|} H(D_i)<br>$$</p>
+<ul>
+<li><strong>信息增益</strong>：即划分前后熵的减少量：</li>
+</ul>
+<p>$$<br>\text{Gain}(A) &#x3D; H(D) - H(D \mid A)<br>$$</p>
+<p><strong>ID3 算法</strong>选择信息增益最大的特征进行划分——即令：</p>
+<p>$$<br>A^* &#x3D; \arg\max_{A} \text{Gain}(A)<br>$$</p>
+<blockquote>
+<p><strong>缺点</strong>：信息增益偏向取值多的特征（类别型变量有大量不同取值时容易过拟合）。</p>
+</blockquote>
+<h4 id="信息增益率-Gain-Ratio-——C4-5"><a href="#信息增益率-Gain-Ratio-——C4-5" class="headerlink" title="信息增益率 (Gain Ratio) ——C4.5"></a>信息增益率 (Gain Ratio) ——C4.5</h4><p>为克服 ID3 的偏向性，C4.5 引入分裂信息（Split Information）来对信息增益进行归一化：</p>
+<ol>
+<li><strong>分裂信息</strong>（或称固有信息）：</li>
+</ol>
+<p>$$<br>\text{SplitInfo}(A) &#x3D; -\sum_{i&#x3D;1}^v \frac{|D_i|}{|D|} \log_2 \frac{|D_i|}{|D|}<br>$$</p>
+<ol>
+<li><strong>信息增益率</strong>：</li>
+</ol>
+<p>$$<br>\text{GainRatio}(A) &#x3D; \frac{\text{Gain}(A)}{\text{SplitInfo}(A) + \epsilon}<br>$$</p>
+<p>通常选择信息增益率最高的特征进行划分。</p>
+<blockquote>
+<p>C4.5 同时支持对连续性（数值型）特征的二元划分：先对候选切分点进行排序，再遍历所有相邻两值中点，选取使增益率最大的切分点。</p>
+</blockquote>
+<h4 id="基尼不纯度-Gini-Impurity-——CART"><a href="#基尼不纯度-Gini-Impurity-——CART" class="headerlink" title="基尼不纯度 (Gini Impurity) ——CART"></a>基尼不纯度 (Gini Impurity) ——CART</h4><p>CART（Classification And Regression Tree）算法采用基尼不纯度作为划分依据。对于节点 $$D$$，基尼不纯度定义为：</p>
+<p>$$<br>\mathrm{Gini}(D) &#x3D; 1 - \sum_{k&#x3D;1}^K p_k^2, \quad p_k &#x3D; \frac{|D_k|}{|D|}<br>$$</p>
+<ul>
+<li>若使用特征 $A$ 将 $D$ 划分为两个子集（CART 传统上构建二叉树），设划分后两部分分别为 $D_\text{left}, D_\text{right}$，则划分后的基尼系数为加权平均：</li>
+</ul>
+<p>$$<br>\mathrm{Gini}(D, A, s) &#x3D; \frac{|D_\text{left}|}{|D|}\mathrm{Gini}(D_\text{left}) + \frac{|D_\text{right}|}{|D|}\mathrm{Gini}(D_\text{right})<br>$$</p>
+<ul>
+<li>**基尼增益 (Gini Gain)**（或称基尼减少量）:</li>
+</ul>
+<p>$$<br>\Delta \mathrm{Gini}(A, s) &#x3D; \mathrm{Gini}(D) - \mathrm{Gini}(D, A, s)<br>$$</p>
+<p>CART 选择使基尼不纯度下降最多（即 $\Delta \mathrm{Gini}$ 最大）的特征和切分点。</p>
+<blockquote>
+<p><strong>CART 区别</strong>：</p>
+<ul>
+<li>使用基尼而非熵；</li>
+<li>通常只考虑二元（yes&#x2F;no）划分，即每个节点形成左右两个子节点。</li>
+<li>对数值型特征遍历所有可能切分点；对类别型特征可先将类别编码为虚拟变量 (One-Hot) 或按某种顺序处理。</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="特征选择与最佳划分"><a href="#特征选择与最佳划分" class="headerlink" title="特征选择与最佳划分"></a>特征选择与最佳划分</h3><ol>
+<li><strong>离散(类别)特征</strong></li>
+</ol>
+<ul>
+<li>ID3&#x2F;C4.5 直接按每个取值划分；CART 需要将 $m$ 个类别先切分为两组（所有可能子集划分），计算基尼并选择最优。</li>
+</ul>
+<ol>
+<li><strong>连续（数值）特征</strong></li>
+</ol>
+<ul>
+<li>首先对该特征在当前节点的所有样本的取值排序：$x_{(1)} \le x_{(2)} \le \dots \le x_{(n)}$。</li>
+<li>对每个相邻取值对 ${x_{(i)}, x_{(i+1)}}$，将其中点 $s &#x3D; \tfrac{x_{(i)}+x_{(i+1)}}{2}$ 作为候选切分点。</li>
+<li>分别计算按 $A \le s$ 与 $A &gt; s$ 两部分划分后的信息增益（或基尼减少量），选择最优 $s^*$。</li>
+</ul>
+<ol>
+<li><strong>递归构建</strong></li>
+</ol>
+<ul>
+<li>从根节点开始，对当前节点所有候选特征（及可能的切分点）分别计算划分指标；</li>
+<li>选出指标最优的特征&#x2F;切分点，将样本划分到子节点；</li>
+<li>对每个子节点递归执行，同样进行“特征选择 → 划分 → 递归”，直到满足停止条件。</li>
+</ul>
+<hr>
+<h2 id="常见决策树算法变体"><a href="#常见决策树算法变体" class="headerlink" title="常见决策树算法变体"></a>常见决策树算法变体</h2><h3 id="ID3-（Quinlan，1986）"><a href="#ID3-（Quinlan，1986）" class="headerlink" title="ID3 （Quinlan，1986）"></a>ID3 （Quinlan，1986）</h3><ul>
+<li><strong>核心思想</strong>：</li>
+<li>使用信息增益作为划分标准；</li>
+<li>仅适用于离散（类别）特征；</li>
+<li>构建多叉树（一个节点可以有多条分支，对应特征的所有取值）。</li>
+<li><strong>简易流程</strong>：</li>
+</ul>
+<ol>
+<li><p>计算当前节点样本集信息熵 $H(D)$。</p>
+</li>
+<li><p>对每个候选特征 $A$，计算信息增益 $\text{Gain}(A)$。</p>
+</li>
+<li><p>选取信息增益最大的特征 $A^*$，对该节点进行划分。</p>
+</li>
+<li><p>递归地对每个子节点执行上述步骤。</p>
+</li>
+<li><p>递归终止条件：</p>
+<ul>
+<li>节点样本全属于同一类别（纯度 1）。</li>
+<li>特征集为空（多数投票决定叶节点类别）。</li>
+<li>节点样本数小于阈值。</li>
+</ul>
+</li>
+</ol>
+<h3 id="C4-5（Quinlan，1993）"><a href="#C4-5（Quinlan，1993）" class="headerlink" title="C4.5（Quinlan，1993）"></a>C4.5（Quinlan，1993）</h3><ul>
+<li><strong>改进点</strong>：</li>
+</ul>
+<ol>
+<li>支持数值型特征的自动二元划分。</li>
+<li>使用信息增益率（Gain Ratio）来选择特征，克服取值多特征的偏向问题。</li>
+<li>支持“有缺失值”处理：当样本缺失特征 $A$ 时，按已知特征在其他样本中的分布进行加权。</li>
+<li>剪枝：可基于统计检验进行后剪枝，减少过拟合。</li>
+</ol>
+<ul>
+<li><strong>流程</strong>：</li>
+</ul>
+<ol>
+<li>对所有特征计算信息增益率 $\text{GainRatio}(A)$，选取最优特征 $A^*$；</li>
+<li>对于数值型特征，遍历所有候选切分点（相邻排序值中点），计算最佳增益率；</li>
+<li>按 $A^*$ 将节点划分；</li>
+<li>递归；</li>
+<li>在树构建完成后进行后剪枝（可选）。</li>
+</ol>
+<h3 id="CART-（Breiman-等，1984）"><a href="#CART-（Breiman-等，1984）" class="headerlink" title="CART （Breiman 等，1984）"></a>CART （Breiman 等，1984）</h3><ul>
+<li><strong>核心思想</strong>：</li>
+<li>使用基尼不纯度 (Gini) 作为划分标准；</li>
+<li>构建二叉树：每个节点仅有 “是&#x2F;否” 两个分支；</li>
+<li>同时支持分类树 (Classification Tree) 和回归树 (Regression Tree)。</li>
+<li><strong>分类树流程</strong>：</li>
+</ul>
+<ol>
+<li>计算当前节点的 $\mathrm{Gini}(D)$。</li>
+<li>对每个候选特征及其所有可能二元切分点，计算基尼减少量 $\Delta \mathrm{Gini}(A, s)$。</li>
+<li>选择使 $\Delta \mathrm{Gini}$ 最大的特征与切分点 $(A^*, s^*)$。</li>
+<li>将节点划分为左右子节点；</li>
+<li>递归；</li>
+<li><strong>剪枝</strong>：可使用交叉验证来调节树的复杂度，通过最小化验证误差决定是否剪枝。</li>
+</ol>
+<ul>
+<li><strong>回归树流程</strong>：</li>
+<li>用 MSE（均方误差）或绝对误差作为节点不纯度度量：</li>
+</ul>
+<p>$$<br>\mathrm{MSE}(D) &#x3D; \frac{1}{|D|}\sum_{i\in D} (y_i - \bar y)^2,\quad \bar y &#x3D; \frac{1}{|D|}\sum_{i\in D} y_i<br>$$</p>
+<p>$$<br>\mathrm{MSE}(D) &#x3D; \frac{1}{|D|}\sum_{i\in D} (y_i - \bar y)^2,\quad \bar y &#x3D; \frac{1}{|D|}\sum_{i\in D} y_i<br>$$</p>
+<ul>
+<li>对数值型特征 $A$ 遍历二元切分点，分别计算左右子集的 MSE 加权平均。</li>
+<li>选取使 MSE 降低最多的切分。</li>
+<li>剪枝一般使用最小化验证集误差或对叶子节点惩罚复杂度（Cost-Complexity Pruning）。</li>
+</ul>
+<hr>
+<h2 id="剪枝-Pruning"><a href="#剪枝-Pruning" class="headerlink" title="剪枝 (Pruning)"></a>剪枝 (Pruning)</h2><p>在决策树中，过深的树容易过拟合训练数据，影响泛化。剪枝是为了提高模型在测试集上的准确性。主要有两种方式：</p>
+<h3 id="预剪枝-Pre-pruning"><a href="#预剪枝-Pre-pruning" class="headerlink" title="预剪枝 (Pre-pruning)"></a>预剪枝 (Pre-pruning)</h3><p>在构建树的过程中，提前停止划分，常见策略有：</p>
+<ol>
+<li><strong>最小样本数</strong>：若节点样本数小于某阈值，停止划分；</li>
+<li><strong>最大深度</strong>：树深度达到设定上限，停止；</li>
+<li><strong>信息增益&#x2F;基尼减少阈值</strong>：若最优划分的增益（或减少量）小于阈值，则不再划分；</li>
+<li><strong>统计检验</strong>：基于卡方检验等统计检验判定划分是否显著。</li>
+</ol>
+<blockquote>
+<p><strong>优点</strong>：减少计算和树的复杂度。<br><strong>缺点</strong>：一旦提前停止，可能错过后续有效划分，导致欠拟合。</p>
+</blockquote>
+<h3 id="后剪枝-Post-pruning"><a href="#后剪枝-Post-pruning" class="headerlink" title="后剪枝 (Post-pruning)"></a>后剪枝 (Post-pruning)</h3><p>先让树尽可能长地生长，然后自底向上裁剪。常见流程：</p>
+<ol>
+<li>构建完完全树（直到所有叶节点纯度为 1 或没有更多可划分特征）；</li>
+<li>对每个非叶子节点评估以下两种情况哪种在验证集上性能更好：</li>
+</ol>
+<ul>
+<li>保留该子树结构；</li>
+<li>将其剪为叶节点，并以子树所有样本在该节点的多数类（分类）或平均值（回归）作为输出；</li>
+</ul>
+<ol>
+<li>如果剪掉子树后验证误差减少或无显著变化，则保留剪枝操作；否则保留子树；</li>
+<li>重复上述过程，直到没有可剪枝节点或验证集误差不再降低。</li>
+</ol>
+<blockquote>
+<p><strong>CART 的 Cost-Complexity Pruning</strong>：定义节点惩罚函数</p>
+</blockquote>
+<hr>
+<h2 id="决策树的优缺点"><a href="#决策树的优缺点" class="headerlink" title="决策树的优缺点"></a>决策树的优缺点</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ol>
+<li><strong>可解释性强</strong></li>
+</ol>
+<ul>
+<li>生成后的决策树可视化，人类易于理解和解释每个决策路径。</li>
+</ul>
+<ol>
+<li><strong>无须特征归一化</strong></li>
+</ol>
+<ul>
+<li>对数值型与类别型特征均可处理，不要求输入特征尺度统一。</li>
+</ul>
+<ol>
+<li><strong>自动特征选择</strong></li>
+</ol>
+<ul>
+<li>在划分过程中自动评估并选取对分类&#x2F;回归最有价值的特征。</li>
+</ul>
+<ol>
+<li><strong>鲁棒性强</strong></li>
+</ol>
+<ul>
+<li>对缺失值可采用“分裂时加权”或“按多数类分配”等策略进行处理；对异常值不敏感。</li>
+</ul>
+<ol>
+<li><strong>易于处理多种类型数据</strong></li>
+</ol>
+<ul>
+<li>可以同时处理数值、类别以及缺失值。</li>
+</ul>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ol>
+<li><strong>容易过拟合</strong></li>
+</ol>
+<ul>
+<li>深度过大时对训练数据拟合过度，泛化能力下降。</li>
+</ul>
+<ol>
+<li><strong>对噪声敏感</strong></li>
+</ol>
+<ul>
+<li>训练数据中的噪声决定划分时可能误导特征选择。</li>
+</ul>
+<ol>
+<li><strong>局部最优</strong></li>
+</ol>
+<ul>
+<li>由于采用贪心策略（每次只选最优特征），可能无法得到全局最优树。</li>
+</ul>
+<ol>
+<li><strong>可用性限制</strong></li>
+</ol>
+<ul>
+<li>对高维稀疏数据（如文本）可能效果不佳；容易生成非常深且稀疏的树。</li>
+</ul>
+<ol>
+<li><strong>不稳定性</strong></li>
+</ol>
+<ul>
+<li>微小的数据变化可能导致决策树结构的大幅改变（当某些样本临界时）。</li>
+</ul>
+<blockquote>
+<p><strong>改进思路</strong>：</p>
+<ul>
+<li><strong>集成方法</strong>：随机森林 (Random Forest)、梯度提升树 (Gradient Boosting Trees，如 XGBoost、LightGBM) 通过集成多棵弱树克服单棵树的易过拟合与不稳定问题。</li>
+<li><strong>特征筛选与降维</strong>：在高维稀疏场景下，可结合特征工程、特征选择等方法减小特征维度。</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="决策树在实际中的应用场景"><a href="#决策树在实际中的应用场景" class="headerlink" title="决策树在实际中的应用场景"></a>决策树在实际中的应用场景</h2><h3 id="相关代码示例"><a href="#相关代码示例" class="headerlink" title="相关代码示例"></a>相关代码示例</h3><blockquote>
+<p>由于还包含了 c45,cart,id3 为划分指标的决策树代码,我整理在了一个 github 仓库中,下面只展示了 decision_stump.py 的代码<br><a href="https://github.com/tkzzzzzz6/MLandDL">https://github.com/tkzzzzzz6/MLandDL</a></p>
+</blockquote>
+<h4 id="decision-stump-py-主要模块"><a href="#decision-stump-py-主要模块" class="headerlink" title="decision_stump.py(主要模块)"></a>decision_stump.py(主要模块)</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DecisionStump</span>():</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__update_parameter</span>(<span class="params">self, h, feature_index, threshold, direction, err_value</span>):</span><br><span class="line">        <span class="variable language_">self</span>.**__min_err_value** = err_value</span><br><span class="line">        <span class="variable language_">self</span>.**__feature_index** = feature_index</span><br><span class="line">        <span class="variable language_">self</span>.**__threshold** = threshold</span><br><span class="line">        <span class="variable language_">self</span>.**__direction** = direction</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__select_direction</span>(<span class="params">self, feature_index, threshold, X, y, w</span>):</span><br><span class="line">        <span class="keyword">for</span> direction <span class="keyword">in</span> [<span class="string">&#x27;greater&#x27;</span>, <span class="string">&#x27;less&#x27;</span>]:</span><br><span class="line">            h = np.ones_like(y)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> direction == <span class="string">&#x27;greater&#x27;</span>:</span><br><span class="line">                h[np.flatnonzero(X[:, feature_index] &lt; threshold)] = -<span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                h[np.flatnonzero(X[:, feature_index] &gt;= threshold)] = -<span class="number">1</span></span><br><span class="line"></span><br><span class="line">            err_value = np.<span class="built_in">sum</span>(w[np.flatnonzero(h != y)])</span><br><span class="line">            <span class="keyword">if</span> err_value &lt; <span class="variable language_">self</span>.**__min_err_value**:</span><br><span class="line">                <span class="variable language_">self</span>.__update_parameter(h, feature_index, threshold, <span class="string">&#x27;greater&#x27;</span>, err_value)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__select_threshold</span>(<span class="params">self, feature_index, X, y, w</span>):</span><br><span class="line">        n_samples = X.shape[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n_samples):</span><br><span class="line">            <span class="variable language_">self</span>.__select_direction(feature_index, X[i, feature_index], X, y, w)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__select_feature</span>(<span class="params">self, X, y, w</span>):</span><br><span class="line">        n_features = X.shape[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n_features):</span><br><span class="line">            <span class="variable language_">self</span>.__select_threshold(i, X, y, w)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fit</span>(<span class="params">self, X, y, w</span>):</span><br><span class="line">        <span class="variable language_">self</span>.**__feature_index** = <span class="literal">None</span></span><br><span class="line">        <span class="variable language_">self</span>.**__threshold** = <span class="literal">None</span></span><br><span class="line">        <span class="variable language_">self</span>.**__direction** = <span class="literal">None</span></span><br><span class="line">        <span class="variable language_">self</span>.**__min_err_value** = np.**inf**</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.__select_feature(X, y, w)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">predict</span>(<span class="params">self, X</span>):</span><br><span class="line">        n_samples = X.shape[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">        y_pred = np.ones(n_samples)</span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.**__direction** == <span class="string">&#x27;greater&#x27;</span>:</span><br><span class="line">            y_pred[np.flatnonzero(X[:, <span class="variable language_">self</span>.**__feature_index**] &lt; <span class="variable language_">self</span>.**__threshold**)] = -<span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            y_pred[np.flatnonzero(X[:, <span class="variable language_">self</span>.**__feature_index**] &gt;= <span class="variable language_">self</span>.**__threshold**)] = -<span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> y_pred</span><br></pre></td></tr></table></figure>
+
+<h4 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749360718079T62Tbr1DOojvcLxBIxqcFCvHnlg.png" alt="1749360718079T62Tbr1DOojvcLxBIxqcFCvHnlg.png"></p>
+<p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749360730852Tfdmbz1oOo6vFpxAAfkcoEBGnXc.png" alt="1749360730852Tfdmbz1oOo6vFpxAAfkcoEBGnXc.png"><br><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749360750853Zeg3bB0PioEDr0x9taMclxgOnmh.png" alt="1749360750853Zeg3bB0PioEDr0x9taMclxgOnmh.png"></p>
+<h3 id="分类任务"><a href="#分类任务" class="headerlink" title="分类任务"></a>分类任务</h3><ol>
+<li><strong>客户流失预测 (Customer Churn Prediction)</strong></li>
+</ol>
+<ul>
+<li>业务场景：电信、金融、电商等行业中，通过客户基本属性、历史行为、消费习惯等特征预测是否会流失。</li>
+<li>决策树优势：易于解释（可解释哪些因素导致客户流失），可处理混合型特征（年龄、性别、套餐类别、使用时长等）。</li>
+</ul>
+<ol>
+<li><strong>信用评估 (Credit Scoring)</strong></li>
+</ol>
+<ul>
+<li>业务场景：银行或金融机构根据用户的个人信息（年龄、工作、收入）、信用记录（逾期次数、还款能力）进行信用风险分类（高风险、中风险、低风险）。</li>
+<li>应用：决策树可直观地给出“如果收入 &lt; X 且逾期次数 &gt; Y，则分类为高风险”，帮助信贷风控。</li>
+</ul>
+<ol>
+<li><strong>医疗诊断</strong></li>
+</ol>
+<ul>
+<li>业务场景：根据患者的症状（发热、咳嗽、X 光结果）、检查指标（血常规、心电图）等预测是否患某种疾病。</li>
+<li>应用：决策树模型可以给出“若咳嗽持续 &gt; 2 周 且 白细胞数 &gt; 某阈值，则可能为肺炎”，同时提供可解释的诊断决策流程。</li>
+</ul>
+<ol>
+<li><strong>垃圾邮件识别</strong></li>
+</ol>
+<ul>
+<li>业务场景：根据邮件内容特征（关键字出现次数、发送人是否在白名单）、邮件长度、附件类型等判断是否为垃圾邮件。</li>
+<li>应用：决策树可快速处理离散&#x2F;连续特征，常用于构建初期的规则或与其他模型结合（如 Random Forest）。</li>
+</ul>
+<h3 id="回归任务"><a href="#回归任务" class="headerlink" title="回归任务"></a>回归任务</h3><ol>
+<li><strong>房价预测 (House Price Prediction)</strong></li>
+</ol>
+<ul>
+<li>业务场景：根据房屋面积、楼层、房龄、地理位置、交通等因素预测房价。</li>
+<li>决策树回归：将房屋特征空间划分为若干区域，每个叶节点输出区域内样本的平均房价。做不到很平滑，但易于理解。</li>
+</ul>
+<ol>
+<li><strong>销售额预测</strong></li>
+</ol>
+<ul>
+<li>业务场景：预测节假日、促销活动或天气变化对某商品销售额的影响。</li>
+<li>决策树回归能够捕获非线性关系，且不需要对特征进行大量预处理。</li>
+</ul>
+<h3 id="特征工程与规则提取"><a href="#特征工程与规则提取" class="headerlink" title="特征工程与规则提取"></a>特征工程与规则提取</h3><ol>
+<li><strong>特征构造</strong></li>
+</ol>
+<ul>
+<li>通过决策树可以将某些连续特征自动离散化。例如，若决策树对“年龄”做了三次切分，分别在 25 岁、40 岁产生不同的分支，则可得到“年龄段”特征。</li>
+</ul>
+<ol>
+<li><strong>规则提取</strong></li>
+</ol>
+<ul>
+<li>从训练好的决策树中可直接提取“如果……则……”的规则，用于可解释性要求高的场景（如审计、医疗）。</li>
+</ul>
+<h3 id="集成学习基础"><a href="#集成学习基础" class="headerlink" title="集成学习基础"></a>集成学习基础</h3><ol>
+<li><strong>随机森林 (Random Forest)</strong></li>
+</ol>
+<ul>
+<li>由多棵决策树随机组合而成。每棵树训练时只使用特征子集和样本子集，最后多数投票决定分类结果或平均值决定回归值。</li>
+<li>优势：降低单棵决策树的过拟合风险，提高泛化能力。</li>
+</ul>
+<ol>
+<li><strong>梯度提升树 (Gradient Boosting Trees)</strong></li>
+</ol>
+<ul>
+<li>通过逐步拟合残差的方式构建多个弱决策树，每棵新树在前一棵树的基础上拟合残差，最终组合得到强模型，如 XGBoost、LightGBM、CatBoost。</li>
+</ul>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li><strong>决策树</strong> 是一种简单、易理解且可处理混合型特征的模型，既可做分类，也可做回归。</li>
+<li><strong>核心步骤</strong>：选择合适的划分指标（信息增益 &#x2F; 信息增益率 &#x2F; 基尼不纯度）、确定最佳划分点，递归生成树，并通过剪枝降低过拟合。</li>
+<li><strong>常见算法</strong>：</li>
+</ol>
+<ul>
+<li><strong>ID3</strong>（仅支持离散特征，使用信息增益）</li>
+<li><strong>C4.5</strong>（支持数值特征 &amp; 离散特征，使用信息增益率，含剪枝）</li>
+<li><strong>CART</strong>（构建二叉树，使用基尼不纯度，可用于分类与回归）</li>
+</ul>
+<ol>
+<li><strong>优缺点</strong>：</li>
+</ol>
+<ul>
+<li>优点：可解释性强、无需特征缩放、自动进行特征选择。</li>
+<li>缺点：容易过拟合、对噪声敏感、在高维稀疏场景下不够稳定。</li>
+</ul>
+<ol>
+<li><strong>典型应用</strong>：</li>
+</ol>
+<ul>
+<li>客户流失预测、信用评估、医疗诊断、垃圾邮件识别等分类场景；</li>
+<li>房价预测、销售额预测等回归场景；</li>
+<li>特征工程、规则提取、以及集成学习（随机森林、梯度提升树）的基石。</li>
+</ul>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+            
+            
+                <div class="post-actions text-center clearfix" id="post-actions">
+                
+                    <a class="donate" href="javascript:;" onclick="krOpenDonateModal()"><i class="fa fa-bitcoin"></i> 打赏</a>
+                
+                
+                    <a class="share" href="javascript:;" onclick="krOpenShareModal()"><i class="fa fa-share-alt"></i> 分享</a>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" rel="tag">课程学习</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2025-06-08T08:00:00.836Z" itemprop="dateModified">最后编辑：2025-06-08</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 2025-05-06-Windows 系统将安装过系统镜像的固态硬盘恢复" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-05-06-Windows系统将安装过系统镜像的固态硬盘恢复/"><i class="fa fa-angle-left"></i> 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 2025-05-05-80x86 汇编语言环境配置" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-05-05-80x86汇编语言环境配置/">下一篇 <i class="fa fa-angle-right"></i></a>
+            </div>
+            
+        </nav>
+    
+    
+        <div class="comment-post">
+            
+        </div>
+    
+</article>
+
+        
+
+            </section>
+
+            
+                
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+        <div class="sticky-area">
+    
+    
+    </div>
+</section>
+            
+
+        
+
+                </div>
+    </div>
+</div>
+
+<footer>
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2025 TK的小站 版权所有.</li>
+                            <li>本站已运行<span id="kr-since">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>自豪地使用 <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a> 主题</li>
+                            <li>站点由 TK 用 <i class="fa fa-heart" style="color:#d43f57"></i> 搭建</li>
+                        </div>
+                        <!-- 额外的追加注入项 -->
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/tkzzzzzz6/tkzzzzzz6.github.io/search">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                <div class="box theme-box" id="theme-toggle">
+                    <span class="fa fa-adjust"></span>
+                </div>
+            </div>
+            <div id="gotop-box" class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+
+    <div id="kr-donate-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseDonateModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-bitcoin"></i>
+            </div>
+            <div class="kr-modal-title">打赏</div>
+            <button class="kr-modal-close" onclick="krCloseDonateModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-donate-message">打赏提示信息</div>
+            <div class="kr-donate-qr" id="kr-donate-qr">
+                
+            </div>
+            <div class="kr-donate-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/donate.min.js"></script>
+
+
+
+
+    <div id="kr-share-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseShareModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-share-alt"></i>
+            </div>
+            <div class="kr-modal-title">分享</div>
+            <button class="kr-modal-close" onclick="krCloseShareModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-share-message">分享提示信息</div>
+            <div class="kr-share-qr" id="kr-share-qr"></div>
+            <div class="kr-share-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/share.min.js"></script>
+
+
+
+<!-- 额外的追加注入项 -->
+
+
+        <script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/tkzzzzzz6/tkzzzzzz6.github.io/";
+</script>
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.js"></script>
+
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.js"></script>
+
+
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-core.min.js"></script>
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-pjax.min.js"></script>
+
+
+<!-- 额外的追加注入项 -->
+
+
+    </body>
+</html>

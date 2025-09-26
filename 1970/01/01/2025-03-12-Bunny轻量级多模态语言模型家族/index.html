@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  
+  
+  <title>2025-03-12-Bunny 轻量级多模态语言模型家族 | TK的小站</title>
+  <link rel="canonical" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-03-12-Bunny%E8%BD%BB%E9%87%8F%E7%BA%A7%E5%A4%9A%E6%A8%A1%E6%80%81%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%AE%B6%E6%97%8F/">
+  <meta name="author" content="TK" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="深度学习 论文阅读" />
+  
+  <meta name="description" content="论文链接https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2402.11530  全文总结一种名为 Bunny 的轻量级多模态语言模型家族，旨在通过优化训练数据来提高模型的性能，从而在计算资源有限的情况下实现高效的多模态学习。 研究背景 背景介绍: 多模态大型语言模型（MLLMs）在视觉理解和推理任务中表现出色，但其部署受到训练和推理阶段的高计算成本和内存消耗的限制。为了克服这一问题，研究者们尝试使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2025-03-12-Bunny 轻量级多模态语言模型家族">
+<meta property="og:url" content="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-03-12-Bunny%E8%BD%BB%E9%87%8F%E7%BA%A7%E5%A4%9A%E6%A8%A1%E6%80%81%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%AE%B6%E6%97%8F/index.html">
+<meta property="og:site_name" content="TK的小站">
+<meta property="og:description" content="论文链接https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2402.11530  全文总结一种名为 Bunny 的轻量级多模态语言模型家族，旨在通过优化训练数据来提高模型的性能，从而在计算资源有限的情况下实现高效的多模态学习。 研究背景 背景介绍: 多模态大型语言模型（MLLMs）在视觉理解和推理任务中表现出色，但其部署受到训练和推理阶段的高计算成本和内存消耗的限制。为了克服这一问题，研究者们尝试使用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1741790887815EqNRbHjCOoXqZixhNGjcc7yXneh.png">
+<meta property="og:image" content="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1741964606068RLo3b1D3moX6OCxShJrc5FiAnee.png">
+<meta property="og:image" content="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1741790898815C6ElbuABdopLlnx0596c9FYznG0.png">
+<meta property="article:published_time" content="1970-01-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-22T07:55:44.487Z">
+<meta property="article:author" content="TK">
+<meta property="article:tag" content="深度学习 论文阅读">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1741790887815EqNRbHjCOoXqZixhNGjcc7yXneh.png">
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-core.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="highlight-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/highlight/highlight.js/night-eighties.min.css" media="all"></link>
+  
+  <link rel="stylesheet" id="theme-light-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/light.min.css" media="all"></link>
+  <link rel="stylesheet" id="theme-dark-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/dark.min.css" media="(prefers-color-scheme: dark)"></link>
+  <script src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-theme.min.js"></script>
+  <link rel="stylesheet" id="fontawe-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="nprogress-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.css" media="all"></link>
+  
+  
+    <link rel="stylesheet" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.css"></link>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  
+    <script src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
+  
+  <!-- 自定义站点横幅和背景 -->
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+      html[data-theme="dark"] .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('');
+        }
+        html[data-theme="dark"] body.custom-background {
+          background-image: url('');
+        }
+      }
+    
+    
+      .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+      html[data-theme="dark"] .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+    
+  </style>
+
+  <!-- 额外的追加注入项 -->
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/tkzzzzzz6/tkzzzzzz6.github.io/">TK的小站</a></div>
+                    <div id="kratos-nav-toggle-wrapper" class="nav-toggle">
+                        <a id="kratos-nav-toggle" class="kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/tkzzzzzz6/tkzzzzzz6.github.io/">
+                        <h2>TK的小站</h2> <br />
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+
+
+        
+
+            
+
+            <section class="kr-main-col col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-03-12-Bunny%E8%BD%BB%E9%87%8F%E7%BA%A7%E5%A4%9A%E6%A8%A1%E6%80%81%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%AE%B6%E6%97%8F/">
+    <div class="kratos-hentry kratos-page-inner clearfix">
+        <header class="kratos-page-header">
+            
+                <h1 class="kratos-page-title text-center" itemprop="name headline">2025-03-12-Bunny 轻量级多模态语言模型家族</h1>
+            
+            <ul class="kratos-page-meta text-center">
+                <li><time datetime="1970-01-01T00:00:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 1970-01-01</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">TK</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~1.87K
+                        
+                        字
+                    </li>
+                
+                
+                    <li>
+                        <i class="fa fa-eye"></i>
+                         次阅读
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-page-content kr-post">
+            
+            
+            
+            <hr />
+            <div itemprop="articleBody"><blockquote>
+<p>论文链接<br><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2402.11530">https://arxiv.org/abs/2402.11530</a></p>
+</blockquote>
+<h1 id="全文总结"><a href="#全文总结" class="headerlink" title="全文总结"></a>全文总结</h1><p>一种名为 Bunny 的轻量级多模态语言模型家族，旨在通过优化训练数据来提高模型的性能，从而在计算资源有限的情况下实现高效的多模态学习。</p>
+<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><ol>
+<li><strong>背景介绍:</strong> 多模态大型语言模型（MLLMs）在视觉理解和推理任务中表现出色，但其部署受到训练和推理阶段的高计算成本和内存消耗的限制。为了克服这一问题，研究者们尝试使用较小的预训练视觉和语言模型，但这通常会导致性能下降。</li>
+<li><strong>研究内容:</strong> 通过优化训练数据来补偿模型规模的减小，从而在保持高性能的同时实现模型的小型化。</li>
+<li><strong>文献综述:</strong> 多种轻量级 MLLM 的尝试，如 LLaVA-Phi、Imp 和 Vary-toy 等，这些工作通过使用小型语言模型和视觉编码器来实现模型的小型化。此外，还有研究探索了模型架构和训练策略的优化。</li>
+</ol>
+<h2 id="研究方法"><a href="#研究方法" class="headerlink" title="研究方法"></a>研究方法</h2><p>这篇论文提出了 Bunny，一种轻量级的多模态模型家族，用于解决多模态学习中的计算成本问题。具体来说，</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1741790887815EqNRbHjCOoXqZixhNGjcc7yXneh.png" alt="1741790887815EqNRbHjCOoXqZixhNGjcc7yXneh.png"></p>
+<ol>
+<li><strong>训练数据构建:</strong> 为了提高训练数据的有效性，作者从 LAION-2B 数据集中构建了高质量的预训练数据集 Bunny-pretrain-LAION-2M，并收集了视觉指令调整数据集 Bunny-695K。通过数据集精简技术，从广泛的源中选择更信息量的数据。</li>
+<li><strong>训练策略:</strong> 采用两阶段训练策略：第一阶段进行预训练，对齐视觉嵌入和文本嵌入；第二阶段进行微调，应用视觉指令调整以充分利用 MLLM 的能力。在微调阶段，使用 LoRA 来训练 LLM 骨干，而视觉编码器和跨模态投影器则完全调整。</li>
+</ol>
+<blockquote>
+<p>LoRA:基于大模型的内在低秩特性，增加旁路矩阵来模拟全参数微调，LoRA 通过简单有效的方案来达成轻量微调的目的。它的应用自不必提，可以将现在的各种大模型通过轻量微调变成各个不同领域的专业模型。<br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1741964606068RLo3b1D3moX6OCxShJrc5FiAnee.png" alt="1741964606068RLo3b1D3moX6OCxShJrc5FiAnee.png"></p>
+<ol>
+<li>使用预训练的 LLM 权重初始化 A 和 B 矩阵。</li>
+<li>将 LLM 应用于特定任务的训练数据集。</li>
+<li>在训练过程中，只有 A 矩阵会针对训练数据集（输入资料（X））进行微调。</li>
+<li>训练完成后，获得了针对特定任务适应的 LLM，也就是 H（输出）。</li>
+</ol>
+<ul>
+<li>举个例子，如果把预训练的大型语言模型比作一座已经建好的复杂大厦，LoRA 就像是给大厦的某些房间（对应模型的特定层）添加一些简易的可拆卸隔断（低秩矩阵模块）来改变房间布局（适应新任务），而不是对整座大厦的结构和所有房间进行大规模改造 ，这样既节省了时间和材料（计算资源和时间），又能达到灵活调整的目的 。</li>
+</ul>
+</blockquote>
+<h2 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h2><ol>
+<li><strong>数据集:</strong> 在多个基准测试上评估 Bunny 的性能，包括 MME 感知、MME 认知、MMBench、SEED-Bench-1、MMMU、VQA-v2、GQA、ScienceQAIMG 和 POPE 等。</li>
+<li><strong>对比模型:</strong> 将 Bunny 与现有的最先进的多模态大型语言模型进行比较，包括 GPT-4V、BLIP-2、InstructBLIP、Shikra、SVIT、LVIS-INSTRUCT4V、ShareGPT4V、VILA1.5、Mini-Gemini-HD、LLaVA、MiniGPT-v2、mPLUG-Owl2、SPHINX-Intern2、YiVL、DeepSeek-VL、MM1、Idefics2、LLaVA-NeXT、MobileVLM、TinyLLaVA、Mipha、MiniCPM、Imp 等。</li>
+<li><strong>实验设置:</strong> 在微调阶段使用 LoRA 进行训练，并对数据策略、训练周期、视觉编码器的冻结与调整等进行消融研究。</li>
+</ol>
+<h2 id="结果与分析"><a href="#结果与分析" class="headerlink" title="结果与分析"></a>结果与分析</h2><ol>
+<li><strong>性能比较:</strong> Bunny-4B 和 Bunny-8B 在大多数基准测试中优于同尺寸的其他 MLLMs，显示出卓越的多模态理解和推理能力。特别是 Bunny-8B 在 MMEP 上取得了 1644.1 的高分，远超第二名 LLaVA-NeXT-Llama-3-8B（1603.7）。</li>
+<li><strong>消融研究:</strong> LoRA 在微调阶段的表现优于完全调整 LLM，表明较小的模型更容易发生灾难性遗忘，而 LoRA 有助于缓解这一问题。增加数据多样性和调整视觉编码器也能提高性能。</li>
+</ol>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>这篇论文提出了 Bunny，一种轻量级但强大的多模态模型家族。通过优化训练数据来补偿模型规模的减小，Bunny 在多个基准测试中表现出色，甚至超越了大型 MLLMs。这项工作为进一步研究和开发提供了一个干净、灵活的开源工具。</p>
+<p>这篇论文展示了通过数据优化来实现小型化 MLLM 的有效性，具有重要的理论和实际意义。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1741790898815C6ElbuABdopLlnx0596c9FYznG0.png" alt="1741790898815C6ElbuABdopLlnx0596c9FYznG0.png"></p>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+            
+            
+                <div class="post-actions text-center clearfix" id="post-actions">
+                
+                    <a class="donate" href="javascript:;" onclick="krOpenDonateModal()"><i class="fa fa-bitcoin"></i> 打赏</a>
+                
+                
+                    <a class="share" href="javascript:;" onclick="krOpenShareModal()"><i class="fa fa-share-alt"></i> 分享</a>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" rel="tag">深度学习 论文阅读</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2025-09-22T07:55:44.487Z" itemprop="dateModified">最后编辑：2025-09-22</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 2025-03-14-Google 检索技巧" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-03-14-Google检索技巧/"><i class="fa fa-angle-left"></i> 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 2025-03-05-判断回文数" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-03-05-判断回文数/">下一篇 <i class="fa fa-angle-right"></i></a>
+            </div>
+            
+        </nav>
+    
+    
+        <div class="comment-post">
+            
+        </div>
+    
+</article>
+
+        
+
+            </section>
+
+            
+                
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+        <div class="sticky-area">
+    
+    
+    </div>
+</section>
+            
+
+        
+
+                </div>
+    </div>
+</div>
+
+<footer>
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2025 TK的小站 版权所有.</li>
+                            <li>本站已运行<span id="kr-since">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>自豪地使用 <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a> 主题</li>
+                            <li>站点由 TK 用 <i class="fa fa-heart" style="color:#d43f57"></i> 搭建</li>
+                        </div>
+                        <!-- 额外的追加注入项 -->
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/tkzzzzzz6/tkzzzzzz6.github.io/search">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                <div class="box theme-box" id="theme-toggle">
+                    <span class="fa fa-adjust"></span>
+                </div>
+            </div>
+            <div id="gotop-box" class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+
+    <div id="kr-donate-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseDonateModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-bitcoin"></i>
+            </div>
+            <div class="kr-modal-title">打赏</div>
+            <button class="kr-modal-close" onclick="krCloseDonateModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-donate-message">打赏提示信息</div>
+            <div class="kr-donate-qr" id="kr-donate-qr">
+                
+            </div>
+            <div class="kr-donate-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/donate.min.js"></script>
+
+
+
+
+    <div id="kr-share-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseShareModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-share-alt"></i>
+            </div>
+            <div class="kr-modal-title">分享</div>
+            <button class="kr-modal-close" onclick="krCloseShareModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-share-message">分享提示信息</div>
+            <div class="kr-share-qr" id="kr-share-qr"></div>
+            <div class="kr-share-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/share.min.js"></script>
+
+
+
+<!-- 额外的追加注入项 -->
+
+
+        <script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/tkzzzzzz6/tkzzzzzz6.github.io/";
+</script>
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.js"></script>
+
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.js"></script>
+
+
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-core.min.js"></script>
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-pjax.min.js"></script>
+
+
+<!-- 额外的追加注入项 -->
+
+
+    </body>
+</html>

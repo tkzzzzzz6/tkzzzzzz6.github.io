@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  
+  
+  <title>2025-06-03-微信小程序开发框架详解 | TK的小站</title>
+  <link rel="canonical" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-06-03-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/">
+  <meta name="author" content="TK" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="课程学习" />
+  
+  <meta name="description" content="微信小程序开发框架详解参考资料  微信小程序技术原理分析 | 匠心博客 Everything You Would Like to Know About WeChat Mini Program developers.weixin.qq.com GitHub - justjavac&#x2F;awesome-wechat-weapp: 微信小程序开发资源汇总    概述互联网生态演进：超级 APP +">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2025-06-03-微信小程序开发框架详解">
+<meta property="og:url" content="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-06-03-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="TK的小站">
+<meta property="og:description" content="微信小程序开发框架详解参考资料  微信小程序技术原理分析 | 匠心博客 Everything You Would Like to Know About WeChat Mini Program developers.weixin.qq.com GitHub - justjavac&#x2F;awesome-wechat-weapp: 微信小程序开发资源汇总    概述互联网生态演进：超级 APP +">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749364131854QUV7bVLfOoZdmix4JoJcT4utnCb.png">
+<meta property="og:image" content="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749364140851U8zbbm8B1onhwfxWR7Rc1X2Anvq.png">
+<meta property="og:image" content="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749364151852KAz5bUGAtoOAQ6xv5FscdRFTnph.png">
+<meta property="article:published_time" content="1970-01-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-08T08:01:15.789Z">
+<meta property="article:author" content="TK">
+<meta property="article:tag" content="课程学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749364131854QUV7bVLfOoZdmix4JoJcT4utnCb.png">
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-core.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="highlight-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/highlight/highlight.js/night-eighties.min.css" media="all"></link>
+  
+  <link rel="stylesheet" id="theme-light-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/light.min.css" media="all"></link>
+  <link rel="stylesheet" id="theme-dark-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/dark.min.css" media="(prefers-color-scheme: dark)"></link>
+  <script src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-theme.min.js"></script>
+  <link rel="stylesheet" id="fontawe-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="nprogress-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.css" media="all"></link>
+  
+  
+    <link rel="stylesheet" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.css"></link>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  
+    <script src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
+  
+  <!-- 自定义站点横幅和背景 -->
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+      html[data-theme="dark"] .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('');
+        }
+        html[data-theme="dark"] body.custom-background {
+          background-image: url('');
+        }
+      }
+    
+    
+      .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+      html[data-theme="dark"] .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+    
+  </style>
+
+  <!-- 额外的追加注入项 -->
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/tkzzzzzz6/tkzzzzzz6.github.io/">TK的小站</a></div>
+                    <div id="kratos-nav-toggle-wrapper" class="nav-toggle">
+                        <a id="kratos-nav-toggle" class="kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/tkzzzzzz6/tkzzzzzz6.github.io/">
+                        <h2>TK的小站</h2> <br />
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+
+
+        
+
+            
+
+            <section class="kr-main-col col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-06-03-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/">
+    <div class="kratos-hentry kratos-page-inner clearfix">
+        <header class="kratos-page-header">
+            
+                <h1 class="kratos-page-title text-center" itemprop="name headline">2025-06-03-微信小程序开发框架详解</h1>
+            
+            <ul class="kratos-page-meta text-center">
+                <li><time datetime="1970-01-01T00:00:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 1970-01-01</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">TK</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~2.86K
+                        
+                        字
+                    </li>
+                
+                
+                    <li>
+                        <i class="fa fa-eye"></i>
+                         次阅读
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-page-content kr-post">
+            
+            
+            
+            <hr />
+            <div itemprop="articleBody"><h1 id="微信小程序开发框架详解"><a href="#微信小程序开发框架详解" class="headerlink" title="微信小程序开发框架详解"></a>微信小程序开发框架详解</h1><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhaomenghuan.js.org/blog/wechat-miniprogram-principle-analysis.html">微信小程序技术原理分析 | 匠心博客</a></li>
+<li><a target="_blank" rel="noopener" href="https://ianwith.github.io/2020/02/12/everything-you-would-like-to-know-about-wechat-mini-program/?utm_source=chatgpt.com">Everything You Would Like to Know About WeChat Mini Program</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/reference/">developers.weixin.qq.com</a></li>
+<li><a href="https://github.com/justjavac/awesome-wechat-weapp?tab=readme-ov-file">GitHub - justjavac&#x2F;awesome-wechat-weapp: 微信小程序开发资源汇总 </a></li>
+</ul>
+</blockquote>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>互联网生态演进：超级 APP + 小程序成为「轻应用时代」下的新生态。</p>
+<p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749364131854QUV7bVLfOoZdmix4JoJcT4utnCb.png" alt="1749364131854QUV7bVLfOoZdmix4JoJcT4utnCb.png"></p>
+<p>小程序方式构建应用是大趋势，被越来越多的企业用户看到其中的优势，构建一个跨多端平台的小程序开发平台是一种思路，帮助企业用户构建一个具备小程序能力的“移动门户”也是一种思路。本文主要调研微信小程序运行时的基本原理，从而构建一个适合我们自己平台的小程序运行框架。</p>
+<p>微信小程序开发可分为<strong>官方原生框架（MINA）与多种第三方跨端开发框架</strong>两大类。官方 MINA 框架提供了 WXML&#x2F;WXSS&#x2F;JS 三层模型，以及基于双线程的渲染与逻辑分离机制，适合对微信生态深度依赖的项目；第三方框架则通过封装、编译等手段让 Vue、React、Web 原生等技术栈在小程序中复用，覆盖从单一微信端到多端（小程序 +H5+App）的多种场景。<br>在众多跨端方案中，<strong>uni-app</strong> 与 <strong>Taro</strong> 拥有最活跃的社区和最完善的生态，分别代表 Vue 与 React 技术栈；<strong>Remax</strong> 针对纯 React 而生，适合对 React 语法和生态依赖度极高的团队；<strong>MPVue</strong>、<strong>WePY</strong> 等 Vue 方案已逐步被 uni-app 或 Taro 取代；<strong>Chameleon</strong>、<strong>kbone</strong> 则聚焦于将 Web 应用“原封不动”移植到小程序。下面将从架构原理、技术栈、优缺点、适用场景及选型建议等方面，逐一详解主流框架。</p>
+<hr>
+<h2 id="官方原生框架：MINA"><a href="#官方原生框架：MINA" class="headerlink" title="官方原生框架：MINA"></a>官方原生框架：MINA</h2><p>微信团队自 2016 年推出的 <strong>MINA</strong>（Mobile Instant Application）是小程序的底层运行时与原生开发框架，核心特点包括：</p>
+<p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749364140851U8zbbm8B1onhwfxWR7Rc1X2Anvq.png" alt="1749364140851U8zbbm8B1onhwfxWR7Rc1X2Anvq.png"></p>
+<ul>
+<li><strong>双线程模型</strong>：渲染与逻辑各自运行在 WebView 线程和 JsCore 线程，数据同步通过 IPC 方式完成，显著提升 UI 响应。</li>
+<li><strong>四文件结构</strong>：每个小程序由 <code>app.json</code>（全局配置）、<code>app.js</code>（应用逻辑）、<code>app.wxss</code>（全局样式）及若干对应 <code>*.wxml</code>&#x2F;<code>*.js</code>&#x2F;<code>*.wxss</code> 的页面文件组成。</li>
+<li><strong>原生 API 丰富</strong>：提供扫码、支付、位置、媒体、网络等数百种接口，适合深度依赖微信生态、追求性能和稳定性的项目。</li>
+<li><strong>数据绑定与事件</strong>：简化视图层与逻辑层交互，开发者可快速上手。</li>
+</ul>
+<p><strong>优点</strong>：官方支持、性能最优、API 齐全<br><strong>缺点</strong>：仅限微信端、不支持跨端复用</p>
+<hr>
+<h2 id="跨端开发框架对比"><a href="#跨端开发框架对比" class="headerlink" title="跨端开发框架对比"></a>跨端开发框架对比</h2><p>主流跨端框架可按技术栈分为 <strong>Vue 系</strong> 与 <strong>React 系</strong>，并包含 Web 应用迁移方案。</p>
+<table>
+<thead>
+<tr>
+<th><strong>框架</strong></th>
+<th><strong>技术栈</strong></th>
+<th><strong>多端支持</strong></th>
+<th><strong>社区活跃度</strong></th>
+<th><strong>状态</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>uni-app</strong></td>
+<td>Vue</td>
+<td>微信&#x2F;支付宝&#x2F;百度&#x2F;字节&#x2F;QQ&#x2F;快应用&#x2F;H5&#x2F;APP</td>
+<td>⭐⭐⭐⭐ (36.5k Stars)</td>
+<td>维护中</td>
+</tr>
+<tr>
+<td><strong>Taro</strong></td>
+<td>React</td>
+<td>微信&#x2F;支付宝&#x2F;百度&#x2F;字节&#x2F;QQ&#x2F;快应用&#x2F;H5&#x2F;RN</td>
+<td>⭐⭐⭐⭐ (31k Stars)</td>
+<td>维护中</td>
+</tr>
+<tr>
+<td><strong>Remax</strong></td>
+<td>React</td>
+<td>微信&#x2F;支付宝&#x2F;百度等小程序</td>
+<td>⭐⭐⭐ (4.3k Stars)</td>
+<td>维护中</td>
+</tr>
+<tr>
+<td><strong>MPVue</strong></td>
+<td>Vue</td>
+<td>微信&#x2F;百度等小程序</td>
+<td>⭐⭐⭐ (20k Stars)</td>
+<td>停止维护</td>
+</tr>
+<tr>
+<td><strong>WePY</strong></td>
+<td>Vue</td>
+<td>微信小程序</td>
+<td>⭐ (少量维护)</td>
+<td>alpha, 更新缓慢</td>
+</tr>
+<tr>
+<td><strong>Chameleon</strong></td>
+<td>Vue&#x2F;React&#x2F;小程序原生</td>
+<td>微信&#x2F;支付宝&#x2F;百度&#x2F;抖音&#x2F;快应用</td>
+<td>⭐⭐</td>
+<td>维护中</td>
+</tr>
+<tr>
+<td><strong>kbone</strong></td>
+<td>Web</td>
+<td>将任意 Web 应用”原样”编译到微信小程序</td>
+<td>⭐⭐</td>
+<td>维护中</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>数据来源：CSDN、GitHub、社区活跃度对比</p>
+</blockquote>
+<h3 id="uni-app"><a href="#uni-app" class="headerlink" title="uni-app"></a>uni-app</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zh.uniapp.dcloud.io/resource.html">uni-app 官网</a></li>
+<li>HBuilderX：<a target="_blank" rel="noopener" href="https://www.dcloud.io/hbuilderx.html">官方 IDE 下载地址</a></li>
+</ul>
+</blockquote>
+<p><img src="https://gitee.com/tanke11223344/imagehost/raw/main/blog/1749364151852KAz5bUGAtoOAQ6xv5FscdRFTnph.png" alt="1749364151852KAz5bUGAtoOAQ6xv5FscdRFTnph.png"></p>
+<ul>
+<li><p><strong>核心</strong>：使用 Vue 语法、单文件组件（<code>.vue</code>），通过 HBuilderX 或 CLI 编译到多端。</p>
+</li>
+<li><p><strong>优势</strong>：</p>
+<ul>
+<li>真正“一套代码，多端运行” ；</li>
+<li>丰富插件与 UI 库（如 uView、Vant Weapp）；</li>
+<li>社区活跃，文档完善。</li>
+</ul>
+</li>
+<li><p><strong>劣势</strong>：运行时体积相对较大、对 Vue 特性支持需关注版本兼容。</p>
+</li>
+</ul>
+<h3 id="Taro"><a href="#Taro" class="headerlink" title="Taro"></a>Taro</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.taro.zone/docs/">Taro 介绍 | Taro 文档</a></li>
+<li><a href="https://github.com/NervJS/taro">github.com</a></li>
+<li><a target="_blank" rel="noopener" href="https://taro.zone/">Taro | 多端统一开发解决方案</a></li>
+</ul>
+</blockquote>
+<ul>
+<li><p><strong>核心</strong>：使用 React&#x2F;JSX 语法，多端编译，支持 React Hooks、TypeScript。</p>
+</li>
+<li><p><strong>优势</strong>：</p>
+<ul>
+<li>React 团队更易上手，编译速度快 ；</li>
+<li>支持多端：小程序、H5、React Native。</li>
+</ul>
+</li>
+<li><p><strong>劣势</strong>：</p>
+<ul>
+<li>部分原生小程序能力需插件或手动配置；</li>
+<li>轻度偏离纯 React 生态，对兼容性需关注。</li>
+</ul>
+</li>
+</ul>
+<h3 id="Remax"><a href="#Remax" class="headerlink" title="Remax"></a>Remax</h3><ul>
+<li><p><strong>核心</strong>：由阿里团队开发，几乎不封装 React API，保持与 React Web 最大一致性 。</p>
+</li>
+<li><p><strong>优势</strong>：</p>
+<ul>
+<li>纯 React 生态，组件迁移成本最低；</li>
+<li>支持 TypeScript。</li>
+</ul>
+</li>
+<li><p><strong>劣势</strong>：</p>
+<ul>
+<li>功能覆盖不如 Taro 全面；</li>
+<li>社区相对小。</li>
+</ul>
+</li>
+</ul>
+<h3 id="MPVue-WePY"><a href="#MPVue-WePY" class="headerlink" title="MPVue &amp; WePY"></a>MPVue &amp; WePY</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://mpvue.com/mpvue/#-html">使用手册 | mpvue.com</a></li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>MPVue</strong>：Vue 2.x 驱动，早期多端方案，已停止维护。</li>
+<li><strong>WePY</strong>：官方第一代组件化框架，alpha 长期无更新，社区废弃度高。</li>
+</ul>
+<h3 id="Chameleon"><a href="#Chameleon" class="headerlink" title="Chameleon"></a>Chameleon</h3><ul>
+<li><strong>特点</strong>：阿里开源，统一多端 API，组件可复用，支持多种端（微信&#x2F;支付宝&#x2F;字节&#x2F;IOS&#x2F;Android）。</li>
+<li><strong>关注点</strong>：学习曲线、社区活跃度一般。</li>
+</ul>
+<h3 id="kbone"><a href="#kbone" class="headerlink" title="kbone"></a>kbone</h3><ul>
+<li><strong>特点</strong>：Web 应用快速迁移，模拟 WebView 环境，支持 DOM&#x2F;BOM，可“零改造”接入热门前端库（Vue&#x2F;React）。</li>
+<li><strong>使用场景</strong>：已有成熟 Web 产品，希望快速在微信内复用。</li>
+</ul>
+<hr>
+<h2 id="UI-组件库推荐"><a href="#UI-组件库推荐" class="headerlink" title="UI 组件库推荐"></a>UI 组件库推荐</h2><ul>
+<li><strong>WeUI</strong>（官方）</li>
+<li><strong>Vant Weapp</strong>（有赞）</li>
+<li><strong>Wux Weapp</strong></li>
+<li><strong>Color UI</strong>（轻量视觉）</li>
+</ul>
+<hr>
+<h2 id="选型建议"><a href="#选型建议" class="headerlink" title="选型建议"></a>选型建议</h2><ol>
+<li><strong>单微信小程序、无跨端需求</strong> → 推荐使用 <strong>原生 MINA</strong>，直接调用官方 API。</li>
+<li><strong>Vue 团队、多端（含 App&#x2F;H5）</strong> → <strong>uni-app</strong> 最佳；</li>
+<li><strong>React 团队、多端（含 RN&#x2F;H5）</strong> → <strong>Taro</strong> 或 <strong>Remax</strong>；</li>
+<li><strong>已有 Web 应用</strong> → <strong>kbone</strong> 零改造迁移；</li>
+<li><strong>轻量化需求</strong> → 可选 <strong>Chameleon</strong>；</li>
+<li><strong>老项目、需维护</strong> → Vue 生态可留用 <strong>MPVue</strong>；React 生态留用 <strong>Remax</strong>。</li>
+</ol>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+            
+            
+                <div class="post-actions text-center clearfix" id="post-actions">
+                
+                    <a class="donate" href="javascript:;" onclick="krOpenDonateModal()"><i class="fa fa-bitcoin"></i> 打赏</a>
+                
+                
+                    <a class="share" href="javascript:;" onclick="krOpenShareModal()"><i class="fa fa-share-alt"></i> 分享</a>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" rel="tag">课程学习</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2025-06-08T08:01:15.789Z" itemprop="dateModified">最后编辑：2025-06-08</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 2025-06-04-低代码平台及相关技术介绍应用" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-06-04-低代码平台及相关技术介绍/"><i class="fa fa-angle-left"></i> 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 2025-06-05-智能体平台及关键技术分析" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-06-05-智能体平台及关键技术分析/">下一篇 <i class="fa fa-angle-right"></i></a>
+            </div>
+            
+        </nav>
+    
+    
+        <div class="comment-post">
+            
+        </div>
+    
+</article>
+
+        
+
+            </section>
+
+            
+                
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+        <div class="sticky-area">
+    
+    
+    </div>
+</section>
+            
+
+        
+
+                </div>
+    </div>
+</div>
+
+<footer>
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2025 TK的小站 版权所有.</li>
+                            <li>本站已运行<span id="kr-since">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>自豪地使用 <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a> 主题</li>
+                            <li>站点由 TK 用 <i class="fa fa-heart" style="color:#d43f57"></i> 搭建</li>
+                        </div>
+                        <!-- 额外的追加注入项 -->
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/tkzzzzzz6/tkzzzzzz6.github.io/search">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                <div class="box theme-box" id="theme-toggle">
+                    <span class="fa fa-adjust"></span>
+                </div>
+            </div>
+            <div id="gotop-box" class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+
+    <div id="kr-donate-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseDonateModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-bitcoin"></i>
+            </div>
+            <div class="kr-modal-title">打赏</div>
+            <button class="kr-modal-close" onclick="krCloseDonateModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-donate-message">打赏提示信息</div>
+            <div class="kr-donate-qr" id="kr-donate-qr">
+                
+            </div>
+            <div class="kr-donate-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/donate.min.js"></script>
+
+
+
+
+    <div id="kr-share-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseShareModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-share-alt"></i>
+            </div>
+            <div class="kr-modal-title">分享</div>
+            <button class="kr-modal-close" onclick="krCloseShareModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-share-message">分享提示信息</div>
+            <div class="kr-share-qr" id="kr-share-qr"></div>
+            <div class="kr-share-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/share.min.js"></script>
+
+
+
+<!-- 额外的追加注入项 -->
+
+
+        <script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/tkzzzzzz6/tkzzzzzz6.github.io/";
+</script>
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.js"></script>
+
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.js"></script>
+
+
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-core.min.js"></script>
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-pjax.min.js"></script>
+
+
+<!-- 额外的追加注入项 -->
+
+
+    </body>
+</html>

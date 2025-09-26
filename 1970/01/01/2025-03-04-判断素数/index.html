@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  
+  
+  <title>2025-03-04-判断素数 | TK的小站</title>
+  <link rel="canonical" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-03-04-%E5%88%A4%E6%96%AD%E7%B4%A0%E6%95%B0/">
+  <meta name="author" content="TK" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="算法练习" />
+  
+  <meta name="description" content="2025-03-04-判断素数的方法 参考博客判断一个数是不是质数(素数)，3 种方式介绍_判断一个数是否为素数-CSDN 博客C-CrashCourse&#x2F;content&#x2F;c-notes&#x2F;你不知道的几种素数判断方法，由浅入深，详解.md at master · hairrrrr&#x2F;C-CrashCourse  暴力求解 根据素数的定义思考。素数是大于 1 的自">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2025-03-04-判断素数">
+<meta property="og:url" content="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-03-04-%E5%88%A4%E6%96%AD%E7%B4%A0%E6%95%B0/index.html">
+<meta property="og:site_name" content="TK的小站">
+<meta property="og:description" content="2025-03-04-判断素数的方法 参考博客判断一个数是不是质数(素数)，3 种方式介绍_判断一个数是否为素数-CSDN 博客C-CrashCourse&#x2F;content&#x2F;c-notes&#x2F;你不知道的几种素数判断方法，由浅入深，详解.md at master · hairrrrr&#x2F;C-CrashCourse  暴力求解 根据素数的定义思考。素数是大于 1 的自">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="1970-01-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-05T14:16:06.023Z">
+<meta property="article:author" content="TK">
+<meta property="article:tag" content="算法练习">
+<meta name="twitter:card" content="summary">
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-core.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="highlight-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/highlight/highlight.js/night-eighties.min.css" media="all"></link>
+  
+  <link rel="stylesheet" id="theme-light-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/light.min.css" media="all"></link>
+  <link rel="stylesheet" id="theme-dark-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/css/kr-theme/dark.min.css" media="(prefers-color-scheme: dark)"></link>
+  <script src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-theme.min.js"></script>
+  <link rel="stylesheet" id="fontawe-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="nprogress-css" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.css" media="all"></link>
+  
+  
+    <link rel="stylesheet" href="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.css"></link>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  
+    <script src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
+  
+  <!-- 自定义站点横幅和背景 -->
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+      html[data-theme="dark"] .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('');
+        }
+        html[data-theme="dark"] body.custom-background {
+          background-image: url('');
+        }
+      }
+    
+    
+      .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+      html[data-theme="dark"] .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+    
+  </style>
+
+  <!-- 额外的追加注入项 -->
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/tkzzzzzz6/tkzzzzzz6.github.io/">TK的小站</a></div>
+                    <div id="kratos-nav-toggle-wrapper" class="nav-toggle">
+                        <a id="kratos-nav-toggle" class="kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/tkzzzzzz6/tkzzzzzz6.github.io/">
+                        <h2>TK的小站</h2> <br />
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+
+
+        
+
+            
+
+            <section class="kr-main-col col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://github.com/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-03-04-%E5%88%A4%E6%96%AD%E7%B4%A0%E6%95%B0/">
+    <div class="kratos-hentry kratos-page-inner clearfix">
+        <header class="kratos-page-header">
+            
+                <h1 class="kratos-page-title text-center" itemprop="name headline">2025-03-04-判断素数</h1>
+            
+            <ul class="kratos-page-meta text-center">
+                <li><time datetime="1970-01-01T00:00:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 1970-01-01</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">TK</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~4.44K
+                        
+                        字
+                    </li>
+                
+                
+                    <li>
+                        <i class="fa fa-eye"></i>
+                         次阅读
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-page-content kr-post">
+            
+            
+            
+            <hr />
+            <div itemprop="articleBody"><h1 id="2025-03-04-判断素数的方法"><a href="#2025-03-04-判断素数的方法" class="headerlink" title="2025-03-04-判断素数的方法"></a>2025-03-04-判断素数的方法</h1><blockquote>
+<p>参考博客<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/afei__/article/details/80638460">判断一个数是不是质数(素数)，3 种方式介绍_判断一个数是否为素数-CSDN 博客</a><br><a href="https://github.com/hairrrrr/C-CrashCourse/blob/master/content/c-notes/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E5%87%A0%E7%A7%8D%E7%B4%A0%E6%95%B0%E5%88%A4%E6%96%AD%E6%96%B9%E6%B3%95%EF%BC%8C%E7%94%B1%E6%B5%85%E5%85%A5%E6%B7%B1%EF%BC%8C%E8%AF%A6%E8%A7%A3.md">C-CrashCourse&#x2F;content&#x2F;c-notes&#x2F;你不知道的几种素数判断方法，由浅入深，详解.md at master · hairrrrr&#x2F;C-CrashCourse</a></p>
+</blockquote>
+<h1 id="暴力求解"><a href="#暴力求解" class="headerlink" title="暴力求解"></a><strong>暴力求解</strong></h1><blockquote>
+<p>根据素数的定义思考。素数是大于 1 的自然数，除了 1 和自身外，其他数都不是它的因子。 那我们就可以用一个循环，从 2 开始遍历到这个数减去 1，如果这个数都不能被整除，那么这个数就是素数。 也就是说： 给定一个数 n , i 从 2 开始取值，直到 n - 1(取整数),如果 n % i !&#x3D; 0 , n 就是素数 进一步思考，有必要遍历到 n - 1 吗？ 除了 1 以外，任何合数最小的因子就是 2，那最大的因子就是 n&#x2F;2 那我们就遍历到 n&#x2F;2 就足够了</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">int isPrime(int target) &#123;</span><br><span class="line"></span><br><span class="line">    int i = 0;</span><br><span class="line"></span><br><span class="line">    if (target &lt;= 1) &#123;</span><br><span class="line">        printf(&quot;illegal input!\n&quot;);//素数定义</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for (i = 2; i &lt;= target / 2; i++) &#123;</span><br><span class="line">        if (target % i == 0)</span><br><span class="line">            return 0;//不是素数直接返回0</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return 1;//是素数返回1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="求解范围改进"><a href="#求解范围改进" class="headerlink" title="求解范围改进"></a>求解范围改进</h2><blockquote>
+<p>在上面的基础上，其实不需要遍历到 $\frac{n}{2}$，只需要到 $\sqrt{n}$（包含 $\sqrt{n}$） 就可以了。</p>
+<ul>
+<li><strong>为什么只需要检查到</strong> $\sqrt{n}$<strong>？</strong><ol>
+<li><strong>因数成对出现</strong>：</li>
+</ol>
+<ul>
+<li>如果 <em>n</em> 不是质数，那么它可以分解为两个因数的乘积，即 <em>n</em>&#x3D;_a_×_b_。</li>
+<li>假设 _a_≤_b_，那么一定有 <em>a_≤_n</em> 且 _b_≥_n_。</li>
+<li>因此，如果 <em>n</em> 有大于 <em>n</em> 的因数 _b_，那么它必然有一个小于或等于 <em>n</em> 的因数 _a_。</li>
+</ul>
+<ol start="2">
+<li><strong>只需检查较小的因数</strong>：</li>
+</ol>
+<ul>
+<li>如果 <em>n</em> 能被某个数 <em>i</em> 整除（即 <em>n</em>%<em>i</em>&#x3D;&#x3D;0），那么 <em>i</em> 就是 <em>n</em> 的一个因数。</li>
+<li>根据上述性质，如果 <em>n</em> 有大于 <em>n</em> 的因数，那么它必然已经被小于或等于 <em>n</em> 的因数检查过了。</li>
+</ul>
+<ol start="3">
+<li><strong>举例说明</strong>：</li>
+</ol>
+<ul>
+<li>假设 <em>n</em>&#x3D;36， $\sqrt{36}$&#x3D;6。</li>
+<li>检查 2 到 6 的整数：</li>
+<li>2 是 36 的因数（36%2&#x3D;&#x3D;0），因此 36 不是质数。</li>
+<li>如果继续检查 4 和 6，会发现它们也是 36 的因数，但已经不需要了，因为 2 已经证明了 36 不是质数。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">int isPrime(int target) &#123;</span><br><span class="line"></span><br><span class="line">    int i = 0;</span><br><span class="line"></span><br><span class="line">    if (target &lt;= 1) &#123;</span><br><span class="line">        printf(&quot;illegal input!\n&quot;);//素数定义</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for (i = 2; i &lt;= (int)sqrt(target); i++) &#123;</span><br><span class="line">        if (target % i == 0)</span><br><span class="line">            return 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="用素数表来判断素数"><a href="#用素数表来判断素数" class="headerlink" title="用素数表来判断素数"></a><strong>用素数表来判断素数</strong></h1><blockquote>
+<p>从第二种方法开始，我们都是先完成判断素数数组，然后用二分法去查找判断数组<br>这里说一下以下三种方法牵扯的概念：</p>
+<ul>
+<li>范围：1 ~ 范围上限 N</li>
+<li>范围上限 N：判断素数需要用户输入随机素数，这个随机素数的范围是 1 ~ N</li>
+<li>判断素数数组：将数组的 <code>下标</code> 与 <code>1 ~ N</code> 的自然数一一对应起来。 判断 1 到 N 的自然数是否为素数，其实就是判断数组的下标是否为素数，如果是 给这个下标所对应的判断素数数组元素赋 1，否则赋 0 比如：我要判断 3 是否为素数，我们就找到 <code>判断素数数组isPrime</code> 中的下标为 3 的元素，即：<code>isPrime[3]</code> 如果 <code>3</code> 是素数 ， 赋值 1，即 <code>isPrime[3] = 1</code> <code>如果 3 不是素数，赋值0 ，即isPrime[3] = 0</code> 这样我们在用二分法查找时，查找数组下标就可以，找到下标后返回下标对应的判断素数数组的值。 如果是 1 说明下标对应的自然数是素数，否则不是</li>
+<li>思路:如果一个数不能整除比它小的任何素数，那么这个数就是素数 这种“打印”素数表的方法效率很低，不推荐使用，可以学习思想</li>
+</ul>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//target：输入的要查找的数</span><br><span class="line">//count：当前已知的素数个数</span><br><span class="line">//PrimeArray：存放素数的数组</span><br><span class="line">int isPrime(int target, int count, int* PrimeArray) &#123;</span><br><span class="line"></span><br><span class="line">    int i = 0;</span><br><span class="line">    for (i = 0; i &lt; count; i++) &#123;</span><br><span class="line">        if (target % PrimeArray[i] == 0)</span><br><span class="line">            return 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="普通筛法——埃拉托斯特尼-Eratosthenes-筛法"><a href="#普通筛法——埃拉托斯特尼-Eratosthenes-筛法" class="headerlink" title="普通筛法——埃拉托斯特尼(Eratosthenes)筛法"></a><strong>普通筛法——埃拉托斯特尼(Eratosthenes)筛法</strong></h1><blockquote>
+<p><strong>思路</strong>:</p>
+<ol>
+<li>我们的想法是，创建一个比范围上限大 1 的数组，我们只关注下标为 1 ~ N（要求的上限） 的数组元素与数组下标（一一对应）。</li>
+<li>将数组初始化为 1。然后用 for 循环，遍历范围为： $[2,\sqrt{N}]$。如果数组元素为 1，则说明这个数组元素的下标所对应的数是素数。</li>
+<li>随后我们将这个下标（除 1 以外）的整数倍所对应的数组元素全部置为 0，也就是判断其为非素数。 这样，我们就知道了范围内（1 ~ 范围上限 N）所有数是素数（下标对应的数组元素值为 1）或不是素数（下标对应的数组元素值为 0）</li>
+<li>用百度百科对埃拉托斯特尼筛法简单描述：<strong>要得到自然数 n 以内的全部素数，必须把不大于 的所有素数的倍数剔除，剩下的就是素数。</strong></li>
+</ol>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">//                 判断素数的数组    范围上限N</span><br><span class="line">void Eratprime(int* isprime, int upper_board) &#123;</span><br><span class="line"></span><br><span class="line">    int i = 0;</span><br><span class="line">    int j = 0;</span><br><span class="line">    //初始化isprime</span><br><span class="line">    for (i = 2; i &lt;= upper_board; i++)</span><br><span class="line">        isprime[i] = 1;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    for (i = 2; i &lt; (int)sqrt(upper_board); i++) &#123;</span><br><span class="line">        if (isprime[i]) &#123;</span><br><span class="line">            isprime[i] = 1;</span><br><span class="line">        &#125;</span><br><span class="line">        for (j = 2; i * j &lt;= upper_board; j++) &#123;//素数的n倍（n &gt;= 2）不是素数</span><br><span class="line">            isprime[i * j] = 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="线性筛法——欧拉筛法"><a href="#线性筛法——欧拉筛法" class="headerlink" title="线性筛法——欧拉筛法"></a><strong>线性筛法——欧拉筛法</strong></h1><blockquote>
+<p><strong>思路</strong>: 我们再思考一下上面的埃拉托斯特尼筛法，会发现，在“剔除“非素数时，有些合数会重复赋值。这样就会增加复杂度，降低效率。 比如：范围上限 N &#x3D; 16 时</p>
+<ul>
+<li>2 是素数，剔除”2 的倍数“，它们是：4，6， 8，10， 12， 14， 16</li>
+<li>3 是素数，剔除”3 的倍数”，它们是，6，9，12，15<br>6，12 是重复的。如何减少重复呢？</li>
+</ul>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">void PrimeList(int* Prime, bool* isPrime, int n) &#123;</span><br><span class="line"></span><br><span class="line">    int i = 0;</span><br><span class="line">    int j = 0;</span><br><span class="line">    int count = 0;</span><br><span class="line"></span><br><span class="line">    if (isPrime != NULL) &#123;//确保isPrime不是空指针</span><br><span class="line">        //将isPrime数组初始化为 1</span><br><span class="line">        for (i = 2; i &lt;= N; i++) &#123;</span><br><span class="line">            isPrime[i] = true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (isPrime != NULL &amp;&amp; Prime != NULL) &#123;</span><br><span class="line">        //从2遍历到范围上限N</span><br><span class="line">        for (i = 2; i &lt;= N; i++) &#123;</span><br><span class="line">            if (isPrime[i])//如果下标（下标对应着1 ~ 范围上限N）对应的isPrime值没有被置为false，说明这个数是素数，将下标放入素数数组</span><br><span class="line">                Prime[count++] = i;</span><br><span class="line">            //循环控制表达式的意义：j小于等于素数数组的个数 或 素数数组中的每一个素数与 i 的积小于范围上限N</span><br><span class="line">            for (j = 0; (j &lt; count) &amp;&amp; (Prime[j] * (long long)i) &lt;= N; j++)//将i强制转换是因为vs上有warning，要求转换为宽类型防止算术溢出。数据上不产生影响</span><br><span class="line">            &#123;</span><br><span class="line">                isPrime[i * Prime[j]] = false;//每一个素数的 i 倍（i &gt;= 2）都不是素数，置为false</span><br><span class="line"></span><br><span class="line">                //这个是欧拉筛法的核心，它可以减少非素数置false的重复率</span><br><span class="line">                //意义是将每一个合数（非素数）拆成 2（最小因数）与最大因数 的乘积</span><br><span class="line">                if (i % Prime[j] == 0)</span><br><span class="line">                    break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+            
+            
+                <div class="post-actions text-center clearfix" id="post-actions">
+                
+                    <a class="donate" href="javascript:;" onclick="krOpenDonateModal()"><i class="fa fa-bitcoin"></i> 打赏</a>
+                
+                
+                    <a class="share" href="javascript:;" onclick="krOpenShareModal()"><i class="fa fa-share-alt"></i> 分享</a>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tkzzzzzz6/tkzzzzzz6.github.io/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" rel="tag">算法练习</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2025-03-05T14:16:06.023Z" itemprop="dateModified">最后编辑：2025-03-05</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 2025-03-03-java 学习" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-03-03-java作业(week2)/"><i class="fa fa-angle-left"></i> 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 2025-02-23-Atcoder abc394" href="/tkzzzzzz6/tkzzzzzz6.github.io/1970/01/01/2025-02-23-abc394/">下一篇 <i class="fa fa-angle-right"></i></a>
+            </div>
+            
+        </nav>
+    
+    
+        <div class="comment-post">
+            
+        </div>
+    
+</article>
+
+        
+
+            </section>
+
+            
+                
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+        <div class="sticky-area">
+    
+    
+    </div>
+</section>
+            
+
+        
+
+                </div>
+    </div>
+</div>
+
+<footer>
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2025 TK的小站 版权所有.</li>
+                            <li>本站已运行<span id="kr-since">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>自豪地使用 <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a> 主题</li>
+                            <li>站点由 TK 用 <i class="fa fa-heart" style="color:#d43f57"></i> 搭建</li>
+                        </div>
+                        <!-- 额外的追加注入项 -->
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/tkzzzzzz6/tkzzzzzz6.github.io/search">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                <div class="box theme-box" id="theme-toggle">
+                    <span class="fa fa-adjust"></span>
+                </div>
+            </div>
+            <div id="gotop-box" class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+
+    <div id="kr-donate-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseDonateModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-bitcoin"></i>
+            </div>
+            <div class="kr-modal-title">打赏</div>
+            <button class="kr-modal-close" onclick="krCloseDonateModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-donate-message">打赏提示信息</div>
+            <div class="kr-donate-qr" id="kr-donate-qr">
+                
+            </div>
+            <div class="kr-donate-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/donate.min.js"></script>
+
+
+
+
+    <div id="kr-share-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseShareModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-share-alt"></i>
+            </div>
+            <div class="kr-modal-title">分享</div>
+            <button class="kr-modal-close" onclick="krCloseShareModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-share-message">分享提示信息</div>
+            <div class="kr-share-qr" id="kr-share-qr"></div>
+            <div class="kr-share-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-modal/share.min.js"></script>
+
+
+
+<!-- 额外的追加注入项 -->
+
+
+        <script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/tkzzzzzz6/tkzzzzzz6.github.io/";
+</script>
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/nprogress@0.2.0/nprogress.js"></script>
+
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/vendors/viewerjs@1.11.6/dist/viewer.min.js"></script>
+
+
+<script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-core.min.js"></script>
+
+
+  <script defer src="/tkzzzzzz6/tkzzzzzz6.github.io/js/kr-pjax.min.js"></script>
+
+
+<!-- 额外的追加注入项 -->
+
+
+    </body>
+</html>
