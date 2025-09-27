@@ -1,0 +1,14 @@
+{
+  "version": "Sample 1.0.0",
+  "model": "shizuku",
+  "textures": [
+    "texture_00.png"
+  ],
+  "motions": {
+    "idle": [
+      {
+        "file": "motions/idle_00.motion3.json"
+      }
+    ]
+  }
+}
