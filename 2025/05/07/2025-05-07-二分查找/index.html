@@ -249,10 +249,6 @@ mjx-container[display="true"] + br {
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/solutions/504484/zai-pai-xu-shu-zu-zhong-cha-zhao-yuan-su-de-di-3-4/">官方题解</a></p>
 </blockquote>
-<blockquote>
-<blockquote>
-</blockquote>
-</blockquote>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">int</span> <span class="token function">lower_bound</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token operator">&amp;</span>nums<span class="token punctuation">,</span> <span class="token keyword">int</span> target<span class="token punctuation">)</span>
@@ -305,6 +301,7 @@ right <span class="token operator">=</span> mid <span class="token operator">-</
 <span class="token keyword">return</span> right<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="牛顿迭代法"><a href="#牛顿迭代法" class="headerlink" title="牛顿迭代法"></a>牛顿迭代法</h2><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// f(x) = x^2 - C_</span>
 <span class="token comment">// f'(x) = 2x_</span>
 
@@ -327,7 +324,8 @@ right <span class="token operator">=</span> mid <span class="token operator">-</
         <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>x0<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="神奇的-0x5f3759df"><a href="#神奇的-0x5f3759df" class="headerlink" title="神奇的 0x5f3759df"></a>神奇的 0x5f3759df</h2> <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 使用快速平方根算法（Fast Inverse Square Root）的变体_</span>
+
+<h2 id="神奇的-0x5f3759df"><a href="#神奇的-0x5f3759df" class="headerlink" title="神奇的 0x5f3759df"></a>神奇的 0x5f3759df</h2><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 使用快速平方根算法（Fast Inverse Square Root）的变体_</span>
 <span class="token comment">// 0x5f3759df 是一个魔法数字，用于快速估计平方根_</span>
 <span class="token keyword">class</span> <span class="token class-name">Solution</span>
 <span class="token punctuation">{</span>
@@ -349,27 +347,28 @@ x0 <span class="token operator">=</span> <span class="token punctuation">(</span
 <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h2> <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">_<span class="token comment">// 使用位运算求解x的算术平方根_</span>
+
+<h2 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h2><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 使用位运算求解x的算术平方根_</span>
 <span class="token keyword">int</span> <span class="token function">mySqrt</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-_    <span class="token comment">// m初始化为2^30，用于逐位检查_</span>
+    <span class="token comment">// m初始化为2^30，用于逐位检查_</span>
     <span class="token keyword">unsigned</span> m <span class="token operator">=</span> <span class="token number">0x40000000</span><span class="token punctuation">,</span> y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> b <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 
     <span class="token keyword">while</span> <span class="token punctuation">(</span>m <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
-_        <span class="token comment">// 计算当前位可能的平方值_</span>
+        <span class="token comment">// 计算当前位可能的平方值_</span>
         b <span class="token operator">=</span> y <span class="token operator">|</span> m<span class="token punctuation">;</span>
-_        <span class="token comment">// y右移一位，为下一位做准备_</span>
+        <span class="token comment">// y右移一位，为下一位做准备_</span>
         y <span class="token operator">=</span> y <span class="token operator">&gt;&gt;</span> <span class="token number">1</span><span class="token punctuation">;</span>
-_        <span class="token comment">// 如果x大于等于当前平方值，说明该位可以取1_</span>
+        <span class="token comment">// 如果x大于等于当前平方值，说明该位可以取1_</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">&gt;=</span> b<span class="token punctuation">)</span>
         <span class="token punctuation">{</span>
-_            <span class="token comment">// 更新x的值_</span>
+            <span class="token comment">// 更新x的值_</span>
             x <span class="token operator">=</span> x <span class="token operator">-</span> b<span class="token punctuation">;</span>
-_            <span class="token comment">// 将当前位设为1_</span>
+            <span class="token comment">// 将当前位设为1_</span>
             y <span class="token operator">=</span> y <span class="token operator">|</span> m<span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-_        <span class="token comment">// m右移两位，检查下一位_</span>
+        <span class="token comment">// m右移两位，检查下一位_</span>
         m <span class="token operator">=</span> m <span class="token operator">&gt;&gt;</span> <span class="token number">2</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 
@@ -377,21 +376,21 @@ _        <span class="token comment">// m右移两位，检查下一位_</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="袖珍计算器-使用-exp-与-ln-函数进行求解"><a href="#袖珍计算器-使用-exp-与-ln-函数进行求解" class="headerlink" title="袖珍计算器(使用 exp 与 ln 函数进行求解)"></a>袖珍计算器(使用 exp 与 ln 函数进行求解)</h2><p>使用<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.491ex" xmlns="http://www.w3.org/2000/svg" width="11.104ex" height="2.696ex" role="img" focusable="false" viewBox="0 -974.6 4908.1 1191.6"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msqrt"><g transform="translate(853,0)"><g data-mml-node="mi"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g><g data-mml-node="mo" transform="translate(0,-17)"><path data-c="221A" d="M95 178Q89 178 81 186T72 200T103 230T169 280T207 309Q209 311 212 311H213Q219 311 227 294T281 177Q300 134 312 108L397 -77Q398 -77 501 136T707 565T814 786Q820 800 834 800Q841 800 846 794T853 782V776L620 293L385 -193Q381 -200 366 -200Q357 -200 354 -197Q352 -195 256 15L160 225L144 214Q129 202 113 190T95 178Z"></path></g><rect width="572" height="60" x="853" y="723"></rect></g><g data-mml-node="mo" transform="translate(1702.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="msup" transform="translate(2758.6,0)"><g data-mml-node="mi"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><g data-mml-node="TeXAtom" transform="translate(499,363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mfrac"><g data-mml-node="mn" transform="translate(220,394) scale(0.707)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mn" transform="translate(220,-345) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><rect width="553.6" height="60" x="120" y="220"></rect></g><g data-mml-node="mi" transform="translate(793.6,0)"><path data-c="1D459" d="M117 59Q117 26 142 26Q179 26 205 131Q211 151 215 152Q217 153 225 153H229Q238 153 241 153T246 151T248 144Q247 138 245 128T234 90T214 43T183 6T137 -11Q101 -11 70 11T38 85Q38 97 39 102L104 360Q167 615 167 623Q167 626 166 628T162 632T157 634T149 635T141 636T132 637T122 637Q112 637 109 637T101 638T95 641T94 647Q94 649 96 661Q101 680 107 682T179 688Q194 689 213 690T243 693T254 694Q266 694 266 686Q266 675 193 386T118 83Q118 81 118 75T117 65V59Z"></path></g><g data-mml-node="mi" transform="translate(1091.6,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(1691.6,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g></g></g></g></svg></mjx-container></p>
- <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cmath&gt;</span></span>
 
-_<span class="token comment">// 使用数学公式求解 x 的算术平方根_</span>
-_<span class="token comment">// 利用公式：sqrt(x) = e^(0.5 * ln(x))_</span>
+<span class="token comment">// 使用数学公式求解 x 的算术平方根_</span>
+<span class="token comment">// 利用公式：sqrt(x) = e^(0.5 * ln(x))_</span>
 <span class="token keyword">class</span> <span class="token class-name">Solution</span>
 <span class="token punctuation">{</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
 <span class="token keyword">int</span> <span class="token function">mySqrt</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-_        <span class="token comment">// 处理特殊情况：x 为 0 时直接返回 0_</span>
+        <span class="token comment">// 处理特殊情况：x 为 0 时直接返回 0_</span>
 <span class="token keyword">if</span><span class="token punctuation">(</span>x <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
 <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-_        <span class="token comment">// 使用 exp 和 log 函数计算平方根_</span>
-_        <span class="token comment">// exp(0.5 * log(x)) = e^(0.5 * ln(x)) = sqrt(x)_</span>
+        <span class="token comment">// 使用 exp 和 log 函数计算平方根_</span>
+        <span class="token comment">// exp(0.5 * log(x)) = e^(0.5 * ln(x)) = sqrt(x)_</span>
 <span class="token keyword">int</span> res <span class="token operator">=</span> <span class="token function">exp</span><span class="token punctuation">(</span><span class="token number">0.5</span> <span class="token operator">*</span> <span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span><span class="token punctuation">)</span><span class="token punctuation">(</span>res <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>res <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&lt;=</span> x <span class="token operator">?</span> res <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">:</span> res<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
@@ -421,10 +420,6 @@ right <span class="token operator">=</span> mid <span class="token operator">-</
 <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-
 
         </article>
         <section class="post-near">

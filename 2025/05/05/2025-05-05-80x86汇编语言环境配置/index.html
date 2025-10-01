@@ -180,70 +180,70 @@ mjx-container[display="true"] + br {
 <h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_65708726/article/details/130795651?spm=1001.2101.3001.6650.3&utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Ctr-3-130795651-blog-144669809.235%5Ev43%5Epc_blog_bottom_relevance_base8&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Ctr-3-130795651-blog-144669809.235%5Ev43%5Epc_blog_bottom_relevance_base8&utm_relevant_index=3">在 VScode 配置汇编语言环境_vscode asm-CSDN 博客</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44225025/article/details/108222446">使用 VSCode 学习汇编语言-CSDN 博客</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42303973/article/details/120444779">VSCode 搭建汇编环境-CSDN 博客</a></p>
 </blockquote>
 <h1 id="安装-MASM-TASM-插件"><a href="#安装-MASM-TASM-插件" class="headerlink" title="安装 MASM/TASM 插件"></a>安装 MASM/TASM 插件</h1><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1746454873197VkKQbyDXjoxDGjxbqvjcOlZ9nte.png" alt="1746454873197VkKQbyDXjoxDGjxbqvjcOlZ9nte.png"></p>
-<h1 id="配置-vscode-setting-json"><a href="#配置-vscode-setting-json" class="headerlink" title="配置 .vscode/setting.json"></a>配置 .vscode/setting.json</h1><pre class="line-numbers language-none"><code class="language-none">{
-    "masmtasm.ASM.emulator": "msdos player",  
-    "masmtasm.dosbox.run": "exit",
-    "masmtasm.ASM.assembler": "MASM-v5.00",
-    "masmtasm.ASM.actions": {
-        "TASM": {
-            "baseBundle": "&lt;built-in&gt;/TASM.jsdos",
-            "before": [
-                "set PATH=C:\\TASM"
-            ],
-            "run": [
-                "TASM ${file}",
-                "TLINK ${filename}",
-                "&gt;${filename}"
-            ],
-            "debug": [
-                "TASM /zi ${file}",
-                "TLINK /v/3 ${filename}.obj",
-                "TD ${filename}.exe"
-            ]
-        },
-        "MASM-v6.11": {
-            "baseBundle": "&lt;built-in&gt;/MASM-v6.11.jsdos",
-            "before": [
-                "set PATH=C:\\MASM"
-            ],
-            "run": [
-                "masm ${file};",
-                "link ${filename};",
-                "&gt;${filename}"
-            ],
-            "debug": [
-                "masm ${file};",
-                "link ${filename}.OBJ;",
-                "&gt;debug ${filename}.exe"
-            ]
-        },
-        "MASM-v5.00": {
-            "baseBundle": "&lt;built-in&gt;/MASM-v5.00.jsdos",
-            "before": [
-                "set PATH=C:\\MASM"
-            ],
-            "run": [
-                "masm ${file};",
-                "link ${filename};",
-                "&gt;${filename}"
-            ],
-            "debug": [
-                "masm ${file};",
-                "link ${filename}.OBJ;",
-                "&gt;debug ${filename}.exe"
-            ],
-            "support": [
-                "jsdos",
-                "dosbox",
-                "dosboxX",
-                "msdos player"
-            ]
-        }
-    }
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="配置-vscode-setting-json"><a href="#配置-vscode-setting-json" class="headerlink" title="配置 .vscode/setting.json"></a>配置 .vscode/setting.json</h1><pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">{</span>
+    <span class="token property">"masmtasm.ASM.emulator"</span><span class="token operator">:</span> <span class="token string">"msdos player"</span><span class="token punctuation">,</span>  
+    <span class="token property">"masmtasm.dosbox.run"</span><span class="token operator">:</span> <span class="token string">"exit"</span><span class="token punctuation">,</span>
+    <span class="token property">"masmtasm.ASM.assembler"</span><span class="token operator">:</span> <span class="token string">"MASM-v5.00"</span><span class="token punctuation">,</span>
+    <span class="token property">"masmtasm.ASM.actions"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"TASM"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">"baseBundle"</span><span class="token operator">:</span> <span class="token string">"&lt;built-in&gt;/TASM.jsdos"</span><span class="token punctuation">,</span>
+            <span class="token property">"before"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"set PATH=C:\\TASM"</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"run"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"TASM ${file}"</span><span class="token punctuation">,</span>
+                <span class="token string">"TLINK ${filename}"</span><span class="token punctuation">,</span>
+                <span class="token string">"&gt;${filename}"</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"debug"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"TASM /zi ${file}"</span><span class="token punctuation">,</span>
+                <span class="token string">"TLINK /v/3 ${filename}.obj"</span><span class="token punctuation">,</span>
+                <span class="token string">"TD ${filename}.exe"</span>
+            <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token property">"MASM-v6.11"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">"baseBundle"</span><span class="token operator">:</span> <span class="token string">"&lt;built-in&gt;/MASM-v6.11.jsdos"</span><span class="token punctuation">,</span>
+            <span class="token property">"before"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"set PATH=C:\\MASM"</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"run"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"masm ${file};"</span><span class="token punctuation">,</span>
+                <span class="token string">"link ${filename};"</span><span class="token punctuation">,</span>
+                <span class="token string">"&gt;${filename}"</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"debug"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"masm ${file};"</span><span class="token punctuation">,</span>
+                <span class="token string">"link ${filename}.OBJ;"</span><span class="token punctuation">,</span>
+                <span class="token string">"&gt;debug ${filename}.exe"</span>
+            <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token property">"MASM-v5.00"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">"baseBundle"</span><span class="token operator">:</span> <span class="token string">"&lt;built-in&gt;/MASM-v5.00.jsdos"</span><span class="token punctuation">,</span>
+            <span class="token property">"before"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"set PATH=C:\\MASM"</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"run"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"masm ${file};"</span><span class="token punctuation">,</span>
+                <span class="token string">"link ${filename};"</span><span class="token punctuation">,</span>
+                <span class="token string">"&gt;${filename}"</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"debug"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"masm ${file};"</span><span class="token punctuation">,</span>
+                <span class="token string">"link ${filename}.OBJ;"</span><span class="token punctuation">,</span>
+                <span class="token string">"&gt;debug ${filename}.exe"</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"support"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"jsdos"</span><span class="token punctuation">,</span>
+                <span class="token string">"dosbox"</span><span class="token punctuation">,</span>
+                <span class="token string">"dosboxX"</span><span class="token punctuation">,</span>
+                <span class="token string">"msdos player"</span>
+            <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h1 id="测试配置环境"><a href="#测试配置环境" class="headerlink" title="测试配置环境"></a>测试配置环境</h1><p>创建以.asm 为后缀的文件,将下面的代码复制上去,运行程序</p>
-<pre class="line-numbers language-none"><code class="language-none">_.MODEL SMALL
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">_.MODEL SMALL
 .STACK 100h
 
 .DATA
@@ -254,12 +254,12 @@ MAIN PROC
     ; 设置数据段地址
     MOV AX, @DATA
     MOV DS, AX
-    
+  
     ; 显示消息
     MOV AH, 09h      ; DOS功能：显示字符串
     LEA DX, message  ; 加载消息地址
     INT 21h          ; 调用DOS中断
-    
+  
     ; 返回DOS
     MOV AH, 4Ch      ; DOS功能：结束程序
     INT 21h          ; 调用DOS中断

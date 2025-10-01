@@ -181,46 +181,46 @@ mjx-container[display="true"] + br {
 <h1 id="任务-1"><a href="#任务-1" class="headerlink" title="任务 1"></a>任务 1</h1><blockquote>
 <p>把数据段中 1 维数组 AA_1 变量地址中连续 7 个数（1,3,5,7,2,4,6）读出，把每个数加 2 后再存入到数据段中 BB_1 数组开始的标号地址中去，并显示出 BB_1 数组中每个数来（之间用空格分开）</p>
 </blockquote>
-<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">DATA  SEGMENT
-    ORG 0100H
-  AA_1    DB     1,3,5,7,2,4,6
-    ORG 0150H
-  BB_1    DB     7 dup(?) 
-  COUNT  DW     7 _;给7设置别名_
-DATA  ENDS
-CSEG  SEGMENT
-      ASSUME CS: CSEG,DS:DATA
-START:MOV    AX, DATA
-      MOV    DS, AX
-      MOV    CX, COUNT
-      LEA    SI, AA_1    _;取偏移地址(或者使用offset) _
-      LEA    DI, BB_1   
-LP1:  MOV    AL, [SI]   _;寄存器间接寻址方式可以改成相对寻址方式 _
-      ADD    AL,2   
-      MOV    [DI], AL   
-      INC SI    _;SI+1        _
-      INC DI    _;DI+1           _
-      LOOP  LP1 _;不是0就转到标号LP1_
-      LEA   SI, BB_1  
-      MOV CX, COUNT
-DISP:  MOV  DL, [SI]
-ADD  DL, 30H    
-MOV    AH,02    _;显示输出(要背下来)_
-INT    21H   
-      MOV DL,' '   _;每显示输出一个数后，输出一个空格  _
-      MOV AH,2   
-      INT 21H  
-      INC   SI
-      LOOP  DISP   
-MOV    AH,4CH   
-      INT    21H
-CSEG  ENDS
-      END    START<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-armasm" data-language="armasm"><code class="language-armasm"><span class="token directive property">DATA</span>  <span class="token instruction keyword">SEGMENT</span>
+    <span class="token instruction keyword">ORG</span> 0100H
+  AA_1    DB     <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">6</span>
+    <span class="token instruction keyword">ORG</span> 0150H
+  BB_1    DB     <span class="token number">7</span> dup<span class="token punctuation">(</span><span class="token operator">?</span><span class="token punctuation">)</span> 
+  <span class="token instruction keyword">COUNT</span>  <span class="token instruction keyword">DW</span>     <span class="token number">7</span> _<span class="token comment">;给7设置别名_</span>
+<span class="token directive property">DATA</span>  <span class="token instruction keyword">ENDS</span>
+<span class="token instruction keyword">CSEG</span>  <span class="token instruction keyword">SEGMENT</span>
+      <span class="token instruction keyword">ASSUME</span> <span class="token instruction keyword">CS</span>: CSEG<span class="token punctuation">,</span>DS:<span class="token directive property">DATA</span>
+<span class="token instruction keyword">START</span>:MOV    AX<span class="token punctuation">,</span> <span class="token directive property">DATA</span>
+      <span class="token instruction keyword">MOV</span>    <span class="token instruction keyword">DS</span><span class="token punctuation">,</span> AX
+      <span class="token instruction keyword">MOV</span>    <span class="token instruction keyword">CX</span><span class="token punctuation">,</span> COUNT
+      <span class="token instruction keyword">LEA</span>    <span class="token instruction keyword">SI</span><span class="token punctuation">,</span> AA_1    _<span class="token comment">;取偏移地址(或者使用offset) _</span>
+      <span class="token instruction keyword">LEA</span>    <span class="token instruction keyword">DI</span><span class="token punctuation">,</span> BB_1   
+LP1:  MOV    AL<span class="token punctuation">,</span> <span class="token punctuation">[</span>SI<span class="token punctuation">]</span>   _<span class="token comment">;寄存器间接寻址方式可以改成相对寻址方式 _</span>
+      <span class="token instruction keyword">ADD</span>    <span class="token instruction keyword">AL</span><span class="token punctuation">,</span><span class="token number">2</span>   
+      <span class="token instruction keyword">MOV</span>    <span class="token punctuation">[</span>DI<span class="token punctuation">]</span><span class="token punctuation">,</span> AL   
+      <span class="token instruction keyword">INC</span> <span class="token instruction keyword">SI</span>    _<span class="token comment">;SI+1        _</span>
+      <span class="token instruction keyword">INC</span> <span class="token instruction keyword">DI</span>    _<span class="token comment">;DI+1           _</span>
+      <span class="token instruction keyword">LOOP</span>  LP1 _<span class="token comment">;不是0就转到标号LP1_</span>
+      <span class="token instruction keyword">LEA</span>   <span class="token instruction keyword">SI</span><span class="token punctuation">,</span> BB_1  
+      <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">CX</span><span class="token punctuation">,</span> COUNT
+<span class="token instruction keyword">DISP</span>:  MOV  DL<span class="token punctuation">,</span> <span class="token punctuation">[</span>SI<span class="token punctuation">]</span>
+<span class="token instruction keyword">ADD</span>  <span class="token instruction keyword">DL</span><span class="token punctuation">,</span> 30H  
+<span class="token instruction keyword">MOV</span>    <span class="token instruction keyword">AH</span><span class="token punctuation">,</span><span class="token number">02</span>    _<span class="token comment">;显示输出(要背下来)_</span>
+<span class="token instruction keyword">INT</span>    21H   
+      <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">DL</span><span class="token punctuation">,</span><span class="token char">' '</span>   _<span class="token comment">;每显示输出一个数后，输出一个空格  _</span>
+      <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span><span class="token number">2</span>   
+      <span class="token instruction keyword">INT</span> 21H  
+      <span class="token instruction keyword">INC</span>   <span class="token instruction keyword">SI</span>
+      <span class="token instruction keyword">LOOP</span>  <span class="token instruction keyword">DISP</span>   
+<span class="token instruction keyword">MOV</span>    <span class="token instruction keyword">AH</span><span class="token punctuation">,</span>4CH   
+      <span class="token instruction keyword">INT</span>    21H
+<span class="token instruction keyword">CSEG</span>  <span class="token instruction keyword">ENDS</span>
+      <span class="token directive property">END</span>    <span class="token instruction keyword">START</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h1 id="任务-2"><a href="#任务-2" class="headerlink" title="任务 2"></a>任务 2</h1><blockquote>
 <p>从键盘接收一个小写字母，然后找出它的前导字符和后续字符，再按顺序显示这三个字符。</p>
 </blockquote>
-<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">CSEG SEGMENT
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">CSEG SEGMENT
     ASSUME CS:CSEG
     ORG 100H
 START:
@@ -272,20 +272,20 @@ CSEG ENDS
 <ol>
 <li><strong>直接寻址</strong>：</li>
 </ol>
-<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">MOV AL, AA_1[0]    ; 访问第一个元素
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">MOV AL, AA_1[0]    ; 访问第一个元素
 MOV AL, AA_1[1]    ; 访问第二个元素<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <ol>
 <li><strong>基址寻址</strong>：</li>
 </ol>
-<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">MOV BX, OFFSET AA_1
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">MOV BX, OFFSET AA_1
 MOV AL, [BX]       ; 访问第一个元素
 MOV AL, [BX+1]     ; 访问第二个元素<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <ol>
 <li><strong>变址寻址</strong>：</li>
 </ol>
-<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">MOV SI, 0
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">MOV SI, 0
 MOV AL, AA_1[SI]   ; 访问第一个元素
 INC SI
 MOV AL, AA_1[SI]   ; 访问第二个元素<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
@@ -293,7 +293,7 @@ MOV AL, AA_1[SI]   ; 访问第二个元素<span aria-hidden="true" class="line-n
 <ol>
 <li><strong>基址加变址寻址</strong>：</li>
 </ol>
-<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">MOV BX, OFFSET AA_1
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">MOV BX, OFFSET AA_1
 MOV SI, 0
 MOV AL, [BX+SI]    ; 访问第一个元素
 INC SI
@@ -302,7 +302,7 @@ MOV AL, [BX+SI]    ; 访问第二个元素<span aria-hidden="true" class="line-n
 <ol>
 <li><strong>基址加变址加位移寻址</strong>：</li>
 </ol>
-<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">MOV BX, OFFSET AA_1
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">MOV BX, OFFSET AA_1
 MOV SI, 1
 MOV AL, [BX+SI-1]  ; 访问第一个元素
 MOV AL, [BX+SI]    ; 访问第二个元素<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
@@ -310,7 +310,7 @@ MOV AL, [BX+SI]    ; 访问第二个元素<span aria-hidden="true" class="line-n
 <h1 id="任务-3"><a href="#任务-3" class="headerlink" title="任务 3"></a>任务 3</h1><blockquote>
 <p>已知 DATAX 和 DATAY 单元各存放一个带符号字节数据，从键盘上接收加（＋）、减（－）、乘（*）或除（/）符号，然后完成相应运算，把结果显示在屏幕上。</p>
 </blockquote>
-<h2 id="求绝对值-基础模块"><a href="#求绝对值-基础模块" class="headerlink" title="求绝对值(基础模块)"></a>求绝对值(基础模块)</h2><pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">DATA SEGMENT
+<h2 id="求绝对值-基础模块"><a href="#求绝对值-基础模块" class="headerlink" title="求绝对值(基础模块)"></a>求绝对值(基础模块)</h2><pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">DATA SEGMENT
     num DB -6         _; 8位有符号数_
     buf DB 4 DUP(?)   _; 最多3位+1_
 DATA ENDS
@@ -356,7 +356,7 @@ PRINT_LOOP:
 CODE ENDS
     END START<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">DATA SEGMENT
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">DATA SEGMENT
     DATAX DB 6      _; 带符号字节数据，负数_
     DATAY DB -2      _; 带符号字节数据，正数_
     RESULT DB 0
@@ -463,7 +463,7 @@ CSEG ENDS
 <li>当 RESULT 为负数时,我在打印结果的时候我们需要先打印’-’号,INT 21H 会把 AL 的值重新设置</li>
 <li>使用 IDIV BX 命令前需要我们将 AX 使用 CBW 命令将 AL 扩展为 AX</li>
 </ul>
-<h2 id="进一步的修改"><a href="#进一步的修改" class="headerlink" title="进一步的修改"></a>进一步的修改</h2><pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">_; 简单计算器程序 - 对DATAX和DATAY中的有符号字节数据进行四则运算_
+<h2 id="进一步的修改"><a href="#进一步的修改" class="headerlink" title="进一步的修改"></a>进一步的修改</h2><pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">_; 简单计算器程序 - 对DATAX和DATAY中的有符号字节数据进行四则运算_
 _; 支持加(+)、减(-)、乘(*)、除(/)四种运算符_
 
 .MODEL SMALL
