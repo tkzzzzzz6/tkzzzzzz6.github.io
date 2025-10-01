@@ -152,7 +152,7 @@ mjx-container[display="true"] + br {
         <div class="has-child">
             <a href>分类</a>
             <div class="sub-menu">
-                
+                <a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
             </div>
         </div>
         
@@ -171,6 +171,8 @@ mjx-container[display="true"] + br {
             <h2>文言文背诵检测程序开发</h2>
             <div class="post-meta">
                 <time class="date">2025.02.10</time>
+            
+                <span class="category"><a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a></span>
             
             </div>
         </section>
@@ -269,24 +271,35 @@ mjx-container[display="true"] + br {
 </ol>
 </li>
 </ul>
-<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sh">└── ReciteHelper/<br>    ├── Dockerfile<br>    ├── README.md<br>    ├── config.py<br>    ├── main.py<br>    ├── requirements.txt<br>    └── texts<br>        ├── 买油翁.txt<br>        ├── 孙权劝学.txt<br>        └── 木兰诗.txt<br></code></pre></td></tr></table></figure>
+<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">└── ReciteHelper/
+    ├── Dockerfile
+    ├── README.md
+    ├── config.py
+    ├── main.py
+    ├── requirements.txt
+    └── texts
+        ├── 买油翁.txt
+        ├── 孙权劝学.txt
+        └── 木兰诗.txt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>使用以下方法安装 ReciteHelper：</p>
 <ol>
 <li>克隆 ReciteHelper 仓库：</li>
 </ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">git <span class="hljs-built_in">clone</span> https://github.com/tkzzzzzz6/ReciteHelper<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone https://github.com/tkzzzzzz6/ReciteHelper<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ol start="2">
 <li>进入项目目录：</li>
 </ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">cd</span> ReciteHelper<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ReciteHelper<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ol start="3">
 <li>配置环境</li>
 </ol>
 <p>推荐使用 conda 虚拟环境：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sh">conda create -n beisong python=3.10 -y<br>conda activate beisong<br>pip install -r requirements.txt<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda create <span class="token parameter variable">-n</span> beisong <span class="token assign-left variable">python</span><span class="token operator">=</span><span class="token number">3.10</span> <span class="token parameter variable">-y</span>
+conda activate beisong
+pip <span class="token function">install</span> <span class="token parameter variable">-r</span> requirements.txt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <ol start="4">
 <li>配置API密钥</li>
@@ -296,7 +309,15 @@ mjx-container[display="true"] + br {
 <li>获取 API Key 和 Secret Key</li>
 <li>修改 config.py 文件：</li>
 </ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment">#语音识别配置</span><br>APP_ID = <span class="hljs-string">'你的APP ID'</span>      <span class="hljs-comment"># 应用ID</span><br>API_KEY = <span class="hljs-string">'你的API Key'</span>    <span class="hljs-comment"># API Key</span><br>SECRET_KEY = <span class="hljs-string">'你的API Key'</span>    <span class="hljs-comment"># API Key</span><br><br><span class="hljs-comment">#百度NLP配置</span><br>NLP_APP_ID = <span class="hljs-string">'你的APP ID'</span> <br>NLP_API_KEY = <span class="hljs-string">'你的API Key'</span>    <span class="hljs-comment"># API Key</span><br>NLP_SECRET_KEY = <span class="hljs-string">'你的API Key'</span>    <span class="hljs-comment"># API Key</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#语音识别配置</span>
+APP_ID <span class="token operator">=</span> <span class="token string">'你的APP ID'</span>      <span class="token comment"># 应用ID</span>
+API_KEY <span class="token operator">=</span> <span class="token string">'你的API Key'</span>    <span class="token comment"># API Key</span>
+SECRET_KEY <span class="token operator">=</span> <span class="token string">'你的API Key'</span>    <span class="token comment"># API Key</span>
+
+<span class="token comment">#百度NLP配置</span>
+NLP_APP_ID <span class="token operator">=</span> <span class="token string">'你的APP ID'</span> 
+NLP_API_KEY <span class="token operator">=</span> <span class="token string">'你的API Key'</span>    <span class="token comment"># API Key</span>
+NLP_SECRET_KEY <span class="token operator">=</span> <span class="token string">'你的API Key'</span>    <span class="token comment"># API Key</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol start="5">
 <li>添加背诵文本</li>
@@ -305,7 +326,7 @@ mjx-container[display="true"] + br {
 <ol start="6">
 <li>运行程序</li>
 </ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">python main.py<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">python main.py<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
         </article>
         <section class="post-near">
@@ -320,7 +341,7 @@ mjx-container[display="true"] + br {
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" rel="tag">程序开发</a>
+            <a class="-none-link" href="/tags/development/" rel="tag">程序开发</a>
             </section>
         
     
@@ -332,7 +353,7 @@ mjx-container[display="true"] + br {
         
             <div class="author-info">
                 <h4>ttkqwe</h4>
-                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
             </div>
         </section>
     
@@ -356,7 +377,7 @@ mjx-container[display="true"] + br {
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-tags">标签云：</h3>
-                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                    <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/deep-learning/" style="font-size: 14px;">深度学习</a> <a href="/tags/development/" style="font-size: 18px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 10px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/course/" style="font-size: 20px;">课程学习</a> <a href="/tags/troubleshooting/" style="font-size: 18px;">问题解决</a>
                 </div>
             </div>
         </section>

@@ -152,7 +152,7 @@ mjx-container[display="true"] + br {
         <div class="has-child">
             <a href>分类</a>
             <div class="sub-menu">
-                
+                <a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
             </div>
         </div>
         
@@ -251,7 +251,32 @@ mjx-container[display="true"] + br {
 <h3 id="视频记录与回放"><a href="#视频记录与回放" class="headerlink" title="视频记录与回放"></a>视频记录与回放</h3><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17421137010841742113700957.png" alt="17421137010841742113700957.png"></p>
 <p>系统具备记录视频的能力，允许用户回放和审查过去的监控视频。这一功能对于事故分析和责任认定至关重要。视频记录还可以用于系统性能评估和优化，以提高溺水检测的准确性和可靠性。</p>
 <h2 id="软件结构"><a href="#软件结构" class="headerlink" title="软件结构"></a>软件结构</h2><p>系统采用模块化设计，主要包含以下模块：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs stylus">DOWNING_DETECT/<br>├── model/<br>│   ├── best_detect<span class="hljs-selector-class">.pt</span><br>│   └── best_seg<span class="hljs-selector-class">.pt</span><br>│<br>├── output/<br>│   └── output_video<span class="hljs-selector-class">.mp4</span><br>│<br>├── resource/<br>│   ├── downing_warning<span class="hljs-selector-class">.mp3</span><br>│   └── 检测到溺水危险<span class="hljs-selector-class">.mp3</span><br>│<br>├── <span class="hljs-attribute">src</span>/<br>│   ├── __init__<span class="hljs-selector-class">.py</span><br>│   ├── audio_manager<span class="hljs-selector-class">.py</span><br>│   ├── detection_utils<span class="hljs-selector-class">.py</span><br>│   ├── downing_detect_video<span class="hljs-selector-class">.py</span><br>│   ├── downing_detect_webcam<span class="hljs-selector-class">.py</span><br>│   ├── model_loader<span class="hljs-selector-class">.py</span><br>│   └── video_processor<span class="hljs-selector-class">.py</span><br>│<br>├── LICENSE<br>├── README<span class="hljs-selector-class">.md</span><br>├── <span class="hljs-selector-tag">main</span><span class="hljs-selector-class">.py</span><br>├── requirements<span class="hljs-selector-class">.txt</span><br>└── train.py<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">DOWNING_DETECT/
+├── model/
+│   ├── best_detect.pt
+│   └── best_seg.pt
+│
+├── output/
+│   └── output_video.mp4
+│
+├── resource/
+│   ├── downing_warning.mp3
+│   └── 检测到溺水危险.mp3
+│
+├── src/
+│   ├── __init__.py
+│   ├── audio_manager.py
+│   ├── detection_utils.py
+│   ├── downing_detect_video.py
+│   ├── downing_detect_webcam.py
+│   ├── model_loader.py
+│   └── video_processor.py
+│
+├── LICENSE
+├── README.md
+├── main.py
+├── requirements.txt
+└── train.py<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li><code>_pycache_/</code>: Python 的字节码缓存目录。</li>
@@ -428,19 +453,21 @@ mjx-container[display="true"] + br {
 <li>目标：确保系统能够连续运行至少 72 小时无故障。</li>
 <li>方法：让系统连续处理视频流，监控其性能和资源使用情况。</li>
 </ul>
-<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><h3 id="克隆仓库"><a href="#克隆仓库" class="headerlink" title="克隆仓库:"></a>克隆仓库:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/your-username/drowning-detection.git<br><span class="hljs-built_in">cd</span> drowning-detection<br></code></pre></td></tr></table></figure>
+<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><h3 id="克隆仓库"><a href="#克隆仓库" class="headerlink" title="克隆仓库:"></a>克隆仓库:</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone https://github.com/your-username/drowning-detection.git
+<span class="token builtin class-name">cd</span> drowning-detection<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h3 id="创建并激活虚拟环境-推荐"><a href="#创建并激活虚拟环境-推荐" class="headerlink" title="创建并激活虚拟环境(推荐):"></a>创建并激活虚拟环境(推荐):</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">python -m venv venv<br><span class="hljs-built_in">source</span> venv/bin/activate  <span class="hljs-comment"># 在Windows上使用 venv\Scripts\activate</span><br></code></pre></td></tr></table></figure>
+<h3 id="创建并激活虚拟环境-推荐"><a href="#创建并激活虚拟环境-推荐" class="headerlink" title="创建并激活虚拟环境(推荐):"></a>创建并激活虚拟环境(推荐):</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">python <span class="token parameter variable">-m</span> venv venv
+<span class="token builtin class-name">source</span> venv/bin/activate  <span class="token comment"># 在Windows上使用 venv\Scripts\activate</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖:"></a>安装依赖:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install -r requirements.txt<br></code></pre></td></tr></table></figure>
+<h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖:"></a>安装依赖:</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> <span class="token parameter variable">-r</span> requirements.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>这将安装项目所需的所有依赖项,并确保版本与开发环境一致。</p>
 <blockquote>
 <p>注意: 如果您在安装过程中遇到任何问题,特别是与 CUDA 或 GPU 支持相关的问题,请参考 PyTorch 官方文档以获取适合您系统的安装说明。</p>
 </blockquote>
-<h2 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h2><h3 id="确保您有适当的视频文件用于检测。"><a href="#确保您有适当的视频文件用于检测。" class="headerlink" title="确保您有适当的视频文件用于检测。"></a>确保您有适当的视频文件用于检测。</h3><h3 id="修改-main-py-中的-video-path-变量-指向您的视频文件"><a href="#修改-main-py-中的-video-path-变量-指向您的视频文件" class="headerlink" title="修改 main.py 中的 video_path 变量,指向您的视频文件:"></a>修改 <code>main.py</code> 中的 <code>video_path</code> 变量,指向您的视频文件:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">video_path = <span class="hljs-string">"path/to/your/video.mp4"</span><br></code></pre></td></tr></table></figure>
+<h2 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h2><h3 id="确保您有适当的视频文件用于检测。"><a href="#确保您有适当的视频文件用于检测。" class="headerlink" title="确保您有适当的视频文件用于检测。"></a>确保您有适当的视频文件用于检测。</h3><h3 id="修改-main-py-中的-video-path-变量-指向您的视频文件"><a href="#修改-main-py-中的-video-path-变量-指向您的视频文件" class="headerlink" title="修改 main.py 中的 video_path 变量,指向您的视频文件:"></a>修改 <code>main.py</code> 中的 <code>video_path</code> 变量,指向您的视频文件:</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">video_path <span class="token operator">=</span> <span class="token string">"path/to/your/video.mp4"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h3 id="运行主程序"><a href="#运行主程序" class="headerlink" title="运行主程序:"></a>运行主程序:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python main.py<br></code></pre></td></tr></table></figure>
+<h3 id="运行主程序"><a href="#运行主程序" class="headerlink" title="运行主程序:"></a>运行主程序:</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">python main.py<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h3 id="程序将开始处理视频-并在检测到潜在溺水危险时发出警告。"><a href="#程序将开始处理视频-并在检测到潜在溺水危险时发出警告。" class="headerlink" title="程序将开始处理视频,并在检测到潜在溺水危险时发出警告。"></a>程序将开始处理视频,并在检测到潜在溺水危险时发出警告。</h3><h3 id="按-‘q’-键退出程序。"><a href="#按-‘q’-键退出程序。" class="headerlink" title="按 ‘q’ 键退出程序。"></a>按 ‘q’ 键退出程序。</h3><h1 id="四、项目总结"><a href="#四、项目总结" class="headerlink" title="四、项目总结"></a>四、项目总结</h1><p>在反思这个溺水检测项目时，我们意识到技术的进步不仅仅是为了创新，更是为了解决实际问题，保护人们的生命安全。我们的项目通过结合最新的人工智能技术和多种监控手段，旨在减少溺水事故，这是一个极具社会价值的目标。我们认识到，尽管技术提供了强大的工具，但真正的挑战在于如何将这些工具有效地应用于实际场景中，以及如何确保系统的稳定性和可靠性。未来，我们将继续优化算法，提高系统的响应速度和准确性，同时，我们也将探索如何降低成本，使这项技术能够更广泛地应用于各种水域，从而保护更多人的生命。</p>
 <p>在推广方面，我们认为教育和意识提升同样重要。如果可行的话，我们将与学校、社区和地方政府合作，提高公众对溺水风险的认识，并教育他们如何使用我们的系统。此外，我们也将通过各种媒体渠道，如社交媒体、公共讲座和行业会议，来展示我们的技术成果，以吸引更多的关注和支持。我们相信，通过技术的推广和公众意识的提高，我们可以共同构建一个更安全的水上环境。让人类拥有更美好的未来！</p>
@@ -458,7 +485,7 @@ mjx-container[display="true"] + br {
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" rel="tag">程序开发</a>
+            <a class="-none-link" href="/tags/development/" rel="tag">程序开发</a>
             </section>
         
     
@@ -470,7 +497,7 @@ mjx-container[display="true"] + br {
         
             <div class="author-info">
                 <h4>ttkqwe</h4>
-                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
             </div>
         </section>
     
@@ -494,7 +521,7 @@ mjx-container[display="true"] + br {
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-tags">标签云：</h3>
-                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                    <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/deep-learning/" style="font-size: 14px;">深度学习</a> <a href="/tags/development/" style="font-size: 18px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 10px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/course/" style="font-size: 20px;">课程学习</a> <a href="/tags/troubleshooting/" style="font-size: 18px;">问题解决</a>
                 </div>
             </div>
         </section>

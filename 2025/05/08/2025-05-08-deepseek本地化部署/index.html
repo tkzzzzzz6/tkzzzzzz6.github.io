@@ -152,7 +152,7 @@ mjx-container[display="true"] + br {
         <div class="has-child">
             <a href>分类</a>
             <div class="sub-menu">
-                
+                <a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
             </div>
         </div>
         
@@ -194,7 +194,7 @@ mjx-container[display="true"] + br {
 <p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1746711612129TVVNbC31CoCYhDxCKkbcJSkBnDd.png" alt="1746711612129TVVNbC31CoCYhDxCKkbcJSkBnDd.png"></p>
 <h2 id="通过-Ollama-拉取-DeepSeek-模型"><a href="#通过-Ollama-拉取-DeepSeek-模型" class="headerlink" title="通过 Ollama 拉取 DeepSeek 模型"></a><strong>通过 Ollama 拉取 DeepSeek 模型</strong></h2><p>这里我选择是的 1.5b，整个模型大小 1.1 GB。</p>
 <p>更多版本可以在这里查看：<a target="_blank" rel="noopener" href="https://ollama.com/library/deepseek-r1">https://ollama.com/library/deepseek-r1</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ollama run deepseek-r1:1.5b<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ollama run deepseek-r1:1.5b<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h3 id="终端回答"><a href="#终端回答" class="headerlink" title="终端回答"></a>终端回答</h3><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1746711633130MXyibKvdcoR5hQxMe6wca3Kknje.png" alt="1746711633130MXyibKvdcoR5hQxMe6wca3Kknje.png"></p>
 <h3 id="使用-open-webui-包回答"><a href="#使用-open-webui-包回答" class="headerlink" title="使用 open-webui 包回答"></a>使用 open-webui 包回答</h3><blockquote>
@@ -211,7 +211,13 @@ mjx-container[display="true"] + br {
 <ul>
 <li><strong>相关命令</strong></li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">conda create -n webui python=3.11<br><br>conda activate webui<br><br>pip install open-webui<br><br>open-webui serve<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda create <span class="token parameter variable">-n</span> webui <span class="token assign-left variable">python</span><span class="token operator">=</span><span class="token number">3.11</span>
+
+conda activate webui
+
+pip <span class="token function">install</span> open-webui
+
+open-webui serve<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>浏览器访问本地 8080 端口 <a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a></p>
 <p>可以发现 openui 的页面非常类似 chatgpt 的页面,功能也非常丰富</p>
@@ -223,18 +229,18 @@ mjx-container[display="true"] + br {
 <li><strong>相关命令</strong></li>
 <li>如果 Ollama 在您的计算机上，请使用此命令：</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">-p</span> <span class="token number">3000</span>:8080 --add-host<span class="token operator">=</span>host.docker.internal:host-gateway <span class="token parameter variable">-v</span> open-webui:/app/backend/data <span class="token parameter variable">--name</span> open-webui <span class="token parameter variable">--restart</span> always ghcr.io/open-webui/open-webui:main<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
 <li>如果 Ollama 在不同的服务器上，请使用此命令：</li>
 <li>要连接到另一台服务器上的 Ollama，请将 <code>OLLAMA_BASE_URL</code> 更改为服务器的 URL：</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -d -p 3000:8080 -e OLLAMA_BASE_URL=https://example.com -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">-p</span> <span class="token number">3000</span>:8080 <span class="token parameter variable">-e</span> <span class="token assign-left variable">OLLAMA_BASE_URL</span><span class="token operator">=</span>https://example.com <span class="token parameter variable">-v</span> open-webui:/app/backend/data <span class="token parameter variable">--name</span> open-webui <span class="token parameter variable">--restart</span> always ghcr.io/open-webui/open-webui:main<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
 <li>要使用 Nvidia GPU 支持运行 Open WebUI，请使用此命令：</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -d -p 3000:8080 --gpus all --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:cuda<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">-p</span> <span class="token number">3000</span>:8080 <span class="token parameter variable">--gpus</span> all --add-host<span class="token operator">=</span>host.docker.internal:host-gateway <span class="token parameter variable">-v</span> open-webui:/app/backend/data <span class="token parameter variable">--name</span> open-webui <span class="token parameter variable">--restart</span> always ghcr.io/open-webui/open-webui:cuda<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1746711672132MNpobPZcDotI3HxC3COcLU7Gn8c.png" alt="1746711672132MNpobPZcDotI3HxC3COcLU7Gn8c.png"></p>
 <p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1746711689131OZBebZZ4DoPg2bxLFWLcJjp2nFe.png" alt="1746711689131OZBebZZ4DoPg2bxLFWLcJjp2nFe.png"></p>
@@ -255,7 +261,7 @@ mjx-container[display="true"] + br {
 </ul>
 </blockquote>
 <p><a target="_blank" rel="noopener" href="https://ollama.com/library/nomic-embed-text">https://ollama.com/library/nomic-embed-text</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ollama pull nomic-embed-text<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ollama pull nomic-embed-text<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1746711726064OWejb8BWloAcuVxrkFpcdQIbnve.png" alt="1746711726064OWejb8BWloAcuVxrkFpcdQIbnve.png"></p>
 <ul>
@@ -265,26 +271,28 @@ mjx-container[display="true"] + br {
 <h1 id="linux-服务器部署"><a href="#linux-服务器部署" class="headerlink" title="linux 服务器部署"></a>linux 服务器部署</h1><blockquote>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/694331045">Ollama Linux 部署与应用 LLama 3</a></p>
 </blockquote>
-<h2 id="Linux-下-Ollama-的安装与配置"><a href="#Linux-下-Ollama-的安装与配置" class="headerlink" title="Linux 下 Ollama 的安装与配置"></a>Linux 下 Ollama 的安装与配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -fsSL https://ollama.com/install.sh | sh<br><span class="hljs-comment">#也许需要相应的权限才能安装，可以使用命令</span><br><span class="hljs-built_in">sudo</span> curl -fsSL https://ollama.com/install.sh | sh<br></code></pre></td></tr></table></figure>
+<h2 id="Linux-下-Ollama-的安装与配置"><a href="#Linux-下-Ollama-的安装与配置" class="headerlink" title="Linux 下 Ollama 的安装与配置"></a>Linux 下 Ollama 的安装与配置</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-fsSL</span> https://ollama.com/install.sh <span class="token operator">|</span> <span class="token function">sh</span>
+<span class="token comment">#也许需要相应的权限才能安装，可以使用命令</span>
+<span class="token function">sudo</span> <span class="token function">curl</span> <span class="token parameter variable">-fsSL</span> https://ollama.com/install.sh <span class="token operator">|</span> <span class="token function">sh</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>上面的命令老是网络连接出现问题,因为我使用的是 ubuntu 系统的服务器,也可以使用下面的命令安装,速度快很多</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> snap install ollama<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> snap <span class="token function">install</span> ollama<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>后面的步骤和在 windows11 本地部署的流程相类似,都是拉取和运行模型,再使用 docker 部署 open-webui 再访问对应的端口使用,所以对应命令我直接粘贴不再详细解释</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ollama run deepseek-r1:1.5b<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ollama run deepseek-r1:1.5b<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <blockquote>
 <p>注意后面的命令最好都添加上 sudo,以防不必要的权限报错</p>
 </blockquote>
-<h3 id="启动-Docker-服务"><a href="#启动-Docker-服务" class="headerlink" title="启动 Docker 服务"></a>启动 Docker 服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl start docker<br></code></pre></td></tr></table></figure>
+<h3 id="启动-Docker-服务"><a href="#启动-Docker-服务" class="headerlink" title="启动 Docker 服务"></a>启动 Docker 服务</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> systemctl start <span class="token function">docker</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h3 id="查看-Docker-服务状态"><a href="#查看-Docker-服务状态" class="headerlink" title="查看 Docker 服务状态"></a>查看 Docker 服务状态</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl status docker<br></code></pre></td></tr></table></figure>
+<h3 id="查看-Docker-服务状态"><a href="#查看-Docker-服务状态" class="headerlink" title="查看 Docker 服务状态"></a>查看 Docker 服务状态</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> systemctl status <span class="token function">docker</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h3 id="使用-docker-安装-open-webui"><a href="#使用-docker-安装-open-webui" class="headerlink" title="使用 docker 安装 open-webui"></a>使用 docker 安装 open-webui</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main<br></code></pre></td></tr></table></figure>
+<h3 id="使用-docker-安装-open-webui"><a href="#使用-docker-安装-open-webui" class="headerlink" title="使用 docker 安装 open-webui"></a>使用 docker 安装 open-webui</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">-p</span> <span class="token number">3000</span>:8080 --add-host<span class="token operator">=</span>host.docker.internal:host-gateway <span class="token parameter variable">-v</span> open-webui:/app/backend/data <span class="token parameter variable">--name</span> open-webui <span class="token parameter variable">--restart</span> always ghcr.io/open-webui/open-webui:main<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>本地端口映射为 8080,浏览器输入对应网址 http://<code>&lt;ip&gt;</code>:8080/即可进入对应的界面</p>
 <p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1746711758065YRpwbq3EPoN8h7xLMrfcC2J7n5g.png" alt="1746711758065YRpwbq3EPoN8h7xLMrfcC2J7n5g.png"></p>
-<h3 id="停止-Docker-服务"><a href="#停止-Docker-服务" class="headerlink" title="停止 Docker 服务()"></a>停止 Docker 服务()</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl stop docker<br></code></pre></td></tr></table></figure>
+<h3 id="停止-Docker-服务"><a href="#停止-Docker-服务" class="headerlink" title="停止 Docker 服务()"></a>停止 Docker 服务()</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> systemctl stop <span class="token function">docker</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>虽然 1.5B 和 7B 级别的小参数模型在资源占用和响应延迟方面具有明显优势，但其生成效果和理解能力相对有限，仅适用于边缘计算中的基础性任务。不过，在特定场景下仍具备一定的应用价值。对于日常生产中的高质量生成需求，仍推荐使用部署在云端服务器的大参数模型，以确保效果和稳定性。</p>
 
@@ -301,7 +309,7 @@ mjx-container[display="true"] + br {
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" rel="tag">程序开发</a>
+            <a class="-none-link" href="/tags/development/" rel="tag">程序开发</a>
             </section>
         
     
@@ -313,7 +321,7 @@ mjx-container[display="true"] + br {
         
             <div class="author-info">
                 <h4>ttkqwe</h4>
-                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
             </div>
         </section>
     
@@ -337,7 +345,7 @@ mjx-container[display="true"] + br {
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-tags">标签云：</h3>
-                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                    <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/deep-learning/" style="font-size: 14px;">深度学习</a> <a href="/tags/development/" style="font-size: 18px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 10px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/course/" style="font-size: 20px;">课程学习</a> <a href="/tags/troubleshooting/" style="font-size: 18px;">问题解决</a>
                 </div>
             </div>
         </section>

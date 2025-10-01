@@ -152,7 +152,7 @@ mjx-container[display="true"] + br {
         <div class="has-child">
             <a href>分类</a>
             <div class="sub-menu">
-                
+                <a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
             </div>
         </div>
         
@@ -250,49 +250,60 @@ mjx-container[display="true"] + br {
 </ul>
 </blockquote>
 <h4 id="使用位运算的权限控制-bitmask"><a href="#使用位运算的权限控制-bitmask" class="headerlink" title="使用位运算的权限控制(bitmask)"></a>使用位运算的权限控制(bitmask)</h4><h5 id="Linux-权限的二进制表示"><a href="#Linux-权限的二进制表示" class="headerlink" title="Linux 权限的二进制表示"></a><strong>Linux 权限的二进制表示</strong></h5><p>Linux 中每个文件/目录的权限分为 <strong>所有者（User）、所属组（Group）、其他用户（Others）</strong> 三个角色，每个角色对应 <strong>读（r）、写（w）、执行（x）</strong> 三种权限，分别用 <strong>3 位二进制</strong> 表示：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">rwx r-x r-- → 二进制：111 101 100 → 八进制：754<br>   ↑   ↑   ↑<br>  用户 组  其他<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">rwx r-x r-- → 二进制：111 <span class="token number">101</span> <span class="token number">100</span> → 八进制：754
+   ↑   ↑   ↑
+  用户 组  其他<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>• 每个权限位映射：</p>
 <p>• <code>r</code>（读）：二进制第 2 位（值 4）</p>
 <p>• <code>w</code>（写）：二进制第 1 位（值 2）</p>
 <p>• <code>x</code>（执行）：二进制第 0 位（值 1）</p>
 <p>• 权限组合：通过二进制位或运算（<code>|</code>）实现，例如：</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">rw</span>- = <span class="hljs-number">4</span>（r） + <span class="hljs-number">2</span>（w） = <span class="hljs-number">6</span> → 二进制 <span class="hljs-number">110</span><br><span class="hljs-attribute">rwx</span> = <span class="hljs-number">4</span> + <span class="hljs-number">2</span> + <span class="hljs-number">1</span> = <span class="hljs-number">7</span> → 二进制 <span class="hljs-number">111</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">rw- = 4（r） + 2（w） = 6 → 二进制 110
+rwx = 4 + 2 + 1 = 7 → 二进制 111<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <hr>
 <h5 id="权限操作的核心逻辑"><a href="#权限操作的核心逻辑" class="headerlink" title="权限操作的核心逻辑"></a><strong>权限操作的核心逻辑</strong></h5><p><strong>权限验证</strong></p>
 <p>Linux 内核通过 <strong>按位与运算（&amp;）</strong> 判断用户是否拥有某权限。例如，检查用户是否有执行权限：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 检查 st_mode 是否包含用户执行权限位</span><br><span class="hljs-keyword">if</span> (st_mode &amp; S_IXUSR) { <span class="hljs-comment">/* 允许执行 */</span> }<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">// 检查 st_mode 是否包含用户执行权限位</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>st_mode <span class="token operator">&amp;</span> S_IXUSR<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">/* 允许执行 */</span> <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>• 权限位宏定义：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> S_IRUSR 0400  <span class="hljs-comment">// 用户读权限（二进制：100 000 000）</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> S_IWUSR 0200  <span class="hljs-comment">// 用户写权限（二进制：010 000 000）</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> S_IXUSR 0100  <span class="hljs-comment">// 用户执行权限（二进制：001 000 000）</span></span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">S_IRUSR</span> <span class="token expression"><span class="token number">0400</span>  </span><span class="token comment">// 用户读权限（二进制：100 000 000）</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">S_IWUSR</span> <span class="token expression"><span class="token number">0200</span>  </span><span class="token comment">// 用户写权限（二进制：010 000 000）</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">S_IXUSR</span> <span class="token expression"><span class="token number">0100</span>  </span><span class="token comment">// 用户执行权限（二进制：001 000 000）</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <h5 id="权限修改"><a href="#权限修改" class="headerlink" title="权限修改"></a><strong>权限修改</strong></h5><p>通过 <strong>按位或（|）赋予权限</strong> 和 <strong>按位与非（&amp; ~）移除权限</strong> 实现动态调整：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">// 添加用户写权限<br>st_mode |= S_IWUSR;<br><br>// 移除用户执行权限<br>st_mode &amp;= ~S_IXUSR;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">// 添加用户写权限
+st_mode <span class="token operator">|</span><span class="token operator">=</span> S_IWUSR<span class="token punctuation">;</span>
+
+// 移除用户执行权限
+st_mode <span class="token operator">&amp;</span><span class="token operator">=</span> ~S_IXUSR<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <hr>
 <h5 id="用户视角的权限管理"><a href="#用户视角的权限管理" class="headerlink" title="用户视角的权限管理"></a><strong>用户视角的权限管理</strong></h5><ul>
 <li><strong>chmod</strong>** 命令的底层实现**</li>
 </ul>
 <p>• 符号模式：直接操作权限位</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> u+x file    <span class="hljs-comment"># 添加用户执行权限（位或运算）</span><br><span class="hljs-built_in">chmod</span> g-w file    <span class="hljs-comment"># 移除组写权限（位与非运算）</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">chmod</span> u+x <span class="token function">file</span>    <span class="token comment"># 添加用户执行权限（位或运算）</span>
+<span class="token function">chmod</span> g-w <span class="token function">file</span>    <span class="token comment"># 移除组写权限（位与非运算）</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>• 八进制模式：直接指定二进制掩码</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> 755 file    <span class="hljs-comment"># rwxr-xr-x → 二进制 111 101 101 → 八进制 755</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">chmod</span> <span class="token number">755</span> <span class="token function">file</span>    <span class="token comment"># rwxr-xr-x → 二进制 111 101 101 → 八进制 755</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
 <li><strong>权限继承与默认值</strong></li>
 </ul>
 <p>• umask 值：通过二进制掩码定义默认权限的补码</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">umask</span> 022         <span class="hljs-comment"># 默认创建文件权限为 644（777 &amp; ~022 = 755）</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">umask</span> 022         <span class="token comment"># 默认创建文件权限为 644（777 &amp; ~022 = 755）</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <hr>
 <h5 id="扩展应用：特殊权限位"><a href="#扩展应用：特殊权限位" class="headerlink" title="扩展应用：特殊权限位"></a><strong>扩展应用：特殊权限位</strong></h5><p>Linux 还扩展了 <strong>SUID、SGID、Sticky Bit</strong> 等权限，仍基于二进制位掩码设计：</p>
 <p>• SUID（Set User ID）：二进制第 11 位（八进制 4000）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> u+s /usr/bin/passwd  <span class="hljs-comment"># 设置SUID，允许普通用户以root权限修改密码</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">chmod</span> u+s /usr/bin/passwd  <span class="token comment"># 设置SUID，允许普通用户以root权限修改密码</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>• Sticky Bit：二进制第 9 位（八进制 1000）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> +t /tmp              <span class="hljs-comment"># 仅文件所有者可删除自己的文件</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">chmod</span> +t /tmp              <span class="token comment"># 仅文件所有者可删除自己的文件</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <hr>
 <ol>
@@ -302,7 +313,22 @@ mjx-container[display="true"] + br {
 <li><strong>可扩展性</strong>：通过扩展位掩码（如 SUID）支持复杂权限需求。</li>
 </ol>
 <p><strong>这一设计充分体现了二进制在权限控制中的核心价值——简洁、高效、灵活。</strong></p>
-<h5 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> S_IXUSR = <span class="hljs-number">0400</span>;_ <span class="hljs-comment">// 用户读权限（二进制：100 000 000）_</span><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> S_IWUSR = <span class="hljs-number">0200</span>;_ <span class="hljs-comment">// 用户写权限（二进制：010 000 000）_</span><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> S_IXUSR = <span class="hljs-number">0100</span>;_ <span class="hljs-comment">// 用户执行权限（二进制：001 000 000）_</span><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">check_permission</span><span class="hljs-params">(<span class="hljs-type">int</span> st_mode)</span></span><br><span class="hljs-function"></span>{<br>_    <span class="hljs-comment">// 检查 st_mode 是否包含用户执行权限位_</span><br>    <span class="hljs-keyword">if</span> (st_mode &amp; S_IXUSR)<br>    {<br>_         <span class="hljs-comment">/* 允许执行 */</span>_<br>    }<br>}<br></code></pre></td></tr></table></figure>
+<h5 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h5><pre class="line-numbers language-none"><code class="language-none">#include &lt;bits/stdc++.h&gt;
+
+using namespace std;
+
+const int S_IXUSR = 0400;_ // 用户读权限（二进制：100 000 000）_
+const int S_IWUSR = 0200;_ // 用户写权限（二进制：010 000 000）_
+const int S_IXUSR = 0100;_ // 用户执行权限（二进制：001 000 000）_
+
+void check_permission(int st_mode)
+{
+_    // 检查 st_mode 是否包含用户执行权限位_
+    if (st_mode &amp; S_IXUSR)
+    {
+_         /* 允许执行 */_
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="企业级框架的权限控制"><a href="#企业级框架的权限控制" class="headerlink" title="企业级框架的权限控制"></a>企业级框架的权限控制</h4><h3 id="算法上的应用"><a href="#算法上的应用" class="headerlink" title="算法上的应用"></a>算法上的应用</h3><h4 id="原码反码补码"><a href="#原码反码补码" class="headerlink" title="原码反码补码"></a>原码反码补码</h4><p>在计算机中，带符号整数通常用 <strong>补码</strong> 表示，其转换流程为：</p>
 <ol>
@@ -327,9 +353,12 @@ mjx-container[display="true"] + br {
 <li><strong>左移（&lt;&lt;）与右移（&gt;&gt;）</strong>：将二进制整体左移或右移，等价于乘／除以 2 的幂。</li>
 </ul>
 <p>例如，下面函数高效判断一个整数是否是 2 的幂次方：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isPowerOfTwo</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>{<br>    <span class="hljs-keyword">return</span> x &gt; <span class="hljs-number">0</span> &amp;&amp; (x &amp; (x - <span class="hljs-number">1</span>)) == <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">bool</span> <span class="token function">isPowerOfTwo</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> x <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>x <span class="token operator">&amp;</span> <span class="token punctuation">(</span>x <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">is_power_of_two</span>(<span class="hljs-params">x: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">bool</span>:<br>    <span class="hljs-keyword">return</span> x &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> (x &amp; (x - <span class="hljs-number">1</span>)) == <span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">is_power_of_two</span><span class="token punctuation">(</span>x<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">bool</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> x <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token keyword">and</span> <span class="token punctuation">(</span>x <span class="token operator">&amp;</span> <span class="token punctuation">(</span>x <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h4 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h4><blockquote>
 <p><a target="_blank" rel="noopener" href="https://oi-wiki.org/math/binary-exponentiation/">快速幂 - OI Wiki</a></p>
@@ -350,24 +379,43 @@ mjx-container[display="true"] + br {
 <li>每次循环后，<code>a *= a</code>（平方），并将 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex" xmlns="http://www.w3.org/2000/svg" width="1.054ex" height="1.025ex" role="img" focusable="false" viewBox="0 -442 466 453"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g></g></g></svg></mjx-container> 右移一位；</li>
 <li>重复上述直到 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.186ex" xmlns="http://www.w3.org/2000/svg" width="5.203ex" height="1.692ex" role="img" focusable="false" viewBox="0 -666 2299.6 748"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><g data-mml-node="mo" transform="translate(743.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(1799.6,0)"><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"></path></g></g></g></svg></mjx-container>，最终 <code>res</code> 即为 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.023ex" xmlns="http://www.w3.org/2000/svg" width="2.13ex" height="1.551ex" role="img" focusable="false" viewBox="0 -675.5 941.5 685.5"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mi"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="mi" transform="translate(562,363) scale(0.707)"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g></g></g></g></svg></mjx-container>。</li>
 </ol>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">long</span> <span class="hljs-type">long</span> <span class="hljs-title">fast_pow</span><span class="hljs-params">(<span class="hljs-type">long</span> <span class="hljs-type">long</span> a, <span class="hljs-type">long</span> <span class="hljs-type">long</span> e)</span> </span>{<br>    <span class="hljs-type">long</span> <span class="hljs-type">long</span> res = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">while</span> (e &gt; <span class="hljs-number">0</span>) {<br>        <span class="hljs-keyword">if</span> (e &amp; <span class="hljs-number">1</span>)            <span class="hljs-comment">// 若当前最低位为 1</span><br>            res = res * a;<br>        a = a * a;           <span class="hljs-comment">// 平方</span><br>        e &gt;&gt;= <span class="hljs-number">1</span>;             <span class="hljs-comment">// 右移下一位</span><br>    }<br>    <span class="hljs-keyword">return</span> res;<br>}<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>    std::cout &lt;&lt; <span class="hljs-built_in">fast_pow</span>(<span class="hljs-number">2</span>, <span class="hljs-number">13</span>) &lt;&lt; std::endl;  <span class="hljs-comment">// 输出 8192</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">long</span> <span class="token keyword">long</span> <span class="token function">fast_pow</span><span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span> a<span class="token punctuation">,</span> <span class="token keyword">long</span> <span class="token keyword">long</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">long</span> <span class="token keyword">long</span> res <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>e <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>e <span class="token operator">&amp;</span> <span class="token number">1</span><span class="token punctuation">)</span>            <span class="token comment">// 若当前最低位为 1</span>
+            res <span class="token operator">=</span> res <span class="token operator">*</span> a<span class="token punctuation">;</span>
+        a <span class="token operator">=</span> a <span class="token operator">*</span> a<span class="token punctuation">;</span>           <span class="token comment">// 平方</span>
+        e <span class="token operator">&gt;&gt;=</span> <span class="token number">1</span><span class="token punctuation">;</span>             <span class="token comment">// 右移下一位</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token function">fast_pow</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>  <span class="token comment">// 输出 8192</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="异或运算"><a href="#异或运算" class="headerlink" title="异或运算"></a>异或运算</h4><ul>
 <li><strong>交换变量</strong>（无需临时变量）</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">a ^= b; b ^= a; a ^= b;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">a <span class="token operator">^=</span> b<span class="token punctuation">;</span> b <span class="token operator">^=</span> a<span class="token punctuation">;</span> a <span class="token operator">^=</span> b<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
 <li><strong>找出唯一出现一次的数</strong></li>
 </ul>
 <p>对于一个数组中只有一个元素出现一次，其余元素都出现两次，用异或可线性时间、常数空间找出它：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">single_number</span>(<span class="hljs-params">nums</span>):<br>    ans = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> nums:<br>        ans ^= x<br>    <span class="hljs-keyword">return</span> ans<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">single_number</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    ans <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">for</span> x <span class="token keyword">in</span> nums<span class="token punctuation">:</span>
+        ans <span class="token operator">^</span><span class="token operator">=</span> x
+    <span class="token keyword">return</span> ans<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li><strong>按位翻转特定范围</strong></li>
 </ul>
 <p>将 <code>n</code> 的第 <code>i</code> 到 <code>j</code> 位全部翻转：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> mask = ((<span class="hljs-number">1</span> &lt;&lt; (j - i + <span class="hljs-number">1</span>)) - <span class="hljs-number">1</span>) &lt;&lt; i;<br>n ^= mask;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> mask <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span>j <span class="token operator">-</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> i<span class="token punctuation">;</span>
+n <span class="token operator">^=</span> mask<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h3 id="数据的表示、计算、存储和传输"><a href="#数据的表示、计算、存储和传输" class="headerlink" title="数据的表示、计算、存储和传输"></a>数据的表示、计算、存储和传输</h3><h4 id="数据压缩"><a href="#数据压缩" class="headerlink" title="数据压缩"></a>数据压缩</h4><blockquote>
 <ul>
@@ -381,17 +429,28 @@ mjx-container[display="true"] + br {
 <ol>
 <li><strong>gzip（无损）示例</strong>：</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> gzip<br><br>text = <span class="hljs-string">b"Data compression example. "</span> * <span class="hljs-number">100</span><br><span class="hljs-comment"># 压缩</span><br>compressed = gzip.compress(text)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">"原始大小："</span>, <span class="hljs-built_in">len</span>(text), <span class="hljs-string">"压缩后大小："</span>, <span class="hljs-built_in">len</span>(compressed))<br><span class="hljs-comment"># 解压</span><br>decompressed = gzip.decompress(compressed)<br><span class="hljs-keyword">assert</span> decompressed == text<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> gzip
+
+text <span class="token operator">=</span> <span class="token string">b"Data compression example. "</span> <span class="token operator">*</span> <span class="token number">100</span>
+<span class="token comment"># 压缩</span>
+compressed <span class="token operator">=</span> gzip<span class="token punctuation">.</span>compress<span class="token punctuation">(</span>text<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"原始大小："</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>text<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"压缩后大小："</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>compressed<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># 解压</span>
+decompressed <span class="token operator">=</span> gzip<span class="token punctuation">.</span>decompress<span class="token punctuation">(</span>compressed<span class="token punctuation">)</span>
+<span class="token keyword">assert</span> decompressed <span class="token operator">==</span> text<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749358101852VcESbqoZboQwALx8jarc7TRmnme.png" alt="1749358101852VcESbqoZboQwALx8jarc7TRmnme.png"></p>
 <p>以上示例使用 DEFLATE 算法，无损地将文本压缩并恢复</p>
 <ul>
 <li><strong>有损压缩</strong>则在压缩过程中丢弃“人眼/人耳不易察觉”的冗余信息，如 JPEG 图像、MP3 音频，其解压后无法恢复到完全原始状态。</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image<br>img = Image.<span class="hljs-built_in">open</span>(<span class="hljs-string">"input.png"</span>)<br>img.save(<span class="hljs-string">"output.jpg"</span>, quality=<span class="hljs-number">50</span>)  <span class="hljs-comment"># quality&lt;100 会丢失部分细节</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> PIL <span class="token keyword">import</span> Image
+img <span class="token operator">=</span> Image<span class="token punctuation">.</span><span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">"input.png"</span><span class="token punctuation">)</span>
+img<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token string">"output.jpg"</span><span class="token punctuation">,</span> quality<span class="token operator">=</span><span class="token number">50</span><span class="token punctuation">)</span>  <span class="token comment"># quality&lt;100 会丢失部分细节</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749357984852CVRfb86YNohpkSxhCM9cQd6bnOd.png" alt="1749357984852CVRfb86YNohpkSxhCM9cQd6bnOd.png"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 对比文件体积</span><br><span class="hljs-built_in">ls</span> -lh input.jpg output.jpg<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 对比文件体积</span>
+<span class="token function">ls</span> <span class="token parameter variable">-lh</span> input.jpg output.jpg<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749358112853YAcabWie6oudnmxod0bcfX4PntU.png" alt="1749358112853YAcabWie6oudnmxod0bcfX4PntU.png"></p>
 <p>通过调整 <code>quality</code> 参数，JPEG 有损压缩可在保留较好视觉效果的同时大幅减小文件体积。</p>
@@ -399,14 +458,27 @@ mjx-container[display="true"] + br {
 <p><a target="_blank" rel="noopener" href="https://colab.research.google.com/drive/1VpmC-vKrvaFusdNNuaavzvAk2YMhGWrW?usp=sharing(colab)">https://colab.research.google.com/drive/1VpmC-vKrvaFusdNNuaavzvAk2YMhGWrW?usp=sharing(colab</a> 链接)</p>
 </blockquote>
 <p>One-Hot 编码是一种将分类变量转换为稀疏二进制向量的技术，每个类别对应一个维度，只有所属类别位置为 1，其它位置为 0。</p>
-<h5 id="Pandas-实现示例："><a href="#Pandas-实现示例：" class="headerlink" title="Pandas 实现示例："></a><strong>Pandas 实现示例</strong>：</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br>df = pd.DataFrame({<span class="hljs-string">"color"</span>: [<span class="hljs-string">"red"</span>, <span class="hljs-string">"blue"</span>, <span class="hljs-string">"green"</span>, <span class="hljs-string">"blue"</span>]})<br>one_hot = pd.get_dummies(df[<span class="hljs-string">"color"</span>], prefix=<span class="hljs-string">"color"</span>)<br><span class="hljs-built_in">print</span>(one_hot)<br></code></pre></td></tr></table></figure>
+<h5 id="Pandas-实现示例："><a href="#Pandas-实现示例：" class="headerlink" title="Pandas 实现示例："></a><strong>Pandas 实现示例</strong>：</h5><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
+df <span class="token operator">=</span> pd<span class="token punctuation">.</span>DataFrame<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"color"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"red"</span><span class="token punctuation">,</span> <span class="token string">"blue"</span><span class="token punctuation">,</span> <span class="token string">"green"</span><span class="token punctuation">,</span> <span class="token string">"blue"</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+one_hot <span class="token operator">=</span> pd<span class="token punctuation">.</span>get_dummies<span class="token punctuation">(</span>df<span class="token punctuation">[</span><span class="token string">"color"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> prefix<span class="token operator">=</span><span class="token string">"color"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>one_hot<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mathematica"><span class="hljs-type">color_blue</span>  <span class="hljs-type">color_green</span>  <span class="hljs-type">color_red</span><br><span class="hljs-number">0</span>       <span class="hljs-built_in">False</span>        <span class="hljs-built_in">False</span>       <span class="hljs-built_in">True</span><br><span class="hljs-number">1</span>        <span class="hljs-built_in">True</span>        <span class="hljs-built_in">False</span>      <span class="hljs-built_in">False</span><br><span class="hljs-number">2</span>       <span class="hljs-built_in">False</span>         <span class="hljs-built_in">True</span>      <span class="hljs-built_in">False</span><br><span class="hljs-number">3</span>        <span class="hljs-built_in">True</span>        <span class="hljs-built_in">False</span>      <span class="hljs-built_in">False</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">color_blue  color_green  color_red
+0       False        False       True
+1        True        False      False
+2       False         True      False
+3        True        False      False<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>此方法对小规模类别集非常高效，并集成于 Pandas。</p>
-<h4 id="Scikit-Learn-实现示例："><a href="#Scikit-Learn-实现示例：" class="headerlink" title="Scikit-Learn 实现示例："></a><strong>Scikit-Learn 实现示例</strong>：</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> OneHotEncoder<br>enc = OneHotEncoder(sparse=<span class="hljs-literal">False</span>)<br>X = enc.fit_transform(df[[<span class="hljs-string">"color"</span>]])<br><span class="hljs-built_in">print</span>(X)<br></code></pre></td></tr></table></figure>
+<h4 id="Scikit-Learn-实现示例："><a href="#Scikit-Learn-实现示例：" class="headerlink" title="Scikit-Learn 实现示例："></a><strong>Scikit-Learn 实现示例</strong>：</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>preprocessing <span class="token keyword">import</span> OneHotEncoder
+enc <span class="token operator">=</span> OneHotEncoder<span class="token punctuation">(</span>sparse<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+X <span class="token operator">=</span> enc<span class="token punctuation">.</span>fit_transform<span class="token punctuation">(</span>df<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">"color"</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>X<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs inform7"><span class="hljs-comment">[<span class="hljs-comment">[0. 0. 1.]</span></span><br><span class="hljs-comment"> <span class="hljs-comment">[1. 0. 0.]</span></span><br><span class="hljs-comment"> <span class="hljs-comment">[0. 1. 0.]</span></span><br><span class="hljs-comment"> <span class="hljs-comment">[1. 0. 0.]</span>]</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">[[0. 0. 1.]
+ [1. 0. 0.]
+ [0. 1. 0.]
+ [1. 0. 0.]]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><code>OneHotEncoder</code> 支持 <code>handle_unknown</code> 参数，用于处理训练外出现的新类别。</p>
 <hr>
@@ -416,7 +488,8 @@ mjx-container[display="true"] + br {
 <li><strong>TensorFlow</strong>：采用 SavedModel 格式，目录中包含 <code>saved_model.pb</code>（Protobuf 二进制）与 <code>variables</code> 检查点文件，使用 <code>model.save('path')</code> 和 <code>tf.keras.models.load_model('path')</code> 进行读写。</li>
 <li><strong>安全张量（safetensors）</strong>：新兴格式，提供比 Pickle 更强的安全性与加载性能，示例：</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> safetensors.torch <span class="hljs-keyword">as</span> st<br>st.save_file(model.state_dict(), <span class="hljs-string">"model.safetensors"</span>)<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> safetensors<span class="token punctuation">.</span>torch <span class="token keyword">as</span> st
+st<span class="token punctuation">.</span>save_file<span class="token punctuation">(</span>model<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"model.safetensors"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>此外，ONNX（Open Neural Network Exchange）以 Protobuf 二进制保存跨框架模型结构与权重，易于在不同平台间互操作。</p>
 <h4 id="CSS-等设计方面的颜色编码"><a href="#CSS-等设计方面的颜色编码" class="headerlink" title="CSS 等设计方面的颜色编码"></a>CSS 等设计方面的颜色编码</h4><p>在前端设计中，颜色可通过多种编码表示，最常见的是 十六进制（Hex）、RGB(A) 与 <strong>HSL(A)</strong> 格式。</p>
@@ -426,10 +499,24 @@ mjx-container[display="true"] + br {
 <li><strong>HSL</strong>：<code>hsl(320,100%,50%)</code>，直观调节色相、饱和度、亮度。</li>
 </ul>
 <p><strong>CSS 示例</strong>：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.button</span> {<br>  <span class="hljs-attribute">background</span>: <span class="hljs-number">#3498db</span>;           <span class="hljs-comment">/* Hex */</span><br>  <span class="hljs-attribute">color</span>: <span class="hljs-built_in">rgb</span>(<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>);     <span class="hljs-comment">/* RGB */</span><br>  <span class="hljs-attribute">border-color</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-number">200</span>, <span class="hljs-number">70%</span>, <span class="hljs-number">50%</span>); <span class="hljs-comment">/* HSL */</span><br>}<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.button</span> <span class="token punctuation">{</span>
+  <span class="token property">background</span><span class="token punctuation">:</span> #3498db<span class="token punctuation">;</span>           <span class="token comment">/* Hex */</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> <span class="token function">rgb</span><span class="token punctuation">(</span>255<span class="token punctuation">,</span> 255<span class="token punctuation">,</span> 255<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">/* RGB */</span>
+  <span class="token property">border-color</span><span class="token punctuation">:</span> <span class="token function">hsl</span><span class="token punctuation">(</span>200<span class="token punctuation">,</span> 70%<span class="token punctuation">,</span> 50%<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* HSL */</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>JavaScript 转换示例</strong>：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// Hex to RGB</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">hexToRgb</span>(<span class="hljs-params">hex</span>) {<br>  <span class="hljs-keyword">let</span> m = hex.<span class="hljs-title function_">match</span>(<span class="hljs-regexp">/^#?([A-F\d]{2})([A-F\d]{2})([A-F\d]{2})$/i</span>);<br>  <span class="hljs-keyword">if</span> (!m) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>  <span class="hljs-keyword">return</span> {<br>    <span class="hljs-attr">r</span>: <span class="hljs-built_in">parseInt</span>(m[<span class="hljs-number">1</span>], <span class="hljs-number">16</span>),<br>    <span class="hljs-attr">g</span>: <span class="hljs-built_in">parseInt</span>(m[<span class="hljs-number">2</span>], <span class="hljs-number">16</span>),<br>    <span class="hljs-attr">b</span>: <span class="hljs-built_in">parseInt</span>(m[<span class="hljs-number">3</span>], <span class="hljs-number">16</span>)<br>  };<br>}<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">hexToRgb</span>(<span class="hljs-string">"#ff00aa"</span>)); <span class="hljs-comment">// {r:255, g:0, b:170}</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// Hex to RGB</span>
+<span class="token keyword">function</span> <span class="token function">hexToRgb</span><span class="token punctuation">(</span><span class="token parameter">hex</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> m <span class="token operator">=</span> hex<span class="token punctuation">.</span><span class="token function">match</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^#?([A-F\d]{2})([A-F\d]{2})([A-F\d]{2})$</span><span class="token regex-delimiter">/</span><span class="token regex-flags">i</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>m<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">r</span><span class="token operator">:</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>m<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">g</span><span class="token operator">:</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>m<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">b</span><span class="token operator">:</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>m<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">hexToRgb</span><span class="token punctuation">(</span><span class="token string">"#ff00aa"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// {r:255, g:0, b:170}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="计算机网络-ip-地址"><a href="#计算机网络-ip-地址" class="headerlink" title="计算机网络 ip 地址"></a>计算机网络 ip 地址</h4><blockquote>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/50091071">计算机网络（一）基本概念（IP,子网掩码,默认网关,DNS）</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_45406092/article/details/118526894">【计算机网络】IP 协议、IP 地址、网段划分、子网划分、子网掩码、CIDR_ip cidr-CSDN 博客</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/537410069">IP 地址、子网掩码、网关、DNS 之间的关系</a></p>
@@ -450,7 +537,12 @@ mjx-container[display="true"] + br {
 <li><a target="_blank" rel="noopener" href="https://colab.research.google.com/drive/1rXH5_RbucvYiemz9kz4mfqlx1Uz3DWA2?usp=sharing(colab)">https://colab.research.google.com/drive/1rXH5_RbucvYiemz9kz4mfqlx1Uz3DWA2?usp=sharing(colab</a> 链接)</li>
 </ul>
 </blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> ipaddress<br><br>net = ipaddress.ip_network(<span class="hljs-string">"192.168.1.10/24"</span>, strict=<span class="hljs-literal">False</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">"网络地址:"</span>, net.network_address)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">"广播地址:"</span>, net.broadcast_address)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">"可用主机:"</span>, <span class="hljs-built_in">list</span>(net.hosts())[:<span class="hljs-number">3</span>], <span class="hljs-string">"…共"</span>, net.num_addresses - <span class="hljs-number">2</span>)<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> ipaddress
+
+net <span class="token operator">=</span> ipaddress<span class="token punctuation">.</span>ip_network<span class="token punctuation">(</span><span class="token string">"192.168.1.10/24"</span><span class="token punctuation">,</span> strict<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"网络地址:"</span><span class="token punctuation">,</span> net<span class="token punctuation">.</span>network_address<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"广播地址:"</span><span class="token punctuation">,</span> net<span class="token punctuation">.</span>broadcast_address<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"可用主机:"</span><span class="token punctuation">,</span> <span class="token builtin">list</span><span class="token punctuation">(</span>net<span class="token punctuation">.</span>hosts<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">"…共"</span><span class="token punctuation">,</span> net<span class="token punctuation">.</span>num_addresses <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749358051852DGQZbu2FIoQK8txaq98c7aD8nCe.png" alt="1749358051852DGQZbu2FIoQK8txaq98c7aD8nCe.png"></p>
 
@@ -467,7 +559,7 @@ mjx-container[display="true"] + br {
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" rel="tag">课程学习</a>
+            <a class="-none-link" href="/tags/course/" rel="tag">课程学习</a>
             </section>
         
     
@@ -479,7 +571,7 @@ mjx-container[display="true"] + br {
         
             <div class="author-info">
                 <h4>ttkqwe</h4>
-                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
             </div>
         </section>
     
@@ -503,7 +595,7 @@ mjx-container[display="true"] + br {
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-tags">标签云：</h3>
-                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                    <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/deep-learning/" style="font-size: 14px;">深度学习</a> <a href="/tags/development/" style="font-size: 18px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 10px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/course/" style="font-size: 20px;">课程学习</a> <a href="/tags/troubleshooting/" style="font-size: 18px;">问题解决</a>
                 </div>
             </div>
         </section>

@@ -152,7 +152,7 @@ mjx-container[display="true"] + br {
         <div class="has-child">
             <a href>分类</a>
             <div class="sub-menu">
-                
+                <a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
             </div>
         </div>
         
@@ -215,7 +215,7 @@ mjx-container[display="true"] + br {
 <h3 id="通信-API"><a href="#通信-API" class="headerlink" title="通信 API"></a>通信 API</h3><p>在通信协议的基础上，具体发送什么数据即发送什么指令，还需要规定各个功能所对应的指令（上位机发给下位机的指令）。</p>
 <p>每个功能所对应的指令叫做 API（Application Programming Interface）, 在实际工作中常称这个 api 为“私有通信协议”。</p>
 <p>举例一条获取温度的 api：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">[包头 + 获取温度对应的命令编码（编号）+ 校验位 + 包尾]<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>包头 + 获取温度对应的命令编码（编号）+ 校验位 + 包尾<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>api 的命令格式，是自定义的一种固定的数据组合格式。不受任何通信方式和通信平台的限制。这就意味着，只要通信协议（通信方式）可以建立，上位机软件可以是任意开发语言和任意开发平台，下位机也可以使用任意类型的单片机。</p>
 <p>上位机主要是对接 PLC、仪表、运动控制卡、视觉等，通信方式包括通信协议、OPC、API 或 SDK，如下图所示：</p>
@@ -298,7 +298,7 @@ mjx-container[display="true"] + br {
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" rel="tag">课程学习</a>
+            <a class="-none-link" href="/tags/course/" rel="tag">课程学习</a>
             </section>
         
     
@@ -310,7 +310,7 @@ mjx-container[display="true"] + br {
         
             <div class="author-info">
                 <h4>ttkqwe</h4>
-                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
             </div>
         </section>
     
@@ -334,7 +334,7 @@ mjx-container[display="true"] + br {
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-tags">标签云：</h3>
-                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                    <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/deep-learning/" style="font-size: 14px;">深度学习</a> <a href="/tags/development/" style="font-size: 18px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 10px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/course/" style="font-size: 20px;">课程学习</a> <a href="/tags/troubleshooting/" style="font-size: 18px;">问题解决</a>
                 </div>
             </div>
         </section>

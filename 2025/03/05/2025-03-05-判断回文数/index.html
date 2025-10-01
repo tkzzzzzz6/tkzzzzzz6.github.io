@@ -152,7 +152,7 @@ mjx-container[display="true"] + br {
         <div class="has-child">
             <a href>分类</a>
             <div class="sub-menu">
-                
+                <a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
             </div>
         </div>
         
@@ -186,17 +186,58 @@ mjx-container[display="true"] + br {
 <h1 id="取反对比"><a href="#取反对比" class="headerlink" title="取反对比"></a>取反对比</h1><blockquote>
 <p>一种容易想到的方法是：将整个数取反后看和原来的数是否相同。</p>
 </blockquote>
-<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs axapta">bool isPalindrome(<span class="hljs-built_in">int</span> x) {  <br>    <span class="hljs-keyword">if</span> (x&lt;<span class="hljs-number">0</span>)  <br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;  <br>    <span class="hljs-built_in">long</span> <span class="hljs-built_in">long</span> <span class="hljs-keyword">sum</span> =<span class="hljs-number">0</span>;  <br>    <span class="hljs-built_in">long</span> <span class="hljs-built_in">long</span> origin = x;  <br>    <span class="hljs-keyword">while</span>(x)  <br>    {  <br>        <span class="hljs-built_in">int</span> num = x %<span class="hljs-number">10</span>;  <br>        <span class="hljs-keyword">sum</span> = <span class="hljs-keyword">sum</span>*<span class="hljs-number">10</span> + num;  <br>        x/=<span class="hljs-number">10</span>;  <br>    }  <br>    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">sum</span> == origin)  <br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;  <br>    <span class="hljs-keyword">else</span>  <br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;  <br>}<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">bool isPalindrome(int x) {  
+    if (x&lt;0)  
+        return false;  
+    long long sum =0;  
+    long long origin = x;  
+    while(x)  
+    {  
+        int num = x %10;  
+        sum = sum*10 + num;  
+        x/=10;  
+    }  
+    if(sum == origin)  
+        return true;  
+    else  
+        return false;  
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h1 id="左右翻转"><a href="#左右翻转" class="headerlink" title="左右翻转"></a>左右翻转</h1><blockquote>
 <p>根据回文数的特点，我们只需要判断左边一半和翻转后的右边一半是否相等即可。</p>
 </blockquote>
-<figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs gml"><span class="hljs-built_in">bool</span> isPalindrome(int <span class="hljs-variable language_">x</span>) {<br>    <span class="hljs-comment">// 负数肯定不是，以及首尾不对称的非0数</span><br>    <span class="hljs-keyword">if</span>(<span class="hljs-variable language_">x</span> &lt; <span class="hljs-number">0</span> || (<span class="hljs-variable language_">x</span> % <span class="hljs-number">10</span> == <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-variable language_">x</span> != <span class="hljs-number">0</span>))<br>        <span class="hljs-keyword">return</span> <span class="hljs-symbol">false</span>;<br><br>    int rev = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> ( <span class="hljs-variable language_">x</span> &gt; rev){<br>        rev = rev * <span class="hljs-number">10</span> + <span class="hljs-variable language_">x</span> % <span class="hljs-number">10</span>; <span class="hljs-comment">//将低位一半的数取反。</span><br>        <span class="hljs-variable language_">x</span> = int (<span class="hljs-variable language_">x</span> / <span class="hljs-number">10</span>);<br>    }<br>    <span class="hljs-comment">//有rev &gt;= x， 奇数情况下需要除去10</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">x</span> == rev || <span class="hljs-variable language_">x</span> == int(rev/<span class="hljs-number">10</span>); <br>}<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">bool isPalindrome(int x) {
+    // 负数肯定不是，以及首尾不对称的非0数
+    if(x &lt; 0 || (x % 10 == 0 &amp;&amp; x != 0))
+        return false;
+
+    int rev = 0;
+    while ( x &gt; rev){
+        rev = rev * 10 + x % 10; //将低位一半的数取反。
+        x = int (x / 10);
+    }
+    //有rev &gt;= x， 奇数情况下需要除去10
+    return x == rev || x == int(rev/10); 
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h1 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h1><blockquote>
 <p>在循环体中，不断地比较第 i 位和倒数第 i 位，直到遇到最中间的 1 个数字(输入为奇数个数字)或者遇到最中间的 2 个数字(输入为偶数个数字)时结束。</p>
 </blockquote>
-<figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs gml"><span class="hljs-built_in">bool</span> isPalindrome(int <span class="hljs-variable language_">x</span>) {  <br>  <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">x</span> &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-symbol">false</span>;  <br>  int <span class="hljs-keyword">div</span> = <span class="hljs-number">1</span>;  <br>  <span class="hljs-keyword">while</span> (<span class="hljs-variable language_">x</span> / <span class="hljs-keyword">div</span> &gt;= <span class="hljs-number">10</span>) {  <br>    <span class="hljs-keyword">div</span> *= <span class="hljs-number">10</span>;  <br>  }          <br>  <span class="hljs-keyword">while</span> (<span class="hljs-variable language_">x</span> != <span class="hljs-number">0</span>) {  <br>    int l = <span class="hljs-variable language_">x</span> / <span class="hljs-keyword">div</span>;  <br>    int r = <span class="hljs-variable language_">x</span> % <span class="hljs-number">10</span>;  <br>    <span class="hljs-keyword">if</span> (l != r) <span class="hljs-keyword">return</span> <span class="hljs-symbol">false</span>;  <br>    <span class="hljs-variable language_">x</span> = (<span class="hljs-variable language_">x</span> % <span class="hljs-keyword">div</span>) / <span class="hljs-number">10</span>;  <span class="hljs-comment">//去掉两边的数</span><br>    <span class="hljs-keyword">div</span> /= <span class="hljs-number">100</span>;  <br>  }  <br>  <span class="hljs-keyword">return</span> <span class="hljs-symbol">true</span>;  <br>}<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">bool isPalindrome(int x) {  
+  if (x &lt; 0) return false;  
+  int div = 1;  
+  while (x / div &gt;= 10) {  
+    div *= 10;  
+  }          
+  while (x != 0) {  
+    int l = x / div;  
+    int r = x % 10;  
+    if (l != r) return false;  
+    x = (x % div) / 10;  //去掉两边的数
+    div /= 100;  
+  }  
+  return true;  
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <blockquote>
 <p>补充:<strong>一个证明,有偶数位的回文数能被 11 整除</strong></p>
@@ -236,7 +277,7 @@ mjx-container[display="true"] + br {
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" rel="tag">算法练习</a>
+            <a class="-none-link" href="/tags/algorithm-practice/" rel="tag">算法练习</a>
             </section>
         
     
@@ -248,7 +289,7 @@ mjx-container[display="true"] + br {
         
             <div class="author-info">
                 <h4>ttkqwe</h4>
-                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
             </div>
         </section>
     
@@ -272,7 +313,7 @@ mjx-container[display="true"] + br {
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-tags">标签云：</h3>
-                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                    <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/deep-learning/" style="font-size: 14px;">深度学习</a> <a href="/tags/development/" style="font-size: 18px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 10px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/course/" style="font-size: 20px;">课程学习</a> <a href="/tags/troubleshooting/" style="font-size: 18px;">问题解决</a>
                 </div>
             </div>
         </section>

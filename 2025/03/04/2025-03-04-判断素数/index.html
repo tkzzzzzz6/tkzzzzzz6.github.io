@@ -152,7 +152,7 @@ mjx-container[display="true"] + br {
         <div class="has-child">
             <a href>分类</a>
             <div class="sub-menu">
-                
+                <a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
             </div>
         </div>
         
@@ -184,7 +184,22 @@ mjx-container[display="true"] + br {
 <h1 id="暴力求解"><a href="#暴力求解" class="headerlink" title="暴力求解"></a><strong>暴力求解</strong></h1><blockquote>
 <p>根据素数的定义思考。素数是大于 1 的自然数，除了 1 和自身外，其他数都不是它的因子。 那我们就可以用一个循环，从 2 开始遍历到这个数减去 1，如果这个数都不能被整除，那么这个数就是素数。 也就是说： 给定一个数 n , i 从 2 开始取值，直到 n - 1(取整数),如果 n % i != 0 , n 就是素数 进一步思考，有必要遍历到 n - 1 吗？ 除了 1 以外，任何合数最小的因子就是 2，那最大的因子就是 n/2 那我们就遍历到 n/2 就足够了</p>
 </blockquote>
-<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs aspectj"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">isPrime</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-keyword">target</span>)</span> </span>{<br><br>    <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;<br><br>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">target</span> &lt;= <span class="hljs-number">1</span>) {<br>        printf(<span class="hljs-string">"illegal input!\n"</span>);<span class="hljs-comment">//素数定义</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    }<br><br>    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">2</span>; i &lt;= <span class="hljs-keyword">target</span> / <span class="hljs-number">2</span>; i++) {<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">target</span> % i == <span class="hljs-number">0</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<span class="hljs-comment">//不是素数直接返回0</span><br>    }<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<span class="hljs-comment">//是素数返回1</span><br>}<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">int isPrime(int target) {
+
+    int i = 0;
+
+    if (target &lt;= 1) {
+        printf("illegal input!\n");//素数定义
+        return -1;
+    }
+
+    for (i = 2; i &lt;= target / 2; i++) {
+        if (target % i == 0)
+            return 0;//不是素数直接返回0
+    }
+
+    return 1;//是素数返回1
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="求解范围改进"><a href="#求解范围改进" class="headerlink" title="求解范围改进"></a>求解范围改进</h2><blockquote>
 <p>在上面的基础上，其实不需要遍历到 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.781ex" xmlns="http://www.w3.org/2000/svg" width="1.955ex" height="2.379ex" role="img" focusable="false" viewBox="0 -706.5 864.3 1051.5"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mfrac"><g data-mml-node="mi" transform="translate(220,394) scale(0.707)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mn" transform="translate(255.4,-345) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><rect width="624.3" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container>，只需要到 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.491ex" xmlns="http://www.w3.org/2000/svg" width="3.287ex" height="2.398ex" role="img" focusable="false" viewBox="0 -843 1453 1060"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msqrt"><g transform="translate(853,0)"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g><g data-mml-node="mo" transform="translate(0,-17)"><path data-c="221A" d="M95 178Q89 178 81 186T72 200T103 230T169 280T207 309Q209 311 212 311H213Q219 311 227 294T281 177Q300 134 312 108L397 -77Q398 -77 501 136T707 565T814 786Q820 800 834 800Q841 800 846 794T853 782V776L620 293L385 -193Q381 -200 366 -200Q357 -200 354 -197Q352 -195 256 15L160 225L144 214Q129 202 113 190T95 178Z"></path></g><rect width="600" height="60" x="853" y="723"></rect></g></g></g></svg></mjx-container>（包含 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.491ex" xmlns="http://www.w3.org/2000/svg" width="3.287ex" height="2.398ex" role="img" focusable="false" viewBox="0 -843 1453 1060"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msqrt"><g transform="translate(853,0)"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g><g data-mml-node="mo" transform="translate(0,-17)"><path data-c="221A" d="M95 178Q89 178 81 186T72 200T103 230T169 280T207 309Q209 311 212 311H213Q219 311 227 294T281 177Q300 134 312 108L397 -77Q398 -77 501 136T707 565T814 786Q820 800 834 800Q841 800 846 794T853 782V776L620 293L385 -193Q381 -200 366 -200Q357 -200 354 -197Q352 -195 256 15L160 225L144 214Q129 202 113 190T95 178Z"></path></g><rect width="600" height="60" x="853" y="723"></rect></g></g></g></svg></mjx-container>） 就可以了。</p>
@@ -216,7 +231,22 @@ mjx-container[display="true"] + br {
 </li>
 </ul>
 </blockquote>
-<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs aspectj"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">isPrime</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-keyword">target</span>)</span> </span>{<br><br>    <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;<br><br>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">target</span> &lt;= <span class="hljs-number">1</span>) {<br>        printf(<span class="hljs-string">"illegal input!\n"</span>);<span class="hljs-comment">//素数定义</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    }<br><br>    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">2</span>; i &lt;= (<span class="hljs-keyword">int</span>)sqrt(<span class="hljs-keyword">target</span>); i++) {<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">target</span> % i == <span class="hljs-number">0</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    }<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>}<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">int isPrime(int target) {
+
+    int i = 0;
+
+    if (target &lt;= 1) {
+        printf("illegal input!\n");//素数定义
+        return -1;
+    }
+
+    for (i = 2; i &lt;= (int)sqrt(target); i++) {
+        if (target % i == 0)
+            return 0;
+    }
+
+    return 1;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h1 id="用素数表来判断素数"><a href="#用素数表来判断素数" class="headerlink" title="用素数表来判断素数"></a><strong>用素数表来判断素数</strong></h1><blockquote>
 <p>从第二种方法开始，我们都是先完成判断素数数组，然后用二分法去查找判断数组<br>这里说一下以下三种方法牵扯的概念：</p>
@@ -227,7 +257,19 @@ mjx-container[display="true"] + br {
 <li>思路:如果一个数不能整除比它小的任何素数，那么这个数就是素数 这种“打印”素数表的方法效率很低，不推荐使用，可以学习思想</li>
 </ul>
 </blockquote>
-<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs aspectj"><span class="hljs-comment">//target：输入的要查找的数</span><br><span class="hljs-comment">//count：当前已知的素数个数</span><br><span class="hljs-comment">//PrimeArray：存放素数的数组</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">isPrime</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-keyword">target</span>, <span class="hljs-keyword">int</span> count, <span class="hljs-keyword">int</span>* PrimeArray)</span> </span>{<br><br>    <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; count; i++) {<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">target</span> % PrimeArray[i] == <span class="hljs-number">0</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    }<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>}<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">//target：输入的要查找的数
+//count：当前已知的素数个数
+//PrimeArray：存放素数的数组
+int isPrime(int target, int count, int* PrimeArray) {
+
+    int i = 0;
+    for (i = 0; i &lt; count; i++) {
+        if (target % PrimeArray[i] == 0)
+            return 0;
+    }
+
+    return 1;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h1 id="普通筛法——埃拉托斯特尼-Eratosthenes-筛法"><a href="#普通筛法——埃拉托斯特尼-Eratosthenes-筛法" class="headerlink" title="普通筛法——埃拉托斯特尼(Eratosthenes)筛法"></a><strong>普通筛法——埃拉托斯特尼(Eratosthenes)筛法</strong></h1><blockquote>
 <p><strong>思路</strong>:</p>
@@ -238,7 +280,26 @@ mjx-container[display="true"] + br {
 <li>用百度百科对埃拉托斯特尼筛法简单描述：<strong>要得到自然数 n 以内的全部素数，必须把不大于 的所有素数的倍数剔除，剩下的就是素数。</strong></li>
 </ol>
 </blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//                 判断素数的数组    范围上限N</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Eratprime</span><span class="hljs-params">(<span class="hljs-type">int</span>* isprime, <span class="hljs-type">int</span> upper_board)</span> </span>{<br><br>    <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">int</span> j = <span class="hljs-number">0</span>;<br>    <span class="hljs-comment">//初始化isprime</span><br>    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">2</span>; i &lt;= upper_board; i++)<br>        isprime[i] = <span class="hljs-number">1</span>;<br><br><br>    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">2</span>; i &lt; (<span class="hljs-type">int</span>)<span class="hljs-built_in">sqrt</span>(upper_board); i++) {<br>        <span class="hljs-keyword">if</span> (isprime[i]) {<br>            isprime[i] = <span class="hljs-number">1</span>;<br>        }<br>        <span class="hljs-keyword">for</span> (j = <span class="hljs-number">2</span>; i * j &lt;= upper_board; j++) {<span class="hljs-comment">//素数的n倍（n &gt;= 2）不是素数</span><br>            isprime[i * j] = <span class="hljs-number">0</span>;<br>        }<br>    }<br><br>}<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">//                 判断素数的数组    范围上限N
+void Eratprime(int* isprime, int upper_board) {
+
+    int i = 0;
+    int j = 0;
+    //初始化isprime
+    for (i = 2; i &lt;= upper_board; i++)
+        isprime[i] = 1;
+
+
+    for (i = 2; i &lt; (int)sqrt(upper_board); i++) {
+        if (isprime[i]) {
+            isprime[i] = 1;
+        }
+        for (j = 2; i * j &lt;= upper_board; j++) {//素数的n倍（n &gt;= 2）不是素数
+            isprime[i * j] = 0;
+        }
+    }
+
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h1 id="线性筛法——欧拉筛法"><a href="#线性筛法——欧拉筛法" class="headerlink" title="线性筛法——欧拉筛法"></a><strong>线性筛法——欧拉筛法</strong></h1><blockquote>
 <p><strong>思路</strong>: 我们再思考一下上面的埃拉托斯特尼筛法，会发现，在“剔除“非素数时，有些合数会重复赋值。这样就会增加复杂度，降低效率。 比如：范围上限 N = 16 时</p>
@@ -247,7 +308,37 @@ mjx-container[display="true"] + br {
 <li>3 是素数，剔除”3 的倍数”，它们是，6，9，12，15<br>6，12 是重复的。如何减少重复呢？</li>
 </ul>
 </blockquote>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><span class="hljs-keyword">void</span> PrimeList(<span class="hljs-keyword">int</span>* Prime, bool* isPrime, <span class="hljs-keyword">int</span> n) {<br><br>    <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">int</span> <span class="hljs-keyword">count</span> = <span class="hljs-number">0</span>;<br><br>    <span class="hljs-keyword">if</span> (isPrime != <span class="hljs-keyword">NULL</span>) {<span class="hljs-comment">//确保isPrime不是空指针</span><br>        <span class="hljs-comment">//将isPrime数组初始化为 1</span><br>        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">2</span>; i &lt;= N; i++) {<br>            isPrime[i] = <span class="hljs-keyword">true</span>;<br>        }<br>    }<br><br>    <span class="hljs-keyword">if</span> (isPrime != <span class="hljs-keyword">NULL</span> &amp;&amp; Prime != <span class="hljs-keyword">NULL</span>) {<br>        <span class="hljs-comment">//从2遍历到范围上限N</span><br>        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">2</span>; i &lt;= N; i++) {<br>            <span class="hljs-keyword">if</span> (isPrime[i])<span class="hljs-comment">//如果下标（下标对应着1 ~ 范围上限N）对应的isPrime值没有被置为false，说明这个数是素数，将下标放入素数数组</span><br>                Prime[<span class="hljs-keyword">count</span>++] = i;<br>            <span class="hljs-comment">//循环控制表达式的意义：j小于等于素数数组的个数 或 素数数组中的每一个素数与 i 的积小于范围上限N</span><br>            <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>; (j &lt; <span class="hljs-keyword">count</span>) &amp;&amp; (Prime[j] * (<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span>)i) &lt;= N; j++)<span class="hljs-comment">//将i强制转换是因为vs上有warning，要求转换为宽类型防止算术溢出。数据上不产生影响</span><br>            {<br>                isPrime[i * Prime[j]] = <span class="hljs-keyword">false</span>;<span class="hljs-comment">//每一个素数的 i 倍（i &gt;= 2）都不是素数，置为false</span><br><br>                <span class="hljs-comment">//这个是欧拉筛法的核心，它可以减少非素数置false的重复率</span><br>                <span class="hljs-comment">//意义是将每一个合数（非素数）拆成 2（最小因数）与最大因数 的乘积</span><br>                <span class="hljs-keyword">if</span> (i % Prime[j] == <span class="hljs-number">0</span>)<br>                    <span class="hljs-keyword">break</span>;<br>            }<br>        }<br>    }<br>}<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">void PrimeList(int* Prime, bool* isPrime, int n) {
+
+    int i = 0;
+    int j = 0;
+    int count = 0;
+
+    if (isPrime != NULL) {//确保isPrime不是空指针
+        //将isPrime数组初始化为 1
+        for (i = 2; i &lt;= N; i++) {
+            isPrime[i] = true;
+        }
+    }
+
+    if (isPrime != NULL &amp;&amp; Prime != NULL) {
+        //从2遍历到范围上限N
+        for (i = 2; i &lt;= N; i++) {
+            if (isPrime[i])//如果下标（下标对应着1 ~ 范围上限N）对应的isPrime值没有被置为false，说明这个数是素数，将下标放入素数数组
+                Prime[count++] = i;
+            //循环控制表达式的意义：j小于等于素数数组的个数 或 素数数组中的每一个素数与 i 的积小于范围上限N
+            for (j = 0; (j &lt; count) &amp;&amp; (Prime[j] * (long long)i) &lt;= N; j++)//将i强制转换是因为vs上有warning，要求转换为宽类型防止算术溢出。数据上不产生影响
+            {
+                isPrime[i * Prime[j]] = false;//每一个素数的 i 倍（i &gt;= 2）都不是素数，置为false
+
+                //这个是欧拉筛法的核心，它可以减少非素数置false的重复率
+                //意义是将每一个合数（非素数）拆成 2（最小因数）与最大因数 的乘积
+                if (i % Prime[j] == 0)
+                    break;
+            }
+        }
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
         </article>
         <section class="post-near">
@@ -262,7 +353,7 @@ mjx-container[display="true"] + br {
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" rel="tag">算法练习</a>
+            <a class="-none-link" href="/tags/algorithm-practice/" rel="tag">算法练习</a>
             </section>
         
     
@@ -274,7 +365,7 @@ mjx-container[display="true"] + br {
         
             <div class="author-info">
                 <h4>ttkqwe</h4>
-                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
             </div>
         </section>
     
@@ -298,7 +389,7 @@ mjx-container[display="true"] + br {
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-tags">标签云：</h3>
-                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                    <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/deep-learning/" style="font-size: 14px;">深度学习</a> <a href="/tags/development/" style="font-size: 18px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 10px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/course/" style="font-size: 20px;">课程学习</a> <a href="/tags/troubleshooting/" style="font-size: 18px;">问题解决</a>
                 </div>
             </div>
         </section>

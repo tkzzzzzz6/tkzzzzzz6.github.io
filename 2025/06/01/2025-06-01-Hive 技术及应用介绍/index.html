@@ -152,7 +152,7 @@ mjx-container[display="true"] + br {
         <div class="has-child">
             <a href>分类</a>
             <div class="sub-menu">
-                
+                <a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
             </div>
         </div>
         
@@ -238,7 +238,15 @@ mjx-container[display="true"] + br {
 </ul>
 </li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 创建按日期分区的 ORC 表</span><br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">EXTERNAL</span> <span class="hljs-keyword">TABLE</span> logs (<br>  user_id <span class="hljs-type">BIGINT</span>,<br>  action  STRING,<br>  ts      <span class="hljs-type">TIMESTAMP</span><br>)<br>PARTITIONED <span class="hljs-keyword">BY</span> (dt STRING)<br>STORED <span class="hljs-keyword">AS</span> ORC<br>LOCATION <span class="hljs-string">'/data/logs/'</span>;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 创建按日期分区的 ORC 表</span>
+<span class="token keyword">CREATE</span> EXTERNAL <span class="token keyword">TABLE</span> logs <span class="token punctuation">(</span>
+  user_id <span class="token keyword">BIGINT</span><span class="token punctuation">,</span>
+  <span class="token keyword">action</span>  STRING<span class="token punctuation">,</span>
+  ts      <span class="token keyword">TIMESTAMP</span>
+<span class="token punctuation">)</span>
+PARTITIONED <span class="token keyword">BY</span> <span class="token punctuation">(</span>dt STRING<span class="token punctuation">)</span>
+STORED <span class="token keyword">AS</span> ORC
+LOCATION <span class="token string">'/data/logs/'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li><strong>SerDe（序列化/反序列化）</strong><ul>
@@ -251,19 +259,42 @@ mjx-container[display="true"] + br {
 <li><a target="_blank" rel="noopener" href="https://www.slideshare.net/slideshow/hive-quick-start-tutorial/3555281">www.slideshare.net</a></li>
 </ul>
 </blockquote>
-<h3 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作"></a>数据操作</h3><h4 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE TABLE</span> IF <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> example.employee(<br>Id <span class="hljs-type">INT</span> COMMENT <span class="hljs-string">'employeeid'</span>,<br>Company STRING COMMENT <span class="hljs-string">'your company'</span>,<br>Money <span class="hljs-type">FLOAT</span> COMMENT <span class="hljs-string">'work money'</span>,)<br><span class="hljs-type">ROW</span> FORMAT DELIMITED FIELDS TERMINATED <span class="hljs-keyword">BY</span> <span class="hljs-string">','</span> STORED <span class="hljs-keyword">AS</span> TEXTFILE;<br></code></pre></td></tr></table></figure>
+<h3 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作"></a>数据操作</h3><h4 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token operator">NOT</span> <span class="token keyword">EXISTS</span> example<span class="token punctuation">.</span>employee<span class="token punctuation">(</span>
+Id <span class="token keyword">INT</span> <span class="token keyword">COMMENT</span> <span class="token string">'employeeid'</span><span class="token punctuation">,</span>
+Company STRING <span class="token keyword">COMMENT</span> <span class="token string">'your company'</span><span class="token punctuation">,</span>
+Money <span class="token keyword">FLOAT</span> <span class="token keyword">COMMENT</span> <span class="token string">'work money'</span><span class="token punctuation">,</span><span class="token punctuation">)</span>
+<span class="token keyword">ROW</span> FORMAT DELIMITED <span class="token keyword">FIELDS</span> <span class="token keyword">TERMINATED</span> <span class="token keyword">BY</span> <span class="token string">','</span> STORED <span class="token keyword">AS</span> TEXTFILE<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <blockquote>
 <p>可以发现就是对应的 SQL 语句</p>
 </blockquote>
-<h4 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> id, name <span class="hljs-keyword">FROM</span> employee <span class="hljs-keyword">WHERE</span> salary <span class="hljs-operator">&gt;=</span> <span class="hljs-number">10000</span>;<br><span class="hljs-keyword">SELECT</span> department, <span class="hljs-built_in">avg</span>(salary) <span class="hljs-keyword">FROM</span> employee <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> department;<br><span class="hljs-keyword">SELECT</span> id, salary, <span class="hljs-type">date</span> <span class="hljs-keyword">FROM</span> employee_a <span class="hljs-keyword">UNION</span> <span class="hljs-keyword">ALL</span><br><span class="hljs-keyword">SELECT</span> id, salary, <span class="hljs-type">date</span> <span class="hljs-keyword">FROM</span> employee_b;<br></code></pre></td></tr></table></figure>
+<h4 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> id<span class="token punctuation">,</span> name <span class="token keyword">FROM</span> employee <span class="token keyword">WHERE</span> salary <span class="token operator">&gt;=</span> <span class="token number">10000</span><span class="token punctuation">;</span>
+<span class="token keyword">SELECT</span> department<span class="token punctuation">,</span> <span class="token function">avg</span><span class="token punctuation">(</span>salary<span class="token punctuation">)</span> <span class="token keyword">FROM</span> employee <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> department<span class="token punctuation">;</span>
+<span class="token keyword">SELECT</span> id<span class="token punctuation">,</span> salary<span class="token punctuation">,</span> <span class="token keyword">date</span> <span class="token keyword">FROM</span> employee_a <span class="token keyword">UNION</span> <span class="token keyword">ALL</span>
+<span class="token keyword">SELECT</span> id<span class="token punctuation">,</span> salary<span class="token punctuation">,</span> <span class="token keyword">date</span> <span class="token keyword">FROM</span> employee_b<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 加载数据到表（分区）</span><br><span class="hljs-keyword">ALTER TABLE</span> logs <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">PARTITION</span> (dt<span class="hljs-operator">=</span><span class="hljs-string">'2025-06-01'</span>);<br>LOAD DATA INPATH <span class="hljs-string">'/raw/logs/2025-06-01/*.log'</span><br><span class="hljs-keyword">INTO</span> <span class="hljs-keyword">TABLE</span> logs <span class="hljs-keyword">PARTITION</span> (dt<span class="hljs-operator">=</span><span class="hljs-string">'2025-06-01'</span>);<br><span class="hljs-comment">-- 简单查询</span><br><span class="hljs-keyword">SELECT</span> user_id, <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">AS</span> cnt<br><span class="hljs-keyword">FROM</span> logs<br><span class="hljs-keyword">WHERE</span> dt<span class="hljs-operator">=</span><span class="hljs-string">'2025-06-01'</span><br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> user_id<br><span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> cnt <span class="hljs-keyword">DESC</span><br>LIMIT <span class="hljs-number">10</span>;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 加载数据到表（分区）</span>
+<span class="token keyword">ALTER</span> <span class="token keyword">TABLE</span> logs <span class="token keyword">ADD</span> <span class="token keyword">PARTITION</span> <span class="token punctuation">(</span>dt<span class="token operator">=</span><span class="token string">'2025-06-01'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">LOAD</span> <span class="token keyword">DATA</span> INPATH <span class="token string">'/raw/logs/2025-06-01/*.log'</span>
+<span class="token keyword">INTO</span> <span class="token keyword">TABLE</span> logs <span class="token keyword">PARTITION</span> <span class="token punctuation">(</span>dt<span class="token operator">=</span><span class="token string">'2025-06-01'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">-- 简单查询</span>
+<span class="token keyword">SELECT</span> user_id<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> cnt
+<span class="token keyword">FROM</span> logs
+<span class="token keyword">WHERE</span> dt<span class="token operator">=</span><span class="token string">'2025-06-01'</span>
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> user_id
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> cnt <span class="token keyword">DESC</span>
+<span class="token keyword">LIMIT</span> <span class="token number">10</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="窗口函数与高级特性"><a href="#窗口函数与高级特性" class="headerlink" title="窗口函数与高级特性"></a>窗口函数与高级特性</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 统计每个用户每天的前 3 次操作</span><br><span class="hljs-keyword">SELECT</span> dt, user_id, action, ts,<br>  <span class="hljs-built_in">ROW_NUMBER</span>() <span class="hljs-keyword">OVER</span> (<span class="hljs-keyword">PARTITION</span> <span class="hljs-keyword">BY</span> dt, user_id <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> ts) <span class="hljs-keyword">AS</span> rn<br><span class="hljs-keyword">FROM</span> logs<br><span class="hljs-keyword">WHERE</span> dt <span class="hljs-operator">&gt;=</span> <span class="hljs-string">'2025-06-01'</span> <span class="hljs-keyword">AND</span> dt <span class="hljs-operator">&lt;=</span> <span class="hljs-string">'2025-06-07'</span><br><span class="hljs-keyword">AND</span> rn <span class="hljs-operator">&lt;=</span> <span class="hljs-number">3</span>;<br></code></pre></td></tr></table></figure>
+<h3 id="窗口函数与高级特性"><a href="#窗口函数与高级特性" class="headerlink" title="窗口函数与高级特性"></a>窗口函数与高级特性</h3><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 统计每个用户每天的前 3 次操作</span>
+<span class="token keyword">SELECT</span> dt<span class="token punctuation">,</span> user_id<span class="token punctuation">,</span> <span class="token keyword">action</span><span class="token punctuation">,</span> ts<span class="token punctuation">,</span>
+  ROW_NUMBER<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">OVER</span> <span class="token punctuation">(</span><span class="token keyword">PARTITION</span> <span class="token keyword">BY</span> dt<span class="token punctuation">,</span> user_id <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> ts<span class="token punctuation">)</span> <span class="token keyword">AS</span> rn
+<span class="token keyword">FROM</span> logs
+<span class="token keyword">WHERE</span> dt <span class="token operator">&gt;=</span> <span class="token string">'2025-06-01'</span> <span class="token operator">AND</span> dt <span class="token operator">&lt;=</span> <span class="token string">'2025-06-07'</span>
+<span class="token operator">AND</span> rn <span class="token operator">&lt;=</span> <span class="token number">3</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="与-Spark-集成"><a href="#与-Spark-集成" class="headerlink" title="与 Spark 集成"></a>与 Spark 集成</h3><p>在 Hive on Spark 模式下，HiveQL 会被提交到 Spark 引擎执行，兼享 Spark 的低延迟与丰富算子。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">-- 启动 Hive 使用 Spark 执行引擎<br><span class="hljs-built_in">set</span> hive.execution.engine=spark;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">-- 启动 Hive 使用 Spark 执行引擎
+<span class="token builtin class-name">set</span> <span class="token assign-left variable">hive.execution.engine</span><span class="token operator">=</span>spark<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h2 id="典型应用场景"><a href="#典型应用场景" class="headerlink" title="典型应用场景"></a>典型应用场景</h2><ol>
 <li><p><strong>ETL 批量处理</strong></p>
@@ -301,7 +332,7 @@ mjx-container[display="true"] + br {
 <li><p><strong>开启成本模型优化</strong></p>
 </li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SET</span> hive.cbo.enable<span class="hljs-operator">=</span><span class="hljs-literal">true</span>;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SET</span> hive<span class="token punctuation">.</span>cbo<span class="token punctuation">.</span><span class="token keyword">enable</span><span class="token operator">=</span><span class="token boolean">true</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
 <li><p><strong>利用 Tez/Spark</strong></p>
@@ -315,7 +346,28 @@ mjx-container[display="true"] + br {
 </ul>
 </li>
 </ul>
-<h2 id="示例：用户次日留存率统计"><a href="#示例：用户次日留存率统计" class="headerlink" title="示例：用户次日留存率统计"></a>示例：用户次日留存率统计</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 1. 计算用户首次活跃日期</span><br><span class="hljs-keyword">CREATE TABLE</span> user_first (<br>  user_id <span class="hljs-type">BIGINT</span>,<br>  first_dt STRING<br>)<br>STORED <span class="hljs-keyword">AS</span> ORC<br><span class="hljs-keyword">AS</span><br><span class="hljs-keyword">SELECT</span> user_id, <span class="hljs-built_in">MIN</span>(dt) <span class="hljs-keyword">AS</span> first_dt<br><span class="hljs-keyword">FROM</span> logs<br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> user_id;<br><span class="hljs-comment">-- 2. 次日留存：join 当天活跃用户与第一天活跃日期后一天</span><br><span class="hljs-keyword">SELECT</span> f.first_dt <span class="hljs-keyword">AS</span> reg_dt,<br>       l.dt        <span class="hljs-keyword">AS</span> act_dt,<br>       <span class="hljs-built_in">COUNT</span>(<span class="hljs-keyword">DISTINCT</span> f.user_id)      <span class="hljs-keyword">AS</span> reg_users,<br>       <span class="hljs-built_in">COUNT</span>(<span class="hljs-keyword">DISTINCT</span> l.user_id)      <span class="hljs-keyword">AS</span> retained_users,<br>       ROUND(<span class="hljs-built_in">COUNT</span>(<span class="hljs-keyword">DISTINCT</span> l.user_id) <span class="hljs-operator">/</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-keyword">DISTINCT</span> f.user_id), <span class="hljs-number">4</span>) <span class="hljs-keyword">AS</span> retention_rate<br><span class="hljs-keyword">FROM</span> user_first f<br><span class="hljs-keyword">JOIN</span> logs l<br>  <span class="hljs-keyword">ON</span> f.user_id <span class="hljs-operator">=</span> l.user_id<br> <span class="hljs-keyword">AND</span> l.dt <span class="hljs-operator">=</span> date_add(f.first_dt, <span class="hljs-number">1</span>)<br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> f.first_dt, l.dt<br><span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> f.first_dt;<br></code></pre></td></tr></table></figure>
+<h2 id="示例：用户次日留存率统计"><a href="#示例：用户次日留存率统计" class="headerlink" title="示例：用户次日留存率统计"></a>示例：用户次日留存率统计</h2><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 1. 计算用户首次活跃日期</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> user_first <span class="token punctuation">(</span>
+  user_id <span class="token keyword">BIGINT</span><span class="token punctuation">,</span>
+  first_dt STRING
+<span class="token punctuation">)</span>
+STORED <span class="token keyword">AS</span> ORC
+<span class="token keyword">AS</span>
+<span class="token keyword">SELECT</span> user_id<span class="token punctuation">,</span> <span class="token function">MIN</span><span class="token punctuation">(</span>dt<span class="token punctuation">)</span> <span class="token keyword">AS</span> first_dt
+<span class="token keyword">FROM</span> logs
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> user_id<span class="token punctuation">;</span>
+<span class="token comment">-- 2. 次日留存：join 当天活跃用户与第一天活跃日期后一天</span>
+<span class="token keyword">SELECT</span> f<span class="token punctuation">.</span>first_dt <span class="token keyword">AS</span> reg_dt<span class="token punctuation">,</span>
+       l<span class="token punctuation">.</span>dt        <span class="token keyword">AS</span> act_dt<span class="token punctuation">,</span>
+       <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token keyword">DISTINCT</span> f<span class="token punctuation">.</span>user_id<span class="token punctuation">)</span>      <span class="token keyword">AS</span> reg_users<span class="token punctuation">,</span>
+       <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token keyword">DISTINCT</span> l<span class="token punctuation">.</span>user_id<span class="token punctuation">)</span>      <span class="token keyword">AS</span> retained_users<span class="token punctuation">,</span>
+       <span class="token function">ROUND</span><span class="token punctuation">(</span><span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token keyword">DISTINCT</span> l<span class="token punctuation">.</span>user_id<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token keyword">DISTINCT</span> f<span class="token punctuation">.</span>user_id<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> retention_rate
+<span class="token keyword">FROM</span> user_first f
+<span class="token keyword">JOIN</span> logs l
+  <span class="token keyword">ON</span> f<span class="token punctuation">.</span>user_id <span class="token operator">=</span> l<span class="token punctuation">.</span>user_id
+ <span class="token operator">AND</span> l<span class="token punctuation">.</span>dt <span class="token operator">=</span> date_add<span class="token punctuation">(</span>f<span class="token punctuation">.</span>first_dt<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> f<span class="token punctuation">.</span>first_dt<span class="token punctuation">,</span> l<span class="token punctuation">.</span>dt
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> f<span class="token punctuation">.</span>first_dt<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <hr>
 <h1 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h1><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749361767853GqNBbN8ARo70Ijxlv3dcyQ5rn0v.png" alt="1749361767853GqNBbN8ARo70Ijxlv3dcyQ5rn0v.png"></p>
@@ -340,7 +392,7 @@ mjx-container[display="true"] + br {
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" rel="tag">课程学习</a>
+            <a class="-none-link" href="/tags/course/" rel="tag">课程学习</a>
             </section>
         
     
@@ -352,7 +404,7 @@ mjx-container[display="true"] + br {
         
             <div class="author-info">
                 <h4>ttkqwe</h4>
-                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
             </div>
         </section>
     
@@ -376,7 +428,7 @@ mjx-container[display="true"] + br {
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-tags">标签云：</h3>
-                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                    <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/deep-learning/" style="font-size: 14px;">深度学习</a> <a href="/tags/development/" style="font-size: 18px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 10px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/course/" style="font-size: 20px;">课程学习</a> <a href="/tags/troubleshooting/" style="font-size: 18px;">问题解决</a>
                 </div>
             </div>
         </section>

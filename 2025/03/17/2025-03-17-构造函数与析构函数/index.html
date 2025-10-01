@@ -152,7 +152,7 @@ mjx-container[display="true"] + br {
         <div class="has-child">
             <a href>分类</a>
             <div class="sub-menu">
-                
+                <a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
             </div>
         </div>
         
@@ -195,7 +195,23 @@ mjx-container[display="true"] + br {
 <li>默认构造函数：如果用户没有定义任何构造函数，编译器会自动生成一个默认构造函数，它不执行任何操作。如果需要，用户也可以显式定义一个默认构造函数。</li>
 <li>构造函数的调用：当创建对象时，构造函数会被自动调用。如果对象是通过直接调用 <code>new</code> 操作符创建的，那么在分配内存后，构造函数会被调用以初始化对象。</li>
 </ul>
-<h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ClassName</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-comment">// 默认构造函数</span><br>    <span class="hljs-built_in">ClassName</span>() {<br>        <span class="hljs-comment">// 初始化代码</span><br>    }<br><br>    <span class="hljs-comment">// 带参数的构造函数</span><br>    <span class="hljs-built_in">ClassName</span>(Type1 param1, Type2 param2) {<br>        <span class="hljs-comment">// 初始化代码，使用参数</span><br>    }<br><br>    <span class="hljs-comment">// 成员初始化列表</span><br>    <span class="hljs-built_in">ClassName</span>(Type1 param1, Type2 param2) : <span class="hljs-built_in">member1</span>(param1), <span class="hljs-built_in">member2</span>(param2) {<br>        <span class="hljs-comment">// 其他初始化代码</span><br>    }<br>};<br></code></pre></td></tr></table></figure>
+<h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">ClassName</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token comment">// 默认构造函数</span>
+    <span class="token function">ClassName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 初始化代码</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 带参数的构造函数</span>
+    <span class="token function">ClassName</span><span class="token punctuation">(</span>Type1 param1<span class="token punctuation">,</span> Type2 param2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 初始化代码，使用参数</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 成员初始化列表</span>
+    <span class="token function">ClassName</span><span class="token punctuation">(</span>Type1 param1<span class="token punctuation">,</span> Type2 param2<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">member1</span><span class="token punctuation">(</span>param1<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">member2</span><span class="token punctuation">(</span>param2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 其他初始化代码</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
 <li>与类同名，没有返回类型。</li>
@@ -204,7 +220,13 @@ mjx-container[display="true"] + br {
 </ul>
 <h2 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h2><p>类的析构函数是类的一种特殊的成员函数，它会在每次删除所创建的对象时执行,用于清理对象在销毁前需要释放的资源。</p>
 <p>析构函数的名称与类的名称是完全相同的，只是在前面加了个波浪号（~）作为前缀，它不会返回任何值，也不能带有任何参数。析构函数有助于在跳出程序（比如关闭文件、释放内存等）前释放资源。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ClassName</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-comment">// 析构函数</span><br>    ~<span class="hljs-built_in">ClassName</span>() {<br>        <span class="hljs-comment">// 清理代码</span><br>    }<br>};<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">ClassName</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token comment">// 析构函数</span>
+    <span class="token operator">~</span><span class="token function">ClassName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 清理代码</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h3><ul>
 <li>与类同名，前面加波浪号（~），没有参数，没有返回类型。</li>
@@ -217,17 +239,84 @@ mjx-container[display="true"] + br {
 <li>默认情况下，编译器会生成默认析构函数，如果用户没有定义任何析构函数。</li>
 </ul>
 <h2 id="成员初始化列表"><a href="#成员初始化列表" class="headerlink" title="成员初始化列表"></a>成员初始化列表</h2><p>成员初始化列表是一种在构造函数体内初始化类成员变量的方式。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp">Line::<span class="hljs-built_in">Line</span>( <span class="hljs-type">double</span> len): <span class="hljs-built_in">length</span>(len)<br>{<br>    cout &lt;&lt; <span class="hljs-string">"Object is being created, length = "</span> &lt;&lt; len &lt;&lt; endl;<br>}<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token class-name">Line</span><span class="token double-colon punctuation">::</span><span class="token function">Line</span><span class="token punctuation">(</span> <span class="token keyword">double</span> len<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token function">length</span><span class="token punctuation">(</span>len<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Object is being created, length = "</span> <span class="token operator">&lt;&lt;</span> len <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp">Line::<span class="hljs-built_in">Line</span>( <span class="hljs-type">double</span> len)<br>{<br>    length = len;<br>    cout &lt;&lt; <span class="hljs-string">"Object is being created, length = "</span> &lt;&lt; len &lt;&lt; endl;<br>}<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token class-name">Line</span><span class="token double-colon punctuation">::</span><span class="token function">Line</span><span class="token punctuation">(</span> <span class="token keyword">double</span> len<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    length <span class="token operator">=</span> len<span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Object is being created, length = "</span> <span class="token operator">&lt;&lt;</span> len <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp">C::<span class="hljs-built_in">C</span>( <span class="hljs-type">double</span> a, <span class="hljs-type">double</span> b, <span class="hljs-type">double</span> c): <span class="hljs-built_in">X</span>(a), <span class="hljs-built_in">Y</span>(b), <span class="hljs-built_in">Z</span>(c)<br>{<br>  ....<br>}<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token class-name">C</span><span class="token double-colon punctuation">::</span><span class="token function">C</span><span class="token punctuation">(</span> <span class="token keyword">double</span> a<span class="token punctuation">,</span> <span class="token keyword">double</span> b<span class="token punctuation">,</span> <span class="token keyword">double</span> c<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token function">X</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">Y</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">Z</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="特点-2"><a href="#特点-2" class="headerlink" title="特点"></a>特点</h3><ul>
 <li>更高效的初始化方式，特别是在初始化常量成员或引用成员时。</li>
 <li>直接在构造函数调用前初始化成员变量。</li>
 </ul>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComputer</span><br>{<br><span class="hljs-keyword">public</span>:<br>    ~<span class="hljs-built_in">MyComputer</span>();_                                  <span class="hljs-comment">// 这是析构函数声明_</span><br>    <span class="hljs-built_in">MyComputer</span>(string cpu, string gpu, <span class="hljs-type">int</span> memory);_ <span class="hljs-comment">// 这是构造函数声明_</span><br>    <span class="hljs-function">string <span class="hljs-title">get_cpu</span><span class="hljs-params">()</span></span>;_                               <span class="hljs-comment">// 获取CPU信息_</span><br>    <span class="hljs-function">string <span class="hljs-title">get_gpu</span><span class="hljs-params">()</span></span>;_                               <span class="hljs-comment">// 获取GPU信息_</span><br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">get_memory</span><span class="hljs-params">()</span></span>;_                               <span class="hljs-comment">// 获取内存信息_</span><br><br><span class="hljs-keyword">private</span>:<br>    string cpu;<br>    string gpu;<br>    <span class="hljs-type">int</span> memory;<br>};<br><br>_<span class="hljs-comment">// 成员函数定义，包括构造函数_</span><br>MyComputer::<span class="hljs-built_in">MyComputer</span>(string cpu, string gpu, <span class="hljs-type">int</span> memory) : <span class="hljs-built_in">cpu</span>(cpu), <span class="hljs-built_in">gpu</span>(gpu), <span class="hljs-built_in">memory</span>(memory)<br>{<br>    cout &lt;&lt; <span class="hljs-string">"Computer is being created"</span> &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">"CPU: "</span> &lt;&lt; cpu &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">"GPU: "</span> &lt;&lt; gpu &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">"Memory: "</span> &lt;&lt; memory &lt;&lt; <span class="hljs-string">"GB"</span> &lt;&lt; endl;<br>}<br><br>MyComputer::~<span class="hljs-built_in">MyComputer</span>()<br>{<br>    cout &lt;&lt; <span class="hljs-string">"Computer is being destroyed"</span> &lt;&lt; endl;<br>}<br><br><span class="hljs-function">string <span class="hljs-title">MyComputer::get_cpu</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-keyword">return</span> cpu;<br>}<br><br><span class="hljs-function">string <span class="hljs-title">MyComputer::get_gpu</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-keyword">return</span> gpu;<br>}<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">MyComputer::get_memory</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-keyword">return</span> memory;<br>}<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-function">MyComputer <span class="hljs-title">computer</span><span class="hljs-params">(<span class="hljs-string">"Intel 13600kf"</span>, <span class="hljs-string">"NVIDIA RTX 4060Ti"</span>, <span class="hljs-number">16</span>)</span></span>;<br>    cout &lt;&lt; <span class="hljs-string">"CPU: "</span> &lt;&lt; computer.<span class="hljs-built_in">get_cpu</span>() &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">"GPU: "</span> &lt;&lt; computer.<span class="hljs-built_in">get_gpu</span>() &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">"Memory: "</span> &lt;&lt; computer.<span class="hljs-built_in">get_memory</span>() &lt;&lt; <span class="hljs-string">"GB"</span> &lt;&lt; endl;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></table></figure>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string&gt;</span></span>
+
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">MyComputer</span>
+<span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token operator">~</span><span class="token function">MyComputer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>_                                  <span class="token comment">// 这是析构函数声明_</span>
+    <span class="token function">MyComputer</span><span class="token punctuation">(</span>string cpu<span class="token punctuation">,</span> string gpu<span class="token punctuation">,</span> <span class="token keyword">int</span> memory<span class="token punctuation">)</span><span class="token punctuation">;</span>_ <span class="token comment">// 这是构造函数声明_</span>
+    string <span class="token function">get_cpu</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>_                               <span class="token comment">// 获取CPU信息_</span>
+    string <span class="token function">get_gpu</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>_                               <span class="token comment">// 获取GPU信息_</span>
+    <span class="token keyword">int</span> <span class="token function">get_memory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>_                               <span class="token comment">// 获取内存信息_</span>
+
+<span class="token keyword">private</span><span class="token operator">:</span>
+    string cpu<span class="token punctuation">;</span>
+    string gpu<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> memory<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+_<span class="token comment">// 成员函数定义，包括构造函数_</span>
+<span class="token class-name">MyComputer</span><span class="token double-colon punctuation">::</span><span class="token function">MyComputer</span><span class="token punctuation">(</span>string cpu<span class="token punctuation">,</span> string gpu<span class="token punctuation">,</span> <span class="token keyword">int</span> memory<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">cpu</span><span class="token punctuation">(</span>cpu<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">gpu</span><span class="token punctuation">(</span>gpu<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">memory</span><span class="token punctuation">(</span>memory<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Computer is being created"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"CPU: "</span> <span class="token operator">&lt;&lt;</span> cpu <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"GPU: "</span> <span class="token operator">&lt;&lt;</span> gpu <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Memory: "</span> <span class="token operator">&lt;&lt;</span> memory <span class="token operator">&lt;&lt;</span> <span class="token string">"GB"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token class-name">MyComputer</span><span class="token double-colon punctuation">::</span><span class="token operator">~</span><span class="token function">MyComputer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Computer is being destroyed"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+string <span class="token class-name">MyComputer</span><span class="token double-colon punctuation">::</span><span class="token function">get_cpu</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> cpu<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+string <span class="token class-name">MyComputer</span><span class="token double-colon punctuation">::</span><span class="token function">get_gpu</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> gpu<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token class-name">MyComputer</span><span class="token double-colon punctuation">::</span><span class="token function">get_memory</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> memory<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    MyComputer <span class="token function">computer</span><span class="token punctuation">(</span><span class="token string">"Intel 13600kf"</span><span class="token punctuation">,</span> <span class="token string">"NVIDIA RTX 4060Ti"</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"CPU: "</span> <span class="token operator">&lt;&lt;</span> computer<span class="token punctuation">.</span><span class="token function">get_cpu</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"GPU: "</span> <span class="token operator">&lt;&lt;</span> computer<span class="token punctuation">.</span><span class="token function">get_gpu</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Memory: "</span> <span class="token operator">&lt;&lt;</span> computer<span class="token punctuation">.</span><span class="token function">get_memory</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">"GB"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol>
 <li><p>定义一个类 <code>MyComputer</code>：</p>
@@ -276,7 +365,7 @@ mjx-container[display="true"] + br {
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" rel="tag">程序开发</a>
+            <a class="-none-link" href="/tags/development/" rel="tag">程序开发</a>
             </section>
         
     
@@ -288,7 +377,7 @@ mjx-container[display="true"] + br {
         
             <div class="author-info">
                 <h4>ttkqwe</h4>
-                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
             </div>
         </section>
     
@@ -312,7 +401,7 @@ mjx-container[display="true"] + br {
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-tags">标签云：</h3>
-                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                    <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/deep-learning/" style="font-size: 14px;">深度学习</a> <a href="/tags/development/" style="font-size: 18px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 10px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/course/" style="font-size: 20px;">课程学习</a> <a href="/tags/troubleshooting/" style="font-size: 18px;">问题解决</a>
                 </div>
             </div>
         </section>

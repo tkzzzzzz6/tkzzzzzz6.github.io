@@ -152,7 +152,7 @@ mjx-container[display="true"] + br {
         <div class="has-child">
             <a href>分类</a>
             <div class="sub-menu">
-                
+                <a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
             </div>
         </div>
         
@@ -205,24 +205,39 @@ mjx-container[display="true"] + br {
 <li><strong>集合操作</strong>：利用位运算表示集合，常用于状态压缩动态规划（状压 DP）。</li>
 <li><strong>特定问题的优化</strong>：例如，快速求解汉明权重（二进制中 1 的个数）。</li>
 </ul>
-<h3 id="5-位运算的实用技巧"><a href="#5-位运算的实用技巧" class="headerlink" title="5. 位运算的实用技巧"></a>5. 位运算的实用技巧</h3><h4 id="5-1-取绝对值"><a href="#5-1-取绝对值" class="headerlink" title="5.1 取绝对值"></a>5.1 取绝对值</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">Abs</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>{<br>    <span class="hljs-keyword">return</span> (n ^ (n &gt;&gt; <span class="hljs-number">31</span>)) - (n &gt;&gt; <span class="hljs-number">31</span>);<br>}<br></code></pre></td></tr></table></figure>
+<h3 id="5-位运算的实用技巧"><a href="#5-位运算的实用技巧" class="headerlink" title="5. 位运算的实用技巧"></a>5. 位运算的实用技巧</h3><h4 id="5-1-取绝对值"><a href="#5-1-取绝对值" class="headerlink" title="5.1 取绝对值"></a>5.1 取绝对值</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">Abs</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>n <span class="token operator">^</span> <span class="token punctuation">(</span>n <span class="token operator">&gt;&gt;</span> <span class="token number">31</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token punctuation">(</span>n <span class="token operator">&gt;&gt;</span> <span class="token number">31</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>通过位运算实现取绝对值，避免分支判断。</p>
-<h4 id="5-2-求最大-最小值"><a href="#5-2-求最大-最小值" class="headerlink" title="5.2 求最大/最小值"></a>5.2 求最大/最小值</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">max</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>{<br>    <span class="hljs-keyword">return</span> (b &amp; ((a - b) &gt;&gt; <span class="hljs-number">31</span>)) | (a &amp; (~(a - b) &gt;&gt; <span class="hljs-number">31</span>));<br>}<br></code></pre></td></tr></table></figure>
+<h4 id="5-2-求最大-最小值"><a href="#5-2-求最大-最小值" class="headerlink" title="5.2 求最大/最小值"></a>5.2 求最大/最小值</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">max</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>b <span class="token operator">&amp;</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>a <span class="token operator">-</span> b<span class="token punctuation">)</span> <span class="token operator">&gt;&gt;</span> <span class="token number">31</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token punctuation">(</span>a <span class="token operator">&amp;</span> <span class="token punctuation">(</span><span class="token operator">~</span><span class="token punctuation">(</span>a <span class="token operator">-</span> b<span class="token punctuation">)</span> <span class="token operator">&gt;&gt;</span> <span class="token number">31</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>利用位运算实现高效的求最大值和最小值操作。</p>
-<h4 id="5-3-判断符号是否相同"><a href="#5-3-判断符号是否相同" class="headerlink" title="5.3 判断符号是否相同"></a>5.3 判断符号是否相同</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isSameSign</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>{<br>    <span class="hljs-keyword">return</span> (x ^ y) &gt;= <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></table></figure>
+<h4 id="5-3-判断符号是否相同"><a href="#5-3-判断符号是否相同" class="headerlink" title="5.3 判断符号是否相同"></a>5.3 判断符号是否相同</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">bool</span> <span class="token function">isSameSign</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>x <span class="token operator">^</span> y<span class="token punctuation">)</span> <span class="token operator">&gt;=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>通过异或运算判断两个数的符号是否相同。</p>
 <h4 id="5-4-操作二进制位"><a href="#5-4-操作二进制位" class="headerlink" title="5.4 操作二进制位"></a>5.4 操作二进制位</h4><ul>
 <li><p>获取某一位的值：</p>
-  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">getBit</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>{ <span class="hljs-keyword">return</span> (a &gt;&gt; b) &amp; <span class="hljs-number">1</span>; }<br><br></code></pre></td></tr></table></figure>
+  <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">getBit</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">(</span>a <span class="token operator">&gt;&gt;</span> b<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
 <li><p>设置某一位为0或1：</p>
-  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">unsetBit</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>{ <span class="hljs-keyword">return</span> a &amp; ~(<span class="hljs-number">1</span> &lt;&lt; b); }<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">setBit</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>{ <span class="hljs-keyword">return</span> a | (<span class="hljs-number">1</span> &lt;&lt; b); }<br></code></pre></td></tr></table></figure></li>
+  <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">unsetBit</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> a <span class="token operator">&amp;</span> <span class="token operator">~</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">setBit</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> a <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
 </ul>
 <h3 id="6-汉明权重与二进制操作"><a href="#6-汉明权重与二进制操作" class="headerlink" title="6. 汉明权重与二进制操作"></a>6. 汉明权重与二进制操作</h3><p>汉明权重是指一个二进制数中 1 的个数。可以通过循环或 <code>lowbit</code> 操作快速求解：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">popcount</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>{<br>    <span class="hljs-type">int</span> cnt = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (x) {<br>        cnt++;<br>        x -= x &amp; -x;<br>    }<br>    <span class="hljs-keyword">return</span> cnt;<br>}<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">popcount</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> cnt <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        cnt<span class="token operator">++</span><span class="token punctuation">;</span>
+        x <span class="token operator">-=</span> x <span class="token operator">&amp;</span> <span class="token operator">-</span>x<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> cnt<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="7-内建函数"><a href="#7-内建函数" class="headerlink" title="7. 内建函数"></a>7. 内建函数</h3><p>GCC 提供了一些位运算相关的内建函数，例如：</p>
 <ul>
@@ -252,7 +267,7 @@ mjx-container[display="true"] + br {
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" rel="tag">算法练习</a>
+            <a class="-none-link" href="/tags/algorithm-practice/" rel="tag">算法练习</a>
             </section>
         
     
@@ -264,7 +279,7 @@ mjx-container[display="true"] + br {
         
             <div class="author-info">
                 <h4>ttkqwe</h4>
-                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
             </div>
         </section>
     
@@ -288,7 +303,7 @@ mjx-container[display="true"] + br {
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-tags">标签云：</h3>
-                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                    <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/deep-learning/" style="font-size: 14px;">深度学习</a> <a href="/tags/development/" style="font-size: 18px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 10px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/course/" style="font-size: 20px;">课程学习</a> <a href="/tags/troubleshooting/" style="font-size: 18px;">问题解决</a>
                 </div>
             </div>
         </section>

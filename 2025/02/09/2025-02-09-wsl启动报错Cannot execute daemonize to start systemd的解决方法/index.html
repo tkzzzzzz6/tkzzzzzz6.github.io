@@ -152,7 +152,7 @@ mjx-container[display="true"] + br {
         <div class="has-child">
             <a href>分类</a>
             <div class="sub-menu">
-                
+                <a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
             </div>
         </div>
         
@@ -172,6 +172,8 @@ mjx-container[display="true"] + br {
             <div class="post-meta">
                 <time class="date">2025.02.09</time>
             
+                <span class="category"><a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a></span>
+            
             </div>
         </section>
         <article class="post-content">
@@ -187,9 +189,9 @@ mjx-container[display="true"] + br {
 <hr>
 <h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><h3 id="1-检查-daemonize-是否安装"><a href="#1-检查-daemonize-是否安装" class="headerlink" title="1. 检查 daemonize 是否安装"></a>1. 检查 daemonize 是否安装</h3><ol>
 <li><p><strong>以 root 身份登录 WSL</strong>：在 Windows 的 CMD 或 PowerShell 中执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wsl -u root<br></code></pre></td></tr></table></figure></li>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">wsl <span class="token parameter variable">-u</span> root<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 <li><p><strong>验证 daemonize 是否存在</strong>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">which</span> daemonize<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">which</span> daemonize<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
 <li>如果无输出，则表示未安装。</li>
@@ -197,25 +199,31 @@ mjx-container[display="true"] + br {
 </li>
 </ol>
 <hr>
-<h3 id="2-安装-daemonize"><a href="#2-安装-daemonize" class="headerlink" title="2. 安装 daemonize"></a>2. 安装 daemonize</h3><h4 id="步骤一：更新软件源"><a href="#步骤一：更新软件源" class="headerlink" title="步骤一：更新软件源"></a>步骤一：更新软件源</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt update<br></code></pre></td></tr></table></figure>
+<h3 id="2-安装-daemonize"><a href="#2-安装-daemonize" class="headerlink" title="2. 安装 daemonize"></a>2. 安装 daemonize</h3><h4 id="步骤一：更新软件源"><a href="#步骤一：更新软件源" class="headerlink" title="步骤一：更新软件源"></a>步骤一：更新软件源</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> update<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h4 id="步骤二：尝试安装-daemonize"><a href="#步骤二：尝试安装-daemonize" class="headerlink" title="步骤二：尝试安装 daemonize"></a>步骤二：尝试安装 daemonize</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install daemonize<br></code></pre></td></tr></table></figure>
+<h4 id="步骤二：尝试安装-daemonize"><a href="#步骤二：尝试安装-daemonize" class="headerlink" title="步骤二：尝试安装 daemonize"></a>步骤二：尝试安装 daemonize</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> daemonize<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <hr>
 <h3 id="3-处理安装报错-E-Unable-to-locate-package-daemonize"><a href="#3-处理安装报错-E-Unable-to-locate-package-daemonize" class="headerlink" title="3. 处理安装报错 E: Unable to locate package daemonize"></a>3. 处理安装报错 <code>E: Unable to locate package daemonize</code></h3><p>若出现此错误，可能是软件源未正确配置。需手动更新软件源：</p>
-<h4 id="方案一：使用-Ubuntu-官方源（推荐国际用户）"><a href="#方案一：使用-Ubuntu-官方源（推荐国际用户）" class="headerlink" title="方案一：使用 Ubuntu 官方源（推荐国际用户）"></a>方案一：使用 Ubuntu 官方源（推荐国际用户）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> sh -c <span class="hljs-string">'echo "deb http://archive.ubuntu.com/ubuntu/ jammy main restricted universe multiverse" &gt; /etc/apt/sources.list'</span><br><span class="hljs-built_in">sudo</span> sh -c <span class="hljs-string">'echo "deb http://archive.ubuntu.com/ubuntu/ jammy-updates main restricted universe multiverse" &gt;&gt; /etc/apt/sources.list'</span><br><span class="hljs-built_in">sudo</span> sh -c <span class="hljs-string">'echo "deb http://archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse" &gt;&gt; /etc/apt/sources.list'</span><br><span class="hljs-built_in">sudo</span> sh -c <span class="hljs-string">'echo "deb http://security.ubuntu.com/ubuntu/ jammy-security main restricted universe multiverse" &gt;&gt; /etc/apt/sources.list'</span><br></code></pre></td></tr></table></figure>
+<h4 id="方案一：使用-Ubuntu-官方源（推荐国际用户）"><a href="#方案一：使用-Ubuntu-官方源（推荐国际用户）" class="headerlink" title="方案一：使用 Ubuntu 官方源（推荐国际用户）"></a>方案一：使用 Ubuntu 官方源（推荐国际用户）</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">sh</span> <span class="token parameter variable">-c</span> <span class="token string">'echo "deb http://archive.ubuntu.com/ubuntu/ jammy main restricted universe multiverse" &gt; /etc/apt/sources.list'</span>
+<span class="token function">sudo</span> <span class="token function">sh</span> <span class="token parameter variable">-c</span> <span class="token string">'echo "deb http://archive.ubuntu.com/ubuntu/ jammy-updates main restricted universe multiverse" &gt;&gt; /etc/apt/sources.list'</span>
+<span class="token function">sudo</span> <span class="token function">sh</span> <span class="token parameter variable">-c</span> <span class="token string">'echo "deb http://archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse" &gt;&gt; /etc/apt/sources.list'</span>
+<span class="token function">sudo</span> <span class="token function">sh</span> <span class="token parameter variable">-c</span> <span class="token string">'echo "deb http://security.ubuntu.com/ubuntu/ jammy-security main restricted universe multiverse" &gt;&gt; /etc/apt/sources.list'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="方案二：使用国内镜像源（推荐中国用户）"><a href="#方案二：使用国内镜像源（推荐中国用户）" class="headerlink" title="方案二：使用国内镜像源（推荐中国用户）"></a>方案二：使用国内镜像源（推荐中国用户）</h4><p>例如替换为清华源：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> sed -i <span class="hljs-string">"s@http://.*archive.ubuntu.com@https://mirrors.tuna.tsinghua.edu.cn@g"</span> /etc/apt/sources.list<br><span class="hljs-built_in">sudo</span> sed -i <span class="hljs-string">"s@http://.*security.ubuntu.com@https://mirrors.tuna.tsinghua.edu.cn@g"</span> /etc/apt/sources.list<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">"s@http://.*archive.ubuntu.com@https://mirrors.tuna.tsinghua.edu.cn@g"</span> /etc/apt/sources.list
+<span class="token function">sudo</span> <span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">"s@http://.*security.ubuntu.com@https://mirrors.tuna.tsinghua.edu.cn@g"</span> /etc/apt/sources.list<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h4 id="更新并安装"><a href="#更新并安装" class="headerlink" title="更新并安装"></a>更新并安装</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt update &amp;&amp; <span class="hljs-built_in">sudo</span> apt upgrade -y<br><span class="hljs-built_in">sudo</span> apt install daemonize<br></code></pre></td></tr></table></figure>
+<h4 id="更新并安装"><a href="#更新并安装" class="headerlink" title="更新并安装"></a>更新并安装</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> update <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> <span class="token function">apt</span> upgrade <span class="token parameter variable">-y</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> daemonize<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <hr>
 <h3 id="4-验证安装并重启-WSL"><a href="#4-验证安装并重启-WSL" class="headerlink" title="4. 验证安装并重启 WSL"></a>4. 验证安装并重启 WSL</h3><ol>
 <li><p><strong>确认 daemonize 路径</strong>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">which</span> daemonize  <span class="hljs-comment"># 应输出 /usr/bin/daemonize</span><br></code></pre></td></tr></table></figure></li>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">which</span> daemonize  <span class="token comment"># 应输出 /usr/bin/daemonize</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 <li><p><strong>重启 WSL</strong>：<br>关闭 WSL 并重新启动：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">wsl --shutdown<br>wsl<br></code></pre></td></tr></table></figure></li>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">wsl <span class="token parameter variable">--shutdown</span>
+wsl<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
 </ol>
 <hr>
 <h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><h3 id="为什么需要-systemd？"><a href="#为什么需要-systemd？" class="headerlink" title="为什么需要 systemd？"></a>为什么需要 systemd？</h3><ul>
@@ -223,10 +231,14 @@ mjx-container[display="true"] + br {
 <li>WSL2 默认不启用 systemd，但部分工具（如 Docker Desktop、snap）依赖它。</li>
 </ul>
 <h3 id="可选：永久启用-systemd"><a href="#可选：永久启用-systemd" class="headerlink" title="可选：永久启用 systemd"></a>可选：永久启用 systemd</h3><p>若需在 WSL 中默认启用 systemd，可修改 <code>/etc/wsl.conf</code>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">tee</span> /etc/wsl.conf &lt;&lt;<span class="hljs-string">EOF</span><br><span class="hljs-string">[boot]</span><br><span class="hljs-string">systemd=true</span><br><span class="hljs-string">EOF</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">tee</span> /etc/wsl.conf <span class="token operator">&lt;&lt;</span><span class="token string">EOF
+[boot]
+systemd=true
+EOF</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>重启 WSL 生效：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">wsl --shutdown<br>wsl<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">wsl <span class="token parameter variable">--shutdown</span>
+wsl<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <hr>
 <h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h4 id="Q1-安装后仍报错怎么办？"><a href="#Q1-安装后仍报错怎么办？" class="headerlink" title="Q1: 安装后仍报错怎么办？"></a>Q1: 安装后仍报错怎么办？</h4><ul>
@@ -247,13 +259,13 @@ mjx-container[display="true"] + br {
                     <li>上一篇: <a href="/2025/02/10/2025-02-10-%E6%96%87%E8%A8%80%E6%96%87%E8%83%8C%E8%AF%B5%E6%A3%80%E6%B5%8B%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/">文言文背诵检测程序开发</a></li>
                 
                 
-                    <li>下一篇: <a href="/2025/02/08/2025-02-08-%E6%8F%90%E7%A4%BA%E8%AF%8D/">文言文背诵检测程序开发</a></li>
+                    <li>下一篇: <a href="/2025/02/08/2025-02-08-%E6%8F%90%E7%A4%BA%E8%AF%8D%E7%A4%BA%E4%BE%8B/">提示词示例</a></li>
                 
             </ul>
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">问题解决</a>
+            <a class="-none-link" href="/tags/troubleshooting/" rel="tag">问题解决</a>
             </section>
         
     
@@ -265,7 +277,7 @@ mjx-container[display="true"] + br {
         
             <div class="author-info">
                 <h4>ttkqwe</h4>
-                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
             </div>
         </section>
     
@@ -289,7 +301,7 @@ mjx-container[display="true"] + br {
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-tags">标签云：</h3>
-                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                    <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/deep-learning/" style="font-size: 14px;">深度学习</a> <a href="/tags/development/" style="font-size: 18px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 10px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/course/" style="font-size: 20px;">课程学习</a> <a href="/tags/troubleshooting/" style="font-size: 18px;">问题解决</a>
                 </div>
             </div>
         </section>

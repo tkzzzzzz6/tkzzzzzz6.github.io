@@ -152,7 +152,7 @@ mjx-container[display="true"] + br {
         <div class="has-child">
             <a href>分类</a>
             <div class="sub-menu">
-                
+                <a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
             </div>
         </div>
         
@@ -218,14 +218,21 @@ mjx-container[display="true"] + br {
 <h2 id="运行说明"><a href="#运行说明" class="headerlink" title="运行说明"></a>运行说明</h2><ol>
 <li>编译方法</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> src<br>javac *.java<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> src
+javac *.java<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <ol>
 <li>运行方法</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">java Main<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">java</span> Main<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-attribute">src</span>/<br>├── Borrowable<span class="hljs-selector-class">.java</span>     <span class="hljs-comment">// 可借阅接口</span><br>├── LibraryItem<span class="hljs-selector-class">.java</span>    <span class="hljs-comment">// 图书馆物品抽象类</span><br>├── Book<span class="hljs-selector-class">.java</span>           <span class="hljs-comment">// 图书类</span><br>├── Reader<span class="hljs-selector-class">.java</span>         <span class="hljs-comment">// 读者类</span><br>├── Library<span class="hljs-selector-class">.java</span>        <span class="hljs-comment">// 图书馆管理类</span><br>└── Main<span class="hljs-selector-class">.java</span>           <span class="hljs-comment">// 主程序入口</span><br></code></pre></td></tr></table></figure>
+<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><pre class="line-numbers language-none"><code class="language-none">src/
+├── Borrowable.java     // 可借阅接口
+├── LibraryItem.java    // 图书馆物品抽象类
+├── Book.java           // 图书类
+├── Reader.java         // 读者类
+├── Library.java        // 图书馆管理类
+└── Main.java           // 主程序入口<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
 <li>系统使用 ISBN 作为图书的唯一标识</li>
@@ -237,7 +244,115 @@ mjx-container[display="true"] + br {
 <h2 id="Main-代码"><a href="#Main-代码" class="headerlink" title="Main 代码"></a>Main 代码</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://github.com/tkzzzzzz6/My_Java_homework">https://github.com/tkzzzzzz6/My_Java_homework</a>(完整代码链接)</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> {<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {<br>        _printHeader_(<span class="hljs-string">"图书馆管理系统启动"</span>);<br><br>        <span class="hljs-comment">// 创建图书馆</span><br>        <span class="hljs-type">Library</span> <span class="hljs-variable">library</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Library</span>(<span class="hljs-string">"我的图书馆"</span>);<br>        <br>        _printHeader_(<span class="hljs-string">"初始化图书馆藏书"</span>);<br>        <span class="hljs-comment">// 添加图书</span><br>        <span class="hljs-type">Book</span> <span class="hljs-variable">book1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Book</span>(<span class="hljs-string">"Java编程思想"</span>, <span class="hljs-string">"B001"</span>, <span class="hljs-string">"Bruce Eckel"</span>, <span class="hljs-string">"9787111213826"</span>);<br>        <span class="hljs-type">Book</span> <span class="hljs-variable">book2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Book</span>(<span class="hljs-string">"软件工程"</span>, <span class="hljs-string">"B002"</span>, <span class="hljs-string">"Erich Gamma"</span>, <span class="hljs-string">"9787111346365"</span>);<br>        <span class="hljs-type">Book</span> <span class="hljs-variable">book3</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Book</span>(<span class="hljs-string">"算法导论"</span>, <span class="hljs-string">"B003"</span>, <span class="hljs-string">"Thomas H. Cormen"</span>, <span class="hljs-string">"9787111187776"</span>);<br>        <span class="hljs-type">Book</span> <span class="hljs-variable">book4</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Book</span>(<span class="hljs-string">"计算机网络"</span>, <span class="hljs-string">"B004"</span>, <span class="hljs-string">"谢希仁"</span>, <span class="hljs-string">"9787302424645"</span>);<br>        <span class="hljs-type">Book</span> <span class="hljs-variable">book6</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Book</span>(<span class="hljs-string">"深度学习"</span>, <span class="hljs-string">"B006"</span>, <span class="hljs-string">"Abraham Silberschatz"</span>, <span class="hljs-string">"9787111187776"</span>);<br>        <span class="hljs-type">Book</span> <span class="hljs-variable">comic1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Book</span>(<span class="hljs-string">"欢迎来到实力至上主义教室"</span>, <span class="hljs-string">"C007"</span>, <span class="hljs-string">"衣笠彰梧"</span>, <span class="hljs-string">"9784861994950"</span>);<br>        <span class="hljs-type">Book</span> <span class="hljs-variable">comic2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Book</span>(<span class="hljs-string">"进击的巨人"</span>, <span class="hljs-string">"C004"</span>, <span class="hljs-string">"谏山创"</span>, <span class="hljs-string">"9787115270532"</span>);<br><br>        <span class="hljs-comment">// 添加图书到图书馆</span><br>        library.addItem(book1);<br>        library.addItem(book2);<br>        library.addItem(book3);<br>        library.addItem(book4);<br>        library.addItem(book6);<br>        library.addItem(comic1);<br>        library.addItem(comic2);<br><br>        System._out_.println(<span class="hljs-string">"\n当前图书馆藏书总量："</span> + library.getTotalItems() + <span class="hljs-string">" 本"</span>);<br><br>        _printHeader_(<span class="hljs-string">"注册读者信息"</span>);<br>        <span class="hljs-comment">// 创建读者</span><br>        <span class="hljs-type">Reader</span> <span class="hljs-variable">reader1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Reader</span>(<span class="hljs-string">"R001"</span>, <span class="hljs-string">"张三"</span>);<br>        <span class="hljs-type">Reader</span> <span class="hljs-variable">reader2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Reader</span>(<span class="hljs-string">"R002"</span>, <span class="hljs-string">"李四"</span>);<br>        <span class="hljs-type">Reader</span> <span class="hljs-variable">reader3</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Reader</span>(<span class="hljs-string">"R003"</span>, <span class="hljs-string">"王五"</span>);<br><br>        <span class="hljs-comment">// 添加读者到图书馆</span><br>        library.addReader(reader1);<br>        library.addReader(reader2);<br>        library.addReader(reader3);<br>        System._out_.println(<span class="hljs-string">"\n当前注册读者总数："</span> + library.getTotalReaders() + <span class="hljs-string">" 人"</span>);<br><br>        <span class="hljs-comment">// 开馆</span><br>        _printHeader_(<span class="hljs-string">"图书馆开始营业"</span>);<br>        library.openLibrary();<br><br>        <span class="hljs-comment">// 测试借阅</span><br>        _printHeader_(<span class="hljs-string">"借阅测试"</span>);<br>        System._out_.println(<span class="hljs-string">"场景1: "</span> + reader1.getName() + <span class="hljs-string">" 借阅《"</span> + book1.getTitle() + <span class="hljs-string">"》"</span>);<br>        <span class="hljs-keyword">if</span> (library.borrowItem(<span class="hljs-string">"B001"</span>, <span class="hljs-string">"R001"</span>)) {<br>            _printSuccess_(<span class="hljs-string">"借阅成功"</span>);<br>        } <span class="hljs-keyword">else</span> {<br>            _printError_(<span class="hljs-string">"借阅失败"</span>);<br>        }<br><br>        System._out_.println(<span class="hljs-string">"\n场景2: "</span> + reader2.getName() + <span class="hljs-string">" 尝试借阅已借出的《"</span> + book1.getTitle() + <span class="hljs-string">"》"</span>);<br>        <span class="hljs-keyword">if</span> (library.borrowItem(<span class="hljs-string">"B001"</span>, <span class="hljs-string">"R002"</span>)) {<br>            _printSuccess_(<span class="hljs-string">"借阅成功"</span>);<br>        } <span class="hljs-keyword">else</span> {<br>            _printError_(<span class="hljs-string">"借阅失败：图书已被借出"</span>);<br>        }<br><br>        System._out_.println(<span class="hljs-string">"\n场景3: "</span> + reader2.getName() + <span class="hljs-string">" 借阅《"</span> + book2.getTitle() + <span class="hljs-string">"》"</span>);<br>        <span class="hljs-keyword">if</span> (library.borrowItem(<span class="hljs-string">"B002"</span>, <span class="hljs-string">"R002"</span>)) {<br>            _printSuccess_(<span class="hljs-string">"借阅成功"</span>);<br>        } <span class="hljs-keyword">else</span> {<br>            _printError_(<span class="hljs-string">"借阅失败"</span>);<br>        }<br><br>        <span class="hljs-comment">// 测试归还</span><br>        _printHeader_(<span class="hljs-string">"归还测试"</span>);<br>        System._out_.println(<span class="hljs-string">"场景1: "</span> + reader1.getName() + <span class="hljs-string">" 归还《"</span> + book1.getTitle() + <span class="hljs-string">"》"</span>);<br>        <span class="hljs-keyword">if</span> (library.returnItem(<span class="hljs-string">"B001"</span>, <span class="hljs-string">"R001"</span>)) {<br>            _printSuccess_(<span class="hljs-string">"归还成功"</span>);<br>        } <span class="hljs-keyword">else</span> {<br>            _printError_(<span class="hljs-string">"归还失败"</span>);<br>        }<br><br>        System._out_.println(<span class="hljs-string">"\n场景2: "</span> + reader2.getName() + <span class="hljs-string">" 归还《"</span> + comic1.getTitle() + <span class="hljs-string">"》"</span>);<br>        <span class="hljs-keyword">if</span> (library.returnItem(<span class="hljs-string">"C007"</span>, <span class="hljs-string">"R002"</span>)) {<br>            _printSuccess_(<span class="hljs-string">"归还成功"</span>);<br>        } <span class="hljs-keyword">else</span> {<br>            _printError_(<span class="hljs-string">"归还失败"</span>);<br>        }<br><br>        <span class="hljs-comment">// 显示可用图书</span><br>        _printHeader_(<span class="hljs-string">"当前可借阅图书列表"</span>);<br>        library.printAvailableBooks();<br><br>        <span class="hljs-comment">// 闭馆</span><br>        _printHeader_(<span class="hljs-string">"图书馆闭馆"</span>);<br>        library.closeLibrary();<br>        <br>        _printHeader_(<span class="hljs-string">"系统运行结束"</span>);<br>    }<br><br>    <span class="hljs-comment">// 美化输出的辅助方法</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">printHeader</span><span class="hljs-params">(String message)</span> {<br>        System._out_.println(<span class="hljs-string">"\n"</span> + <span class="hljs-string">"="</span>.repeat(<span class="hljs-number">50</span>));<br>        System._out_.println(<span class="hljs-string">"&gt;&gt;&gt; "</span> + message);<br>        System._out_.println(<span class="hljs-string">"="</span>.repeat(<span class="hljs-number">50</span>));<br>    }<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">printSuccess</span><span class="hljs-params">(String message)</span> {<br>        System._out_.println(<span class="hljs-string">"[成功] "</span> + message);<br>    }<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">printError</span><span class="hljs-params">(String message)</span> {<br>        System._out_.println(<span class="hljs-string">"[失败] "</span> + message);<br>    }<br>}<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">public class Main {
+    public static void main(String[] args) {
+        _printHeader_("图书馆管理系统启动");
+
+        // 创建图书馆
+        Library library = new Library("我的图书馆");
+        
+        _printHeader_("初始化图书馆藏书");
+        // 添加图书
+        Book book1 = new Book("Java编程思想", "B001", "Bruce Eckel", "9787111213826");
+        Book book2 = new Book("软件工程", "B002", "Erich Gamma", "9787111346365");
+        Book book3 = new Book("算法导论", "B003", "Thomas H. Cormen", "9787111187776");
+        Book book4 = new Book("计算机网络", "B004", "谢希仁", "9787302424645");
+        Book book6 = new Book("深度学习", "B006", "Abraham Silberschatz", "9787111187776");
+        Book comic1 = new Book("欢迎来到实力至上主义教室", "C007", "衣笠彰梧", "9784861994950");
+        Book comic2 = new Book("进击的巨人", "C004", "谏山创", "9787115270532");
+
+        // 添加图书到图书馆
+        library.addItem(book1);
+        library.addItem(book2);
+        library.addItem(book3);
+        library.addItem(book4);
+        library.addItem(book6);
+        library.addItem(comic1);
+        library.addItem(comic2);
+
+        System._out_.println("\n当前图书馆藏书总量：" + library.getTotalItems() + " 本");
+
+        _printHeader_("注册读者信息");
+        // 创建读者
+        Reader reader1 = new Reader("R001", "张三");
+        Reader reader2 = new Reader("R002", "李四");
+        Reader reader3 = new Reader("R003", "王五");
+
+        // 添加读者到图书馆
+        library.addReader(reader1);
+        library.addReader(reader2);
+        library.addReader(reader3);
+        System._out_.println("\n当前注册读者总数：" + library.getTotalReaders() + " 人");
+
+        // 开馆
+        _printHeader_("图书馆开始营业");
+        library.openLibrary();
+
+        // 测试借阅
+        _printHeader_("借阅测试");
+        System._out_.println("场景1: " + reader1.getName() + " 借阅《" + book1.getTitle() + "》");
+        if (library.borrowItem("B001", "R001")) {
+            _printSuccess_("借阅成功");
+        } else {
+            _printError_("借阅失败");
+        }
+
+        System._out_.println("\n场景2: " + reader2.getName() + " 尝试借阅已借出的《" + book1.getTitle() + "》");
+        if (library.borrowItem("B001", "R002")) {
+            _printSuccess_("借阅成功");
+        } else {
+            _printError_("借阅失败：图书已被借出");
+        }
+
+        System._out_.println("\n场景3: " + reader2.getName() + " 借阅《" + book2.getTitle() + "》");
+        if (library.borrowItem("B002", "R002")) {
+            _printSuccess_("借阅成功");
+        } else {
+            _printError_("借阅失败");
+        }
+
+        // 测试归还
+        _printHeader_("归还测试");
+        System._out_.println("场景1: " + reader1.getName() + " 归还《" + book1.getTitle() + "》");
+        if (library.returnItem("B001", "R001")) {
+            _printSuccess_("归还成功");
+        } else {
+            _printError_("归还失败");
+        }
+
+        System._out_.println("\n场景2: " + reader2.getName() + " 归还《" + comic1.getTitle() + "》");
+        if (library.returnItem("C007", "R002")) {
+            _printSuccess_("归还成功");
+        } else {
+            _printError_("归还失败");
+        }
+
+        // 显示可用图书
+        _printHeader_("当前可借阅图书列表");
+        library.printAvailableBooks();
+
+        // 闭馆
+        _printHeader_("图书馆闭馆");
+        library.closeLibrary();
+        
+        _printHeader_("系统运行结束");
+    }
+
+    // 美化输出的辅助方法
+    private static void printHeader(String message) {
+        System._out_.println("\n" + "=".repeat(50));
+        System._out_.println("&gt;&gt;&gt; " + message);
+        System._out_.println("=".repeat(50));
+    }
+
+    private static void printSuccess(String message) {
+        System._out_.println("[成功] " + message);
+    }
+
+    private static void printError(String message) {
+        System._out_.println("[失败] " + message);
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
         </article>
         <section class="post-near">
@@ -252,7 +367,7 @@ mjx-container[display="true"] + br {
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" rel="tag">程序开发</a>
+            <a class="-none-link" href="/tags/development/" rel="tag">程序开发</a>
             </section>
         
     
@@ -264,7 +379,7 @@ mjx-container[display="true"] + br {
         
             <div class="author-info">
                 <h4>ttkqwe</h4>
-                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
             </div>
         </section>
     
@@ -288,7 +403,7 @@ mjx-container[display="true"] + br {
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-tags">标签云：</h3>
-                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                    <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/deep-learning/" style="font-size: 14px;">深度学习</a> <a href="/tags/development/" style="font-size: 18px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 10px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/course/" style="font-size: 20px;">课程学习</a> <a href="/tags/troubleshooting/" style="font-size: 18px;">问题解决</a>
                 </div>
             </div>
         </section>

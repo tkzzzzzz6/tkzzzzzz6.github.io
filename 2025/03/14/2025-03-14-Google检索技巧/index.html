@@ -152,7 +152,7 @@ mjx-container[display="true"] + br {
         <div class="has-child">
             <a href>分类</a>
             <div class="sub-menu">
-                
+                <a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
             </div>
         </div>
         
@@ -182,43 +182,56 @@ mjx-container[display="true"] + br {
 <p>参考博客<br><a target="_blank" rel="noopener" href="https://www.freecodecamp.org/chinese/news/how-to-google-like-a-pro-10-tips-for-effective-googling/">如何像专家一样高效使用 Google 搜索</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7054368795640463373">13 个高效使用 Google 搜索的技巧</a></p>
 </blockquote>
 <h2 id="1-使用引号精确搜索（“-”）"><a href="#1-使用引号精确搜索（“-”）" class="headerlink" title="1. 使用引号精确搜索（“ ”）"></a>1. 使用引号精确搜索（<code>“ ”</code>）</h2><p>当你需要搜索特定的短语或句子时，使用双引号可以告诉 Google 只返回包含该确切内容的结果。例如：</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ada">搜索： <span class="hljs-string">"learn JavaScript array"</span><br>结果： 只显示包含“learn JavaScript <span class="hljs-keyword">array</span>”这一完整短语的内容。<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">搜索： "learn JavaScript array"
+结果： 只显示包含“learn JavaScript array”这一完整短语的内容。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h2 id="2-使用连字符排除内容（-）"><a href="#2-使用连字符排除内容（-）" class="headerlink" title="2. 使用连字符排除内容（-）"></a>2. 使用连字符排除内容（<code>-</code>）</h2><p>如果你希望排除某些不相关的搜索结果，可以在关键词后加上连字符。例如：</p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">搜索： <span class="hljs-keyword">JavaScript </span>-wikipedia<br>结果： 排除维基百科中的相关内容。<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">搜索： JavaScript -wikipedia
+结果： 排除维基百科中的相关内容。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h2 id="3-使用星号填充内容（-）"><a href="#3-使用星号填充内容（-）" class="headerlink" title="3. 使用星号填充内容（*）"></a>3. 使用星号填充内容（<code>*</code>）</h2><p>当你只记得部分搜索内容时，可以用星号代替不确定的部分。例如：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql">搜索： Git 撤销 <span class="hljs-keyword">commit</span> <span class="hljs-operator">*</span><br>结果： 显示包含“Git 撤销 <span class="hljs-keyword">commit</span>”后跟任意单词的内容。<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">搜索： Git 撤销 commit *
+结果： 显示包含“Git 撤销 commit”后跟任意单词的内容。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h2 id="4-搜索指定范围（-）"><a href="#4-搜索指定范围（-）" class="headerlink" title="4. 搜索指定范围（...）"></a>4. 搜索指定范围（<code>...</code>）</h2><p>使用“…”可以搜索指定数字范围的内容，比如年份、版本等。例如：</p>
-<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">搜索： JavaScript in 2021.<span class="hljs-string">..2022</span><br>结果： 找到2021年到2022年之间关于JavaScript的相关内容。<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">搜索： JavaScript in 2021...2022
+结果： 找到2021年到2022年之间关于JavaScript的相关内容。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h2 id="5-搜索指定站点内容（site-）"><a href="#5-搜索指定站点内容（site-）" class="headerlink" title="5. 搜索指定站点内容（site:）"></a>5. 搜索指定站点内容（<code>site:</code>）</h2><p>如果你想在某个特定网站中搜索内容，可以在关键词后加上 <code>site:网站域名</code>。例如：</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ada">搜索： javascript <span class="hljs-keyword">Array</span> site:w3schools.com<br>结果： 在W3Schools网站中查找关于JavaScript数组的内容。<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">搜索： javascript Array site:w3schools.com
+结果： 在W3Schools网站中查找关于JavaScript数组的内容。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h2 id="6-搜索指定文件类型内容（filetype-）"><a href="#6-搜索指定文件类型内容（filetype-）" class="headerlink" title="6. 搜索指定文件类型内容（filetype:）"></a>6. 搜索指定文件类型内容（<code>filetype:</code>）</h2><p>如果你需要查找特定文件类型的内容，比如电子书、文档等，可以使用 <code>filetype:</code> 后跟文件扩展名。例如：</p>
-<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs elm">搜索： <span class="hljs-type">React</span> ebook file<span class="hljs-keyword">type</span>:pdf<br>结果： 找到<span class="hljs-type">React</span>相关的<span class="hljs-type">PDF</span>电子书。<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">搜索： React ebook filetype:pdf
+结果： 找到React相关的PDF电子书。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h2 id="7-查找多个关键字（AND）"><a href="#7-查找多个关键字（AND）" class="headerlink" title="7. 查找多个关键字（AND）"></a>7. 查找多个关键字（<code>AND</code>）</h2><p>当你需要同时查找多个关键字时，可以使用 <code>AND</code> 连接它们。例如：</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs armasm">搜索： React <span class="hljs-keyword">AND</span> CSS<br>结果： 找到同时包含React和CSS的内容。<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">搜索： React AND CSS
+结果： 找到同时包含React和CSS的内容。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h2 id="8-查找其中一个关键字（OR）"><a href="#8-查找其中一个关键字（OR）" class="headerlink" title="8. 查找其中一个关键字（OR）"></a>8. 查找其中一个关键字（<code>OR</code>）</h2><p>如果你想查找多个关键字中的任意一个，可以使用 <code>OR</code>。例如：</p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">搜索： React <span class="hljs-keyword">OR </span>Vue<br>结果： 找到包含React或Vue的内容。<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">搜索： React OR Vue
+结果： 找到包含React或Vue的内容。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h2 id="9-查询关键字的定义（define-）"><a href="#9-查询关键字的定义（define-）" class="headerlink" title="9. 查询关键字的定义（define:）"></a>9. 查询关键字的定义（<code>define:</code>）</h2><p>如果你想知道某个单词的定义，可以在其前面加上 <code>define:</code>。例如：</p>
-<figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs puppet">搜索： <span class="hljs-keyword">define</span>: <span class="hljs-section">JavaScript</span><br>结果： 找到JavaScript的定义。<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">搜索： define: JavaScript
+结果： 找到JavaScript的定义。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h2 id="10-搜索相关内容（-）"><a href="#10-搜索相关内容（-）" class="headerlink" title="10. 搜索相关内容（+）"></a>10. 搜索相关内容（<code>+</code>）</h2><p>当你想要搜索多个相关的关键词时，可以使用加号连接它们。例如：</p>
-<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs maxima">搜索： CSS <span class="hljs-built_in">style</span>+React<br>结果： 找到同时包含CSS样式和React相关内容。<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">搜索： CSS style+React
+结果： 找到同时包含CSS样式和React相关内容。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h2 id="11-查找相似网站（related-）"><a href="#11-查找相似网站（related-）" class="headerlink" title="11. 查找相似网站（related:）"></a>11. 查找相似网站（<code>related:</code>）</h2><p>如果你想找到与某个网站类似的其他网站，可以在其前面加上 <code>related:</code>。例如：</p>
-<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">搜索： related</span><span class="hljs-punctuation">:</span> <span class="hljs-string">w3schools.com</span><br>结果： 找到与W3Schools类似的编程学习网站。<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">搜索： related: w3schools.com
+结果： 找到与W3Schools类似的编程学习网站。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h2 id="12-搜索指定站点内容（site-）"><a href="#12-搜索指定站点内容（site-）" class="headerlink" title="12. 搜索指定站点内容（site:）"></a>12. 搜索指定站点内容（<code>site:</code>）</h2><p>与第 5 点类似，使用 <code>site:</code> 可以搜索指定站点中的内容。例如：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">搜索： React site:github<span class="hljs-selector-class">.com</span><br>结果： 找到GitHub上关于React的内容。<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">搜索： React site:github.com
+结果： 找到GitHub上关于React的内容。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h2 id="13-搜索指定时间范围（before-、after-）"><a href="#13-搜索指定时间范围（before-、after-）" class="headerlink" title="13. 搜索指定时间范围（before:、after:）"></a>13. 搜索指定时间范围（<code>before:</code>、<code>after:</code>）</h2><p>如果你需要查找某个时间范围内的内容，可以使用 <code>before:</code> 或 <code>after:</code>。例如：</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs applescript">搜索： <span class="hljs-keyword">after</span>:<span class="hljs-number">2021</span> learn react<br>结果： 找到<span class="hljs-number">2021</span>年之后关于学习React的内容。<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">搜索： after:2021 learn react
+结果： 找到2021年之后关于学习React的内容。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
         </article>
         <section class="post-near">
@@ -233,7 +246,7 @@ mjx-container[display="true"] + br {
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">问题解决</a>
+            <a class="-none-link" href="/tags/troubleshooting/" rel="tag">问题解决</a>
             </section>
         
     
@@ -245,7 +258,7 @@ mjx-container[display="true"] + br {
         
             <div class="author-info">
                 <h4>ttkqwe</h4>
-                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
             </div>
         </section>
     
@@ -269,7 +282,7 @@ mjx-container[display="true"] + br {
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-tags">标签云：</h3>
-                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                    <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/deep-learning/" style="font-size: 14px;">深度学习</a> <a href="/tags/development/" style="font-size: 18px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 10px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/course/" style="font-size: 20px;">课程学习</a> <a href="/tags/troubleshooting/" style="font-size: 18px;">问题解决</a>
                 </div>
             </div>
         </section>

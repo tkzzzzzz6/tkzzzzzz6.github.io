@@ -152,7 +152,7 @@ mjx-container[display="true"] + br {
         <div class="has-child">
             <a href>分类</a>
             <div class="sub-menu">
-                
+                <a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
             </div>
         </div>
         
@@ -199,7 +199,71 @@ mjx-container[display="true"] + br {
 <li>虚函数的调用是<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=227971983&content_type=Article&match_order=1&q=%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A&zhida_source=entity">动态绑定</a>（Dynamic Binding）的，即在运行时根据指针或引用所指向的对象类型来选择调用哪个函数，从而实现动态多态性。</li>
 <li>抽象类是一种不能直接实例化的类，只能被其他类继承并实现其虚函数。通过定义<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=227971983&content_type=Article&match_order=1&q=%E7%BA%AF%E8%99%9A%E5%87%BD%E6%95%B0&zhida_source=entity">纯虚函数</a>（Pure Virtual Function），可以使得一个类成为抽象类，强制其子类必须实现该函数。</li>
 </ol>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 形状基类，定义了计算面积和周长的虚函数</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Shape</span> {<br><span class="hljs-keyword">public</span>:<br>   <span class="hljs-comment">// 计算面积的虚函数，提供默认实</span><br>   <span class="hljs-comment">// 使用virtual关键字，允许派生类重写</span><br>   <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">double</span> <span class="hljs-title">calculateArea</span><span class="hljs-params">()</span> </span>{<br>       <span class="hljs-keyword">return</span> <span class="hljs-number">0.0</span>; <span class="hljs-comment">// 基类提供默认实现</span><br>   }<br><br>   <span class="hljs-comment">// 计算周长的虚函数，提供默认实现</span><br>   <span class="hljs-comment">// 使用virtual关键字，允许派生类重写</span><br>   <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">double</span> <span class="hljs-title">calculatePerimeter</span><span class="hljs-params">()</span> </span>{<br>       <span class="hljs-keyword">return</span> <span class="hljs-number">0.0</span>; <span class="hljs-comment">// 基类提供默认实现</span><br>   }<br><br>   <span class="hljs-comment">// 虚析构函数，确保派生类对象正确释放</span><br>   <span class="hljs-keyword">virtual</span> ~<span class="hljs-built_in">Shape</span>() {} <span class="hljs-comment">// 虚析构函数</span><br>};<br><br><span class="hljs-comment">// 矩形类，继承自Shape基类</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Rectangle</span> : <span class="hljs-keyword">public</span> Shape {<br><span class="hljs-keyword">private</span>:<br>   <span class="hljs-comment">// 矩形的私有成员：宽和高</span><br>   <span class="hljs-type">double</span> width;<br>   <span class="hljs-type">double</span> height;<br><br><span class="hljs-keyword">public</span>:<br>   <span class="hljs-comment">// 构造函数，初始化矩形的宽和高</span><br>   <span class="hljs-built_in">Rectangle</span>(<span class="hljs-type">double</span> w, <span class="hljs-type">double</span> h) : <span class="hljs-built_in">width</span>(w), <span class="hljs-built_in">height</span>(h) {}<br><br>   <span class="hljs-comment">// 重写基类的calculateArea虚函数</span><br>   <span class="hljs-comment">// override关键字确保正确重写基类虚函数</span><br>   <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">calculateArea</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span> </span>{<br>       <span class="hljs-keyword">return</span> width * height; <span class="hljs-comment">// 矩形面积计算</span><br>   }<br><br>   <span class="hljs-comment">// 重写基类的calculatePerimeter虚函数</span><br>   <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">calculatePerimeter</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span> </span>{<br>       <span class="hljs-keyword">return</span> <span class="hljs-number">2</span> * (width + height); <span class="hljs-comment">// 矩形周长计算</span><br>   }<br>};<br><br><span class="hljs-comment">// 圆形类，继承自Shape基类</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Circle</span> : <span class="hljs-keyword">public</span> Shape {<br><span class="hljs-keyword">private</span>:<br>   <span class="hljs-comment">// 圆形的私有成员：半径</span><br>   <span class="hljs-type">double</span> radius;<br>   <span class="hljs-comment">// 圆周率常量</span><br>   <span class="hljs-type">const</span> <span class="hljs-type">double</span> PI = <span class="hljs-number">3.14159</span>;<br><br><span class="hljs-keyword">public</span>:<br>   <span class="hljs-comment">// 构造函数，初始化圆形的半径</span><br>   <span class="hljs-built_in">Circle</span>(<span class="hljs-type">double</span> r) : <span class="hljs-built_in">radius</span>(r) {}<br><br>   <span class="hljs-comment">// 重写基类的calculateArea虚函数</span><br>   <span class="hljs-comment">// override关键字确保正确重写基类虚函数</span><br>   <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">calculateArea</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span> </span>{<br>       <span class="hljs-keyword">return</span> PI * radius * radius; <span class="hljs-comment">// 圆形面积计算</span><br>   }<br><br>   <span class="hljs-comment">// 重写基类的calculatePerimeter虚函数</span><br>   <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">calculatePerimeter</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span> </span>{<br>       <span class="hljs-keyword">return</span> <span class="hljs-number">2</span> * PI * radius; <span class="hljs-comment">// 圆形周长计算</span><br>   }<br>};<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 形状基类，定义了计算面积和周长的虚函数</span>
+<span class="token keyword">class</span> <span class="token class-name">Shape</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+   <span class="token comment">// 计算面积的虚函数，提供默认实</span>
+   <span class="token comment">// 使用virtual关键字，允许派生类重写</span>
+   <span class="token keyword">virtual</span> <span class="token keyword">double</span> <span class="token function">calculateArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">return</span> <span class="token number">0.0</span><span class="token punctuation">;</span> <span class="token comment">// 基类提供默认实现</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token comment">// 计算周长的虚函数，提供默认实现</span>
+   <span class="token comment">// 使用virtual关键字，允许派生类重写</span>
+   <span class="token keyword">virtual</span> <span class="token keyword">double</span> <span class="token function">calculatePerimeter</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">return</span> <span class="token number">0.0</span><span class="token punctuation">;</span> <span class="token comment">// 基类提供默认实现</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token comment">// 虚析构函数，确保派生类对象正确释放</span>
+   <span class="token keyword">virtual</span> <span class="token operator">~</span><span class="token function">Shape</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment">// 虚析构函数</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 矩形类，继承自Shape基类</span>
+<span class="token keyword">class</span> <span class="token class-name">Rectangle</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">Shape</span></span> <span class="token punctuation">{</span>
+<span class="token keyword">private</span><span class="token operator">:</span>
+   <span class="token comment">// 矩形的私有成员：宽和高</span>
+   <span class="token keyword">double</span> width<span class="token punctuation">;</span>
+   <span class="token keyword">double</span> height<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span><span class="token operator">:</span>
+   <span class="token comment">// 构造函数，初始化矩形的宽和高</span>
+   <span class="token function">Rectangle</span><span class="token punctuation">(</span><span class="token keyword">double</span> w<span class="token punctuation">,</span> <span class="token keyword">double</span> h<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">width</span><span class="token punctuation">(</span>w<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">height</span><span class="token punctuation">(</span>h<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+   <span class="token comment">// 重写基类的calculateArea虚函数</span>
+   <span class="token comment">// override关键字确保正确重写基类虚函数</span>
+   <span class="token keyword">double</span> <span class="token function">calculateArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">override</span> <span class="token punctuation">{</span>
+       <span class="token keyword">return</span> width <span class="token operator">*</span> height<span class="token punctuation">;</span> <span class="token comment">// 矩形面积计算</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token comment">// 重写基类的calculatePerimeter虚函数</span>
+   <span class="token keyword">double</span> <span class="token function">calculatePerimeter</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">override</span> <span class="token punctuation">{</span>
+       <span class="token keyword">return</span> <span class="token number">2</span> <span class="token operator">*</span> <span class="token punctuation">(</span>width <span class="token operator">+</span> height<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 矩形周长计算</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 圆形类，继承自Shape基类</span>
+<span class="token keyword">class</span> <span class="token class-name">Circle</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">Shape</span></span> <span class="token punctuation">{</span>
+<span class="token keyword">private</span><span class="token operator">:</span>
+   <span class="token comment">// 圆形的私有成员：半径</span>
+   <span class="token keyword">double</span> radius<span class="token punctuation">;</span>
+   <span class="token comment">// 圆周率常量</span>
+   <span class="token keyword">const</span> <span class="token keyword">double</span> PI <span class="token operator">=</span> <span class="token number">3.14159</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span><span class="token operator">:</span>
+   <span class="token comment">// 构造函数，初始化圆形的半径</span>
+   <span class="token function">Circle</span><span class="token punctuation">(</span><span class="token keyword">double</span> r<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">radius</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+   <span class="token comment">// 重写基类的calculateArea虚函数</span>
+   <span class="token comment">// override关键字确保正确重写基类虚函数</span>
+   <span class="token keyword">double</span> <span class="token function">calculateArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">override</span> <span class="token punctuation">{</span>
+       <span class="token keyword">return</span> PI <span class="token operator">*</span> radius <span class="token operator">*</span> radius<span class="token punctuation">;</span> <span class="token comment">// 圆形面积计算</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token comment">// 重写基类的calculatePerimeter虚函数</span>
+   <span class="token keyword">double</span> <span class="token function">calculatePerimeter</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">override</span> <span class="token punctuation">{</span>
+       <span class="token keyword">return</span> <span class="token number">2</span> <span class="token operator">*</span> PI <span class="token operator">*</span> radius<span class="token punctuation">;</span> <span class="token comment">// 圆形周长计算</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h1 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h1><p><strong>虚函数只能借助于指针或者引用来达到多态的效果。</strong></p>
 <blockquote>
@@ -207,7 +271,23 @@ mjx-container[display="true"] + br {
 </blockquote>
 <h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1747056760477QGSmb9FB5obI4CxbD3RcFRIynCe.png" alt="1747056760477QGSmb9FB5obI4CxbD3RcFRIynCe.png"></p>
 <h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><h2 id="虚函数声明"><a href="#虚函数声明" class="headerlink" title="虚函数声明"></a>虚函数声明</h2><p>从简单的例子开始</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Animal</span><br>{<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">shout</span><span class="hljs-params">()</span></span><br><span class="hljs-function">    </span>{<br>        cout &lt;&lt; <span class="hljs-string">"动物叫了一声\n"</span>;<br>    }<br>};<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Cat</span> : <span class="hljs-keyword">public</span> Animal<br>{<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">shout</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span></span><br><span class="hljs-function">    </span>{<br>        cout &lt;&lt; <span class="hljs-string">"喵喵喵\n"</span>;<br>    }<br>};<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Animal</span>
+<span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">shout</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        cout <span class="token operator">&lt;&lt;</span> <span class="token string">"动物叫了一声\n"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Cat</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">Animal</span></span>
+<span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">void</span> <span class="token function">shout</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">override</span>
+    <span class="token punctuation">{</span>
+        cout <span class="token operator">&lt;&lt;</span> <span class="token string">"喵喵喵\n"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>解释：</strong></p>
 <ul>
@@ -220,9 +300,32 @@ mjx-container[display="true"] + br {
 </blockquote>
 <h2 id="纯虚函数与抽象类"><a href="#纯虚函数与抽象类" class="headerlink" title="纯虚函数与抽象类"></a>纯虚函数与抽象类</h2><h3 id="纯虚函数"><a href="#纯虚函数" class="headerlink" title="纯虚函数"></a>纯虚函数</h3><p>纯虚函数是指在基类中定义的没有实现的虚函数。使用纯虚函数可以使该函数只有函数原型，而没有具体的实现。注：这里的“=0”表示该函数为纯虚函数。</p>
 <p>纯虚函数的作用是让子类必须实现该函数，并且不能直接创建该类对象（即该类为抽象类）。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Shape</span> {<br><span class="hljs-keyword">public</span>:<br>   <span class="hljs-comment">// 纯虚函数，没有默认实现</span><br>   <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">double</span> <span class="hljs-title">calculateArea</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;<br>   <br>   <span class="hljs-comment">// 包含纯虚函数的类成为抽象类</span><br>   <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;<br>};<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Rectangle</span> : <span class="hljs-keyword">public</span> Shape {<br><span class="hljs-keyword">public</span>:<br>   <span class="hljs-comment">// 必须实现基类的纯虚函数</span><br>   <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">calculateArea</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span> </span>{<br>       <span class="hljs-keyword">return</span> width * height;<br>   }<br>   <br>   <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span> </span>{<br>       <span class="hljs-comment">// 绘制矩形的具体实现</span><br>   }<br><br><span class="hljs-keyword">private</span>:<br>   <span class="hljs-type">double</span> width;<br>   <span class="hljs-type">double</span> height;<br>};<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Shape</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+   <span class="token comment">// 纯虚函数，没有默认实现</span>
+   <span class="token keyword">virtual</span> <span class="token keyword">double</span> <span class="token function">calculateArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+   
+   <span class="token comment">// 包含纯虚函数的类成为抽象类</span>
+   <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">draw</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Rectangle</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">Shape</span></span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+   <span class="token comment">// 必须实现基类的纯虚函数</span>
+   <span class="token keyword">double</span> <span class="token function">calculateArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">override</span> <span class="token punctuation">{</span>
+       <span class="token keyword">return</span> width <span class="token operator">*</span> height<span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+   
+   <span class="token keyword">void</span> <span class="token function">draw</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">override</span> <span class="token punctuation">{</span>
+       <span class="token comment">// 绘制矩形的具体实现</span>
+   <span class="token punctuation">}</span>
+
+<span class="token keyword">private</span><span class="token operator">:</span>
+   <span class="token keyword">double</span> width<span class="token punctuation">;</span>
+   <span class="token keyword">double</span> height<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>解释：</strong></p>
 <ul>
@@ -232,11 +335,53 @@ mjx-container[display="true"] + br {
 <li>这个示例展示了纯虚函数作为接口的设计模式，确保派生类提供必要的具体行为。</li>
 </ul>
 <h3 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h3><p>抽象类是包含纯虚函数的类，它们不能被实例化，只能被继承。抽象类只能用作其他类的基类。如果一个类继承了抽象类，则必须实现所有的纯虚函数，否则该类也会成为抽象类。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Shape</span><br>{<br><span class="hljs-keyword">public</span>:<br>_    <span class="hljs-comment">// 纯虚函数_</span><br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">double</span> <span class="hljs-title">getArea</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;<br>};<br><br>_<span class="hljs-comment">// 继承自抽象类Shape_</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Rectangle</span> : <span class="hljs-keyword">public</span> Shape<br>{<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-type">double</span> **width**;<br>    <span class="hljs-type">double</span> **height**;<br>    <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">getArea</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> **width** * **height**; }<br>};<br><br>_<span class="hljs-comment">// 继承自抽象类Shape_</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Circle</span> : <span class="hljs-keyword">public</span> Shape<br>{<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-type">double</span> **radius**;<br>    <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">getArea</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> <span class="hljs-number">3.14</span> * **radius** * **radius**; }<br>};<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Shape</span>
+<span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+_    <span class="token comment">// 纯虚函数_</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">double</span> <span class="token function">getArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+_<span class="token comment">// 继承自抽象类Shape_</span>
+<span class="token keyword">class</span> <span class="token class-name">Rectangle</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">Shape</span></span>
+<span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">double</span> <span class="token operator">*</span><span class="token operator">*</span>width<span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">;</span>
+    <span class="token keyword">double</span> <span class="token operator">*</span><span class="token operator">*</span>height<span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">;</span>
+    <span class="token keyword">double</span> <span class="token function">getArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token operator">*</span><span class="token operator">*</span>width<span class="token operator">*</span><span class="token operator">*</span> <span class="token operator">*</span> <span class="token operator">*</span><span class="token operator">*</span>height<span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+_<span class="token comment">// 继承自抽象类Shape_</span>
+<span class="token keyword">class</span> <span class="token class-name">Circle</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">Shape</span></span>
+<span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">double</span> <span class="token operator">*</span><span class="token operator">*</span>radius<span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">;</span>
+    <span class="token keyword">double</span> <span class="token function">getArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token number">3.14</span> <span class="token operator">*</span> <span class="token operator">*</span><span class="token operator">*</span>radius<span class="token operator">*</span><span class="token operator">*</span> <span class="token operator">*</span> <span class="token operator">*</span><span class="token operator">*</span>radius<span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>Shape 为抽象类，其中包含纯虚函数 getArea()，Rectangle 和 Circle 均继承自 Shape，并且实现了 getArea()函数的具体内容。</p>
 <h3 id="多重继承中的虚函数"><a href="#多重继承中的虚函数" class="headerlink" title="多重继承中的虚函数"></a>多重继承中的虚函数</h3><p>在多重继承中，如果一个类同时继承了多个基类，而这些基类中都有同名的虚函数，那么子类必须对这些虚函数进行重写并实现。此时，需要使用作用域限定符来指明重写的是哪个基类的虚函数。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Base1</span><br>{<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span> </span>{ cout &lt;&lt; <span class="hljs-string">"Base1::func()"</span> &lt;&lt; endl; }<br>};<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Base2</span><br>{<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span> </span>{ cout &lt;&lt; <span class="hljs-string">"Base2::func()"</span> &lt;&lt; endl; }<br>};<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Derived</span> : <span class="hljs-keyword">public</span> Base1, <span class="hljs-keyword">public</span> Base2<br>{<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span></span><br><span class="hljs-function">    </span>{<br>        Base1::<span class="hljs-built_in">func</span>();<br>        Base2::<span class="hljs-built_in">func</span>();<br>    }<br>};<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Base1</span>
+<span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Base1::func()"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Base2</span>
+<span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Base2::func()"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Derived</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">Base1</span><span class="token punctuation">,</span> <span class="token keyword">public</span> <span class="token class-name">Base2</span></span>
+<span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name">Base1</span><span class="token double-colon punctuation">::</span><span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Base2</span><span class="token double-colon punctuation">::</span><span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>派生类 Derived 同时继承了 Base1 和 Base2，这两个基类中都有名为 func 的虚函数。在 Derived 中，我们通过使用作用域限定符 Base1::和 Base2::，分别调用了两个基类中的虚函数。</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3><ul>
@@ -255,7 +400,66 @@ mjx-container[display="true"] + br {
 </ul>
 </li>
 </ul>
-<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span><br><br><span class="hljs-comment">// 基类Entity，定义了一个虚函数GetName()</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Entity</span> {<br><span class="hljs-keyword">public</span>:<br>   <span class="hljs-comment">// 虚函数，返回一个默认的实体名称</span><br>   <span class="hljs-comment">// 使用virtual关键字，允许派生类重写</span><br>   <span class="hljs-function"><span class="hljs-keyword">virtual</span> std::string <span class="hljs-title">GetName</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> <span class="hljs-string">"Entity"</span>; }<br>};<br><br><span class="hljs-comment">// 派生类Player，继承自Entity</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Player</span> : <span class="hljs-keyword">public</span> Entity {<br><span class="hljs-keyword">private</span>:<br>   <span class="hljs-comment">// 私有成员，存储玩家名称</span><br>   std::string m_Name;<br><br><span class="hljs-keyword">public</span>:<br>   <span class="hljs-comment">// 构造函数，使用传入的名称初始化玩家</span><br>   <span class="hljs-built_in">Player</span>(<span class="hljs-type">const</span> std::string&amp; name) :<span class="hljs-built_in">m_Name</span>(name) {};<br><br>   <span class="hljs-comment">// 重写基类的GetName()虚函数</span><br>   <span class="hljs-comment">// override关键字确保正确重写基类虚函数</span><br>   <span class="hljs-function">std::string <span class="hljs-title">GetName</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span> </span>{ <span class="hljs-keyword">return</span> m_Name; };<br><br>   <span class="hljs-comment">// 设置玩家名称的成员函数</span><br>   <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">SetName</span><span class="hljs-params">(std::string name)</span> </span>{ m_Name = name; };<br>};<br><br><span class="hljs-comment">// 打印实体名称的函数</span><br><span class="hljs-comment">// 接受一个Entity指针作为参数，体现了多态性</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">PrintName</span><span class="hljs-params">(Entity* entity)</span> </span>{<br>   <span class="hljs-comment">// 调用虚函数GetName()，实际执行的是对象的具体实现</span><br>   std::cout &lt;&lt; entity-&gt;<span class="hljs-built_in">GetName</span>() &lt;&lt; std::endl;<br>};<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>   <span class="hljs-comment">// 创建一个基类Entity对象的指针</span><br>   Entity* e = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Entity</span>();<br>   <span class="hljs-comment">// 调用PrintName()，将打印"Entity"</span><br>   <span class="hljs-built_in">PrintName</span>(e);<br><br>   <span class="hljs-comment">// 创建一个Player对象，名称为"tanke"</span><br>   Player* p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Player</span>(<span class="hljs-string">"tanke"</span>);<br>   <span class="hljs-comment">// 调用PrintName()，将打印"tanke"</span><br>   <span class="hljs-built_in">PrintName</span>(p);<br><br>   <span class="hljs-comment">// 修改Player对象的名称为"wangjie"</span><br>   p-&gt;<span class="hljs-built_in">SetName</span>(<span class="hljs-string">"wangjie"</span>);<br><br>   <span class="hljs-comment">// 将Player指针赋值给基类指针，体现了多态性</span><br>   Entity* e1 = p;<br>   <span class="hljs-comment">// 调用PrintName()，将打印"wangjie"</span><br>   <span class="hljs-built_in">PrintName</span>(p);<br><br>   <span class="hljs-comment">// 等待用户输入，保持窗口打开</span><br>   std::cin.<span class="hljs-built_in">get</span>();<br><br>   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></table></figure>
+<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string&gt;</span></span>
+
+<span class="token comment">// 基类Entity，定义了一个虚函数GetName()</span>
+<span class="token keyword">class</span> <span class="token class-name">Entity</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+   <span class="token comment">// 虚函数，返回一个默认的实体名称</span>
+   <span class="token comment">// 使用virtual关键字，允许派生类重写</span>
+   <span class="token keyword">virtual</span> std<span class="token double-colon punctuation">::</span>string <span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token string">"Entity"</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 派生类Player，继承自Entity</span>
+<span class="token keyword">class</span> <span class="token class-name">Player</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">Entity</span></span> <span class="token punctuation">{</span>
+<span class="token keyword">private</span><span class="token operator">:</span>
+   <span class="token comment">// 私有成员，存储玩家名称</span>
+   std<span class="token double-colon punctuation">::</span>string m_Name<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span><span class="token operator">:</span>
+   <span class="token comment">// 构造函数，使用传入的名称初始化玩家</span>
+   <span class="token function">Player</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token double-colon punctuation">::</span>string<span class="token operator">&amp;</span> name<span class="token punctuation">)</span> <span class="token operator">:</span><span class="token function">m_Name</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+   <span class="token comment">// 重写基类的GetName()虚函数</span>
+   <span class="token comment">// override关键字确保正确重写基类虚函数</span>
+   std<span class="token double-colon punctuation">::</span>string <span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">override</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> m_Name<span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+   <span class="token comment">// 设置玩家名称的成员函数</span>
+   <span class="token keyword">void</span> <span class="token function">SetName</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>string name<span class="token punctuation">)</span> <span class="token punctuation">{</span> m_Name <span class="token operator">=</span> name<span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 打印实体名称的函数</span>
+<span class="token comment">// 接受一个Entity指针作为参数，体现了多态性</span>
+<span class="token keyword">void</span> <span class="token function">PrintName</span><span class="token punctuation">(</span>Entity<span class="token operator">*</span> entity<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token comment">// 调用虚函数GetName()，实际执行的是对象的具体实现</span>
+   std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> entity<span class="token operator">-&gt;</span><span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token comment">// 创建一个基类Entity对象的指针</span>
+   Entity<span class="token operator">*</span> e <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Entity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token comment">// 调用PrintName()，将打印"Entity"</span>
+   <span class="token function">PrintName</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token comment">// 创建一个Player对象，名称为"tanke"</span>
+   Player<span class="token operator">*</span> p <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Player</span><span class="token punctuation">(</span><span class="token string">"tanke"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token comment">// 调用PrintName()，将打印"tanke"</span>
+   <span class="token function">PrintName</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token comment">// 修改Player对象的名称为"wangjie"</span>
+   p<span class="token operator">-&gt;</span><span class="token function">SetName</span><span class="token punctuation">(</span><span class="token string">"wangjie"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token comment">// 将Player指针赋值给基类指针，体现了多态性</span>
+   Entity<span class="token operator">*</span> e1 <span class="token operator">=</span> p<span class="token punctuation">;</span>
+   <span class="token comment">// 调用PrintName()，将打印"wangjie"</span>
+   <span class="token function">PrintName</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token comment">// 等待用户输入，保持窗口打开</span>
+   std<span class="token double-colon punctuation">::</span>cin<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>解释：</strong></p>
 <ul>
@@ -287,7 +491,7 @@ mjx-container[display="true"] + br {
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" rel="tag">程序开发</a>
+            <a class="-none-link" href="/tags/development/" rel="tag">程序开发</a>
             </section>
         
     
@@ -299,7 +503,7 @@ mjx-container[display="true"] + br {
         
             <div class="author-info">
                 <h4>ttkqwe</h4>
-                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
             </div>
         </section>
     
@@ -323,7 +527,7 @@ mjx-container[display="true"] + br {
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-tags">标签云：</h3>
-                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                    <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/deep-learning/" style="font-size: 14px;">深度学习</a> <a href="/tags/development/" style="font-size: 18px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 10px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/course/" style="font-size: 20px;">课程学习</a> <a href="/tags/troubleshooting/" style="font-size: 18px;">问题解决</a>
                 </div>
             </div>
         </section>

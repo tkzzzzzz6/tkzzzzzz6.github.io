@@ -152,7 +152,7 @@ mjx-container[display="true"] + br {
         <div class="has-child">
             <a href>分类</a>
             <div class="sub-menu">
-                
+                <a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
             </div>
         </div>
         
@@ -226,7 +226,17 @@ mjx-container[display="true"] + br {
 <h4 id="用来描述业务处理逻辑的元数据"><a href="#用来描述业务处理逻辑的元数据" class="headerlink" title="用来描述业务处理逻辑的元数据"></a>用来描述业务处理逻辑的元数据</h4><p>首先，低代码平台会根据自身的能力边界和封装粒度，将用来承载业务逻辑的要件（也称业务能力）抽象成元数据定义，如数据库操作、判断、循环、文件处理、钉钉推送等。开发者在设计器上编排和操作对这些要件；设计器将这些要件的顺序、配置信息等保存为元数据；运行时通过加载这些元数据，还原出业务逻辑处理的规则和实现方式，并最终形成可执行的程序。</p>
 <p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749364849852NCzGbmsjxoreJoxDVqac9FwDnPg.png" alt="1749364849852NCzGbmsjxoreJoxDVqac9FwDnPg.png"></p>
 <p>具体而言，低代码平台用来描述业务逻辑的元数据通常由若干有顺序的“操作”构成，每个操作中包含操作类型、配置参数、输入参数、输出参数等。如从向数据库中特定表插入数据的操作，在元数据中可描述为：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript">{<br>    <span class="hljs-string">"$type"</span>: <span class="hljs-string">"Forguncy.Model.UpdateDataTableCommand, ServerDesignerCommon"</span>,<br>    <span class="hljs-string">"TableName"</span>: <span class="hljs-string">"表名"</span>,<br>    <span class="hljs-string">"UpdateType"</span>: <span class="hljs-string">"add"</span>,<br>    <span class="hljs-string">"UpdateValues"</span>: [<br>        {<br>            <span class="hljs-string">"ColumnName"</span>: <span class="hljs-string">"字段名"</span>,<br>            <span class="hljs-string">"Value"</span>: <span class="hljs-string">"=arg0"</span><br>        }<br>    ],<br>}<br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">{</span>
+    <span class="token string-property property">"$type"</span><span class="token operator">:</span> <span class="token string">"Forguncy.Model.UpdateDataTableCommand, ServerDesignerCommon"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"TableName"</span><span class="token operator">:</span> <span class="token string">"表名"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"UpdateType"</span><span class="token operator">:</span> <span class="token string">"add"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"UpdateValues"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token string-property property">"ColumnName"</span><span class="token operator">:</span> <span class="token string">"字段名"</span><span class="token punctuation">,</span>
+            <span class="token string-property property">"Value"</span><span class="token operator">:</span> <span class="token string">"=arg0"</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="页面"><a href="#页面" class="headerlink" title="页面"></a>页面</h3><p>不同的低代码平台大多采用类似的技术原理，即使用 JSON/XML 格式的元数据描述前端组件的属性和页面布局。在设计体验上，低代码平台大多在固定布局和栅格布局两种方案中进行选择，少数低代码平台选择融合两者布局方案的网格布局（Grid Layout）。</p>
 <h4 id="从可执行代码到元数据"><a href="#从可执行代码到元数据" class="headerlink" title="从可执行代码到元数据"></a>从可执行代码到元数据</h4><p>页面设计的可视化与数据库可视化设计的历史类似，可以追溯到 1990 年代，随着 Visual Basic 的火热，传统编码开发领域涌现出了大量以拖拽的方式构建程序界面的开发工具。直至今日，很多开发者在提及可视化开发时，第一反应还是那个时代的 Visual Basic、Visual C++、PowerBuilder 等工具。这一阶段的页面设计以固定布局为主，开发者通过拖拽的方式摆放和配置页面元素，开发工具则根据这些信息自动生成可执行的程序代码，包含创建控件等页面元素、设置元素的位置、调整元素的样式等。在程序运行时，这些程序代码会被调用，逐步还原开发者的拖拽操作，最终展示出应用的界面。</p>
@@ -293,7 +303,7 @@ mjx-container[display="true"] + br {
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" rel="tag">课程学习</a>
+            <a class="-none-link" href="/tags/course/" rel="tag">课程学习</a>
             </section>
         
     
@@ -305,7 +315,7 @@ mjx-container[display="true"] + br {
         
             <div class="author-info">
                 <h4>ttkqwe</h4>
-                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
             </div>
         </section>
     
@@ -329,7 +339,7 @@ mjx-container[display="true"] + br {
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-tags">标签云：</h3>
-                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                    <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/deep-learning/" style="font-size: 14px;">深度学习</a> <a href="/tags/development/" style="font-size: 18px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 10px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/course/" style="font-size: 20px;">课程学习</a> <a href="/tags/troubleshooting/" style="font-size: 18px;">问题解决</a>
                 </div>
             </div>
         </section>

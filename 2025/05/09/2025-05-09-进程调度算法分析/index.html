@@ -152,7 +152,7 @@ mjx-container[display="true"] + br {
         <div class="has-child">
             <a href>分类</a>
             <div class="sub-menu">
-                
+                <a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
             </div>
         </div>
         
@@ -633,7 +633,11 @@ mjx-container[display="true"] + br {
 </table>
 
 <p>注意：由于多个时间点属于同一进程的继续执行，合并相邻时间段可简化为：</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">P1</span>: <span class="hljs-number">0</span>−<span class="hljs-number">1</span>, <span class="hljs-number">12</span>−<span class="hljs-number">19</span>  <br><span class="hljs-attribute">P2</span>: <span class="hljs-number">1</span>−<span class="hljs-number">5</span>  <br><span class="hljs-attribute">P5</span>: <span class="hljs-number">5</span>−<span class="hljs-number">7</span>  <br><span class="hljs-attribute">P4</span>: <span class="hljs-number">7</span>−<span class="hljs-number">12</span>  <br><span class="hljs-attribute">P3</span>: <span class="hljs-number">19</span>−<span class="hljs-number">28</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">P1: 0−1, 12−19  
+P2: 1−5  
+P5: 5−7  
+P4: 7−12  
+P3: 19−28<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="SRTF-指标计算"><a href="#SRTF-指标计算" class="headerlink" title="SRTF 指标计算"></a>SRTF 指标计算</h4><table>
 <tr>
@@ -734,7 +738,17 @@ mjx-container[display="true"] + br {
 </ol>
 <h4 id="调度时间线（Gantt-图）"><a href="#调度时间线（Gantt-图）" class="headerlink" title="调度时间线（Gantt 图）"></a>调度时间线（Gantt 图）</h4><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749361187852I1ojbIWGEoHOfLxgZsJciFdWnqd.png" alt="1749361187852I1ojbIWGEoHOfLxgZsJciFdWnqd.png"></p>
 <p>合并表示为各个片段与时间区间：</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs markdown">[<span class="hljs-symbol">0−3</span>]: <span class="hljs-link">P1  </span><br>[<span class="hljs-symbol">3−6</span>]: <span class="hljs-link">P2  </span><br>[<span class="hljs-symbol">6−9</span>]: <span class="hljs-link">P3  </span><br>[<span class="hljs-symbol">9−12</span>]: <span class="hljs-link">P4  </span><br>[<span class="hljs-symbol">12−14</span>]: <span class="hljs-link">P5  </span><br>[<span class="hljs-symbol">14−17</span>]: <span class="hljs-link">P1  </span><br>[<span class="hljs-symbol">17−18</span>]: <span class="hljs-link">P2  </span><br>[<span class="hljs-symbol">18−21</span>]: <span class="hljs-link">P3  </span><br>[<span class="hljs-symbol">21−23</span>]: <span class="hljs-link">P4  </span><br>[<span class="hljs-symbol">23−25</span>]: <span class="hljs-link">P1  </span><br>[<span class="hljs-symbol">25−28</span>]: <span class="hljs-link">P3</span><br></code></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">[0−3]: P1  
+[3−6]: P2  
+[6−9]: P3  
+[9−12]: P4  
+[12−14]: P5  
+[14−17]: P1  
+[17−18]: P2  
+[18−21]: P3  
+[21−23]: P4  
+[23−25]: P1  
+[25−28]: P3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="RR-指标计算"><a href="#RR-指标计算" class="headerlink" title="RR 指标计算"></a>RR 指标计算</h4><table>
 <tr>
@@ -826,7 +840,14 @@ mjx-container[display="true"] + br {
 <ul>
 <li>对本示例数据，无进程在 Q1 用满 8 单位，因此 Q2 无进程。</li>
 </ul>
-<h4 id="调度时间线（简化）"><a href="#调度时间线（简化）" class="headerlink" title="调度时间线（简化）"></a>调度时间线（简化）</h4><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs armasm">[<span class="hljs-number">0</span>−<span class="hljs-number">4</span>]   <span class="hljs-built_in">P1</span> (<span class="hljs-built_in">Q0</span>)  <br>[<span class="hljs-number">4</span>−<span class="hljs-number">8</span>]   <span class="hljs-built_in">P2</span> (<span class="hljs-built_in">Q0</span>)  <br>[<span class="hljs-number">8</span>−<span class="hljs-number">12</span>]  <span class="hljs-built_in">P3</span> (<span class="hljs-built_in">Q0</span>)  <br>[<span class="hljs-number">12</span>−<span class="hljs-number">16</span>] <span class="hljs-built_in">P4</span> (<span class="hljs-built_in">Q0</span>)  <br>[<span class="hljs-number">16</span>−<span class="hljs-number">18</span>] <span class="hljs-built_in">P5</span> (<span class="hljs-built_in">Q0</span>)  <br>[<span class="hljs-number">18</span>−<span class="hljs-number">22</span>] <span class="hljs-built_in">P1</span> (<span class="hljs-built_in">Q1</span>)  <br>[<span class="hljs-number">22</span>−<span class="hljs-number">27</span>] <span class="hljs-built_in">P3</span> (<span class="hljs-built_in">Q1</span>)  <br>[<span class="hljs-number">27</span>−<span class="hljs-number">28</span>] <span class="hljs-built_in">P4</span> (<span class="hljs-built_in">Q1</span>)<br></code></pre></td></tr></table></figure>
+<h4 id="调度时间线（简化）"><a href="#调度时间线（简化）" class="headerlink" title="调度时间线（简化）"></a>调度时间线（简化）</h4><pre class="line-numbers language-none"><code class="language-none">[0−4]   P1 (Q0)  
+[4−8]   P2 (Q0)  
+[8−12]  P3 (Q0)  
+[12−16] P4 (Q0)  
+[16−18] P5 (Q0)  
+[18−22] P1 (Q1)  
+[22−27] P3 (Q1)  
+[27−28] P4 (Q1)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="多级反馈队列指标计算"><a href="#多级反馈队列指标计算" class="headerlink" title="多级反馈队列指标计算"></a>多级反馈队列指标计算</h4><table>
 <tr>
@@ -1006,7 +1027,7 @@ mjx-container[display="true"] + br {
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" rel="tag">课程学习</a>
+            <a class="-none-link" href="/tags/course/" rel="tag">课程学习</a>
             </section>
         
     
@@ -1018,7 +1039,7 @@ mjx-container[display="true"] + br {
         
             <div class="author-info">
                 <h4>ttkqwe</h4>
-                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
             </div>
         </section>
     
@@ -1042,7 +1063,7 @@ mjx-container[display="true"] + br {
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-tags">标签云：</h3>
-                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                    <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/deep-learning/" style="font-size: 14px;">深度学习</a> <a href="/tags/development/" style="font-size: 18px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 10px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/course/" style="font-size: 20px;">课程学习</a> <a href="/tags/troubleshooting/" style="font-size: 18px;">问题解决</a>
                 </div>
             </div>
         </section>
