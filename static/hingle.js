@@ -170,7 +170,7 @@ var Paul_Hingle = function (config) {
     // 如果开启复制内容提示
     if(config.copyright){
         document.oncopy = function () {
-            ks.notice("复制内容请注明来源并保留版权信息！", {color: "yellow", overlay: true})
+            ks.notice("感谢复制,希望内容对你有所帮助！", {color: "yellow", overlay: true})
         };
     }
 

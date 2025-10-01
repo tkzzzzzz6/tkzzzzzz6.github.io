@@ -243,28 +243,29 @@ mjx-container[display="true"] + br {
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h1 id="测试配置环境"><a href="#测试配置环境" class="headerlink" title="测试配置环境"></a>测试配置环境</h1><p>创建以.asm 为后缀的文件,将下面的代码复制上去,运行程序</p>
-<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">_.MODEL SMALL
+<pre class="line-numbers language-armasm" data-language="armasm"><code class="language-armasm">.MODEL SMALL
 .STACK 100h
 
-.DATA
-    message DB 'Hello, Assembly! Environment test successful!$'
+.<span class="token directive property">DATA</span>
+    message <span class="token instruction keyword">DB</span> 'Hello<span class="token punctuation">,</span> Assembly<span class="token operator">!</span> Environment test successful<span class="token operator">!</span>$'
 
-.CODE
-MAIN PROC
-    ; 设置数据段地址
-    MOV AX, @DATA
-    MOV DS, AX
+.<span class="token directive property">CODE</span>
+<span class="token instruction keyword">MAIN</span> <span class="token directive property">PROC</span>
+    <span class="token comment">; 设置数据段地址</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AX</span><span class="token punctuation">,</span> @<span class="token directive property">DATA</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">DS</span><span class="token punctuation">,</span> AX
   
-    ; 显示消息
-    MOV AH, 09h      ; DOS功能：显示字符串
-    LEA DX, message  ; 加载消息地址
-    INT 21h          ; 调用DOS中断
+    <span class="token comment">; 显示消息</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span> 09h      <span class="token comment">; DOS功能：显示字符串</span>
+    <span class="token instruction keyword">LEA</span> <span class="token instruction keyword">DX</span><span class="token punctuation">,</span> message  <span class="token comment">; 加载消息地址</span>
+    <span class="token instruction keyword">INT</span> 21h          <span class="token comment">; 调用DOS中断</span>
   
-    ; 返回DOS
-    MOV AH, 4Ch      ; DOS功能：结束程序
-    INT 21h          ; 调用DOS中断
-MAIN ENDP
-__END MAIN_<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token comment">; 返回DOS</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span> 4Ch      <span class="token comment">; DOS功能：结束程序</span>
+    <span class="token instruction keyword">INT</span> 21h          <span class="token comment">; 调用DOS中断</span>
+<span class="token instruction keyword">MAIN</span> <span class="token directive property">ENDP</span>
+<span class="token directive property">END</span> <span class="token instruction keyword">MAIN</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 
 <blockquote>
 <p>注意:</p>
