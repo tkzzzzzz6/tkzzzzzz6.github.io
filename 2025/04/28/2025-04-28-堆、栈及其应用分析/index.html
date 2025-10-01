@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2025-04-28-堆、栈及其应用分析 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-04-28-堆、栈及其应用分析"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-04-28-堆、栈及其应用分析</h2>
+            <div class="post-meta">
+                <time class="date">2025.04.28</time>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="堆、栈及其应用分析"><a href="#堆、栈及其应用分析" class="headerlink" title="堆、栈及其应用分析"></a>堆、栈及其应用分析</h1><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/linfangnan/p/12450061.html">栈结构解析及其应用 - 乌漆 WhiteMoon - 博客园</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/moonandstar08/p/4934597.html">堆栈信息分析 - moonandstar08 - 博客园</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tolin/p/14982094.html">什么是堆?什么是栈?他们之间有什么区别和联系? - tolin - 博客园</a></li>
+</ul>
+</blockquote>
+<h1 id="堆-Heap-与-栈-Stack-概述"><a href="#堆-Heap-与-栈-Stack-概述" class="headerlink" title="堆 (Heap) 与 栈 (Stack) 概述"></a>堆 (Heap) 与 栈 (Stack) 概述</h1><ul>
+<li><p><strong>栈（Stack）</strong></p>
+</li>
+<li><p><strong>数据结构视角</strong>：一种受限的线性结构，只能在同一端（栈顶）进行插入（Push）和删除（Pop），遵循 “后进先出”（LIFO）原则。</p>
+</li>
+<li><p><strong>内存视角</strong>：栈区由操作系统自动分配与回收，用于存储函数调用时的局部变量、函数参数、返回地址等信息。栈空间连续，访问和分配速度极快，但容量有限（通常几 MB），每个线程都有独立栈空间。</p>
+</li>
+<li><p><strong>堆（Heap）</strong></p>
+<ul>
+<li><strong>数据结构视角</strong>：一种近似完全二叉树的优先队列结构（最大堆或最小堆），常用于按优先级提取元素。</li>
+<li><strong>内存视角</strong>：堆区用于动态分配内存，程序运行时可调用 <code>new</code>/<code>malloc</code>（C++）或由运行时自动分配（Python）来获取；释放时需 <code>delete</code>/<code>free</code> 或由垃圾回收负责。堆空间大但分配、释放开销较大，可能产生内存碎片。</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据结构视角"><a href="#数据结构视角" class="headerlink" title="数据结构视角"></a>数据结构视角</h2><p><strong>栈</strong>：一种线性受限结构，只允许在栈顶进行插入（Push）和删除（Pop），遵循“后进先出”（LIFO）原则。常用操作包括 <code>push</code>（进栈）、<code>pop</code>（出栈）、<code>top</code>（取栈顶）等，这些操作时间复杂度通常为 O(1)。栈可用数组（顺序栈）或链表（链式栈）实现，适用于函数调用、递归计算、撤销操作等场景。</p>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://oi-wiki.org/ds/stack/">栈 - OI Wiki</a></li>
+</ul>
+</blockquote>
+<h3 id="使用数组模拟栈"><a href="#使用数组模拟栈" class="headerlink" title="使用数组模拟栈"></a>使用数组模拟栈</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> st[N];<br><span class="hljs-comment">// 这里使用 st[0] (即 *st) 代表栈中元素数量，同时也是栈顶下标</span><br><br><span class="hljs-comment">// 压栈 ：</span><br>st[++*st] = var1;<br><span class="hljs-comment">// 取栈顶 ：</span><br><span class="hljs-type">int</span> u = st[*st];<br><span class="hljs-comment">// 弹栈 ：注意越界问题, *st == 0 时不能继续弹出</span><br><span class="hljs-keyword">if</span> (*st) --*st;<br><span class="hljs-comment">// 清空栈</span><br>*st = <span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure>
+
+<h3 id="C-STL-中的栈"><a href="#C-STL-中的栈" class="headerlink" title="C++ STL 中的栈"></a>C++ STL 中的栈</h3><p>C++ 中的 STL 也提供了一个容器 <code>std::stack</code>，使用前需要引入 <code>stack</code> 头文件。</p>
+<p>STL 中的 <code>stack</code> 容器提供了一众成员函数以供调用，其中较为常用的有：</p>
+<ul>
+<li><p>元素访问</p>
+<ul>
+<li><code>st.top()</code> 返回栈顶</li>
+</ul>
+</li>
+<li><p>修改</p>
+<ul>
+<li><code>st.push()</code> 插入传入的参数到栈顶</li>
+<li><code>st.pop()</code> 弹出栈顶</li>
+</ul>
+</li>
+<li><p>容量</p>
+<ul>
+<li><code>st.empty()</code> 返回是否为空</li>
+<li><code>st.size()</code> 返回元素数量</li>
+</ul>
+</li>
+</ul>
+<p>此外，<code>std::stack</code> 还提供了一些运算符。较为常用的是使用赋值运算符 <code>=</code> 为 <code>stack</code> 赋值，示例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 新建两个栈 st1 和 st2</span><br>std::stack&lt;<span class="hljs-type">int</span>&gt; st1, st2;<br><br><span class="hljs-comment">// 为 st1 装入 1</span><br>st<span class="hljs-number">1.</span><span class="hljs-built_in">push</span>(<span class="hljs-number">1</span>);<br><br><span class="hljs-comment">// 将 st1 赋值给 st2</span><br>st2 = st1;<br><br><span class="hljs-comment">// 输出 st2 的栈顶元素</span><br>cout &lt;&lt; st<span class="hljs-number">2.</span><span class="hljs-built_in">top</span>() &lt;&lt; endl;<br><span class="hljs-comment">// 输出: 1</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="使用-Python-中的-list-模拟栈"><a href="#使用-Python-中的-list-模拟栈" class="headerlink" title="使用 Python 中的 list 模拟栈"></a>使用 Python 中的 list 模拟栈</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python">st = [<span class="hljs-number">5</span>, <span class="hljs-number">1</span>, <span class="hljs-number">4</span>]<br><br><span class="hljs-comment"># 使用 append() 向栈顶添加元素</span><br>st.append(<span class="hljs-number">2</span>)<br>st.append(<span class="hljs-number">3</span>)<br><span class="hljs-comment"># &gt;&gt;&gt; st</span><br><span class="hljs-comment"># [5, 1, 4, 2, 3]</span><br><br><span class="hljs-comment"># 使用 pop 取出栈顶元素</span><br>st.pop()<br><span class="hljs-comment"># &gt;&gt;&gt; st</span><br><span class="hljs-comment"># [5, 1, 4, 2]</span><br><br><span class="hljs-comment"># 使用 clear 清空栈</span><br>st.clear()<br></code></pre></td></tr></table></figure>
+
+<p><strong>堆</strong>（优先队列）: 一种树形结构，即满足堆序性的完全二叉树。每个节点的值都不大于（或不小于）其父节点的值，根节点是最大值（大顶堆）或最小值（小顶堆）。常见操作包括：上浮（shift_up）、下沉（shift_down）、插入（push）和弹出（pop）堆顶元素，以及查询堆顶（top）。堆常用作优先队列，在任务调度、Dijkstra 最短路径、Top-K 计算等场景中非常常见。</p>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://oi-wiki.org/ds/heap/">堆简介 - OI Wiki</a></li>
+</ul>
+</blockquote>
+<p>堆是一棵树，其每个节点都有一个键值，且每个节点的键值都大于等于/小于等于其父亲的键值。</p>
+<p>每个节点的键值都大于等于其父亲键值的堆叫做小根堆，否则叫做大根堆。STL 中的 priority_queue 其实就是一个大根堆。</p>
+<p>（小根）堆主要支持的操作有：插入一个数、查询最小值、删除最小值、合并两个堆、减小一个元素的值。</p>
+<p>一些功能强大的堆（可并堆）还能（高效地）支持 merge 等操作。</p>
+<p>一些功能更强大的堆还支持可持久化，也就是对任意历史版本进行查询或者操作，产生新的版本。</p>
+<h3 id="C-堆-优先队列：默认大顶堆（priority-queue）："><a href="#C-堆-优先队列：默认大顶堆（priority-queue）：" class="headerlink" title="C++ 堆/优先队列：默认大顶堆（priority_queue）："></a><strong>C++ 堆/优先队列</strong>：默认大顶堆（<code>priority_queue</code>）：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp">std::priority_queue&lt;<span class="hljs-type">int</span>&gt; pq;<br>pq.<span class="hljs-built_in">push</span>(<span class="hljs-number">5</span>);<br>pq.<span class="hljs-built_in">push</span>(<span class="hljs-number">3</span>);<br><span class="hljs-type">int</span> top = pq.<span class="hljs-built_in">top</span>(); <span class="hljs-comment">// 5 (最大值)</span><br>pq.<span class="hljs-built_in">pop</span>();<br></code></pre></td></tr></table></figure>
+
+<h3 id="Python-堆（heapq-最小堆）："><a href="#Python-堆（heapq-最小堆）：" class="headerlink" title="Python 堆（heapq 最小堆）："></a><strong>Python 堆</strong>（<code>heapq</code> 最小堆）：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> heapq<br>heap = []<br>heapq.heappush(heap, <span class="hljs-number">3</span>)<br>heapq.heappush(heap, <span class="hljs-number">5</span>)<br>top = heapq.heappop(heap)  <span class="hljs-comment"># 3 (最小值)</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>如果需要大顶堆，可插入负值或使用第三方实现。</li>
+</ul>
+<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://algorithm-visualizer.org/brute-force/heapsort">Brute Force Heapsort</a></p>
+</blockquote>
+<p>堆排序是一种高效的、基于比较的排序算法。它利用了堆这种数据结构的特性。基本思想是：</p>
+<ol>
+<li><p>**建堆 (Heapify)**：将待排序的序列构建成一个大顶堆（或小顶堆）。此时，堆顶元素就是整个序列的最大值（或最小值）。</p>
+</li>
+<li><p>**排序 (Sort)**：</p>
+<ul>
+<li>将堆顶元素与序列末尾的元素交换。</li>
+<li>此时，序列末尾的元素即为最大（或最小）值，已经处于正确排序位置。</li>
+<li>将剩余的 n-1 个元素重新调整为一个堆。</li>
+<li>重复此过程，直到所有元素都排序完毕。</li>
+</ul>
+</li>
+</ol>
+<p>堆排序的平均时间复杂度和最坏时间复杂度都是 O(nlogn)。</p>
+<h4 id="C-实现堆排序"><a href="#C-实现堆排序" class="headerlink" title="C++ 实现堆排序"></a>C++ 实现堆排序</h4><p>在 C++ 中，可以利用标准库 <code>&lt;algorithm&gt;</code> 中提供的堆操作函数来方便地实现堆排序。</p>
+<ul>
+<li><code>std::make_heap(first, last)</code>: 将指定范围 <code>[first, last)</code> 内的元素重新排列，使其成为一个大顶堆。</li>
+<li><code>std::sort_heap(first, last)</code>: 将一个已经建好的堆 <code>[first, last)</code> 进行排序。它会重复地将堆顶元素（最大值）移动到序列的末尾，并重新调整剩余部分为堆。</li>
+</ul>
+<p>C++</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span> <span class="hljs-comment">// 包含 make_heap, sort_heap</span></span><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print_vector</span><span class="hljs-params">(<span class="hljs-type">const</span> std::vector&lt;<span class="hljs-type">int</span>&gt;&amp; vec)</span> </span>{<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> val : vec) {<br>        std::cout &lt;&lt; val &lt;&lt; <span class="hljs-string">" "</span>;<br>    }<br>    std::cout &lt;&lt; std::endl;<br>}<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>    std::vector&lt;<span class="hljs-type">int</span>&gt; v = {<span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">1</span>, <span class="hljs-number">8</span>, <span class="hljs-number">4</span>, <span class="hljs-number">7</span>, <span class="hljs-number">2</span>};<br>    std::cout &lt;&lt; <span class="hljs-string">"Original vector: "</span>;<br>    <span class="hljs-built_in">print_vector</span>(v);<br><br>    <span class="hljs-comment">// 1. 将 vector 转换成大顶堆</span><br>    std::<span class="hljs-built_in">make_heap</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>());<br>    std::cout &lt;&lt; <span class="hljs-string">"After make_heap (top is max): "</span> &lt;&lt; v.<span class="hljs-built_in">front</span>() &lt;&lt; std::endl;<br>  <br>    <span class="hljs-comment">// 2. 对堆进行排序 (结果为升序)</span><br>    std::<span class="hljs-built_in">sort_heap</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>());<br>  <br>    std::cout &lt;&lt; <span class="hljs-string">"Sorted vector: "</span>;<br>    <span class="hljs-built_in">print_vector</span>(v); <span class="hljs-comment">// 输出: 1 2 3 4 5 7 8</span><br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></table></figure>
+
+<h4 id="Python-实现堆排序"><a href="#Python-实现堆排序" class="headerlink" title="Python 实现堆排序"></a>Python 实现堆排序</h4><p>Python 的 <code>heapq</code> 模块本身不直接提供一个完整的 <code>heapsort</code> 函数，但我们可以很容易地利用其 <code>heappush</code> 和 <code>heappop</code> 来实现。因为 <code>heapq</code> 是最小堆，所以 <code>heappop</code> 总是弹出最小值，天然适合用于升序排序。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> heapq<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">heapsort_asc</span>(<span class="hljs-params">iterable</span>):<br>    <span class="hljs-string">"""</span><br><span class="hljs-string">    使用 heapq 实现升序排序</span><br><span class="hljs-string">    """</span><br>    h = []<br>    <span class="hljs-comment"># 将所有元素压入堆中</span><br>    <span class="hljs-keyword">for</span> value <span class="hljs-keyword">in</span> iterable:<br>        heapq.heappush(h, value)<br>    <span class="hljs-comment"># 依次弹出堆中最小的元素，构成有序列表</span><br>    <span class="hljs-keyword">return</span> [heapq.heappop(h) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(h))]<br><br>data = [<span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">1</span>, <span class="hljs-number">8</span>, <span class="hljs-number">4</span>, <span class="hljs-number">7</span>, <span class="hljs-number">2</span>]<br><span class="hljs-built_in">print</span>(<span class="hljs-string">f"Original list: <span class="hljs-subst">{data}</span>"</span>)<br><br>sorted_data = heapsort_asc(data)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">f"Sorted list (ascending): <span class="hljs-subst">{sorted_data}</span>"</span>) <span class="hljs-comment"># 输出: [1, 2, 3, 4, 5, 7, 8]</span><br><br><span class="hljs-comment"># 原地堆排序 (In-place Heap Sort)</span><br><span class="hljs-comment"># 这更接近于堆排序的经典实现</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">heapsort_inplace</span>(<span class="hljs-params">arr</span>):<br>    n = <span class="hljs-built_in">len</span>(arr)<br>    <span class="hljs-comment"># 1. 构建大顶堆 (从最后一个非叶子节点开始)</span><br>    <span class="hljs-comment"># 注意：heapq 是最小堆，所以这里通过对负数操作来模拟大顶堆</span><br>    <span class="hljs-comment"># 或者我们手动实现大顶堆的 sift_down</span><br>    <span class="hljs-comment"># 为了简单，我们还是用 heapq 来理解，但传统实现更高效</span><br>    h = []<br>    <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> arr:<br>        heapq.heappush(h, x)<br>    arr[:] = [heapq.heappop(h) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n)]<br>    <span class="hljs-keyword">return</span> arr<br><br>data_inplace = [<span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">1</span>, <span class="hljs-number">8</span>, <span class="hljs-number">4</span>, <span class="hljs-number">7</span>, <span class="hljs-number">2</span>]<br>heapsort_inplace(data_inplace)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">f"In-place sorted list: <span class="hljs-subst">{data_inplace}</span>"</span>)<br></code></pre></td></tr></table></figure>
+
+<p>栈和堆（优先队列）各有特点：</p>
+<ul>
+<li><strong>数据组织</strong>：栈是线性的、受限的结构，只能从一端操作；堆是树形结构，可快速获取最大或最小元素。</li>
+<li><strong>访问效率</strong>：栈操作简单开销小；堆插入/删除需维护堆序（O(log n)）。</li>
+<li><strong>应用场景</strong>：栈适合管理临时状态（如函数调用栈、表达式求值、撤销操作）；堆（优先队列）适合按优先级处理元素，如操作系统任务调度、网络请求优先级、算法中的最佳-优先搜索等。</li>
+</ul>
+<h2 id="内存分配视角"><a href="#内存分配视角" class="headerlink" title="内存分配视角"></a>内存分配视角</h2><p>在程序运行时，内存通常分为<strong>代码区</strong>、<strong>数据区</strong>、<strong>堆区</strong>和<strong>栈区</strong>。其中：</p>
+<ul>
+<li><strong>栈区</strong>：由系统自动管理，随函数调用而增长，每次函数调用时分配空间给局部变量、函数参数和返回地址。函数返回时，这些空间自动回收。栈分配速度快、开销低，但空间有限（常见几 MB），且每个线程都有独立的栈空间。如果栈空间不足，会导致栈溢出错误。</li>
+<li><strong>堆区</strong>：用于动态内存分配，程序员（或运行时）在运行时使用 <code>new</code>/<code>malloc</code> 等申请内存，由程序员 <code>delete</code>/<code>free</code> 释放（在 Python/Java 等语言由垃圾回收自动释放）。堆的可用空间远大于栈，存放<strong>动态对象</strong>。堆内存碎片化的风险更高：频繁的分配和释放可能将大块连续内存切割成许多小碎片，降低利用率。</li>
+<li><strong>静态/全局区</strong>：编译时分配，程序运行前即确定，存放全局变量、静态变量和常量，在程序整个生命周期存在。</li>
+</ul>
+<p><strong>分配方式</strong>：栈的分配和回收速度极快，操作由 CPU 指令自动完成；堆的分配开销较大，一般需要额外的内存管理算法（如自由链表或分代收集），在 C++ 中需要程序员手动释放。Python 中所有对象都分配在堆上，解释器通过引用计数和垃圾回收来管理。</p>
+<p><strong>访问效率</strong>：由于栈内存连续、分配固定，因此访问和分配速度更高。堆内存由多个块组成，需额外指针管理，因而略慢于栈访问。此外，栈是线程私有的（线程安全），而堆是所有线程共享的（需注意并发安全）。</p>
+<ul>
+<li><strong>C++ 栈 vs 堆 分配</strong>：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span> </span>{<br>    <span class="hljs-type">int</span> a = <span class="hljs-number">10</span>;            <span class="hljs-comment">// 分配在栈上</span><br>    <span class="hljs-type">int</span> *p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>(<span class="hljs-number">20</span>);  <span class="hljs-comment">// 分配在堆上</span><br>    <span class="hljs-comment">// ...</span><br>    <span class="hljs-keyword">delete</span> p;              <span class="hljs-comment">// 手动释放堆内存</span><br>} <span class="hljs-comment">// 函数返回时，a 的栈空间自动释放，若忘了 delete，则 p 指向的内存泄露</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Python 对象分配</strong>：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">func</span>():<br>    a = <span class="hljs-number">10</span>             <span class="hljs-comment"># 10 是整数对象，存储在堆中；a 是栈帧内的局部引用</span><br>    b = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]      <span class="hljs-comment"># 列表对象在堆上分配</span><br>    <span class="hljs-comment"># 变量 a, b 是存放在函数调用栈帧中的引用，当函数结束，这些引用消失</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>Python 不需要显示释放内存，垃圾回收自动回收无用对象。</li>
+</ul>
+<h2 id="典型应用场景"><a href="#典型应用场景" class="headerlink" title="典型应用场景"></a>典型应用场景</h2><h3 id="函数调用与返回"><a href="#函数调用与返回" class="headerlink" title="函数调用与返回"></a>函数调用与返回</h3><p>当程序调用一个函数时，当前上下文（包括当前函数的局部变量、返回地址、CPU 寄存器等）会被“压栈（push）”到栈上；函数执行完成后，栈顶信息被“弹栈（pop）”，程序自动返回调用点并恢复先前状态。这种机制正是栈的典型应用。</p>
+<h4 id="C-示例"><a href="#C-示例" class="headerlink" title="C++ 示例"></a>C++ 示例</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-comment">// 一个示例函数，用于演示栈帧形成</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">factorial</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>{<br>    <span class="hljs-keyword">if</span> (n &lt;= <span class="hljs-number">1</span>) {<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    }<br>    <span class="hljs-comment">// 调用 factorial(n-1) 前，会把当前的 n、返回地址等信息压入栈</span><br>    <span class="hljs-keyword">return</span> n * <span class="hljs-built_in">factorial</span>(n - <span class="hljs-number">1</span>);<br>}<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>    <span class="hljs-type">int</span> x = <span class="hljs-number">5</span>;<br>    std::cout &lt;&lt; <span class="hljs-string">"factorial("</span> &lt;&lt; x &lt;&lt; <span class="hljs-string">") = "</span> &lt;&lt; <span class="hljs-built_in">factorial</span>(x) &lt;&lt; std::endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>每次调用 <code>factorial</code> 时，当前函数的局部变量（如 <code>n</code>）和返回地址会压入栈；函数结束时，栈帧被弹出，返回到上一级调用点。</li>
+</ul>
+<h4 id="Python-示例"><a href="#Python-示例" class="headerlink" title="Python 示例"></a>Python 示例</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">factorial</span>(<span class="hljs-params">n</span>):<br>    <span class="hljs-keyword">if</span> n &lt;= <span class="hljs-number">1</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>    <span class="hljs-comment"># 递归调用时，Python 会将当前函数帧压入调用栈</span><br>    <span class="hljs-keyword">return</span> n * factorial(n - <span class="hljs-number">1</span>)<br><span class="hljs-keyword">if</span> <br>name<br> == <span class="hljs-string">"</span><br><span class="hljs-string">__main__</span><br><span class="hljs-string">"</span>:<br>    x = <span class="hljs-number">5</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f"factorial(<span class="hljs-subst">{x}</span>) ="</span>, factorial(x))<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>Python 解释器内部也维护一个“调用栈”，每个函数调用都会在栈中创建一个帧（Frame），存放局部变量和执行状态。</li>
+</ul>
+<hr>
+<h3 id="内存管理（局部变量与函数参数）"><a href="#内存管理（局部变量与函数参数）" class="headerlink" title="内存管理（局部变量与函数参数）"></a>内存管理（局部变量与函数参数）</h3><h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><ul>
+<li><strong>栈分配</strong>：编译器在编译期或运行期自动为每个函数分配固定的栈空间，用于存储局部变量和函数参数。函数结束时，这些空间会自动释放，无需程序员手动管理。</li>
+<li><strong>堆分配</strong>：程序员可在运行时动态向操作系统请求内存，使用 <code>new</code>/<code>malloc</code>（C++）或创建对象（Python）。这些内存由程序员负责释放（或由垃圾回收器回收）。</li>
+</ul>
+<h4 id="C-示例：栈-vs-堆"><a href="#C-示例：栈-vs-堆" class="headerlink" title="C++ 示例：栈 vs 堆"></a>C++ 示例：栈 vs 堆</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">stackExample</span><span class="hljs-params">()</span> </span>{<br>    <span class="hljs-type">int</span> a = <span class="hljs-number">10</span>;             <span class="hljs-comment">// 分配在栈上</span><br>    <span class="hljs-type">int</span> b[<span class="hljs-number">100</span>];             <span class="hljs-comment">// 数组也分配在栈上</span><br>    std::cout &lt;&lt; <span class="hljs-string">"a = "</span> &lt;&lt; a &lt;&lt; std::endl;<br>    std::cout &lt;&lt; <span class="hljs-string">"b[0] = "</span> &lt;&lt; b[<span class="hljs-number">0</span>] &lt;&lt; std::endl;<br>} <span class="hljs-comment">// 函数结束时，a 和 b 的栈空间自动释放</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">heapExample</span><span class="hljs-params">()</span> </span>{<br>    <span class="hljs-type">int</span> *p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>(<span class="hljs-number">20</span>);   <span class="hljs-comment">// 在堆上分配一个 int</span><br>    <span class="hljs-type">int</span> *arr = <span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[<span class="hljs-number">100</span>];<span class="hljs-comment">// 在堆上分配一个大小为 100 的数组</span><br>    std::cout &lt;&lt; <span class="hljs-string">"*p = "</span> &lt;&lt; *p &lt;&lt; std::endl;<br>    std::cout &lt;&lt; <span class="hljs-string">"arr[0] = "</span> &lt;&lt; arr[<span class="hljs-number">0</span>] &lt;&lt; std::endl;<br>    <span class="hljs-keyword">delete</span> p;               <span class="hljs-comment">// 释放堆内存</span><br>    <span class="hljs-keyword">delete</span>[] arr;           <span class="hljs-comment">// 释放数组</span><br>}<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>    <span class="hljs-built_in">stackExample</span>();<br>    <span class="hljs-built_in">heapExample</span>();<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><code>stackExample</code>：变量 <code>a</code> 和数组 <code>b</code> 分配在栈上，由系统自动分配与回收。</li>
+<li><code>heapExample</code>：使用 <code>new</code> 在堆上分配内存，需要手动调用 <code>delete</code>/<code>delete[]</code> 来释放，否则会发生内存泄漏。</li>
+</ul>
+<h4 id="Python-示例：对象分配在堆上"><a href="#Python-示例：对象分配在堆上" class="headerlink" title="Python 示例：对象分配在堆上"></a>Python 示例：对象分配在堆上</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">memory_example</span>():<br>    a = <span class="hljs-number">10</span>            <span class="hljs-comment"># 整数对象 10 存储在堆上，a 是栈帧中的一个引用</span><br>    lst = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]   <span class="hljs-comment"># 列表对象存储在堆上，lst 引用保存在栈帧</span><br>    <span class="hljs-built_in">print</span>(a, lst)<br><span class="hljs-keyword">if</span> <br>name<br> == <span class="hljs-string">"</span><br><span class="hljs-string">__main__</span><br><span class="hljs-string">"</span>:<br>    memory_example()<br>    <span class="hljs-comment"># Python 通过引用计数和垃圾回收自动释放不再使用的对象</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>在 Python 中，所有对象都分配在堆上，局部变量仅是对这些对象的引用，保存在栈帧中。函数退出时，局部引用消失，引用计数可能降为 0，垃圾回收器会回收对象。</li>
+</ul>
+<hr>
+<h3 id="表达式求值（逆波兰表达式）"><a href="#表达式求值（逆波兰表达式）" class="headerlink" title="表达式求值（逆波兰表达式）"></a>表达式求值（逆波兰表达式）</h3><h4 id="说明-1"><a href="#说明-1" class="headerlink" title="说明"></a>说明</h4><p>逆波兰表达式（后缀表达式）无需括号即可明确运算顺序，评估过程中需要一个栈来保存操作数、临时结果。</p>
+<ul>
+<li>遇到操作数时，压栈</li>
+<li>遇到运算符时，从栈中弹出相应数量的操作数进行计算，并将结果压回栈</li>
+<li>最后栈顶即为运算结果</li>
+</ul>
+<h4 id="C-示例（仅支持-四则运算）"><a href="#C-示例（仅支持-四则运算）" class="headerlink" title="C++ 示例（仅支持 + - * / 四则运算）"></a>C++ 示例（仅支持 <code>+ - * /</code> 四则运算）</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stack&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sstream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-comment">// 将字符串拆分为逆波兰表达式的 tokens</span><br><span class="hljs-function">std::vector&lt;std::string&gt; <span class="hljs-title">tokenize</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string &amp;expr)</span> </span>{<br>    std::vector&lt;std::string&gt; tokens;<br>    <span class="hljs-function">std::istringstream <span class="hljs-title">iss</span><span class="hljs-params">(expr)</span></span>;<br>    std::string token;<br>    <span class="hljs-keyword">while</span> (iss &gt;&gt; token) {<br>        tokens.<span class="hljs-built_in">push_back</span>(token);<br>    }<br>    <span class="hljs-keyword">return</span> tokens;<br>}<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">evalRPN</span><span class="hljs-params">(<span class="hljs-type">const</span> std::vector&lt;std::string&gt; &amp;tokens)</span> </span>{<br>    std::stack&lt;<span class="hljs-type">int</span>&gt; st;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> &amp;tk : tokens) {<br>        <span class="hljs-keyword">if</span> (tk == <span class="hljs-string">"+"</span> || tk == <span class="hljs-string">"-"</span> || tk == <span class="hljs-string">"</span><br><span class="hljs-string">_"</span> || tk == <span class="hljs-string">"/"</span>) {<br>            <span class="hljs-type">int</span> b = st.<span class="hljs-built_in">top</span>(); st.<span class="hljs-built_in">pop</span>();<br>            <span class="hljs-type">int</span> a = st.<span class="hljs-built_in">top</span>(); st.<span class="hljs-built_in">pop</span>();<br>            <span class="hljs-type">int</span> res = <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">if</span> (tk == <span class="hljs-string">"+"</span>) res = a + b;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (tk == <span class="hljs-string">"-"</span>) res = a - b;<br><span class="hljs-function">_*            <span class="hljs-keyword">else</span> <span class="hljs-title">if</span> <span class="hljs-params">(tk == <span class="hljs-string">"*</span></span></span><br><span class="hljs-string"><span class="hljs-params"><span class="hljs-function">"</span>)</span> res </span>= a * b;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (tk == <span class="hljs-string">"/"</span>) res = a / b;<br>            st.<span class="hljs-built_in">push</span>(res);<br>        } <span class="hljs-keyword">else</span> {<br>            st.<span class="hljs-built_in">push</span>(std::<span class="hljs-built_in">stoi</span>(tk));<br>        }<br>    }<br>    <span class="hljs-keyword">return</span> st.<span class="hljs-built_in">top</span>();<br>}<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>    std::string expr = <span class="hljs-string">"3 4 + 2 * 7 /"</span>;<br>    <span class="hljs-comment">// 对应中缀: ((3 + 4) * 2) / 7 = 2</span><br>    <span class="hljs-keyword">auto</span> tokens = <span class="hljs-built_in">tokenize</span>(expr);<br>    std::cout &lt;&lt; <span class="hljs-string">"Result: "</span> &lt;&lt; <span class="hljs-built_in">evalRPN</span>(tokens) &lt;&lt; std::endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>将逆波兰表达式拆为 token 数组，遍历时用 <code>std::stack&lt;int&gt;</code> 存放操作数。每遇运算符，弹出两个操作数，计算后将结果压回栈。</li>
+</ul>
+<h4 id="Python-示例-1"><a href="#Python-示例-1" class="headerlink" title="Python 示例"></a>Python 示例</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">eval_rpn</span>(<span class="hljs-params">tokens</span>):<br>    stack = []<br>    <span class="hljs-keyword">for</span> tk <span class="hljs-keyword">in</span> tokens:<br>        <span class="hljs-keyword">if</span> tk <span class="hljs-keyword">in</span> {<span class="hljs-string">"+"</span>, <span class="hljs-string">"-"</span>, <span class="hljs-string">"</span><br><span class="hljs-string">_"</span>, <span class="hljs-string">"/"</span>}:<br>            b = stack.pop()<br>            a = stack.pop()<br>            <span class="hljs-keyword">if</span> tk == <span class="hljs-string">"+"</span>:<br>                stack.append(a + b)<br>            <span class="hljs-keyword">elif</span> tk == <span class="hljs-string">"-"</span>:<br>                stack.append(a - b)<br>_*            <span class="hljs-keyword">elif</span> tk == <span class="hljs-string">"*</span><br><span class="hljs-string">"</span>:<br>                stack.append(a * b)<br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-comment"># 对于除法，需要注意 Python 的整除与 C++ 不同</span><br>                stack.append(<span class="hljs-built_in">int</span>(a / b))  <span class="hljs-comment"># 向零取整</span><br>        <span class="hljs-keyword">else</span>:<br>            stack.append(<span class="hljs-built_in">int</span>(tk))<br>    <span class="hljs-keyword">return</span> stack.pop()<br><span class="hljs-keyword">if</span> <br>name<br> == <span class="hljs-string">"</span><br><span class="hljs-string">__main__</span><br><span class="hljs-string">"</span>:<br>    expr = <span class="hljs-string">"3 4 + 2 * 7 /"</span>.split()<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">"Result:"</span>, eval_rpn(expr))  <span class="hljs-comment"># 2</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>Python 用列表 <code>stack</code> 模拟栈，操作与 C++ 版本一致。</li>
+</ul>
+<hr>
+<h3 id="撤销（Undo）操作"><a href="#撤销（Undo）操作" class="headerlink" title="撤销（Undo）操作"></a>撤销（Undo）操作</h3><p>许多应用需要实现“撤销”功能，此时可将用户操作或状态快照依次压入栈，用户点击“撤销”时，再次从栈顶弹出即可恢复到上一次状态。</p>
+<h4 id="Python-示例：文本编辑器简易撤销栈"><a href="#Python-示例：文本编辑器简易撤销栈" class="headerlink" title="Python 示例：文本编辑器简易撤销栈"></a>Python 示例：文本编辑器简易撤销栈</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">TextEditor</span>:<br>    <span class="hljs-keyword">def</span> <br><span class="hljs-title function_">__init__</span><br>(<span class="hljs-variable language_">self</span>):<br>        <span class="hljs-variable language_">self</span>.text = <span class="hljs-string">""</span><br>        <span class="hljs-variable language_">self</span>.undo_stack = []  <span class="hljs-comment"># 存放历史状态</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">write</span>(<span class="hljs-params">self, s</span>):<br>        <span class="hljs-comment"># 在写新内容前，将当前状态压栈</span><br>        <span class="hljs-variable language_">self</span>.undo_stack.append(<span class="hljs-variable language_">self</span>.text)<br>        <span class="hljs-variable language_">self</span>.text += s<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">undo</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.undo_stack:<br>            <span class="hljs-variable language_">self</span>.text = <span class="hljs-variable language_">self</span>.undo_stack.pop()<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">"Nothing to undo"</span>)<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">show</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f"Current Text: '<span class="hljs-subst">{self.text}</span>'"</span>)<br><span class="hljs-keyword">if</span> <br>name<br> == <span class="hljs-string">"</span><br><span class="hljs-string">__main__</span><br><span class="hljs-string">"</span>:<br>    editor = TextEditor()<br>    editor.write(<span class="hljs-string">"Hello"</span>)<br>    editor.show()        <span class="hljs-comment"># Hello</span><br>    editor.write(<span class="hljs-string">", World!"</span>)<br>    editor.show()        <span class="hljs-comment"># Hello, World!</span><br>    editor.undo()<br>    editor.show()        <span class="hljs-comment"># Hello</span><br>    editor.undo()<br>    editor.show()        <span class="hljs-comment"># (空字符串)</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>每次写入之前，将 <code>self.text</code> 的旧值压入 <code>undo_stack</code>。调用 <code>undo()</code> 时，将栈顶字符串弹出并恢复。</li>
+</ul>
+<hr>
+<h3 id="浏览器后退功能"><a href="#浏览器后退功能" class="headerlink" title="浏览器后退功能"></a>浏览器后退功能</h3><p>浏览器维护一个“历史页面访问栈”：</p>
+<ul>
+<li>用户访问新页面时，将当前页面地址压入“后退栈”，同时清空“前进栈”</li>
+<li>点击“后退”时，将当前页面压入“前进栈”，并从“后退栈”弹出最近访问的页面</li>
+<li>点击“前进”时，则反向操作</li>
+</ul>
+<h4 id="Python-示例：简易浏览器历史"><a href="#Python-示例：简易浏览器历史" class="headerlink" title="Python 示例：简易浏览器历史"></a>Python 示例：简易浏览器历史</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">BrowserHistory</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, homepage: <span class="hljs-built_in">str</span></span>):<br>        <span class="hljs-variable language_">self</span>.back_stack = []     <span class="hljs-comment"># 后退栈</span><br>        <span class="hljs-variable language_">self</span>.forward_stack = []  <span class="hljs-comment"># 前进栈</span><br>        <span class="hljs-variable language_">self</span>.current = homepage  <span class="hljs-comment"># 当前页面</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">visit</span>(<span class="hljs-params">self, url: <span class="hljs-built_in">str</span></span>):<br>        <span class="hljs-variable language_">self</span>.back_stack.append(<span class="hljs-variable language_">self</span>.current)<br>        <span class="hljs-variable language_">self</span>.current = url<br>        <span class="hljs-variable language_">self</span>.forward_stack.clear()  <span class="hljs-comment"># 新访问清空前进历史</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">back</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.back_stack:<br>            <span class="hljs-variable language_">self</span>.forward_stack.append(<span class="hljs-variable language_">self</span>.current)<br>            <span class="hljs-variable language_">self</span>.current = <span class="hljs-variable language_">self</span>.back_stack.pop()<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">"No pages to go back to"</span>)<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.forward_stack:<br>            <span class="hljs-variable language_">self</span>.back_stack.append(<span class="hljs-variable language_">self</span>.current)<br>            <span class="hljs-variable language_">self</span>.current = <span class="hljs-variable language_">self</span>.forward_stack.pop()<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">"No pages to go forward to"</span>)<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">show</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f"Back: <span class="hljs-subst">{self.back_stack}</span>, Current: <span class="hljs-subst">{self.current}</span>, Forward: <span class="hljs-subst">{self.forward_stack}</span>"</span>)<br><span class="hljs-keyword">if</span> name == <span class="hljs-string">"__main__"</span>:<br>    browser = BrowserHistory(<span class="hljs-string">"homepage.com"</span>)<br>    browser.show()<br>    browser.visit(<span class="hljs-string">"news.com"</span>)<br>    browser.show()<br>    browser.visit(<span class="hljs-string">"sports.com"</span>)<br>    browser.show()<br>    browser.back()<br>    browser.show()<br>    browser.back()<br>    browser.show()<br>    browser.forward()<br>    browser.show()<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>通过两个栈 (<code>back_stack</code> 和 <code>forward_stack</code>) 维护历史访问记录，实现后退和前进功能。</li>
+</ul>
+<hr>
+<h3 id="语法分析与括号匹配"><a href="#语法分析与括号匹配" class="headerlink" title="语法分析与括号匹配"></a>语法分析与括号匹配</h3><p>在编译器或解释器的语法分析阶段，需要检查表达式或语句是否合法。最常见的是<strong>括号匹配</strong>问题：扫描字符串时，遇到左括号（<code>(</code>、<code>[</code>、<code>{</code>）时压栈，遇到右括号时检查栈顶是否是对应的左括号，若不匹配则报错；最后栈为空则匹配成功。</p>
+<h4 id="C-示例：括号匹配"><a href="#C-示例：括号匹配" class="headerlink" title="C++ 示例：括号匹配"></a>C++ 示例：括号匹配</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stack&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unordered_map&gt;</span></span><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isValid</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string &amp;s)</span> </span>{<br>    std::stack&lt;<span class="hljs-type">char</span>&gt; st;<br>    std::unordered_map&lt;<span class="hljs-type">char</span>, <span class="hljs-type">char</span>&gt; pairs = {<br>        {<span class="hljs-string">')'</span>, <span class="hljs-string">'('</span>}, {<span class="hljs-string">']'</span>, <span class="hljs-string">'['</span>}, {<span class="hljs-string">'}'</span>, <span class="hljs-string">'{'</span>}<br>    };<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : s) {<br>        <span class="hljs-keyword">if</span> (c == <span class="hljs-string">'('</span> || c == <span class="hljs-string">'['</span> || c == <span class="hljs-string">'{'</span>) {<br>            st.<span class="hljs-built_in">push</span>(c);<br>        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c == <span class="hljs-string">')'</span> || c == <span class="hljs-string">']'</span> || c == <span class="hljs-string">'}'</span>) {<br>            <span class="hljs-keyword">if</span> (st.<span class="hljs-built_in">empty</span>() || st.<span class="hljs-built_in">top</span>() != pairs[c]) {<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            }<br>            st.<span class="hljs-built_in">pop</span>();<br>        }<br>        <span class="hljs-comment">// 忽略其他字符</span><br>    }<br>    <span class="hljs-keyword">return</span> st.<span class="hljs-built_in">empty</span>();<br>}<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>    std::string s1 = <span class="hljs-string">"([{}])"</span>;<br>    std::string s2 = <span class="hljs-string">"([}{])"</span>;<br>    std::cout &lt;&lt; s1 &lt;&lt; <span class="hljs-string">" is "</span> &lt;&lt; (<span class="hljs-built_in">isValid</span>(s1) ? <span class="hljs-string">"valid\n"</span> : <span class="hljs-string">"invalid\n"</span>);<br>    std::cout &lt;&lt; s2 &lt;&lt; <span class="hljs-string">" is "</span> &lt;&lt; (<span class="hljs-built_in">isValid</span>(s2) ? <span class="hljs-string">"valid\n"</span> : <span class="hljs-string">"invalid\n"</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>使用 <code>std::stack&lt;char&gt;</code> 存储左括号，遇到右括号时检查对应关系。</li>
+</ul>
+<h4 id="Python-示例-2"><a href="#Python-示例-2" class="headerlink" title="Python 示例"></a>Python 示例</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">is_valid</span>(<span class="hljs-params">s: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">bool</span>:<br>    stack = []<br>    pairs = {<span class="hljs-string">')'</span>: <span class="hljs-string">'('</span>, <span class="hljs-string">']'</span>: <span class="hljs-string">'['</span>, <span class="hljs-string">'}'</span>: <span class="hljs-string">'{'</span>}<br>    <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> s:<br>        <span class="hljs-keyword">if</span> c <span class="hljs-keyword">in</span> <span class="hljs-string">'([{'</span>:<br>            stack.append(c)<br>        <span class="hljs-keyword">elif</span> c <span class="hljs-keyword">in</span> <span class="hljs-string">')]}'</span>:<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> stack <span class="hljs-keyword">or</span> stack[-<span class="hljs-number">1</span>] != pairs[c]:<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>            stack.pop()<br>        <span class="hljs-comment"># 忽略其他字符</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">not</span> stack<br><span class="hljs-keyword">if</span> name == <span class="hljs-string">"__main__"</span>:<br>    <span class="hljs-built_in">print</span>(is_valid(<span class="hljs-string">"([{}])"</span>))  <span class="hljs-comment"># True</span><br>    <span class="hljs-built_in">print</span>(is_valid(<span class="hljs-string">"([}{])"</span>))  <span class="hljs-comment"># False</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>逻辑同上，用列表模拟栈。</li>
+</ul>
+<hr>
+<h3 id="进程-线程调度与上下文切换"><a href="#进程-线程调度与上下文切换" class="headerlink" title="进程/线程调度与上下文切换"></a>进程/线程调度与上下文切换</h3><p>操作系统在进行<strong>线程切换</strong>或<strong>进程切换</strong>时，需要保存当前执行状态（寄存器上下文、程序计数器等）到线程/进程的<strong>栈帧</strong>中，待下次重新调度时再从栈中恢复。</p>
+<ul>
+<li>线程栈：每个线程分配固定大小的栈空间，保存其调用链和临时变量。上下文切换时，CPU 会自动“压栈”通用寄存器和程序计数器，然后加载下一个线程的寄存器和 PC 值；切回原线程时，再次“弹栈”恢复上下文。</li>
+</ul>
+<h4 id="C-伪示例（伪代码，仅用于说明概念）"><a href="#C-伪示例（伪代码，仅用于说明概念）" class="headerlink" title="C++ 伪示例（伪代码，仅用于说明概念）"></a>C++ 伪示例（伪代码，仅用于说明概念）</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">CPUContext</span> {<br>    <span class="hljs-type">uint64_t</span> rip;     <span class="hljs-comment">// 指令指针（程序计数器）</span><br>    <span class="hljs-type">uint64_t</span> rsp;     <span class="hljs-comment">// 栈指针</span><br>    <span class="hljs-type">uint64_t</span> regs[<span class="hljs-number">16</span>];<span class="hljs-comment">// 其他通用寄存器</span><br>    <span class="hljs-comment">// ...</span><br>};<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">context_switch</span><span class="hljs-params">(CPUContext *cur, CPUContext </span></span><br><span class="hljs-params"><span class="hljs-function">_next)</span> </span>{<br>    <span class="hljs-comment">// 保存当前上下文到 cur</span><br>    <span class="hljs-function"><span class="hljs-keyword">asm</span> <span class="hljs-title">volatile</span> <span class="hljs-params">(</span></span><br><span class="hljs-params"><span class="hljs-function">        <span class="hljs-string">"mov %%rsp, %0\n\t"</span></span></span><br><span class="hljs-params"><span class="hljs-function">        <span class="hljs-string">"mov %%rax, %1\n\t"</span></span></span><br><span class="hljs-params"><span class="hljs-function">        <span class="hljs-comment">// … 其他寄存器</span></span></span><br><span class="hljs-params"><span class="hljs-function">_*        : <span class="hljs-string">"=m"</span>(cur-&gt;rsp), <span class="hljs-string">"=m"</span>(cur-&gt;regs[<span class="hljs-number">0</span>]) <span class="hljs-comment">/*</span></span></span><br><span class="hljs-comment"><span class="hljs-params"><span class="hljs-function"> … </span></span></span><br><span class="hljs-comment"><span class="hljs-params"><span class="hljs-function">_/</span></span></span><br><span class="hljs-comment"><span class="hljs-params"><span class="hljs-function">        :</span></span></span><br><span class="hljs-comment"><span class="hljs-params"><span class="hljs-function">        :</span></span></span><br><span class="hljs-comment"><span class="hljs-params"><span class="hljs-function">    );</span></span></span><br><span class="hljs-comment"><span class="hljs-params"><span class="hljs-function">    // 加载下一个上下文</span></span></span><br><span class="hljs-comment"><span class="hljs-params"><span class="hljs-function">    asm volatile (</span></span></span><br><span class="hljs-comment"><span class="hljs-params"><span class="hljs-function">        "mov %0, %%rsp\n\t"</span></span></span><br><span class="hljs-comment"><span class="hljs-params"><span class="hljs-function">        "mov %1, %%rax\n\t"</span></span></span><br><span class="hljs-comment"><span class="hljs-params"><span class="hljs-function">        // … 其他寄存器</span></span></span><br><span class="hljs-comment"><span class="hljs-params"><span class="hljs-function">        :</span></span></span><br><span class="hljs-comment"><span class="hljs-params"><span class="hljs-function">_*        : "m"(next-&gt;rsp), "m"(next-&gt;regs[0]) /*</span></span></span><br><span class="hljs-comment"><span class="hljs-params"><span class="hljs-function"> … */</span></span></span><br><span class="hljs-params"><span class="hljs-function">    )</span></span>;<br>    <span class="hljs-comment">// 跳转到下一个线程的指令地址</span><br>    <span class="hljs-function"><span class="hljs-keyword">asm</span> <span class="hljs-title">volatile</span> <span class="hljs-params">(<span class="hljs-string">"jmp *%0"</span> :: <span class="hljs-string">"m"</span>(next-&gt;rip))</span></span>;<br>}<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>该示例仅示意 OS 如何将寄存器状态压栈/存储到 <code>CPUContext</code> 结构，模拟上下文切换。真实内核会更复杂，并在内核栈上完成这些操作。</li>
+</ul>
+<hr>
+<h3 id="实时系统任务调度与中断处理"><a href="#实时系统任务调度与中断处理" class="headerlink" title="实时系统任务调度与中断处理"></a>实时系统任务调度与中断处理</h3><p>在实时系统（RTOS）中，每个任务通常分配一个固定大小的栈，用于保存用户态执行时的局部变量和调用帧。</p>
+<ul>
+<li><strong>任务调度</strong>：RTOS 按优先级或时间片轮转调度任务，切换时需保存/恢复任务上下文（寄存器、程序计数器等）到各自任务的栈帧。</li>
+<li><strong>中断处理</strong>：发生中断时，CPU 自动将部分寄存器（如程序计数器、标志寄存器）压入当前栈中，跳转到中断处理程序，并使用中断程序自身的栈（通常也是内核栈）执行，处理完毕后从栈中弹出恢复现场。</li>
+</ul>
+<h4 id="C-示例（伪代码，基于-ARM-Cortex-M-中断栈）"><a href="#C-示例（伪代码，基于-ARM-Cortex-M-中断栈）" class="headerlink" title="C 示例（伪代码，基于 ARM Cortex-M 中断栈）"></a>C 示例（伪代码，基于 ARM Cortex-M 中断栈）</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// 假设 Cortex-M 架构，中断发生时硬件会自动压入 R0-R3、R12、LR、PC、xPSR</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">SysTick_Handler</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {<br>    <span class="hljs-comment">// 此时硬件已将通用寄存器和 xPSR 压入当前任务的栈中，使用 PSP/MSP 寄存器区分</span><br>    <span class="hljs-comment">// 处理中断逻辑</span><br>    <span class="hljs-comment">// ...</span><br>    <span class="hljs-comment">// 退出中断时，硬件自动从栈中弹回寄存器并恢复现场</span><br>}<br><span class="hljs-comment">// 任务创建时，手动构造该任务的初始栈帧</span><br><span class="hljs-type">uint32_t</span> *<span class="hljs-title function_">create_task_stack</span><span class="hljs-params">(<span class="hljs-type">void</span> (*task_func)(<span class="hljs-type">void</span>), <span class="hljs-type">uint32_t</span> *stack_top)</span> {<br>    <span class="hljs-comment">// 栈顶需预留硬件自动压栈的空间（8 寄存器）</span><br>    *(--stack_top) = INITIAL_xPSR;  <span class="hljs-comment">// xPSR</span><br>    *(--stack_top) = (<span class="hljs-type">uint32_t</span>)task_func; <span class="hljs-comment">// PC</span><br>    *(--stack_top) = <span class="hljs-number">0xFFFFFFFD</span>;    <span class="hljs-comment">// LR (使用 PSP 指向任务栈)</span><br>    <span class="hljs-comment">// R12, R3, R2, R1, R0</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) {<br>        *(--stack_top) = <span class="hljs-number">0</span>;<br>    }<br>    <span class="hljs-comment">// 接下来是软件自动压入的寄存器（R4–R11）</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">8</span>; i++) {<br>        *(--stack_top) = <span class="hljs-number">0</span>;<br>    }<br>    <span class="hljs-keyword">return</span> stack_top; <span class="hljs-comment">// 返回任务上下文初始化后的栈顶指针</span><br>}<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>在 ARM Cortex-M 系列中，中断或异常发生时，硬件会自动将 R0–R3、R12、LR、PC、xPSR 压栈；退出时硬件弹栈恢复。这段伪代码展示了如何手动为一个新任务构造“假”的中断栈帧，使其从任务函数 <code>task_func</code> 开始执行。</li>
+</ul>
+<hr>
+<h2 id="堆与栈在内存中的分布及冲突"><a href="#堆与栈在内存中的分布及冲突" class="headerlink" title="堆与栈在内存中的分布及冲突"></a>堆与栈在内存中的分布及冲突</h2><h3 id="内存布局示意"><a href="#内存布局示意" class="headerlink" title="内存布局示意"></a>内存布局示意</h3><p>C 语言的内存模型分为 5 个区：栈区、堆区、静态区、常量区、代码区。每个区存储的内容如下：</p>
+<ol>
+<li>栈区：存放函数的参数值、局部变量等，由编译器自动分配和释放，通常在函数执行完后就释放了，其操作方式类似于数据结构中的栈。栈内存分配运算内置于 CPU 的指令集，效率很高，但是分配的内存量有限，比如 iOS 中栈区的大小是 2M。</li>
+<li>堆区：就是通过 new、malloc、realloc 分配的内存块，编译器不会负责它们的释放工作，需要用程序区释放。分配方式类似于数据结构中的链表。“内存泄漏”通常说的就是堆区。</li>
+<li>静态区：全局变量和静态变量的存储是放在一块的，初始化的全局变量和静态变量在一块区域，未初始化的全局变量和未初始化的静态变量在相邻的另一块区域。程序结束后，由系统释放。</li>
+<li>常量区：常量存储在这里，不允许修改。</li>
+<li>代码区：顾名思义，存放代码。</li>
+</ol>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749360547853MFckbxyUqonaQtxbuPsc8E3unsc.png" alt="1749360547853MFckbxyUqonaQtxbuPsc8E3unsc.png"><br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749360556085D4ivbYK77oSejXxL204cgPNvneb.png" alt="1749360556085D4ivbYK77oSejXxL204cgPNvneb.png"></p>
+<ul>
+<li><strong>堆区</strong>（Heap）从低地址向高地址方向增长。当程序调用 <code>new</code>/<code>malloc</code> 分配内存时，分配器会在堆中寻找足够大的空闲块。</li>
+<li><strong>栈区</strong>（Stack）从高地址向低地址方向增长。当函数调用时，系统在栈顶“向下”分配栈帧；函数返回时，“向上”回收。</li>
+<li>两者通常由中间的空闲区隔开，若向对方增长的空间过大，可能出现<strong>堆与栈冲突</strong>（Stack–Heap Collision）。</li>
+</ul>
+<h3 id="栈堆冲突（Stack–Heap-Collision）"><a href="#栈堆冲突（Stack–Heap-Collision）" class="headerlink" title="栈堆冲突（Stack–Heap Collision）"></a>栈堆冲突（Stack–Heap Collision）</h3><p>当程序对堆申请大量连续内存（如 <code>new</code>/<code>malloc</code>）而栈调用层次过深（或线程栈空间不足）时：</p>
+<ul>
+<li><strong>堆过度增长</strong>：不断调用动态分配函数，导致堆区不断向高地址扩展</li>
+<li><strong>栈过度生长</strong>：深度递归或大量局部变量导致栈区向低地址扩展<br>若二者相向增长，最终会相互覆盖（即“冲突”），造成已分配的堆内存或栈空间被意外覆盖，导致程序崩溃或不可预知的错误。</li>
+</ul>
+<h4 id="示意场景"><a href="#示意场景" class="headerlink" title="示意场景"></a>示意场景</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">recurse</span><span class="hljs-params">(<span class="hljs-type">int</span> depth)</span> </span>{<br>    <span class="hljs-comment">// 每次调用消耗一定的栈空间</span><br>    <span class="hljs-type">char</span> buffer[<span class="hljs-number">1024</span>];  <span class="hljs-comment">// 1KB 的局部数组</span><br>    <span class="hljs-keyword">if</span> (depth &gt; <span class="hljs-number">0</span>) {<br>        <span class="hljs-built_in">recurse</span>(depth - <span class="hljs-number">1</span>);<br>    }<br>}<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>    <span class="hljs-comment">// 不断分配堆内存</span><br>    std::vector&lt;<span class="hljs-type">int</span>*&gt; allocations;<br>    <span class="hljs-keyword">try</span> {<br>        <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {<br>            allocations.<span class="hljs-built_in">push_back</span>(<span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[<span class="hljs-number">10000</span>]); <span class="hljs-comment">// 每次分配 ~40KB</span><br>        }<br>    } <span class="hljs-built_in">catch</span> (std::bad_alloc &amp;e) {<br>        std::cerr &lt;&lt; <span class="hljs-string">"Heap exhausted: "</span> &lt;&lt; e.<span class="hljs-built_in">what</span>() &lt;&lt; std::endl;<br>    }<br>    <span class="hljs-comment">// 同时进行深度递归</span><br>    <span class="hljs-built_in">recurse</span>(<span class="hljs-number">100000</span>); <span class="hljs-comment">// 这会导致栈溢出</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>在上述伪示例中，如果同时执行大量 <code>new int[10000]</code>（堆分配）与深度递归 <code>recurse(100000)</code>（栈分配），就可能发生堆与栈冲突。实际运行时，程序要么先出现堆分配失败（抛出 <code>bad_alloc</code>），要么先出现栈溢出 (Stack Overflow)。</li>
+</ul>
+<h4 id="如何避免"><a href="#如何避免" class="headerlink" title="如何避免"></a>如何避免</h4><ol>
+<li><strong>控制递归深度</strong>，或使用迭代替代深度递归，从而减少栈空间消耗。</li>
+<li><strong>限制堆分配总量</strong>，在堆分配时及时释放不再使用的内存，避免过度占用。</li>
+<li><strong>增加可用内存</strong>：在嵌入式或受限环境下，根据需求调整栈大小（编译器或链接器选项）和堆区大小。</li>
+<li><strong>监控与检测工具</strong>：使用工具（如 Valgrind、AddressSanitizer）检测内存越界和栈溢出问题。</li>
+</ol>
+<hr>
+<h2 id="堆与栈在不同应用场景中的现实案例"><a href="#堆与栈在不同应用场景中的现实案例" class="headerlink" title="堆与栈在不同应用场景中的现实案例"></a>堆与栈在不同应用场景中的现实案例</h2><h3 id="嵌入式开发"><a href="#嵌入式开发" class="headerlink" title="嵌入式开发"></a>嵌入式开发</h3><ul>
+<li><strong>堆与栈在 RTOS 中的角色</strong><ul>
+<li><strong>栈</strong>：每个任务分配固定大小的任务栈，用于存储任务函数的调用帧和局部变量。RTOS 切换任务时，会保存/恢复任务的寄存器上下文到各自的任务栈中。</li>
+<li><strong>堆</strong>：嵌入式往往内存紧张，避免动态分配；如果使用堆则要小心碎片化。许多 RTOS（如 FreeRTOS）提供“内存池”或“堆区域”管理接口，开发者可根据需求预先分配一段大内存作为堆，通过 <code>pvPortMalloc</code>/<code>vPortFree</code> 操作。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// FreeRTOS 示例：创建一个任务，并为其指定栈大小</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">vTaskFunction</span><span class="hljs-params">(<span class="hljs-type">void</span> *pvParameters)</span> {<br>    <span class="hljs-type">int</span> local_var = <span class="hljs-number">42</span>;  <span class="hljs-comment">// 存储在任务栈中</span><br>    <span class="hljs-keyword">for</span> (;;) {<br>        <span class="hljs-comment">// Task logic...</span><br>    }<br>}<br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {<br>    <span class="hljs-comment">// 在创建任务时，指定 256 字 作为任务栈大小</span><br>    xTaskCreate(vTaskFunction, <span class="hljs-string">"Task1"</span>, <span class="hljs-number">256</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-number">1</span>, <span class="hljs-literal">NULL</span>);<br>    vTaskStartScheduler(); <span class="hljs-comment">// 启动调度器，开始抢占式多任务</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>场景说明</strong>：在嵌入式系统中，为了保证实时性和预测性，往往禁止或限制堆分配，更多地使用<strong>静态分配</strong>或<strong>内存池</strong>，仅在启动阶段少量使用堆。</li>
+</ul>
+<hr>
+<h3 id="Web-后端"><a href="#Web-后端" class="headerlink" title="Web 后端"></a>Web 后端</h3><ul>
+<li><p><strong>函数调用与请求栈</strong></p>
+<ul>
+<li>在 Web 服务中，每个 HTTP 请求都可能触发一条线程（或使用协程/异步框架），该请求对应的调用堆栈存放在栈内存中。若请求处理链条过深（大量中间件或控制器嵌套），有可能导致栈溢出。</li>
+</ul>
+</li>
+<li><p><strong>缓存管理</strong></p>
+<ul>
+<li><strong>堆</strong>：Java 或 C++ 编写的后端应用中的缓存（如 LRU Cache）通常使用堆结构来维护元素优先级或过期时间。例如，使用 <code>std::priority_queue</code> 或 Python 的 <code>heapq</code> 实现定时淘汰策略。</li>
+</ul>
+</li>
+</ul>
+<h4 id="C-示例：基于堆的简单-LRU-缓存（按过期时间）"><a href="#C-示例：基于堆的简单-LRU-缓存（按过期时间）" class="headerlink" title="C++ 示例：基于堆的简单 LRU 缓存（按过期时间）"></a>C++ 示例：基于堆的简单 LRU 缓存（按过期时间）</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;queue&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unordered_map&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;chrono&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;thread&gt;</span></span><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">CacheItem</span> {<br>    <span class="hljs-type">int</span> key;<br>    std::string value;<br>    std::chrono::steady_clock::time_point expire_time;<br>};<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">CompareExpire</span> {<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(<span class="hljs-type">const</span> CacheItem &amp;a, <span class="hljs-type">const</span> CacheItem &amp;b)</span> </span>{<br>        <span class="hljs-keyword">return</span> a.expire_time &gt; b.expire_time; <span class="hljs-comment">// 过期时间早的优先级高</span><br>    }<br>};<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">LRUCache</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">LRUCache</span>(<span class="hljs-type">size_t</span> capacity): <span class="hljs-built_in">capacity_</span>(capacity) {}<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">put</span><span class="hljs-params">(<span class="hljs-type">int</span> key, <span class="hljs-type">const</span> std::string &amp;value, <span class="hljs-type">int</span> ttl_seconds)</span> </span>{<br>        <span class="hljs-keyword">auto</span> now = std::chrono::steady_clock::<span class="hljs-built_in">now</span>();<br>        CacheItem item{key, value, now + std::chrono::<span class="hljs-built_in">seconds</span>(ttl_seconds)};<br>        <span class="hljs-keyword">if</span> (cache_map_.<span class="hljs-built_in">size</span>() &gt;= capacity_) {<br>            <span class="hljs-comment">// 移除过期或最久未使用元素</span><br>            <span class="hljs-built_in">evict</span>();<br>        }<br>        cache_map_[key] = item;<br>        min_heap_.<span class="hljs-built_in">push</span>(item);<br>    }<br>    <span class="hljs-function">std::string <span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-type">int</span> key)</span> </span>{<br>        <span class="hljs-keyword">auto</span> it = cache_map_.<span class="hljs-built_in">find</span>(key);<br>        <span class="hljs-keyword">if</span> (it == cache_map_.<span class="hljs-built_in">end</span>()) <span class="hljs-keyword">return</span> <span class="hljs-string">""</span>; <span class="hljs-comment">// 未命中</span><br>        <span class="hljs-comment">// 更新过期时间或移动到最新位置可自行实现</span><br>        <span class="hljs-keyword">return</span> it-&gt;second.value;<br>    }<br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">evict</span><span class="hljs-params">()</span> </span>{<br>        <span class="hljs-keyword">auto</span> now = std::chrono::steady_clock::<span class="hljs-built_in">now</span>();<br>        <span class="hljs-keyword">while</span> (!min_heap_.<span class="hljs-built_in">empty</span>()) {<br>            <span class="hljs-keyword">auto</span> &amp;top = min_heap_.<span class="hljs-built_in">top</span>();<br>            <span class="hljs-keyword">if</span> (top.expire_time &lt;= now) {<br>                <span class="hljs-comment">// 已过期，删除</span><br>                cache_map_.<span class="hljs-built_in">erase</span>(top.key);<br>                min_heap_.<span class="hljs-built_in">pop</span>();<br>            } <span class="hljs-keyword">else</span> {<br>                <span class="hljs-comment">// 如果堆顶未过期，但 cache_map_ 超过容量，可自行实现额外的 LRU 逻辑</span><br>                <span class="hljs-keyword">break</span>;<br>            }<br>        }<br>        <span class="hljs-comment">// 这里简化：如果仍然超出容量，可额外删除最老元素</span><br>    }<br>    <span class="hljs-type">size_t</span> capacity_;<br>    std::unordered_map&lt;<span class="hljs-type">int</span>, CacheItem&gt; cache_map_;<br>    std::priority_queue&lt;CacheItem, std::vector&lt;CacheItem&gt;, CompareExpire&gt; min_heap_;<br>};<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>    <span class="hljs-function">LRUCache <span class="hljs-title">cache</span><span class="hljs-params">(<span class="hljs-number">3</span>)</span></span>;<br>    cache.<span class="hljs-built_in">put</span>(<span class="hljs-number">1</span>, <span class="hljs-string">"A"</span>, <span class="hljs-number">2</span>);<br>    cache.<span class="hljs-built_in">put</span>(<span class="hljs-number">2</span>, <span class="hljs-string">"B"</span>, <span class="hljs-number">5</span>);<br>    cache.<span class="hljs-built_in">put</span>(<span class="hljs-number">3</span>, <span class="hljs-string">"C"</span>, <span class="hljs-number">10</span>);<br>    std::this_thread::<span class="hljs-built_in">sleep_for</span>(std::chrono::<span class="hljs-built_in">seconds</span>(<span class="hljs-number">3</span>));<br>    std::cout &lt;&lt; <span class="hljs-string">"Get key 1: "</span> &lt;&lt; cache.<span class="hljs-built_in">get</span>(<span class="hljs-number">1</span>) &lt;&lt; std::endl; <span class="hljs-comment">// 可能已过期，返回 ""</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>使用 <code>std::priority_queue</code>（最小堆）按过期时间排序，当容量满时弹出最早过期项或其他淘汰策略。</li>
+</ul>
+<hr>
+<h3 id="游戏开发"><a href="#游戏开发" class="headerlink" title="游戏开发"></a>游戏开发</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/KillerAery/p/10765893.html">游戏架构设计:内存管理 - KillerAery - 博客园</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhyan8/p/17238161.html">【Unity3D】Unity3D 技术栈 - little_fat_sheep - 博客园</a></li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>内存池（Memory Pool）</strong><ul>
+<li>游戏中对象（如子弹、特效、NPC）创建频繁，反复调用 <code>new/delete</code> 会导致堆碎片和性能损耗。常用的做法是在启动时预先向堆申请一大块连续内存，将其切分为固定大小的“内存池块”，通过栈或链表管理空闲块。分配时从池中取出一个空闲块，释放时将其归还池中，而无需操作系统的堆管理。</li>
+</ul>
+</li>
+</ul>
+<h4 id="C-示例：简单对象池（以-GameObject-为例）"><a href="#C-示例：简单对象池（以-GameObject-为例）" class="headerlink" title="C++ 示例：简单对象池（以 GameObject 为例）"></a>C++ 示例：简单对象池（以 <code>GameObject</code> 为例）</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-comment">// 假设游戏对象</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">GameObject</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">GameObject</span>() : <span class="hljs-built_in">x</span>(<span class="hljs-number">0</span>), <span class="hljs-built_in">y</span>(<span class="hljs-number">0</span>) {}<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">reset</span><span class="hljs-params">()</span> </span>{ x = y = <span class="hljs-number">0</span>; }<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">set_position</span><span class="hljs-params">(<span class="hljs-type">int</span> px, <span class="hljs-type">int</span> py)</span> </span>{ x = px; y = py; }<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>{ std::cout &lt;&lt; <span class="hljs-string">"GameObject at ("</span> &lt;&lt; x &lt;&lt; <span class="hljs-string">", "</span> &lt;&lt; y &lt;&lt; <span class="hljs-string">")\n"</span>; }<br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-type">int</span> x, y;<br>};<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">ObjectPool</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">ObjectPool</span>(<span class="hljs-type">size_t</span> poolSize) {<br>        pool_.<span class="hljs-built_in">reserve</span>(poolSize);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; poolSize; ++i) {<br>            pool_.<span class="hljs-built_in">push_back</span>(<span class="hljs-keyword">new</span> <span class="hljs-built_in">GameObject</span>());<br>            free_stack_.<span class="hljs-built_in">push</span>(pool_.<span class="hljs-built_in">back</span>());<br>        }<br>    }<br>    ~<span class="hljs-built_in">ObjectPool</span>() {<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> obj : pool_) <span class="hljs-keyword">delete</span> obj;<br>    }<br>    <span class="hljs-function">GameObject* <span class="hljs-title">acquire</span><span class="hljs-params">()</span> </span>{<br>        <span class="hljs-keyword">if</span> (free_stack_.<span class="hljs-built_in">empty</span>()) <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<br>        GameObject* obj = free_stack_.<span class="hljs-built_in">top</span>();<br>        free_stack_.<span class="hljs-built_in">pop</span>();<br>        <span class="hljs-keyword">return</span> obj;<br>    }<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">release</span><span class="hljs-params">(GameObject* obj)</span> </span>{<br>        obj-&gt;<span class="hljs-built_in">reset</span>();<br>        free_stack_.<span class="hljs-built_in">push</span>(obj);<br>    }<br><span class="hljs-keyword">private</span>:<br>    std::vector&lt;GameObject*&gt; pool_;<br>    std::stack&lt;GameObject*&gt; free_stack_;<br>};<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>    <span class="hljs-function">ObjectPool <span class="hljs-title">pool</span><span class="hljs-params">(<span class="hljs-number">5</span>)</span></span>;<br>    GameObject *obj1 = pool.<span class="hljs-built_in">acquire</span>();<br>    obj1-&gt;<span class="hljs-built_in">set_position</span>(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>);<br>    obj1-&gt;<span class="hljs-built_in">print</span>(); <span class="hljs-comment">// GameObject at (10, 20)</span><br>    pool.<span class="hljs-built_in">release</span>(obj1);<br>    GameObject *obj2 = pool.<span class="hljs-built_in">acquire</span>();<br>    obj2-&gt;<span class="hljs-built_in">print</span>(); <span class="hljs-comment">// GameObject at (0, 0) （重置后）</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><code>ObjectPool</code> 在构造时一次性向堆申请若干 <code>GameObject</code>，将它们全部存在 <code>pool_</code> 容器中，再把指针压入 <code>free_stack_</code>（栈）。获取时从 <code>free_stack_</code> 弹栈；释放时将对象 <code>reset()</code> 并压回栈。避免了频繁的 <code>new/delete</code>。</li>
+</ul>
+<hr>
+<h3 id="操作系统原理"><a href="#操作系统原理" class="headerlink" title="操作系统原理"></a>操作系统原理</h3><ul>
+<li><p><strong>线程栈</strong></p>
+<ul>
+<li>操作系统为每个线程分配固定大小的内存作为线程栈，用于保存函数调用帧、局部变量和中断上下文。栈空间不足会导致<strong>栈溢出（Stack Overflow）</strong>，可能使程序崩溃。</li>
+</ul>
+</li>
+<li><p><strong>堆碎片与分配器</strong></p>
+<ul>
+<li>应用在堆上频繁分配/释放不同大小的块，会导致碎片化（外部碎片）。操作系统或 C 运行时使用<strong>分配算法</strong>（如伙伴系统、空闲链表、slab 分配器）来减少碎片。例如 Linux 内核使用伙伴算法（Buddy Allocator）为内核分配物理页；用户态 C 库（glibc）使用 ptmalloc2，实现复杂的 bin 快表和 mmap 分配，从而提升多线程环境下的分配效率并尽量减少碎片。</li>
+</ul>
+</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>总体而言，<strong>栈</strong>与<strong>堆</strong>在数据结构和内存管理层面都是基础而关键的概念。数据结构层面，栈提供简单高效的 LIFO 存取，堆（优先队列）提供基于优先级的动态调度；内存管理层面，栈由系统自动分配释放，速度快但空间有限；堆则按需动态分配，由程序或运行时负责回收，灵活但需要注意碎片和内存泄漏。理解两者的差异及应用场景（如嵌入式的静态分配、后端的请求栈和缓存管理、游戏的内存池、操作系统的线程栈管理等）可以帮助程序员写出更健壮、高效的代码。</p>
+<ul>
+<li><strong>栈</strong>：自动分配与释放；访问速度快；适用于函数调用、状态机、撤销等场景；容量有限且线程私有。</li>
+<li><strong>堆</strong>：动态分配与释放；灵活但开销较大；可能发生碎片；适用于缓存管理、对象池、动态数据结构等场景。</li>
+<li>理解两者在内存布局上的位置及增长方式，有助于避免栈溢出和堆栈冲突，提高程序安全性与性能。</li>
+</ul>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2025/05/01/2025-05-01-%E5%86%B3%E7%AD%96%E6%A0%91%E7%AE%97%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8/">2025-05-01-决策树算法及应用</a></li>
+                
+                
+                    <li>下一篇: <a href="/2025/04/23/2025-04-23-%E5%9F%BA%E4%BA%8E%E4%B8%8A%E4%B8%8B%E4%BD%8D%E6%9C%BA%E7%BB%93%E6%9E%84%E7%9A%84%E7%B3%BB%E7%BB%9F%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90/">2025-04-23-基于上下位机结构的系统实例分析</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" rel="tag">课程学习</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2025/07/29/2025-07-29-%E4%B9%9D%E6%A0%BC%E9%80%9A%E7%94%A8%E5%9F%BA%E7%A1%80%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">2025-07-29-九格通用基础大模型环境配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/07/03/2025-07-03-%E6%8B%AF%E6%95%91%E6%88%91%E7%9A%84%E2%80%9C%E9%AB%98%E7%83%A7%E2%80%9D%E6%88%98%E5%8F%8B%E2%80%94%E2%80%94Y7000P%202024%E7%89%88%E6%B8%85%E7%81%B0%E6%8D%A2%E7%A1%85%E8%84%82%E8%AE%B0%E5%BD%95/">2025-07-03-拯救我的“高烧”战友——Y7000P 2024 版清灰换硅脂记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/08/2025-06-08-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%95%E5%B1%82%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-08-大模型底层技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/05/2025-06-05-%E6%99%BA%E8%83%BD%E4%BD%93%E5%B9%B3%E5%8F%B0%E5%8F%8A%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-05-智能体平台及关键技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/04/2025-06-04-%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%B9%B3%E5%8F%B0%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D/">2025-06-04-低代码平台及相关技术介绍应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/03/2025-06-03-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/">2025-06-03-微信小程序开发框架详解</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2025 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>

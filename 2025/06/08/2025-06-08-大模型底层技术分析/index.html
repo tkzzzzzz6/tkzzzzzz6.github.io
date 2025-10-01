@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2025-06-08-大模型底层技术分析 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-06-08-大模型底层技术分析"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-06-08-大模型底层技术分析</h2>
+            <div class="post-meta">
+                <time class="date">2025.06.08</time>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="大模型底层技术分析"><a href="#大模型底层技术分析" class="headerlink" title="大模型底层技术分析"></a>大模型底层技术分析</h1><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://medium.com/@lmpo/mastering-llms-a-guide-to-decoding-algorithms-c90a48fd167b">Understanding LLM Decoding Strategies</a></li>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000046177208">最新「大模型简史」整理！从 Transformer（2017）到 DeepSeek-R1（2025）</a></li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/@lmpo/%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%AE%80%E5%8F%B2-%E4%BB%8Etransformer-2017-%E5%88%B0deepseek-r1-2025-cc54d658fb43">大语言模型简史</a></li>
+</ul>
+</blockquote>
+<h1 id="2025年大语言模型综述论文推荐"><a href="#2025年大语言模型综述论文推荐" class="headerlink" title="2025年大语言模型综述论文推荐"></a>2025年大语言模型综述论文推荐</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/luo-junyu/Awesome-Agent-Papers">Awesome Agent Papers GitHub Repository</a></li>
+</ul>
+</blockquote>
+<p>以下是三篇 2025 年关于大语言模型的综述论文：</p>
+<ol>
+<li><h2 id="A-Survey-on-Large-Language-Models-with-some-Insights-on-their-Capabilities-and-Limitations"><a href="#A-Survey-on-Large-Language-Models-with-some-Insights-on-their-Capabilities-and-Limitations" class="headerlink" title="A Survey on Large Language Models with some Insights on their Capabilities and Limitations"></a><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2501.04040">A Survey on Large Language Models with some Insights on their Capabilities and Limitations</a></h2></li>
+</ol>
+<ul>
+<li><strong>链接</strong> : <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2501.04040">arXiv:2501.04040</a></li>
+<li><strong>内容概述</strong> :<br>该论文深入探讨 LLMs 的能力，包括文本生成、问答、翻译、摘要、常识推理、代码生成和数学计算，强调其接近人类水平的理解能力。研究分析了基于 Transformer 架构的模型（如 GPT、LLaMA），探讨了数据和计算规模的指数增长对性能的影响。论文还讨论了扩展机制（如参数量增加、上下文长度扩展）和架构策略（如多头注意力、层归一化）。此外，分析了 LLMs 的局限性，如高计算成本、事实错误（hallucination）和伦理问题。应用领域包括医疗（诊断辅助）、金融（风险评估）、教育（智能辅导）和法律（合同分析）。论文还探讨了链式推理（Chain-of-Thought, CoT）和路径推理（Path-of-Thought, PoT）能力，以及 LLM-modulo 框架的泛化性。</li>
+<li><strong>贡献</strong> :</li>
+<li>提供 LLMs 的全面能力与局限性分析，适合理解技术边界。</li>
+<li>覆盖多领域应用，适合跨行业参考。</li>
+<li>174 页的详尽内容，计划提交期刊的精简版，信息量丰富。</li>
+</ul>
+<ol start="2">
+<li><h2 id="Large-Language-Models-A-Survey"><a href="#Large-Language-Models-A-Survey" class="headerlink" title="Large Language Models: A Survey"></a><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2402.06196">Large Language Models: A Survey</a></h2></li>
+</ol>
+<ul>
+<li><strong>链接</strong> : <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2402.06196">arXiv:2402.06196</a></li>
+<li><strong>内容概述</strong> :<br>该论文是 2024 年初版的更新版本，综述了主流 LLMs（如 GPT、LLaMA、PaLM）的特性、贡献和局限性。研究讨论了构建和增强 LLMs 的技术，包括预训练、微调、分布式训练和高效推理。论文调研了用于训练、微调和评估的热门数据集（如 Common Crawl、The Pile），并回顾了广泛使用的评估指标（如 BLEU、ROUGE、Perplexity）。通过代表性基准测试（如 MMLU、GLUE）比较了多个 LLMs 的性能，分析了其在不同任务上的表现。论文还探讨了开放挑战，如计算效率、数据偏见和模型可解释性，以及未来研究方向（如多模态 LLMs、能源优化）。</li>
+<li><strong>贡献</strong> :</li>
+<li>提供 LLMs 的技术全景，涵盖架构、数据集和评估。</li>
+<li>更新至 2025 年，包含最新模型和优化技术。</li>
+<li>强调未来方向，适合预测技术趋势。</li>
+</ul>
+<ol start="3">
+<li><h2 id="Large-Language-Model-Agent-A-Survey-on-Methodology-Applications-and-Challenges"><a href="#Large-Language-Model-Agent-A-Survey-on-Methodology-Applications-and-Challenges" class="headerlink" title="Large Language Model Agent: A Survey on Methodology, Applications and Challenges"></a><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2503.21460">Large Language Model Agent: A Survey on Methodology, Applications and Challenges</a></h2></li>
+</ol>
+<ul>
+<li><strong>链接</strong> : <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2503.21460">arXiv:2503.21460</a></li>
+<li><strong>内容概述</strong> :<br>该论文聚焦 LLM 智能体，分析其方法论、应用和挑战，涵盖 329 篇相关研究。论文提出了以方法论为中心的分类法，连接架构基础、协作机制和演化路径，统一了智能体设计的研究碎片。讨论了智能体的目标驱动行为和动态适应能力，探索其在复杂环境中的表现。应用场景包括自动化任务分解、协作工作流和多智能体系统。挑战包括计算资源需求、协作效率和评估方法的标准化。论文提供资源库（<a target="_blank" rel="noopener" href="https://github.com/luo-junyu/Awesome-Agent-Papers">GitHub</a>），便于进一步研究。</li>
+<li><strong>贡献</strong> :</li>
+<li>提供 LLM 智能体的系统性分类，适合深入研究智能体应用。</li>
+<li>覆盖广泛应用场景，强调协作机制。</li>
+<li>提供开源资源，方便开发者实践。</li>
+</ul>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="什么是语言模型-Language-Models-？"><a href="#什么是语言模型-Language-Models-？" class="headerlink" title="什么是语言模型 (Language Models)？"></a>什么是语言模型 (Language Models)？</h2><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366089085BNAubDynsogt1bxoYrPcAnBlnvh.png" alt="1749366089085BNAubDynsogt1bxoYrPcAnBlnvh.png"></p>
+<p>「语言模型」是一种「人工智能系统」，旨在处理、理解和生成类似人类的语言。它们从大型数据集中学习模式和结构，使得能够产生连贯且上下文相关的文本，应用于翻译、摘要、聊天机器人和内容生成等领域。</p>
+<h3 id="大型语言模型（LLMs）"><a href="#大型语言模型（LLMs）" class="headerlink" title="大型语言模型（LLMs）"></a>大型语言模型（LLMs）</h3><p>「语言模型」（LMs）和「大型语言模型」（LLMs）这两个术语虽然经常被互换使用，但实际上它们基于规模、架构、训练数据和能力指代不同的概念。LLMs 是 LMs 的一个子集，其规模显著更大，通常包含数十亿个参数（例如，GPT-3 拥有 1750 亿个参数）。这种更大的规模使 LLMs 能够在广泛的任务中表现出卓越的性能。“LLM”这一术语在 2018 至 2019 年间随着基于 Transformer 架构的模型（如 BERT 和 GPT-1）的出现开始受到关注。然而，在 2020 年 GPT-3 发布后，这个词才被广泛使用，展示了这些大规模模型的重大影响力和强大能力。</p>
+<h3 id="自回归语言模型-（Autoregressive-Language-Models）"><a href="#自回归语言模型-（Autoregressive-Language-Models）" class="headerlink" title="自回归语言模型 （Autoregressive Language Models）"></a><a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=255912486&content_type=Article&match_order=1&q=%E8%87%AA%E5%9B%9E%E5%BD%92%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B&zhida_source=entity">自回归语言模型</a> （Autoregressive Language Models）</h3><p>大多数 LLMs 以「自回归方式」(Autoregressive)操作，这意味着它们根据前面的「文本」预测下一个「字」（或 token／sub-word）的「概率分布」(propability distribution)。这种自回归特性使模型能够学习复杂的语言模式和依赖关系，从而善于「文本生成」。</p>
+<p><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="57.784ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 25540.6 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mtable" transform="translate(389,0)"><g data-mml-node="mtr"><g data-mml-node="mtd"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D464" d="M580 385Q580 406 599 424T641 443Q659 443 674 425T690 368Q690 339 671 253Q656 197 644 161T609 80T554 12T482 -11Q438 -11 404 5T355 48Q354 47 352 44Q311 -11 252 -11Q226 -11 202 -5T155 14T118 53T104 116Q104 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Q21 293 29 315T52 366T96 418T161 441Q204 441 227 416T250 358Q250 340 217 250T184 111Q184 65 205 46T258 26Q301 26 334 87L339 96V119Q339 122 339 128T340 136T341 143T342 152T345 165T348 182T354 206T362 238T373 281Q402 395 406 404Q419 431 449 431Q468 431 475 421T483 402Q483 389 454 274T422 142Q420 131 420 107V100Q420 85 423 71T442 42T487 26Q558 26 600 148Q609 171 620 213T632 273Q632 306 619 325T593 357T580 385Z"></path></g><g data-mml-node="mn" transform="translate(749,-150) scale(0.707)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g><g data-mml-node="mo" transform="translate(1152.6,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="msub" transform="translate(1597.2,0)"><g data-mml-node="mi"><path data-c="1D464" d="M580 385Q580 406 599 424T641 443Q659 443 674 425T690 368Q690 339 671 253Q656 197 644 161T609 80T554 12T482 -11Q438 -11 404 5T355 48Q354 47 352 44Q311 -11 252 -11Q226 -11 202 -5T155 14T118 53T104 116Q104 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Q21 293 29 315T52 366T96 418T161 441Q204 441 227 416T250 358Q250 340 217 250T184 111Q184 65 205 46T258 26Q301 26 334 87L339 96V119Q339 122 339 128T340 136T341 143T342 152T345 165T348 182T354 206T362 238T373 281Q402 395 406 404Q419 431 449 431Q468 431 475 421T483 402Q483 389 454 274T422 142Q420 131 420 107V100Q420 85 423 71T442 42T487 26Q558 26 600 148Q609 171 620 213T632 273Q632 306 619 325T593 357T580 385Z"></path></g><g data-mml-node="mn" transform="translate(749,-150) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g><g data-mml-node="mtd" transform="translate(3749.8,0)"><g data-mml-node="mo"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mo" transform="translate(444.7,0)"><path data-c="2026" d="M78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60ZM525 60Q525 84 542 102T585 120Q609 120 627 104T646 61Q646 36 629 18T586 0T543 17T525 60ZM972 60Q972 84 989 102T1032 120Q1056 120 1074 104T1093 61Q1093 36 1076 18T1033 0T990 17T972 60Z"></path></g><g data-mml-node="mo" transform="translate(1783.3,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="msub" transform="translate(2228,0)"><g data-mml-node="mi"><path data-c="1D464" d="M580 385Q580 406 599 424T641 443Q659 443 674 425T690 368Q690 339 671 253Q656 197 644 161T609 80T554 12T482 -11Q438 -11 404 5T355 48Q354 47 352 44Q311 -11 252 -11Q226 -11 202 -5T155 14T118 53T104 116Q104 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Q21 293 29 315T52 366T96 418T161 441Q204 441 227 416T250 358Q250 340 217 250T184 111Q184 65 205 46T258 26Q301 26 334 87L339 96V119Q339 122 339 128T340 136T341 143T342 152T345 165T348 182T354 206T362 238T373 281Q402 395 406 404Q419 431 449 431Q468 431 475 421T483 402Q483 389 454 274T422 142Q420 131 420 107V100Q420 85 423 71T442 42T487 26Q558 26 600 148Q609 171 620 213T632 273Q632 306 619 325T593 357T580 385Z"></path></g><g data-mml-node="TeXAtom" transform="translate(749,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(600,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mn" transform="translate(1378,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g></g></g></g><g data-mml-node="mo" transform="translate(8493.7,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mrow" transform="translate(9049.4,0)"><g data-mml-node="mo"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="msub" transform="translate(389,0)"><g data-mml-node="mi"><path data-c="1D464" d="M580 385Q580 406 599 424T641 443Q659 443 674 425T690 368Q690 339 671 253Q656 197 644 161T609 80T554 12T482 -11Q438 -11 404 5T355 48Q354 47 352 44Q311 -11 252 -11Q226 -11 202 -5T155 14T118 53T104 116Q104 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Q21 293 29 315T52 366T96 418T161 441Q204 441 227 416T250 358Q250 340 217 250T184 111Q184 65 205 46T258 26Q301 26 334 87L339 96V119Q339 122 339 128T340 136T341 143T342 152T345 165T348 182T354 206T362 238T373 281Q402 395 406 404Q419 431 449 431Q468 431 475 421T483 402Q483 389 454 274T422 142Q420 131 420 107V100Q420 85 423 71T442 42T487 26Q558 26 600 148Q609 171 620 213T632 273Q632 306 619 325T593 357T580 385Z"></path></g><g data-mml-node="TeXAtom" transform="translate(749,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g></g><g data-mml-node="mo" transform="translate(1612.3,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g><g data-mml-node="mi" transform="translate(11050.7,0)"><path data-c="1D443" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"></path></g><g data-mml-node="mo" transform="translate(11801.7,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="msub" transform="translate(12190.7,0)"><g data-mml-node="mi"><path data-c="1D464" d="M580 385Q580 406 599 424T641 443Q659 443 674 425T690 368Q690 339 671 253Q656 197 644 161T609 80T554 12T482 -11Q438 -11 404 5T355 48Q354 47 352 44Q311 -11 252 -11Q226 -11 202 -5T155 14T118 53T104 116Q104 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Q21 293 29 315T52 366T96 418T161 441Q204 441 227 416T250 358Q250 340 217 250T184 111Q184 65 205 46T258 26Q301 26 334 87L339 96V119Q339 122 339 128T340 136T341 143T342 152T345 165T348 182T354 206T362 238T373 281Q402 395 406 404Q419 431 449 431Q468 431 475 421T483 402Q483 389 454 274T422 142Q420 131 420 107V100Q420 85 423 71T442 42T487 26Q558 26 600 148Q609 171 620 213T632 273Q632 306 619 325T593 357T580 385Z"></path></g><g data-mml-node="TeXAtom" transform="translate(749,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g></g><g data-mml-node="mo" transform="translate(13413.9,0) translate(0 -0.5)"><path data-c="7C" d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z"></path></g><g data-mml-node="msub" transform="translate(13691.9,0)"><g data-mml-node="mi"><path data-c="1D464" d="M580 385Q580 406 599 424T641 443Q659 443 674 425T690 368Q690 339 671 253Q656 197 644 161T609 80T554 12T482 -11Q438 -11 404 5T355 48Q354 47 352 44Q311 -11 252 -11Q226 -11 202 -5T155 14T118 53T104 116Q104 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Q21 293 29 315T52 366T96 418T161 441Q204 441 227 416T250 358Q250 340 217 250T184 111Q184 65 205 46T258 26Q301 26 334 87L339 96V119Q339 122 339 128T340 136T341 143T342 152T345 165T348 182T354 206T362 238T373 281Q402 395 406 404Q419 431 449 431Q468 431 475 421T483 402Q483 389 454 274T422 142Q420 131 420 107V100Q420 85 423 71T442 42T487 26Q558 26 600 148Q609 171 620 213T632 273Q632 306 619 325T593 357T580 385Z"></path></g><g data-mml-node="mn" transform="translate(749,-150) scale(0.707)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g><g data-mml-node="mo" transform="translate(14844.5,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="msub" transform="translate(15289.1,0)"><g data-mml-node="mi"><path data-c="1D464" d="M580 385Q580 406 599 424T641 443Q659 443 674 425T690 368Q690 339 671 253Q656 197 644 161T609 80T554 12T482 -11Q438 -11 404 5T355 48Q354 47 352 44Q311 -11 252 -11Q226 -11 202 -5T155 14T118 53T104 116Q104 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Q21 293 29 315T52 366T96 418T161 441Q204 441 227 416T250 358Q250 340 217 250T184 111Q184 65 205 46T258 26Q301 26 334 87L339 96V119Q339 122 339 128T340 136T341 143T342 152T345 165T348 182T354 206T362 238T373 281Q402 395 406 404Q419 431 449 431Q468 431 475 421T483 402Q483 389 454 274T422 142Q420 131 420 107V100Q420 85 423 71T442 42T487 26Q558 26 600 148Q609 171 620 213T632 273Q632 306 619 325T593 357T580 385Z"></path></g><g data-mml-node="mn" transform="translate(749,-150) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g><g data-mml-node="mo" transform="translate(16441.7,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mo" transform="translate(16886.4,0)"><path data-c="2026" d="M78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60ZM525 60Q525 84 542 102T585 120Q609 120 627 104T646 61Q646 36 629 18T586 0T543 17T525 60ZM972 60Q972 84 989 102T1032 120Q1056 120 1074 104T1093 61Q1093 36 1076 18T1033 0T990 17T972 60Z"></path></g><g data-mml-node="mo" transform="translate(18225,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="msub" transform="translate(18669.7,0)"><g data-mml-node="mi"><path data-c="1D464" d="M580 385Q580 406 599 424T641 443Q659 443 674 425T690 368Q690 339 671 253Q656 197 644 161T609 80T554 12T482 -11Q438 -11 404 5T355 48Q354 47 352 44Q311 -11 252 -11Q226 -11 202 -5T155 14T118 53T104 116Q104 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Q21 293 29 315T52 366T96 418T161 441Q204 441 227 416T250 358Q250 340 217 250T184 111Q184 65 205 46T258 26Q301 26 334 87L339 96V119Q339 122 339 128T340 136T341 143T342 152T345 165T348 182T354 206T362 238T373 281Q402 395 406 404Q419 431 449 431Q468 431 475 421T483 402Q483 389 454 274T422 142Q420 131 420 107V100Q420 85 423 71T442 42T487 26Q558 26 600 148Q609 171 620 213T632 273Q632 306 619 325T593 357T580 385Z"></path></g><g data-mml-node="TeXAtom" transform="translate(749,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(600,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mn" transform="translate(1378,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g><g data-mml-node="mo" transform="translate(20796.6,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mo" transform="translate(21241.3,0)"><path data-c="2026" d="M78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60ZM525 60Q525 84 542 102T585 120Q609 120 627 104T646 61Q646 36 629 18T586 0T543 17T525 60ZM972 60Q972 84 989 102T1032 120Q1056 120 1074 104T1093 61Q1093 36 1076 18T1033 0T990 17T972 60Z"></path></g><g data-mml-node="mo" transform="translate(22580,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="msub" transform="translate(23024.6,0)"><g data-mml-node="mi"><path data-c="1D464" d="M580 385Q580 406 599 424T641 443Q659 443 674 425T690 368Q690 339 671 253Q656 197 644 161T609 80T554 12T482 -11Q438 -11 404 5T355 48Q354 47 352 44Q311 -11 252 -11Q226 -11 202 -5T155 14T118 53T104 116Q104 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Q21 293 29 315T52 366T96 418T161 441Q204 441 227 416T250 358Q250 340 217 250T184 111Q184 65 205 46T258 26Q301 26 334 87L339 96V119Q339 122 339 128T340 136T341 143T342 152T345 165T348 182T354 206T362 238T373 281Q402 395 406 404Q419 431 449 431Q468 431 475 421T483 402Q483 389 454 274T422 142Q420 131 420 107V100Q420 85 423 71T442 42T487 26Q558 26 600 148Q609 171 620 213T632 273Q632 306 619 325T593 357T580 385Z"></path></g><g data-mml-node="TeXAtom" transform="translate(749,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(600,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mn" transform="translate(1378,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g><g data-mml-node="mo" transform="translate(25151.6,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container></p>
+<p>在文本生成任时，LLM 通过解码算法(Decoding Algorithm)来确定下一个输出的字。</p>
+<p>这一过程可以采用不同的策略：既可以选择概率最高的下个字（即贪婪搜索），也可以从预测的概率分布中随机采样一个字。后一种方法使得每次生成的文本都可能有所不同，这种特性与人类语言的多样性和随机性颇为相似。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366102088NG49bUAoXomHelxiq2ZckdIlnpb.png" alt="1749366102088NG49bUAoXomHelxiq2ZckdIlnpb.png"><br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366116880KWu3bn2W2oethdxLzqAcm6xBnWC.png" alt="1749366116880KWu3bn2W2oethdxLzqAcm6xBnWC.png"></p>
+<h3 id="生成能力"><a href="#生成能力" class="headerlink" title="生成能力"></a>生成能力</h3><p>LLMs 的自回归特性使其能够基于前文提供的上下文逐词生成文本。从「提示」(prompt)开始，如下图，模型通过迭代预测下一个词，直到生成完整的序列或达到预定的停止条件。为了生成对提示的完整回答，LLM 通过将先前选择的标记添加到输入中进行迭代生成，尤如「文字接龙」游戏。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366127852Do7ybXLnFoU5QmxRFcrcML6Lnpf.png" alt="1749366127852Do7ybXLnFoU5QmxRFcrcML6Lnpf.png"></p>
+<h2 id="Transformer-革命-2017"><a href="#Transformer-革命-2017" class="headerlink" title="Transformer 革命 (2017)"></a>Transformer 革命 (2017)</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.03762">Attention Is All You Need</a></li>
+</ul>
+</blockquote>
+<p>Vaswani 等人在 2017 年通过其开创性论文“Attention is All You Need”引入了 Transformer 架构，标志着 NLP 的一个分水岭时刻。它解决了早期模型如循环神经网络（RNNs）和长短期记忆网络（LSTMs）的关键限制，这些模型在长程依赖性和顺序处理方面存在困难。这些问题使得使用 RNN 或 LSTM 实现有效的语言模型变得困难，因为它们计算效率低下且容易出现梯度消失等问题。另一方面，Transformers 克服了这些障碍，彻底改变了这一领域，并为现代大型语言模型奠定了基础。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366139852ZnJWbnoMCojKUExcNMZcJaV4nod.png" alt="1749366139852ZnJWbnoMCojKUExcNMZcJaV4nod.png"></p>
+<h3 id="Transformer-架构的关键创新"><a href="#Transformer-架构的关键创新" class="headerlink" title="Transformer 架构的关键创新"></a>Transformer 架构的关键创新</h3><p>自注意力机制 (Self-Attention)：与按顺序处理标记并难以应对长程依赖性的 RNN 不同，Transformers 使用自注意力来权衡每个标记相对于其他标记的重要性。这使得模型能够动态关注输入的相关部分。数学上：</p>
+<p><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -2.308ex" xmlns="http://www.w3.org/2000/svg" width="42.399ex" height="5.874ex" role="img" focusable="false" viewBox="0 -1576.4 18740.2 2596.4"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="41" d="M255 0Q240 3 140 3Q48 3 39 0H32V46H47Q119 49 139 88Q140 91 192 245T295 553T348 708Q351 716 366 716H376Q396 715 400 709Q402 707 508 390L617 67Q624 54 636 51T687 46H717V0H708Q699 3 581 3Q458 3 437 0H427V46H440Q510 46 510 64Q510 66 486 138L462 209H229L209 150Q189 91 189 85Q189 72 209 59T259 46H264V0H255ZM447 255L345 557L244 256Q244 255 345 255H447Z"></path><path data-c="74" d="M27 422Q80 426 109 478T141 600V615H181V431H316V385H181V241Q182 116 182 100T189 68Q203 29 238 29Q282 29 292 100Q293 108 293 146V181H333V146V134Q333 57 291 17Q264 -10 221 -10Q187 -10 162 2T124 33T105 68T98 100Q97 107 97 248V385H18V422H27Z" transform="translate(750,0)"></path><path data-c="74" d="M27 422Q80 426 109 478T141 600V615H181V431H316V385H181V241Q182 116 182 100T189 68Q203 29 238 29Q282 29 292 100Q293 108 293 146V181H333V146V134Q333 57 291 17Q264 -10 221 -10Q187 -10 162 2T124 33T105 68T98 100Q97 107 97 248V385H18V422H27Z" transform="translate(1139,0)"></path><path data-c="65" d="M28 218Q28 273 48 318T98 391T163 433T229 448Q282 448 320 430T378 380T406 316T415 245Q415 238 408 231H126V216Q126 68 226 36Q246 30 270 30Q312 30 342 62Q359 79 369 104L379 128Q382 131 395 131H398Q415 131 415 121Q415 117 412 108Q393 53 349 21T250 -11Q155 -11 92 58T28 218ZM333 275Q322 403 238 411H236Q228 411 220 410T195 402T166 381T143 340T127 274V267H333V275Z" transform="translate(1528,0)"></path><path data-c="6E" d="M41 46H55Q94 46 102 60V68Q102 77 102 91T102 122T103 161T103 203Q103 234 103 269T102 328V351Q99 370 88 376T43 385H25V408Q25 431 27 431L37 432Q47 433 65 434T102 436Q119 437 138 438T167 441T178 442H181V402Q181 364 182 364T187 369T199 384T218 402T247 421T285 437Q305 442 336 442Q450 438 463 329Q464 322 464 190V104Q464 66 466 59T477 49Q498 46 526 46H542V0H534L510 1Q487 2 460 2T422 3Q319 3 310 0H302V46H318Q379 46 379 62Q380 64 380 200Q379 335 378 343Q372 371 358 385T334 402T308 404Q263 404 229 370Q202 343 195 315T187 232V168V108Q187 78 188 68T191 55T200 49Q221 46 249 46H265V0H257L234 1Q210 2 183 2T145 3Q42 3 33 0H25V46H41Z" transform="translate(1972,0)"></path><path data-c="74" d="M27 422Q80 426 109 478T141 600V615H181V431H316V385H181V241Q182 116 182 100T189 68Q203 29 238 29Q282 29 292 100Q293 108 293 146V181H333V146V134Q333 57 291 17Q264 -10 221 -10Q187 -10 162 2T124 33T105 68T98 100Q97 107 97 248V385H18V422H27Z" transform="translate(2528,0)"></path><path data-c="69" d="M69 609Q69 637 87 653T131 669Q154 667 171 652T188 609Q188 579 171 564T129 549Q104 549 87 564T69 609ZM247 0Q232 3 143 3Q132 3 106 3T56 1L34 0H26V46H42Q70 46 91 49Q100 53 102 60T104 102V205V293Q104 345 102 359T88 378Q74 385 41 385H30V408Q30 431 32 431L42 432Q52 433 70 434T106 436Q123 437 142 438T171 441T182 442H185V62Q190 52 197 50T232 46H255V0H247Z" transform="translate(2917,0)"></path><path data-c="6F" d="M28 214Q28 309 93 378T250 448Q340 448 405 380T471 215Q471 120 407 55T250 -10Q153 -10 91 57T28 214ZM250 30Q372 30 372 193V225V250Q372 272 371 288T364 326T348 362T317 390T268 410Q263 411 252 411Q222 411 195 399Q152 377 139 338T126 246V226Q126 130 145 91Q177 30 250 30Z" transform="translate(3195,0)"></path><path data-c="6E" d="M41 46H55Q94 46 102 60V68Q102 77 102 91T102 122T103 161T103 203Q103 234 103 269T102 328V351Q99 370 88 376T43 385H25V408Q25 431 27 431L37 432Q47 433 65 434T102 436Q119 437 138 438T167 441T178 442H181V402Q181 364 182 364T187 369T199 384T218 402T247 421T285 437Q305 442 336 442Q450 438 463 329Q464 322 464 190V104Q464 66 466 59T477 49Q498 46 526 46H542V0H534L510 1Q487 2 460 2T422 3Q319 3 310 0H302V46H318Q379 46 379 62Q380 64 380 200Q379 335 378 343Q372 371 358 385T334 402T308 404Q263 404 229 370Q202 343 195 315T187 232V168V108Q187 78 188 68T191 55T200 49Q221 46 249 46H265V0H257L234 1Q210 2 183 2T145 3Q42 3 33 0H25V46H41Z" transform="translate(3695,0)"></path></g></g><g data-mml-node="mo" transform="translate(4251,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(4640,0)"><g data-mml-node="mi"><path data-c="1D410" d="M64 339Q64 431 96 502T182 614T295 675T420 696Q469 696 481 695Q620 680 709 589T798 339Q798 255 768 184Q720 77 611 26L600 21Q635 -26 682 -26H696Q769 -26 769 0Q769 7 774 12T787 18Q805 18 805 -7V-13Q803 -64 785 -106T737 -171Q720 -183 697 -191Q687 -193 668 -193Q636 -193 613 -182T575 -144T552 -94T532 -27Q531 -23 530 -16T528 -6T526 -3L512 -5Q499 -7 477 -8T431 -10Q393 -10 382 -9Q238 8 151 97T64 339ZM326 80Q326 113 356 138T430 163Q492 163 542 100L553 86Q554 85 561 91T578 108Q637 179 637 330Q637 430 619 498T548 604Q500 641 425 641Q408 641 390 637T347 623T299 590T259 535Q226 469 226 338Q226 244 246 180T318 79L325 74Q326 74 326 80ZM506 58Q480 112 433 112Q412 112 395 104T378 77Q378 44 431 44Q480 44 506 58Z"></path></g></g><g data-mml-node="mo" transform="translate(5504,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(5948.7,0)"><g data-mml-node="mi"><path data-c="1D40A" d="M400 0Q376 3 226 3Q75 3 51 0H39V62H147V624H39V686H51Q75 683 226 683Q376 683 400 686H412V624H304V338L472 483L634 624H565V686H576Q597 683 728 683Q814 683 829 686H836V624H730L614 524Q507 432 497 422Q496 422 498 418T514 395T553 342T627 241L759 63L805 62H852V0H842Q830 3 701 3Q550 3 526 0H513V62H549Q584 62 584 63Q583 65 486 196T388 328L304 256V62H412V0H400Z"></path></g></g><g data-mml-node="mo" transform="translate(6849.7,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(7294.3,0)"><g data-mml-node="mi"><path data-c="1D415" d="M592 686H604Q615 685 631 685T666 684T700 684T724 683Q829 683 835 686H843V624H744L611 315Q584 254 546 165Q492 40 482 19T461 -6L460 -7H409Q398 -4 391 9Q385 20 257 315L124 624H25V686H36Q57 683 190 683Q340 683 364 686H377V624H289L384 403L480 185L492 212Q504 240 529 298T575 405L670 624H582V686H592Z"></path></g></g><g data-mml-node="mo" transform="translate(8163.3,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mo" transform="translate(8830.1,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(9885.9,0)"><g data-mml-node="mi"><path data-c="53" d="M55 507Q55 590 112 647T243 704H257Q342 704 405 641L426 672Q431 679 436 687T446 700L449 704Q450 704 453 704T459 705H463Q466 705 472 699V462L466 456H448Q437 456 435 459T430 479Q413 605 329 646Q292 662 254 662Q201 662 168 626T135 542Q135 508 152 480T200 435Q210 431 286 412T370 389Q427 367 463 314T500 191Q500 110 448 45T301 -21Q245 -21 201 -4T140 27L122 41Q118 36 107 21T87 -7T78 -21Q76 -22 68 -22H64Q61 -22 55 -16V101Q55 220 56 222Q58 227 76 227H89Q95 221 95 214Q95 182 105 151T139 90T205 42T305 24Q352 24 386 62T420 155Q420 198 398 233T340 281Q284 295 266 300Q261 301 239 306T206 314T174 325T141 343T112 367T85 402Q55 451 55 507Z"></path><path data-c="6F" d="M28 214Q28 309 93 378T250 448Q340 448 405 380T471 215Q471 120 407 55T250 -10Q153 -10 91 57T28 214ZM250 30Q372 30 372 193V225V250Q372 272 371 288T364 326T348 362T317 390T268 410Q263 411 252 411Q222 411 195 399Q152 377 139 338T126 246V226Q126 130 145 91Q177 30 250 30Z" transform="translate(556,0)"></path><path data-c="66" d="M273 0Q255 3 146 3Q43 3 34 0H26V46H42Q70 46 91 49Q99 52 103 60Q104 62 104 224V385H33V431H104V497L105 564L107 574Q126 639 171 668T266 704Q267 704 275 704T289 705Q330 702 351 679T372 627Q372 604 358 590T321 576T284 590T270 627Q270 647 288 667H284Q280 668 273 668Q245 668 223 647T189 592Q183 572 182 497V431H293V385H185V225Q185 63 186 61T189 57T194 54T199 51T206 49T213 48T222 47T231 47T241 46T251 46H282V0H273Z" transform="translate(1056,0)"></path><path data-c="74" d="M27 422Q80 426 109 478T141 600V615H181V431H316V385H181V241Q182 116 182 100T189 68Q203 29 238 29Q282 29 292 100Q293 108 293 146V181H333V146V134Q333 57 291 17Q264 -10 221 -10Q187 -10 162 2T124 33T105 68T98 100Q97 107 97 248V385H18V422H27Z" transform="translate(1362,0)"></path><path data-c="6D" d="M41 46H55Q94 46 102 60V68Q102 77 102 91T102 122T103 161T103 203Q103 234 103 269T102 328V351Q99 370 88 376T43 385H25V408Q25 431 27 431L37 432Q47 433 65 434T102 436Q119 437 138 438T167 441T178 442H181V402Q181 364 182 364T187 369T199 384T218 402T247 421T285 437Q305 442 336 442Q351 442 364 440T387 434T406 426T421 417T432 406T441 395T448 384T452 374T455 366L457 361L460 365Q463 369 466 373T475 384T488 397T503 410T523 422T546 432T572 439T603 442Q729 442 740 329Q741 322 741 190V104Q741 66 743 59T754 49Q775 46 803 46H819V0H811L788 1Q764 2 737 2T699 3Q596 3 587 0H579V46H595Q656 46 656 62Q657 64 657 200Q656 335 655 343Q649 371 635 385T611 402T585 404Q540 404 506 370Q479 343 472 315T464 232V168V108Q464 78 465 68T468 55T477 49Q498 46 526 46H542V0H534L510 1Q487 2 460 2T422 3Q319 3 310 0H302V46H318Q379 46 379 62Q380 64 380 200Q379 335 378 343Q372 371 358 385T334 402T308 404Q263 404 229 370Q202 343 195 315T187 232V168V108Q187 78 188 68T191 55T200 49Q221 46 249 46H265V0H257L234 1Q210 2 183 2T145 3Q42 3 33 0H25V46H41Z" transform="translate(1751,0)"></path><path data-c="61" d="M137 305T115 305T78 320T63 359Q63 394 97 421T218 448Q291 448 336 416T396 340Q401 326 401 309T402 194V124Q402 76 407 58T428 40Q443 40 448 56T453 109V145H493V106Q492 66 490 59Q481 29 455 12T400 -6T353 12T329 54V58L327 55Q325 52 322 49T314 40T302 29T287 17T269 6T247 -2T221 -8T190 -11Q130 -11 82 20T34 107Q34 128 41 147T68 188T116 225T194 253T304 268H318V290Q318 324 312 340Q290 411 215 411Q197 411 181 410T156 406T148 403Q170 388 170 359Q170 334 154 320ZM126 106Q126 75 150 51T209 26Q247 26 276 49T315 109Q317 116 318 175Q318 233 317 233Q309 233 296 232T251 223T193 203T147 166T126 106Z" transform="translate(2584,0)"></path><path data-c="78" d="M201 0Q189 3 102 3Q26 3 17 0H11V46H25Q48 47 67 52T96 61T121 78T139 96T160 122T180 150L226 210L168 288Q159 301 149 315T133 336T122 351T113 363T107 370T100 376T94 379T88 381T80 383Q74 383 44 385H16V431H23Q59 429 126 429Q219 429 229 431H237V385Q201 381 201 369Q201 367 211 353T239 315T268 274L272 270L297 304Q329 345 329 358Q329 364 327 369T322 376T317 380T310 384L307 385H302V431H309Q324 428 408 428Q487 428 493 431H499V385H492Q443 385 411 368Q394 360 377 341T312 257L296 236L358 151Q424 61 429 57T446 50Q464 46 499 46H516V0H510H502Q494 1 482 1T457 2T432 2T414 3Q403 3 377 3T327 1L304 0H295V46H298Q309 46 320 51T331 63Q331 65 291 120L250 175Q249 174 219 133T185 88Q181 83 181 74Q181 63 188 55T206 46Q208 46 208 23V0H201Z" transform="translate(3084,0)"></path></g></g><g data-mml-node="mrow" transform="translate(13664.6,0)"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="28" d="M701 -940Q701 -943 695 -949H664Q662 -947 636 -922T591 -879T537 -818T475 -737T412 -636T350 -511T295 -362T250 -186T221 17T209 251Q209 962 573 1361Q596 1386 616 1405T649 1437T664 1450H695Q701 1444 701 1441Q701 1436 681 1415T629 1356T557 1261T476 1118T400 927T340 675T308 359Q306 321 306 250Q306 -139 400 -430T690 -924Q701 -936 701 -940Z"></path></g><g data-mml-node="mfrac" transform="translate(736,0)"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(220,676)"><g data-mml-node="msup"><g data-mml-node="mi"><path data-c="1D410" d="M64 339Q64 431 96 502T182 614T295 675T420 696Q469 696 481 695Q620 680 709 589T798 339Q798 255 768 184Q720 77 611 26L600 21Q635 -26 682 -26H696Q769 -26 769 0Q769 7 774 12T787 18Q805 18 805 -7V-13Q803 -64 785 -106T737 -171Q720 -183 697 -191Q687 -193 668 -193Q636 -193 613 -182T575 -144T552 -94T532 -27Q531 -23 530 -16T528 -6T526 -3L512 -5Q499 -7 477 -8T431 -10Q393 -10 382 -9Q238 8 151 97T64 339ZM326 80Q326 113 356 138T430 163Q492 163 542 100L553 86Q554 85 561 91T578 108Q637 179 637 330Q637 430 619 498T548 604Q500 641 425 641Q408 641 390 637T347 623T299 590T259 535Q226 469 226 338Q226 244 246 180T318 79L325 74Q326 74 326 80ZM506 58Q480 112 433 112Q412 112 395 104T378 77Q378 44 431 44Q480 44 506 58Z"></path><path data-c="1D40A" d="M400 0Q376 3 226 3Q75 3 51 0H39V62H147V624H39V686H51Q75 683 226 683Q376 683 400 686H412V624H304V338L472 483L634 624H565V686H576Q597 683 728 683Q814 683 829 686H836V624H730L614 524Q507 432 497 422Q496 422 498 418T514 395T553 342T627 241L759 63L805 62H852V0H842Q830 3 701 3Q550 3 526 0H513V62H549Q584 62 584 63Q583 65 486 196T388 328L304 256V62H412V0H400Z" transform="translate(864,0)"></path></g><g data-mml-node="mi" transform="translate(1798,423.1) scale(0.707)"><path data-c="1D413" d="M41 425Q41 426 51 545T62 669V675H737V669Q738 665 748 546T758 425V419H696V425Q687 517 669 555T595 607Q578 612 522 613H478V62H631V0H615Q585 3 399 3Q214 3 184 0H168V62H321V613H277H263Q164 613 134 561Q113 527 103 425V419H41V425Z"></path></g></g></g><g data-mml-node="msqrt" transform="translate(514.6,-855.6)"><g transform="translate(853,0)"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g><g data-mml-node="mi" transform="translate(553,-150) scale(0.707)"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g></g></g><g data-mml-node="mo" transform="translate(0,35.6)"><path data-c="221A" d="M95 178Q89 178 81 186T72 200T103 230T169 280T207 309Q209 311 212 311H213Q219 311 227 294T281 177Q300 134 312 108L397 -77Q398 -77 501 136T707 565T814 786Q820 800 834 800Q841 800 846 794T853 782V776L620 293L385 -193Q381 -200 366 -200Q357 -200 354 -197Q352 -195 256 15L160 225L144 214Q129 202 113 190T95 178Z"></path></g><rect width="971.4" height="60" x="853" y="775.6"></rect></g><rect width="2613.7" height="60" x="120" y="220"></rect></g><g data-mml-node="mo" transform="translate(3589.7,0) translate(0 -0.5)"><path data-c="29" d="M34 1438Q34 1446 37 1448T50 1450H56H71Q73 1448 99 1423T144 1380T198 1319T260 1238T323 1137T385 1013T440 864T485 688T514 485T526 251Q526 134 519 53Q472 -519 162 -860Q139 -885 119 -904T86 -936T71 -949H56Q43 -949 39 -947T34 -937Q88 -883 140 -813Q428 -430 428 251Q428 453 402 628T338 922T245 1146T145 1309T46 1425Q44 1427 42 1429T39 1433T36 1436L34 1438Z"></path></g></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(17990.2,0)"><g data-mml-node="mi"><path data-c="56" d="M114 620Q113 621 110 624T107 627T103 630T98 632T91 634T80 635T67 636T48 637H19V683H28Q46 680 152 680Q273 680 294 683H305V637H284Q223 634 223 620Q223 618 313 372T404 126L490 358Q575 588 575 597Q575 616 554 626T508 637H503V683H512Q527 680 627 680Q718 680 724 683H730V637H723Q648 637 627 596Q627 595 515 291T401 -14Q396 -22 382 -22H374H367Q353 -22 348 -14Q346 -12 231 303Q114 617 114 620Z"></path></g></g></g></g></svg></mjx-container></p>
+<p>这里，Q、K、V 是查询(query)、键(key)和值(value)矩阵，dₖ 是键的维度。自注意力允许并行计算，加快训练速度，同时提高全局上下文理解。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366152088YWvebIv6soDVh2xSALYc4m2vnoc.png" alt="1749366152088YWvebIv6soDVh2xSALYc4m2vnoc.png"></p>
+<p>多头注意力：多个注意力头并行操作，每个头专注于输入的不同方面。它们的输出被连接并转换，从而实现更丰富的上下文表示。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366160852M4bYbd1axoJPw5xY8TzcBDn4n4b.png" alt="1749366160852M4bYbd1axoJPw5xY8TzcBDn4n4b.png"></p>
+<p>前馈网络(FFN)和层归一化(Layer Norm)：每个 Transformer 层包括应用于每个标记的前馈网络，以及层归一化和残差连接。这些稳定了训练并支持更深的架构。</p>
+<p>位置编码：由于 Transformers 本身不编码标记顺序，因此添加了位置编码（位置和频率的正弦函数）以表示词序，在不牺牲并行化的情况下保留顺序信息。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366172089We3mbXuFDomJfSxxrwFchohkn3d.png" alt="1749366172089We3mbXuFDomJfSxxrwFchohkn3d.png"></p>
+<h4 id="对语言建模的影响"><a href="#对语言建模的影响" class="headerlink" title="对语言建模的影响"></a>对语言建模的影响</h4><ul>
+<li>可扩展性：Transformers 实现了完全并行化的计算，使得在大型数据集上训练大规模模型成为可能。</li>
+<li>上下文理解：自注意力捕捉局部和全局依赖关系，提高了连贯性和上下文意识。</li>
+</ul>
+<p>Transformer 架构的引入为构建能够以前所未有的精确性和灵活性处理复杂任务的大规模高效语言模型奠定了基础。</p>
+<h2 id="预训练-Transformer-模型时代-2018–2020"><a href="#预训练-Transformer-模型时代-2018–2020" class="headerlink" title="预训练 Transformer 模型时代 (2018–2020)"></a><strong>预训练 Transformer 模型时代 (2018–2020)</strong></h2><p>2017 年 Transformer 架构的引入为 NLP 的新时代铺平了道路，其特点是预训练模型的兴起和对扩展的前所未有的关注。这一时期见证了两个有影响力的模型家族的出现：BERT 和 GPT，它们展示了大规模预训练和微调范式的强大功能。</p>
+<h3 id="BERT：双向上下文理解-2018"><a href="#BERT：双向上下文理解-2018" class="headerlink" title="BERT：双向上下文理解 (2018)"></a><strong>BERT：双向上下文理解 (2018)</strong></h3><p>2018 年，谷歌推出了 BERT（Bidirectional Encoder Representations from Transformers），这是一种使用 Transformer 编码器(Encoder)的突破性模型，在广泛的 NLP 任务中取得了最先进的性能。</p>
+<p>与之前单向处理文本（从左到右或从右到左）的模型不同，BERT 采用了双向训练方法，使其能够同时从两个方向捕获上下文。通过生成深层次的、上下文丰富的文本表示，BERT 在文本分类、命名实体识别（NER）、情感分析等语言理解任务中表现出色。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366186892IyVobGCISoulBexHp23ckNjrnpd.png" alt="1749366186892IyVobGCISoulBexHp23ckNjrnpd.png"></p>
+<p>BERT 的关键创新包括：</p>
+<ul>
+<li>掩码语言建模（Masker Language Modeling — MLM）：BERT 不是预测序列中的下一个词，而是被训练预测句子中随机掩码的标记。这迫使模型在进行预测时考虑整个句子的上下文 — — 包括前后词语。例如，给定句子“The cat sat on the [MASK] mat”，BERT 会学习根据周围上下文预测“soft”。</li>
+<li>下一句预测（Next Sentence Prediction — NSP）：除了 MLM 之外，BERT 还接受了称为下一句预测的次要任务训练，其中模型学习预测两个句子是否在文档中连续。这帮助 BERT 在需要理解句子之间关系的任务中表现出色，例如问答和自然语言推理。</li>
+</ul>
+<p>BERT 的影响：BERT 的双向训练使其在 GLUE（通用语言理解评估）和 SQuAD（斯坦福问答数据集）等基准测试中取得了突破性的表现。它的成功证明了上下文嵌入的重要性 — — 这些表示根据周围词语动态变化 — — 并为新一代预训练模型铺平了道路。</p>
+<h3 id="GPT：生成式预训练和自回归文本生成（2018–2020）"><a href="#GPT：生成式预训练和自回归文本生成（2018–2020）" class="headerlink" title="GPT：生成式预训练和自回归文本生成（2018–2020）"></a><strong>GPT：生成式预训练和自回归文本生成（2018–2020）</strong></h3><p>虽然 BERT 优先考虑双向上下文理解，但 OpenAI 的 GPT 系列采用了不同的策略，专注于通过自回归预训练实现生成能力。通过利用 Transformer 的解码器(Decoder)，GPT 模型在自回归语言模型和文本生成方面表现出色。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366197851NG9rbQKhOoiyU8xFnjzcE6dnnVb.png" alt="1749366197851NG9rbQKhOoiyU8xFnjzcE6dnnVb.png"></p>
+<p>GPT (2018)GPT 的第一个版本于 2018 年发布，是一个大规模的 Transformer 模型，经过训练以预测序列中的下一个词，类似于传统语言模型。</p>
+<ul>
+<li>单向自回归训练：GPT 使用因果语言建模目标进行训练，其中模型仅基于前面的标记预测下一个标记。这使得它特别适合于生成任务，如文本补全、摘要生成和对话生成。</li>
+<li>下游任务的微调：GPT 的一个关键贡献是它能够在不需要特定任务架构的情况下针对特定下游任务进行微调。只需添加一个分类头或修改输入格式，GPT 就可以适应诸如情感分析、机器翻译和问答等任务。</li>
+</ul>
+<p>GPT-2 (2019)在原版 GPT 的成功基础上，OpenAI 发布了 GPT-2，这是一个参数量达 15 亿的更大模型。GPT-2 展示了令人印象深刻的零样本(Zero-shot)能力，意味着它可以在没有任何特定任务微调的情况下执行任务。例如，它可以生成连贯的文章、回答问题，甚至在语言之间翻译文本，尽管没有明确针对这些任务进行训练。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366209087ZZYMb63vmoBszCxVyMFcGqQXnnf.png" alt="1749366209087ZZYMb63vmoBszCxVyMFcGqQXnnf.png"></p>
+<p>GPT-3 (2020)GPT-3 的发布标志着语言模型规模扩展的一个转折点。凭借惊人的 1750 亿参数(175B parameters)，GPT-3 突破了大规模预训练的可能性界限。它展示了显著的少样本(Few-short)和零样本(Zero-short)学习能力，在推理时只需提供最少或无需示例即可执行任务。GPT-3 的生成能力扩展到了创意写作、编程和复杂推理任务，展示了超大模型的潜力。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366215856SDbBbzF1Go4u1TxVTbjczhGtnze.png" alt="1749366215856SDbBbzF1Go4u1TxVTbjczhGtnze.png"></p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366222852FIYObGa7BoUFd8xnGLPcBRdqnPb.png" alt="1749366222852FIYObGa7BoUFd8xnGLPcBRdqnPb.png"></p>
+<h4 id="GPT-的影响及规模的作用"><a href="#GPT-的影响及规模的作用" class="headerlink" title="GPT 的影响及规模的作用"></a>GPT 的影响及规模的作用</h4><p>GPT 模型的引入，特别是 GPT-3，标志着 AI 的一个变革时代，展示了自回归架构和生成能力的强大功能。这些模型为内容创作、对话代理和自动推理等应用开辟了新的可能性，在广泛的任务中达到了接近人类的表现。GPT-3 凭借其 1750 亿参数证明了规模的深远影响，表明在大规模数据集上训练的更大模型可以树立新的 AI 能力标杆。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366235853QJZ3b7F2Coy8CUxlx7pcDmmhnOb.png" alt="1749366235853QJZ3b7F2Coy8CUxlx7pcDmmhnOb.png"></p>
+<blockquote>
+<p>语言建模性能随着模型大小、数据集大小和训练使用的计算量的增加而平稳提升。<br><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2001.08361">Scaling Laws for Neural Language Models</a></p>
+</blockquote>
+<p>在 2018 年至 2020 年间，该领域由对规模的不懈追求驱动。研究人员发现，随着模型规模的增长 — — 从数百万到数十亿参数 — — 它们在捕捉复杂模式和泛化到新任务方面变得更好。这种规模效应得到了三个关键因素的支持：</p>
+<ul>
+<li>数据集大小：更大的模型需要庞大的数据集进行预训练。例如，GPT-3 是在大量互联网文本语料库上进行训练的，使其能够学习多样化的语言模式和知识领域。</li>
+<li>计算资源：强大的硬件（如 GPU 和 TPU）的可用性以及分布式训练技术，使得高效训练具有数十亿参数的模型成为可能。</li>
+<li>高效架构：混合精度训练和梯度检查点等创新降低了计算成本，使得在合理的时间和预算内进行大规模训练更加实际。</li>
+</ul>
+<p>这个规模扩展的时代不仅提升了语言模型的性能，还为未来的 AI 突破奠定了基础，强调了规模、数据和计算在实现最先进结果中的重要性。</p>
+<h2 id="后训练对齐：弥合-AI-与人类价值观之间的差距-2021–2022"><a href="#后训练对齐：弥合-AI-与人类价值观之间的差距-2021–2022" class="headerlink" title="后训练对齐：弥合 AI 与人类价值观之间的差距 (2021–2022)"></a><strong>后训练对齐：弥合 AI 与人类价值观之间的差距 (2021–2022)</strong></h2><p>GPT-3（一个拥有 1750 亿参数的 LLM）生成几乎无法与人类写作区分的文本的能力引发了关于 AI 生成内容的真实性和可信度的重大担忧。</p>
+<p>尽管这一成就标志着 AI 发展的一个重要里程碑，但也突显了确保这些模型与人类价值观、偏好和期望保持一致的关键挑战。一个主要问题是「幻觉」（Hallucination），即 LLM 生成与事实不符、无意义或与输入提示矛盾的内容，给人一种「一本正经地胡说八道」的印象。</p>
+<p>为了解决这些挑战，2021 年和 2022 年的研究人员专注于改善与人类意图的一致性并减少幻觉，导致了监督微调（SFT）和基于人类反馈的强化学习（RLHF）等技术的发展。</p>
+<h3 id="监督微调-SFT"><a href="#监督微调-SFT" class="headerlink" title="监督微调 (SFT)"></a><strong>监督微调 (SFT)</strong></h3><p>增强 GPT-3 对齐能力的第一步是监督微调（SFT），这是 RLHF 框架的基础组成部分。SFT 类似于指令调优，涉及在高质量的输入-输出对或演示上训练模型，以教它如何遵循指令并生成所需的输出。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366280852MfpwbkcnioN5lXxMOPgc4gyhnld.png" alt="1749366280852MfpwbkcnioN5lXxMOPgc4gyhnld.png"></p>
+<p>这些演示经过精心策划，以反映预期的行为和结果，确保模型学会生成准确且符合上下文的响应。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366299852Y3fRbjJ0OoOLhVxvXBwcQkp7nti.png" alt="1749366299852Y3fRbjJ0OoOLhVxvXBwcQkp7nti.png"></p>
+<p>然而，SFT 本身有局限性：</p>
+<ol>
+<li>可扩展性：收集人类演示是劳动密集型且耗时的，尤其是对于复杂或小众任务。</li>
+<li>性能：简单模仿人类行为并不能保证模型会超越人类表现或在未见过的任务上很好地泛化。</li>
+</ol>
+<p>为了克服这些挑战，需要一种更具可扩展性和效率的方法，为下一步铺平了道路：基于人类反馈的强化学习（Reinforcement Learning from Human Feedback — RLHF）。</p>
+<h3 id="基于人类反馈的强化学习-RLHF"><a href="#基于人类反馈的强化学习-RLHF" class="headerlink" title="基于人类反馈的强化学习 (RLHF)"></a><strong>基于人类反馈的强化学习 (RLHF)</strong></h3><p>OpenAI 在 2022 年引入的 RLHF 解决了 SFT 的可扩展性和性能限制。与需要人类编写完整输出的 SFT 不同，RLHF 涉及根据质量对多个模型生成的输出进行排名。这种方法允许更高效的数据收集和标注，显著增强了可扩展性。</p>
+<p>RLHF 过程包括两个关键阶段：</p>
+<ol>
+<li>训练奖励模型：人类注释者对模型生成的多个输出进行排名，创建一个偏好数据集。这些数据用于训练一个奖励模型，该模型学习根据人类反馈评估输出的质量。</li>
+<li>使用强化学习微调 LLM：奖励模型使用近端策略优化（Proximal Policy Optimization - PPO）（一种强化学习算法）指导 LLM 的微调。通过迭代更新，模型学会了生成更符合人类偏好和期望的输出。</li>
+</ol>
+<p>这个两阶段过程 — — 结合 SFT 和 RLHF — — 使模型不仅能够准确遵循指令，还能适应新任务并持续改进。通过将人类反馈整合到训练循环中，RLHF 显著增强了模型生成可靠、符合人类输出的能力，为 AI 对齐和性能设定了新标准。</p>
+<h3 id="ChatGPT：推进对话式-AI-2022"><a href="#ChatGPT：推进对话式-AI-2022" class="headerlink" title="ChatGPT：推进对话式 AI (2022)"></a><strong>ChatGPT：推进对话式 AI (2022)</strong></h3><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366311853KsazbV5PJoA6qqxaf11cKTLSnDc.png" alt="1749366311853KsazbV5PJoA6qqxaf11cKTLSnDc.png"></p>
+<p>2022 年 3 月，OpenAI 推出了 GPT-3.5，这是 GPT-3 的升级版，架构相同但训练和微调有所改进。关键增强包括通过改进数据更好地遵循指令，减少了幻觉（尽管未完全消除），以及更多样化、更新的数据集，以生成更相关、上下文感知的响应。</p>
+<ul>
+<li>对话聚焦的微调：在大量对话数据集上进行训练，ChatGPT 擅长维持对话的上下文和连贯性，实现更引人入胜和类似人类的互动。</li>
+<li>RLHF：通过整合 RLHF，ChatGPT 学会了生成不仅有用而且诚实和无害的响应。人类培训师根据质量对响应进行排名，使模型能够逐步改进其表现。</li>
+</ul>
+<p>ChatGPT 的推出标志着 AI 的一个关键时刻，通常被称为「ChatGPT 时刻」(ChatGPT moment)，因为它展示了对话式 AI 改变人机交互的潜力。</p>
+<h2 id="多模态模型：连接文本、图像及其他-2023–2024"><a href="#多模态模型：连接文本、图像及其他-2023–2024" class="headerlink" title="多模态模型：连接文本、图像及其他 (2023–2024)"></a><strong>多模态模型：连接文本、图像及其他 (2023–2024)</strong></h2><p>在 2023 年至 2024 年间，像 GPT-4V 和 GPT-4o 这样的多模态大型语言模型（MLLMs）通过将文本、图像、音频和视频整合到统一系统中重新定义了 AI。这些模型扩展了传统语言模型的能力，实现了更丰富的交互和更复杂的问题解决。</p>
+<h3 id="GPT-4V：视觉遇见语言"><a href="#GPT-4V：视觉遇见语言" class="headerlink" title="GPT-4V：视觉遇见语言"></a><strong>GPT-4V：视觉遇见语言</strong></h3><p>2023 年，OpenAI 推出了 GPT-4V，将 GPT-4 的语言能力与先进的计算机视觉相结合。它可以解释图像、生成标题、回答视觉问题，并推断视觉中的上下文关系。其跨模态注意力机制允许文本和图像数据的无缝集成，使其在医疗保健（如分析医学图像）和教育（如互动学习工具）等领域具有价值。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366321852Qf1nb3g94oVLqFx4n6xcdS7Yntt.png" alt="1749366321852Qf1nb3g94oVLqFx4n6xcdS7Yntt.png"></p>
+<h3 id="GPT-4o：全模态前沿"><a href="#GPT-4o：全模态前沿" class="headerlink" title="GPT-4o：全模态前沿"></a><strong>GPT-4o：全模态前沿</strong></h3><p>到 2024 年初，GPT-4o 通过整合音频和视频输入进一步推进了多模态。它在一个统一的表示空间中运行，可以转录音频、描述视频或将文本合成音频。实时交互和增强的创造力 — — 如生成多媒体内容 — — 使其成为娱乐和设计等行业的多功能工具。</p>
+<p>现实世界的影响: MLLMs 革新了医疗保健（诊断）、教育（互动学习）和创意产业（多媒体制作）等领域。它们处理多种模态的能力解锁了创新的新可能性。</p>
+<h2 id="推理模型：从「系统-1」到「系统-2」思维的转变-2024"><a href="#推理模型：从「系统-1」到「系统-2」思维的转变-2024" class="headerlink" title="推理模型：从「系统 1」到「系统 2」思维的转变 (2024)"></a><strong>推理模型：从「系统 1」到「系统 2」思维的转变 (2024)</strong></h2><p>2024 年，AI 开发开始强调增强「推理」(Reasoning)，从简单的模式识别转向更逻辑化和结构化的思维过程。这一转变受到认知心理学双重过程理论的影响，区分了「系统 1」（快速、直觉）和「系统 2」（缓慢、分析）思维。虽然像 GPT-3 和 GPT-4 这样的早期模型在生成文本等「系统 1」任务上表现出色，但在深度推理和问题解决方面却有所欠缺。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366332852KqgYbfsQdoAjgcxwSSTcTGHsnsd.png" alt="1749366332852KqgYbfsQdoAjgcxwSSTcTGHsnsd.png"></p>
+<h3 id="OpenAI-o1：推理能力的一大飞跃-2024"><a href="#OpenAI-o1：推理能力的一大飞跃-2024" class="headerlink" title="OpenAI-o1：推理能力的一大飞跃(2024)"></a><strong>OpenAI-o1：推理能力的一大飞跃(2024)</strong></h3><p>2024 年 9 月 12 日，OpenAI 发布的 o1-preview 标志着人工智能能力的重大飞跃，尤其是在解决复杂推理任务（如数学和编程）方面。与传统 LLMs 不同，推理模型采用了「长链思维」（Long CoT） — — 即内部的推理轨迹，使模型能够通过分解问题、批判自己的解决方案并探索替代方案来“思考”问题。这些 CoTs 对用户是隐藏的，用户看到的是一个总结性的输出。</p>
+<p><strong>推理模型的关键特性包括：</strong></p>
+<ul>
+<li>长链思维（Long CoT） ：使模型能够将复杂问题分解为更小的部分，批判性地评估其解决方案，并探索多种方法，类似于搜索算法。</li>
+<li>推理时计算控制 ：对于更复杂的问题，可以生成更长的 CoTs；而对于较简单的问题，则使用较短的 CoTs 以节省计算资源。</li>
+<li>增强的推理能力 ：尽管像 o1-preview 这样的初始推理模型在某些领域的能力不如标准 LLMs，但在推理任务中，它们的表现远远超越了后者，常常能与人类专家媲美。例如，o1-preview 在数学（AIME 2024）、编程（CodeForces）和博士级别的科学问题上均超越了 GPT-4o。</li>
+</ul>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366342083VcEfbjllyoLSeCxGQvLcJEPBnSe.png" alt="1749366342083VcEfbjllyoLSeCxGQvLcJEPBnSe.png"></p>
+<p><strong>OpenAI-o1：</strong></p>
+<p>2024 年 12 月 5 日，OpenAI 的完整版 o1 模型进一步提升了性能，在美国 AIME 2024 数学考试中排名前 500 名学生之列，并显著超越了 GPT-4o（解决了 74%-93% 的 AIME 问题，而 GPT-4o 仅为 12%）。此外，o1-mini 作为更便宜且更快的版本，在编码任务中表现出色，尽管其成本仅为完整版 o1 的 20%。</p>
+<p><strong>OpenAI-o3：</strong></p>
+<p>2025 年 1 月 31 日，OpenAI 发布了 o3，这是其推理模型系列的最新突破，建立在 o1 模型成功的基础之上。尽管完整的 o3 模型尚未发布，但其在关键基准测试中的表现被描述为具有开创性。</p>
+<ul>
+<li>ARC-AGI ：达到 87.5% 的准确率，超过了人类水平的 85%，远超 GPT-4o 的 5%。</li>
+<li>编程 ：在 SWE-Bench Verified 上得分 71.7%，并在 Codeforces 上获得 2727 的 Elo 评分，跻身全球前 200 名竞争性程序员之列。</li>
+<li>数学 ：在 EpochAI 的 FrontierMath 基准测试中达到 25.2% 的准确率，相比之前的最先进水平（2.0%）有了显著提升。</li>
+</ul>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366352852CSmybKboboZFwUxlGddcKw08n4d.png" alt="1749366352852CSmybKboboZFwUxlGddcKw08n4d.png"></p>
+<p>OpenAI-o1 和 OpenAI-o3 推理模型的发布代表了人工智能领域的重大进步，通过结构化的内部推理过程提供了卓越的问题解决能力，并在复杂数学和编程任务中树立了新的标杆。</p>
+<h2 id="成本高效的推理模型：DeepSeek-R1-2025"><a href="#成本高效的推理模型：DeepSeek-R1-2025" class="headerlink" title="成本高效的推理模型：DeepSeek-R1 (2025)"></a><strong>成本高效的推理模型：DeepSeek-R1 (2025)</strong></h2><p>LLMs 通常需要极其庞大的计算资源来进行训练和推理。像 GPT-4o 和 OpenAI-o1 这样的最先进 LLM 模型的闭源性质限制了对尖端 AI 的「普及化」。</p>
+<h4 id="DeepSeek-V3-2024–12"><a href="#DeepSeek-V3-2024–12" class="headerlink" title="DeepSeek-V3 (2024–12)"></a>DeepSeek-V3 (2024–12)</h4><p>2024 年 12 月下旬，「深度求索-V3」(DeepSeek-V3)作为一种成本高效的开放权重 LLM 出现，为 AI 的可访问性设定了新标准。DeepSeek-V3 与 OpenAI 的 ChatGPT 等顶级解决方案相媲美，但开发成本显著降低，估计约为 560 万美元，仅为西方公司投资的一小部分。</p>
+<p>该模型最多包含 6710 亿个参数，其中 370 亿个活跃参数，并采用专家混合（MoE）架构，将模型划分为专门处理数学和编码等任务的组件，以减轻训练负担。DeepSeek-V3 采用了工程效率，例如改进 Key-Value 缓存管理和进一步推动专家混合方法。该模型引入了三个关键架构：</p>
+<ul>
+<li>多头潜在注意力（Multi-head Latent Attention — MLA）：通过压缩注意力键和值来减少内存使用，同时保持性能，并通过旋转位置嵌入（RoPE）增强位置信息。</li>
+<li>DeepSeek 专家混合（DeepSeekMoE）：在前馈网络（FFNs）中采用共享和路由专家的混合，以提高效率并平衡专家利用率。</li>
+<li>多标记预测 (Multi-Token Prediction — MTP)：增强模型生成连贯且上下文相关的输出的能力，特别是对于需要复杂序列生成的任务。</li>
+</ul>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366364852VqXxb4bC3o4zcdxZ2IfcCiBTn8f.png" alt="1749366364852VqXxb4bC3o4zcdxZ2IfcCiBTn8f.png"></p>
+<p>DeepSeek-V3 的发布引发了全球科技抛售，危及 1 万亿美元的市值，并导致英伟达股票盘前下跌 13%。DeepSeek-V3 的价格为每百万输出标记 2.19 美元，约为 OpenAI 类似模型成本的 1/30。</p>
+<h4 id="DeepSeek-R1-Zero-和-DeepSeek-R1-2025–01"><a href="#DeepSeek-R1-Zero-和-DeepSeek-R1-2025–01" class="headerlink" title="DeepSeek-R1-Zero 和 DeepSeek-R1 (2025–01)"></a>DeepSeek-R1-Zero 和 DeepSeek-R1 (2025–01)</h4><p>仅仅一个月后，2025 年 1 月下旬，DeepSeek 通过发布 DeepSeek-R1-Zero 和 DeepSeek-R1 再次引起轰动，这些模型展示了卓越的推理能力，训练成本极低。</p>
+<p>利用先进的强化学习技术，这些模型证明了高性能推理可以在没有通常与尖端 AI 相关的巨额计算费用的情况下实现。这一突破巩固了 DeepSeek 作为高效和可扩展 AI 创新领导者的地位。</p>
+<ul>
+<li>DeepSeek-R1-Zero：一种基于 DeepSeek-V3 的推理模型，通过强化学习（RL）增强其推理能力。它完全消除了「监督微调」(SFT)阶段，直接从名为 DeepSeek-V3-Base 的预训练模型开始。</li>
+<li>它采用了一种基于「规则的强化学习方法」(Rule-based Reinforcement Learning)，称为「组相对策略优化」（Group Relative Policy Optimization — GRPO），根据预定义规则计算奖励，使训练过程更简单且更具可扩展性。</li>
+</ul>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366374853P4GgbfXdCosRNaxVs9UcgPZJnrh.png" alt="1749366374853P4GgbfXdCosRNaxVs9UcgPZJnrh.png"></p>
+<p>DeepSeek-R1：为了解决 DeepSeek-R1-Zero 的局限性，如低可读性和语言混杂，DeepSeek-R1 纳入了一组有限的高质量冷启动数据和额外的 RL 训练。该模型经历了多个微调和 RL 阶段，包括拒绝采样和第二轮 RL 训练，以提高其通用能力和与人类偏好的一致性。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366389092T1wubPqY6oxXXFxd0qzcJ2glncg.png" alt="1749366389092T1wubPqY6oxXXFxd0qzcJ2glncg.png"></p>
+<p>蒸馏 DeepSeek 模型：DeepSeek 开发了较小的、蒸馏版的 DeepSeek-R1，参数范围从 15 亿到 700 亿，将先进的推理能力带到较弱的硬件上。这些模型使用原始 DeepSeek-R1 生成的合成数据进行微调，确保在推理任务中表现出色，同时足够轻量化以便本地部署。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366397854N4nzbC2KTorOW5xuYnzcufyenNe.png" alt="1749366397854N4nzbC2KTorOW5xuYnzcufyenNe.png"></p>
+<p>DeepSeek-R1 在各种基准测试中表现出竞争力，包括数学、编码、常识和写作。根据使用模式，它相比 OpenAI 的 o1 模型等竞争对手提供了显著的成本节省，使用成本便宜 20 到 50 倍。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366406080JB7LbnJZUoOrhzxuPW6cI1Z9nEb.png" alt="1749366406080JB7LbnJZUoOrhzxuPW6cI1Z9nEb.png"></p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a><strong>结论</strong></h1><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749366416855UwLGbPxkwoY8EExcZAXcdmNtncC.png" alt="1749366416855UwLGbPxkwoY8EExcZAXcdmNtncC.png"></p>
+<p>从 2017 年 Transformer 架构的引入到 2025 年 DeepSeek-R1 的发展，大型语言模型（LLMs）的演变标志着人工智能领域的一个革命性篇章。LLMs 的崛起由四个里程碑式的成就标示：</p>
+<ul>
+<li>Transformers (2017)：Transformer 架构的引入为构建能够以前所未有的精确性和灵活性处理复杂任务的大规模高效模型奠定了基础。</li>
+<li>GPT-3 (2020)：该模型展示了规模在 AI 中的变革力量，证明了在大规模数据集上训练的巨大模型可以在广泛的应用中实现接近人类的表现，为 AI 所能完成的任务设立了新的基准。</li>
+<li>ChatGPT (2022)：通过将对话式 AI 带入主流，ChatGPT 使高级 AI 对普通用户来说更加可访问和互动。它还引发了关于广泛采用 AI 的伦理和社会影响的关键讨论。</li>
+<li>DeepSeek-R1 (2025)：代表了成本效率的一大飞跃，DeepSeek-R1 利用专家混合架构(MoE)和优化算法，与许多美国模型相比，运营成本降低了多达 50 倍。其开源性质加速尖端 AI 应用的普及化，赋予各行业创新者权力，并强调了可扩展性、对齐性和可访问性在塑造 AI 未来中的重要性。</li>
+</ul>
+<p>LLMs 正逐步演变为多功能、多模态的推理系统，能够同时满足普通用户和特定需求。这一演变得益于突破性技术创新，以及在规模、易用性和成本效益上的显著提升，推动人工智能朝着更加包容和影响力深远的方向迈进。</p>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2025/07/03/2025-07-03-%E6%8B%AF%E6%95%91%E6%88%91%E7%9A%84%E2%80%9C%E9%AB%98%E7%83%A7%E2%80%9D%E6%88%98%E5%8F%8B%E2%80%94%E2%80%94Y7000P%202024%E7%89%88%E6%B8%85%E7%81%B0%E6%8D%A2%E7%A1%85%E8%84%82%E8%AE%B0%E5%BD%95/">2025-07-03-拯救我的“高烧”战友——Y7000P 2024 版清灰换硅脂记录</a></li>
+                
+                
+                    <li>下一篇: <a href="/2025/06/05/2025-06-05-%E6%99%BA%E8%83%BD%E4%BD%93%E5%B9%B3%E5%8F%B0%E5%8F%8A%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-05-智能体平台及关键技术分析</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" rel="tag">课程学习</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2025/07/29/2025-07-29-%E4%B9%9D%E6%A0%BC%E9%80%9A%E7%94%A8%E5%9F%BA%E7%A1%80%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">2025-07-29-九格通用基础大模型环境配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/07/03/2025-07-03-%E6%8B%AF%E6%95%91%E6%88%91%E7%9A%84%E2%80%9C%E9%AB%98%E7%83%A7%E2%80%9D%E6%88%98%E5%8F%8B%E2%80%94%E2%80%94Y7000P%202024%E7%89%88%E6%B8%85%E7%81%B0%E6%8D%A2%E7%A1%85%E8%84%82%E8%AE%B0%E5%BD%95/">2025-07-03-拯救我的“高烧”战友——Y7000P 2024 版清灰换硅脂记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/08/2025-06-08-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%95%E5%B1%82%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-08-大模型底层技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/05/2025-06-05-%E6%99%BA%E8%83%BD%E4%BD%93%E5%B9%B3%E5%8F%B0%E5%8F%8A%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-05-智能体平台及关键技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/04/2025-06-04-%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%B9%B3%E5%8F%B0%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D/">2025-06-04-低代码平台及相关技术介绍应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/03/2025-06-03-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/">2025-06-03-微信小程序开发框架详解</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2025 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>

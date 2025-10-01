@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2025-06-01-Hive 技术及应用介绍 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-06-01-Hive 技术及应用介绍"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-06-01-Hive 技术及应用介绍</h2>
+            <div class="post-meta">
+                <time class="date">2025.06.01</time>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="Hive-技术及应用介绍"><a href="#Hive-技术及应用介绍" class="headerlink" title="Hive 技术及应用介绍"></a>Hive 技术及应用介绍</h1><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://cshihong.github.io/2018/05/22/Hive%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/">Hive 技术原理</a></li>
+<li><a target="_blank" rel="noopener" href="http://xiaqunfeng.cc/2018/10/18/Hive/">Hive 架构及应用介绍</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaohaigegede/p/17725025.html">Hive - 小海哥哥 de - 博客园</a></li>
+<li><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/Home">https://cwiki.apache.org/confluence/display/Hive/Home</a>(官方文档)</li>
+</ul>
+</blockquote>
+<p>Apache Hive 是基于 Hadoop 构建的数据仓库工具，它为海量结构化数据提供类 SQL 的查询能力，并将查询翻译为 MapReduce、Tez 或 Spark 作业执行。Hive 简化了大数据批量分析的使用门槛，让熟悉 SQL 的开发者能够在 Hadoop 生态上轻松进行 ETL、OLAP 和 BI 分析。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749361719853NEWubQsOsob8hwxG164ce9SWnxe.png" alt="1749361719853NEWubQsOsob8hwxG164ce9SWnxe.png"></p>
+<p>Hive 的执行流程</p>
+<h2 id="Hive-的背景与定位"><a href="#Hive-的背景与定位" class="headerlink" title="Hive 的背景与定位"></a>Hive 的背景与定位</h2><ul>
+<li><strong>背景</strong>：随着大数据时代到来，Hadoop 分布式文件系统（HDFS）与 MapReduce 为存储与计算提供了高吞吐的能力，但原生 MapReduce 编程复杂、开发成本高。</li>
+<li><strong>定位</strong>：Hive 通过 HiveQL（类似 SQL 的查询语言）屏蔽 MapReduce/Tez/Spark 的底层细节，将查询语句编译为执行计划并自动运行，适合批量离线分析，主要面向 ETL、数据聚合与多维分析。</li>
+</ul>
+<h3 id="Hive-在-Hadoop-生态系统中的位置"><a href="#Hive-在-Hadoop-生态系统中的位置" class="headerlink" title="Hive 在 Hadoop 生态系统中的位置"></a>Hive 在 Hadoop 生态系统中的位置</h3><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749361730854XD25bKuMWocEPtxmRBQc1JaOn6c.png" alt="1749361730854XD25bKuMWocEPtxmRBQc1JaOn6c.png"></p>
+<p>Hive 的运行深度依赖于 Hadoop 的核心生态，包括其分布式文件系统 HDFS、计算框架 MapReduce 以及资源调度器 YARN，因此可以将 Hive 理解为一种构建在 Hadoop 之上的 “SQL on Hadoop” 应用。其核心工作机制是将用户输入的类 SQL 查询语句转换为底层的 MapReduce 任务来执行，也正是因为多了这一步从 SQL 到 MapReduce 的转化开销，所以在同等条件下，Hive 查询的执行效率通常会低于直接编写原生 MapReduce 程序。</p>
+<h2 id="Hive-体系结构"><a href="#Hive-体系结构" class="headerlink" title="Hive 体系结构"></a>Hive 体系结构</h2><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749361740853ZjDRb5l8hozhtExpjCrcgQXFnzd.png" alt="1749361740853ZjDRb5l8hozhtExpjCrcgQXFnzd.png"><br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749361749853Rykybe2KzostXMxQrA2cx8pgnWh.png" alt="1749361749853Rykybe2KzostXMxQrA2cx8pgnWh.png"></p>
+<p>Hive 的核心组件包括：</p>
+<ol>
+<li><p><strong>Hive 客户端（CLI、Beeline、JDBC/ODBC）</strong></p>
+<ul>
+<li>支持交互式提交 HiveQL，或通过 JDBC/ODBC 接入 BI 工具（如 Tableau、Power BI）。</li>
+</ul>
+</li>
+<li><p><strong>Driver</strong></p>
+<ul>
+<li>接收并解析 HiveQL，生成抽象语法树（AST），再进行优化和编译，生成执行计划（Execution Plan）。</li>
+</ul>
+</li>
+<li><p><strong>Compiler / Optimizer</strong></p>
+<ul>
+<li>将 AST 转为逻辑计划，应用谓词下推、列裁剪等优化，再生成物理计划，拆分为一个或多个 MapReduce/Tez/Spark 任务。</li>
+</ul>
+</li>
+<li><p><strong>Execution Engine</strong></p>
+<ul>
+<li>将物理计划提交给底层执行框架（MapReduce、Tez 或 Spark），监控任务状态并返回结果。</li>
+</ul>
+</li>
+<li><p><strong>Metastore</strong></p>
+<ul>
+<li>存储表结构、分区信息、列类型、SerDe、统计信息等元数据，通常使用 MySQL、PostgreSQL 或 Derby。</li>
+</ul>
+</li>
+</ol>
+<h2 id="数据模型与存储格式"><a href="#数据模型与存储格式" class="headerlink" title="数据模型与存储格式"></a>数据模型与存储格式</h2><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749361758853Z6E0bN8eQofC9kxqkCmcz14ynBg.png" alt="1749361758853Z6E0bN8eQofC9kxqkCmcz14ynBg.png"></p>
+<ul>
+<li><strong>表与分区</strong><ul>
+<li>Hive 将 HDFS 文件组织为表（Table）、分区（Partition）和桶（Bucket）。分区通常按日期、地域等字段维度存储，减少查询扫描量。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>数据库：创建表时如果不指定数据库，则默认为 default 数据库。<br>表：物理概念，实际对应 HDFS 上的一个目录。<br>分区：对应所在表所在目录下的一个子目录。<br>桶：对应表或分区所在路径的一个文件</p>
+</blockquote>
+<ul>
+<li><strong>文件格式</strong><ul>
+<li>支持文本（Text）、SequenceFile、ORC、Parquet、Avro 等列式与行式格式。列式格式（ORC、Parquet）通过压缩和列裁剪大幅提升查询性能。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 创建按日期分区的 ORC 表</span><br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">EXTERNAL</span> <span class="hljs-keyword">TABLE</span> logs (<br>  user_id <span class="hljs-type">BIGINT</span>,<br>  action  STRING,<br>  ts      <span class="hljs-type">TIMESTAMP</span><br>)<br>PARTITIONED <span class="hljs-keyword">BY</span> (dt STRING)<br>STORED <span class="hljs-keyword">AS</span> ORC<br>LOCATION <span class="hljs-string">'/data/logs/'</span>;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>SerDe（序列化/反序列化）</strong><ul>
+<li>通过自定义 SerDe，Hive 能解析任意复杂格式（JSON、CSV、XML 等）。</li>
+</ul>
+</li>
+</ul>
+<h2 id="HiveQL-基本用法"><a href="#HiveQL-基本用法" class="headerlink" title="HiveQL 基本用法"></a>HiveQL 基本用法</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.slideshare.net/slideshow/hive-quick-start-tutorial/3555281">www.slideshare.net</a></li>
+</ul>
+</blockquote>
+<h3 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作"></a>数据操作</h3><h4 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE TABLE</span> IF <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> example.employee(<br>Id <span class="hljs-type">INT</span> COMMENT <span class="hljs-string">'employeeid'</span>,<br>Company STRING COMMENT <span class="hljs-string">'your company'</span>,<br>Money <span class="hljs-type">FLOAT</span> COMMENT <span class="hljs-string">'work money'</span>,)<br><span class="hljs-type">ROW</span> FORMAT DELIMITED FIELDS TERMINATED <span class="hljs-keyword">BY</span> <span class="hljs-string">','</span> STORED <span class="hljs-keyword">AS</span> TEXTFILE;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>可以发现就是对应的 SQL 语句</p>
+</blockquote>
+<h4 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> id, name <span class="hljs-keyword">FROM</span> employee <span class="hljs-keyword">WHERE</span> salary <span class="hljs-operator">&gt;=</span> <span class="hljs-number">10000</span>;<br><span class="hljs-keyword">SELECT</span> department, <span class="hljs-built_in">avg</span>(salary) <span class="hljs-keyword">FROM</span> employee <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> department;<br><span class="hljs-keyword">SELECT</span> id, salary, <span class="hljs-type">date</span> <span class="hljs-keyword">FROM</span> employee_a <span class="hljs-keyword">UNION</span> <span class="hljs-keyword">ALL</span><br><span class="hljs-keyword">SELECT</span> id, salary, <span class="hljs-type">date</span> <span class="hljs-keyword">FROM</span> employee_b;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 加载数据到表（分区）</span><br><span class="hljs-keyword">ALTER TABLE</span> logs <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">PARTITION</span> (dt<span class="hljs-operator">=</span><span class="hljs-string">'2025-06-01'</span>);<br>LOAD DATA INPATH <span class="hljs-string">'/raw/logs/2025-06-01/*.log'</span><br><span class="hljs-keyword">INTO</span> <span class="hljs-keyword">TABLE</span> logs <span class="hljs-keyword">PARTITION</span> (dt<span class="hljs-operator">=</span><span class="hljs-string">'2025-06-01'</span>);<br><span class="hljs-comment">-- 简单查询</span><br><span class="hljs-keyword">SELECT</span> user_id, <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">AS</span> cnt<br><span class="hljs-keyword">FROM</span> logs<br><span class="hljs-keyword">WHERE</span> dt<span class="hljs-operator">=</span><span class="hljs-string">'2025-06-01'</span><br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> user_id<br><span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> cnt <span class="hljs-keyword">DESC</span><br>LIMIT <span class="hljs-number">10</span>;<br></code></pre></td></tr></table></figure>
+
+<h3 id="窗口函数与高级特性"><a href="#窗口函数与高级特性" class="headerlink" title="窗口函数与高级特性"></a>窗口函数与高级特性</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 统计每个用户每天的前 3 次操作</span><br><span class="hljs-keyword">SELECT</span> dt, user_id, action, ts,<br>  <span class="hljs-built_in">ROW_NUMBER</span>() <span class="hljs-keyword">OVER</span> (<span class="hljs-keyword">PARTITION</span> <span class="hljs-keyword">BY</span> dt, user_id <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> ts) <span class="hljs-keyword">AS</span> rn<br><span class="hljs-keyword">FROM</span> logs<br><span class="hljs-keyword">WHERE</span> dt <span class="hljs-operator">&gt;=</span> <span class="hljs-string">'2025-06-01'</span> <span class="hljs-keyword">AND</span> dt <span class="hljs-operator">&lt;=</span> <span class="hljs-string">'2025-06-07'</span><br><span class="hljs-keyword">AND</span> rn <span class="hljs-operator">&lt;=</span> <span class="hljs-number">3</span>;<br></code></pre></td></tr></table></figure>
+
+<h3 id="与-Spark-集成"><a href="#与-Spark-集成" class="headerlink" title="与 Spark 集成"></a>与 Spark 集成</h3><p>在 Hive on Spark 模式下，HiveQL 会被提交到 Spark 引擎执行，兼享 Spark 的低延迟与丰富算子。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">-- 启动 Hive 使用 Spark 执行引擎<br><span class="hljs-built_in">set</span> hive.execution.engine=spark;<br></code></pre></td></tr></table></figure>
+
+<h2 id="典型应用场景"><a href="#典型应用场景" class="headerlink" title="典型应用场景"></a>典型应用场景</h2><ol>
+<li><p><strong>ETL 批量处理</strong></p>
+<ul>
+<li>定时从日志系统、关系库导入数据，清洗、聚合后写入 Hive 数据仓库，用于下游 BI 报表。</li>
+</ul>
+</li>
+<li><p><strong>多维 OLAP 分析</strong></p>
+<ul>
+<li>基于 Hive 的 HiveCube 或第三方 OLAP 引擎（如 Apache Kylin）实现大规模多维分析。</li>
+</ul>
+</li>
+<li><p><strong>数据探索与报表</strong></p>
+<ul>
+<li>数据分析师通过 Beeline 或 BI 工具（Tableau、Power BI）直接查询 Hive 表。</li>
+</ul>
+</li>
+<li><p><strong>机器学习特征工程</strong></p>
+<ul>
+<li>使用 HiveQL 快速统计用户行为特征，然后将结果导出到 HDFS，再由 Spark/MLlib 训练模型。</li>
+</ul>
+</li>
+</ol>
+<h2 id="性能优化要点"><a href="#性能优化要点" class="headerlink" title="性能优化要点"></a>性能优化要点</h2><ul>
+<li><p><strong>合理分区</strong></p>
+<ul>
+<li>按查询高频过滤字段分区（如按日期、地域），减少文件扫描。</li>
+</ul>
+</li>
+<li><p><strong>使用列式存储</strong></p>
+<ul>
+<li>ORC/Parquet 格式支持列裁剪、矢量化读取和压缩。</li>
+</ul>
+</li>
+<li><p><strong>开启成本模型优化</strong></p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SET</span> hive.cbo.enable<span class="hljs-operator">=</span><span class="hljs-literal">true</span>;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>利用 Tez/Spark</strong></p>
+<ul>
+<li>将执行引擎换为 Tez 或 Spark，降低 MapReduce 的启动开销与 I/O 序列化成本。</li>
+</ul>
+</li>
+<li><p><strong>小文件合并</strong></p>
+<ul>
+<li>小文件过多会导致任务过多，建议合并或使用 HDFS 合并工具。</li>
+</ul>
+</li>
+</ul>
+<h2 id="示例：用户次日留存率统计"><a href="#示例：用户次日留存率统计" class="headerlink" title="示例：用户次日留存率统计"></a>示例：用户次日留存率统计</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 1. 计算用户首次活跃日期</span><br><span class="hljs-keyword">CREATE TABLE</span> user_first (<br>  user_id <span class="hljs-type">BIGINT</span>,<br>  first_dt STRING<br>)<br>STORED <span class="hljs-keyword">AS</span> ORC<br><span class="hljs-keyword">AS</span><br><span class="hljs-keyword">SELECT</span> user_id, <span class="hljs-built_in">MIN</span>(dt) <span class="hljs-keyword">AS</span> first_dt<br><span class="hljs-keyword">FROM</span> logs<br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> user_id;<br><span class="hljs-comment">-- 2. 次日留存：join 当天活跃用户与第一天活跃日期后一天</span><br><span class="hljs-keyword">SELECT</span> f.first_dt <span class="hljs-keyword">AS</span> reg_dt,<br>       l.dt        <span class="hljs-keyword">AS</span> act_dt,<br>       <span class="hljs-built_in">COUNT</span>(<span class="hljs-keyword">DISTINCT</span> f.user_id)      <span class="hljs-keyword">AS</span> reg_users,<br>       <span class="hljs-built_in">COUNT</span>(<span class="hljs-keyword">DISTINCT</span> l.user_id)      <span class="hljs-keyword">AS</span> retained_users,<br>       ROUND(<span class="hljs-built_in">COUNT</span>(<span class="hljs-keyword">DISTINCT</span> l.user_id) <span class="hljs-operator">/</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-keyword">DISTINCT</span> f.user_id), <span class="hljs-number">4</span>) <span class="hljs-keyword">AS</span> retention_rate<br><span class="hljs-keyword">FROM</span> user_first f<br><span class="hljs-keyword">JOIN</span> logs l<br>  <span class="hljs-keyword">ON</span> f.user_id <span class="hljs-operator">=</span> l.user_id<br> <span class="hljs-keyword">AND</span> l.dt <span class="hljs-operator">=</span> date_add(f.first_dt, <span class="hljs-number">1</span>)<br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> f.first_dt, l.dt<br><span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> f.first_dt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h1><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749361767853GqNBbN8ARo70Ijxlv3dcyQ5rn0v.png" alt="1749361767853GqNBbN8ARo70Ijxlv3dcyQ5rn0v.png"></p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749361778853RwFcbEGI7o1p7cxmwTNcbjjdn7c.png" alt="1749361778853RwFcbEGI7o1p7cxmwTNcbjjdn7c.png"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li><strong>Hive</strong> 以 SQL 友好的方式在 Hadoop 集群上实现批量离线分析，适用于 ETL、OLAP、报表和特征工程。</li>
+<li>通过 Metastore 管理元数据，通过多种文件格式和执行引擎（MapReduce/Tez/Spark）兼顾兼容性与性能。</li>
+<li>合理分区、列式存储和成本模型优化可显著提升查询性能。</li>
+<li>Hive 与 Spark、Flink、Presto 等工具生态配合，为大数据平台提供灵活多样的计算选择。</li>
+</ul>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2025/06/02/2025-06-02-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%88%86%E7%B1%BB%E5%92%8C%E5%BA%94%E7%94%A8/">2025-06-02-数据库的分类和应用</a></li>
+                
+                
+                    <li>下一篇: <a href="/2025/05/21/2025-05-21-%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%94%AE%E7%9B%98%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/">2025-05-21-汇编语言键盘输入输出</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" rel="tag">课程学习</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2025/07/29/2025-07-29-%E4%B9%9D%E6%A0%BC%E9%80%9A%E7%94%A8%E5%9F%BA%E7%A1%80%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">2025-07-29-九格通用基础大模型环境配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/07/03/2025-07-03-%E6%8B%AF%E6%95%91%E6%88%91%E7%9A%84%E2%80%9C%E9%AB%98%E7%83%A7%E2%80%9D%E6%88%98%E5%8F%8B%E2%80%94%E2%80%94Y7000P%202024%E7%89%88%E6%B8%85%E7%81%B0%E6%8D%A2%E7%A1%85%E8%84%82%E8%AE%B0%E5%BD%95/">2025-07-03-拯救我的“高烧”战友——Y7000P 2024 版清灰换硅脂记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/08/2025-06-08-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%95%E5%B1%82%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-08-大模型底层技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/05/2025-06-05-%E6%99%BA%E8%83%BD%E4%BD%93%E5%B9%B3%E5%8F%B0%E5%8F%8A%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-05-智能体平台及关键技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/04/2025-06-04-%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%B9%B3%E5%8F%B0%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D/">2025-06-04-低代码平台及相关技术介绍应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/03/2025-06-03-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/">2025-06-03-微信小程序开发框架详解</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2025 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>

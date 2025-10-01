@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2025-03-28-Tmux(多终端管理器)使用教程 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-03-28-Tmux(多终端管理器)使用教程"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-03-28-Tmux(多终端管理器)使用教程</h2>
+            <div class="post-meta">
+                <time class="date">2025.03.28</time>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <blockquote>这篇文章上次修改于 188 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+        
+            <blockquote>
+<p><a target="_blank" rel="noopener" href="https://tmuxcheatsheet.com/">Tmux Cheat Sheet &amp; Quick Reference | Session, window, pane and more</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=nTqu6w2wc68&ab_channel=NetworkChuck">https://www.youtube.com/watch?v=nTqu6w2wc68&amp;ab_channel=NetworkChuck</a>(教学视频)</p>
+<p><a target="_blank" rel="noopener" href="https://louiszhai.github.io/2017/09/30/tmux/">Tmux 使用手册</a></p>
+<p><a target="_blank" rel="noopener" href="https://gist.github.com/ryerh/14b7c24dfd623ef8edc7">Tmux 快捷键 &amp; 速查表 &amp; 简明教程</a></p>
+</blockquote>
+<p>启动新会话：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tmux [new -s 会话名 -n 窗口名]<br></code></pre></td></tr></table></figure>
+
+<p>恢复会话：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tmux at [-t 会话名]<br></code></pre></td></tr></table></figure>
+
+<p>列出所有会话：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tmux <span class="hljs-built_in">ls</span><br></code></pre></td></tr></table></figure>
+
+<p>关闭会话：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tmux kill-session -t 会话名<br></code></pre></td></tr></table></figure>
+
+<p>关闭所有会话：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tmux <span class="hljs-built_in">ls</span> | grep : | <span class="hljs-built_in">cut</span> -d. -f1 | awk <span class="hljs-string">'{print substr($1, 0, length($1)-1)}'</span> | xargs <span class="hljs-built_in">kill</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="在-Tmux-中，按下-Tmux-前缀-ctrl-b-，然后："><a href="#在-Tmux-中，按下-Tmux-前缀-ctrl-b-，然后：" class="headerlink" title="在 Tmux 中，按下 Tmux 前缀 ctrl+b****，然后："></a><strong>在 Tmux 中，按下 Tmux 前缀</strong> <strong>ctrl+b****，然后：</strong></h1><h2 id="会话"><a href="#会话" class="headerlink" title="会话"></a><strong>会话</strong></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">:new&lt;回车&gt;  启动新会话<br>s           列出所有会话<br>$           重命名当前会话<br></code></pre></td></tr></table></figure>
+
+<h2 id="窗口-标签页"><a href="#窗口-标签页" class="headerlink" title="窗口 (标签页)"></a><strong>窗口 (标签页)</strong></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">c  创建新窗口<br>w  列出所有窗口<br>n  后一个窗口<br>p  前一个窗口<br>f  查找窗口<br>,  重命名当前窗口<br>&amp;  关闭当前窗口<br></code></pre></td></tr></table></figure>
+
+<h2 id="调整窗口排序"><a href="#调整窗口排序" class="headerlink" title="调整窗口排序"></a><strong>调整窗口排序</strong></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">swap-window -s 3 -t 1  交换 3 号和 1 号窗口<br>swap-window -t 1       交换当前和 1 号窗口<br>move-window -t 1       移动当前窗口到 1 号<br></code></pre></td></tr></table></figure>
+
+<h2 id="窗格（分割窗口）"><a href="#窗格（分割窗口）" class="headerlink" title="窗格（分割窗口）"></a><strong>窗格（分割窗口）</strong></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">%  垂直分割<br><span class="hljs-string">"  水平分割</span><br><span class="hljs-string">o  交换窗格</span><br><span class="hljs-string">x  关闭窗格</span><br><span class="hljs-string">⍽  左边这个符号代表空格键 - 切换布局</span><br><span class="hljs-string">q 显示每个窗格是第几个，当数字出现的时候按数字几就选中第几个窗格</span><br><span class="hljs-string">{ 与上一个窗格交换位置</span><br><span class="hljs-string">} 与下一个窗格交换位置</span><br><span class="hljs-string">z 切换窗格最大化/最小化</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="同步窗格"><a href="#同步窗格" class="headerlink" title="同步窗格"></a><strong>同步窗格</strong></h2><p>这么做可以切换到想要的窗口，输入 Tmux 前缀和一个冒号呼出命令提示行，然后输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">:setw synchronize-panes<br></code></pre></td></tr></table></figure>
+
+<p>你可以指定开或关，否则重复执行命令会在两者间切换。 这个选项值针对某个窗口有效，不会影响别的会话和窗口。 完事儿之后再次执行命令来关闭。<u>帮助</u></p>
+<h2 id="调整窗格尺寸"><a href="#调整窗格尺寸" class="headerlink" title="调整窗格尺寸"></a><strong>调整窗格尺寸</strong></h2><p>如果你不喜欢默认布局，可以重调窗格的尺寸。虽然这很容易实现，但一般不需要这么干。这几个命令用来调整窗格：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">PREFIX : resize-pane -D          当前窗格向下扩大 1 格<br>PREFIX : resize-pane -U          当前窗格向上扩大 1 格<br>PREFIX : resize-pane -L          当前窗格向左扩大 1 格<br>PREFIX : resize-pane -R          当前窗格向右扩大 1 格<br>PREFIX : resize-pane -D 20       当前窗格向下扩大 20 格<br>PREFIX : resize-pane -t 2 -L 20  编号为 2 的窗格向左扩大 20 格<br></code></pre></td></tr></table></figure>
+
+<h2 id="文本复制模式："><a href="#文本复制模式：" class="headerlink" title="文本复制模式："></a><strong>文本复制模式：</strong></h2><p>按下 <code>PREFIX-[</code> 进入文本复制模式。可以使用方向键在屏幕中移动光标。默认情况下，方向键是启用的。在配置文件中启用 Vim 键盘布局来切换窗口、调整窗格大小。Tmux 也支持 Vi 模式。要是想启用 Vi 模式，只需要把下面这一行添加到 .tmux.conf 中：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">setw -g mode-keys vi<br></code></pre></td></tr></table></figure>
+
+<p>启用这条配置后，就可以使用 h、j、k、l 来移动光标了。</p>
+<p>想要退出文本复制模式的话，按下回车键就可以了。然后按下 <code>PREFIX-]</code> 粘贴刚才复制的文本。</p>
+<p>一次移动一格效率低下，在 Vi 模式启用的情况下，可以辅助一些别的快捷键高效工作。</p>
+<p>例如，可以使用 w 键逐词移动，使用 b 键逐词回退。使用 f 键加上任意字符跳转到当前行第一次出现该字符的位置，使用 F 键达到相反的效果。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs bash">vi             emacs        功能<br>^              M-m          反缩进<br>Escape         C-g          清除选定内容<br>Enter          M-w          复制选定内容<br>j              Down         光标下移<br>h              Left         光标左移<br>l              Right        光标右移<br>L                           光标移到尾行<br>M              M-r          光标移到中间行<br>H              M-R          光标移到首行<br>k              Up           光标上移<br>d              C-u          删除整行<br>D              C-k          删除到行末<br>$              C-e          移到行尾<br>:              g            前往指定行<br>C-d            M-Down       向下滚动半屏<br>C-u            M-Up         向上滚动半屏<br>C-f            Page down    下一页<br>w              M-f          下一个词<br>p              C-y          粘贴<br>C-b            Page up      上一页<br>b              M-b          上一个词<br>q              Escape       退出<br>C-Down or J    C-Down       向下翻<br>C-Up or K      C-Up         向下翻<br>n              n            继续搜索<br>?              C-r          向前搜索<br>/              C-s          向后搜索<br>0              C-a          移到行首<br>Space          C-Space      开始选中<br>               C-t          字符调序<br></code></pre></td></tr></table></figure>
+
+<h2 id="杂项："><a href="#杂项：" class="headerlink" title="杂项："></a><strong>杂项：</strong></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">d  退出 tmux（tmux 仍在后台运行）<br>t  窗口中央显示一个数字时钟<br>?  列出所有快捷键<br>:  命令提示符<br></code></pre></td></tr></table></figure>
+
+<h2 id="配置选项："><a href="#配置选项：" class="headerlink" title="配置选项："></a><strong>配置选项：</strong></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 鼠标支持 - 设置为 on 来启用鼠标(与 2.1 之前的版本有区别，请自行查阅 man page)</span><br>* <span class="hljs-built_in">set</span> -g mouse on<br><br><span class="hljs-comment"># 设置默认终端模式为 256color</span><br><span class="hljs-built_in">set</span> -g default-terminal <span class="hljs-string">"screen-256color"</span><br><br><span class="hljs-comment"># 启用活动警告</span><br>setw -g monitor-activity on<br><span class="hljs-built_in">set</span> -g visual-activity on<br><br><span class="hljs-comment"># 居中窗口列表</span><br><span class="hljs-built_in">set</span> -g status-justify centre<br><br><span class="hljs-comment"># 最大化/恢复窗格</span><br>unbind Up <span class="hljs-built_in">bind</span> Up new-window -d -n tmp \; swap-pane -s tmp.1 \; select-window -t tmp<br>unbind Down<br><span class="hljs-built_in">bind</span> Down last-window \; swap-pane -s tmp.1 \; kill-window -t tmp<br></code></pre></td></tr></table></figure>
+
+<h2 id="参考配置文件（-tmux-conf）："><a href="#参考配置文件（-tmux-conf）：" class="headerlink" title="参考配置文件（~/.tmux.conf）："></a><strong>参考配置文件（~/.tmux.conf）：</strong></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># -----------------------------------------------------------------------------# Tmux 基本配置 - 要求 Tmux &gt;= 2.3# 如果不想使用插件，只需要将此节的内容写入 ~/.tmux.conf 即可# -----------------------------------------------------------------------------# C-b 和 VIM 冲突，修改 Prefix 组合键为 Control-Z，按键距离近set -g prefix C-z</span><br><br><span class="hljs-built_in">set</span> -g base-index         1     <span class="hljs-comment"># 窗口编号从 1 开始计数</span><br><span class="hljs-built_in">set</span> -g display-panes-time 10000 <span class="hljs-comment"># PREFIX-Q 显示编号的驻留时长，单位 msset -g mouse              on    # 开启鼠标</span><br><span class="hljs-built_in">set</span> -g pane-base-index    1     <span class="hljs-comment"># 窗格编号从 1 开始计数</span><br><span class="hljs-built_in">set</span> -g renumber-windows   on    <span class="hljs-comment"># 关掉某个窗口后，编号重排</span><br><br>setw -g allow-rename      off   <span class="hljs-comment"># 禁止活动进程修改窗口名</span><br>setw -g automatic-rename  off   <span class="hljs-comment"># 禁止自动命名新窗口</span><br>setw -g mode-keys         vi    <span class="hljs-comment"># 进入复制模式的时候使用 vi 键位（默认是 EMACS）# -----------------------------------------------------------------------------# 使用插件 - via tpm#   1. 执行 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm#   2. 执行 bash ~/.tmux/plugins/tpm/bin/install_plugins# -----------------------------------------------------------------------------</span><br><br>setenv -g TMUX_PLUGIN_MANAGER_PATH <span class="hljs-string">'~/.tmux/plugins'</span># 推荐的插件（请去每个插件的仓库下读一读使用教程）<br><span class="hljs-built_in">set</span> -g @plugin <span class="hljs-string">'seebi/tmux-colors-solarized'</span><br><span class="hljs-built_in">set</span> -g @plugin <span class="hljs-string">'tmux-plugins/tmux-pain-control'</span><br><span class="hljs-built_in">set</span> -g @plugin <span class="hljs-string">'tmux-plugins/tmux-prefix-highlight'</span><br><span class="hljs-built_in">set</span> -g @plugin <span class="hljs-string">'tmux-plugins/tmux-resurrect'</span><br><span class="hljs-built_in">set</span> -g @plugin <span class="hljs-string">'tmux-plugins/tmux-sensible'</span><br><span class="hljs-built_in">set</span> -g @plugin <span class="hljs-string">'tmux-plugins/tmux-yank'</span><br><span class="hljs-built_in">set</span> -g @plugin <span class="hljs-string">'tmux-plugins/tpm'</span># tmux-resurrectset -g @resurrect-dir <span class="hljs-string">'~/.tmux/resurrect'</span># tmux-prefix-highlightset -g status-right <span class="hljs-string">'#{prefix_highlight} #H | %a %Y-%m-%d %H:%M'</span><br><span class="hljs-built_in">set</span> -g @prefix_highlight_show_copy_mode <span class="hljs-string">'on'</span><br><span class="hljs-built_in">set</span> -g @prefix_highlight_copy_mode_attr <span class="hljs-string">'fg=white,bg=blue'</span># 初始化 TPM 插件管理器 (放在配置文件的最后)<br>run <span class="hljs-string">'~/.tmux/plugins/tpm/tpm'</span># -----------------------------------------------------------------------------# 结束# -----------------------------------------------------------------------------<br></code></pre></td></tr></table></figure>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2025/04/02/2025-04-02-JAVA%E4%BD%9C%E4%B8%9A_%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F_week4/">2025-04-02-JAVA 作业_图书管理系统_week4</a></li>
+                
+                
+                    <li>下一篇: <a href="/2025/03/20/2025-03-20-%E4%BD%BF%E7%94%A8word%E6%96%87%E6%A1%A3%E5%AF%BC%E5%87%BA%E5%8A%9F%E8%83%BD%E5%8E%8B%E7%BC%A9%E5%9B%BE%E7%89%87%E7%9A%84%E6%8A%80%E5%B7%A7/">2025-03-18-使用 word 文档导出功能压缩图片的技巧</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">问题解决</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2025/07/29/2025-07-29-%E4%B9%9D%E6%A0%BC%E9%80%9A%E7%94%A8%E5%9F%BA%E7%A1%80%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">2025-07-29-九格通用基础大模型环境配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/07/03/2025-07-03-%E6%8B%AF%E6%95%91%E6%88%91%E7%9A%84%E2%80%9C%E9%AB%98%E7%83%A7%E2%80%9D%E6%88%98%E5%8F%8B%E2%80%94%E2%80%94Y7000P%202024%E7%89%88%E6%B8%85%E7%81%B0%E6%8D%A2%E7%A1%85%E8%84%82%E8%AE%B0%E5%BD%95/">2025-07-03-拯救我的“高烧”战友——Y7000P 2024 版清灰换硅脂记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/08/2025-06-08-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%95%E5%B1%82%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-08-大模型底层技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/05/2025-06-05-%E6%99%BA%E8%83%BD%E4%BD%93%E5%B9%B3%E5%8F%B0%E5%8F%8A%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-05-智能体平台及关键技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/04/2025-06-04-%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%B9%B3%E5%8F%B0%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D/">2025-06-04-低代码平台及相关技术介绍应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/03/2025-06-03-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/">2025-06-03-微信小程序开发框架详解</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2025 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>

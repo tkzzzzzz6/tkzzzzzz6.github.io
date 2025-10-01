@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2025-04-23-基于上下位机结构的系统实例分析 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-04-23-基于上下位机结构的系统实例分析"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-04-23-基于上下位机结构的系统实例分析</h2>
+            <div class="post-meta">
+                <time class="date">2025.04.23</time>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="基于上下位机结构的系统实例分析"><a href="#基于上下位机结构的系统实例分析" class="headerlink" title="基于上下位机结构的系统实例分析"></a>基于上下位机结构的系统实例分析</h1><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/BadAyase/article/details/102680588">上位机开发介绍</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiketang/p/15305637.html">上位机那些事儿 - 常哥说编程 - 博客园</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.51cto.com/u_15712566/5457487">介绍上位机和下位机</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.sohu.com/a/748967956_120070959">上位机与下位机有什么区别？它们的关系是什么？</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ebyte.com/news/3065.html">论上位机与下位机的工作原理及应用区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://m.elecfans.com/article/286528.html">什么是上位机_上位机软件介绍</a></li>
+<li><a target="_blank" rel="noopener" href="https://ee.ofweek.com/2021-01/ART-11000-2814-30482117.html">如何给下位机编写一个简单的上位机？</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiketang/p/15305637.html">上位机那些事儿 - 常哥说编程</a></li>
+</ul>
+</blockquote>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>在现代工业自动化、物联网和智能控制领域，上下位机结构是一种核心的分层控制架构。上位机（Upper Computer）通常是功能强大的计算机，如个人电脑、工业 PC 或服务器，负责监控、数据处理、用户交互和决策制定。下位机（Lower Computer）是直接与物理设备（如传感器、执行器）连接的控制器，如可编程逻辑控制器（PLC）、单片机或嵌入式系统，负责执行具体任务和数据采集。这种结构通过通信协议（如 Modbus、TCP/IP）实现高效协作，广泛应用于工业、物联网和嵌入式系统等领域。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749360238852HJiCbmVvbojFg4xx4DbcUta2nYf.png" alt="1749360238852HJiCbmVvbojFg4xx4DbcUta2nYf.png"></p>
+<p>基于上下位机结构的软件示例</p>
+<h1 id="上下位机结构概述"><a href="#上下位机结构概述" class="headerlink" title="上下位机结构概述"></a>上下位机结构概述</h1><p>上下位机系统，也称为主从（Master-Slave）系统，是一种分层控制架构。它由一个处于控制地位的“上位机”（Master）和一个或多个受其控制的“下位机”（Slave）组成。</p>
+<ul>
+<li><strong>上位机（Master）：</strong> 通常是功能更强大、资源更丰富的计算机或控制单元。它负责发送指令、监控下位机的状态以及进行数据处理和分析。上位机往往具备人机交互界面，方便用户进行操作和管理。</li>
+</ul>
+<blockquote>
+<p>典型设备：电脑、平板、手机、面板、触摸屏</p>
+</blockquote>
+<ul>
+<li><strong>下位机（Slave）：</strong> 通常是资源相对有限的嵌入式系统、单片机或执行特定任务的设备。它们接收并执行来自上位机的指令，并将执行结果或采集的数据反馈给上位机。</li>
+</ul>
+<blockquote>
+<p>典型设备：PLC、stm32、51、FPGA、ARM 等各类可编程芯片。</p>
+</blockquote>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749360247852LxqkbwQ33oiuqlxEitFc8ub4ndc.png" alt="1749360247852LxqkbwQ33oiuqlxEitFc8ub4ndc.png"></p>
+<p>典型的工业控制系统分为现场设备层和现场控制层，分别负责与物理设备交互和实时控制。在它们之上还有过程监控层、生产管理层（MES）、企业决策层（ERP），这三个层次统称为“上位机”系统。</p>
+<p>如果系统没有完整的上位机层，也无妨，因为上位机仅用于监控和管理，并非直接负责执行 。广义上，“上位机”指所有基于 PC 的监控管理系统（如 SCADA、MES、ERP）；狭义上，多指 SCADA 本身，用于实时监控和数据采集。</p>
+<h2 id="通信协议与通信-API"><a href="#通信协议与通信-API" class="headerlink" title="通信协议与通信 API"></a>通信协议与通信 API</h2><h3 id="通信协议（通信方式）"><a href="#通信协议（通信方式）" class="headerlink" title="通信协议（通信方式）"></a>通信协议（通信方式）</h3><p>上位机和下位机之间的通信协议有很多，只要能完成通信的协议都可以用在上位机与下位机之间。</p>
+<p>比如：</p>
+<p>通信协议：RS232/RS485 串行通信、USB、蓝牙、网络 UDP/TCP</p>
+<p>这个通信协议也是实现上位机与下位机之间数据交换的基本通道。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749360261852Nz3rbIyZno5yunxpGgVcvX9HnXd.png" alt="1749360261852Nz3rbIyZno5yunxpGgVcvX9HnXd.png"><br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749360271853AkrsbvBSxoFHdFxOkKjcvwFqnug.png" alt="1749360271853AkrsbvBSxoFHdFxOkKjcvwFqnug.png"></p>
+<h3 id="通信-API"><a href="#通信-API" class="headerlink" title="通信 API"></a>通信 API</h3><p>在通信协议的基础上，具体发送什么数据即发送什么指令，还需要规定各个功能所对应的指令（上位机发给下位机的指令）。</p>
+<p>每个功能所对应的指令叫做 API（Application Programming Interface）, 在实际工作中常称这个 api 为“私有通信协议”。</p>
+<p>举例一条获取温度的 api：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">[包头 + 获取温度对应的命令编码（编号）+ 校验位 + 包尾]<br></code></pre></td></tr></table></figure>
+
+<p>api 的命令格式，是自定义的一种固定的数据组合格式。不受任何通信方式和通信平台的限制。这就意味着，只要通信协议（通信方式）可以建立，上位机软件可以是任意开发语言和任意开发平台，下位机也可以使用任意类型的单片机。</p>
+<p>上位机主要是对接 PLC、仪表、运动控制卡、视觉等，通信方式包括通信协议、OPC、API 或 SDK，如下图所示：</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749360284853ZrjUbb7O6oWXLyxl0ezcsZsvnbc.png" alt="1749360284853ZrjUbb7O6oWXLyxl0ezcsZsvnbc.png"></p>
+<h2 id="定义与功能"><a href="#定义与功能" class="headerlink" title="定义与功能"></a>定义与功能</h2><p>上位机和下位机在控制系统中分工明确，功能互补：</p>
+<p>上位机作为系统的“大脑”，处理复杂任务并与用户交互；下位机作为“执行者”，确保实时性和精确性。两者通过串口（RS232/RS485）、以太网或无线协议通信，形成高效的控制体系。</p>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749360295853Wqq4bMNQAot40JxAMsfch8w5ntd.png" alt="1749360295853Wqq4bMNQAot40JxAMsfch8w5ntd.png"></p>
+<p>上位机发送的指令会首先传递给下位机，下位机收到后将其解析为相应的时序信号，从而直接驱动具体的设备运行。下位机会不断采集设备的状态数据（通常为模拟量），并将这些数据转换为数字信号，上报给上位机进行监控与处理 。</p>
+<p>上下位机均需进行编程开发，且各自拥有针对性的开发环境与工具，下位机常见于 PLC、单片机或智能模块等，而上位机通常为基于 PC 的监控管理系统 。</p>
+<p>在系统架构层面，上位机相当于“控制者”和“服务提供者”，负责发出控制指令并处理反馈；下位机则扮演“被控制者”和“服务执行者”，直接与现场设备交互，实现具体控制逻辑。两者之间的通信方式多样，通常由下位机来决定其所支持的专有协议，以保证数据传输的可靠性与实时性，例如常见的 RS232、RS485、MODBUS、PROFIBUS 等 。</p>
+<p>下位机在出厂时一般会附带详细的通信手册，其中定义了该设备专用的协议格式与帧结构，开发人员在进行上位机编程时只需调用相应的 API 或驱动库即可快速实现通信对接。因此，主机与从机的关系不仅体现在控制与被控上，更体现在两者通信协议的配合与适配上，以确保工业现场系统的稳定运行与高效协同。</p>
+<h1 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h1><p>上位机开发通常使用 C/C++（Qt、MFC）、C#（.NET 平下的 WinForms/WPF）、VB。其中就目前的情况来看，Qt 和 WinForms 应该是目前应用相对比较广的。VB 和 MFC 比较老旧，做的界面也比较有年代感。其中，新版本的 Qt 还支持用 Python 来编写。而 WPF 算是后起之秀，也逐渐替代 WinForms，其制作的上位机界面较新式。其他，一些组态软件是专门做上位机软件的，像组态王、力控，相当于是二次开发，门槛较低一些，操作也比较简单，但是拓展性差。</p>
+<h1 id="系统实例分析"><a href="#系统实例分析" class="headerlink" title="系统实例分析"></a>系统实例分析</h1><h2 id="工业自动化控制系统"><a href="#工业自动化控制系统" class="headerlink" title="工业自动化控制系统"></a><strong>工业自动化控制系统</strong></h2><p>在工厂的自动化生产线上，上位机通常是工控机（Industrial PC）或 PLC（可编程逻辑控制器），负责监控和协调整个生产过程。下位机则是各种执行机构，如机械臂、传感器、电机驱动器等。</p>
+<ul>
+<li><strong>例子：</strong> 假设一条饮料灌装生产线。上位机通过人机界面接收生产指令（例如，灌装多少瓶、什么类型的饮料等）。然后，上位机向下位机的各个模块发送指令：<ul>
+<li>发送指令给<strong>传送带控制下位机</strong>，启动传送带。</li>
+<li>发送指令给<strong>灌装机下位机</strong>，控制饮料的精确灌装。</li>
+<li>发送指令给<strong>封盖机下位机</strong>，完成瓶盖的封装。</li>
+<li>发送指令给<strong>贴标机下位机</strong>，进行标签的粘贴。</li>
+<li>各个下位机在完成任务后，将状态信息（例如，是否完成、是否有异常等）反馈给上位机。</li>
+</ul>
+</li>
+</ul>
+<h2 id="智能家居系统"><a href="#智能家居系统" class="headerlink" title="智能家居系统"></a><strong>智能家居系统</strong></h2><p>在智能家居系统中，上位机通常是中央控制主机、智能手机 App 或语音助手，负责接收用户的指令和管理各个智能设备。下位机则是各种智能家居设备，如智能灯泡、智能插座、智能门锁、环境传感器等。</p>
+<ul>
+<li><strong>例子：</strong> 用户通过手机 App（上位机）发送指令打开客厅的灯。<ul>
+<li>手机 App 将“打开客厅灯”的指令发送给<strong>中央控制主机（上位机）</strong>。</li>
+<li>中央控制主机通过无线协议（例如，Zigbee、Wi-Fi）将指令发送给<strong>客厅的智能灯泡（下位机）</strong>。</li>
+<li>智能灯泡接收到指令后，执行亮灯操作，并可能将状态信息（例如，当前亮度、颜色等）反馈给中央控制主机，最终显示在手机 App 上。</li>
+</ul>
+</li>
+</ul>
+<h2 id="机器人控制系统"><a href="#机器人控制系统" class="headerlink" title="机器人控制系统"></a><strong>机器人控制系统</strong></h2><p>在机器人控制系统中，上位机通常是负责路径规划、任务决策的高性能处理器或工作站。下位机则是机器人的各个关节驱动器、传感器、末端执行器等。</p>
+<ul>
+<li><strong>例子：</strong> 一个巡逻机器人需要按照预设的路线进行巡逻，并在发现异常情况时进行上报。<ul>
+<li>上位机（例如，嵌入式主板或工控机）负责存储巡逻路线、分析传感器数据以识别异常、并进行通信。</li>
+<li>下位机（例如，电机驱动器、摄像头、红外传感器等）负责执行电机的运动指令、采集图像和环境数据。</li>
+<li>上位机根据预设路线，向下位机的电机驱动器发送运动指令。同时，上位机接收来自摄像头和红外传感器的数据，进行分析。如果发现异常情况（例如，检测到移动物体），上位机会将警报信息发送给远程监控系统（可以看作更高级别的上位机）。</li>
+</ul>
+</li>
+</ul>
+<h2 id="医疗设备"><a href="#医疗设备" class="headerlink" title="医疗设备"></a><strong>医疗设备</strong></h2><p>在一些复杂的医疗设备中，也采用上下位机结构。例如，医学影像设备或监护系统。</p>
+<ul>
+<li><strong>例子：</strong> 一台 CT 扫描仪。<ul>
+<li>上位机（操作控制台的计算机）负责接收医生的扫描参数设置、控制扫描过程、进行图像重建和显示。</li>
+<li>下位机（扫描床控制器、X 射线发生器控制器、数据采集系统等）负责按照上位机的指令精确地移动病人、发射 X 射线、采集数据。</li>
+</ul>
+</li>
+</ul>
+<h1 id="上下位机系统的优缺点"><a href="#上下位机系统的优缺点" class="headerlink" title="上下位机系统的优缺点"></a>上下位机系统的优缺点</h1><p><strong>优点：</strong></p>
+<ul>
+<li><strong>结构清晰，易于理解：</strong> 分层结构使得系统逻辑清晰，方便开发和维护。</li>
+<li><strong>资源优化利用：</strong> 上位机负责复杂的计算和管理，下位机专注于特定任务，可以根据需求选择合适的硬件资源。</li>
+<li><strong>可靠性高：</strong> 下位机通常功能单一，故障率相对较低。即使某个下位机出现故障，通常不会影响整个系统的运行。</li>
+<li><strong>良好的实时性：</strong> 下位机可以针对实时性要求较高的任务进行优化设计。</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li><strong>依赖性强：</strong> 下位机的运行完全依赖于上位机的指令，一旦上位机发生故障，整个系统可能会瘫痪。</li>
+<li><strong>通信负担：</strong> 上位机需要与多个下位机进行通信，当系统规模较大时，通信量可能会成为瓶颈。</li>
+<li><strong>实时性要求高的场景中，上位机的响应速度可能影响下位机的性能。</strong></li>
+</ul>
+<p>上下位机结构在工业自动化中仍占主导，但物联网技术的兴起可能部分取代传统 SCADA 系统。例如，工业物联网（IIoT）通过更智能的连接生态提供更高的灵活性，但在实时性和可靠性方面，传统上下位机结构仍具优势。争议在于，是否应完全转向物联网架构，还是继续优化现有结构以适应新需求。</p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><ul>
+<li>上位机是指可以直接发出操控命令的计算机</li>
+<li>下位机是直接控制设备获取设备状况的计算机</li>
+<li>工控机，工作站，触摸屏作为上位机， 通信控制 PLC，单片机等作为下位机</li>
+</ul>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2025/04/28/2025-04-28-%E5%A0%86%E3%80%81%E6%A0%88%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E5%88%86%E6%9E%90/">2025-04-28-堆、栈及其应用分析</a></li>
+                
+                
+                    <li>下一篇: <a href="/2025/04/22/2025-04-22-X86%20%E6%9E%B6%E6%9E%84%E4%B8%8E%20Arm%20%E6%9E%B6%E6%9E%84%E5%BC%82%E5%90%8C%E5%8F%8A%E5%BA%94%E7%94%A8/">2025-04-22-X86 架构与 Arm 架构异同及应用</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" rel="tag">课程学习</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2025/07/29/2025-07-29-%E4%B9%9D%E6%A0%BC%E9%80%9A%E7%94%A8%E5%9F%BA%E7%A1%80%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">2025-07-29-九格通用基础大模型环境配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/07/03/2025-07-03-%E6%8B%AF%E6%95%91%E6%88%91%E7%9A%84%E2%80%9C%E9%AB%98%E7%83%A7%E2%80%9D%E6%88%98%E5%8F%8B%E2%80%94%E2%80%94Y7000P%202024%E7%89%88%E6%B8%85%E7%81%B0%E6%8D%A2%E7%A1%85%E8%84%82%E8%AE%B0%E5%BD%95/">2025-07-03-拯救我的“高烧”战友——Y7000P 2024 版清灰换硅脂记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/08/2025-06-08-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%95%E5%B1%82%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-08-大模型底层技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/05/2025-06-05-%E6%99%BA%E8%83%BD%E4%BD%93%E5%B9%B3%E5%8F%B0%E5%8F%8A%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-05-智能体平台及关键技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/04/2025-06-04-%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%B9%B3%E5%8F%B0%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D/">2025-06-04-低代码平台及相关技术介绍应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/03/2025-06-03-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/">2025-06-03-微信小程序开发框架详解</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2025 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2025-04-10 汇编实验1：利用DEBUG熟悉常用指令的使用 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-04-10 汇编实验1：利用DEBUG熟悉常用指令的使用"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-04-10 汇编实验1：利用DEBUG熟悉常用指令的使用</h2>
+            <div class="post-meta">
+                <time class="date">2025.04.10</time>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="2025-04-10-汇编实验1：利用DEBUG熟悉常用指令的使用"><a href="#2025-04-10-汇编实验1：利用DEBUG熟悉常用指令的使用" class="headerlink" title="2025-04-10 汇编实验1：利用DEBUG熟悉常用指令的使用"></a>2025-04-10 汇编实验1：利用DEBUG熟悉常用指令的使用</h1><h2 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h2><p>熟悉DEBUG中的常用调试命令（如R、D、E、T、A、G、P等），通过实验加深对各种寻址方式的理解；能够熟练使用DEBUG中的命令对指令进行反汇编，观察并了解机器代码。</p>
+<h2 id="实验题"><a href="#实验题" class="headerlink" title="实验题"></a>实验题</h2><h3 id="任务一：设置寄存器和存储单元"><a href="#任务一：设置寄存器和存储单元" class="headerlink" title="任务一：设置寄存器和存储单元"></a>任务一：设置寄存器和存储单元</h3><p>通过DEBUG命令对寄存器和存储单元进行设置，使其满足以下条件：</p>
+<table>
+<thead>
+<tr>
+<th>寄存器/存储地址</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>(DS)</td>
+<td>2000H</td>
+</tr>
+<tr>
+<td>(BX)</td>
+<td>0100H</td>
+</tr>
+<tr>
+<td>(SI)</td>
+<td>0002H</td>
+</tr>
+<tr>
+<td>(BP)</td>
+<td>0200H</td>
+</tr>
+<tr>
+<td>(SS)</td>
+<td>2300H</td>
+</tr>
+<tr>
+<td>(20100)</td>
+<td>12H</td>
+</tr>
+<tr>
+<td>(20101)</td>
+<td>34H</td>
+</tr>
+<tr>
+<td>(20102)</td>
+<td>56H</td>
+</tr>
+<tr>
+<td>(20103)</td>
+<td>78H</td>
+</tr>
+<tr>
+<td>(21200)</td>
+<td>2AH</td>
+</tr>
+<tr>
+<td>(21201)</td>
+<td>4CH</td>
+</tr>
+<tr>
+<td>(21202)</td>
+<td>B7H</td>
+</tr>
+<tr>
+<td>(21203)</td>
+<td>65H</td>
+</tr>
+<tr>
+<td>(23204)</td>
+<td>88H</td>
+</tr>
+<tr>
+<td>(23205)</td>
+<td>99H</td>
+</tr>
+</tbody></table>
+<h3 id="任务二：执行指令并观察结果"><a href="#任务二：执行指令并观察结果" class="headerlink" title="任务二：执行指令并观察结果"></a>任务二：执行指令并观察结果</h3><p>分别输入下列指令，并单步执行(T)，观察执行结果并截图。说明每条指令执行完成后AX寄存器的内容。</p>
+<h4 id="1-MOV-AX-1200H"><a href="#1-MOV-AX-1200H" class="headerlink" title="(1) MOV AX, 1200H"></a>(1) MOV AX, 1200H</h4><p><strong>源操作数为立即寻址方式</strong></p>
+<ul>
+<li>(AX) = 1200H</li>
+</ul>
+<p><strong>t = 0</strong></p>
+<ul>
+<li>AX = 1200H</li>
+<li>BX = 0100H</li>
+<li>CX = 0009H</li>
+<li>DX = 0000H</li>
+<li>SP = 0000H</li>
+<li>BP = 0200H</li>
+<li>SI = 0002H</li>
+<li>DI = 0000H</li>
+<li>DS = 2000H</li>
+<li>ES = 0760H</li>
+<li>SS = 2300H</li>
+<li>CS = 0770H</li>
+<li>IP = 0003H</li>
+<li>标志位：NU UP EI PL NZ NA PO NC</li>
+</ul>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17444568124471744456812290.png" alt="17444568124471744456812290.png"></p>
+<h4 id="2-MOV-AX-BX"><a href="#2-MOV-AX-BX" class="headerlink" title="(2) MOV AX, BX"></a>(2) MOV AX, BX</h4><p><strong>源操作数为寄存器寻址方式</strong></p>
+<ul>
+<li>(BX) = 0100H</li>
+</ul>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17444568464441744456846383.png" alt="17444568464441744456846383.png"><br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17444568554431744456855020.png" alt="17444568554431744456855020.png"></p>
+<h4 id="3-MOV-AX-1200H"><a href="#3-MOV-AX-1200H" class="headerlink" title="(3) MOV AX, [1200H]"></a>(3) MOV AX, [1200H]</h4><p><strong>源操作数为直接寻址方式</strong></p>
+<ul>
+<li>([1200H]) = (21200H) = 4C2AH</li>
+</ul>
+<h4 id="4-MOV-AX-BX"><a href="#4-MOV-AX-BX" class="headerlink" title="(4) MOV AX, [BX]"></a>(4) MOV AX, [BX]</h4><p><strong>源操作数为寄存器间接寻址方式</strong></p>
+<ul>
+<li>([BX]) = (20100H) = 1234H</li>
+</ul>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17444568624421744456862198.png" alt="17444568624421744456862198.png"><br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17444568884441744456887465.png" alt="17444568884441744456887465.png"></p>
+<h4 id="5-MOV-AX-1100-BX"><a href="#5-MOV-AX-1100-BX" class="headerlink" title="(5) MOV AX, 1100[BX]"></a>(5) MOV AX, 1100[BX]</h4><p><strong>源操作数为基址变址加偏移地址寻址方式</strong></p>
+<ul>
+<li>(1100[BX]) = (21202H) = 65B7H</li>
+</ul>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17444569014431744456901288.png" alt="17444569014431744456901288.png"></p>
+<h4 id="6-MOV-AX-BX-SI"><a href="#6-MOV-AX-BX-SI" class="headerlink" title="(6) MOV AX, [BX][SI]"></a>(6) MOV AX, [BX][SI]</h4><p><strong>源操作数为基址变址加偏移地址寻址方式</strong></p>
+<ul>
+<li>([BX][SI]) = (20102H) = 56H78H</li>
+</ul>
+<p>AX = 7856H<br>BX = 0100H<br>CX = 0009H<br>DX = 0000H<br>SP = 0000H<br>BP = 0200H<br>SI = 0002H<br>DI = 0000H<br>DS = 2000H<br>ES = 0760H<br>SS = 2300H<br>CS = 0770H<br>IP = 0010H<br>标志位：NU UP EI PL NZ NA PO NC</p>
+<h4 id="7-MOV-AX-1100-BX-SI"><a href="#7-MOV-AX-1100-BX-SI" class="headerlink" title="(7) MOV AX, 1100[BX][SI]"></a>(7) MOV AX, 1100[BX][SI]</h4><p><strong>源操作数为基址变址加偏移地址寻址方式</strong></p>
+<ul>
+<li>(1100[BX][SI]) = (21202H) = 65B7H</li>
+</ul>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17444569444441744456943836.png" alt="17444569444441744456943836.png"><br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17444569624431744456961758.png" alt="17444569624431744456961758.png"></p>
+<h4 id="8-MOV-AX-BP-SI-04"><a href="#8-MOV-AX-BP-SI-04" class="headerlink" title="(8) MOV AX, [BP+SI+04]"></a>(8) MOV AX, [BP+SI+04]</h4><p><strong>源操作数为基址变址加偏移地址寻址方式</strong></p>
+<ul>
+<li>([BP+SI+04]) = (20104H) = 0000H</li>
+</ul>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17444569764471744456975814.png" alt="17444569764471744456975814.png"></p>
+<h2 id="实验报告"><a href="#实验报告" class="headerlink" title="实验报告"></a>实验报告</h2><h3 id="总结操作步骤及各种寻址方式，记录调试结果。"><a href="#总结操作步骤及各种寻址方式，记录调试结果。" class="headerlink" title="总结操作步骤及各种寻址方式，记录调试结果。"></a>总结操作步骤及各种寻址方式，记录调试结果。</h3><h3 id="任务一运行结果"><a href="#任务一运行结果" class="headerlink" title="任务一运行结果"></a>任务一运行结果</h3><p>使用<code>r+</code>命令给寄存器赋值：</p>
+<ul>
+<li><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17444569874441744456987333.png" alt="17444569874441744456987333.png"></li>
+</ul>
+<p>使用<code>f</code>命令给20100到20103赋值：</p>
+<ul>
+<li><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17444570054451744457004736.png" alt="17444570054451744457004736.png"></li>
+</ul>
+<p>使用<code>f</code>命令给21200到21203赋值：</p>
+<ul>
+<li><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17444570193821744457017476.png" alt="17444570193821744457017476.png"></li>
+</ul>
+<p>使用<code>f</code>命令给23204到23205赋值：</p>
+<ul>
+<li>![未提供具体图片链接，请自行补充]</li>
+</ul>
+<h3 id="任务二"><a href="#任务二" class="headerlink" title="任务二"></a>任务二</h3><p>使用<code>a</code>命令给代码段添加汇编代码，并使用<code>u</code>命令反汇编代码以检查其正确性。</p>
+<ul>
+<li><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17444570314451744457031389.png" alt="17444570314451744457031389.png"></li>
+</ul>
+<p>使用<code>t</code>命令单步运行指令：</p>
+<ul>
+<li><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17444570454481744457044523.png" alt="17444570454481744457044523.png"></li>
+</ul>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2025/04/15/2025-04-15-%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%80%9D%E6%83%B3%E5%9C%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/">2025-04-15-二进制思想在计算机科学中的应用</a></li>
+                
+                
+                    <li>下一篇: <a href="/2025/04/02/2025-04-02-JAVA%E4%BD%9C%E4%B8%9A_%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F_week4/">2025-04-02-JAVA 作业_图书管理系统_week4</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" rel="tag">课程学习</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2025/07/29/2025-07-29-%E4%B9%9D%E6%A0%BC%E9%80%9A%E7%94%A8%E5%9F%BA%E7%A1%80%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">2025-07-29-九格通用基础大模型环境配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/07/03/2025-07-03-%E6%8B%AF%E6%95%91%E6%88%91%E7%9A%84%E2%80%9C%E9%AB%98%E7%83%A7%E2%80%9D%E6%88%98%E5%8F%8B%E2%80%94%E2%80%94Y7000P%202024%E7%89%88%E6%B8%85%E7%81%B0%E6%8D%A2%E7%A1%85%E8%84%82%E8%AE%B0%E5%BD%95/">2025-07-03-拯救我的“高烧”战友——Y7000P 2024 版清灰换硅脂记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/08/2025-06-08-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%95%E5%B1%82%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-08-大模型底层技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/05/2025-06-05-%E6%99%BA%E8%83%BD%E4%BD%93%E5%B9%B3%E5%8F%B0%E5%8F%8A%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-05-智能体平台及关键技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/04/2025-06-04-%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%B9%B3%E5%8F%B0%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D/">2025-06-04-低代码平台及相关技术介绍应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/03/2025-06-03-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/">2025-06-03-微信小程序开发框架详解</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2025 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>

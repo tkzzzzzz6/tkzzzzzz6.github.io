@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2025-03-17-构造函数与析构函数 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-03-17-构造函数与析构函数"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-03-17-构造函数与析构函数</h2>
+            <div class="post-meta">
+                <time class="date">2025.03.17</time>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <blockquote>这篇文章上次修改于 199 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+        
+            <blockquote>
+<p>参考博客</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/168787937">C++ 构造函数的三种写法</a></p>
+</blockquote>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/cplusplus/cpp-constructor-destructor.html">C++ 类构造函数 &amp; 析构函数 | 菜鸟教程</a></p>
+</blockquote>
+<p>在 CPP 中，类的构造函数是类的一种特殊的成员函数，它会在每次创建类的新对象时执行。</p>
+<p>构造函数的名称与类的名称是完全相同的，并且不会返回任何类型，也不会返回 void。构造函数可用于为某些成员变量设置初始值。</p>
+<h1 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h1><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17421968151641742196814832.png" alt="17421968151641742196814832.png"></p>
+<h1 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h1><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17421968291641742196828888.png" alt="17421968291641742196828888.png"></p>
+<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1><ul>
+<li>函数重载：C++ 允许构造函数重载，即一个类可以有多个构造函数，每个构造函数的参数列表不同。这允许对象以不同的方式被初始化。</li>
+<li>成员初始化列表：在构造函数中，可以使用成员初始化列表来初始化类的成员变量。这种方式比在构造函数体内赋值更高效，因为它直接在对象创建时初始化成员变量。</li>
+<li>默认构造函数：如果用户没有定义任何构造函数，编译器会自动生成一个默认构造函数，它不执行任何操作。如果需要，用户也可以显式定义一个默认构造函数。</li>
+<li>构造函数的调用：当创建对象时，构造函数会被自动调用。如果对象是通过直接调用 <code>new</code> 操作符创建的，那么在分配内存后，构造函数会被调用以初始化对象。</li>
+</ul>
+<h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ClassName</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-comment">// 默认构造函数</span><br>    <span class="hljs-built_in">ClassName</span>() {<br>        <span class="hljs-comment">// 初始化代码</span><br>    }<br><br>    <span class="hljs-comment">// 带参数的构造函数</span><br>    <span class="hljs-built_in">ClassName</span>(Type1 param1, Type2 param2) {<br>        <span class="hljs-comment">// 初始化代码，使用参数</span><br>    }<br><br>    <span class="hljs-comment">// 成员初始化列表</span><br>    <span class="hljs-built_in">ClassName</span>(Type1 param1, Type2 param2) : <span class="hljs-built_in">member1</span>(param1), <span class="hljs-built_in">member2</span>(param2) {<br>        <span class="hljs-comment">// 其他初始化代码</span><br>    }<br>};<br></code></pre></td></tr></table></figure>
+
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>与类同名，没有返回类型。</li>
+<li>可以重载（Overload），以支持不同的初始化方式。</li>
+<li>默认情况下，编译器会生成默认构造函数，如果用户没有定义任何构造函数。</li>
+</ul>
+<h2 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h2><p>类的析构函数是类的一种特殊的成员函数，它会在每次删除所创建的对象时执行,用于清理对象在销毁前需要释放的资源。</p>
+<p>析构函数的名称与类的名称是完全相同的，只是在前面加了个波浪号（~）作为前缀，它不会返回任何值，也不能带有任何参数。析构函数有助于在跳出程序（比如关闭文件、释放内存等）前释放资源。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ClassName</span> {<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-comment">// 析构函数</span><br>    ~<span class="hljs-built_in">ClassName</span>() {<br>        <span class="hljs-comment">// 清理代码</span><br>    }<br>};<br></code></pre></td></tr></table></figure>
+
+<h3 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>与类同名，前面加波浪号（~），没有参数，没有返回类型。</li>
+</ul>
+<blockquote>
+<p>析构函数不能有参数,因为如果析构函数可以有参数，那么在对象销毁时，就必须提供这些参数，这在逻辑上是不合理的，因为对象正在被销毁，无法再提供额外的信息。</p>
+</blockquote>
+<ul>
+<li>不能重载。</li>
+<li>默认情况下，编译器会生成默认析构函数，如果用户没有定义任何析构函数。</li>
+</ul>
+<h2 id="成员初始化列表"><a href="#成员初始化列表" class="headerlink" title="成员初始化列表"></a>成员初始化列表</h2><p>成员初始化列表是一种在构造函数体内初始化类成员变量的方式。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp">Line::<span class="hljs-built_in">Line</span>( <span class="hljs-type">double</span> len): <span class="hljs-built_in">length</span>(len)<br>{<br>    cout &lt;&lt; <span class="hljs-string">"Object is being created, length = "</span> &lt;&lt; len &lt;&lt; endl;<br>}<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp">Line::<span class="hljs-built_in">Line</span>( <span class="hljs-type">double</span> len)<br>{<br>    length = len;<br>    cout &lt;&lt; <span class="hljs-string">"Object is being created, length = "</span> &lt;&lt; len &lt;&lt; endl;<br>}<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp">C::<span class="hljs-built_in">C</span>( <span class="hljs-type">double</span> a, <span class="hljs-type">double</span> b, <span class="hljs-type">double</span> c): <span class="hljs-built_in">X</span>(a), <span class="hljs-built_in">Y</span>(b), <span class="hljs-built_in">Z</span>(c)<br>{<br>  ....<br>}<br></code></pre></td></tr></table></figure>
+
+<h3 id="特点-2"><a href="#特点-2" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>更高效的初始化方式，特别是在初始化常量成员或引用成员时。</li>
+<li>直接在构造函数调用前初始化成员变量。</li>
+</ul>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyComputer</span><br>{<br><span class="hljs-keyword">public</span>:<br>    ~<span class="hljs-built_in">MyComputer</span>();_                                  <span class="hljs-comment">// 这是析构函数声明_</span><br>    <span class="hljs-built_in">MyComputer</span>(string cpu, string gpu, <span class="hljs-type">int</span> memory);_ <span class="hljs-comment">// 这是构造函数声明_</span><br>    <span class="hljs-function">string <span class="hljs-title">get_cpu</span><span class="hljs-params">()</span></span>;_                               <span class="hljs-comment">// 获取CPU信息_</span><br>    <span class="hljs-function">string <span class="hljs-title">get_gpu</span><span class="hljs-params">()</span></span>;_                               <span class="hljs-comment">// 获取GPU信息_</span><br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">get_memory</span><span class="hljs-params">()</span></span>;_                               <span class="hljs-comment">// 获取内存信息_</span><br><br><span class="hljs-keyword">private</span>:<br>    string cpu;<br>    string gpu;<br>    <span class="hljs-type">int</span> memory;<br>};<br><br>_<span class="hljs-comment">// 成员函数定义，包括构造函数_</span><br>MyComputer::<span class="hljs-built_in">MyComputer</span>(string cpu, string gpu, <span class="hljs-type">int</span> memory) : <span class="hljs-built_in">cpu</span>(cpu), <span class="hljs-built_in">gpu</span>(gpu), <span class="hljs-built_in">memory</span>(memory)<br>{<br>    cout &lt;&lt; <span class="hljs-string">"Computer is being created"</span> &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">"CPU: "</span> &lt;&lt; cpu &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">"GPU: "</span> &lt;&lt; gpu &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">"Memory: "</span> &lt;&lt; memory &lt;&lt; <span class="hljs-string">"GB"</span> &lt;&lt; endl;<br>}<br><br>MyComputer::~<span class="hljs-built_in">MyComputer</span>()<br>{<br>    cout &lt;&lt; <span class="hljs-string">"Computer is being destroyed"</span> &lt;&lt; endl;<br>}<br><br><span class="hljs-function">string <span class="hljs-title">MyComputer::get_cpu</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-keyword">return</span> cpu;<br>}<br><br><span class="hljs-function">string <span class="hljs-title">MyComputer::get_gpu</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-keyword">return</span> gpu;<br>}<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">MyComputer::get_memory</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-keyword">return</span> memory;<br>}<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-function">MyComputer <span class="hljs-title">computer</span><span class="hljs-params">(<span class="hljs-string">"Intel 13600kf"</span>, <span class="hljs-string">"NVIDIA RTX 4060Ti"</span>, <span class="hljs-number">16</span>)</span></span>;<br>    cout &lt;&lt; <span class="hljs-string">"CPU: "</span> &lt;&lt; computer.<span class="hljs-built_in">get_cpu</span>() &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">"GPU: "</span> &lt;&lt; computer.<span class="hljs-built_in">get_gpu</span>() &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">"Memory: "</span> &lt;&lt; computer.<span class="hljs-built_in">get_memory</span>() &lt;&lt; <span class="hljs-string">"GB"</span> &lt;&lt; endl;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></table></figure>
+
+<ol>
+<li><p>定义一个类 <code>MyComputer</code>：</p>
+<ul>
+<li>用于模拟计算机的属性，包括 CPU、GPU 和内存。</li>
+<li>包含构造函数和析构函数，分别在对象创建和销毁时执行。</li>
+</ul>
+</li>
+<li><p>构造函数：</p>
+<ul>
+<li>初始化计算机的属性（CPU、GPU 和内存）。</li>
+<li>输出创建计算机时的属性信息。</li>
+</ul>
+</li>
+<li><p>析构函数：</p>
+<ul>
+<li>在对象销毁时输出提示信息，表示计算机被销毁。</li>
+</ul>
+</li>
+<li><p>成员函数：</p>
+<ul>
+<li>提供 <code>get_cpu()</code>、<code>get_gpu()</code> 和 <code>get_memory()</code> 函数，用于获取计算机的属性值。</li>
+</ul>
+</li>
+<li><p>主函数 <code>main()</code>：</p>
+<ul>
+<li>创建一个 <code>MyComputer</code> 对象，传入 CPU、GPU 和内存参数。</li>
+<li>调用成员函数获取并输出计算机的属性。</li>
+<li>程序结束时，对象自动销毁，触发析构函数。</li>
+</ul>
+</li>
+</ol>
+<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>说白了,构造函数就是对象在创建时执行的函数,析构函数就是在对应删除时执行的函数</p>
+<p>对于使用 new 和 delete 关键字构建的动态对应,在执行对应的代码的时候会自动调用对应的构造和析构函数</p>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2025/03/18/2025-03-18-VitPose%E5%9F%BA%E4%BA%8Evit%E7%9A%84%E5%A7%BF%E6%80%81%E8%AF%84%E4%BC%B0%E6%A8%A1%E5%9E%8B/">2025-03-18-VitPose 基于 vit 的姿态评估模型</a></li>
+                
+                
+                    <li>下一篇: <a href="/2025/03/16/2025-03-16-%E6%B0%B4%E2%80%9C%E9%95%9C%E2%80%9D%E5%AE%89%E6%BE%9C%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8EYOLO11%E7%9A%84%E6%99%BA%E8%83%BD%E6%BA%BA%E6%B0%B4%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%20V1.0%20%E8%AE%BE%E8%AE%A1%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/">2025-03-16-水“镜”安澜——基于YOLO11的智能溺水检测系统软件 V1.0 设计说明文档</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" rel="tag">程序开发</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2025/07/29/2025-07-29-%E4%B9%9D%E6%A0%BC%E9%80%9A%E7%94%A8%E5%9F%BA%E7%A1%80%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">2025-07-29-九格通用基础大模型环境配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/07/03/2025-07-03-%E6%8B%AF%E6%95%91%E6%88%91%E7%9A%84%E2%80%9C%E9%AB%98%E7%83%A7%E2%80%9D%E6%88%98%E5%8F%8B%E2%80%94%E2%80%94Y7000P%202024%E7%89%88%E6%B8%85%E7%81%B0%E6%8D%A2%E7%A1%85%E8%84%82%E8%AE%B0%E5%BD%95/">2025-07-03-拯救我的“高烧”战友——Y7000P 2024 版清灰换硅脂记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/08/2025-06-08-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%95%E5%B1%82%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-08-大模型底层技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/05/2025-06-05-%E6%99%BA%E8%83%BD%E4%BD%93%E5%B9%B3%E5%8F%B0%E5%8F%8A%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-05-智能体平台及关键技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/04/2025-06-04-%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%B9%B3%E5%8F%B0%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D/">2025-06-04-低代码平台及相关技术介绍应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/03/2025-06-03-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/">2025-06-03-微信小程序开发框架详解</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2025 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2025-05-12-虚函数 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-05-12-虚函数"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-05-12-虚函数</h2>
+            <div class="post-meta">
+                <time class="date">2025.05.12</time>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <p>2025-05-12-虚函数</p>
+<blockquote>
+<h1 id="参考资源"><a href="#参考资源" class="headerlink" title="参考资源"></a>参考资源</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/629281871">对 C++ 虚函数不了解？看完这篇文章掌握虚函数的原理和作用</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1QV4y1U73z/">4-虚函数_哔哩哔哩_bilibili</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/cpp-virtual-functions.html">C++ 虚函数和纯虚函数的区别</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/i_chaoren/article/details/77281785">C++ 多态–虚函数 virtual 及 override_虚函数 override-CSDN 博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/54145222">C++ 虚函数</a></p>
+</blockquote>
+<p>虚函数是在父类中定义的一种特殊类型的函数，允许子类重写该函数以适应其自身需求。虚函数的调用取决于对象的实际类型，而不是指针或引用类型。通过将函数声明为虚函数，可以使继承层次结构中的每个子类都能够使用其自己的实现，从而提高代码的可扩展性和灵活性。在 C++ 中，使用关键字”virtual”来定义虚函数。</p>
+<ul>
+<li>虚函数不代表函数为不被实现的函数。</li>
+<li>为了允许用基类的指针来调用子类的这个函数。</li>
+<li>定义一个函数为纯虚函数，才代表函数没有被实现。</li>
+<li>纯虚函数是为了实现一个接口，起到一个规范的作用，规范继承这个类的程序员必须实现这个函数。</li>
+</ul>
+<p>虚函数虚在所谓”推迟联编”或者”动态联编”上，一个类函数的调用并不是在编译时刻被确定的，而是在运行时刻被确定的。由于编写代码的时候并不能确定被调用的是基类的函数还是哪个派生类的函数，所以被成为”虚”函数。</p>
+<h1 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h1><p>虚函数可以让子类对象在运行时动态地继承和修改父类的成员函数，使得代码更加灵活、可重用，并且可以实现多态性和<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=227971983&content_type=Article&match_order=1&q=%E6%8A%BD%E8%B1%A1%E7%B1%BB&zhida_source=entity">抽象类</a>等高级特性。</p>
+<ol>
+<li>通过虚函数，可以实现多态性（Polymorphism），即同一个函数名可以在不同的子类中表现出不同的行为，这样可以提高代码的可重用性和灵活性。</li>
+<li>避免静态绑定，在使用父类指针或引用调用子类对象的成员函数时，如果没有使用虚函数，则会进行静态绑定（Static Binding），即只能调用父类的成员函数，无法调用子类特有的成员函数。</li>
+<li>虚函数的调用是<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=227971983&content_type=Article&match_order=1&q=%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A&zhida_source=entity">动态绑定</a>（Dynamic Binding）的，即在运行时根据指针或引用所指向的对象类型来选择调用哪个函数，从而实现动态多态性。</li>
+<li>抽象类是一种不能直接实例化的类，只能被其他类继承并实现其虚函数。通过定义<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=227971983&content_type=Article&match_order=1&q=%E7%BA%AF%E8%99%9A%E5%87%BD%E6%95%B0&zhida_source=entity">纯虚函数</a>（Pure Virtual Function），可以使得一个类成为抽象类，强制其子类必须实现该函数。</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 形状基类，定义了计算面积和周长的虚函数</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Shape</span> {<br><span class="hljs-keyword">public</span>:<br>   <span class="hljs-comment">// 计算面积的虚函数，提供默认实</span><br>   <span class="hljs-comment">// 使用virtual关键字，允许派生类重写</span><br>   <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">double</span> <span class="hljs-title">calculateArea</span><span class="hljs-params">()</span> </span>{<br>       <span class="hljs-keyword">return</span> <span class="hljs-number">0.0</span>; <span class="hljs-comment">// 基类提供默认实现</span><br>   }<br><br>   <span class="hljs-comment">// 计算周长的虚函数，提供默认实现</span><br>   <span class="hljs-comment">// 使用virtual关键字，允许派生类重写</span><br>   <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">double</span> <span class="hljs-title">calculatePerimeter</span><span class="hljs-params">()</span> </span>{<br>       <span class="hljs-keyword">return</span> <span class="hljs-number">0.0</span>; <span class="hljs-comment">// 基类提供默认实现</span><br>   }<br><br>   <span class="hljs-comment">// 虚析构函数，确保派生类对象正确释放</span><br>   <span class="hljs-keyword">virtual</span> ~<span class="hljs-built_in">Shape</span>() {} <span class="hljs-comment">// 虚析构函数</span><br>};<br><br><span class="hljs-comment">// 矩形类，继承自Shape基类</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Rectangle</span> : <span class="hljs-keyword">public</span> Shape {<br><span class="hljs-keyword">private</span>:<br>   <span class="hljs-comment">// 矩形的私有成员：宽和高</span><br>   <span class="hljs-type">double</span> width;<br>   <span class="hljs-type">double</span> height;<br><br><span class="hljs-keyword">public</span>:<br>   <span class="hljs-comment">// 构造函数，初始化矩形的宽和高</span><br>   <span class="hljs-built_in">Rectangle</span>(<span class="hljs-type">double</span> w, <span class="hljs-type">double</span> h) : <span class="hljs-built_in">width</span>(w), <span class="hljs-built_in">height</span>(h) {}<br><br>   <span class="hljs-comment">// 重写基类的calculateArea虚函数</span><br>   <span class="hljs-comment">// override关键字确保正确重写基类虚函数</span><br>   <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">calculateArea</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span> </span>{<br>       <span class="hljs-keyword">return</span> width * height; <span class="hljs-comment">// 矩形面积计算</span><br>   }<br><br>   <span class="hljs-comment">// 重写基类的calculatePerimeter虚函数</span><br>   <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">calculatePerimeter</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span> </span>{<br>       <span class="hljs-keyword">return</span> <span class="hljs-number">2</span> * (width + height); <span class="hljs-comment">// 矩形周长计算</span><br>   }<br>};<br><br><span class="hljs-comment">// 圆形类，继承自Shape基类</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Circle</span> : <span class="hljs-keyword">public</span> Shape {<br><span class="hljs-keyword">private</span>:<br>   <span class="hljs-comment">// 圆形的私有成员：半径</span><br>   <span class="hljs-type">double</span> radius;<br>   <span class="hljs-comment">// 圆周率常量</span><br>   <span class="hljs-type">const</span> <span class="hljs-type">double</span> PI = <span class="hljs-number">3.14159</span>;<br><br><span class="hljs-keyword">public</span>:<br>   <span class="hljs-comment">// 构造函数，初始化圆形的半径</span><br>   <span class="hljs-built_in">Circle</span>(<span class="hljs-type">double</span> r) : <span class="hljs-built_in">radius</span>(r) {}<br><br>   <span class="hljs-comment">// 重写基类的calculateArea虚函数</span><br>   <span class="hljs-comment">// override关键字确保正确重写基类虚函数</span><br>   <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">calculateArea</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span> </span>{<br>       <span class="hljs-keyword">return</span> PI * radius * radius; <span class="hljs-comment">// 圆形面积计算</span><br>   }<br><br>   <span class="hljs-comment">// 重写基类的calculatePerimeter虚函数</span><br>   <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">calculatePerimeter</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span> </span>{<br>       <span class="hljs-keyword">return</span> <span class="hljs-number">2</span> * PI * radius; <span class="hljs-comment">// 圆形周长计算</span><br>   }<br>};<br></code></pre></td></tr></table></figure>
+
+<h1 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h1><p><strong>虚函数只能借助于指针或者引用来达到多态的效果。</strong></p>
+<blockquote>
+<p><strong>多态</strong>的本质是“同一个函数调用，能够根据不同对象表现出不同的行为</p>
+</blockquote>
+<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1747056760477QGSmb9FB5obI4CxbD3RcFRIynCe.png" alt="1747056760477QGSmb9FB5obI4CxbD3RcFRIynCe.png"></p>
+<h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><h2 id="虚函数声明"><a href="#虚函数声明" class="headerlink" title="虚函数声明"></a>虚函数声明</h2><p>从简单的例子开始</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Animal</span><br>{<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">shout</span><span class="hljs-params">()</span></span><br><span class="hljs-function">    </span>{<br>        cout &lt;&lt; <span class="hljs-string">"动物叫了一声\n"</span>;<br>    }<br>};<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Cat</span> : <span class="hljs-keyword">public</span> Animal<br>{<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">shout</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span></span><br><span class="hljs-function">    </span>{<br>        cout &lt;&lt; <span class="hljs-string">"喵喵喵\n"</span>;<br>    }<br>};<br></code></pre></td></tr></table></figure>
+
+<p><strong>解释：</strong></p>
+<ul>
+<li>代码通过 <code>Animal</code> 基类定义了一个虚函数 <code>shout()</code>，为派生类提供了一个默认实现。</li>
+<li><code>Cat</code> 类继承自 <code>Animal</code>，使用 <code>override</code> 关键字重写了 <code>shout()</code> 方法，展示了虚函数允许派生类提供自己的特定实现。</li>
+<li>这个示例体现了 C++ 多态性的基本原理：基类定义一个通用接口，派生类可以根据自身特性灵活地实现具体行为。</li>
+</ul>
+<blockquote>
+<p>需要注意的是，在子类中重写虚函数时，其访问权限不能更严格（即不能由 public 变为 private 或 protected），否则编译器会报错。</p>
+</blockquote>
+<h2 id="纯虚函数与抽象类"><a href="#纯虚函数与抽象类" class="headerlink" title="纯虚函数与抽象类"></a>纯虚函数与抽象类</h2><h3 id="纯虚函数"><a href="#纯虚函数" class="headerlink" title="纯虚函数"></a>纯虚函数</h3><p>纯虚函数是指在基类中定义的没有实现的虚函数。使用纯虚函数可以使该函数只有函数原型，而没有具体的实现。注：这里的“=0”表示该函数为纯虚函数。</p>
+<p>纯虚函数的作用是让子类必须实现该函数，并且不能直接创建该类对象（即该类为抽象类）。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Shape</span> {<br><span class="hljs-keyword">public</span>:<br>   <span class="hljs-comment">// 纯虚函数，没有默认实现</span><br>   <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">double</span> <span class="hljs-title">calculateArea</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;<br>   <br>   <span class="hljs-comment">// 包含纯虚函数的类成为抽象类</span><br>   <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;<br>};<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Rectangle</span> : <span class="hljs-keyword">public</span> Shape {<br><span class="hljs-keyword">public</span>:<br>   <span class="hljs-comment">// 必须实现基类的纯虚函数</span><br>   <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">calculateArea</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span> </span>{<br>       <span class="hljs-keyword">return</span> width * height;<br>   }<br>   <br>   <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span> </span>{<br>       <span class="hljs-comment">// 绘制矩形的具体实现</span><br>   }<br><br><span class="hljs-keyword">private</span>:<br>   <span class="hljs-type">double</span> width;<br>   <span class="hljs-type">double</span> height;<br>};<br></code></pre></td></tr></table></figure>
+
+<p><strong>解释：</strong></p>
+<ul>
+<li>代码通过 <code>Shape</code> 基类定义了两个纯虚函数 <code>calculateArea()</code> 和 <code>draw()</code>，使 <code>Shape</code> 成为一个抽象类。</li>
+<li>纯虚函数（<code>= 0</code>）没有默认实现，强制派生类必须提供具体实现。</li>
+<li><code>Rectangle</code> 类继承自 <code>Shape</code>，必须实现所有纯虚函数，否则仍将是抽象类。</li>
+<li>这个示例展示了纯虚函数作为接口的设计模式，确保派生类提供必要的具体行为。</li>
+</ul>
+<h3 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h3><p>抽象类是包含纯虚函数的类，它们不能被实例化，只能被继承。抽象类只能用作其他类的基类。如果一个类继承了抽象类，则必须实现所有的纯虚函数，否则该类也会成为抽象类。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Shape</span><br>{<br><span class="hljs-keyword">public</span>:<br>_    <span class="hljs-comment">// 纯虚函数_</span><br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">double</span> <span class="hljs-title">getArea</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;<br>};<br><br>_<span class="hljs-comment">// 继承自抽象类Shape_</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Rectangle</span> : <span class="hljs-keyword">public</span> Shape<br>{<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-type">double</span> **width**;<br>    <span class="hljs-type">double</span> **height**;<br>    <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">getArea</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> **width** * **height**; }<br>};<br><br>_<span class="hljs-comment">// 继承自抽象类Shape_</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Circle</span> : <span class="hljs-keyword">public</span> Shape<br>{<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-type">double</span> **radius**;<br>    <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">getArea</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> <span class="hljs-number">3.14</span> * **radius** * **radius**; }<br>};<br></code></pre></td></tr></table></figure>
+
+<p>Shape 为抽象类，其中包含纯虚函数 getArea()，Rectangle 和 Circle 均继承自 Shape，并且实现了 getArea()函数的具体内容。</p>
+<h3 id="多重继承中的虚函数"><a href="#多重继承中的虚函数" class="headerlink" title="多重继承中的虚函数"></a>多重继承中的虚函数</h3><p>在多重继承中，如果一个类同时继承了多个基类，而这些基类中都有同名的虚函数，那么子类必须对这些虚函数进行重写并实现。此时，需要使用作用域限定符来指明重写的是哪个基类的虚函数。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Base1</span><br>{<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span> </span>{ cout &lt;&lt; <span class="hljs-string">"Base1::func()"</span> &lt;&lt; endl; }<br>};<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Base2</span><br>{<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span> </span>{ cout &lt;&lt; <span class="hljs-string">"Base2::func()"</span> &lt;&lt; endl; }<br>};<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Derived</span> : <span class="hljs-keyword">public</span> Base1, <span class="hljs-keyword">public</span> Base2<br>{<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span></span><br><span class="hljs-function">    </span>{<br>        Base1::<span class="hljs-built_in">func</span>();<br>        Base2::<span class="hljs-built_in">func</span>();<br>    }<br>};<br></code></pre></td></tr></table></figure>
+
+<p>派生类 Derived 同时继承了 Base1 和 Base2，这两个基类中都有名为 func 的虚函数。在 Derived 中，我们通过使用作用域限定符 Base1::和 Base2::，分别调用了两个基类中的虚函数。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3><ul>
+<li><p>优点：</p>
+<ul>
+<li>实现多态性：通过虚函数，可以在不知道对象具体类型的情况下，调用特定对象的方法。</li>
+<li>代码灵活性：虚函数允许子类覆盖父类的方法，并且不需要改变基类的代码。</li>
+<li>代码可维护性：虚函数使得代码易于维护和扩展，因为子类可以通过重载虚函数来实现自己的行为。</li>
+</ul>
+</li>
+<li><p>缺点：</p>
+<ul>
+<li>额外的开销：虚函数需要额外的开销来支持运行时的动态绑定和查找虚表。这可能会影响程序的性能。</li>
+<li>可能会引起混淆：由于虚函数的存在，同名的函数可能会被不同的类定义。如果没有正确的使用虚函数，可能会导致混淆和错误的结果。</li>
+<li>不适合于小型应用：虚函数对于小型应用来说可能过于复杂和冗余。在这种情况下，使用虚函数可能会导致更多的开销而不是提高效率。</li>
+</ul>
+</li>
+</ul>
+<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span><br><br><span class="hljs-comment">// 基类Entity，定义了一个虚函数GetName()</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Entity</span> {<br><span class="hljs-keyword">public</span>:<br>   <span class="hljs-comment">// 虚函数，返回一个默认的实体名称</span><br>   <span class="hljs-comment">// 使用virtual关键字，允许派生类重写</span><br>   <span class="hljs-function"><span class="hljs-keyword">virtual</span> std::string <span class="hljs-title">GetName</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> <span class="hljs-string">"Entity"</span>; }<br>};<br><br><span class="hljs-comment">// 派生类Player，继承自Entity</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Player</span> : <span class="hljs-keyword">public</span> Entity {<br><span class="hljs-keyword">private</span>:<br>   <span class="hljs-comment">// 私有成员，存储玩家名称</span><br>   std::string m_Name;<br><br><span class="hljs-keyword">public</span>:<br>   <span class="hljs-comment">// 构造函数，使用传入的名称初始化玩家</span><br>   <span class="hljs-built_in">Player</span>(<span class="hljs-type">const</span> std::string&amp; name) :<span class="hljs-built_in">m_Name</span>(name) {};<br><br>   <span class="hljs-comment">// 重写基类的GetName()虚函数</span><br>   <span class="hljs-comment">// override关键字确保正确重写基类虚函数</span><br>   <span class="hljs-function">std::string <span class="hljs-title">GetName</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span> </span>{ <span class="hljs-keyword">return</span> m_Name; };<br><br>   <span class="hljs-comment">// 设置玩家名称的成员函数</span><br>   <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">SetName</span><span class="hljs-params">(std::string name)</span> </span>{ m_Name = name; };<br>};<br><br><span class="hljs-comment">// 打印实体名称的函数</span><br><span class="hljs-comment">// 接受一个Entity指针作为参数，体现了多态性</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">PrintName</span><span class="hljs-params">(Entity* entity)</span> </span>{<br>   <span class="hljs-comment">// 调用虚函数GetName()，实际执行的是对象的具体实现</span><br>   std::cout &lt;&lt; entity-&gt;<span class="hljs-built_in">GetName</span>() &lt;&lt; std::endl;<br>};<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>   <span class="hljs-comment">// 创建一个基类Entity对象的指针</span><br>   Entity* e = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Entity</span>();<br>   <span class="hljs-comment">// 调用PrintName()，将打印"Entity"</span><br>   <span class="hljs-built_in">PrintName</span>(e);<br><br>   <span class="hljs-comment">// 创建一个Player对象，名称为"tanke"</span><br>   Player* p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Player</span>(<span class="hljs-string">"tanke"</span>);<br>   <span class="hljs-comment">// 调用PrintName()，将打印"tanke"</span><br>   <span class="hljs-built_in">PrintName</span>(p);<br><br>   <span class="hljs-comment">// 修改Player对象的名称为"wangjie"</span><br>   p-&gt;<span class="hljs-built_in">SetName</span>(<span class="hljs-string">"wangjie"</span>);<br><br>   <span class="hljs-comment">// 将Player指针赋值给基类指针，体现了多态性</span><br>   Entity* e1 = p;<br>   <span class="hljs-comment">// 调用PrintName()，将打印"wangjie"</span><br>   <span class="hljs-built_in">PrintName</span>(p);<br><br>   <span class="hljs-comment">// 等待用户输入，保持窗口打开</span><br>   std::cin.<span class="hljs-built_in">get</span>();<br><br>   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></table></figure>
+
+<p><strong>解释：</strong></p>
+<ul>
+<li>代码通过 <code>Entity</code> 基类定义了一个虚函数 <code>GetName()</code>，为派生类提供了一个默认实现。</li>
+<li><code>Player</code> 类继承自 <code>Entity</code>，并使用 <code>override</code> 关键字重写了 <code>GetName()</code> 方法。</li>
+<li><code>PrintName()</code> 函数接受一个 <code>Entity</code> 指针，展示了 C++ 多态性的关键特征 - 可以通过基类指针调用派生类的具体实现。</li>
+</ul>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1747056796676Ue1zbj8hco94t9xuRBRcd0jWnXg.png" alt="1747056796676Ue1zbj8hco94t9xuRBRcd0jWnXg.png"></p>
+<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><ol>
+<li>虚函数应用于继承层次结构中的多态性，即通过基类指针或引用调用派生类对象的成员函数。</li>
+<li>可以将虚函数作为接口定义，让不同的派生类实现自己的版本，以满足各自的需求。</li>
+<li>避免在构造函数和析构函数中调用虚函数，因为此时对象还未完全构造或已经被销毁。</li>
+<li>虚函数的声明应该在公共部分（例如基类），而不是在私有部分（例如派生类）中声明。</li>
+<li>将虚函数的实现定义为 inline 可以提高程序的执行效率。</li>
+<li>在使用纯虚函数时，需要给出其具体实现。可以在派生类中实现，也可以在基类中实现。</li>
+<li>避免过度使用虚函数，因为虚函数会增加程序的开销。在没有必要的情况下，可以使用普通成员函数代替虚函数。</li>
+</ol>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2025/05/17/2025-05-17-scBridge%20embraces%20cell%20heterogeneity%20in%20single-cell%20RNA-seq%20and%20ATAC-seq%20data%20integration/">2025-05-17-scBridge</a></li>
+                
+                
+                    <li>下一篇: <a href="/2025/05/11/2025-05-11-%E5%9F%9F%E9%80%82%E5%BA%94(Domain%20Adaptation)/">2025-05-11-域适应(Domain Adaptation)</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" rel="tag">程序开发</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2025/07/29/2025-07-29-%E4%B9%9D%E6%A0%BC%E9%80%9A%E7%94%A8%E5%9F%BA%E7%A1%80%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">2025-07-29-九格通用基础大模型环境配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/07/03/2025-07-03-%E6%8B%AF%E6%95%91%E6%88%91%E7%9A%84%E2%80%9C%E9%AB%98%E7%83%A7%E2%80%9D%E6%88%98%E5%8F%8B%E2%80%94%E2%80%94Y7000P%202024%E7%89%88%E6%B8%85%E7%81%B0%E6%8D%A2%E7%A1%85%E8%84%82%E8%AE%B0%E5%BD%95/">2025-07-03-拯救我的“高烧”战友——Y7000P 2024 版清灰换硅脂记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/08/2025-06-08-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%95%E5%B1%82%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-08-大模型底层技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/05/2025-06-05-%E6%99%BA%E8%83%BD%E4%BD%93%E5%B9%B3%E5%8F%B0%E5%8F%8A%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-05-智能体平台及关键技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/04/2025-06-04-%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%B9%B3%E5%8F%B0%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D/">2025-06-04-低代码平台及相关技术介绍应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/03/2025-06-03-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/">2025-06-03-微信小程序开发框架详解</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2025 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2025-06-03-微信小程序开发框架详解 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-06-03-微信小程序开发框架详解"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-06-03-微信小程序开发框架详解</h2>
+            <div class="post-meta">
+                <time class="date">2025.06.03</time>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="微信小程序开发框架详解"><a href="#微信小程序开发框架详解" class="headerlink" title="微信小程序开发框架详解"></a>微信小程序开发框架详解</h1><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhaomenghuan.js.org/blog/wechat-miniprogram-principle-analysis.html">微信小程序技术原理分析 | 匠心博客</a></li>
+<li><a target="_blank" rel="noopener" href="https://ianwith.github.io/2020/02/12/everything-you-would-like-to-know-about-wechat-mini-program/?utm_source=chatgpt.com">Everything You Would Like to Know About WeChat Mini Program</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/reference/">developers.weixin.qq.com</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/justjavac/awesome-wechat-weapp?tab=readme-ov-file">GitHub - justjavac/awesome-wechat-weapp: 微信小程序开发资源汇总 </a></li>
+</ul>
+</blockquote>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>互联网生态演进：超级 APP + 小程序成为「轻应用时代」下的新生态。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749364131854QUV7bVLfOoZdmix4JoJcT4utnCb.png" alt="1749364131854QUV7bVLfOoZdmix4JoJcT4utnCb.png"></p>
+<p>小程序方式构建应用是大趋势，被越来越多的企业用户看到其中的优势，构建一个跨多端平台的小程序开发平台是一种思路，帮助企业用户构建一个具备小程序能力的“移动门户”也是一种思路。本文主要调研微信小程序运行时的基本原理，从而构建一个适合我们自己平台的小程序运行框架。</p>
+<p>微信小程序开发可分为<strong>官方原生框架（MINA）与多种第三方跨端开发框架</strong>两大类。官方 MINA 框架提供了 WXML/WXSS/JS 三层模型，以及基于双线程的渲染与逻辑分离机制，适合对微信生态深度依赖的项目；第三方框架则通过封装、编译等手段让 Vue、React、Web 原生等技术栈在小程序中复用，覆盖从单一微信端到多端（小程序 +H5+App）的多种场景。<br>在众多跨端方案中，<strong>uni-app</strong> 与 <strong>Taro</strong> 拥有最活跃的社区和最完善的生态，分别代表 Vue 与 React 技术栈；<strong>Remax</strong> 针对纯 React 而生，适合对 React 语法和生态依赖度极高的团队；<strong>MPVue</strong>、<strong>WePY</strong> 等 Vue 方案已逐步被 uni-app 或 Taro 取代；<strong>Chameleon</strong>、<strong>kbone</strong> 则聚焦于将 Web 应用“原封不动”移植到小程序。下面将从架构原理、技术栈、优缺点、适用场景及选型建议等方面，逐一详解主流框架。</p>
+<hr>
+<h2 id="官方原生框架：MINA"><a href="#官方原生框架：MINA" class="headerlink" title="官方原生框架：MINA"></a>官方原生框架：MINA</h2><p>微信团队自 2016 年推出的 <strong>MINA</strong>（Mobile Instant Application）是小程序的底层运行时与原生开发框架，核心特点包括：</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749364140851U8zbbm8B1onhwfxWR7Rc1X2Anvq.png" alt="1749364140851U8zbbm8B1onhwfxWR7Rc1X2Anvq.png"></p>
+<ul>
+<li><strong>双线程模型</strong>：渲染与逻辑各自运行在 WebView 线程和 JsCore 线程，数据同步通过 IPC 方式完成，显著提升 UI 响应。</li>
+<li><strong>四文件结构</strong>：每个小程序由 <code>app.json</code>（全局配置）、<code>app.js</code>（应用逻辑）、<code>app.wxss</code>（全局样式）及若干对应 <code>*.wxml</code>/<code>*.js</code>/<code>*.wxss</code> 的页面文件组成。</li>
+<li><strong>原生 API 丰富</strong>：提供扫码、支付、位置、媒体、网络等数百种接口，适合深度依赖微信生态、追求性能和稳定性的项目。</li>
+<li><strong>数据绑定与事件</strong>：简化视图层与逻辑层交互，开发者可快速上手。</li>
+</ul>
+<p><strong>优点</strong>：官方支持、性能最优、API 齐全<br><strong>缺点</strong>：仅限微信端、不支持跨端复用</p>
+<hr>
+<h2 id="跨端开发框架对比"><a href="#跨端开发框架对比" class="headerlink" title="跨端开发框架对比"></a>跨端开发框架对比</h2><p>主流跨端框架可按技术栈分为 <strong>Vue 系</strong> 与 <strong>React 系</strong>，并包含 Web 应用迁移方案。</p>
+<table>
+<thead>
+<tr>
+<th><strong>框架</strong></th>
+<th><strong>技术栈</strong></th>
+<th><strong>多端支持</strong></th>
+<th><strong>社区活跃度</strong></th>
+<th><strong>状态</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>uni-app</strong></td>
+<td>Vue</td>
+<td>微信/支付宝/百度/字节/QQ/快应用/H5/APP</td>
+<td>⭐⭐⭐⭐ (36.5k Stars)</td>
+<td>维护中</td>
+</tr>
+<tr>
+<td><strong>Taro</strong></td>
+<td>React</td>
+<td>微信/支付宝/百度/字节/QQ/快应用/H5/RN</td>
+<td>⭐⭐⭐⭐ (31k Stars)</td>
+<td>维护中</td>
+</tr>
+<tr>
+<td><strong>Remax</strong></td>
+<td>React</td>
+<td>微信/支付宝/百度等小程序</td>
+<td>⭐⭐⭐ (4.3k Stars)</td>
+<td>维护中</td>
+</tr>
+<tr>
+<td><strong>MPVue</strong></td>
+<td>Vue</td>
+<td>微信/百度等小程序</td>
+<td>⭐⭐⭐ (20k Stars)</td>
+<td>停止维护</td>
+</tr>
+<tr>
+<td><strong>WePY</strong></td>
+<td>Vue</td>
+<td>微信小程序</td>
+<td>⭐ (少量维护)</td>
+<td>alpha, 更新缓慢</td>
+</tr>
+<tr>
+<td><strong>Chameleon</strong></td>
+<td>Vue/React/小程序原生</td>
+<td>微信/支付宝/百度/抖音/快应用</td>
+<td>⭐⭐</td>
+<td>维护中</td>
+</tr>
+<tr>
+<td><strong>kbone</strong></td>
+<td>Web</td>
+<td>将任意 Web 应用”原样”编译到微信小程序</td>
+<td>⭐⭐</td>
+<td>维护中</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>数据来源：CSDN、GitHub、社区活跃度对比</p>
+</blockquote>
+<h3 id="uni-app"><a href="#uni-app" class="headerlink" title="uni-app"></a>uni-app</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zh.uniapp.dcloud.io/resource.html">uni-app 官网</a></li>
+<li>HBuilderX：<a target="_blank" rel="noopener" href="https://www.dcloud.io/hbuilderx.html">官方 IDE 下载地址</a></li>
+</ul>
+</blockquote>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749364151852KAz5bUGAtoOAQ6xv5FscdRFTnph.png" alt="1749364151852KAz5bUGAtoOAQ6xv5FscdRFTnph.png"></p>
+<ul>
+<li><p><strong>核心</strong>：使用 Vue 语法、单文件组件（<code>.vue</code>），通过 HBuilderX 或 CLI 编译到多端。</p>
+</li>
+<li><p><strong>优势</strong>：</p>
+<ul>
+<li>真正“一套代码，多端运行” ；</li>
+<li>丰富插件与 UI 库（如 uView、Vant Weapp）；</li>
+<li>社区活跃，文档完善。</li>
+</ul>
+</li>
+<li><p><strong>劣势</strong>：运行时体积相对较大、对 Vue 特性支持需关注版本兼容。</p>
+</li>
+</ul>
+<h3 id="Taro"><a href="#Taro" class="headerlink" title="Taro"></a>Taro</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.taro.zone/docs/">Taro 介绍 | Taro 文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/NervJS/taro">github.com</a></li>
+<li><a target="_blank" rel="noopener" href="https://taro.zone/">Taro | 多端统一开发解决方案</a></li>
+</ul>
+</blockquote>
+<ul>
+<li><p><strong>核心</strong>：使用 React/JSX 语法，多端编译，支持 React Hooks、TypeScript。</p>
+</li>
+<li><p><strong>优势</strong>：</p>
+<ul>
+<li>React 团队更易上手，编译速度快 ；</li>
+<li>支持多端：小程序、H5、React Native。</li>
+</ul>
+</li>
+<li><p><strong>劣势</strong>：</p>
+<ul>
+<li>部分原生小程序能力需插件或手动配置；</li>
+<li>轻度偏离纯 React 生态，对兼容性需关注。</li>
+</ul>
+</li>
+</ul>
+<h3 id="Remax"><a href="#Remax" class="headerlink" title="Remax"></a>Remax</h3><ul>
+<li><p><strong>核心</strong>：由阿里团队开发，几乎不封装 React API，保持与 React Web 最大一致性 。</p>
+</li>
+<li><p><strong>优势</strong>：</p>
+<ul>
+<li>纯 React 生态，组件迁移成本最低；</li>
+<li>支持 TypeScript。</li>
+</ul>
+</li>
+<li><p><strong>劣势</strong>：</p>
+<ul>
+<li>功能覆盖不如 Taro 全面；</li>
+<li>社区相对小。</li>
+</ul>
+</li>
+</ul>
+<h3 id="MPVue-WePY"><a href="#MPVue-WePY" class="headerlink" title="MPVue & WePY"></a>MPVue &amp; WePY</h3><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://mpvue.com/mpvue/#-html">使用手册 | mpvue.com</a></li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>MPVue</strong>：Vue 2.x 驱动，早期多端方案，已停止维护。</li>
+<li><strong>WePY</strong>：官方第一代组件化框架，alpha 长期无更新，社区废弃度高。</li>
+</ul>
+<h3 id="Chameleon"><a href="#Chameleon" class="headerlink" title="Chameleon"></a>Chameleon</h3><ul>
+<li><strong>特点</strong>：阿里开源，统一多端 API，组件可复用，支持多种端（微信/支付宝/字节/IOS/Android）。</li>
+<li><strong>关注点</strong>：学习曲线、社区活跃度一般。</li>
+</ul>
+<h3 id="kbone"><a href="#kbone" class="headerlink" title="kbone"></a>kbone</h3><ul>
+<li><strong>特点</strong>：Web 应用快速迁移，模拟 WebView 环境，支持 DOM/BOM，可“零改造”接入热门前端库（Vue/React）。</li>
+<li><strong>使用场景</strong>：已有成熟 Web 产品，希望快速在微信内复用。</li>
+</ul>
+<hr>
+<h2 id="UI-组件库推荐"><a href="#UI-组件库推荐" class="headerlink" title="UI 组件库推荐"></a>UI 组件库推荐</h2><ul>
+<li><strong>WeUI</strong>（官方）</li>
+<li><strong>Vant Weapp</strong>（有赞）</li>
+<li><strong>Wux Weapp</strong></li>
+<li><strong>Color UI</strong>（轻量视觉）</li>
+</ul>
+<hr>
+<h2 id="选型建议"><a href="#选型建议" class="headerlink" title="选型建议"></a>选型建议</h2><ol>
+<li><strong>单微信小程序、无跨端需求</strong> → 推荐使用 <strong>原生 MINA</strong>，直接调用官方 API。</li>
+<li><strong>Vue 团队、多端（含 App/H5）</strong> → <strong>uni-app</strong> 最佳；</li>
+<li><strong>React 团队、多端（含 RN/H5）</strong> → <strong>Taro</strong> 或 <strong>Remax</strong>；</li>
+<li><strong>已有 Web 应用</strong> → <strong>kbone</strong> 零改造迁移；</li>
+<li><strong>轻量化需求</strong> → 可选 <strong>Chameleon</strong>；</li>
+<li><strong>老项目、需维护</strong> → Vue 生态可留用 <strong>MPVue</strong>；React 生态留用 <strong>Remax</strong>。</li>
+</ol>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2025/06/04/2025-06-04-%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%B9%B3%E5%8F%B0%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D/">2025-06-04-低代码平台及相关技术介绍应用</a></li>
+                
+                
+                    <li>下一篇: <a href="/2025/06/02/2025-06-02-IP%20%E5%9C%B0%E5%9D%80%E8%A7%84%E5%88%92%E5%8F%8A%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/">2025-06-02-IP 地址规划及案例分析</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" rel="tag">课程学习</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2025/07/29/2025-07-29-%E4%B9%9D%E6%A0%BC%E9%80%9A%E7%94%A8%E5%9F%BA%E7%A1%80%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">2025-07-29-九格通用基础大模型环境配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/07/03/2025-07-03-%E6%8B%AF%E6%95%91%E6%88%91%E7%9A%84%E2%80%9C%E9%AB%98%E7%83%A7%E2%80%9D%E6%88%98%E5%8F%8B%E2%80%94%E2%80%94Y7000P%202024%E7%89%88%E6%B8%85%E7%81%B0%E6%8D%A2%E7%A1%85%E8%84%82%E8%AE%B0%E5%BD%95/">2025-07-03-拯救我的“高烧”战友——Y7000P 2024 版清灰换硅脂记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/08/2025-06-08-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%95%E5%B1%82%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-08-大模型底层技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/05/2025-06-05-%E6%99%BA%E8%83%BD%E4%BD%93%E5%B9%B3%E5%8F%B0%E5%8F%8A%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-05-智能体平台及关键技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/04/2025-06-04-%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%B9%B3%E5%8F%B0%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D/">2025-06-04-低代码平台及相关技术介绍应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/03/2025-06-03-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/">2025-06-03-微信小程序开发框架详解</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2025 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2025-03-15-位运算 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-03-15-位运算"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-03-15-位运算</h2>
+            <div class="post-meta">
+                <time class="date">2025.03.15</time>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <blockquote>这篇文章上次修改于 201 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+        
+            <blockquote>
+<p>参考资料<br><a target="_blank" rel="noopener" href="https://oi-wiki.org/math/bit/">https://oi-wiki.org/math/bit/</a></p>
+</blockquote>
+<h3 id="1-位运算简介"><a href="#1-位运算简介" class="headerlink" title="1. 位运算简介"></a>1. 位运算简介</h3><p>位运算是一种基于整数二进制表示的运算方式。由于计算机内部以二进制形式存储数据，位运算的速度非常快，通常比普通算术运算更高效。</p>
+<h3 id="2-基本位运算操作"><a href="#2-基本位运算操作" class="headerlink" title="2. 基本位运算操作"></a>2. 基本位运算操作</h3><ul>
+<li><strong>按位与（</strong><code>&amp;</code>）：两个二进制位都为 1 时，结果为 1；否则为 0。</li>
+<li><strong>按位或（</strong><code>|</code>）：两个二进制位中至少有一个为 1 时，结果为 1；否则为 0。</li>
+<li><strong>按位异或（</strong><code>^</code>）：两个二进制位相同为 0，不同为 1。</li>
+</ul>
+<blockquote>
+<p>异或运算的逆运算是它本身，也就是说两次异或同一个数最后结果不变，即 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.188ex" xmlns="http://www.w3.org/2000/svg" width="12.883ex" height="1.758ex" role="img" focusable="false" viewBox="0 -694 5694.4 777"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="mo" transform="translate(751.2,0)"><path data-c="2295" d="M56 250Q56 394 156 488T384 583Q530 583 626 485T722 250Q722 110 625 14T390 -83Q249 -83 153 14T56 250ZM364 542Q308 539 251 509T148 418T96 278V270H369V542H364ZM681 278Q675 338 650 386T592 462T522 509T458 535T412 542H409V270H681V278ZM96 222Q104 150 139 95T219 12T302 -29T366 -42H369V230H96V222ZM681 222V230H409V-42H412Q429 -42 456 -36T521 -10T590 37T649 113T681 222Z"></path></g><g data-mml-node="mi" transform="translate(1751.4,0)"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g><g data-mml-node="mo" transform="translate(2402.7,0)"><path data-c="2295" d="M56 250Q56 394 156 488T384 583Q530 583 626 485T722 250Q722 110 625 14T390 -83Q249 -83 153 14T56 250ZM364 542Q308 539 251 509T148 418T96 278V270H369V542H364ZM681 278Q675 338 650 386T592 462T522 509T458 535T412 542H409V270H681V278ZM96 222Q104 150 139 95T219 12T302 -29T366 -42H369V230H96V222ZM681 222V230H409V-42H412Q429 -42 456 -36T521 -10T590 37T649 113T681 222Z"></path></g><g data-mml-node="mi" transform="translate(3402.9,0)"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g><g data-mml-node="mo" transform="translate(4109.7,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mi" transform="translate(5165.4,0)"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g></g></g></svg></mjx-container></p>
+</blockquote>
+<ul>
+<li><strong>按位取反（</strong><code>~</code>）：将二进制位的 0 变为 1，1 变为 0。</li>
+<li><strong>左移（</strong><code>&lt;&lt;</code>）：将二进制表示向左移动若干位，右侧补 0。</li>
+<li><strong>右移（</strong><code>&gt;&gt;</code>）：将二进制表示向右移动若干位，左侧补符号位（有符号数）或补 0（无符号数）。</li>
+</ul>
+<h3 id="3-位运算的特殊性质"><a href="#3-位运算的特殊性质" class="headerlink" title="3. 位运算的特殊性质"></a>3. 位运算的特殊性质</h3><ul>
+<li><strong>异或运算的逆运算</strong>：异或运算具有自反性，即 <code>a ^ b ^ b = a</code>。</li>
+<li><strong>补码表示</strong>：计算机中负数以补码形式存储，正数的补码是其本身，负数的补码是其绝对值的二进制表示取反后加 1。</li>
+</ul>
+<h3 id="4-位运算的应用"><a href="#4-位运算的应用" class="headerlink" title="4. 位运算的应用"></a>4. 位运算的应用</h3><p>位运算在编程中有多种高效应用，包括但不限于：</p>
+<ul>
+<li><strong>高效运算</strong>：例如，通过左移和右移实现乘除 2 的幂次方。</li>
+<li><strong>集合操作</strong>：利用位运算表示集合，常用于状态压缩动态规划（状压 DP）。</li>
+<li><strong>特定问题的优化</strong>：例如，快速求解汉明权重（二进制中 1 的个数）。</li>
+</ul>
+<h3 id="5-位运算的实用技巧"><a href="#5-位运算的实用技巧" class="headerlink" title="5. 位运算的实用技巧"></a>5. 位运算的实用技巧</h3><h4 id="5-1-取绝对值"><a href="#5-1-取绝对值" class="headerlink" title="5.1 取绝对值"></a>5.1 取绝对值</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">Abs</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>{<br>    <span class="hljs-keyword">return</span> (n ^ (n &gt;&gt; <span class="hljs-number">31</span>)) - (n &gt;&gt; <span class="hljs-number">31</span>);<br>}<br></code></pre></td></tr></table></figure>
+
+<p>通过位运算实现取绝对值，避免分支判断。</p>
+<h4 id="5-2-求最大-最小值"><a href="#5-2-求最大-最小值" class="headerlink" title="5.2 求最大/最小值"></a>5.2 求最大/最小值</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">max</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>{<br>    <span class="hljs-keyword">return</span> (b &amp; ((a - b) &gt;&gt; <span class="hljs-number">31</span>)) | (a &amp; (~(a - b) &gt;&gt; <span class="hljs-number">31</span>));<br>}<br></code></pre></td></tr></table></figure>
+
+<p>利用位运算实现高效的求最大值和最小值操作。</p>
+<h4 id="5-3-判断符号是否相同"><a href="#5-3-判断符号是否相同" class="headerlink" title="5.3 判断符号是否相同"></a>5.3 判断符号是否相同</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isSameSign</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>{<br>    <span class="hljs-keyword">return</span> (x ^ y) &gt;= <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></table></figure>
+
+<p>通过异或运算判断两个数的符号是否相同。</p>
+<h4 id="5-4-操作二进制位"><a href="#5-4-操作二进制位" class="headerlink" title="5.4 操作二进制位"></a>5.4 操作二进制位</h4><ul>
+<li><p>获取某一位的值：</p>
+  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">getBit</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>{ <span class="hljs-keyword">return</span> (a &gt;&gt; b) &amp; <span class="hljs-number">1</span>; }<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>设置某一位为0或1：</p>
+  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">unsetBit</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>{ <span class="hljs-keyword">return</span> a &amp; ~(<span class="hljs-number">1</span> &lt;&lt; b); }<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">setBit</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>{ <span class="hljs-keyword">return</span> a | (<span class="hljs-number">1</span> &lt;&lt; b); }<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="6-汉明权重与二进制操作"><a href="#6-汉明权重与二进制操作" class="headerlink" title="6. 汉明权重与二进制操作"></a>6. 汉明权重与二进制操作</h3><p>汉明权重是指一个二进制数中 1 的个数。可以通过循环或 <code>lowbit</code> 操作快速求解：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">popcount</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>{<br>    <span class="hljs-type">int</span> cnt = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (x) {<br>        cnt++;<br>        x -= x &amp; -x;<br>    }<br>    <span class="hljs-keyword">return</span> cnt;<br>}<br></code></pre></td></tr></table></figure>
+
+<h3 id="7-内建函数"><a href="#7-内建函数" class="headerlink" title="7. 内建函数"></a>7. 内建函数</h3><p>GCC 提供了一些位运算相关的内建函数，例如：</p>
+<ul>
+<li><code>__builtin_popcount(x)</code>：计算二进制中 1 的个数。</li>
+<li><code>__builtin_clz(x)</code>：计算前导 0 的个数。</li>
+<li><code>__builtin_ctz(x)</code>：计算末尾 0 的个数。</li>
+</ul>
+<p>这些函数经过编译器优化，运行速度极快。</p>
+<h3 id="8-更多位数的处理"><a href="#8-更多位数的处理" class="headerlink" title="8. 更多位数的处理"></a>8. 更多位数的处理</h3><p>对于更大的数据集，可以使用 <code>bitset</code> 等数据结构进行高效位操作。</p>
+<h3 id="9-应用"><a href="#9-应用" class="headerlink" title="9.应用"></a>9.应用</h3><blockquote>
+<p>状态</p>
+</blockquote>
+<blockquote>
+<p>异或加密</p>
+</blockquote>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2025/03/16/2025-03-16-%E6%B0%B4%E2%80%9C%E9%95%9C%E2%80%9D%E5%AE%89%E6%BE%9C%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8EYOLO11%E7%9A%84%E6%99%BA%E8%83%BD%E6%BA%BA%E6%B0%B4%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%20V1.0%20%E8%AE%BE%E8%AE%A1%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/">2025-03-16-水“镜”安澜——基于YOLO11的智能溺水检测系统软件 V1.0 设计说明文档</a></li>
+                
+                
+                    <li>下一篇: <a href="/2025/03/14/2025-03-14-Google%E6%A3%80%E7%B4%A2%E6%8A%80%E5%B7%A7/">2025-03-14-Google 检索技巧</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" rel="tag">算法练习</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2025/07/29/2025-07-29-%E4%B9%9D%E6%A0%BC%E9%80%9A%E7%94%A8%E5%9F%BA%E7%A1%80%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">2025-07-29-九格通用基础大模型环境配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/07/03/2025-07-03-%E6%8B%AF%E6%95%91%E6%88%91%E7%9A%84%E2%80%9C%E9%AB%98%E7%83%A7%E2%80%9D%E6%88%98%E5%8F%8B%E2%80%94%E2%80%94Y7000P%202024%E7%89%88%E6%B8%85%E7%81%B0%E6%8D%A2%E7%A1%85%E8%84%82%E8%AE%B0%E5%BD%95/">2025-07-03-拯救我的“高烧”战友——Y7000P 2024 版清灰换硅脂记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/08/2025-06-08-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%95%E5%B1%82%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-08-大模型底层技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/05/2025-06-05-%E6%99%BA%E8%83%BD%E4%BD%93%E5%B9%B3%E5%8F%B0%E5%8F%8A%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-05-智能体平台及关键技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/04/2025-06-04-%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%B9%B3%E5%8F%B0%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D/">2025-06-04-低代码平台及相关技术介绍应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/03/2025-06-03-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/">2025-06-03-微信小程序开发框架详解</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2025 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>

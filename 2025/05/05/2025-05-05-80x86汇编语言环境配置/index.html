@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2025-05-05-80x86 汇编语言环境配置 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-05-05-80x86 汇编语言环境配置"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-05-05-80x86 汇编语言环境配置</h2>
+            <div class="post-meta">
+                <time class="date">2025.05.05</time>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="2025-05-05-80x86-汇编语言环境配置"><a href="#2025-05-05-80x86-汇编语言环境配置" class="headerlink" title="2025-05-05-80x86 汇编语言环境配置"></a>2025-05-05-80x86 汇编语言环境配置</h1><blockquote>
+<h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_65708726/article/details/130795651?spm=1001.2101.3001.6650.3&utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Ctr-3-130795651-blog-144669809.235%5Ev43%5Epc_blog_bottom_relevance_base8&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Ctr-3-130795651-blog-144669809.235%5Ev43%5Epc_blog_bottom_relevance_base8&utm_relevant_index=3">在 VScode 配置汇编语言环境_vscode asm-CSDN 博客</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44225025/article/details/108222446">使用 VSCode 学习汇编语言-CSDN 博客</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42303973/article/details/120444779">VSCode 搭建汇编环境-CSDN 博客</a></p>
+</blockquote>
+<h1 id="安装-MASM-TASM-插件"><a href="#安装-MASM-TASM-插件" class="headerlink" title="安装 MASM/TASM 插件"></a>安装 MASM/TASM 插件</h1><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1746454873197VkKQbyDXjoxDGjxbqvjcOlZ9nte.png" alt="1746454873197VkKQbyDXjoxDGjxbqvjcOlZ9nte.png"></p>
+<h1 id="配置-vscode-setting-json"><a href="#配置-vscode-setting-json" class="headerlink" title="配置 .vscode/setting.json"></a>配置 .vscode/setting.json</h1><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs nix">{<br>    <span class="hljs-string">"masmtasm.ASM.emulator"</span>: <span class="hljs-string">"msdos player"</span>,  <br>    <span class="hljs-string">"masmtasm.dosbox.run"</span>: <span class="hljs-string">"exit"</span>,<br>    <span class="hljs-string">"masmtasm.ASM.assembler"</span>: <span class="hljs-string">"MASM-v5.00"</span>,<br>    <span class="hljs-string">"masmtasm.ASM.actions"</span>: {<br>        <span class="hljs-string">"TASM"</span>: {<br>            <span class="hljs-string">"baseBundle"</span>: <span class="hljs-string">"&lt;built-in&gt;/TASM.jsdos"</span>,<br>            <span class="hljs-string">"before"</span>: [<br>                <span class="hljs-string">"set PATH=C:<span class="hljs-char escape_">\\</span>TASM"</span><br>            ],<br>            <span class="hljs-string">"run"</span>: [<br>                <span class="hljs-string">"TASM <span class="hljs-subst">${file}</span>"</span>,<br>                <span class="hljs-string">"TLINK <span class="hljs-subst">${filename}</span>"</span>,<br>                <span class="hljs-string">"&gt;<span class="hljs-subst">${filename}</span>"</span><br>            ],<br>            <span class="hljs-string">"debug"</span>: [<br>                <span class="hljs-string">"TASM /zi <span class="hljs-subst">${file}</span>"</span>,<br>                <span class="hljs-string">"TLINK /v/3 <span class="hljs-subst">${filename}</span>.obj"</span>,<br>                <span class="hljs-string">"TD <span class="hljs-subst">${filename}</span>.exe"</span><br>            ]<br>        },<br>        <span class="hljs-string">"MASM-v6.11"</span>: {<br>            <span class="hljs-string">"baseBundle"</span>: <span class="hljs-string">"&lt;built-in&gt;/MASM-v6.11.jsdos"</span>,<br>            <span class="hljs-string">"before"</span>: [<br>                <span class="hljs-string">"set PATH=C:<span class="hljs-char escape_">\\</span>MASM"</span><br>            ],<br>            <span class="hljs-string">"run"</span>: [<br>                <span class="hljs-string">"masm <span class="hljs-subst">${file}</span>;"</span>,<br>                <span class="hljs-string">"link <span class="hljs-subst">${filename}</span>;"</span>,<br>                <span class="hljs-string">"&gt;<span class="hljs-subst">${filename}</span>"</span><br>            ],<br>            <span class="hljs-string">"debug"</span>: [<br>                <span class="hljs-string">"masm <span class="hljs-subst">${file}</span>;"</span>,<br>                <span class="hljs-string">"link <span class="hljs-subst">${filename}</span>.OBJ;"</span>,<br>                <span class="hljs-string">"&gt;debug <span class="hljs-subst">${filename}</span>.exe"</span><br>            ]<br>        },<br>        <span class="hljs-string">"MASM-v5.00"</span>: {<br>            <span class="hljs-string">"baseBundle"</span>: <span class="hljs-string">"&lt;built-in&gt;/MASM-v5.00.jsdos"</span>,<br>            <span class="hljs-string">"before"</span>: [<br>                <span class="hljs-string">"set PATH=C:<span class="hljs-char escape_">\\</span>MASM"</span><br>            ],<br>            <span class="hljs-string">"run"</span>: [<br>                <span class="hljs-string">"masm <span class="hljs-subst">${file}</span>;"</span>,<br>                <span class="hljs-string">"link <span class="hljs-subst">${filename}</span>;"</span>,<br>                <span class="hljs-string">"&gt;<span class="hljs-subst">${filename}</span>"</span><br>            ],<br>            <span class="hljs-string">"debug"</span>: [<br>                <span class="hljs-string">"masm <span class="hljs-subst">${file}</span>;"</span>,<br>                <span class="hljs-string">"link <span class="hljs-subst">${filename}</span>.OBJ;"</span>,<br>                <span class="hljs-string">"&gt;debug <span class="hljs-subst">${filename}</span>.exe"</span><br>            ],<br>            <span class="hljs-string">"support"</span>: [<br>                <span class="hljs-string">"jsdos"</span>,<br>                <span class="hljs-string">"dosbox"</span>,<br>                <span class="hljs-string">"dosboxX"</span>,<br>                <span class="hljs-string">"msdos player"</span><br>            ]<br>        }<br>    }<br>}<br></code></pre></td></tr></table></figure>
+
+<h1 id="测试配置环境"><a href="#测试配置环境" class="headerlink" title="测试配置环境"></a>测试配置环境</h1><p>创建以.asm 为后缀的文件,将下面的代码复制上去,运行程序</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs x86asm">_<span class="hljs-number">.</span>MODEL SMALL<br><span class="hljs-meta">.STACK</span> <span class="hljs-number">100h</span><br><span class="hljs-meta"></span><br><span class="hljs-meta">.DATA</span><br>    message <span class="hljs-built_in">DB</span> <span class="hljs-string">'Hello, Assembly! Environment test successful!$'</span><br><span class="hljs-meta"></span><br><span class="hljs-meta">.CODE</span><br>MAIN PROC<br>    <span class="hljs-comment">; 设置数据段地址</span><br>    <span class="hljs-keyword">MOV</span> <span class="hljs-built_in">AX</span>, @DATA<br>    <span class="hljs-keyword">MOV</span> <span class="hljs-built_in">DS</span>, <span class="hljs-built_in">AX</span><br>    <br>    <span class="hljs-comment">; 显示消息</span><br>    <span class="hljs-keyword">MOV</span> <span class="hljs-number">AH</span>, <span class="hljs-number">09h</span>      <span class="hljs-comment">; DOS功能：显示字符串</span><br>    <span class="hljs-keyword">LEA</span> <span class="hljs-built_in">DX</span>, message  <span class="hljs-comment">; 加载消息地址</span><br>    <span class="hljs-keyword">INT</span> <span class="hljs-number">21h</span>          <span class="hljs-comment">; 调用DOS中断</span><br>    <br>    <span class="hljs-comment">; 返回DOS</span><br>    <span class="hljs-keyword">MOV</span> <span class="hljs-number">AH</span>, <span class="hljs-number">4Ch</span>      <span class="hljs-comment">; DOS功能：结束程序</span><br>    <span class="hljs-keyword">INT</span> <span class="hljs-number">21h</span>          <span class="hljs-comment">; 调用DOS中断</span><br>MAIN ENDP<br>__END MAIN_<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意:</p>
+<ul>
+<li>路径中最好不要有中文,如果有中文的话可以将项目路径设置为没有中文的路径中再运行</li>
+<li>程序如果要调试的话,需要先调试</li>
+<li>如果运行报错的话一般都是因为路径的问题,可以使用,先启动dox环境再自己编译,链接和运行,完成以后再使用调试的功能</li>
+</ul>
+<p>eg:<br>编译:masm E1.asm;</p>
+<p>链接:link E1.obj;</p>
+<p>运行:E1.exe</p>
+<p>然后才能debug</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17465878142961746587813440.png" alt="17465878142961746587813440.png"></p>
+</blockquote>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1746454883775Er3IbHOLQoATO9xPoIYcDBMznKd.png" alt="1746454883775Er3IbHOLQoATO9xPoIYcDBMznKd.png"></p>
+<p>出现上面的信息说明基础环境配置成功!</p>
+<h1 id="Extension-Settings-拓展设置说明"><a href="#Extension-Settings-拓展设置说明" class="headerlink" title="Extension Settings 拓展设置说明"></a>Extension Settings 拓展设置说明</h1><p>要实现完整的功能，需要在拓展中进行设置，同时”设置(首选项)”中还有一些其他选项，以提供更大的灵活性。</p>
+<h3 id="汇编工具选择"><a href="#汇编工具选择" class="headerlink" title="汇编工具选择"></a>汇编工具选择</h3><ul>
+<li>选择使用 MASM 还是 TASM</li>
+</ul>
+<h3 id="16-位模拟器选择"><a href="#16-位模拟器选择" class="headerlink" title="16 位模拟器选择"></a>16 位模拟器选择</h3><ul>
+<li><p><strong>DOSBox</strong>：（默认模式）更加完善</p>
+</li>
+<li><p><strong>msdos-player</strong>：可以在 cmd 中运行，不会弹出窗口，但对 TD 等图形化界面的处理效果不好</p>
+</li>
+<li><p><strong>auto</strong>：（推荐，但是有时无法工作）根据情况选择模拟工具：</p>
+<ul>
+<li>汇编链接使用 msdos-player 模拟，会比较安静</li>
+<li>运行使用 DOSBox，更加直观稳定</li>
+<li>调试中 MASM(debug)使用 msdos-palyer 在 windows 集成终端中显示（更加美观一些）</li>
+<li>调试中 TASM(TD)在 DOSBox 中运行（目前只能这样）</li>
+</ul>
+</li>
+</ul>
+<h3 id="其他配置选项"><a href="#其他配置选项" class="headerlink" title="其他配置选项"></a>其他配置选项</h3><ul>
+<li>调整 dosbox 窗口大小</li>
+<li>规定 dosbox 运行程序之后进行什么操作（是否直接退出程序，还是等待）</li>
+<li>启动相关功能之前是否先保存文件（不保存的话，只能操作之前保存的版本，建议保存）</li>
+<li>设置自定义汇编工具路径</li>
+</ul>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2025/05/06/2025-05-06-Windows%E7%B3%BB%E7%BB%9F%E5%B0%86%E5%AE%89%E8%A3%85%E8%BF%87%E7%B3%BB%E7%BB%9F%E9%95%9C%E5%83%8F%E7%9A%84%E5%9B%BA%E6%80%81%E7%A1%AC%E7%9B%98%E6%81%A2%E5%A4%8D/">2025-05-06-Windows 系统将安装过系统镜像的固态硬盘恢复</a></li>
+                
+                
+                    <li>下一篇: <a href="/2025/05/01/2025-05-01-%E5%86%B3%E7%AD%96%E6%A0%91%E7%AE%97%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8/">2025-05-01-决策树算法及应用</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" rel="tag">课程学习</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2025/07/29/2025-07-29-%E4%B9%9D%E6%A0%BC%E9%80%9A%E7%94%A8%E5%9F%BA%E7%A1%80%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">2025-07-29-九格通用基础大模型环境配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/07/03/2025-07-03-%E6%8B%AF%E6%95%91%E6%88%91%E7%9A%84%E2%80%9C%E9%AB%98%E7%83%A7%E2%80%9D%E6%88%98%E5%8F%8B%E2%80%94%E2%80%94Y7000P%202024%E7%89%88%E6%B8%85%E7%81%B0%E6%8D%A2%E7%A1%85%E8%84%82%E8%AE%B0%E5%BD%95/">2025-07-03-拯救我的“高烧”战友——Y7000P 2024 版清灰换硅脂记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/08/2025-06-08-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%95%E5%B1%82%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-08-大模型底层技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/05/2025-06-05-%E6%99%BA%E8%83%BD%E4%BD%93%E5%B9%B3%E5%8F%B0%E5%8F%8A%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-05-智能体平台及关键技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/04/2025-06-04-%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%B9%B3%E5%8F%B0%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D/">2025-06-04-低代码平台及相关技术介绍应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/03/2025-06-03-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/">2025-06-03-微信小程序开发框架详解</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2025 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>

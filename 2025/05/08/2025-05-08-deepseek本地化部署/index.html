@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2025-05-08-deepseek 本地化部署 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-05-08-deepseek 本地化部署"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-05-08-deepseek 本地化部署</h2>
+            <div class="post-meta">
+                <time class="date">2025.05.08</time>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="2025-05-08-deepseek-本地化部署"><a href="#2025-05-08-deepseek-本地化部署" class="headerlink" title="2025-05-08-deepseek 本地化部署"></a>2025-05-08-deepseek 本地化部署</h1><blockquote>
+<p>参考博客<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiezhr/p/18712410">本地部署 DeepSeek：小白也能轻松搞定！</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiezhr/p/18714692">如何给本地部署的 DeepSeek 投喂数据，让他更懂你</a></p>
+</blockquote>
+<p><strong>[实验目的]：</strong>理解系统架构与原理，掌握 DeepSeek 的基本工作原理、内部架构和检索机制，了解其在大规模语义检索中的优势。学习如何在本地环境中部署和调试 DeepSeek 系统，包括环境配置、依赖安装、参数调优等关键步骤。</p>
+<h2 id="我的电脑硬件配置"><a href="#我的电脑硬件配置" class="headerlink" title="我的电脑硬件配置"></a><strong>我的电脑硬件配置</strong></h2><ul>
+<li>CPU：英特尔酷睿 i5-13600KF 十四核</li>
+<li>GPU:  4060TI 8G</li>
+<li>内存：16GB</li>
+<li>操作系统：Windows 11</li>
+</ul>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17467115411301746711540958.png" alt="17467115411301746711540958.png"></p>
+<h1 id="本地部署"><a href="#本地部署" class="headerlink" title="本地部署"></a>本地部署</h1><h2 id="下载并安装-Ollama"><a href="#下载并安装-Ollama" class="headerlink" title="下载并安装 Ollama"></a><strong>下载并安装 Ollama</strong></h2><p>访问官网：<a target="_blank" rel="noopener" href="https://ollama.com/">https://ollama.com/</a> 下载</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1746711596129JMZnbPx10ozMxux4hPTcIqtunjh.png" alt="1746711596129JMZnbPx10ozMxux4hPTcIqtunjh.png"></p>
+<p>双击 OllamaSetup.exe 进行安装：</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1746711612129TVVNbC31CoCYhDxCKkbcJSkBnDd.png" alt="1746711612129TVVNbC31CoCYhDxCKkbcJSkBnDd.png"></p>
+<h2 id="通过-Ollama-拉取-DeepSeek-模型"><a href="#通过-Ollama-拉取-DeepSeek-模型" class="headerlink" title="通过 Ollama 拉取 DeepSeek 模型"></a><strong>通过 Ollama 拉取 DeepSeek 模型</strong></h2><p>这里我选择是的 1.5b，整个模型大小 1.1 GB。</p>
+<p>更多版本可以在这里查看：<a target="_blank" rel="noopener" href="https://ollama.com/library/deepseek-r1">https://ollama.com/library/deepseek-r1</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ollama run deepseek-r1:1.5b<br></code></pre></td></tr></table></figure>
+
+<h3 id="终端回答"><a href="#终端回答" class="headerlink" title="终端回答"></a>终端回答</h3><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1746711633130MXyibKvdcoR5hQxMe6wca3Kknje.png" alt="1746711633130MXyibKvdcoR5hQxMe6wca3Kknje.png"></p>
+<h3 id="使用-open-webui-包回答"><a href="#使用-open-webui-包回答" class="headerlink" title="使用 open-webui 包回答"></a>使用 open-webui 包回答</h3><blockquote>
+<p>注意:</p>
+<ul>
+<li>系统需要安装 conda 进行虚拟环境的配置,并且 webui 需要 python 版本在 3.11 才能安装</li>
+<li>Open WebUI 的核心包大小相对较小，但它会拉取一些额外的依赖包（如用于 RAG 功能的嵌入模型或前端支持的库），这些依赖可能会增加总体安装体积。例如，首次运行时，它可能会下载约 900MB 的嵌入模型（如 all-MiniLM-L6-v2）用于本地功能。</li>
+</ul>
+</blockquote>
+<h4 id="使用-pip-安装-open-webui-包"><a href="#使用-pip-安装-open-webui-包" class="headerlink" title="使用 pip 安装 open-webui 包"></a>使用 pip 安装 open-webui 包</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/open-webui/open-webui">GitHub - open-webui/open-webui: User-friendly AI Interface (Supports Ollama, OpenAI API, …)</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/20642808493">DeepSeek-R1 本地部署指南：Ollama 助你轻松实现，支持 2G 显卡</a></p>
+</blockquote>
+<ul>
+<li><strong>相关命令</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">conda create -n webui python=3.11<br><br>conda activate webui<br><br>pip install open-webui<br><br>open-webui serve<br></code></pre></td></tr></table></figure>
+
+<p>浏览器访问本地 8080 端口 <a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a></p>
+<p>可以发现 openui 的页面非常类似 chatgpt 的页面,功能也非常丰富</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1746711653308NpvZbeAjYolqB1x856ucgkZ8nme.png" alt="1746711653308NpvZbeAjYolqB1x856ucgkZ8nme.png"></p>
+<h4 id="使用-docker-安装和运行-open-webui"><a href="#使用-docker-安装和运行-open-webui" class="headerlink" title="使用 docker 安装和运行 open-webui"></a>使用 docker 安装和运行 open-webui</h4><blockquote>
+<p>注意执行命令之前打开 docker desktop</p>
+</blockquote>
+<ul>
+<li><strong>相关命令</strong></li>
+<li>如果 Ollama 在您的计算机上，请使用此命令：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>如果 Ollama 在不同的服务器上，请使用此命令：</li>
+<li>要连接到另一台服务器上的 Ollama，请将 <code>OLLAMA_BASE_URL</code> 更改为服务器的 URL：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -d -p 3000:8080 -e OLLAMA_BASE_URL=https://example.com -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>要使用 Nvidia GPU 支持运行 Open WebUI，请使用此命令：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -d -p 3000:8080 --gpus all --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:cuda<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1746711672132MNpobPZcDotI3HxC3COcLU7Gn8c.png" alt="1746711672132MNpobPZcDotI3HxC3COcLU7Gn8c.png"></p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1746711689131OZBebZZ4DoPg2bxLFWLcJjp2nFe.png" alt="1746711689131OZBebZZ4DoPg2bxLFWLcJjp2nFe.png"></p>
+<p>可以发现本地端口映射为 3000,浏览器输入对应网址 <a target="_blank" rel="noopener" href="http://localhost:3000/%E5%8D%B3%E5%8F%AF%E8%BF%9B%E5%85%A5%E5%AF%B9%E5%BA%94%E7%9A%84%E7%95%8C%E9%9D%A2">http://localhost:3000/即可进入对应的界面</a></p>
+<blockquote>
+<p>实测初始加载和响应速度比似乎用 pip 安装慢了不少,但是后面问题回答速度还是非常快的</p>
+</blockquote>
+<h3 id="使用-Page-Assit-浏览器插件回答"><a href="#使用-Page-Assit-浏览器插件回答" class="headerlink" title="使用 Page Assit 浏览器插件回答"></a>使用 <code>Page Assit</code> 浏览器插件回答</h3><ul>
+<li><strong>WebUI****界面</strong></li>
+</ul>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1746711710130VY2rbRym1oF4MyxeMbXcReNSnvW.png" alt="1746711710130VY2rbRym1oF4MyxeMbXcReNSnvW.png"></p>
+<ul>
+<li><strong>知识库</strong></li>
+</ul>
+<blockquote>
+<ul>
+<li>使用 nomic-embed-text 文本嵌入模型</li>
+</ul>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://ollama.com/library/nomic-embed-text">https://ollama.com/library/nomic-embed-text</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ollama pull nomic-embed-text<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1746711726064OWejb8BWloAcuVxrkFpcdQIbnve.png" alt="1746711726064OWejb8BWloAcuVxrkFpcdQIbnve.png"></p>
+<ul>
+<li>效果</li>
+</ul>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1746711742063XIL9bn9tuoRJDsxQPkucmGBTn1d.png" alt="1746711742063XIL9bn9tuoRJDsxQPkucmGBTn1d.png"></p>
+<h1 id="linux-服务器部署"><a href="#linux-服务器部署" class="headerlink" title="linux 服务器部署"></a>linux 服务器部署</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/694331045">Ollama Linux 部署与应用 LLama 3</a></p>
+</blockquote>
+<h2 id="Linux-下-Ollama-的安装与配置"><a href="#Linux-下-Ollama-的安装与配置" class="headerlink" title="Linux 下 Ollama 的安装与配置"></a>Linux 下 Ollama 的安装与配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -fsSL https://ollama.com/install.sh | sh<br><span class="hljs-comment">#也许需要相应的权限才能安装，可以使用命令</span><br><span class="hljs-built_in">sudo</span> curl -fsSL https://ollama.com/install.sh | sh<br></code></pre></td></tr></table></figure>
+
+<p>上面的命令老是网络连接出现问题,因为我使用的是 ubuntu 系统的服务器,也可以使用下面的命令安装,速度快很多</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> snap install ollama<br></code></pre></td></tr></table></figure>
+
+<p>后面的步骤和在 windows11 本地部署的流程相类似,都是拉取和运行模型,再使用 docker 部署 open-webui 再访问对应的端口使用,所以对应命令我直接粘贴不再详细解释</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ollama run deepseek-r1:1.5b<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意后面的命令最好都添加上 sudo,以防不必要的权限报错</p>
+</blockquote>
+<h3 id="启动-Docker-服务"><a href="#启动-Docker-服务" class="headerlink" title="启动 Docker 服务"></a>启动 Docker 服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl start docker<br></code></pre></td></tr></table></figure>
+
+<h3 id="查看-Docker-服务状态"><a href="#查看-Docker-服务状态" class="headerlink" title="查看 Docker 服务状态"></a>查看 Docker 服务状态</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl status docker<br></code></pre></td></tr></table></figure>
+
+<h3 id="使用-docker-安装-open-webui"><a href="#使用-docker-安装-open-webui" class="headerlink" title="使用 docker 安装 open-webui"></a>使用 docker 安装 open-webui</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main<br></code></pre></td></tr></table></figure>
+
+<p>本地端口映射为 8080,浏览器输入对应网址 http://<code>&lt;ip&gt;</code>:8080/即可进入对应的界面</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1746711758065YRpwbq3EPoN8h7xLMrfcC2J7n5g.png" alt="1746711758065YRpwbq3EPoN8h7xLMrfcC2J7n5g.png"></p>
+<h3 id="停止-Docker-服务"><a href="#停止-Docker-服务" class="headerlink" title="停止 Docker 服务()"></a>停止 Docker 服务()</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl stop docker<br></code></pre></td></tr></table></figure>
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>虽然 1.5B 和 7B 级别的小参数模型在资源占用和响应延迟方面具有明显优势，但其生成效果和理解能力相对有限，仅适用于边缘计算中的基础性任务。不过，在特定场景下仍具备一定的应用价值。对于日常生产中的高质量生成需求，仍推荐使用部署在云端服务器的大参数模型，以确保效果和稳定性。</p>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2025/05/09/2025-05-09-%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/">2025-05-09-进程调度算法分析</a></li>
+                
+                
+                    <li>下一篇: <a href="/2025/05/07/2025-05-07-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">2025-05-07-二分查找</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" rel="tag">程序开发</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！如本站内容对你有所帮助的话，不妨 <a target="_blank" rel="noopener" href="https://paul.ren/donate">捐助支持</a> 一下？同时欢迎订阅关注 <a href="https://paul.ren/note" target="_blank">我的日记</a>，唠嗑（分享）每日的折腾经历。</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2025/07/29/2025-07-29-%E4%B9%9D%E6%A0%BC%E9%80%9A%E7%94%A8%E5%9F%BA%E7%A1%80%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">2025-07-29-九格通用基础大模型环境配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/07/03/2025-07-03-%E6%8B%AF%E6%95%91%E6%88%91%E7%9A%84%E2%80%9C%E9%AB%98%E7%83%A7%E2%80%9D%E6%88%98%E5%8F%8B%E2%80%94%E2%80%94Y7000P%202024%E7%89%88%E6%B8%85%E7%81%B0%E6%8D%A2%E7%A1%85%E8%84%82%E8%AE%B0%E5%BD%95/">2025-07-03-拯救我的“高烧”战友——Y7000P 2024 版清灰换硅脂记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/08/2025-06-08-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%95%E5%B1%82%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-08-大模型底层技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/05/2025-06-05-%E6%99%BA%E8%83%BD%E4%BD%93%E5%B9%B3%E5%8F%B0%E5%8F%8A%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-05-智能体平台及关键技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/04/2025-06-04-%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%B9%B3%E5%8F%B0%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D/">2025-06-04-低代码平台及相关技术介绍应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/03/2025-06-03-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6%E8%AF%A6%E8%A7%A3/">2025-06-03-微信小程序开发框架详解</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px;">深度学习</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" style="font-size: 18px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a> <a href="/tags/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">课程学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 18px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2025 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>
