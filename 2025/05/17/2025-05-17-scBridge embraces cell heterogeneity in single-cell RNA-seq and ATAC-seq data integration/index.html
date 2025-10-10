@@ -199,7 +199,6 @@ mjx-container[display="true"] + br {
 <li><strong>Portal</strong>：基于对抗学习的半监督多组学整合管线（本文略）。</li>
 </ul>
 <p>这些方法多对所有细胞“一视同仁”地整合，未利用组学内部的“异质性”信息来引导模型从“易”到“难”分层对齐。</p>
-<p><img src="/static/BegjbomkVoa7Hpx1yEScx3mRn8f.png"></p>
 <h1 id="Method"><a href="#Method" class="headerlink" title="Method:"></a>Method:</h1><h2 id="异构迁移学习框架概览"><a href="#异构迁移学习框架概览" class="headerlink" title="异构迁移学习框架概览"></a>异构迁移学习框架概览</h2><p>scBridge 将标注的 scRNA-seq 与未标注的 scATAC-seq 数据看作源域与目标域，通过迭代的迁移学习流程逐步对齐两种组学的嵌入表示(Nature)。</p>
 <ol>
 <li><strong>Warm-up（热身）</strong><br>使用带标签的 scRNA-seq 数据训练一个深度编码器 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.464ex" xmlns="http://www.w3.org/2000/svg" width="1.244ex" height="2.059ex" role="img" focusable="false" viewBox="0 -705 550 910"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D453" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"></path></g></g></g></svg></mjx-container> 和分类器 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.464ex" xmlns="http://www.w3.org/2000/svg" width="1.079ex" height="1.464ex" role="img" focusable="false" viewBox="0 -442 477 647"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D454" d="M311 43Q296 30 267 15T206 0Q143 0 105 45T66 160Q66 265 143 353T314 442Q361 442 401 394L404 398Q406 401 409 404T418 412T431 419T447 422Q461 422 470 413T480 394Q480 379 423 152T363 -80Q345 -134 286 -169T151 -205Q10 -205 10 -137Q10 -111 28 -91T74 -71Q89 -71 102 -80T116 -111Q116 -121 114 -130T107 -144T99 -154T92 -162L90 -164H91Q101 -167 151 -167Q189 -167 211 -155Q234 -144 254 -122T282 -75Q288 -56 298 -13Q311 35 311 43ZM384 328L380 339Q377 350 375 354T369 368T359 382T346 393T328 402T306 405Q262 405 221 352Q191 313 171 233T151 117Q151 38 213 38Q269 38 323 108L331 118L384 328Z"></path></g></g></g></svg></mjx-container>，并计算出初始的 RNA 嵌入及原型（每种细胞类型的平均嵌入）(<a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41467-023-41795-5">Nature</a>)。</li>
@@ -229,8 +228,7 @@ mjx-container[display="true"] + br {
 <h1 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment:"></a><strong>Experiment:</strong></h1><h2 id="我完成的任务与收获"><a href="#我完成的任务与收获" class="headerlink" title="我完成的任务与收获"></a>我完成的任务与收获</h2><ul>
 <li>重装服务器的 conda 环境</li>
 </ul>
-<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><h3 id="umap-PBMC-CellType"><a href="#umap-PBMC-CellType" class="headerlink" title="umap_PBMC_CellType"></a>umap_PBMC_CellType</h3><h3 id="umap-PBMC-Domain"><a href="#umap-PBMC-Domain" class="headerlink" title="umap_PBMC_Domain"></a>umap_PBMC_Domain</h3><p><img src="/static/YzVibvyJhoS3Cexix0AcdNFDn6d.png"></p>
-<h3 id="umap-PBMC-Reliability"><a href="#umap-PBMC-Reliability" class="headerlink" title="umap_PBMC_Reliability"></a>umap_PBMC_Reliability</h3><p><img src="/static/KgrdbEYNSoTVI1xchbYccC0WnYb.png"><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1747738616339KgrdbEYNSoTVI1xchbYccC0WnYb.png" alt="1747738616339KgrdbEYNSoTVI1xchbYccC0WnYb.png"></p>
+<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><h3 id="umap-PBMC-Reliability"><a href="#umap-PBMC-Reliability" class="headerlink" title="umap_PBMC_Reliability"></a>umap_PBMC_Reliability</h3><p><img src="/static/KgrdbEYNSoTVI1xchbYccC0WnYb.png"><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1747738616339KgrdbEYNSoTVI1xchbYccC0WnYb.png" alt="1747738616339KgrdbEYNSoTVI1xchbYccC0WnYb.png"></p>
 
         </article>
         <section class="post-near">
@@ -286,7 +284,22 @@ mjx-container[display="true"] + br {
             </div>
         </section>
         <section class="sub-footer">
-            <p>© 2025 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+            <p>
+                © 2025 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.
+                
+                    &nbsp;|&nbsp;
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+                        蜀ICP备2025165253号
+                    </a>
+                
+                
+                    &nbsp;|&nbsp;
+                    <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11000002000001" target="_blank" rel="nofollow noopener" class="police-beian">
+                        <span class="police-icon" aria-hidden="true"></span>
+                        <span class="police-text">京公网安备11000002000001号</span>
+                    </a>
+                
+            </p>
         </section>
     </div>
 </footer>
@@ -297,6 +310,13 @@ mjx-container[display="true"] + br {
 
 
 <script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+<style>
+.police-beian{display:inline-flex;align-items:center;gap:4px}
+.police-icon{display:inline-block;width:16px;height:16px;background:#e91e63;border-radius:2px;opacity:.85}
+/* 说明：如需官方警徽图标，可将 .police-icon 的 background 设置为图片：
+   background:url('https://www.beian.gov.cn/img/ghs.png') no-repeat center/contain; */
+</style>
 
   </body>
 </html>
