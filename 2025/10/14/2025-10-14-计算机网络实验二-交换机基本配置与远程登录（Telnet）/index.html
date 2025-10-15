@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2025-10-14-计算机网络实验二-交换机基本配置与远程登录（Telnet） - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-10-14-计算机网络实验二-交换机基本配置与远程登录（Telnet）"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-10-14-计算机网络实验二-交换机基本配置与远程登录（Telnet）</h2>
+            <div class="post-meta">
+                <time class="date">2025.10.14</time>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="2025-10-14-计算机网络实验二-交换机基本配置与远程登录（Telnet）"><a href="#2025-10-14-计算机网络实验二-交换机基本配置与远程登录（Telnet）" class="headerlink" title="2025-10-14-计算机网络实验二-交换机基本配置与远程登录（Telnet）"></a>2025-10-14-计算机网络实验二-交换机基本配置与远程登录（Telnet）</h1><h2 id="一、实验目标"><a href="#一、实验目标" class="headerlink" title="一、实验目标"></a>一、实验目标</h2><p>掌握：</p>
+<ol>
+<li>交换机的不同模式切换</li>
+<li>交换机的基本配置（改名、设密码、查看配置）</li>
+<li>交换机接口和 VLAN 配置</li>
+<li>通过 telnet 登录交换机</li>
+</ol>
+<h2 id="二、实验拓扑"><a href="#二、实验拓扑" class="headerlink" title="二、实验拓扑"></a>二、实验拓扑</h2><p> <strong>连接关系：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">PC2 &lt;—— 直通线 ——&gt; Switch0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p> <strong>IP 地址分配（举例学号末两位为 55）：</strong></p>
+<table>
+<thead>
+<tr>
+<th>设备</th>
+<th>接口</th>
+<th>IP 地址</th>
+<th>子网掩码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PC2</td>
+<td>FastEthernet0</td>
+<td>10.1.1.55</td>
+<td>255.255.255.0</td>
+</tr>
+<tr>
+<td>Switch0</td>
+<td>VLAN1</td>
+<td>10.1.1.65</td>
+<td>255.255.255.0</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="三、实验步骤与命令讲解"><a href="#三、实验步骤与命令讲解" class="headerlink" title="三、实验步骤与命令讲解"></a>三、实验步骤与命令讲解</h2><hr>
+<h3 id="1️-模式切换练习"><a href="#1️-模式切换练习" class="headerlink" title="1️ 模式切换练习"></a><strong>1️ 模式切换练习</strong></h3><p>在交换机 CLI 中操作：</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>提示符</th>
+<th>进入命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>用户模式</td>
+<td><code>Switch&gt;</code></td>
+<td>——（开机默认）</td>
+<td>只能查看基本信息</td>
+</tr>
+<tr>
+<td>特权模式</td>
+<td><code>Switch#</code></td>
+<td><code>enable</code></td>
+<td>可以查看和保存配置</td>
+</tr>
+<tr>
+<td>全局配置模式</td>
+<td><code>Switch(config)#</code></td>
+<td><code>configure terminal</code></td>
+<td>可以修改全局参数</td>
+</tr>
+<tr>
+<td>接口配置模式</td>
+<td><code>Switch(config-if)#</code></td>
+<td><code>interface fastethernet0/1</code></td>
+<td>配置具体端口参数</td>
+</tr>
+</tbody></table>
+<p> 提示：</p>
+<ul>
+<li>输入 <code>?</code> 可以查看该模式下能用的命令</li>
+<li><code>Ctrl+Z</code> 或 <code>end</code> 返回上一级</li>
+<li><code>exit</code> 退出当前模式</li>
+</ul>
+<hr>
+<h3 id="2️-修改交换机名称和设置口令"><a href="#2️-修改交换机名称和设置口令" class="headerlink" title="2️ 修改交换机名称和设置口令"></a><strong>2️ 修改交换机名称和设置口令</strong></h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Switch<span class="token operator">&gt;</span> <span class="token builtin class-name">enable</span>                          <span class="token comment"># 进入特权模式</span>
+Switch<span class="token comment"># configure terminal              # 进入全局配置模式</span>
+Switch<span class="token punctuation">(</span>config<span class="token punctuation">)</span><span class="token comment"># hostname Switch2950     # 修改主机名</span>
+Switch2950<span class="token punctuation">(</span>config<span class="token punctuation">)</span><span class="token comment"># enable secret cisco # 设置特权模式加密密码</span>
+Switch2950<span class="token punctuation">(</span>config<span class="token punctuation">)</span><span class="token comment"># line console 0      # 进入控制台配置</span>
+Switch2950<span class="token punctuation">(</span>config-line<span class="token punctuation">)</span><span class="token comment"># password cisco # 设置 console 口令</span>
+Switch2950<span class="token punctuation">(</span>config-line<span class="token punctuation">)</span><span class="token comment"># login          # 开启登录验证</span>
+Switch2950<span class="token punctuation">(</span>config-line<span class="token punctuation">)</span><span class="token comment"># exit</span>
+Switch2950<span class="token punctuation">(</span>config<span class="token punctuation">)</span><span class="token comment"># line vty 0 4        # 进入远程登录配置</span>
+Switch2950<span class="token punctuation">(</span>config-line<span class="token punctuation">)</span><span class="token comment"># password cisco # 设置 telnet 密码</span>
+Switch2950<span class="token punctuation">(</span>config-line<span class="token punctuation">)</span><span class="token comment"># login</span>
+Switch2950<span class="token punctuation">(</span>config-line<span class="token punctuation">)</span><span class="token comment"># exit</span>
+Switch2950<span class="token punctuation">(</span>config<span class="token punctuation">)</span><span class="token comment"># service password-encryption # 对明文密码加密</span>
+Switch2950<span class="token punctuation">(</span>config<span class="token punctuation">)</span><span class="token comment"># end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p> <strong>命令解释：</strong></p>
+<ul>
+<li><code>hostname</code>：修改设备名字</li>
+<li><code>enable secret</code>：设置进入特权模式的加密密码</li>
+<li><code>line console 0</code>：进入控制台口配置视图</li>
+<li><code>line vty 0 4</code>：进入虚拟终端（Telnet）配置</li>
+<li><code>login</code>：开启密码验证</li>
+<li><code>service password-encryption</code>：对配置文件中的密码加密</li>
+</ul>
+<hr>
+<h3 id="3️-配置接口与-VLAN-管理-IP"><a href="#3️-配置接口与-VLAN-管理-IP" class="headerlink" title="3️ 配置接口与 VLAN 管理 IP"></a><strong>3️ 配置接口与 VLAN 管理 IP</strong></h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Switch2950<span class="token comment"># configure terminal</span>
+Switch2950<span class="token punctuation">(</span>config<span class="token punctuation">)</span><span class="token comment"># interface vlan 1</span>
+Switch2950<span class="token punctuation">(</span>config-if<span class="token punctuation">)</span><span class="token comment"># ip address 10.1.1.65 255.255.255.0</span>
+Switch2950<span class="token punctuation">(</span>config-if<span class="token punctuation">)</span><span class="token comment"># no shutdown</span>
+Switch2950<span class="token punctuation">(</span>config-if<span class="token punctuation">)</span><span class="token comment"># exit</span>
+
+Switch2950<span class="token punctuation">(</span>config<span class="token punctuation">)</span><span class="token comment"># interface fastethernet0/1</span>
+Switch2950<span class="token punctuation">(</span>config-if<span class="token punctuation">)</span><span class="token comment"># switchport mode access</span>
+Switch2950<span class="token punctuation">(</span>config-if<span class="token punctuation">)</span><span class="token comment"># switchport access vlan 1</span>
+Switch2950<span class="token punctuation">(</span>config-if<span class="token punctuation">)</span><span class="token comment"># no shutdown</span>
+Switch2950<span class="token punctuation">(</span>config-if<span class="token punctuation">)</span><span class="token comment"># end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p> <strong>命令解释：</strong></p>
+<ul>
+<li><code>interface vlan 1</code>：进入 VLAN 1 接口配置，用作管理 IP</li>
+<li><code>ip address</code>：设置 IP 地址</li>
+<li><code>no shutdown</code>：开启接口（默认关闭）</li>
+<li><code>switchport mode access</code>：指定为普通接入口（非 trunk）</li>
+<li><code>switchport access vlan 1</code>：将该端口加入 VLAN 1</li>
+</ul>
+<hr>
+<h3 id="4️-查看与保存配置"><a href="#4️-查看与保存配置" class="headerlink" title="4️ 查看与保存配置"></a><strong>4️ 查看与保存配置</strong></h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Switch2950<span class="token comment"># show running-config     # 查看当前运行配置</span>
+Switch2950<span class="token comment"># copy running-config startup-config</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p> <strong>说明：</strong></p>
+<ul>
+<li><code>show running-config</code>：查看当前配置</li>
+<li><code>copy running-config startup-config</code>：保存配置（否则重启后会丢失）</li>
+</ul>
+<hr>
+<h3 id="5️-在-PC-上设置-IP"><a href="#5️-在-PC-上设置-IP" class="headerlink" title="5️ 在 PC 上设置 IP"></a><strong>5️ 在 PC 上设置 IP</strong></h3><p>在 <strong>PC2 → Desktop → IP Configuration</strong> 中设置：</p>
+<pre class="line-numbers language-none"><code class="language-none">IP Address: 10.1.1.55
+Subnet Mask: 255.255.255.0
+Default Gateway: 10.1.1.65<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h3 id="6️-测试连通性"><a href="#6️-测试连通性" class="headerlink" title="6️ 测试连通性"></a><strong>6️ 测试连通性</strong></h3><p>在 PC 命令行输入：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ping</span> <span class="token number">10.1</span>.1.65<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>出现：</p>
+<pre class="line-numbers language-none"><code class="language-none">Reply from 10.1.1.65: bytes=32 time&lt;1ms TTL=255<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p> 表示配置成功。</p>
+<hr>
+<h3 id="7️-Telnet-登录验证（可选进阶）"><a href="#7️-Telnet-登录验证（可选进阶）" class="headerlink" title="7️ Telnet 登录验证（可选进阶）"></a><strong>7️ Telnet 登录验证（可选进阶）</strong></h3><ol>
+<li><p>在 PC 命令行输入：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">telnet <span class="token number">10.1</span>.1.65<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>输入密码 <code>cisco</code></p>
+</li>
+<li><p>登录成功后输入：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">enable</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>再输入特权密码（也是 <code>cisco</code>）</p>
+</li>
+</ol>
+<p> 表示已通过 <strong>Telnet</strong> 远程管理交换机。</p>
+<hr>
+<h2 id="四、常用命令速查表"><a href="#四、常用命令速查表" class="headerlink" title="四、常用命令速查表"></a>四、常用命令速查表</h2><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>命令</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>进入特权模式</td>
+<td><code>enable</code></td>
+</tr>
+<tr>
+<td>进入全局配置</td>
+<td><code>configure terminal</code></td>
+</tr>
+<tr>
+<td>查看配置</td>
+<td><code>show running-config</code></td>
+</tr>
+<tr>
+<td>保存配置</td>
+<td><code>copy running-config startup-config</code></td>
+</tr>
+<tr>
+<td>修改设备名</td>
+<td><code>hostname XXX</code></td>
+</tr>
+<tr>
+<td>设置特权密码</td>
+<td><code>enable secret 密码</code></td>
+</tr>
+<tr>
+<td>设置 console 密码</td>
+<td><code>line console 0</code> → <code>password 密码</code> → <code>login</code></td>
+</tr>
+<tr>
+<td>设置 telnet 密码</td>
+<td><code>line vty 0 4</code> → <code>password 密码</code> → <code>login</code></td>
+</tr>
+<tr>
+<td>配置 VLAN IP</td>
+<td><code>interface vlan 1</code> → <code>ip address X.X.X.X 255.255.255.0</code></td>
+</tr>
+<tr>
+<td>启动接口</td>
+<td><code>no shutdown</code></td>
+</tr>
+<tr>
+<td>查看端口状态</td>
+<td><code>show interfaces status</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><ul>
+<li>网络拓扑图<br><img src="http://t2z9ig7uo.hn-bkt.clouddn.com/blog/1760449982508.png" alt="1760449982508.png"></li>
+<li>PC2 ping 交换机成功<br><img src="http://t2z9ig7uo.hn-bkt.clouddn.com/blog/b4cfa67271e5d24d369a1ddc1491fddd.png" alt="b4cfa67271e5d24d369a1ddc1491fddd.png"></li>
+</ul>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2025/10/15/2025-10-15-python%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E5%BC%8F%E4%B8%8Emap%E5%87%BD%E6%95%B0/">2025-10-15-python列表推导式与map函数</a></li>
+                
+                
+                    <li>下一篇: <a href="/2025/07/29/2025-07-29-%E4%B9%9D%E6%A0%BC%E9%80%9A%E7%94%A8%E5%9F%BA%E7%A1%80%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">2025-07-29-九格通用基础大模型环境配置</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/course/" rel="tag">课程学习</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2025/10/15/2025-10-15-python%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E5%BC%8F%E4%B8%8Emap%E5%87%BD%E6%95%B0/">2025-10-15-python列表推导式与map函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/14/2025-10-14-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C-%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E4%B8%8E%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95%EF%BC%88Telnet%EF%BC%89/">2025-10-14-计算机网络实验二-交换机基本配置与远程登录（Telnet）</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/07/29/2025-07-29-%E4%B9%9D%E6%A0%BC%E9%80%9A%E7%94%A8%E5%9F%BA%E7%A1%80%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">2025-07-29-九格通用基础大模型环境配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/07/03/2025-07-03-%E6%8B%AF%E6%95%91%E6%88%91%E7%9A%84%E2%80%9C%E9%AB%98%E7%83%A7%E2%80%9D%E6%88%98%E5%8F%8B%E2%80%94%E2%80%94Y7000P%202024%E7%89%88%E6%B8%85%E7%81%B0%E6%8D%A2%E7%A1%85%E8%84%82%E8%AE%B0%E5%BD%95/">2025-07-03-拯救我的“高烧”战友——Y7000P 2024 版清灰换硅脂记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/08/2025-06-08-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%95%E5%B1%82%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-08-大模型底层技术分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/06/05/2025-06-05-%E6%99%BA%E8%83%BD%E4%BD%93%E5%B9%B3%E5%8F%B0%E5%8F%8A%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/">2025-06-05-智能体平台及关键技术分析</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">十月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/deep-learning/" style="font-size: 14px;">深度学习</a> <a href="/tags/development/" style="font-size: 18px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 10px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 16px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 12px;">论文阅读</a> <a href="/tags/course/" style="font-size: 20px;">课程学习</a> <a href="/tags/troubleshooting/" style="font-size: 18px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>
+                © 2025 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.
+                
+                    &nbsp;|&nbsp;
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+                        蜀ICP备2025165253号
+                    </a>
+                
+                
+                    &nbsp;|&nbsp;
+                    <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11000002000001" target="_blank" rel="nofollow noopener" class="police-beian">
+                        <span class="police-icon" aria-hidden="true"></span>
+                        <span class="police-text">京公网安备11000002000001号</span>
+                    </a>
+                
+            </p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+<style>
+.police-beian{display:inline-flex;align-items:center;gap:4px}
+.police-icon{display:inline-block;width:16px;height:16px;background:#e91e63;border-radius:2px;opacity:.85}
+/* 说明：如需官方警徽图标，可将 .police-icon 的 background 设置为图片：
+   background:url('https://www.beian.gov.cn/img/ghs.png') no-repeat center/contain; */
+</style>
+
+  </body>
+</html>
