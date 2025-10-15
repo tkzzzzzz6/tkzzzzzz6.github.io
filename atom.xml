@@ -6,7 +6,7 @@
   <link href="https://ke-tan.asia/atom.xml" rel="self"/>
   
   <link href="https://ke-tan.asia/"/>
-  <updated>2025-10-15T01:37:01.852Z</updated>
+  <updated>2025-10-15T10:47:49.088Z</updated>
   <id>https://ke-tan.asia/</id>
   
   <author>
@@ -17,9 +17,31 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>2025-10-15-python列表推导式与map函数</title>
+    <title>2025-10-15-浏览器批量下载文件的方法</title>
     <link href="https://ke-tan.asia/2025/10/15/2025-10-15-python%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E5%BC%8F%E4%B8%8Emap%E5%87%BD%E6%95%B0/"/>
     <id>https://ke-tan.asia/2025/10/15/2025-10-15-python%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E5%BC%8F%E4%B8%8Emap%E5%87%BD%E6%95%B0/</id>
+    <published>2025-10-14T16:00:00.000Z</published>
+    <updated>2025-10-15T10:47:49.088Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="2025-10-15-浏览器批量下载文件的方法"><a href="#2025-10-15-浏览器批量下载文件的方法" class="headerlink" title="2025-10-15-浏览器批量下载文件的方法"></a>2025-10-15-浏览器批量下载文件的方法</h1><blockquote><p>参考资料<br><a href="https://blog.csdn.net/m0_45447650/article/details/125786723">wget 的安装与使用（Windows）</a><br><a href="https://www.reddit.com/r/techsupport/comments/1dsuawu/how_can_i_massdownload_all_the_files_in_the_links/?tl=zh-hans">我怎样才能批量下载一个网站链接里的所有文件？</a></p></blockquote><p>今天在下载课资料时,遇到了单个页面有多个文件资源链接需要批量下载的问题,通过查找资料,总结了以下几种方法:</p><h2 id="方法一-使用浏览器扩展插件"><a href="#方法一-使用浏览器扩展插件" class="headerlink" title="方法一: 使用浏览器扩展插件"></a>方法一: 使用浏览器扩展插件</h2><ul><li><p>浏览器插件:Instant Data Scraper:可以自动从任何网页中提取数据并导出为 Excel 或 CSV 文件。<a href="https://chromewebstore.google.com/detail/instant-data-scraper/ofaokhiedipichpaobibbnahnkdoiiah?hl=zh-CN">下载链接</a></p></li><li><p>下载软件:IDM或者JDownloader 2</p></li></ul><p>这里有两种思路,一种是将csv文件中的链接列全部复制,通过下载软件的通过剪贴板批量下载的功能进行批量下载,另一种是将对应的链接转化为csv格式的文件,再使用ai编写对应的下载的脚本</p><p>这里我只介绍第一种思路下载软件通过剪贴板批量下载的思路</p><ol><li><p>使用Instant Data Scraper插件,提取网页中的链接,并选中和复制链接相关列<br><img src="http://t2z9ig7uo.hn-bkt.clouddn.com/blog/1760523559939.png" alt="1760523559939.png"></p></li><li><p>打开下载软件,在设置中找到“通过剪贴板监控”或类似选项,并启用它</p></li></ol><ul><li><p>IDM:任务-&gt;从剪贴板中添加批量下载<br><img src="http://t2z9ig7uo.hn-bkt.clouddn.com/blog/1760525166362.png" alt="1760525166362.png"></p></li><li><p>JDownloader 2:链接抓取器-&gt;ctrl+v 粘贴剪贴板内容<br><img src="http://t2z9ig7uo.hn-bkt.clouddn.com/blog/1760523940222.png" alt="1760523940222.png"></p></li></ul><p>右键开始所有下载</p><p><img src="http://t2z9ig7uo.hn-bkt.clouddn.com/blog/1760524005163.png" alt="1760524005163.png"></p><h2 id="方法二-使用wget-r-命令批量下载"><a href="#方法二-使用wget-r-命令批量下载" class="headerlink" title="方法二:使用wget -r 命令批量下载"></a>方法二:使用wget -r 命令批量下载</h2><p>需要网站有robots.txt文件,且允许爬取,深度学习的数据集相关网站一般都允许爬取</p><p>示例:</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">wget</span> <span class="token parameter variable">-r</span> <span class="token parameter variable">-c</span> https://cdn.nohesi.gg/cars/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>-c 选项表示断点续传<br><img src="http://t2z9ig7uo.hn-bkt.clouddn.com/blog/1760522349155.png" alt="1760522349155.png"></p><p>如果你有更好的方法,欢迎在评论区留言分享</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;2025-10-15-浏览器批量下载文件的方法&quot;&gt;&lt;a href=&quot;#2025-10-15-浏览器批量下载文件的方法&quot; class=&quot;headerlink&quot; title=&quot;2025-10-15-浏览器批量下载文件的方法&quot;&gt;&lt;/a&gt;2025-10-15-浏览器批量下</summary>
+      
+    
+    
+    
+    
+    <category term="问题解决" scheme="https://ke-tan.asia/tags/troubleshooting/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2025-10-15-python列表推导式与map函数</title>
+    <link href="https://ke-tan.asia/2025/10/15/2025-10-15-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95/"/>
+    <id>https://ke-tan.asia/2025/10/15/2025-10-15-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95/</id>
     <published>2025-10-14T16:00:00.000Z</published>
     <updated>2025-10-15T01:37:01.852Z</updated>
     
@@ -434,28 +456,6 @@
     
     
     <category term="算法学习" scheme="https://ke-tan.asia/tags/algorithm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2025-05-06-Windows 系统将安装过系统镜像的固态硬盘恢复</title>
-    <link href="https://ke-tan.asia/2025/05/06/2025-05-06-Windows%E7%B3%BB%E7%BB%9F%E5%B0%86%E5%AE%89%E8%A3%85%E8%BF%87%E7%B3%BB%E7%BB%9F%E9%95%9C%E5%83%8F%E7%9A%84%E5%9B%BA%E6%80%81%E7%A1%AC%E7%9B%98%E6%81%A2%E5%A4%8D/"/>
-    <id>https://ke-tan.asia/2025/05/06/2025-05-06-Windows%E7%B3%BB%E7%BB%9F%E5%B0%86%E5%AE%89%E8%A3%85%E8%BF%87%E7%B3%BB%E7%BB%9F%E9%95%9C%E5%83%8F%E7%9A%84%E5%9B%BA%E6%80%81%E7%A1%AC%E7%9B%98%E6%81%A2%E5%A4%8D/</id>
-    <published>2025-05-05T16:00:00.000Z</published>
-    <updated>2025-10-15T01:37:08.910Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="2025-05-06-Windows-系统将安装过系统镜像的固态硬盘恢复"><a href="#2025-05-06-Windows-系统将安装过系统镜像的固态硬盘恢复" class="headerlink" title="2025-05-06-Windows 系统将安装过系统镜像的固态硬盘恢复"></a>2025-05-06-Windows 系统将安装过系统镜像的固态硬盘恢复</h1><blockquote><p>参考博客<br><a href="https://blog.csdn.net/yongdad/article/details/139067667">如何将制作过的系统盘恢复成普通 U 盘_ubuntu 系统盘还原成普通 u 盘-CSDN 博客</a></p></blockquote><h1 id="U-盘与之类似"><a href="#U-盘与之类似" class="headerlink" title="U 盘与之类似"></a>U 盘与之类似</h1><p><code>win</code>+<code>x</code> 再按 <code>k</code> 打开磁盘管理</p><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1746540429427EPSZbKOXuo8eWax3h6Qc5lLNnhh.png" alt="1746540429427EPSZbKOXuo8eWax3h6Qc5lLNnhh.png"></p><p>将中间的 mis 卷删除,再将整体新增卷即可</p><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1746540468427V4JObBFySo9XphxGpg3cW57OnMc.png" alt="1746540468427V4JObBFySo9XphxGpg3cW57OnMc.png"></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;2025-05-06-Windows-系统将安装过系统镜像的固态硬盘恢复&quot;&gt;&lt;a href=&quot;#2025-05-06-Windows-系统将安装过系统镜像的固态硬盘恢复&quot; class=&quot;headerlink&quot; title=&quot;2025-05-06-Windows 系</summary>
-      
-    
-    
-    
-    
-    <category term="问题解决" scheme="https://ke-tan.asia/tags/troubleshooting/"/>
     
   </entry>
   
