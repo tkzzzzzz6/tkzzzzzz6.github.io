@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2025-10-19-C++绝对值函数详解 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-10-19-C++绝对值函数详解"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-10-19-C++绝对值函数详解</h2>
+            <div class="post-meta">
+                <time class="date">2025.10.19</time>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/numeric/math/abs">std::abs - cppreference</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/numeric/math/fabs">std::fabs - cppreference</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41575507/article/details/105995538">C++ abs函数详解 - CSDN博客</a></li>
+</ul>
+</blockquote>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在刷算法题的时候，经常需要用到绝对值函数。一开始我以为C++的绝对值函数就是简单的<code>abs()</code>，直到遇到了浮点数、long long等不同类型的数据，才发现C++中的绝对值函数远比想象中复杂。</p>
+<p>今天就来系统地梳理一下C++中绝对值函数的使用方法和注意事项，帮助大家避开我踩过的坑。</p>
+<h2 id="一、不同类型的绝对值函数"><a href="#一、不同类型的绝对值函数" class="headerlink" title="一、不同类型的绝对值函数"></a>一、不同类型的绝对值函数</h2><p>C++中<strong>不同数据类型有不同的绝对值函数</strong>，这是很多初学者容易踩的坑！</p>
+<h3 id="函数对照表"><a href="#函数对照表" class="headerlink" title="函数对照表"></a>函数对照表</h3><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>函数名</th>
+<th>头文件</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>int</strong></td>
+<td><code>abs()</code></td>
+<td><code>&lt;cstdlib&gt;</code> 或 <code>&lt;cmath&gt;</code></td>
+<td><code>abs(-5)</code> → 5</td>
+</tr>
+<tr>
+<td><strong>long</strong></td>
+<td><code>labs()</code></td>
+<td><code>&lt;cstdlib&gt;</code></td>
+<td><code>labs(-123L)</code> → 123</td>
+</tr>
+<tr>
+<td><strong>long long</strong></td>
+<td><code>llabs()</code></td>
+<td><code>&lt;cstdlib&gt;</code></td>
+<td><code>llabs(-123LL)</code> → 123</td>
+</tr>
+<tr>
+<td><strong>float/double</strong></td>
+<td><code>fabs()</code></td>
+<td><code>&lt;cmath&gt;</code></td>
+<td><code>fabs(-3.14)</code> → 3.14</td>
+</tr>
+<tr>
+<td><strong>通用（C++11）</strong></td>
+<td><code>abs()</code></td>
+<td><code>&lt;cmath&gt;</code></td>
+<td>自动识别类型</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="二、基本使用方法"><a href="#二、基本使用方法" class="headerlink" title="二、基本使用方法"></a>二、基本使用方法</h2><h3 id="1-整数类型"><a href="#1-整数类型" class="headerlink" title="1. 整数类型"></a>1. 整数类型</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdlib&gt;</span>  <span class="token comment">// 或 &lt;cmath&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token function">abs</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>  <span class="token comment">// 输出：5</span>
+    
+    <span class="token keyword">long</span> b <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">123L</span><span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token function">labs</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>  <span class="token comment">// 输出：123</span>
+    
+    <span class="token keyword">long</span> <span class="token keyword">long</span> c <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">123456789LL</span><span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token function">llabs</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>  <span class="token comment">// 输出：123456789</span>
+    
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="2-浮点数类型"><a href="#2-浮点数类型" class="headerlink" title="2. 浮点数类型"></a>2. 浮点数类型</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cmath&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">double</span> x <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">3.14</span><span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token function">fabs</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>  <span class="token comment">// 输出：3.14</span>
+    
+    <span class="token keyword">float</span> y <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">2.5f</span><span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token function">fabs</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>  <span class="token comment">// 输出：2.5</span>
+    
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="3-C-11-通用方法（推荐）"><a href="#3-C-11-通用方法（推荐）" class="headerlink" title="3. C++11 通用方法（推荐）"></a>3. C++11 通用方法（推荐）</h3><p>从C++11开始，<code>abs()</code>函数被重载了，可以自动识别不同类型：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cmath&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// abs() 在 C++11 中重载了，可以自动识别类型</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token function">abs</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>        <span class="token comment">// int：5</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token function">abs</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">5L</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>       <span class="token comment">// long：5</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token function">abs</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">5LL</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>      <span class="token comment">// long long：5</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token function">abs</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">3.14</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>     <span class="token comment">// double：3.14</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token function">abs</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">2.5f</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>     <span class="token comment">// float：2.5</span>
+    
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="三、算法竞赛常用写法"><a href="#三、算法竞赛常用写法" class="headerlink" title="三、算法竞赛常用写法"></a>三、算法竞赛常用写法</h2><p>在算法竞赛中，通常会使用万能头文件<code>bits/stdc++.h</code>，这样就不需要担心头文件的问题了：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// bits/stdc++.h 已经包含了所有头文件</span>
+    
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">;</span>
+    <span class="token keyword">long</span> <span class="token keyword">long</span> b <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">123456789LL</span><span class="token punctuation">;</span>
+    <span class="token keyword">double</span> c <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">3.14</span><span class="token punctuation">;</span>
+    
+    cout <span class="token operator">&lt;&lt;</span> <span class="token function">abs</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>    <span class="token comment">// 5</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token function">abs</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>    <span class="token comment">// 123456789</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token function">abs</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>    <span class="token comment">// 3.14</span>
+    
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>推荐：</strong> 在算法竞赛中，直接用 <code>abs()</code> 即可，编译器会自动识别类型！</p>
+<hr>
+<h2 id="四、重要注意事项"><a href="#四、重要注意事项" class="headerlink" title="四、重要注意事项"></a>四、重要注意事项</h2><h3 id="注意1：整数溢出问题（非常重要！）"><a href="#注意1：整数溢出问题（非常重要！）" class="headerlink" title="注意1：整数溢出问题（非常重要！）"></a>注意1：整数溢出问题（非常重要！）</h3><p>这是最容易踩的坑，我自己就在这里吃过亏。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> a <span class="token operator">=</span> INT_MIN<span class="token punctuation">;</span>  <span class="token comment">// -2147483648</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token function">abs</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// ⚠️ 未定义行为！可能输出负数</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>原因分析：</strong></p>
+<ul>
+<li><code>INT_MIN</code> 的值是 -2147483648</li>
+<li><code>INT_MAX</code> 的值是 2147483647</li>
+<li><code>abs(INT_MIN)</code> 应该是 2147483648，但超出了 int 范围！</li>
+<li>结果是<strong>未定义行为</strong>，可能输出负数或其他奇怪的值</li>
+</ul>
+<p><strong>解决方法：</strong></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 方法1：使用 long long</span>
+<span class="token keyword">int</span> a <span class="token operator">=</span> INT_MIN<span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token function">abs</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span><span class="token punctuation">)</span>a<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>  <span class="token comment">// 强制转换为 long long</span>
+
+<span class="token comment">// 方法2：使用 llabs</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token function">llabs</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+
+<span class="token comment">// 方法3：用更大的类型存储</span>
+<span class="token keyword">long</span> <span class="token keyword">long</span> a <span class="token operator">=</span> INT_MIN<span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token function">abs</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="注意2：浮点数要用正确的函数"><a href="#注意2：浮点数要用正确的函数" class="headerlink" title="注意2：浮点数要用正确的函数"></a>注意2：浮点数要用正确的函数</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// ❌ 错误：对浮点数用整数的 abs 并强制转换</span>
+<span class="token keyword">double</span> x <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">3.14</span><span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token function">abs</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 输出：3（小数部分被截断了！）</span>
+
+<span class="token comment">// ✅ 正确：用 fabs 或直接用 abs（C++11）</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token function">fabs</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 输出：3.14</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token function">abs</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 输出：3.14（C++11）</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="注意3：避免重复计算"><a href="#注意3：避免重复计算" class="headerlink" title="注意3：避免重复计算"></a>注意3：避免重复计算</h3><p>在一些场景下，可能需要多次使用同一个绝对值，这时候应该先计算并存储：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// ❌ 低效：计算了两次</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">abs</span><span class="token punctuation">(</span>x <span class="token operator">-</span> y<span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token function">abs</span><span class="token punctuation">(</span>x <span class="token operator">-</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// ✅ 高效：只计算一次</span>
+<span class="token keyword">int</span> diff <span class="token operator">=</span> <span class="token function">abs</span><span class="token punctuation">(</span>x <span class="token operator">-</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>diff <span class="token operator">&gt;</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    cout <span class="token operator">&lt;&lt;</span> diff<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="注意4：负数取模后再求绝对值"><a href="#注意4：负数取模后再求绝对值" class="headerlink" title="注意4：负数取模后再求绝对值"></a>注意4：负数取模后再求绝对值</h3><p>这是一个容易混淆的地方，顺序不同结果可能不同：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">7</span><span class="token punctuation">,</span> b <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 先绝对值再取模</span>
+<span class="token keyword">int</span> result1 <span class="token operator">=</span> <span class="token function">abs</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token operator">%</span> b<span class="token punctuation">;</span>  <span class="token comment">// 7 % 3 = 1</span>
+
+<span class="token comment">// 先取模再绝对值</span>
+<span class="token keyword">int</span> result2 <span class="token operator">=</span> <span class="token function">abs</span><span class="token punctuation">(</span>a <span class="token operator">%</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// (-7) % 3 = -1，abs(-1) = 1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在C++中，负数取模的结果符号与被除数相同，所以 <code>-7 % 3 = -1</code>。</p>
+<hr>
+<h2 id="五、常见使用场景"><a href="#五、常见使用场景" class="headerlink" title="五、常见使用场景"></a>五、常见使用场景</h2><h3 id="场景1：计算两数之差的绝对值"><a href="#场景1：计算两数之差的绝对值" class="headerlink" title="场景1：计算两数之差的绝对值"></a>场景1：计算两数之差的绝对值</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">,</span> b <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> diff <span class="token operator">=</span> <span class="token function">abs</span><span class="token punctuation">(</span>a <span class="token operator">-</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>这是最常见的用法，用于计算距离、差值等。</p>
+<h3 id="场景2：判断是否在允许范围内"><a href="#场景2：判断是否在允许范围内" class="headerlink" title="场景2：判断是否在允许范围内"></a>场景2：判断是否在允许范围内</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">7</span><span class="token punctuation">,</span> target <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">,</span> tolerance <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">abs</span><span class="token punctuation">(</span>x <span class="token operator">-</span> target<span class="token punctuation">)</span> <span class="token operator">&lt;=</span> tolerance<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"在允许范围内"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="场景3：计算曼哈顿距离"><a href="#场景3：计算曼哈顿距离" class="headerlink" title="场景3：计算曼哈顿距离"></a>场景3：计算曼哈顿距离</h3><p>在网格问题中经常用到：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> x1 <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> y1 <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> x2 <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">,</span> y2 <span class="token operator">=</span> <span class="token number">6</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> manhattan_distance <span class="token operator">=</span> <span class="token function">abs</span><span class="token punctuation">(</span>x1 <span class="token operator">-</span> x2<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">abs</span><span class="token punctuation">(</span>y1 <span class="token operator">-</span> y2<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 7</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="场景4：判断奇偶性（适用于负数）"><a href="#场景4：判断奇偶性（适用于负数）" class="headerlink" title="场景4：判断奇偶性（适用于负数）"></a>场景4：判断奇偶性（适用于负数）</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">7</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">abs</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"奇数"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"偶数"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="场景5：数组中找最接近的值"><a href="#场景5：数组中找最接近的值" class="headerlink" title="场景5：数组中找最接近的值"></a>场景5：数组中找最接近的值</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> target <span class="token operator">=</span> <span class="token number">50</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">45</span><span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">,</span> <span class="token number">80</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> closest <span class="token operator">=</span> arr<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> min_diff <span class="token operator">=</span> <span class="token function">abs</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">-</span> target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> diff <span class="token operator">=</span> <span class="token function">abs</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>diff <span class="token operator">&lt;</span> min_diff<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        min_diff <span class="token operator">=</span> diff<span class="token punctuation">;</span>
+        closest <span class="token operator">=</span> arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token string">"最接近的值："</span> <span class="token operator">&lt;&lt;</span> closest<span class="token punctuation">;</span>  <span class="token comment">// 45</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="六、函数性能对比"><a href="#六、函数性能对比" class="headerlink" title="六、函数性能对比"></a>六、函数性能对比</h2><p>虽然在大多数情况下性能差异不大，但了解一下还是有帮助的：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>适用类型</th>
+<th>返回类型</th>
+<th>头文件</th>
+<th>推荐度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>abs(int)</code></td>
+<td>int</td>
+<td>int</td>
+<td><code>&lt;cstdlib&gt;</code></td>
+<td>⭐⭐⭐</td>
+</tr>
+<tr>
+<td><code>labs(long)</code></td>
+<td>long</td>
+<td>long</td>
+<td><code>&lt;cstdlib&gt;</code></td>
+<td>⭐⭐</td>
+</tr>
+<tr>
+<td><code>llabs(long long)</code></td>
+<td>long long</td>
+<td>long long</td>
+<td><code>&lt;cstdlib&gt;</code></td>
+<td>⭐⭐</td>
+</tr>
+<tr>
+<td><code>fabs(double)</code></td>
+<td>float/double</td>
+<td>double</td>
+<td><code>&lt;cmath&gt;</code></td>
+<td>⭐⭐⭐</td>
+</tr>
+<tr>
+<td><code>abs(T)</code> (C++11)</td>
+<td>任意数值类型</td>
+<td>对应类型</td>
+<td><code>&lt;cmath&gt;</code></td>
+<td>⭐⭐⭐⭐⭐</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="七、记忆技巧"><a href="#七、记忆技巧" class="headerlink" title="七、记忆技巧"></a>七、记忆技巧</h2><h3 id="记忆口诀"><a href="#记忆口诀" class="headerlink" title="记忆口诀"></a>记忆口诀</h3><pre class="line-numbers language-none"><code class="language-none">整数 abs，浮点 fabs
+C++11 后都用 abs
+小心溢出 INT_MIN
+竞赛直接 abs 最稳<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="推荐使用方式"><a href="#推荐使用方式" class="headerlink" title="推荐使用方式"></a>推荐使用方式</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token comment">// C++11 后统一用 abs()，编译器自动识别类型</span>
+<span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token function">abs</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token comment">// int</span>
+<span class="token keyword">long</span> <span class="token keyword">long</span> b <span class="token operator">=</span> <span class="token function">abs</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">5LL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// long long</span>
+<span class="token keyword">double</span> c <span class="token operator">=</span> <span class="token function">abs</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">3.14</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">// double</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="八、完整示例代码"><a href="#八、完整示例代码" class="headerlink" title="八、完整示例代码"></a>八、完整示例代码</h2><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 1. 整数绝对值</span>
+    <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"abs(-10) = "</span> <span class="token operator">&lt;&lt;</span> <span class="token function">abs</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>  <span class="token comment">// 10</span>
+    
+    <span class="token comment">// 2. long long 绝对值</span>
+    <span class="token keyword">long</span> <span class="token keyword">long</span> y <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">123456789LL</span><span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"abs(-123456789LL) = "</span> <span class="token operator">&lt;&lt;</span> <span class="token function">abs</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>  <span class="token comment">// 123456789</span>
+    
+    <span class="token comment">// 3. 浮点数绝对值</span>
+    <span class="token keyword">double</span> z <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">3.14159</span><span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"abs(-3.14159) = "</span> <span class="token operator">&lt;&lt;</span> <span class="token function">abs</span><span class="token punctuation">(</span>z<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>  <span class="token comment">// 3.14159</span>
+    
+    <span class="token comment">// 4. 计算差值</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">,</span> b <span class="token operator">=</span> <span class="token number">15</span><span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"差值 = "</span> <span class="token operator">&lt;&lt;</span> <span class="token function">abs</span><span class="token punctuation">(</span>a <span class="token operator">-</span> b<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>  <span class="token comment">// 10</span>
+    
+    <span class="token comment">// 5. 注意溢出（正确做法）</span>
+    <span class="token keyword">int</span> min_val <span class="token operator">=</span> INT_MIN<span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"abs(INT_MIN) = "</span> <span class="token operator">&lt;&lt;</span> <span class="token function">abs</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span><span class="token punctuation">)</span>min_val<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    
+    <span class="token comment">// 6. 曼哈顿距离</span>
+    <span class="token keyword">int</span> x1 <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> y1 <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">,</span> x2 <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">,</span> y2 <span class="token operator">=</span> <span class="token number">6</span><span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"曼哈顿距离 = "</span> <span class="token operator">&lt;&lt;</span> <span class="token function">abs</span><span class="token punctuation">(</span>x1<span class="token operator">-</span>x2<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">abs</span><span class="token punctuation">(</span>y1<span class="token operator">-</span>y2<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>  <span class="token comment">// 7</span>
+    
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="九、常见错误示例"><a href="#九、常见错误示例" class="headerlink" title="九、常见错误示例"></a>九、常见错误示例</h2><h3 id="错误1：浮点数用错函数"><a href="#错误1：浮点数用错函数" class="headerlink" title="错误1：浮点数用错函数"></a>错误1：浮点数用错函数</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// ❌ 错误</span>
+<span class="token keyword">double</span> x <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">3.14</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> result <span class="token operator">=</span> <span class="token function">abs</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 可能得到 3，小数丢失</span>
+
+<span class="token comment">// ✅ 正确</span>
+<span class="token keyword">double</span> result <span class="token operator">=</span> <span class="token function">abs</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 3.14（C++11）</span>
+<span class="token comment">// 或</span>
+<span class="token keyword">double</span> result <span class="token operator">=</span> <span class="token function">fabs</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 3.14</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="错误2：溢出未处理"><a href="#错误2：溢出未处理" class="headerlink" title="错误2：溢出未处理"></a>错误2：溢出未处理</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// ❌ 危险</span>
+<span class="token keyword">int</span> x <span class="token operator">=</span> INT_MIN<span class="token punctuation">;</span>
+<span class="token keyword">int</span> result <span class="token operator">=</span> <span class="token function">abs</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 未定义行为</span>
+
+<span class="token comment">// ✅ 安全</span>
+<span class="token keyword">long</span> <span class="token keyword">long</span> result <span class="token operator">=</span> <span class="token function">abs</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span><span class="token punctuation">)</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="错误3：重复计算"><a href="#错误3：重复计算" class="headerlink" title="错误3：重复计算"></a>错误3：重复计算</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// ❌ 低效</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">abs</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> target<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        sum <span class="token operator">+=</span> <span class="token function">abs</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// ✅ 高效</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> diff <span class="token operator">=</span> <span class="token function">abs</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>diff <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        sum <span class="token operator">+=</span> diff<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h3><ol>
+<li><strong>C++11 及以后</strong>：统一使用 <code>abs()</code>，简单好记，编译器自动处理类型</li>
+<li><strong>注意整数溢出</strong>：<code>INT_MIN</code> 的绝对值会溢出，需要转换为 <code>long long</code></li>
+<li><strong>算法竞赛</strong>：<code>#include &lt;bits/stdc++.h&gt;</code> + <code>abs()</code> 搞定一切</li>
+<li><strong>避免重复计算</strong>：将绝对值结果存储在变量中，不要重复调用</li>
+<li><strong>浮点数</strong>：C++11 后用 <code>abs()</code> 或 <code>fabs()</code> 都可以</li>
+</ol>
+<h3 id="何时使用何种函数"><a href="#何时使用何种函数" class="headerlink" title="何时使用何种函数"></a>何时使用何种函数</h3><ul>
+<li>✅ <strong>一般情况</strong>：直接用 <code>abs()</code>（C++11）</li>
+<li>✅ <strong>明确是浮点数</strong>：用 <code>fabs()</code> 或 <code>abs()</code></li>
+<li>⚠️ <strong>可能溢出</strong>：先转换为 <code>long long</code> 再用 <code>abs()</code></li>
+<li>⚠️ <strong>C++98/03</strong>：整数用 <code>abs()</code>/<code>labs()</code>/<code>llabs()</code>，浮点用 <code>fabs()</code></li>
+</ul>
+<h3 id="快速查询表"><a href="#快速查询表" class="headerlink" title="快速查询表"></a>快速查询表</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 推荐写法（C++11）</span>
+<span class="token function">abs</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">)</span>        <span class="token comment">// int</span>
+<span class="token function">abs</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">5LL</span><span class="token punctuation">)</span>      <span class="token comment">// long long  </span>
+<span class="token function">abs</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">3.14</span><span class="token punctuation">)</span>     <span class="token comment">// double</span>
+
+<span class="token comment">// 注意溢出</span>
+<span class="token function">abs</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span><span class="token punctuation">)</span>INT_MIN<span class="token punctuation">)</span>  <span class="token comment">// 安全</span>
+
+<span class="token comment">// 旧版本兼容</span>
+<span class="token function">abs</span><span class="token punctuation">(</span>int_val<span class="token punctuation">)</span>       <span class="token comment">// int</span>
+<span class="token function">labs</span><span class="token punctuation">(</span>long_val<span class="token punctuation">)</span>     <span class="token comment">// long</span>
+<span class="token function">llabs</span><span class="token punctuation">(</span>ll_val<span class="token punctuation">)</span>      <span class="token comment">// long long</span>
+<span class="token function">fabs</span><span class="token punctuation">(</span>double_val<span class="token punctuation">)</span>   <span class="token comment">// double</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>绝对值函数虽然看起来简单，但在实际使用中有不少细节需要注意。特别是整数溢出的问题，我自己就因为这个在比赛中吃过亏。</p>
+<p>希望这篇文章能帮助大家避开这些坑，在刷题和比赛中更加得心应手！</p>
+<p>如果有任何问题或者补充，欢迎在评论区讨论～</p>
+<p><strong>祝大家刷题顺利！</strong> 💪✨</p>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2025/10/23/1/">2025-10-23-C++求阶乘末尾非零数字</a></li>
+                
+                
+                    <li>下一篇: <a href="/2025/10/17/2025-10-17-C++%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%8A%A0%E9%80%9F%E8%AF%A6%E8%A7%A3/">2025-10-17-C++输入输出加速详解</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/algorithm/" rel="tag">算法学习</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2025/10/23/1/">2025-10-23-C++求阶乘末尾非零数字</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/19/2025-10-19-C++%E7%BB%9D%E5%AF%B9%E5%80%BC%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/">2025-10-19-C++绝对值函数详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/17/2025-10-17-C++%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%8A%A0%E9%80%9F%E8%AF%A6%E8%A7%A3/">2025-10-17-C++输入输出加速详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/15/2025-10-15-python%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E5%BC%8F%E4%B8%8Emap%E5%87%BD%E6%95%B0/">2025-10-15-浏览器批量下载文件的方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/15/2025-10-15-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95/">2025-10-15-python列表推导式与map函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/14/2025-10-14-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C-%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E4%B8%8E%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95%EF%BC%88Telnet%EF%BC%89/">2025-10-14-计算机网络实验二-交换机基本配置与远程登录（Telnet）</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">十月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1970/01/">一月 1970</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/deep-learning/" style="font-size: 14.29px;">深度学习</a> <a href="/tags/development/" style="font-size: 17.14px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 12.86px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 15.71px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 11.43px;">论文阅读</a> <a href="/tags/course/" style="font-size: 20px;">课程学习</a> <a href="/tags/troubleshooting/" style="font-size: 18.57px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>
+                © 2025 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.
+                
+                    &nbsp;|&nbsp;
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+                        蜀ICP备2025165253号
+                    </a>
+                
+                
+            </p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+<style>
+.police-beian{display:inline-flex;align-items:center;gap:4px}
+.police-icon{display:inline-block;width:16px;height:16px;background:#e91e63;border-radius:2px;opacity:.85}
+/* 说明：如需官方警徽图标，可将 .police-icon 的 background 设置为图片：
+   background:url('https://www.beian.gov.cn/img/ghs.png') no-repeat center/contain; */
+</style>
+
+  </body>
+</html>

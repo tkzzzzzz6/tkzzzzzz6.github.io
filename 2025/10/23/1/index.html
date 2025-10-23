@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2025-10-23-C++求阶乘末尾非零数字 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-10-23-C++求阶乘末尾非零数字"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-10-23-C++求阶乘末尾非零数字</h2>
+            <div class="post-meta">
+                <time class="date">2025.10.23</time>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/248c8fbee56e491aa147b67b9c082da0?channelPut=w251acm">阶乘末尾非零数字 - NowCoder题目链接</a>  </li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/winter2121/article/details/119570873">记一个有趣的算法题：求n的阶乘最后一位非零数字</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个整数 <code>n</code>（1 ≤ n ≤ 10^7），要求输出 <code>n!</code>（n 的阶乘）中<strong>末尾第一个非零数字</strong>。</p>
+<p>题目链接</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/248c8fbee56e491aa147b67b9c082da0?channelPut=w251acm">阶乘末尾非零数字</a></li>
+</ul>
+<hr>
+<h2 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h2><p>对于较小的 <code>n</code>（如 n ≤ 20），我们可以直接计算出 <code>n!</code> 的值并从后往前找第一个非零数字：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">long</span> <span class="token keyword">long</span> <span class="token function">factorial</span><span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">long</span> <span class="token keyword">long</span> ans <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ans <span class="token operator">*=</span> i<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+````
+
+但当 `n` 达到 <span class="token number">10</span><span class="token operator">^</span><span class="token number">7</span> 时，`n<span class="token operator">!</span>` 的值极其巨大（数百万位），即使使用 `<span class="token keyword">long</span> <span class="token keyword">double</span>` 或大整数也无法保存，因此<span class="token operator">*</span><span class="token operator">*</span>直接计算不可行<span class="token operator">*</span><span class="token operator">*</span>。
+
+<span class="token operator">--</span><span class="token operator">-</span>
+
+## 思路
+
+我们只需要找到<span class="token operator">*</span><span class="token operator">*</span>阶乘末尾的第一个非零数字<span class="token operator">*</span><span class="token operator">*</span>，而非整个阶乘。
+
+分析阶乘中的末尾零产生的原因：
+
+<span class="token operator">*</span> 每一对 `<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span>` 会产生一个零；
+<span class="token operator">*</span> 因此我们可以统计 <span class="token number">5</span> 的个数并与 <span class="token number">2</span> 配对去除掉它们的影响；
+<span class="token operator">*</span> 同时在计算过程中每次取模避免数字过大。
+
+<span class="token operator">*</span><span class="token operator">*</span>核心思想：<span class="token operator">*</span><span class="token operator">*</span>
+
+<span class="token operator">*</span> 模拟乘法过程；
+<span class="token operator">*</span> 每次乘完后去掉末尾的零；
+<span class="token operator">*</span> 保留最后几位数字（如 <span class="token number">1e9</span>）即可。
+
+<span class="token operator">--</span><span class="token operator">-</span>
+
+##  实现思路
+
+<span class="token number">1.</span> 初始化 `res <span class="token operator">=</span> <span class="token number">1</span>`；
+<span class="token number">2.</span> 遍历 `i <span class="token operator">=</span> <span class="token number">1.</span><span class="token punctuation">.</span>n`：
+
+   <span class="token operator">*</span> `res <span class="token operator">*=</span> i`；
+   <span class="token operator">*</span> 去掉所有末尾的 <span class="token number">0</span>；
+   <span class="token operator">*</span> 取模 `res <span class="token operator">%=</span> <span class="token number">1000000000</span>`（保留最后 <span class="token number">9</span> 位，防止溢出）；
+<span class="token number">3.</span> 最终 `res <span class="token operator">%</span> <span class="token number">10</span>` 即为末尾第一个非零数字。
+
+<span class="token operator">--</span><span class="token operator">-</span>
+
+##  代码实现
+
+```cpp
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">long</span> <span class="token keyword">long</span> ll<span class="token punctuation">;</span>
+
+ll <span class="token function">lastNonZeroDigit_factorial</span><span class="token punctuation">(</span>ll n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ll ans <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ans <span class="token operator">*=</span> i<span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>ans <span class="token operator">%</span> <span class="token number">10</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>ans <span class="token operator">/=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+        ans <span class="token operator">%=</span> <span class="token keyword">int</span><span class="token punctuation">(</span><span class="token number">1e9</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1e9是double需要强制转换</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ios<span class="token double-colon punctuation">::</span><span class="token function">sync_with_stdio</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">,</span> cin<span class="token punctuation">.</span><span class="token function">tie</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    ll n<span class="token punctuation">;</span>
+    cin <span class="token operator">&gt;&gt;</span> n<span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token function">lastNonZeroDigit_factorial</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">10</span> <span class="token operator">&lt;&lt;</span> <span class="token char">'\n'</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="关键点总结"><a href="#关键点总结" class="headerlink" title="关键点总结"></a>关键点总结</h2><ol>
+<li><p><strong>避免大数计算</strong>：通过不断取模与去除 0 来防止溢出；</p>
+</li>
+<li><p><strong>2 与 5 的抵消原理</strong>：每对 (2,5) 会产生一个 0，去掉它们即可；</p>
+</li>
+<li><p><strong>优化输出</strong>：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">ios<span class="token double-colon punctuation">::</span><span class="token function">sync_with_stdio</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+cin<span class="token punctuation">.</span><span class="token function">tie</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>关闭流同步，提高输入输出效率。</p>
+</li>
+</ol>
+<hr>
+<h2 id="思考延伸"><a href="#思考延伸" class="headerlink" title="思考延伸"></a>思考延伸</h2><ul>
+<li>该方法不仅适用于阶乘问题，还可以推广到“组合数末尾非零数字”类问题；</li>
+<li>若需要更多尾部非零数字（例如末尾 5 位非零数），可调整取模范围（如 1e12）。</li>
+</ul>
+<hr>
+<p><strong>总结一句话：</strong></p>
+<blockquote>
+<p>“通过逐步消去 2 和 5 的影响，并限制保留位数，我们无需计算完整阶乘即可求出末尾非零数字。”</p>
+</blockquote>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2025/10/19/2025-10-19-C++%E7%BB%9D%E5%AF%B9%E5%80%BC%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/">2025-10-19-C++绝对值函数详解</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/algorithm/" rel="tag">算法学习</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2025/10/23/1/">2025-10-23-C++求阶乘末尾非零数字</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/19/2025-10-19-C++%E7%BB%9D%E5%AF%B9%E5%80%BC%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/">2025-10-19-C++绝对值函数详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/17/2025-10-17-C++%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%8A%A0%E9%80%9F%E8%AF%A6%E8%A7%A3/">2025-10-17-C++输入输出加速详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/15/2025-10-15-python%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E5%BC%8F%E4%B8%8Emap%E5%87%BD%E6%95%B0/">2025-10-15-浏览器批量下载文件的方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/15/2025-10-15-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95/">2025-10-15-python列表推导式与map函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/14/2025-10-14-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C-%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E4%B8%8E%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95%EF%BC%88Telnet%EF%BC%89/">2025-10-14-计算机网络实验二-交换机基本配置与远程登录（Telnet）</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">十月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1970/01/">一月 1970</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/deep-learning/" style="font-size: 14.29px;">深度学习</a> <a href="/tags/development/" style="font-size: 17.14px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 12.86px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 15.71px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 11.43px;">论文阅读</a> <a href="/tags/course/" style="font-size: 20px;">课程学习</a> <a href="/tags/troubleshooting/" style="font-size: 18.57px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>
+                © 2025 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.
+                
+                    &nbsp;|&nbsp;
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+                        蜀ICP备2025165253号
+                    </a>
+                
+                
+            </p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+<style>
+.police-beian{display:inline-flex;align-items:center;gap:4px}
+.police-icon{display:inline-block;width:16px;height:16px;background:#e91e63;border-radius:2px;opacity:.85}
+/* 说明：如需官方警徽图标，可将 .police-icon 的 background 设置为图片：
+   background:url('https://www.beian.gov.cn/img/ghs.png') no-repeat center/contain; */
+</style>
+
+  </body>
+</html>

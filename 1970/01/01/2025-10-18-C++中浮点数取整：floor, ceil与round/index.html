@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title> - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content=""/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>没有标题的文章</h2>
+            <div class="post-meta">
+                <time class="date">1970.01.01</time>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <blockquote>这篇文章上次修改于 20385 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+        
+            <p>好的，明白了 Hexo 博客文章的格式要求。这篇博客文章将专注于 C++ 中的向上和向下取整，并澄清与四舍五入的区别。</p>
+<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token front-matter-block"><span class="token punctuation">---</span>
+<span class="token front-matter yaml language-yaml">title: 2025-10-18-C++中浮点数取整：floor, ceil与round
+date: 2025-10-18
+tags:
+    - 算法学习</span>
+<span class="token punctuation">---</span></span>
+
+<span class="token title important"><span class="token punctuation">#</span> 参考资料</span>
+
+<span class="token blockquote punctuation">&gt;</span> <span class="token list punctuation">-</span> <span class="token url">[<span class="token content">std::floor - cppreference</span>](<span class="token url">https://en.cppreference.com/w/cpp/numeric/math/floor</span>)</span>
+<span class="token blockquote punctuation">&gt;</span> <span class="token list punctuation">-</span> <span class="token url">[<span class="token content">std::ceil - cppreference</span>](<span class="token url">https://en.cppreference.com/w/cpp/numeric/math/ceil</span>)</span>
+<span class="token blockquote punctuation">&gt;</span> <span class="token list punctuation">-</span> <span class="token url">[<span class="token content">std::round - cppreference</span>](<span class="token url">https://en.cppreference.com/w/cpp/numeric/math/round</span>)</span>
+<span class="token blockquote punctuation">&gt;</span> <span class="token list punctuation">-</span> <span class="token url">[<span class="token content">C++ 四舍五入、向下取整、向上取整、截断取整 - 知乎</span>](<span class="token url">https://zhuanlan.zhihu.com/p/63353457</span>)</span>
+
+<span class="token hr punctuation">---</span>
+
+<span class="token title important"><span class="token punctuation">##</span> C++ 中浮点数取整：`floor`, `ceil` 与 `round`</span>
+
+在 C++ 编程中，我们经常需要对浮点数进行取整操作。但取整并非简单地抹去小数部分，它根据不同的规则分为向下取整、向上取整和四舍五入等。理解这些操作的含义、C++ 中的实现方式以及潜在的“坑”，对于编写健壮的数值计算代码至关重要。
+
+本文将详细探讨 C++ 标准库 <span class="token code-snippet code keyword">`&lt;cmath&gt;`</span> (在 C 语言中是 <span class="token code-snippet code keyword">`&lt;math.h&gt;`</span>) 中提供的 <span class="token code-snippet code keyword">`floor()`</span>、<span class="token code-snippet code keyword">`ceil()`</span> 和 <span class="token code-snippet code keyword">`round()`</span> 函数。
+
+<span class="token title important"><span class="token punctuation">###</span> 1. 理解取整的种类</span>
+
+在开始之前，我们先统一一下对不同取整方式的理解。想象一条数轴，这会帮助我们直观地理解这些概念：
+
+<span class="token title important"><span class="token punctuation">####</span> 1.1 向下取整 (Floor)</span>
+
+向下取整意味着将一个数“掰”到它<span class="token bold"><span class="token punctuation">**</span><span class="token content">左边最近的那个整数</span><span class="token punctuation">**</span></span>。无论正负，结果都朝<span class="token bold"><span class="token punctuation">**</span><span class="token content">负无穷大</span><span class="token punctuation">**</span></span>的方向靠近。
+
+<span class="token list punctuation">*</span>   <span class="token code-snippet code keyword">`floor(3.7)`</span> 结果是 <span class="token code-snippet code keyword">`3.0`</span>
+<span class="token list punctuation">*</span>   <span class="token code-snippet code keyword">`floor(3.0)`</span> 结果是 <span class="token code-snippet code keyword">`3.0`</span>
+<span class="token list punctuation">*</span>   <span class="token code-snippet code keyword">`floor(-3.7)`</span> 结果是 <span class="token code-snippet code keyword">`-4.0`</span> (因为 -4 在 -3.7 的左边)
+<span class="token list punctuation">*</span>   <span class="token code-snippet code keyword">`floor(-3.0)`</span> 结果是 <span class="token code-snippet code keyword">`-3.0`</span>
+
+<span class="token title important"><span class="token punctuation">####</span> 1.2 向上取整 (Ceiling)</span>
+
+向上取整意味着将一个数“掰”到它<span class="token bold"><span class="token punctuation">**</span><span class="token content">右边最近的那个整数</span><span class="token punctuation">**</span></span>。无论正负，结果都朝<span class="token bold"><span class="token punctuation">**</span><span class="token content">正无穷大</span><span class="token punctuation">**</span></span>的方向靠近。
+
+<span class="token list punctuation">*</span>   <span class="token code-snippet code keyword">`ceil(3.2)`</span> 结果是 <span class="token code-snippet code keyword">`4.0`</span>
+<span class="token list punctuation">*</span>   <span class="token code-snippet code keyword">`ceil(3.0)`</span> 结果是 <span class="token code-snippet code keyword">`3.0`</span>
+<span class="token list punctuation">*</span>   <span class="token code-snippet code keyword">`ceil(-3.2)`</span> 结果是 <span class="token code-snippet code keyword">`-3.0`</span> (因为 -3 在 -3.2 的右边)
+<span class="token list punctuation">*</span>   <span class="token code-snippet code keyword">`ceil(-3.0)`</span> 结果是 <span class="token code-snippet code keyword">`-3.0`</span>
+
+<span class="token title important"><span class="token punctuation">####</span> 1.3 四舍五入 (Rounding)</span>
+
+四舍五入是最常见的取整方式，它将一个数取整到<span class="token bold"><span class="token punctuation">**</span><span class="token content">最近的整数</span><span class="token punctuation">**</span></span>。当小数部分恰好是 <span class="token code-snippet code keyword">`.5`</span> 时，通常会遵循“远离零”的规则 (或者在某些语境下是“向偶数靠拢”的规则，但 <span class="token code-snippet code keyword">`std::round`</span> 遵循的是远离零)。
+
+<span class="token list punctuation">*</span>   <span class="token code-snippet code keyword">`round(3.7)`</span> 结果是 <span class="token code-snippet code keyword">`4.0`</span>
+<span class="token list punctuation">*</span>   <span class="token code-snippet code keyword">`round(3.2)`</span> 结果是 <span class="token code-snippet code keyword">`3.0`</span>
+<span class="token list punctuation">*</span>   <span class="token code-snippet code keyword">`round(3.5)`</span> 结果是 <span class="token code-snippet code keyword">`4.0`</span> (远离零)
+<span class="token list punctuation">*</span>   <span class="token code-snippet code keyword">`round(-3.7)`</span> 结果是 <span class="token code-snippet code keyword">`-4.0`</span>
+<span class="token list punctuation">*</span>   <span class="token code-snippet code keyword">`round(-3.2)`</span> 结果是 <span class="token code-snippet code keyword">`-3.0`</span>
+<span class="token list punctuation">*</span>   <span class="token code-snippet code keyword">`round(-3.5)`</span> 结果是 <span class="token code-snippet code keyword">`-4.0`</span> (远离零)
+
+<span class="token title important"><span class="token punctuation">###</span> 2. C++ 中的实现方法</span>
+
+C++ 标准库在 <span class="token code-snippet code keyword">`&lt;cmath&gt;`</span> (对于 C 语言是 <span class="token code-snippet code keyword">`&lt;math.h&gt;`</span>) 中提供了这些函数。
+
+<span class="token title important"><span class="token punctuation">####</span> 2.1 `std::floor()` - 向下取整</span>
+
+```cpp
+<span class="token title important"><span class="token punctuation">#</span>include &lt;iostream&gt;</span>
+<span class="token title important"><span class="token punctuation">#</span>include &lt;cmath&gt; // 包含 floor 函数</span>
+
+int main() {
+    double x1 = 3.7;
+    double x2 = -3.7;
+    double x3 = 3.0;
+
+<span class="token code keyword">    std::cout &lt;&lt; "std::floor(" &lt;&lt; x1 &lt;&lt; ") = " &lt;&lt; std::floor(x1) &lt;&lt; std::endl; // 输出 3.0
+    std::cout &lt;&lt; "std::floor(" &lt;&lt; x2 &lt;&lt; ") = " &lt;&lt; std::floor(x2) &lt;&lt; std::endl; // 输出 -4.0
+    std::cout &lt;&lt; "std::floor(" &lt;&lt; x3 &lt;&lt; ") = " &lt;&lt; std::floor(x3) &lt;&lt; std::endl; // 输出 3.0</span>
+
+<span class="token code keyword">    // 如果需要整数类型的结果，需要强制类型转换
+    int result_int = static_cast&lt;int&gt;(std::floor(x1));
+    std::cout &lt;&lt; "static_cast&lt;int&gt;(std::floor(" &lt;&lt; x1 &lt;&lt; ")) = " &lt;&lt; result_int &lt;&lt; std::endl; // 输出 3</span>
+
+<span class="token code keyword">    return 0;</span>
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="2-2-std-ceil-向上取整"><a href="#2-2-std-ceil-向上取整" class="headerlink" title="2.2 std::ceil() - 向上取整"></a>2.2 <code>std::ceil()</code> - 向上取整</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cmath&gt;</span> <span class="token comment">// 包含 ceil 函数</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">double</span> x1 <span class="token operator">=</span> <span class="token number">3.2</span><span class="token punctuation">;</span>
+    <span class="token keyword">double</span> x2 <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">3.2</span><span class="token punctuation">;</span>
+    <span class="token keyword">double</span> x3 <span class="token operator">=</span> <span class="token number">3.0</span><span class="token punctuation">;</span>
+
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"std::ceil("</span> <span class="token operator">&lt;&lt;</span> x1 <span class="token operator">&lt;&lt;</span> <span class="token string">") = "</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span><span class="token function">ceil</span><span class="token punctuation">(</span>x1<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span> <span class="token comment">// 输出 4.0</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"std::ceil("</span> <span class="token operator">&lt;&lt;</span> x2 <span class="token operator">&lt;&lt;</span> <span class="token string">") = "</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span><span class="token function">ceil</span><span class="token punctuation">(</span>x2<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span> <span class="token comment">// 输出 -3.0</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"std::ceil("</span> <span class="token operator">&lt;&lt;</span> x3 <span class="token operator">&lt;&lt;</span> <span class="token string">") = "</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span><span class="token function">ceil</span><span class="token punctuation">(</span>x3<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span> <span class="token comment">// 输出 3.0</span>
+
+    <span class="token comment">// 如果需要整数类型的结果，需要强制类型转换</span>
+    <span class="token keyword">int</span> result_int <span class="token operator">=</span> <span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span><span class="token function">ceil</span><span class="token punctuation">(</span>x1<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"static_cast&lt;int&gt;(std::ceil("</span> <span class="token operator">&lt;&lt;</span> x1 <span class="token operator">&lt;&lt;</span> <span class="token string">")) = "</span> <span class="token operator">&lt;&lt;</span> result_int <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span> <span class="token comment">// 输出 4</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="2-3-std-round-四舍五入"><a href="#2-3-std-round-四舍五入" class="headerlink" title="2.3 std::round() - 四舍五入"></a>2.3 <code>std::round()</code> - 四舍五入</h4><p>从 C++11 (以及 C99) 开始，标准库提供了 <code>std::round()</code> 函数来实现标准的四舍五入。它通常遵循“远离零”的规则。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cmath&gt;</span> <span class="token comment">// 包含 round 函数</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">double</span> x1 <span class="token operator">=</span> <span class="token number">3.7</span><span class="token punctuation">;</span>
+    <span class="token keyword">double</span> x2 <span class="token operator">=</span> <span class="token number">3.2</span><span class="token punctuation">;</span>
+    <span class="token keyword">double</span> x3 <span class="token operator">=</span> <span class="token number">3.5</span><span class="token punctuation">;</span>
+    <span class="token keyword">double</span> x4 <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">3.7</span><span class="token punctuation">;</span>
+    <span class="token keyword">double</span> x5 <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">3.2</span><span class="token punctuation">;</span>
+    <span class="token keyword">double</span> x6 <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">3.5</span><span class="token punctuation">;</span>
+
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"std::round("</span> <span class="token operator">&lt;&lt;</span> x1 <span class="token operator">&lt;&lt;</span> <span class="token string">") = "</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span><span class="token function">round</span><span class="token punctuation">(</span>x1<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span> <span class="token comment">// 输出 4.0</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"std::round("</span> <span class="token operator">&lt;&lt;</span> x2 <span class="token operator">&lt;&lt;</span> <span class="token string">") = "</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span><span class="token function">round</span><span class="token punctuation">(</span>x2<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span> <span class="token comment">// 输出 3.0</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"std::round("</span> <span class="token operator">&lt;&lt;</span> x3 <span class="token operator">&lt;&lt;</span> <span class="token string">") = "</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span><span class="token function">round</span><span class="token punctuation">(</span>x3<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span> <span class="token comment">// 输出 4.0 (远离零)</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"std::round("</span> <span class="token operator">&lt;&lt;</span> x4 <span class="token operator">&lt;&lt;</span> <span class="token string">") = "</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span><span class="token function">round</span><span class="token punctuation">(</span>x4<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span> <span class="token comment">// 输出 -4.0</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"std::round("</span> <span class="token operator">&lt;&lt;</span> x5 <span class="token operator">&lt;&lt;</span> <span class="token string">") = "</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span><span class="token function">round</span><span class="token punctuation">(</span>x5<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span> <span class="token comment">// 输出 -3.0</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"std::round("</span> <span class="token operator">&lt;&lt;</span> x6 <span class="token operator">&lt;&lt;</span> <span class="token string">") = "</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span><span class="token function">round</span><span class="token punctuation">(</span>x6<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span> <span class="token comment">// 输出 -4.0 (远离零)</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>【历史遗留与混淆点】</strong><br>你可能听说过“C 语言中用 <code>x + 0.5</code> 再 <code>floor</code> 来四舍五入”这种说法。这确实是一种常见的<strong>实现四舍五入</strong>的技巧，尤其是针对正数。但请注意，它实现的不是向上取整，而是四舍五入。且对于负数 <code>.5</code> 的处理（例如 <code>floor(-3.5 + 0.5) = floor(-3.0) = -3</code>），可能与 <code>std::round</code> 的“远离零”规则（<code>round(-3.5) = -4.0</code>）有所不同。因此，推荐使用 <code>std::round()</code> 进行四舍五入，以避免混淆和不一致的行为。</p>
+<h3 id="3-注意事项与潜在问题"><a href="#3-注意事项与潜在问题" class="headerlink" title="3. 注意事项与潜在问题"></a>3. 注意事项与潜在问题</h3><h4 id="3-1-返回类型是浮点数"><a href="#3-1-返回类型是浮点数" class="headerlink" title="3.1 返回类型是浮点数"></a>3.1 返回类型是浮点数</h4><p><code>std::floor()</code>, <code>std::ceil()</code>, <code>std::round()</code> 都接受浮点数（<code>double</code>、<code>float</code>、<code>long double</code>）作为输入，并<strong>返回一个浮点数类型的结果</strong>。即使结果是一个整数（例如 <code>ceil(3.0)</code> 返回 <code>3.0</code>），它仍然是 <code>double</code> 类型。</p>
+<p>如果你需要一个 <code>int</code> 或 <code>long long</code> 类型的整数结果，务必进行<strong>强制类型转换</strong>：<br><code>int result_int = static_cast&lt;int&gt;(std::ceil(value));</code></p>
+<h4 id="3-2-负数的表现"><a href="#3-2-负数的表现" class="headerlink" title="3.2 负数的表现"></a>3.2 负数的表现</h4><p>这是最容易出错的地方。请再次回顾数轴的概念：</p>
+<ul>
+<li><code>floor</code> 总是向左（负无穷大）取整。</li>
+<li><code>ceil</code> 总是向右（正无穷大）取整。</li>
+<li><code>round</code> 总是取到最近的整数， <code>.5</code> 边界则远离零。</li>
+</ul>
+<p>确保你完全理解它们在处理负数时的行为，这与我们日常生活中对“向上/向下”的直觉可能不同。</p>
+<h4 id="3-3-浮点数精度问题"><a href="#3-3-浮点数精度问题" class="headerlink" title="3.3 浮点数精度问题"></a>3.3 浮点数精度问题</h4><p>浮点数计算的精度问题是所有数值处理的“老大难”。由于浮点数在计算机中的表示方式，某些小数可能无法精确表示，从而导致一些意想不到的结果。</p>
+<p>例如，<code>10.0 / 3.0</code> 可能不是精确的 <code>3.333...</code>，而可能是 <code>3.3333333333333335</code>。</p>
+<ul>
+<li>如果一个数理论上是 <code>3.0</code>，但由于精度问题变成了 <code>2.9999999999999999</code>：<ul>
+<li><code>ceil(2.9999999999999999)</code> 可能会得到 <code>3.0</code> (通常是期望的)。</li>
+<li><code>floor(2.9999999999999999)</code> 可能会得到 <code>2.0</code> (这可能不是你想要的)。</li>
+</ul>
+</li>
+<li>如果一个数理论上是 <code>3.0</code>，但由于精度问题变成了 <code>3.0000000000000001</code>：<ul>
+<li><code>ceil(3.0000000000000001)</code> 可能会得到 <code>4.0</code> (这可能不是你想要的)。</li>
+<li><code>floor(3.0000000000000001)</code> 可能会得到 <code>3.0</code> (通常是期望的)。</li>
+</ul>
+</li>
+</ul>
+<p><strong>应对策略：</strong></p>
+<ol>
+<li><strong>尽量使用整数运算：</strong> 如果你的计算涉及到整数之间的除法，并且需要向上取整，<strong>强烈建议使用整数运算的技巧来避免浮点数精度问题</strong>。<ul>
+<li>对于 <code>a / b</code> (其中 <code>a</code>, <code>b</code> 均为整数，且 <code>b &gt; 0</code>) 的向上取整，可以写成：<br><code>int result_ceil_int = (a + b - 1) / b;</code></li>
+<li>这个技巧只适用于 <code>a &gt;= 0</code>。如果 <code>a</code> 可能是负数，情况会更复杂，需要单独处理。</li>
+</ul>
+</li>
+<li><strong>避免对非常接近整数的浮点数进行 <code>ceil/floor</code> 操作</strong>，除非你对精度有充分的把握或可以接受潜在误差。</li>
+<li><strong>使用一个极小的偏移量 (epsilon) 辅助判断</strong>：在某些场景下，可以通过 <code>x + epsilon</code> 或 <code>x - epsilon</code> 来微调浮点数，以避免临界值附近的精度误差，但这种方法需要谨慎使用，并且 <code>epsilon</code> 的选择非常关键。例如，<code>ceil(x - 1e-9)</code> 试图将略大于整数的数拉回，但可能会影响正常的小数。</li>
+</ol>
+<h3 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h3><p><code>std::floor()</code>, <code>std::ceil()</code>, <code>std::round()</code> 是 C++ 中处理浮点数取整的强大工具。掌握它们的含义、用法和潜在的精度问题，是编写正确、高效数值计算代码的基础。在实际编程中，根据具体需求选择合适的取整方式，并时刻警惕浮点数精度带来的挑战，尤其在算法竞赛和科学计算中，这些细节往往决定了程序的正确性。</p>
+<hr>
+<pre><code>
+</code></pre>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2025/02/08/2025-02-08-%E6%8F%90%E7%A4%BA%E8%AF%8D%E7%A4%BA%E4%BE%8B/">提示词示例</a></li>
+                
+                
+                    <li>下一篇: 看完啦 (つд⊂)</li>
+                
+            </ul>
+        </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2025/10/23/1/">2025-10-23-C++求阶乘末尾非零数字</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/19/2025-10-19-C++%E7%BB%9D%E5%AF%B9%E5%80%BC%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/">2025-10-19-C++绝对值函数详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/17/2025-10-17-C++%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%8A%A0%E9%80%9F%E8%AF%A6%E8%A7%A3/">2025-10-17-C++输入输出加速详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/15/2025-10-15-python%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E5%BC%8F%E4%B8%8Emap%E5%87%BD%E6%95%B0/">2025-10-15-浏览器批量下载文件的方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/15/2025-10-15-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95/">2025-10-15-python列表推导式与map函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/14/2025-10-14-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E4%BA%8C-%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E4%B8%8E%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95%EF%BC%88Telnet%EF%BC%89/">2025-10-14-计算机网络实验二-交换机基本配置与远程登录（Telnet）</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">十月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1970/01/">一月 1970</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/deep-learning/" style="font-size: 14.29px;">深度学习</a> <a href="/tags/development/" style="font-size: 17.14px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 12.86px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 15.71px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 11.43px;">论文阅读</a> <a href="/tags/course/" style="font-size: 20px;">课程学习</a> <a href="/tags/troubleshooting/" style="font-size: 18.57px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>
+                © 2025 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.
+                
+                    &nbsp;|&nbsp;
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+                        蜀ICP备2025165253号
+                    </a>
+                
+                
+            </p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+<style>
+.police-beian{display:inline-flex;align-items:center;gap:4px}
+.police-icon{display:inline-block;width:16px;height:16px;background:#e91e63;border-radius:2px;opacity:.85}
+/* 说明：如需官方警徽图标，可将 .police-icon 的 background 设置为图片：
+   background:url('https://www.beian.gov.cn/img/ghs.png') no-repeat center/contain; */
+</style>
+
+  </body>
+</html>
