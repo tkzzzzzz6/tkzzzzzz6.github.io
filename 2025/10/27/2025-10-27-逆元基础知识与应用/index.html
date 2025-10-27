@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2025-10-27-逆元基础知识与应用 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-10-27-逆元基础知识与应用"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-10-27-逆元基础知识与应用</h2>
+            <div class="post-meta">
+                <time class="date">2025.10.27</time>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="2025-10-27-逆元基础知识与应用"><a href="#2025-10-27-逆元基础知识与应用" class="headerlink" title="2025-10-27-逆元基础知识与应用"></a>2025-10-27-逆元基础知识与应用</h1><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/63f4ee67d8534e68bc4461f75838291b?channelPut=w251acm">抢红包期望问题 - NowCoder 题目链接</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%A8%A1%E9%81%8B%E7%AE%97">模运算 - 维基百科</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95">扩展欧几里得算法 - 维基百科</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86">费马小定理 - 维基百科</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BE%A4">群论基础 - 维基百科</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%80%86%E7%9F%A9%E9%98%B5">线性代数中的逆矩阵 - 维基百科</a></li>
+</ul>
+</blockquote>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在算法竞赛和密码学中，我们经常会遇到”模运算下的除法”问题。由于模运算的特殊性，我们不能直接进行除法运算，这时就需要用到<strong>逆元</strong>的概念。本文将从最基础的概念讲起，逐步深入到逆元与线性代数的联系，最后通过一道实战例题来巩固理解。</p>
+<h2 id="一、什么是逆元？"><a href="#一、什么是逆元？" class="headerlink" title="一、什么是逆元？"></a>一、什么是逆元？</h2><p>简单来说，<strong>逆元就是能让运算结果”回到原点”的那个数</strong>。</p>
+<h3 id="1-1-加法逆元（最容易理解）"><a href="#1-1-加法逆元（最容易理解）" class="headerlink" title="1.1 加法逆元（最容易理解）"></a>1.1 加法逆元（最容易理解）</h3><ul>
+<li>比如 5 的加法逆元是 -5，因为 <code>5 + (-5) = 0</code></li>
+<li>就像你向东走5步，再向西走5步，就回到原地了</li>
+<li><strong>规律</strong>：一个数的加法逆元就是它的相反数</li>
+</ul>
+<h3 id="1-2-乘法逆元"><a href="#1-2-乘法逆元" class="headerlink" title="1.2 乘法逆元"></a>1.2 乘法逆元</h3><ul>
+<li>比如 5 的乘法逆元是 1/5，因为 <code>5 × (1/5) = 1</code></li>
+<li>就像把东西放大5倍后，再缩小到原来的1/5，就恢复原样了</li>
+<li><strong>规律</strong>：一个数的乘法逆元就是它的倒数</li>
+</ul>
+<h3 id="1-3-模运算中的逆元（重点！）"><a href="#1-3-模运算中的逆元（重点！）" class="headerlink" title="1.3 模运算中的逆元（重点！）"></a>1.3 模运算中的逆元（重点！）</h3><p>这是编程和密码学中最常用的概念。</p>
+<p><strong>例子</strong>：在模7的世界里，3的逆元是5，因为：</p>
+<pre class="line-numbers language-none"><code class="language-none">3 × 5 = 15
+15 mod 7 = 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>可以理解为：在一个”只有7个数字(0-6)的时钟”上，什么数乘以3能回到1？答案是5。</p>
+<p><strong>数学定义</strong>：若 <code>a × x ≡ 1 (mod m)</code>，则称 x 是 a 在模 m 意义下的乘法逆元，记作 <code>a⁻¹</code>。</p>
+<h2 id="二、逆元的应用场景"><a href="#二、逆元的应用场景" class="headerlink" title="二、逆元的应用场景"></a>二、逆元的应用场景</h2><h3 id="2-1-密码学"><a href="#2-1-密码学" class="headerlink" title="2.1 密码学"></a>2.1 密码学</h3><p>RSA加密算法的核心就是模逆元：</p>
+<ul>
+<li>加密：<code>密文 = 明文^e mod n</code></li>
+<li>解密：<code>明文 = 密文^d mod n</code></li>
+<li>其中 d 是 e 的模逆元</li>
+</ul>
+<h3 id="2-2-编程竞赛-算法题"><a href="#2-2-编程竞赛-算法题" class="headerlink" title="2.2 编程竞赛/算法题"></a>2.2 编程竞赛/算法题</h3><p>求解除法取模问题：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 计算 (a/b) mod p</span>
+<span class="token comment">// 转化为 a × b^(-1) mod p</span>
+<span class="token comment">// (因为直接除法取模会有精度问题)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="2-3-分数运算（模意义下）"><a href="#2-3-分数运算（模意义下）" class="headerlink" title="2.3 分数运算（模意义下）"></a>2.3 分数运算（模意义下）</h3><ul>
+<li>在模运算中不能直接除法</li>
+<li>需要先求逆元，再相乘</li>
+</ul>
+<h3 id="2-4-线性方程求解"><a href="#2-4-线性方程求解" class="headerlink" title="2.4 线性方程求解"></a>2.4 线性方程求解</h3><p>解方程 <code>ax ≡ b (mod m)</code>：</p>
+<ul>
+<li>需要求 a 的逆元 <code>a^(-1)</code></li>
+<li>则 <code>x = a^(-1) × b (mod m)</code></li>
+</ul>
+<h3 id="2-5-区块链-比特币"><a href="#2-5-区块链-比特币" class="headerlink" title="2.5 区块链/比特币"></a>2.5 区块链/比特币</h3><p>椭圆曲线密码学(ECC)大量使用模逆元运算</p>
+<h2 id="三、如何求逆元？"><a href="#三、如何求逆元？" class="headerlink" title="三、如何求逆元？"></a>三、如何求逆元？</h2><h3 id="3-1-扩展欧几里得算法"><a href="#3-1-扩展欧几里得算法" class="headerlink" title="3.1 扩展欧几里得算法"></a>3.1 扩展欧几里得算法</h3><p>最通用的方法：</p>
+<ul>
+<li>当 <code>gcd(a, m) = 1</code> 时，a 在模 m 意义下才存在逆元</li>
+<li>用扩展欧几里得算法可以快速找到这个逆元</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 扩展欧几里得算法</span>
+ll <span class="token function">exgcd</span><span class="token punctuation">(</span>ll a<span class="token punctuation">,</span> ll b<span class="token punctuation">,</span> ll <span class="token operator">&amp;</span>x<span class="token punctuation">,</span> ll <span class="token operator">&amp;</span>y<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>b <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        x <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> a<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    ll d <span class="token operator">=</span> <span class="token function">exgcd</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span> a <span class="token operator">%</span> b<span class="token punctuation">,</span> y<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    y <span class="token operator">-=</span> a <span class="token operator">/</span> b <span class="token operator">*</span> x<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> d<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 求逆元</span>
+ll <span class="token function">inv</span><span class="token punctuation">(</span>ll a<span class="token punctuation">,</span> ll m<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ll x<span class="token punctuation">,</span> y<span class="token punctuation">;</span>
+    <span class="token function">exgcd</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> m<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>x <span class="token operator">%</span> m <span class="token operator">+</span> m<span class="token punctuation">)</span> <span class="token operator">%</span> m<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="3-2-快速幂方法（当模数是质数p）"><a href="#3-2-快速幂方法（当模数是质数p）" class="headerlink" title="3.2 快速幂方法（当模数是质数p）"></a>3.2 快速幂方法（当模数是质数p）</h3><p>根据<strong>费马小定理</strong>：<code>a^(p-1) ≡ 1 (mod p)</code></p>
+<p>所以：<strong>a的逆元 = a^(p-2) mod p</strong></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 快速幂求逆元</span>
+ll <span class="token function">power</span><span class="token punctuation">(</span>ll base<span class="token punctuation">,</span> ll exp<span class="token punctuation">,</span> ll mod<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ll res <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    base <span class="token operator">%=</span> mod<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>exp <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>exp <span class="token operator">&amp;</span> <span class="token number">1</span><span class="token punctuation">)</span> res <span class="token operator">=</span> res <span class="token operator">*</span> base <span class="token operator">%</span> mod<span class="token punctuation">;</span>
+        base <span class="token operator">=</span> base <span class="token operator">*</span> base <span class="token operator">%</span> mod<span class="token punctuation">;</span>
+        exp <span class="token operator">&gt;&gt;=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 求逆元（模数为质数）</span>
+ll <span class="token function">inv</span><span class="token punctuation">(</span>ll a<span class="token punctuation">,</span> ll p<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">power</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> p <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="四、逆元与逆矩阵：数学思想的统一"><a href="#四、逆元与逆矩阵：数学思想的统一" class="headerlink" title="四、逆元与逆矩阵：数学思想的统一"></a>四、逆元与逆矩阵：数学思想的统一</h2><h3 id="4-1-核心类比关系"><a href="#4-1-核心类比关系" class="headerlink" title="4.1 核心类比关系"></a>4.1 核心类比关系</h3><table>
+<thead>
+<tr>
+<th>数的乘法</th>
+<th>矩阵乘法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>单位元是 <strong>1</strong></td>
+<td>单位元是 <strong>单位矩阵 I</strong></td>
+</tr>
+<tr>
+<td><code>a × a⁻¹ = 1</code></td>
+<td><code>A × A⁻¹ = I</code></td>
+</tr>
+<tr>
+<td>0 没有逆元</td>
+<td>行列式为0的矩阵没有逆</td>
+</tr>
+<tr>
+<td>非零数都有逆</td>
+<td>满秩矩阵才有逆</td>
+</tr>
+</tbody></table>
+<h3 id="4-2-都是”撤销操作”"><a href="#4-2-都是”撤销操作”" class="headerlink" title="4.2 都是”撤销操作”"></a>4.2 都是”撤销操作”</h3><pre class="line-numbers language-none"><code class="language-none">数字层面:
+  ×5 → ×(1/5) → 回到原点
+  
+矩阵层面:
+  ×A → ×A⁻¹ → 回到原点
+  
+比如: 向量旋转30° → 旋转-30° → 回到原位置<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="4-3-存在性条件类似"><a href="#4-3-存在性条件类似" class="headerlink" title="4.3 存在性条件类似"></a>4.3 存在性条件类似</h3><p><strong>数的逆元</strong>：</p>
+<ul>
+<li>普通除法: 分母不能为0</li>
+<li>模运算: <code>gcd(a, m) = 1</code></li>
+</ul>
+<p><strong>矩阵的逆</strong>：</p>
+<ul>
+<li>行列式 <code>det(A) ≠ 0</code></li>
+<li>矩阵必须是”满秩”的（列向量线性无关）</li>
+</ul>
+<p>可以理解为：<strong>都要求”信息无损失”</strong></p>
+<ul>
+<li>乘以0会丢失信息 → 无法恢复</li>
+<li>矩阵降维会丢失信息 → 无法恢复</li>
+</ul>
+<h3 id="4-4-群论视角：统一的数学框架"><a href="#4-4-群论视角：统一的数学框架" class="headerlink" title="4.4 群论视角：统一的数学框架"></a>4.4 群论视角：统一的数学框架</h3><p>逆元和逆矩阵都是**群论(Group Theory)**中”逆元”的不同实例：</p>
+<table>
+<thead>
+<tr>
+<th>群的类型</th>
+<th>元素</th>
+<th>运算</th>
+<th>单位元</th>
+<th>逆元</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>实数乘法群</td>
+<td>非零实数</td>
+<td>×</td>
+<td>1</td>
+<td>1/a</td>
+</tr>
+<tr>
+<td>模p乘法群</td>
+<td>{1,2,…,p-1}</td>
+<td>×(mod p)</td>
+<td>1</td>
+<td>a⁻¹ mod p</td>
+</tr>
+<tr>
+<td>一般线性群GL(n)</td>
+<td>可逆矩阵</td>
+<td>矩阵乘法</td>
+<td>I</td>
+<td>A⁻¹</td>
+</tr>
+</tbody></table>
+<p><strong>关键洞察</strong>：1×1矩阵的逆就是数的倒数！</p>
+<pre class="line-numbers language-none"><code class="language-none">A = [5]
+A⁻¹ = [1/5]
+[5] × [1/5] = [1]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>所以<strong>数的逆元可以看作是矩阵求逆在一维空间的特例</strong>！</p>
+<h2 id="五、实战例题：抢红包期望问题"><a href="#五、实战例题：抢红包期望问题" class="headerlink" title="五、实战例题：抢红包期望问题"></a>五、实战例题：抢红包期望问题</h2><h3 id="5-1-题目描述"><a href="#5-1-题目描述" class="headerlink" title="5.1 题目描述"></a>5.1 题目描述</h3><p>有一个软件的抢红包系统是这样设计的：假如现在红包里面还有 w 元，那么你抢红包能抢到的钱就是 [0,w] 等概率均匀随机出的一个实数 x。</p>
+<p>现在有个人发了一个 w 元的红包，有 n 个人来抢。那么请问第 k 个人期望抢到多少钱？输出答案对 10^9+7 取模后的结果。</p>
+<p><strong>输入格式</strong>：</p>
+<ul>
+<li>一行三个整数 w, n, k (0≤w≤10^9, 0≤k≤n≤10^18)</li>
+</ul>
+<p><strong>输出格式</strong>：</p>
+<ul>
+<li>一行一个整数，表示第 k 个人期望抢到的钱数对 10^9+7 取模后的结果</li>
+</ul>
+<p><strong>示例</strong>：</p>
+<pre class="line-numbers language-none"><code class="language-none">输入：2 1 1
+输出：1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="5-2-问题分析"><a href="#5-2-问题分析" class="headerlink" title="5.2 问题分析"></a>5.2 问题分析</h3><p><strong>核心思路</strong>：每次到下一个人的时候，对应的期望都会变成原来的一半。</p>
+<ul>
+<li>第1个人：期望抢到 w/2</li>
+<li>第2个人：期望抢到 w/4 = w/(2^2)</li>
+<li>第3个人：期望抢到 w/8 = w/(2^3)</li>
+<li>第k个人：期望抢到 <strong>w/(2^k)</strong></li>
+</ul>
+<p>但是在模运算中，我们不能直接除以 2^k，需要使用<strong>乘法逆元</strong>：</p>
+<pre class="line-numbers language-none"><code class="language-none">w / (2^k) mod p  
+=  w × (2^k)^(-1) mod p
+=  w × (2^(-1))^k mod p<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="5-3-完整代码实现"><a href="#5-3-完整代码实现" class="headerlink" title="5.3 完整代码实现"></a>5.3 完整代码实现</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">long</span> <span class="token keyword">long</span> ll<span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> ll mod <span class="token operator">=</span> <span class="token number">1e9</span> <span class="token operator">+</span> <span class="token number">7</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 快速幂：计算 base^exp % mod</span>
+ll <span class="token function">power</span><span class="token punctuation">(</span>ll base<span class="token punctuation">,</span> ll exp<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ll res <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    base <span class="token operator">%=</span> mod<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>exp <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>exp <span class="token operator">&amp;</span> <span class="token number">1</span><span class="token punctuation">)</span> 
+            res <span class="token operator">=</span> res <span class="token operator">*</span> base <span class="token operator">%</span> mod<span class="token punctuation">;</span>
+        base <span class="token operator">=</span> base <span class="token operator">*</span> base <span class="token operator">%</span> mod<span class="token punctuation">;</span>
+        exp <span class="token operator">&gt;&gt;=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ios<span class="token double-colon punctuation">::</span><span class="token function">sync_with_stdio</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cin<span class="token punctuation">.</span><span class="token function">tie</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    ll w<span class="token punctuation">,</span> n<span class="token punctuation">,</span> k<span class="token punctuation">;</span>
+    cin <span class="token operator">&gt;&gt;</span> w <span class="token operator">&gt;&gt;</span> n <span class="token operator">&gt;&gt;</span> k<span class="token punctuation">;</span>
+
+    <span class="token comment">// 计算 2 在模 mod 意义下的乘法逆元</span>
+    <span class="token comment">// 根据费马小定理：2^(-1) = 2^(mod-2) mod mod</span>
+    ll inv2 <span class="token operator">=</span> <span class="token function">power</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> mod <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 计算 (2^k) 的模逆元，即 (2的模逆元)^k</span>
+    ll inv2_k <span class="token operator">=</span> <span class="token function">power</span><span class="token punctuation">(</span>inv2<span class="token punctuation">,</span> k<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 期望 = w × (2^k 的模逆元) % mod</span>
+    ll ans <span class="token operator">=</span> <span class="token punctuation">(</span>w <span class="token operator">*</span> inv2_k<span class="token punctuation">)</span> <span class="token operator">%</span> mod<span class="token punctuation">;</span>
+
+    cout <span class="token operator">&lt;&lt;</span> ans <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="5-4-代码关键点解析"><a href="#5-4-代码关键点解析" class="headerlink" title="5.4 代码关键点解析"></a>5.4 代码关键点解析</h3><ol>
+<li><p><strong>使用费马小定理求逆元</strong>：</p>
+<ul>
+<li>由于 10^9+7 是质数</li>
+<li>所以 <code>2^(-1) ≡ 2^(10^9+5) (mod 10^9+7)</code></li>
+</ul>
+</li>
+<li><p><strong>巧妙处理大指数</strong>：</p>
+<ul>
+<li>不是直接计算 <code>(2^k)^(-1)</code></li>
+<li>而是先算 <code>2^(-1)</code>，再求其 k 次方</li>
+<li>避免了计算超大的 2^k（k最大可达10^18）</li>
+</ul>
+</li>
+<li><p><strong>快速幂优化</strong>：</p>
+<ul>
+<li>时间复杂度从 O(k) 降到 O(log k)</li>
+<li>对于 k=10^18 的情况至关重要</li>
+</ul>
+</li>
+</ol>
+<h2 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h2><p>逆元是现代算法和密码学中的核心概念，它：</p>
+<ol>
+<li><strong>在模运算中实现除法运算</strong></li>
+<li><strong>与线性代数中的逆矩阵本质相同</strong>，都是群论中”逆元”概念的具体体现</li>
+<li><strong>求解方法</strong>：扩展欧几里得算法（通用）或快速幂+费马小定理（质数模）</li>
+<li><strong>广泛应用于</strong>：密码学、算法竞赛、区块链、图形学等领域</li>
+</ol>
+<hr>
+<p><strong>相关阅读推荐</strong>：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/container">C++ STL 常用容器详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://oi-wiki.org/math/binary-exponentiation/">快速幂算法详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BE%A4">群论入门</a></li>
+</ul>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2025/10/26/2025-10-26-C++%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84k%E5%8F%89%E6%A0%91%E6%9C%80%E4%BC%98%E6%A0%B9%E8%8A%82%E7%82%B9%E9%80%89%E6%8B%A9%E9%97%AE%E9%A2%98/">2025-10-26-C++树形结构k叉树最优根节点选择问题</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/algorithm/" rel="tag">算法学习</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2025/10/27/2025-10-27-%E9%80%86%E5%85%83%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%8E%E5%BA%94%E7%94%A8/">2025-10-27-逆元基础知识与应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/26/2025-10-26-C++%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84k%E5%8F%89%E6%A0%91%E6%9C%80%E4%BC%98%E6%A0%B9%E8%8A%82%E7%82%B9%E9%80%89%E6%8B%A9%E9%97%AE%E9%A2%98/">2025-10-26-C++树形结构k叉树最优根节点选择问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/24/2025-10-24-Google%20Drive%20%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/">2025-10-24-Google Drive 命令行下载文件完整指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/24/2025-10-24-C++%E9%AD%94%E6%B3%95%E8%8D%AF%E5%89%82%E6%94%B6%E9%9B%86%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E9%97%AE%E9%A2%98/">2025-10-24-C++魔法药剂收集最小花费问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/23/2025-10-23-C++%E6%B1%82%E9%98%B6%E4%B9%98%E6%9C%AB%E5%B0%BE%E9%9D%9E%E9%9B%B6%E6%95%B0%E5%AD%97/">2025-10-23-C++求阶乘末尾非零数字</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/19/2025-10-19-C++%E7%BB%9D%E5%AF%B9%E5%80%BC%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/">2025-10-19-C++绝对值函数详解</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">十月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/deep-learning/" style="font-size: 12.86px;">深度学习</a> <a href="/tags/development/" style="font-size: 15.71px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 17.14px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 14.29px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 11.43px;">论文阅读</a> <a href="/tags/course/" style="font-size: 20px;">课程学习</a> <a href="/tags/troubleshooting/" style="font-size: 18.57px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>
+                © 2025 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.
+                
+                    &nbsp;|&nbsp;
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+                        蜀ICP备2025165253号
+                    </a>
+                
+                
+            </p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+<style>
+.police-beian{display:inline-flex;align-items:center;gap:4px}
+.police-icon{display:inline-block;width:16px;height:16px;background:#e91e63;border-radius:2px;opacity:.85}
+/* 说明：如需官方警徽图标，可将 .police-icon 的 background 设置为图片：
+   background:url('https://www.beian.gov.cn/img/ghs.png') no-repeat center/contain; */
+</style>
+
+  </body>
+</html>
