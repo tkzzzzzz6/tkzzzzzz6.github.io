@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2025-10-26-C++树形结构k叉树最优根节点选择问题 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-10-26-C++树形结构k叉树最优根节点选择问题"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-10-26-C++树形结构k叉树最优根节点选择问题</h2>
+            <div class="post-meta">
+                <time class="date">2025.10.26</time>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="C-树形结构-k叉树最优根节点选择问题"><a href="#C-树形结构-k叉树最优根节点选择问题" class="headerlink" title="C++ 树形结构 k叉树最优根节点选择问题"></a>C++ 树形结构 k叉树最优根节点选择问题</h1><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.nowcoder.com/practice/85631392592c4b9b9558e0611773ad33?channelPut=w251acm">k叉树根节点选择 - NowCoder 题目链接</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%A0%91_(%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)">树 (数据结构) - 维基百科</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%BA%A6_(%E5%9B%BE%E8%AE%BA)">图的度数 - 维基百科</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/container/vector">C++ STL vector 用法详解</a></li>
+</ul>
+</blockquote>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><h3 id="题目背景"><a href="#题目背景" class="headerlink" title="题目背景"></a>题目背景</h3><p>对于一棵有根树，如果它的全部节点都满足：孩子个数不多于 k，且 k 是所有可取的值中最小的那个，则称它是一个 <strong>k 叉树</strong>。</p>
+<p>形式化的，记 cnt_i 为有根树上，第 i 个节点的孩子数目，则：</p>
+<pre class="line-numbers language-none"><code class="language-none">k = max{cnt_1, cnt_2, ..., cnt_n}<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>现在智乃想要给一棵由 n 个节点构成的<strong>无根树</strong>标记一个根节点，她发现选择的根节点不同时，k 的值也不同。</p>
+<p><strong>任务</strong>：选择一个节点作为根节点，以最小化 k 的取值，并输出最小的 k 值和对应的根节点编号（多个时选编号最小的）。</p>
+<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h3><ul>
+<li>第一行：一个正整数 n (2 ≤ n ≤ 10^5)，代表树的节点数量</li>
+<li>接下来 n-1 行：每行两个正整数 u_i, v_i，代表无根树上的一条无向边</li>
+</ul>
+<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h3><p>输出两个正整数：最小的 k 值和对应的根节点编号</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p><strong>示例 1：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">输入：
+4
+3 1
+2 3
+3 4
+
+输出：
+2 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>示例 2：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">输入：
+3
+1 2
+1 3
+
+输出：
+1 2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h2><h3 id="核心观察"><a href="#核心观察" class="headerlink" title="核心观察"></a>核心观察</h3><p>在理解这道题之前，我们需要明确几个关键概念：</p>
+<ol>
+<li><p><strong>无根树与有根树的区别</strong></p>
+<ul>
+<li>无根树：所有节点地位平等，边是无向的</li>
+<li>有根树：指定一个根节点后，其他节点按层次组织，边有方向（父→子）</li>
+</ul>
+</li>
+<li><p><strong>度数的定义</strong></p>
+<ul>
+<li>在无根树中，节点的度数 = 连接该节点的边数</li>
+<li>在有根树中，节点的孩子数取决于它是否为根节点</li>
+</ul>
+</li>
+<li><p><strong>根节点对 k 值的影响</strong></p>
+<p>当我们选择节点 r 作为根时：</p>
+<ul>
+<li><strong>根节点 r 的孩子数</strong> = degree[r]（所有连接的边都指向孩子）</li>
+<li><strong>非根节点 u 的孩子数</strong> = degree[u] - 1（有一条边连向父节点）</li>
+</ul>
+<p>因此：</p>
+<pre class="line-numbers language-none"><code class="language-none">k_r = max(degree[r], max{degree[u] - 1 | u ≠ r})<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ol>
+<h3 id="问题转化"><a href="#问题转化" class="headerlink" title="问题转化"></a>问题转化</h3><p>设：</p>
+<ul>
+<li><code>max_deg</code> = 所有节点中的最大度数</li>
+<li><code>second_max_deg</code> = 次大度数</li>
+</ul>
+<p>对于节点 r，我们可以分情况讨论：</p>
+<p><strong>情况 1：degree[r] &lt; max_deg</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">k_r = max(degree[r], max_deg - 1)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>因为最大度数节点不是根，它会损失一个孩子。</p>
+<p><strong>情况 2：degree[r] == max_deg</strong></p>
+<ul>
+<li>如果只有 r 一个节点有最大度数：<pre class="line-numbers language-none"><code class="language-none">k_r = max(max_deg, second_max_deg - 1)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>如果有多个节点有最大度数：<pre class="line-numbers language-none"><code class="language-none">k_r = max_deg<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+<h3 id="最优策略"><a href="#最优策略" class="headerlink" title="最优策略"></a>最优策略</h3><p>通过上述分析，我们发现：</p>
+<ul>
+<li><strong>选择度数最大的节点作为根</strong>，通常能获得较小的 k 值</li>
+<li>但需要考虑次大度数的影响</li>
+</ul>
+<hr>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><h3 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h3><pre class="line-numbers language-none"><code class="language-none">1. 统计每个节点的度数
+2. 找出最大度数 max_deg 和次大度数 second_max_deg
+3. 统计有多少个节点的度数等于 max_deg
+4. 对每个节点 r，根据公式计算 k_r
+5. 选择 k_r 最小的节点（相同时选编号最小的）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h3><pre class="line-numbers language-none"><code class="language-none">输入 n 和 n-1 条边
+初始化 degree 数组
+
+for 每条边 (u, v):
+    degree[u]++
+    degree[v]++
+
+找出 max_deg, second_max_deg, max_count
+
+for r from 1 to n:
+    if degree[r] &lt; max_deg:
+        k_r = max(degree[r], max_deg - 1)
+    else if degree[r] == max_deg:
+        if max_count == 1:
+            k_r = max(max_deg, second_max_deg - 1)
+        else:
+            k_r = max_deg
+    
+    更新最优答案
+
+输出 min_k 和 best_root<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ios<span class="token double-colon punctuation">::</span><span class="token function">sync_with_stdio</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cin<span class="token punctuation">.</span><span class="token function">tie</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">int</span> n<span class="token punctuation">;</span>
+    cin <span class="token operator">&gt;&gt;</span> n<span class="token punctuation">;</span>
+    
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token function">degree</span><span class="token punctuation">(</span>n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token comment">// 读入边并统计度数</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> u<span class="token punctuation">,</span> v<span class="token punctuation">;</span>
+        cin <span class="token operator">&gt;&gt;</span> u <span class="token operator">&gt;&gt;</span> v<span class="token punctuation">;</span>
+        degree<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
+        degree<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment">// 找出最大度数和次大度数</span>
+    <span class="token keyword">int</span> max_deg <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> second_max_deg <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> max_count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">// 有多少个节点的度数等于max_deg</span>
+    
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>degree<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&gt;</span> max_deg<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            second_max_deg <span class="token operator">=</span> max_deg<span class="token punctuation">;</span>
+            max_deg <span class="token operator">=</span> degree<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            max_count <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>degree<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> max_deg<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            max_count<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>degree<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&gt;</span> second_max_deg<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            second_max_deg <span class="token operator">=</span> degree<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment">// 计算每个节点作为根时的k值</span>
+    <span class="token keyword">int</span> min_k <span class="token operator">=</span> INT_MAX<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> best_root <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> r <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> r <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> r<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> k_r<span class="token punctuation">;</span>
+        
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>degree<span class="token punctuation">[</span>r<span class="token punctuation">]</span> <span class="token operator">&lt;</span> max_deg<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// r不是最大度数节点</span>
+            k_r <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>degree<span class="token punctuation">[</span>r<span class="token punctuation">]</span><span class="token punctuation">,</span> max_deg <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token comment">// degree[r] == max_deg</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>max_count <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment">// r是唯一的最大度数节点</span>
+                k_r <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>max_deg<span class="token punctuation">,</span> second_max_deg <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                <span class="token comment">// 有多个最大度数节点</span>
+                k_r <span class="token operator">=</span> max_deg<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        
+        <span class="token comment">// 更新最优答案（k值小的优先，相同时编号小的优先）</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>k_r <span class="token operator">&lt;</span> min_k <span class="token operator">||</span> <span class="token punctuation">(</span>k_r <span class="token operator">==</span> min_k <span class="token operator">&amp;&amp;</span> r <span class="token operator">&lt;</span> best_root<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            min_k <span class="token operator">=</span> k_r<span class="token punctuation">;</span>
+            best_root <span class="token operator">=</span> r<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    
+    cout <span class="token operator">&lt;&lt;</span> min_k <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> best_root <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="代码说明"><a href="#代码说明" class="headerlink" title="代码说明"></a>代码说明</h3><p><strong>关键变量：</strong></p>
+<ul>
+<li><code>degree[i]</code>：节点 i 的度数</li>
+<li><code>max_deg</code>：所有节点中的最大度数</li>
+<li><code>second_max_deg</code>：次大度数</li>
+<li><code>max_count</code>：度数等于最大度数的节点数量</li>
+</ul>
+<p><strong>核心逻辑：</strong></p>
+<ol>
+<li><strong>度数统计</strong>（第 10-16 行）：遍历所有边，统计每个节点的度数</li>
+<li><strong>找最大值和次大值</strong>（第 18-31 行）：一次遍历找出最大和次大度数</li>
+<li><strong>计算 k 值</strong>（第 33-52 行）：根据节点度数与最大度数的关系计算 k_r</li>
+<li><strong>更新答案</strong>（第 54-57 行）：保持最小 k 值和最小编号</li>
+</ol>
+<hr>
+<h2 id="示例验证"><a href="#示例验证" class="headerlink" title="示例验证"></a>示例验证</h2><h3 id="示例-1-详解"><a href="#示例-1-详解" class="headerlink" title="示例 1 详解"></a>示例 1 详解</h3><p><strong>输入：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">4
+3 1
+2 3
+3 4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>树的结构（无根树）：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">1
+|
+3---2
+|
+4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>度数统计：</strong></p>
+<ul>
+<li>degree[1] = 1</li>
+<li>degree[2] = 1</li>
+<li>degree[3] = 3 ← 最大度数</li>
+<li>degree[4] = 1</li>
+</ul>
+<p><strong>各节点作为根时的 k 值：</strong></p>
+<table>
+<thead>
+<tr>
+<th>根节点</th>
+<th>degree[r]</th>
+<th>计算公式</th>
+<th>k_r</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>max(1, 3-1)</td>
+<td><strong>2</strong></td>
+<td>节点3有2个孩子</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>max(1, 3-1)</td>
+<td><strong>2</strong></td>
+<td>节点3有2个孩子</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>max(3, 1-1)</td>
+<td><strong>3</strong></td>
+<td>节点3本身有3个孩子</td>
+</tr>
+<tr>
+<td>4</td>
+<td>1</td>
+<td>max(1, 3-1)</td>
+<td><strong>2</strong></td>
+<td>节点3有2个孩子</td>
+</tr>
+</tbody></table>
+<p><strong>结论：</strong> min_k = 2，最小编号 = 1，输出 <code>2 1</code> ✓</p>
+<hr>
+<h3 id="示例-2-详解"><a href="#示例-2-详解" class="headerlink" title="示例 2 详解"></a>示例 2 详解</h3><p><strong>输入：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">3
+1 2
+1 3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>树的结构：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">2
+ \
+  1
+ /
+3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>度数统计：</strong></p>
+<ul>
+<li>degree[1] = 2 ← 最大度数</li>
+<li>degree[2] = 1</li>
+<li>degree[3] = 1</li>
+</ul>
+<p><strong>各节点作为根时的 k 值：</strong></p>
+<table>
+<thead>
+<tr>
+<th>根节点</th>
+<th>degree[r]</th>
+<th>计算公式</th>
+<th>k_r</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>2</td>
+<td>max(2, 1-1)</td>
+<td><strong>2</strong></td>
+<td>节点1有2个孩子</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>max(1, 2-1)</td>
+<td><strong>1</strong></td>
+<td>节点1只有1个孩子了</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1</td>
+<td>max(1, 2-1)</td>
+<td><strong>1</strong></td>
+<td>节点1只有1个孩子了</td>
+</tr>
+</tbody></table>
+<p><strong>结论：</strong> min_k = 1，最小编号 = 2，输出 <code>1 2</code> ✓</p>
+<hr>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><ul>
+<li><strong>读入边并统计度数</strong>：O(n)</li>
+<li><strong>找最大和次大度数</strong>：O(n)</li>
+<li><strong>枚举所有节点计算 k 值</strong>：O(n)</li>
+</ul>
+<p><strong>总时间复杂度：O(n)</strong></p>
+<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><ul>
+<li><code>degree</code> 数组：O(n)</li>
+<li>其他变量：O(1)</li>
+</ul>
+<p><strong>总空间复杂度：O(n)</strong></p>
+<h3 id="优化点"><a href="#优化点" class="headerlink" title="优化点"></a>优化点</h3><p>本算法已经是最优解，无需进一步优化：</p>
+<ul>
+<li>不需要真正建立树结构</li>
+<li>不需要 DFS/BFS 遍历</li>
+<li>只需统计度数即可得出答案</li>
+</ul>
+<hr>
+<h2 id="扩展思考"><a href="#扩展思考" class="headerlink" title="扩展思考"></a>扩展思考</h2><h3 id="变体问题"><a href="#变体问题" class="headerlink" title="变体问题"></a>变体问题</h3><ol>
+<li><p><strong>如果要输出所有最优根节点怎么办？</strong></p>
+<ul>
+<li>使用 vector 存储所有 k 值等于 min_k 的节点</li>
+</ul>
+</li>
+<li><p><strong>如果树的节点数达到 10^6 级别？</strong></p>
+<ul>
+<li>当前算法依然高效，O(n) 可以轻松处理</li>
+</ul>
+</li>
+<li><p><strong>如果要求输出构造后的树结构？</strong></p>
+<ul>
+<li>需要真正建图并进行 DFS/BFS，复杂度仍为 O(n)</li>
+</ul>
+</li>
+</ol>
+<h3 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://oi-wiki.org/graph/tree-centroid/">树的重心</a></li>
+<li><a target="_blank" rel="noopener" href="https://oi-wiki.org/graph/tree-diameter/">树的直径</a></li>
+<li><a target="_blank" rel="noopener" href="https://oi-wiki.org/dp/tree/#%E6%8D%A2%E6%A0%B9-dp">换根 DP</a></li>
+</ul>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="核心知识点"><a href="#核心知识点" class="headerlink" title="核心知识点"></a>核心知识点</h3><ol>
+<li>⭐ <strong>度数是关键</strong>：无需建树，只需统计度数</li>
+<li>⭐ <strong>公式推导</strong>：根节点与非根节点的孩子数计算方式不同</li>
+<li>⭐ <strong>分类讨论</strong>：根据节点度数与最大度数的关系分情况处理</li>
+<li>⭐ <strong>贪心思想</strong>：选择度数大的节点作为根通常更优</li>
+</ol>
+<h3 id="易错点"><a href="#易错点" class="headerlink" title="易错点"></a>易错点</h3><ul>
+<li>❌ 忘记处理多个节点有相同最大度数的情况</li>
+<li>❌ 没有正确计算次大度数</li>
+<li>❌ 输出时忘记优先选择编号小的节点</li>
+<li>❌ 边界情况：链状树（退化为 1 叉树）</li>
+</ul>
+<h3 id="学习建议"><a href="#学习建议" class="headerlink" title="学习建议"></a>学习建议</h3><ul>
+<li>理解无根树与有根树的转换关系</li>
+<li>掌握度数的概念和应用</li>
+<li>学会用数学公式简化树形问题</li>
+<li>多做树形结构相关的题目</li>
+</ul>
+<hr>
+<h2 id="参考代码模板"><a href="#参考代码模板" class="headerlink" title="参考代码模板"></a>参考代码模板</h2><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 树形问题通用模板</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ios<span class="token double-colon punctuation">::</span><span class="token function">sync_with_stdio</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cin<span class="token punctuation">.</span><span class="token function">tie</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">int</span> n<span class="token punctuation">;</span>
+    cin <span class="token operator">&gt;&gt;</span> n<span class="token punctuation">;</span>
+    
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token function">degree</span><span class="token punctuation">(</span>n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token comment">// 1. 统计度数</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> u<span class="token punctuation">,</span> v<span class="token punctuation">;</span>
+        cin <span class="token operator">&gt;&gt;</span> u <span class="token operator">&gt;&gt;</span> v<span class="token punctuation">;</span>
+        degree<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
+        degree<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment">// 2. 找极值</span>
+    <span class="token keyword">int</span> max_deg <span class="token operator">=</span> <span class="token operator">*</span><span class="token function">max_element</span><span class="token punctuation">(</span>degree<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> degree<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token comment">// 3. 枚举计算</span>
+    <span class="token keyword">int</span> ans <span class="token operator">=</span> INT_MAX<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> pos <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> cur <span class="token operator">=</span> <span class="token comment">/* 根据问题计算 */</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>cur <span class="token operator">&lt;</span> ans <span class="token operator">||</span> <span class="token punctuation">(</span>cur <span class="token operator">==</span> ans <span class="token operator">&amp;&amp;</span> i <span class="token operator">&lt;</span> pos<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            ans <span class="token operator">=</span> cur<span class="token punctuation">;</span>
+            pos <span class="token operator">=</span> i<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    
+    cout <span class="token operator">&lt;&lt;</span> ans <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> pos <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2025/10/24/2025-10-24-Google%20Drive%20%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/">2025-10-24-Google Drive 命令行下载文件完整指南</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/algorithm/" rel="tag">算法学习</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2025/10/26/2025-10-26-C++%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84k%E5%8F%89%E6%A0%91%E6%9C%80%E4%BC%98%E6%A0%B9%E8%8A%82%E7%82%B9%E9%80%89%E6%8B%A9%E9%97%AE%E9%A2%98/">2025-10-26-C++树形结构k叉树最优根节点选择问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/24/2025-10-24-Google%20Drive%20%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/">2025-10-24-Google Drive 命令行下载文件完整指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/24/2025-10-24-C++%E9%AD%94%E6%B3%95%E8%8D%AF%E5%89%82%E6%94%B6%E9%9B%86%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E9%97%AE%E9%A2%98/">2025-10-24-C++魔法药剂收集最小花费问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/23/2025-10-23-C++%E6%B1%82%E9%98%B6%E4%B9%98%E6%9C%AB%E5%B0%BE%E9%9D%9E%E9%9B%B6%E6%95%B0%E5%AD%97/">2025-10-23-C++求阶乘末尾非零数字</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/19/2025-10-19-C++%E7%BB%9D%E5%AF%B9%E5%80%BC%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/">2025-10-19-C++绝对值函数详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/17/2025-10-17-C++%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%8A%A0%E9%80%9F%E8%AF%A6%E8%A7%A3/">2025-10-17-C++输入输出加速详解</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">十月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1970/01/">一月 1970</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/deep-learning/" style="font-size: 13.33px;">深度学习</a> <a href="/tags/development/" style="font-size: 16.67px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 15px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 15px;">算法练习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 11.67px;">论文阅读</a> <a href="/tags/course/" style="font-size: 20px;">课程学习</a> <a href="/tags/troubleshooting/" style="font-size: 18.33px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>
+                © 2025 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.
+                
+                    &nbsp;|&nbsp;
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+                        蜀ICP备2025165253号
+                    </a>
+                
+                
+            </p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+<style>
+.police-beian{display:inline-flex;align-items:center;gap:4px}
+.police-icon{display:inline-block;width:16px;height:16px;background:#e91e63;border-radius:2px;opacity:.85}
+/* 说明：如需官方警徽图标，可将 .police-icon 的 background 设置为图片：
+   background:url('https://www.beian.gov.cn/img/ghs.png') no-repeat center/contain; */
+</style>
+
+  </body>
+</html>
