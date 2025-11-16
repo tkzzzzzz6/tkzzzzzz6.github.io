@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2025-11-16-计算机图形学种子填充算法 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-11-16-计算机图形学种子填充算法"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-11-16-计算机图形学种子填充算法</h2>
+            <div class="post-meta">
+                <time class="date">2025.11.16</time>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h1><ol>
+<li><p>掌握种子填充法（递归法和基于栈的算法），扫描线种子填充法</p>
+</li>
+<li><p>了解像素的四联通,八联通以及两种联通的边界和内点表示的方法[1]</p>
+</li>
+<li><p>掌握常见的种子填充算法以及效率的分析</p>
+</li>
+</ol>
+<h1 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a>实验内容</h1><h2 id="种子填充法"><a href="#种子填充法" class="headerlink" title="种子填充法"></a>种子填充法</h2><p>给图形上色，就像给水池注水一样。想象您有一个不规则形状的图形，比如用黑色笔画的一个封闭圆圈，现在您想用红色油漆填满它，这就是”种子填充”要做的事情。</p>
+<p>种子填充的思路，就像您在待填充区域内任意选择一个点（”种子”），然后让这个颜色像水一样，从这个点向四周”流淌”或”蔓延”，直到遇到边界或流满了整个区域为止。</p>
+<h2 id="填充的判断依据-水往哪里流？"><a href="#填充的判断依据-水往哪里流？" class="headerlink" title="填充的判断依据(水往哪里流？)"></a>填充的判断依据(水往哪里流？)</h2><p>填充算法的关键在于判断一个像素点是否应该被上色。这里有两种判断方法，对应着水的<strong>流淌目标</strong>：</p>
+<h3 id="边界表示-Boundary-Fill"><a href="#边界表示-Boundary-Fill" class="headerlink" title="边界表示 (Boundary Fill)"></a>边界表示 (Boundary Fill)</h3><p>找边界法：水（新颜色）向外流淌时，如果遇到墙壁（边界色），就停止流淌。只要没遇到墙壁，水就继续流。图形的边界颜色是已知的（例如黑色边框），我们只填充边界色内部的区域。</p>
+<h3 id="内点表示-Flood-Fill"><a href="#内点表示-Flood-Fill" class="headerlink" title="内点表示 (Flood Fill)"></a>内点表示 (Flood Fill)</h3><p><strong>找内色法</strong>：水（新颜色）向外流淌时，只填充和<strong>种子点颜色相同（内色）</strong>的区域。一旦遇到其他颜色或边界色，就停止。适用于填充一个<strong>已经被上过色</strong>的、由多种颜色包围的区域。例如，把一个蓝色的区域改为黄色。</p>
+<h2 id="蔓延的方式：水怎么流？"><a href="#蔓延的方式：水怎么流？" class="headerlink" title="蔓延的方式：水怎么流？"></a>蔓延的方式：水怎么流？</h2><p>“水”从一个像素点流向相邻像素点的方式也有两种，这决定了填充的形状和速度：</p>
+<h3 id="四连通-4-Connected"><a href="#四连通-4-Connected" class="headerlink" title="四连通 (4-Connected)"></a>四连通 (4-Connected)</h3><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1763259290846.png" alt="1763259290846.png"></p>
+<p>十字蔓延法：水只向上下左右四个方向流淌。从中心点出发，只检查 N, S, E, W<br>四个邻居。简单、速度快，但可能无法填充对角线连接的区域。</p>
+<h3 id="八连通-8-Connected"><a href="#八连通-8-Connected" class="headerlink" title="八连通 (8-Connected)"></a>八连通 (8-Connected)</h3><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1763259306980.png" alt="1763259306980.png"></p>
+<p>米字蔓延法：水向上下左右，以及四个对角线方向流淌（共八个方向）。<br>从中心点出发，检查所有八个邻居。更加完整、不易遗漏，能处理斜线连接的区域。</p>
+<h2 id="基于递归的种子填充"><a href="#基于递归的种子填充" class="headerlink" title="基于递归的种子填充"></a>基于递归的种子填充</h2><ul>
+<li><strong>原理：</strong></li>
+</ul>
+<p>以种子像素为起点，递归检查其邻域像素是否满足”既不是边界色也不是已填充色”的条件；若满足，则对该像素着色并继续对其邻域进行同样的判断，从而沿四邻域或八邻域方向逐步向外扩散，实现区域填充。</p>
+<ul>
+<li><strong>不足:</strong></li>
+</ul>
+<ol>
+<li><p>当填充区域较大或边界复杂时，递归调用层级会迅速增加，最终可能超过系统允许的最大栈深度，导致程序崩溃。</p>
+</li>
+<li><p>效率较低，重复访问像素,递归过程中可能对同一像素进行多次读取与判断，特别是边界附近区域，会造成不必要的<br>glReadPixels 开销，影响填充效率。没有显式记录”已访问”状态</p>
+</li>
+<li><p>在凹多边形、细长通道等形状中递归扩散容易出现”漏”或”爆”的情况，尤其是在颜色比较不精确时更容易错填或溢出到图形外部。(特别是八联通的时候,判断的时候如果原本的直线比较细,很容易溢出到要填充的多边形的外面)</p>
+</li>
+</ol>
+<ul>
+<li><strong>思路:</strong></li>
+</ul>
+<ol>
+<li><p>取当前种子像素的颜色</p>
+</li>
+<li><p>若当前像素颜色既不是目标色也不是边界色则填充，且将其邻域像素依次作为种子像素重复步骤（1）、（2），直到递归结束</p>
+</li>
+</ol>
+<ul>
+<li><strong>关键代码</strong></li>
+</ul>
+<ol>
+<li><strong>四邻域的递归种子填充算法</strong></li>
+</ol>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// A1_1:四邻域的种子填充法的递归填充算法</span>
+<span class="token keyword">void</span> <span class="token function">SeedFilling_4near</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">float</span> color<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">glReadPixels</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> GL_RGB<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/*获取屏幕上特定位置的像素颜色值 void glReadPixels(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *data);*/</span>
+    cout <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> <span class="token string">","</span> <span class="token operator">&lt;&lt;</span> y <span class="token operator">&lt;&lt;</span> <span class="token string">":"</span> <span class="token operator">&lt;&lt;</span> color<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> color<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> color<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> newcolor<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> boundarycolor<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">/* 因为边界像素已经着色，且种子像素是在内部，因此基于连通性的扩散到边界像素就会停止，因此不需要想光栅化一样确定内外像素，只需要判定颜色即可*/</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">draw_a_point</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SeedFilling_4near</span><span class="token punctuation">(</span>x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SeedFilling_4near</span><span class="token punctuation">(</span>x <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SeedFilling_4near</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SeedFilling_4near</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li><strong>八邻域的递归种子填充算法</strong></li>
+</ol>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// A1_2:八邻域的种子填充法的递归填充算法</span>
+<span class="token keyword">void</span> <span class="token function">SeedFilling_8near</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">float</span> color<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">glReadPixels</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> GL_RGB<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/*获取屏幕上特定位置的像素颜色值 void glReadPixels(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *data);*/</span>
+    cout <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> <span class="token string">","</span> <span class="token operator">&lt;&lt;</span> y <span class="token operator">&lt;&lt;</span> <span class="token string">":"</span> <span class="token operator">&lt;&lt;</span> color<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> color<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> color<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> newcolor<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> boundarycolor<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">/* 因为边界像素已经着色，且种子像素是在内部，因此基于连通性的扩散到边界像素就会停止，因此不需要想光栅化一样确定内外像素，只需要判定颜色即可*/</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">draw_a_point</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SeedFilling_8near</span><span class="token punctuation">(</span>x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SeedFilling_8near</span><span class="token punctuation">(</span>x <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SeedFilling_8near</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SeedFilling_8near</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SeedFilling_8near</span><span class="token punctuation">(</span>x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> y <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SeedFilling_8near</span><span class="token punctuation">(</span>x <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> y <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SeedFilling_8near</span><span class="token punctuation">(</span>x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> y <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SeedFilling_8near</span><span class="token punctuation">(</span>x <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> y <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="基于栈的种子填充"><a href="#基于栈的种子填充" class="headerlink" title="基于栈的种子填充"></a>基于栈的种子填充</h2><ul>
+<li><strong>原理:</strong></li>
+</ul>
+<p>使用显式栈结构代替系统递归调用栈：以种子像素为起点入栈，每次弹出一个像素，判断其颜色是否满足”既不是边界色也不是已填充色”的条件，若满足则着色并将其邻域符合条件的像素继续压入栈中，从而沿四邻域或八邻域方向逐步扩散完成区域填充。</p>
+<ul>
+<li><strong>不足:</strong></li>
+</ul>
+<ol>
+<li><p>仍存在较大的空间开销：虽然避免了函数递归导致的系统栈溢出，但当填充区域非常大时，显式栈中会同时存放大量待处理像素，依然可能占用较多内存。</p>
+</li>
+<li><p>访问像素仍可能重复、效率一般：如果没有额外的访问标记，算法依旧完全依赖颜色判断，可能对同一像素多次入栈和检查，配合频繁的<br>glReadPixels 调用，会带来一定性能损失。</p>
+</li>
+<li><p>对边界精度依赖较强：与递归法类似，在凹多边形、细长通道以及边界线较细、颜色存在浮点误差的场景下，若边界判定不够准确，仍然有可能出现局部漏填或少量越界填充的问题。</p>
+</li>
+</ol>
+<ul>
+<li><strong>思路:</strong></li>
+</ul>
+<p>(1) 种子像素入栈</p>
+<p>(2) 当栈非空时，重复执行下述三步：</p>
+<blockquote>
+<p>１）栈顶像素出栈</p>
+<p>２）将出栈像素置成多边形色</p>
+<p>３）按四向或八向检查相邻像素，若某个像素不在边界且未置成多边形色，则把该像素入栈。</p>
+</blockquote>
+<ul>
+<li><strong>关键代码</strong></li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// A2:用栈实现的种子填充算法</span>
+<span class="token keyword">void</span> <span class="token function">StackSeedFilling</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    stack<span class="token operator">&lt;</span>point<span class="token operator">&gt;</span> q<span class="token punctuation">;</span>
+    q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>q<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        point now <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> nowx <span class="token operator">=</span> now<span class="token punctuation">.</span>x<span class="token punctuation">,</span> nowy <span class="token operator">=</span> now<span class="token punctuation">.</span>y<span class="token punctuation">;</span>
+        <span class="token keyword">float</span> color<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token function">glReadPixels</span><span class="token punctuation">(</span>nowx<span class="token punctuation">,</span> nowy<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> GL_RGB<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> newcolor<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> boundarycolor<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">/* 因为边界像素已经着色，且种子像素是在内部，因此基于连通性的扩散到边界像素就会停止，因此不需要想光栅化一样确定内外像素，只需要判定颜色即可*/</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">draw_a_point</span><span class="token punctuation">(</span>nowx<span class="token punctuation">,</span> nowy<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>nowx <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> nowy<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>nowx <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> nowy<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>nowx<span class="token punctuation">,</span> nowy <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>nowx<span class="token punctuation">,</span> nowy <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="基于广度优先搜索的种子填充算法"><a href="#基于广度优先搜索的种子填充算法" class="headerlink" title="基于广度优先搜索的种子填充算法"></a>基于广度优先搜索的种子填充算法</h2><ul>
+<li><strong>原理:</strong></li>
+</ul>
+<p>另一种形式的基于栈的种子填充算法,使用队列代替递归/栈，以种子像素为起点入队，每次从队头取出一个像素进行颜色判断，若满足”既不是边界色也不是已填充色”的条件，则对其着色并把其邻域像素继续入队，从而按”波前”方式在四邻域或八邻域方向逐层扩散完成区域填充。</p>
+<ul>
+<li><strong>不足:</strong></li>
+</ul>
+<p>和基于栈的种子填充算法相同</p>
+<ul>
+<li><strong>思路:</strong></li>
+</ul>
+<p>(1) 将初始种子像素坐标压入队列；</p>
+<p>(2) 当队列非空时循环执行：</p>
+<pre><code>1）从队头取出一个像素，读取其颜色；
+
+2）若该像素既不是边界色也不是填充色，则对其着色；
+
+3）按四向或八向检查其邻域像素，若某个邻域像素在窗口范围内且颜色满足"可填充"条件，则把该像素压入队列，等待后续处理；
+</code></pre>
+<p>(3)<br>当队列为空时，说明所有与种子像素连通的区域像素均已处理完毕，填充结束。</p>
+<ul>
+<li><strong>关键代码</strong></li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// A3:用广度优先搜索实现的种子填充算法</span>
+<span class="token keyword">void</span> <span class="token function">BFSSeedFilling</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    queue<span class="token operator">&lt;</span>point<span class="token operator">&gt;</span> q<span class="token punctuation">;</span>
+    q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>q<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        point now <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> nowx <span class="token operator">=</span> now<span class="token punctuation">.</span>x<span class="token punctuation">,</span> nowy <span class="token operator">=</span> now<span class="token punctuation">.</span>y<span class="token punctuation">;</span>
+        <span class="token keyword">float</span> color<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token function">glReadPixels</span><span class="token punctuation">(</span>nowx<span class="token punctuation">,</span> nowy<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> GL_RGB<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> newcolor<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> boundarycolor<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">draw_a_point</span><span class="token punctuation">(</span>nowx<span class="token punctuation">,</span> nowy<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>nowx <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> nowy<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>nowx <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> nowy<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>nowx<span class="token punctuation">,</span> nowy <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>nowx<span class="token punctuation">,</span> nowy <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="扫描线种子填充算法"><a href="#扫描线种子填充算法" class="headerlink" title="扫描线种子填充算法"></a>扫描线种子填充算法</h2><ul>
+<li><strong>原理:</strong></li>
+</ul>
+<p>以种子像素所在的扫描线为基础，先在该行上向左右扩展形成连续的填充线段（区间），再在该区间的上下相邻扫描线上寻找新的种子区间，从而通过”按行扩展 +<br>垂直传播”的方式完成整块区域的填充。</p>
+<ul>
+<li><strong>不足:</strong></li>
+</ul>
+<ol>
+<li><p>相比简单的递归或栈 /<br>队列像素级扩散，扫描线种子填充需要维护区间端点（xl,<br>xr）、上下扫描线的交叠关系等，算法实现更复杂，容易在细节上出错。</p>
+</li>
+<li><p>对边界连续性和正确性要求较高:边界如果存在断裂、锯齿较严重或线条过细，容易导致扫描线在寻找左右终止位置时出现误判，从而造成局部漏填或越界填充。</p>
+</li>
+<li><p>更适合规则区域，但对极端复杂形状不够直观:对于凹多边形、包含很多细长通道或孤立小区域的图形，扫描线在划分区间和寻找上下交叠区间时逻辑较绕，不如简单的<br>4 邻域 / 8 邻域扩散直观。</p>
+</li>
+</ol>
+<ul>
+<li><strong>思路:</strong></li>
+</ul>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1763259663217.png" alt="1763259663217.png"></p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1763259673699.png" alt="1763259673699.png"></p>
+<p>图片来源:<a target="_blank" rel="noopener" href="https://www.cnblogs.com/wkfvawl/p/11625712.html">计算机图形学——区域填充算法（基本光栅图形算法）</a></p>
+<p>(1) 初始化时，向堆栈压入种子像素，当堆栈不为空时，重复执行以下各步。</p>
+<p>(2) 从包含种子像素的堆栈中推出区间段内的种子像素。</p>
+<p>(3) 沿着扫描线，对种子像素的左右像素进行填充，直至遇到边界像素为止。</p>
+<p>(4) 区间段内的最左和最右像素标记为xl, xr，在此区间[xl,<br>xr]内，检查与当前扫描线相邻的上下两条扫描线是否全为边界像素或已被填充过。(有交集又没有填充)</p>
+<p>(5)<br>如果经过测试，这些扫描线上的像素段需要填充，则在xl和xr区间范围内，把每一像素段的最右像素作为种子像素，并压入堆栈。</p>
+<ul>
+<li><strong>关键代码</strong></li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// B1:扫描线种子填充法</span>
+<span class="token comment">// 输入：多边形顶点数据，顺时针排列</span>
+<span class="token comment">// 输出：多边形内部需要填充的点集</span>
+<span class="token keyword">void</span> <span class="token function">ScanningSeedFilling</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    stack<span class="token operator">&lt;</span>point<span class="token operator">&gt;</span> q<span class="token punctuation">;</span>
+    q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>q<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        point now <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// now.y是当前的扫描线</span>
+        <span class="token keyword">int</span> seed_x <span class="token operator">=</span> now<span class="token punctuation">.</span>x<span class="token punctuation">,</span> seed_y <span class="token operator">=</span> now<span class="token punctuation">.</span>y<span class="token punctuation">;</span>
+        <span class="token keyword">float</span> color<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token function">glReadPixels</span><span class="token punctuation">(</span>seed_x<span class="token punctuation">,</span> seed_y<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> GL_RGB<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 如果种子点已经填充过或是边界，跳过</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> newcolor<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> boundarycolor<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">continue</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">int</span> xl <span class="token operator">=</span> seed_x<span class="token punctuation">;</span>
+        <span class="token comment">// 向左填充，找到最左边界xl</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> boundarycolor<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> newcolor<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">draw_a_point</span><span class="token punctuation">(</span>xl<span class="token punctuation">,</span> seed_y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            xl<span class="token operator">--</span><span class="token punctuation">;</span>
+            <span class="token function">glReadPixels</span><span class="token punctuation">(</span>xl<span class="token punctuation">,</span> seed_y<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> GL_RGB<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        xl<span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment">// 回退到最后一个有效像素</span>
+
+        <span class="token comment">// 向右填充，找到最右边界xr</span>
+        <span class="token keyword">int</span> xr <span class="token operator">=</span> seed_x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token function">glReadPixels</span><span class="token punctuation">(</span>xr<span class="token punctuation">,</span> seed_y<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> GL_RGB<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> boundarycolor<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> newcolor<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">draw_a_point</span><span class="token punctuation">(</span>xr<span class="token punctuation">,</span> seed_y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            xr<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token function">glReadPixels</span><span class="token punctuation">(</span>xr<span class="token punctuation">,</span> seed_y<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> GL_RGB<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        xr<span class="token operator">--</span><span class="token punctuation">;</span> <span class="token comment">// 回退到最后一个有效像素</span>
+        <span class="token comment">// 检查上下两条扫描线y+1和y-1，在区间[xl, xr]内找到每一段的最右像素作为种子</span>
+        <span class="token keyword">int</span> y_above <span class="token operator">=</span> seed_y <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> y_below <span class="token operator">=</span> seed_y <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 检查上方扫描线</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> xl<span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> xr<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">float</span> color_above<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token function">glReadPixels</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> y_above<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> GL_RGB<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> color_above<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color_above<span class="token punctuation">,</span> boundarycolor<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color_above<span class="token punctuation">,</span> newcolor<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment">// 找到这一段的最右像素</span>
+                <span class="token keyword">int</span> j <span class="token operator">=</span> i<span class="token punctuation">;</span>
+                <span class="token keyword">while</span> <span class="token punctuation">(</span>j <span class="token operator">&lt;=</span> xr<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token function">glReadPixels</span><span class="token punctuation">(</span>j<span class="token punctuation">,</span> y_above<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> GL_RGB<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> color_above<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">same_color</span><span class="token punctuation">(</span>color_above<span class="token punctuation">,</span> boundarycolor<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token function">same_color</span><span class="token punctuation">(</span>color_above<span class="token punctuation">,</span> newcolor<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                        <span class="token keyword">break</span><span class="token punctuation">;</span>
+                    j<span class="token operator">++</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token comment">// 压入最右像素作为种子</span>
+                q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> y_above<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                i <span class="token operator">=</span> j<span class="token punctuation">;</span> <span class="token comment">// 跳过已处理的段</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// 检查下方扫描线</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> xl<span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> xr<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">float</span> color_below<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token function">glReadPixels</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> y_below<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> GL_RGB<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> color_below<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color_below<span class="token punctuation">,</span> boundarycolor<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color_below<span class="token punctuation">,</span> newcolor<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment">// 找到这一段的最右像素</span>
+                <span class="token keyword">int</span> j <span class="token operator">=</span> i<span class="token punctuation">;</span>
+                <span class="token keyword">while</span> <span class="token punctuation">(</span>j <span class="token operator">&lt;=</span> xr<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token function">glReadPixels</span><span class="token punctuation">(</span>j<span class="token punctuation">,</span> y_below<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> GL_RGB<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> color_below<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">same_color</span><span class="token punctuation">(</span>color_below<span class="token punctuation">,</span> boundarycolor<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token function">same_color</span><span class="token punctuation">(</span>color_below<span class="token punctuation">,</span> newcolor<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                        <span class="token keyword">break</span><span class="token punctuation">;</span>
+                    j<span class="token operator">++</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token comment">// 压入最右像素作为种子</span>
+                q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> y_below<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                i <span class="token operator">=</span> j<span class="token punctuation">;</span> <span class="token comment">// 跳过已处理的段</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="实验原理或思路"><a href="#实验原理或思路" class="headerlink" title="实验原理或思路"></a>实验原理或思路</h1><p>实现区域填充算法，包括递归种子填充、基于栈的种子填充、基于广度优先搜索的种子填充以及扫描线种子填充法，并通过<br>OpenGL 完成交互式可视化验证。</p>
+<ol>
+<li><strong>算法原理理解与对比分析</strong></li>
+</ol>
+<!-- -->
+
+<ol>
+<li><p><strong>递归种子填充：</strong>从种子点出发，递归检查并填充邻域像素，结构简单但容易造成深层递归导致栈溢出，并且颜色判断可能引起重复访问或越界填充。</p>
+</li>
+<li><p><strong>基于栈的种子填充：</strong>使用显式栈代替递归进行深度优先扩展，避免了系统栈溢出问题，但仍可能占用较多内存，同时依靠颜色判断会重复访问像素。</p>
+</li>
+<li><p><strong>基于广度优先搜索（BFS）的种子填充：</strong>利用队列实现按层扩散的区域生长，填充过程直观、不会栈溢出，但队列中可能同时存放大量像素，空间需求较高。</p>
+</li>
+<li><p><strong>扫描线种子填充算法：</strong>以扫描线为单位向左右扩展形成连续区间，再在上下扫描线上搜索新种子，效率高、像素访问少，但实现复杂，对边界连续性要求更高。</p>
+</li>
+</ol>
+<h1 id="实验过程及结果"><a href="#实验过程及结果" class="headerlink" title="实验过程及结果"></a>实验过程及结果</h1><p>由于关键代码已经在实验内容部分展示了,这里我只展示了运行的结果,并将完整的程序放在了本段的末尾</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV17pC2BKEBZ/?spm_id_from=333.1387.homepage.video_card.click&vd_source=0ca07f837bf8ee7607324d7927199dcc">演示视频链接</a></p>
+<h2 id="任务1-基于递归的种子填充"><a href="#任务1-基于递归的种子填充" class="headerlink" title="任务1: 基于递归的种子填充"></a>任务1: 基于递归的种子填充</h2><ul>
+<li><strong>运行结果</strong></li>
+</ul>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1763259978496.png" alt="1763259978496.png"></p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1763260167311.png" alt="1763260167311.png"></p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1763259997818.png" alt="1763259997818.png"></p>
+<h2 id="任务2-基于栈的种子填充"><a href="#任务2-基于栈的种子填充" class="headerlink" title="任务2: 基于栈的种子填充"></a>任务2: 基于栈的种子填充</h2><ul>
+<li><strong>运行结果</strong></li>
+</ul>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1763260026558.png" alt="1763260026558.png"></p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1763260121963.png" alt="1763260121963.png"></p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1763260050189.png" alt="1763260050189.png"></p>
+<h2 id="任务3-基于广度优先搜索的种子填充算法"><a href="#任务3-基于广度优先搜索的种子填充算法" class="headerlink" title="任务3: 基于广度优先搜索的种子填充算法"></a>任务3: 基于广度优先搜索的种子填充算法</h2><ul>
+<li><strong>运行结果</strong></li>
+</ul>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1763260059707.png" alt="1763260059707.png"></p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1763260080993.png" alt="1763260080993.png"></p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1763260072375.png" alt="1763260072375.png"></p>
+<h2 id="任务4-扫描线种子填充算法"><a href="#任务4-扫描线种子填充算法" class="headerlink" title="任务4: 扫描线种子填充算法"></a>任务4: 扫描线种子填充算法</h2><ul>
+<li><strong>运行结果</strong></li>
+</ul>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1763260091189.png" alt="1763260091189.png"></p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1763260103145.png" alt="1763260103145.png"></p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1763260110531.png" alt="1763260110531.png"></p>
+<h1 id="完整程序代码"><a href="#完整程序代码" class="headerlink" title="完整程序代码"></a>完整程序代码</h1><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;windows.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">GLUT_DISABLE_ATEXIT_HACK</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifdef</span> <span class="token expression">__APPLE__</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;GLUT/glut.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">else</span></span>
+<span class="token comment">// #include "../gl/GL.H"</span>
+<span class="token comment">// #include "../gl/GLU.H"</span>
+<span class="token comment">// #include "../gl/GLUT.H"</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;GL/glut.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;vector&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;queue&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stack&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;GL/glut.h&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token keyword">int</span> window_width <span class="token operator">=</span> <span class="token number">800</span><span class="token punctuation">,</span> window_height <span class="token operator">=</span> <span class="token number">600</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">int</span> slices <span class="token operator">=</span> <span class="token number">16</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">int</span> stacks <span class="token operator">=</span> <span class="token number">16</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 像素点的大小设置</span>
+<span class="token keyword">static</span> <span class="token keyword">float</span> point_size <span class="token operator">=</span> <span class="token number">1.0f</span><span class="token punctuation">;</span>        <span class="token comment">// 填充点的默认大小</span>
+<span class="token keyword">static</span> <span class="token keyword">float</span> vertex_point_size <span class="token operator">=</span> <span class="token number">8.0f</span><span class="token punctuation">;</span> <span class="token comment">// 顶点的大小（可选，用于区分顶点和填充点）</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">point</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> x<span class="token punctuation">,</span> y<span class="token punctuation">;</span>
+    <span class="token function">point</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token function">point</span><span class="token punctuation">(</span><span class="token keyword">int</span> xx<span class="token punctuation">,</span> <span class="token keyword">int</span> yy<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">x</span><span class="token punctuation">(</span>xx<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">y</span><span class="token punctuation">(</span>yy<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+vector<span class="token operator">&lt;</span>point<span class="token operator">&gt;</span> vertexs<span class="token punctuation">;</span> <span class="token comment">// 多边形顶点集合</span>
+
+<span class="token keyword">float</span> newcolor<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">;</span>      <span class="token comment">// 填充颜色</span>
+<span class="token keyword">float</span> boundarycolor<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment">// 边界颜色</span>
+
+<span class="token keyword">void</span> <span class="token function">draw_a_point</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">draw_vertex</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">bool</span> <span class="token function">same_color</span><span class="token punctuation">(</span><span class="token keyword">float</span> <span class="token operator">*</span>color1<span class="token punctuation">,</span> <span class="token keyword">float</span> <span class="token operator">*</span>color2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">SeedFilling</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">StackSeedFilling</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">ScanningSeedFilling</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">mymouse</span><span class="token punctuation">(</span><span class="token keyword">int</span> button<span class="token punctuation">,</span> <span class="token keyword">int</span> state<span class="token punctuation">,</span> <span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 画点并着色（填充点）</span>
+<span class="token keyword">void</span> <span class="token function">draw_a_point</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">glPointSize</span><span class="token punctuation">(</span>point_size<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置点的大小</span>
+    <span class="token function">glBegin</span><span class="token punctuation">(</span>GL_POINTS<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glColor3fv</span><span class="token punctuation">(</span>newcolor<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glVertex2f</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glEnd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glFlush</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 绘制顶点（使用不同的点大小）</span>
+<span class="token keyword">void</span> <span class="token function">draw_vertex</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">glPointSize</span><span class="token punctuation">(</span>vertex_point_size<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置顶点的大小</span>
+    <span class="token function">glBegin</span><span class="token punctuation">(</span>GL_POINTS<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glColor3fv</span><span class="token punctuation">(</span>newcolor<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 顶点使用填充颜色，或者可以用boundarycolor</span>
+    <span class="token function">glVertex2f</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glEnd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glFlush</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 判断函数</span>
+<span class="token keyword">bool</span> <span class="token function">same_color</span><span class="token punctuation">(</span><span class="token keyword">float</span> <span class="token operator">*</span>color1<span class="token punctuation">,</span> <span class="token keyword">float</span> <span class="token operator">*</span>color2<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">bool</span> is_same <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">3</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>color1<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> color2<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            is_same <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> is_same<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// A1_1:四邻域的种子填充法的递归填充算法</span>
+<span class="token keyword">void</span> <span class="token function">SeedFilling_4near</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">float</span> color<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">glReadPixels</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> GL_RGB<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/*获取屏幕上特定位置的像素颜色值 void glReadPixels(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *data);*/</span>
+    cout <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> <span class="token string">","</span> <span class="token operator">&lt;&lt;</span> y <span class="token operator">&lt;&lt;</span> <span class="token string">":"</span> <span class="token operator">&lt;&lt;</span> color<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> color<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> color<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> newcolor<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> boundarycolor<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">/* 因为边界像素已经着色，且种子像素是在内部，因此基于连通性的扩散到边界像素就会停止，因此不需要想光栅化一样确定内外像素，只需要判定颜色即可*/</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">draw_a_point</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SeedFilling_4near</span><span class="token punctuation">(</span>x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SeedFilling_4near</span><span class="token punctuation">(</span>x <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SeedFilling_4near</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SeedFilling_4near</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// A1_2:八邻域的种子填充法的递归填充算法</span>
+<span class="token keyword">void</span> <span class="token function">SeedFilling_8near</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">float</span> color<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">glReadPixels</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> GL_RGB<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/*获取屏幕上特定位置的像素颜色值 void glReadPixels(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *data);*/</span>
+    cout <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> <span class="token string">","</span> <span class="token operator">&lt;&lt;</span> y <span class="token operator">&lt;&lt;</span> <span class="token string">":"</span> <span class="token operator">&lt;&lt;</span> color<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> color<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> color<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> newcolor<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> boundarycolor<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">/* 因为边界像素已经着色，且种子像素是在内部，因此基于连通性的扩散到边界像素就会停止，因此不需要想光栅化一样确定内外像素，只需要判定颜色即可*/</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">draw_a_point</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SeedFilling_8near</span><span class="token punctuation">(</span>x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SeedFilling_8near</span><span class="token punctuation">(</span>x <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SeedFilling_8near</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SeedFilling_8near</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SeedFilling_8near</span><span class="token punctuation">(</span>x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> y <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SeedFilling_8near</span><span class="token punctuation">(</span>x <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> y <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SeedFilling_8near</span><span class="token punctuation">(</span>x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> y <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">SeedFilling_8near</span><span class="token punctuation">(</span>x <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> y <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// A2:用栈实现的种子填充算法</span>
+<span class="token keyword">void</span> <span class="token function">StackSeedFilling</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    stack<span class="token operator">&lt;</span>point<span class="token operator">&gt;</span> q<span class="token punctuation">;</span>
+    q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>q<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        point now <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> nowx <span class="token operator">=</span> now<span class="token punctuation">.</span>x<span class="token punctuation">,</span> nowy <span class="token operator">=</span> now<span class="token punctuation">.</span>y<span class="token punctuation">;</span>
+        <span class="token keyword">float</span> color<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token function">glReadPixels</span><span class="token punctuation">(</span>nowx<span class="token punctuation">,</span> nowy<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> GL_RGB<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> newcolor<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> boundarycolor<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">/* 因为边界像素已经着色，且种子像素是在内部，因此基于连通性的扩散到边界像素就会停止，因此不需要想光栅化一样确定内外像素，只需要判定颜色即可*/</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">draw_a_point</span><span class="token punctuation">(</span>nowx<span class="token punctuation">,</span> nowy<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>nowx <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> nowy<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>nowx <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> nowy<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>nowx<span class="token punctuation">,</span> nowy <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>nowx<span class="token punctuation">,</span> nowy <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// A3:用广度优先搜索实现的种子填充算法</span>
+<span class="token keyword">void</span> <span class="token function">BFSSeedFilling</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    queue<span class="token operator">&lt;</span>point<span class="token operator">&gt;</span> q<span class="token punctuation">;</span>
+    q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>q<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        point now <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> nowx <span class="token operator">=</span> now<span class="token punctuation">.</span>x<span class="token punctuation">,</span> nowy <span class="token operator">=</span> now<span class="token punctuation">.</span>y<span class="token punctuation">;</span>
+        <span class="token keyword">float</span> color<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token function">glReadPixels</span><span class="token punctuation">(</span>nowx<span class="token punctuation">,</span> nowy<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> GL_RGB<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> newcolor<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> boundarycolor<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">draw_a_point</span><span class="token punctuation">(</span>nowx<span class="token punctuation">,</span> nowy<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>nowx <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> nowy<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>nowx <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> nowy<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>nowx<span class="token punctuation">,</span> nowy <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>nowx<span class="token punctuation">,</span> nowy <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// B1:扫描线种子填充法</span>
+<span class="token comment">// 输入：多边形顶点数据，顺时针排列</span>
+<span class="token comment">// 输出：多边形内部需要填充的点集</span>
+
+<span class="token keyword">void</span> <span class="token function">ScanningSeedFilling</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    stack<span class="token operator">&lt;</span>point<span class="token operator">&gt;</span> q<span class="token punctuation">;</span>
+    q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>q<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        point now <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// now.y是当前的扫描线</span>
+        <span class="token keyword">int</span> seed_x <span class="token operator">=</span> now<span class="token punctuation">.</span>x<span class="token punctuation">,</span> seed_y <span class="token operator">=</span> now<span class="token punctuation">.</span>y<span class="token punctuation">;</span>
+        <span class="token keyword">float</span> color<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token function">glReadPixels</span><span class="token punctuation">(</span>seed_x<span class="token punctuation">,</span> seed_y<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> GL_RGB<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 如果种子点已经填充过或是边界，跳过</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> newcolor<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> boundarycolor<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">continue</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">int</span> xl <span class="token operator">=</span> seed_x<span class="token punctuation">;</span>
+        <span class="token comment">// 向左填充，找到最左边界xl</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> boundarycolor<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> newcolor<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">draw_a_point</span><span class="token punctuation">(</span>xl<span class="token punctuation">,</span> seed_y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            xl<span class="token operator">--</span><span class="token punctuation">;</span>
+            <span class="token function">glReadPixels</span><span class="token punctuation">(</span>xl<span class="token punctuation">,</span> seed_y<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> GL_RGB<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        xl<span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment">// 回退到最后一个有效像素</span>
+
+        <span class="token comment">// 向右填充，找到最右边界xr</span>
+        <span class="token keyword">int</span> xr <span class="token operator">=</span> seed_x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token function">glReadPixels</span><span class="token punctuation">(</span>xr<span class="token punctuation">,</span> seed_y<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> GL_RGB<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> boundarycolor<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color<span class="token punctuation">,</span> newcolor<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">draw_a_point</span><span class="token punctuation">(</span>xr<span class="token punctuation">,</span> seed_y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            xr<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token function">glReadPixels</span><span class="token punctuation">(</span>xr<span class="token punctuation">,</span> seed_y<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> GL_RGB<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        xr<span class="token operator">--</span><span class="token punctuation">;</span> <span class="token comment">// 回退到最后一个有效像素</span>
+        <span class="token comment">// 检查上下两条扫描线y+1和y-1，在区间[xl, xr]内找到每一段的最右像素作为种子</span>
+        <span class="token keyword">int</span> y_above <span class="token operator">=</span> seed_y <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> y_below <span class="token operator">=</span> seed_y <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 检查上方扫描线</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> xl<span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> xr<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">float</span> color_above<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token function">glReadPixels</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> y_above<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> GL_RGB<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> color_above<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color_above<span class="token punctuation">,</span> boundarycolor<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color_above<span class="token punctuation">,</span> newcolor<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment">// 找到这一段的最右像素</span>
+                <span class="token keyword">int</span> j <span class="token operator">=</span> i<span class="token punctuation">;</span>
+                <span class="token keyword">while</span> <span class="token punctuation">(</span>j <span class="token operator">&lt;=</span> xr<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token function">glReadPixels</span><span class="token punctuation">(</span>j<span class="token punctuation">,</span> y_above<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> GL_RGB<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> color_above<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">same_color</span><span class="token punctuation">(</span>color_above<span class="token punctuation">,</span> boundarycolor<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token function">same_color</span><span class="token punctuation">(</span>color_above<span class="token punctuation">,</span> newcolor<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                        <span class="token keyword">break</span><span class="token punctuation">;</span>
+                    j<span class="token operator">++</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token comment">// 压入最右像素作为种子</span>
+                q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> y_above<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                i <span class="token operator">=</span> j<span class="token punctuation">;</span> <span class="token comment">// 跳过已处理的段</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// 检查下方扫描线</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> xl<span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> xr<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">float</span> color_below<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token function">glReadPixels</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> y_below<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> GL_RGB<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> color_below<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color_below<span class="token punctuation">,</span> boundarycolor<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">same_color</span><span class="token punctuation">(</span>color_below<span class="token punctuation">,</span> newcolor<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment">// 找到这一段的最右像素</span>
+                <span class="token keyword">int</span> j <span class="token operator">=</span> i<span class="token punctuation">;</span>
+                <span class="token keyword">while</span> <span class="token punctuation">(</span>j <span class="token operator">&lt;=</span> xr<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token function">glReadPixels</span><span class="token punctuation">(</span>j<span class="token punctuation">,</span> y_below<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> GL_RGB<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> color_below<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">same_color</span><span class="token punctuation">(</span>color_below<span class="token punctuation">,</span> boundarycolor<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token function">same_color</span><span class="token punctuation">(</span>color_below<span class="token punctuation">,</span> newcolor<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                        <span class="token keyword">break</span><span class="token punctuation">;</span>
+                    j<span class="token operator">++</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token comment">// 压入最右像素作为种子</span>
+                q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">point</span><span class="token punctuation">(</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> y_below<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                i <span class="token operator">=</span> j<span class="token punctuation">;</span> <span class="token comment">// 跳过已处理的段</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">mymouse</span><span class="token punctuation">(</span><span class="token keyword">int</span> button<span class="token punctuation">,</span> <span class="token keyword">int</span> state<span class="token punctuation">,</span> <span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/*指定并绘制多边形顶点*/</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>button <span class="token operator">==</span> GLUT_LEFT_BUTTON <span class="token operator">&amp;&amp;</span> state <span class="token operator">==</span> GLUT_DOWN<span class="token punctuation">)</span> <span class="token comment">/* GLUT_LEFT_BUTTON=鼠标左键， GLUT_DOWN=按下按键*/</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// 使用draw_vertex函数绘制顶点</span>
+        <span class="token function">draw_vertex</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> window_height <span class="token operator">-</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        point <span class="token function">p</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> window_height <span class="token operator">-</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        vertexs<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        cout <span class="token operator">&lt;&lt;</span> <span class="token string">"顶点"</span> <span class="token operator">&lt;&lt;</span> vertexs<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">": ("</span> <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> <span class="token string">", "</span> <span class="token operator">&lt;&lt;</span> y <span class="token operator">&lt;&lt;</span> <span class="token string">")"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/*结束顶点指定，顺序连接顶点得到封闭多边形*/</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>button <span class="token operator">==</span> GLUT_RIGHT_BUTTON <span class="token operator">&amp;&amp;</span> state <span class="token operator">==</span> GLUT_DOWN<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">glClearColor</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置绘制窗口颜色为白色</span>
+        <span class="token function">glColor3fv</span><span class="token punctuation">(</span>boundarycolor<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token function">glBegin</span><span class="token punctuation">(</span>GL_LINES<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> vertexs<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">==</span> vertexs<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment">// 画完最后一个点，使其闭合</span>
+            <span class="token punctuation">{</span>
+                <span class="token function">glVertex2f</span><span class="token punctuation">(</span>vertexs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>x<span class="token punctuation">,</span> vertexs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">glVertex2f</span><span class="token punctuation">(</span>vertexs<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>x<span class="token punctuation">,</span> vertexs<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">{</span>
+                <span class="token function">glVertex2f</span><span class="token punctuation">(</span>vertexs<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>x<span class="token punctuation">,</span> vertexs<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">glVertex2f</span><span class="token punctuation">(</span>vertexs<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>x<span class="token punctuation">,</span> vertexs<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">glEnd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">glFlush</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        vertexs<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/*指定种子点，并开始填充*/</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>button <span class="token operator">==</span> GLUT_MIDDLE_BUTTON <span class="token operator">&amp;&amp;</span> state <span class="token operator">==</span> GLUT_DOWN<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        cout <span class="token operator">&lt;&lt;</span> <span class="token string">"种子像素: ("</span> <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> <span class="token string">", "</span> <span class="token operator">&lt;&lt;</span> y <span class="token operator">&lt;&lt;</span> <span class="token string">")"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+
+<span class="token comment">// %%%%%%%%%在这里切换填充算法%%%%%%%%%%%</span>
+        <span class="token comment">// SeedFilling_4near(x, window_height - y); // 四邻域的递归种子填充算法</span>
+        <span class="token comment">// SeedFilling_8near(x, window_height - y); // 八邻域的递归种子填充算法</span>
+        <span class="token comment">// StackSeedFilling(x, window_height - y); // 栈种子填充算法</span>
+        <span class="token function">BFSSeedFilling</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> window_height <span class="token operator">-</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 广度优先搜索种子填充算法</span>
+        <span class="token comment">// ScanningSeedFilling(x, window_height - y); // 扫描线种子填充算法</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">display</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">glClear</span><span class="token punctuation">(</span>GL_COLOR_BUFFER_BIT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glColor3f</span><span class="token punctuation">(</span><span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glPointSize</span><span class="token punctuation">(</span>point_size<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 使用全局的点大小设置</span>
+    <span class="token function">glBegin</span><span class="token punctuation">(</span>GL_POINTS<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glEnd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glFlush</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"点击鼠标左键画点；"</span> <span class="token operator">&lt;&lt;</span> endl
+         <span class="token operator">&lt;&lt;</span> <span class="token string">"点击鼠标右键结束画点，形成多边形；"</span> <span class="token operator">&lt;&lt;</span> endl
+         <span class="token operator">&lt;&lt;</span> <span class="token string">"点击鼠标中键确定区域填充种子点位置。"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token function">glutInit</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>argc<span class="token punctuation">,</span> argv<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glutInitDisplayMode</span><span class="token punctuation">(</span>GLUT_SINGLE <span class="token operator">|</span> GLUT_RGB<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glutInitWindowPosition</span><span class="token punctuation">(</span><span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">150</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glutInitWindowSize</span><span class="token punctuation">(</span>window_width<span class="token punctuation">,</span> window_height<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glutCreateWindow</span><span class="token punctuation">(</span><span class="token string">"填充算法-谭棵"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glMatrixMode</span><span class="token punctuation">(</span>GL_PROJECTION<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glLoadIdentity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">gluOrtho2D</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> window_width<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> window_height<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glClearColor</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glClear</span><span class="token punctuation">(</span>GL_COLOR_BUFFER_BIT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glutDisplayFunc</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>display<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glutMouseFunc</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>mymouse<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glutMainLoop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2025/10/27/2025-10-27-%E9%80%86%E5%85%83%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%8E%E5%BA%94%E7%94%A8/">2025-10-27-逆元基础知识与应用</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6-%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" rel="tag">计算机图形学 课程学习</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2025/11/16/2025-11-16-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E7%A7%8D%E5%AD%90%E5%A1%AB%E5%85%85%E7%AE%97%E6%B3%95/">2025-11-16-计算机图形学种子填充算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/27/2025-10-27-%E9%80%86%E5%85%83%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%8E%E5%BA%94%E7%94%A8/">2025-10-27-逆元基础知识与应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/26/2025-10-26-C++%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84k%E5%8F%89%E6%A0%91%E6%9C%80%E4%BC%98%E6%A0%B9%E8%8A%82%E7%82%B9%E9%80%89%E6%8B%A9%E9%97%AE%E9%A2%98/">2025-10-26-C++树形结构k叉树最优根节点选择问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/24/2025-10-24-Google%20Drive%20%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/">2025-10-24-Google Drive 命令行下载文件完整指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/24/2025-10-24-C++%E9%AD%94%E6%B3%95%E8%8D%AF%E5%89%82%E6%94%B6%E9%9B%86%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E9%97%AE%E9%A2%98/">2025-10-24-C++魔法药剂收集最小花费问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2025/10/23/2025-10-23-C++%E6%B1%82%E9%98%B6%E4%B9%98%E6%9C%AB%E5%B0%BE%E9%9D%9E%E9%9B%B6%E6%95%B0%E5%AD%97/">2025-10-23-C++求阶乘末尾非零数字</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">十一月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">十月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/deep-learning/" style="font-size: 12.86px;">深度学习</a> <a href="/tags/development/" style="font-size: 15.71px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 17.14px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 14.29px;">算法练习</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6-%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">计算机图形学 课程学习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 11.43px;">论文阅读</a> <a href="/tags/course/" style="font-size: 20px;">课程学习</a> <a href="/tags/troubleshooting/" style="font-size: 18.57px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>
+                © 2025 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.
+                
+                    &nbsp;|&nbsp;
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+                        蜀ICP备2025165253号
+                    </a>
+                
+                
+            </p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+<style>
+.police-beian{display:inline-flex;align-items:center;gap:4px}
+.police-icon{display:inline-block;width:16px;height:16px;background:#e91e63;border-radius:2px;opacity:.85}
+/* 说明：如需官方警徽图标，可将 .police-icon 的 background 设置为图片：
+   background:url('https://www.beian.gov.cn/img/ghs.png') no-repeat center/contain; */
+</style>
+
+  </body>
+</html>
