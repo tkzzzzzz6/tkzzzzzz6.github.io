@@ -6,7 +6,7 @@
   <link href="https://tanke.asia/atom.xml" rel="self"/>
   
   <link href="https://tanke.asia/"/>
-  <updated>2026-03-15T02:52:29.108Z</updated>
+  <updated>2026-03-17T11:07:32.617Z</updated>
   <id>https://tanke.asia/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GitHub Pages 部署 Hexo 添加个性化域名的配置方法（腾讯云域名）</title>
+    <link href="https://tanke.asia/2026/03/17/2026-03-17-GitHub%20Pages%20%E9%83%A8%E7%BD%B2Hexo%E6%B7%BB%E5%8A%A0%E4%B8%AA%E6%80%A7%E5%8C%96%E5%9F%9F%E5%90%8D%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95(%E8%85%BE%E8%AE%AF%E4%BA%91%E5%9F%9F%E5%90%8D)/"/>
+    <id>https://tanke.asia/2026/03/17/2026-03-17-GitHub%20Pages%20%E9%83%A8%E7%BD%B2Hexo%E6%B7%BB%E5%8A%A0%E4%B8%AA%E6%80%A7%E5%8C%96%E5%9F%9F%E5%90%8D%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95(%E8%85%BE%E8%AE%AF%E4%BA%91%E5%9F%9F%E5%90%8D)/</id>
+    <published>2026-03-16T16:00:00.000Z</published>
+    <updated>2026-03-17T11:07:32.617Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="GitHub-Pages-个性化域名配置"><a href="#GitHub-Pages-个性化域名配置" class="headerlink" title="GitHub Pages 个性化域名配置"></a>GitHub Pages 个性化域名配置</h2><p><a href="https://hexo.io/">Hexo</a> 是一个快速、简洁且高效的静态博客框架，使用 Markdown 解析文章，在几秒内即可生成静态网页。</p><p>本文主要介绍如何为部署在 GitHub Pages 上的 Hexo 博客配置个性化域名，以腾讯云域名为例，完整演示从购买到生效的全流程。</p><h3 id="购买域名"><a href="#购买域名" class="headerlink" title="购买域名"></a>购买域名</h3><p>在部署完 Hexo 博客之后，默认的访问地址是 <code>https://&lt;用户名&gt;.github.io/&lt;仓库名&gt;/</code>。如果想要使用个性化域名访问博客，需要先购买一个域名。</p><p>这里以腾讯云域名为例，进入 <a href="https://cloud.tencent.com/product/domain">腾讯云域名</a> 购买，一般价格在 5~50 元/年不等。<code>.asia</code> 后缀的域名只需 5 元，非常划算。</p><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1773744762304.png" alt="购买域名"></p><h3 id="DNS-解析"><a href="#DNS-解析" class="headerlink" title="DNS 解析"></a>DNS 解析</h3><p>进入 <a href="https://console.cloud.tencent.com/domain/all-domain/all#">域名解析控制台</a>，选择<code>域名列表</code>，在对应域名一栏点击<code>解析</code>，进入 DNS 解析界面。</p><p>在 DNS 解析界面添加如下两条记录：</p><table><thead><tr><th>记录类型</th><th>主机记录</th><th>记录值</th></tr></thead><tbody><tr><td>CNAME</td><td>@</td><td><code>&lt;用户名&gt;.github.io</code></td></tr><tr><td>CNAME</td><td>www</td><td><code>&lt;用户名&gt;.github.io</code></td></tr></tbody></table><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1773745054007.png" alt="DNS 解析配置"></p><p>这样无论用户输入 <code>www.tanke.asia</code> 还是直接输入 <code>tanke.asia</code>，都可以正确定位到网站。请将记录值替换为你自己的 GitHub Pages 地址。</p><h3 id="添加-CNAME-文件"><a href="#添加-CNAME-文件" class="headerlink" title="添加 CNAME 文件"></a>添加 CNAME 文件</h3><p>在 Hexo 本地目录的 <code>source/</code> 文件夹中，创建一个名为 <code>CNAME</code> 的无后缀文件，文件内容填写你的域名（不加 <code>https://</code>）：</p><pre class="line-numbers language-text" data-language="text"><code class="language-text">tanke.asia<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>然后重新生成并部署：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo cleanhexo d <span class="token parameter variable">-g</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h3 id="GitHub-Pages-添加自定义域名"><a href="#GitHub-Pages-添加自定义域名" class="headerlink" title="GitHub Pages 添加自定义域名"></a>GitHub Pages 添加自定义域名</h3><p>进入你的 GitHub 仓库，选择 <code>Settings</code> -&gt; <code>Pages</code>，在 <code>Custom domain</code> 处填写你的自定义域名并保存。</p><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1773745187397.png" alt="GitHub Pages 自定义域名设置"></p><p>完成以上步骤后，即可通过自定义域名访问你的博客。</p><h3 id="启用-HTTPS"><a href="#启用-HTTPS" class="headerlink" title="启用 HTTPS"></a>启用 HTTPS</h3><p>建议同时勾选 <code>Enforce HTTPS</code> 选项，GitHub Pages 会自动为你申请免费的 SSL 证书，启用后访问会更加安全，同时避免浏览器的”不安全”警告。</p><blockquote><p>注意：DNS 解析生效需要几分钟到几小时不等，若自定义域名验证失败，等待一段时间后重试即可。</p></blockquote><p>好啦,感谢大家的观看,欢迎访问我的博客：<a href="https://tanke.asia/">tanke.asia</a>，也欢迎各位小伙伴交换友链～</p><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul><li><a href="https://cloud.tencent.com/developer/article/2142661">GitHub Pages 个性化域名配置</a></li><li><a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site">GitHub Pages 官方文档</a></li></ul><hr>]]></content>
+    
+    
+    <summary type="html">本文介绍如何为部署在 GitHub Pages 上的 Hexo 博客配置腾讯云个性化域名，包括购买域名、DNS 解析、CNAME 文件及 HTTPS 启用全流程。</summary>
+    
+    
+    
+    <category term="工具配置" scheme="https://tanke.asia/categories/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/"/>
+    
+    
+    <category term="GitHub Pages" scheme="https://tanke.asia/tags/GitHub-Pages/"/>
+    
+    <category term="网站" scheme="https://tanke.asia/tags/%E7%BD%91%E7%AB%99/"/>
+    
+  </entry>
   
   <entry>
     <title>2026-03-15-因服务器网络访问问题从 GitHub 平滑迁移至 Gitee 等国内平台的方法</title>
@@ -533,29 +556,6 @@
     <category term="欧拉公式" scheme="https://tanke.asia/tags/%E6%AC%A7%E6%8B%89%E5%85%AC%E5%BC%8F/"/>
     
     <category term="拓扑" scheme="https://tanke.asia/tags/%E6%8B%93%E6%89%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2026-01-06期末复习-计算机图形学简答题</title>
-    <link href="https://tanke.asia/2026/01/06/2026-01-06%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E7%AE%80%E7%AD%94%E9%A2%98/"/>
-    <id>https://tanke.asia/2026/01/06/2026-01-06%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E7%AE%80%E7%AD%94%E9%A2%98/</id>
-    <published>2026-01-05T16:00:00.000Z</published>
-    <updated>2026-01-17T02:23:42.234Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="简答题"><a href="#简答题" class="headerlink" title="简答题"></a>简答题</h1><ol><li>图形的本质是什么<br>答：对客观对象几何形状、空间关系及其视觉属性的抽象描述与表达，是把现实世界对象用数学模型与可视信息进行形式化表示。</li><li>图形包含哪两方面的要素?在计算机中如何表示它们<br>答：几何要素与属性要素。几何要素描述形状与结构，用点、线、面、曲线/曲面及拓扑关系等几何数据结构表示；属性要素描述外观，用颜色、亮度、材质、纹理、透明度等属性参数表示。</li><li>计算机图形学的主要内容是什么<br>答：图形建模与表示、几何变换与坐标系统、视图/投影与观察、裁剪、消隐与可见性判定、光照与着色、光栅化与显示、交互与动画、图形仿真与可视化等。</li><li>图形和图像有何联系和区别<br>答：图形是几何模型驱动的描述，强调结构与几何关系；图像是像素矩阵，强调采样后的亮度/颜色分布。图形可通过渲染生成图像；图像也可经处理与重建得到图形信息（如边缘、形状）。</li><li>计算机图形学的应用领域<br>答：CAD/CAM、科学与工程可视化、游戏与影视动画、虚拟现实/增强现实、医学成像与手术规划、工业设计与数字孪生、人机交互、教育与训练等。</li><li>总结光栅显示系统的优缺点<br>答：优点：显示设备成熟、成本低、实现与渲染灵活，可显示复杂图形与图像。缺点：分辨率受限、锯齿明显、存储与带宽开销大、精细线条易失真，放大后出现像素化。</li><li>总结图形流水线的任务,内容和特点<br>答：任务是将场景几何数据最终转换为屏幕像素。内容包括建模变换、视图变换、投影、裁剪、光照与着色、光栅化与片段处理、输出到帧缓冲。特点是阶段化、顺序化且可并行，数据流驱动，便于硬件加速与统一接口。</li><li>在光栅显示系统中显卡的作用是什么<br>答：存储帧缓冲与图形数据，完成图形流水线中的变换、光栅化与着色等计算，加速绘制并输出视频信号驱动显示器。</li><li>简述几种反走样方法的基本思想及其优缺点<br>答：<br>（1）超采样/多重采样：提高采样率后再过滤，效果好但计算与存储开销大。<br>（2）区域覆盖/面积采样：按像素覆盖率加权，质量较好，成本中等。<br>（3）滤波后采样（低通滤波）：抑制高频锯齿，细节可能变模糊。<br>（4）后处理抗锯齿（如 FXAA）：速度快、实现简单，但可能损失细节。</li><li>裁剪的本质是什么<br>答：判断图形元素与裁剪窗口的空间关系，保留可见部分并去除不可见部分的过程，是一种可见性预处理与范围限制。</li><li>在区域填充中,多边形扫描转换算法和区域填充算法有何异同<br>答：相同点：都以像素填充为目标，常用扫描线逐行处理。不同点：多边形扫描转换针对多边形边界，求交点后成对填充；区域填充通常从种子点扩展（如洪水/边界填充），对任意闭合区域更通用。</li><li>三维观察为何需要许多坐标系,如果只使用一个坐标系,可以完成三维观察吗,坐标系的作用是什么<br>答：需要模型、世界、观察、投影、屏幕等坐标系以分离建模、观察与显示，便于分层处理。只用一个坐标系理论上可行，但变换复杂且不利于组织与复用。坐标系用于描述对象与视点位置、执行变换与投影、统一显示过程。</li><li>什么是实体,有效的实体有哪些性质<br>答：实体是具有体积的三维对象。有效实体应满足联通性、封闭性、无自交、边界一致性、内外可区分（可定义内部与外部），边界是定向可闭合的曲面。</li><li>多边形网格表示法中,常用的图形几何元素有哪些<br>答：顶点、边、面（多边形片元，如三角形/四边形），以及必要的拓扑关系（邻接关系）。</li><li>什么是扫描表示,构造实体几何表示<br>答：扫描表示（体素表示）用三维体素网格描述实体的占据情况，适合体数据。构造实体几何表示（CSG）用基本体（球、立方体、圆柱等）及集合运算（并、交、差）构造复杂实体，适合精确建模。</li><li>解释插值和逼近<br>答：插值要求曲线/曲面经过给定数据点；逼近允许不经过所有点，在某种误差最小意义下逼近数据，常用于噪声数据或整体趋势拟合。</li><li>参数表示法描述曲线或曲面有何优点,为什么表示时通常采用次数为 3<br>答：参数表示便于控制形状、处理多值与闭合曲线、实现平滑性与局部控制，也便于动画与变形。通常用三次：可保证足够的光滑性（如 C1/C2 连续），又兼顾计算效率与稳定性，且表达能力足够。</li><li>Bezier 曲线以及 B 样条曲线的特性有哪些<br>答：Bezier：由控制点决定，端点插值，整体性强（改一个点影响全局），非负基函数、凸包性、仿射不变，易于生成与分割。<br>B 样条：分段多项式，局部控制，连续性可控，仿射不变，逼近性强，适合复杂曲线与局部编辑。</li><li>如何实现 Bezier 曲线与B 样条曲线之间的相互转化<br>答：通过基函数转换矩阵或节点向量构造。将 B 样条通过提高节点重数实现分段，使每段等价为 Bezier；或将 Bezier 表达为等价的 B 样条基函数形式并计算控制点。</li><li>二维编码裁剪法如何对线段的端点进行编码,以及裁剪的<br>答：用 Cohen-Sutherland 4 位区域码（上、下、右、左）标记端点相对窗口的位置。裁剪过程：若两端区域码按位或为 0 则全可见；若按位与不为 0 则全不可见；否则计算与窗口边界的交点并迭代更新端点，直到可见或舍弃。</li><li>二维图形包含哪些图形<br>答：点、线段、折线、多边形、曲线、圆弧/圆，以及由这些基本图元组成的平面图形。</li><li>反射光由哪三部分组成<br>答：环境光、漫反射、镜面反射（对应全局背景、粗糙表面散射与高光成分）。</li><li>自由曲面的表示通常有几种,对应是什么<br>答：常见有参数表示（Bezier、B 样条、NURBS 曲面）、多边形网格表示、隐式曲面表示（等值面），各自适用于不同建模与渲染需求。</li><li>平面几何投影可以分为哪两大类,主要的特点是什么<br>答：平行投影与透视投影。平行投影投影线平行，保持平行性与比例（工程制图常用）；透视投影投影线汇聚于视点，近大远小、真实感强。</li><li>简述区域连贯性,扫描线的连贯性以及边的连贯性<br>答：区域连贯性指相邻像素/片元在空间上连续，可复用计算结果；扫描线连贯性指相邻扫描线的交点变化平缓，可增量更新；边的连贯性指同一边在相邻扫描线的交点位置变化可用增量计算，从而提高效率。</li><li>计算机动画包含哪些运动<br>答：物体运动、视点/相机运动、形变（形状）运动、光照/材质变化等，通常还包括时间控制与关键帧插值。</li><li>多边形填充过程中,对于某一条扫描线,填充可以分为什么步骤<br>答：求交点、排序交点、成对填充（奇偶规则/边界规则）并更新边表，必要时更新活动边表的增量参数。</li><li>什么是二维几何变换,列举至少 4 种二维几何变换<br>答：对二维图形进行位置、形状、方向或尺度的变换。常见有平移、旋转、缩放、对称（镜像）、错切（切变），可用矩阵形式统一表示。</li></ol><h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><ol><li>图形: 对对象几何形状、空间关系与视觉属性的抽象描述，可用数学模型与数据结构表达。</li><li>像素图: 由离散像素矩阵表示的图像或图形，像素包含颜色与亮度信息，适合显示与存储。</li><li>区域填充: 根据区域边界或种子点，将区域内部像素赋予指定属性的过程（如颜色或纹理）。</li><li>扫描线: 与屏幕水平线对应的逐行像素集合，用于逐行处理、求交与填充。</li><li>投影: 将三维对象通过投影线映射到二维平面的几何变换，是三维到二维显示的基础。</li><li>曲线拟合: 用一条或多条曲线在误差最小意义下逼近离散数据点，强调整体趋势。</li><li>自由曲线: 通过控制点或参数方程定义、形状可灵活控制的曲线（如 Bezier、B 样条），便于设计与编辑。</li></ol>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;简答题&quot;&gt;&lt;a href=&quot;#简答题&quot; class=&quot;headerlink&quot; title=&quot;简答题&quot;&gt;&lt;/a&gt;简答题&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;图形的本质是什么&lt;br&gt;答：对客观对象几何形状、空间关系及其视觉属性的抽象描述与表达，是把现实世界对象用数学模型与可视信</summary>
-      
-    
-    
-    
-    
-    <category term="期末复习" scheme="https://tanke.asia/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/"/>
     
   </entry>
   
