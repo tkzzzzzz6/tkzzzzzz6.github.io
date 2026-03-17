@@ -6,7 +6,7 @@
   <link href="https://tanke.asia/atom.xml" rel="self"/>
   
   <link href="https://tanke.asia/"/>
-  <updated>2026-03-17T11:07:32.617Z</updated>
+  <updated>2026-03-17T14:15:54.880Z</updated>
   <id>https://tanke.asia/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>GitHub Pages 部署 Hexo 添加个性化域名的配置方法（腾讯云域名）</title>
+    <title>2026-03-17-GitHub Pages 部署Hexo添加个性化域名的配置方法(腾讯云域名)</title>
     <link href="https://tanke.asia/2026/03/17/2026-03-17-GitHub%20Pages%20%E9%83%A8%E7%BD%B2Hexo%E6%B7%BB%E5%8A%A0%E4%B8%AA%E6%80%A7%E5%8C%96%E5%9F%9F%E5%90%8D%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95(%E8%85%BE%E8%AE%AF%E4%BA%91%E5%9F%9F%E5%90%8D)/"/>
     <id>https://tanke.asia/2026/03/17/2026-03-17-GitHub%20Pages%20%E9%83%A8%E7%BD%B2Hexo%E6%B7%BB%E5%8A%A0%E4%B8%AA%E6%80%A7%E5%8C%96%E5%9F%9F%E5%90%8D%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95(%E8%85%BE%E8%AE%AF%E4%BA%91%E5%9F%9F%E5%90%8D)/</id>
     <published>2026-03-16T16:00:00.000Z</published>
-    <updated>2026-03-17T11:07:32.617Z</updated>
+    <updated>2026-03-17T14:15:54.880Z</updated>
     
     <content type="html"><![CDATA[<h2 id="GitHub-Pages-个性化域名配置"><a href="#GitHub-Pages-个性化域名配置" class="headerlink" title="GitHub Pages 个性化域名配置"></a>GitHub Pages 个性化域名配置</h2><p><a href="https://hexo.io/">Hexo</a> 是一个快速、简洁且高效的静态博客框架，使用 Markdown 解析文章，在几秒内即可生成静态网页。</p><p>本文主要介绍如何为部署在 GitHub Pages 上的 Hexo 博客配置个性化域名，以腾讯云域名为例，完整演示从购买到生效的全流程。</p><h3 id="购买域名"><a href="#购买域名" class="headerlink" title="购买域名"></a>购买域名</h3><p>在部署完 Hexo 博客之后，默认的访问地址是 <code>https://&lt;用户名&gt;.github.io/&lt;仓库名&gt;/</code>。如果想要使用个性化域名访问博客，需要先购买一个域名。</p><p>这里以腾讯云域名为例，进入 <a href="https://cloud.tencent.com/product/domain">腾讯云域名</a> 购买，一般价格在 5~50 元/年不等。<code>.asia</code> 后缀的域名只需 5 元，非常划算。</p><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1773744762304.png" alt="购买域名"></p><h3 id="DNS-解析"><a href="#DNS-解析" class="headerlink" title="DNS 解析"></a>DNS 解析</h3><p>进入 <a href="https://console.cloud.tencent.com/domain/all-domain/all#">域名解析控制台</a>，选择<code>域名列表</code>，在对应域名一栏点击<code>解析</code>，进入 DNS 解析界面。</p><p>在 DNS 解析界面添加如下两条记录：</p><table><thead><tr><th>记录类型</th><th>主机记录</th><th>记录值</th></tr></thead><tbody><tr><td>CNAME</td><td>@</td><td><code>&lt;用户名&gt;.github.io</code></td></tr><tr><td>CNAME</td><td>www</td><td><code>&lt;用户名&gt;.github.io</code></td></tr></tbody></table><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1773745054007.png" alt="DNS 解析配置"></p><p>这样无论用户输入 <code>www.tanke.asia</code> 还是直接输入 <code>tanke.asia</code>，都可以正确定位到网站。请将记录值替换为你自己的 GitHub Pages 地址。</p><h3 id="添加-CNAME-文件"><a href="#添加-CNAME-文件" class="headerlink" title="添加 CNAME 文件"></a>添加 CNAME 文件</h3><p>在 Hexo 本地目录的 <code>source/</code> 文件夹中，创建一个名为 <code>CNAME</code> 的无后缀文件，文件内容填写你的域名（不加 <code>https://</code>）：</p><pre class="line-numbers language-text" data-language="text"><code class="language-text">tanke.asia<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>然后重新生成并部署：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo cleanhexo d <span class="token parameter variable">-g</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h3 id="GitHub-Pages-添加自定义域名"><a href="#GitHub-Pages-添加自定义域名" class="headerlink" title="GitHub Pages 添加自定义域名"></a>GitHub Pages 添加自定义域名</h3><p>进入你的 GitHub 仓库，选择 <code>Settings</code> -&gt; <code>Pages</code>，在 <code>Custom domain</code> 处填写你的自定义域名并保存。</p><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1773745187397.png" alt="GitHub Pages 自定义域名设置"></p><p>完成以上步骤后，即可通过自定义域名访问你的博客。</p><h3 id="启用-HTTPS"><a href="#启用-HTTPS" class="headerlink" title="启用 HTTPS"></a>启用 HTTPS</h3><p>建议同时勾选 <code>Enforce HTTPS</code> 选项，GitHub Pages 会自动为你申请免费的 SSL 证书，启用后访问会更加安全，同时避免浏览器的”不安全”警告。</p><blockquote><p>注意：DNS 解析生效需要几分钟到几小时不等，若自定义域名验证失败，等待一段时间后重试即可。</p></blockquote><p>好啦,感谢大家的观看,欢迎访问我的博客：<a href="https://tanke.asia/">tanke.asia</a>，也欢迎各位小伙伴交换友链～</p><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul><li><a href="https://cloud.tencent.com/developer/article/2142661">GitHub Pages 个性化域名配置</a></li><li><a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site">GitHub Pages 官方文档</a></li></ul><hr>]]></content>
     
