@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>2026-01-22-LeetCode刷题笔记-3507-移除最小数对使数组有序I - TK的小站</title>
+  <link rel="stylesheet" href="/css/style.css">
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+<body>
+  <header>
+    <h1><a href="/">TK的小站</a></h1>
+    
+    <nav>
+      <a href="/">首页</a>
+      <a href="/archives/">归档</a>
+      <a href="/categories/">分类</a>
+      <a href="/tags/">标签</a>
+      <a href="/about/">关于</a>
+    </nav>
+    <hr>
+  </header>
+  <main>
+    <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>2026-01-22-LeetCode刷题笔记-3507-移除最小数对使数组有序I - TK的小站</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <h1><a href="/">TK的小站</a></h1>
+    
+    <nav>
+      <a href="/">首页</a>
+      <a href="/archives/">归档</a>
+      <a href="/categories/">分类</a>
+      <a href="/tags/">标签</a>
+      <a href="/about/">关于</a>
+    </nav>
+    <hr>
+  </header>
+  <main>
+
+
+<article class="post">
+  <h1>2026-01-22-LeetCode刷题笔记-3507-移除最小数对使数组有序I</h1>
+  <p class="post-meta">
+    发布于
+    <time datetime="2026-01-21T16:00:00.000Z">2026-01-22 00:00</time>
+    
+  </p>
+  <div class="post-content">
+    <h1 id="题目信息"><a href="#题目信息" class="headerlink" title="题目信息"></a>题目信息</h1><ul>
+<li>平台：LeetCode</li>
+<li>题目：3507. 移除最小数对使数组有序 I</li>
+<li>难度：简单</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-pair-removal-to-sort-array-i/description/?envType=daily-question&envId=2026-01-22">题目链接</a></li>
+</ul>
+<hr>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定数组 nums，每次可以选择相邻的一对元素，将它们合并为它们的和（等价于删除这对并用和替代）。每次操作选择“当前相邻对和最小”的那一对。问最少需要多少次操作，才能让数组变为非递减序列。</p>
+<hr>
+<h2 id="初步思路"><a href="#初步思路" class="headerlink" title="初步思路"></a>初步思路</h2><ol>
+<li>只要数组已非递减，就停止。</li>
+<li>否则在当前数组里遍历所有相邻对，找到和最小的一对进行合并。</li>
+<li>重复上述过程，统计操作次数。</li>
+</ol>
+<hr>
+<h2 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h2><ul>
+<li>核心：每轮扫描所有相邻对，若仍无序则合并最小对</li>
+<li>技巧：一次遍历同时判断是否已非递减，并找到最小相邻对</li>
+<li>时间复杂度：O(k·n)，k 为合并次数（每次遍历当前数组）</li>
+<li>空间复杂度：O(1)（原地修改列表）</li>
+</ul>
+<hr>
+<h2 id="代码实现（Python）"><a href="#代码实现（Python）" class="headerlink" title="代码实现（Python）"></a>代码实现（Python）</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token triple-quoted-string string">'''
+Author: tkzzzzzz6
+Date: 2026-01-22 22:28:44
+LastEditors: tkzzzzzz6
+LastEditTime: 2026-01-22 22:47:28
+'''</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">minimumPairRemoval</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> nums<span class="token punctuation">:</span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+        cnt <span class="token operator">=</span> <span class="token number">0</span>
+
+        <span class="token keyword">while</span> <span class="token builtin">len</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token operator">&gt;</span><span class="token number">1</span><span class="token punctuation">:</span>
+            isAscending <span class="token operator">=</span> <span class="token boolean">True</span>
+            minSum <span class="token operator">=</span> inf
+            target_idx <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span>
+
+            <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                pair_sum <span class="token operator">=</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">+</span>nums<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span>
+                <span class="token keyword">if</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">&gt;</span>nums<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+                    isAscending <span class="token operator">=</span> <span class="token boolean">False</span>
+
+                <span class="token keyword">if</span> minSum <span class="token operator">&gt;</span> pair_sum<span class="token punctuation">:</span>
+                    minSum <span class="token operator">=</span> pair_sum
+                    target_idx <span class="token operator">=</span> i
+                
+            <span class="token keyword">if</span> isAscending<span class="token punctuation">:</span>
+                <span class="token keyword">break</span>
+
+            cnt <span class="token operator">+=</span> <span class="token number">1</span>
+            nums<span class="token punctuation">[</span>target_idx<span class="token punctuation">]</span> <span class="token operator">=</span> minSum
+            nums<span class="token punctuation">.</span>pop<span class="token punctuation">(</span>target_idx<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> cnt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="总结与反思"><a href="#总结与反思" class="headerlink" title="总结与反思"></a>总结与反思</h2><ol>
+<li>每轮遍历既能判断是否有序，也能确定最小相邻对。</li>
+<li>该实现为直接模拟，便于理解，但在数据规模大时会偏慢。</li>
+</ol>
+
+  </div>
+  
+    <p class="post-tags">
+      标签：
+      
+        <a href="/tags/algorithm/">算法学习</a>, 
+      
+        <a href="/tags/LeetCode/">LeetCode</a>, 
+      
+        <a href="/tags/%E8%B4%AA%E5%BF%83/">贪心</a>
+      
+    </p>
+  
+</article>
+  </main>
+  <footer>
+    <hr>
+    <p>&copy; 2026 tkzzzzzz6</p>
+  </footer>
+</body>
+</html>
+
+
+  </main>
+  <footer>
+    <hr>
+    <p>&copy; 2026 tkzzzzzz6</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>提示词示例 - TK的小站</title>
+  <link rel="stylesheet" href="/css/style.css">
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+<body>
+  <header>
+    <h1><a href="/">TK的小站</a></h1>
+    
+    <nav>
+      <a href="/">首页</a>
+      <a href="/archives/">归档</a>
+      <a href="/categories/">分类</a>
+      <a href="/tags/">标签</a>
+      <a href="/about/">关于</a>
+    </nav>
+    <hr>
+  </header>
+  <main>
+    <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>提示词示例 - TK的小站</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <h1><a href="/">TK的小站</a></h1>
+    
+    <nav>
+      <a href="/">首页</a>
+      <a href="/archives/">归档</a>
+      <a href="/categories/">分类</a>
+      <a href="/tags/">标签</a>
+      <a href="/about/">关于</a>
+    </nav>
+    <hr>
+  </header>
+  <main>
+
+
+<article class="post">
+  <h1>提示词示例</h1>
+  <p class="post-meta">
+    发布于
+    <time datetime="2025-02-07T16:00:00.000Z">2025-02-08 00:00</time>
+    
+  </p>
+  <div class="post-content">
+    <h3 id="可参考的提示词（Prompts）"><a href="#可参考的提示词（Prompts）" class="headerlink" title="可参考的提示词（Prompts）"></a>可参考的提示词（Prompts）</h3><p>您可以将这些提示词组合或分步提供给AI，以生成文章的各个部分。</p>
+<h4 id="角色设定与总体任务-Master-Prompt"><a href="#角色设定与总体任务-Master-Prompt" class="headerlink" title="角色设定与总体任务 (Master Prompt)"></a><strong>角色设定与总体任务 (Master Prompt)</strong></h4><blockquote>
+<p>你是一位资深的软件工程师和技术博主，擅长撰写清晰、易于理解的“手把手”教程。</p>
+<p>我需要你帮我写一篇关于“<strong>本地化部署DeepSeek模型</strong>”的博客文章。</p>
+<p><strong>核心技术栈包括</strong>：Ollama、DeepSeek-1.5B模型、Open WebUI。<br><strong>目标平台</strong>：主要是在Windows 11本地部署，其次是在Linux服务器上部署。<br><strong>文章风格</strong>：面向有一定基础的开发者，步骤清晰，配有命令代码和截图占位符 <code>![截图描述]</code>。</p>
+<p><strong>文章需要包含以下几个部分</strong>：</p>
+<ol>
+<li>引言和准备工作（参考资料、实验目的）。</li>
+<li>Windows下的详细部署流程：安装Ollama -&gt; 拉取DeepSeek模型 -&gt; 通过命令行和Open WebUI（pip和Docker两种方式）进行交互。</li>
+<li>Linux服务器上的简化部署流程，指出与Windows的不同之处。</li>
+<li>一个总结，评价1.5B小模型的优缺点和适用场景。</li>
+</ol>
+<p>现在，请先为我生成文章的<strong>大纲</strong>和<strong>引言部分</strong>。</p>
+</blockquote>
+<h4 id="分步生成提示词-Step-by-Step-Prompts"><a href="#分步生成提示词-Step-by-Step-Prompts" class="headerlink" title="分步生成提示词 (Step-by-Step Prompts)"></a><strong>分步生成提示词 (Step-by-Step Prompts)</strong></h4><p><strong>第1步：生成引言和准备工作</strong></p>
+<blockquote>
+<p>根据我们之前定下的主题“本地化部署DeepSeek模型”，请为我撰写文章的<strong>引言</strong>、<strong>参考资料</strong>和<strong>实验目的</strong>部分。参考资料可以先用占位符链接。实验目的要清晰地列出我们计划完成的任务。</p>
+</blockquote>
+<p><strong>第2步：生成Windows部署 - Ollama和模型部分</strong></p>
+<blockquote>
+<p>接下来，请撰写“<strong>在Windows本地部署</strong>”的第一部分内容。</p>
+<ol>
+<li><strong>下载并安装Ollama</strong>：描述如何从 <code>ollama.com</code> 下载并安装Ollama，并为下载页面和安装过程各插入一个截图占位符。</li>
+<li><strong>通过Ollama拉取DeepSeek模型</strong>：说明我们将使用 <code>deepseek-r1:1.5b</code> 模型，提供 <code>ollama run</code> 命令，并附上一个查看更多版本的Ollama官网链接。最后插入一个命令成功执行的截图占位符。</li>
+</ol>
+</blockquote>
+<p><strong>第3步：生成Windows部署 - 交互方式部分</strong></p>
+<blockquote>
+<p>现在，请详细描述与本地模型交互的几种方式。</p>
+<ol>
+<li><strong>终端回答</strong>：简单描述这是最直接的方式，并插入一张终端对话的截图占位符。</li>
+<li><strong>使用open-webui</strong>：重点介绍这个方法。<ul>
+<li>先写一个“注意”块，提醒用户需要Python 3.11和Conda环境。</li>
+<li>写一个子标题“<strong>使用pip安装</strong>”，提供创建conda环境、pip安装和启动服务的完整命令，并说明如何访问（<code>localhost:8080</code>）。插入UI截图占位符。</li>
+<li>再写一个子标题“<strong>使用docker安装</strong>”，提供 <code>docker run</code> 命令，解释端口映射。说明如何访问（<code>localhost:3000</code>）。插入Docker运行状态和UI界面的截图占位符。</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<p><strong>第4步：生成Linux服务器部署部分</strong></p>
+<blockquote>
+<p>请为我撰写“<strong>linux服务器部署</strong>”章节。</p>
+<ul>
+<li>开头说明这个过程和Windows类似。</li>
+<li>提供在Linux下安装Ollama的 <code>curl</code> 命令和 <code>sudo snap install ollama</code> 备用命令。</li>
+<li>简要列出后续的 <code>ollama run</code> 和 <code>docker run</code> 命令。</li>
+<li>特别提醒用户访问时需要使用服务器的公网IP。</li>
+<li>最后插入一张在Linux上部署成功并访问的截图占位符。</li>
+</ul>
+</blockquote>
+<p><strong>第5步：生成总结部分</strong></p>
+<blockquote>
+<p>最后，请为整篇文章撰写一个<strong>总结</strong>。评价一下像DeepSeek-1.5B这样的小参数模型的<strong>优势</strong>（资源占用、延迟）和<strong>局限性</strong>（生成能力）。根据这些特点，给出你的<strong>最终建议</strong>：这类模型适合什么场景（如边缘计算、基础任务），而对于高质量的生产需求，应该选择什么样的模型。</p>
+</blockquote>
+
+  </div>
+  
+    <p class="post-tags">
+      标签：
+      
+        <a href="/tags/development/">程序开发</a>
+      
+    </p>
+  
+</article>
+  </main>
+  <footer>
+    <hr>
+    <p>&copy; 2026 tkzzzzzz6</p>
+  </footer>
+</body>
+</html>
+
+
+  </main>
+  <footer>
+    <hr>
+    <p>&copy; 2026 tkzzzzzz6</p>
+  </footer>
+</body>
+</html>

@@ -3,11 +3,11 @@
   <title>TK的小站</title>
   
   
-  <link href="https://ke-tan.asia/atom.xml" rel="self"/>
+  <link href="https://tanke.asia/atom.xml" rel="self"/>
   
-  <link href="https://ke-tan.asia/"/>
+  <link href="https://tanke.asia/"/>
   <updated>2026-03-15T02:52:29.108Z</updated>
-  <id>https://ke-tan.asia/</id>
+  <id>https://tanke.asia/</id>
   
   <author>
     <name>tkzzzzzz6</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>2026-03-15-因服务器网络访问问题从 GitHub 平滑迁移至 Gitee 等国内平台的方法</title>
-    <link href="https://ke-tan.asia/2026/03/15/2026-03-15-%E5%9B%A0%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BD%91%E7%BB%9C%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98%E4%BB%8E%20GitHub%20%E5%B9%B3%E6%BB%91%E8%BF%81%E7%A7%BB%E8%87%B3%20Gitee%20%E7%AD%89%E5%9B%BD%E5%86%85%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%96%B9%E6%B3%95/"/>
-    <id>https://ke-tan.asia/2026/03/15/2026-03-15-%E5%9B%A0%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BD%91%E7%BB%9C%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98%E4%BB%8E%20GitHub%20%E5%B9%B3%E6%BB%91%E8%BF%81%E7%A7%BB%E8%87%B3%20Gitee%20%E7%AD%89%E5%9B%BD%E5%86%85%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%96%B9%E6%B3%95/</id>
+    <link href="https://tanke.asia/2026/03/15/2026-03-15-%E5%9B%A0%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BD%91%E7%BB%9C%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98%E4%BB%8E%20GitHub%20%E5%B9%B3%E6%BB%91%E8%BF%81%E7%A7%BB%E8%87%B3%20Gitee%20%E7%AD%89%E5%9B%BD%E5%86%85%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%96%B9%E6%B3%95/"/>
+    <id>https://tanke.asia/2026/03/15/2026-03-15-%E5%9B%A0%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BD%91%E7%BB%9C%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98%E4%BB%8E%20GitHub%20%E5%B9%B3%E6%BB%91%E8%BF%81%E7%A7%BB%E8%87%B3%20Gitee%20%E7%AD%89%E5%9B%BD%E5%86%85%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%96%B9%E6%B3%95/</id>
     <published>2026-03-14T16:00:00.000Z</published>
     <updated>2026-03-15T02:52:29.108Z</updated>
     
@@ -35,16 +35,16 @@
     
     
     
-    <category term="Git" scheme="https://ke-tan.asia/tags/Git/"/>
+    <category term="Git" scheme="https://tanke.asia/tags/Git/"/>
     
-    <category term="环境配置" scheme="https://ke-tan.asia/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+    <category term="环境配置" scheme="https://tanke.asia/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
     
   </entry>
   
   <entry>
     <title>2026-03-14-Claude Code配置火山方舟Coding Plan（豆包）指南</title>
-    <link href="https://ke-tan.asia/2026/03/14/2026-03-14-Claude%20Code%E9%85%8D%E7%BD%AE%E7%81%AB%E5%B1%B1%E6%96%B9%E8%88%9FCoding%20Plan%EF%BC%88%E8%B1%86%E5%8C%85%EF%BC%89%E6%8C%87%E5%8D%97/"/>
-    <id>https://ke-tan.asia/2026/03/14/2026-03-14-Claude%20Code%E9%85%8D%E7%BD%AE%E7%81%AB%E5%B1%B1%E6%96%B9%E8%88%9FCoding%20Plan%EF%BC%88%E8%B1%86%E5%8C%85%EF%BC%89%E6%8C%87%E5%8D%97/</id>
+    <link href="https://tanke.asia/2026/03/14/2026-03-14-Claude%20Code%E9%85%8D%E7%BD%AE%E7%81%AB%E5%B1%B1%E6%96%B9%E8%88%9FCoding%20Plan%EF%BC%88%E8%B1%86%E5%8C%85%EF%BC%89%E6%8C%87%E5%8D%97/"/>
+    <id>https://tanke.asia/2026/03/14/2026-03-14-Claude%20Code%E9%85%8D%E7%BD%AE%E7%81%AB%E5%B1%B1%E6%96%B9%E8%88%9FCoding%20Plan%EF%BC%88%E8%B1%86%E5%8C%85%EF%BC%89%E6%8C%87%E5%8D%97/</id>
     <published>2026-03-13T16:00:00.000Z</published>
     <updated>2026-03-15T02:05:29.075Z</updated>
     
@@ -59,18 +59,18 @@
     
     
     
-    <category term="Claude Code" scheme="https://ke-tan.asia/tags/Claude-Code/"/>
+    <category term="Claude Code" scheme="https://tanke.asia/tags/Claude-Code/"/>
     
-    <category term="CLI 工具" scheme="https://ke-tan.asia/tags/CLI-%E5%B7%A5%E5%85%B7/"/>
+    <category term="CLI 工具" scheme="https://tanke.asia/tags/CLI-%E5%B7%A5%E5%85%B7/"/>
     
-    <category term="vibe coding" scheme="https://ke-tan.asia/tags/vibe-coding/"/>
+    <category term="vibe coding" scheme="https://tanke.asia/tags/vibe-coding/"/>
     
   </entry>
   
   <entry>
     <title>2026-01-22-LeetCode刷题笔记-3507-移除最小数对使数组有序I</title>
-    <link href="https://ke-tan.asia/2026/01/22/2026-01-22-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-3507-%E7%A7%BB%E9%99%A4%E6%9C%80%E5%B0%8F%E6%95%B0%E5%AF%B9%E4%BD%BF%E6%95%B0%E7%BB%84%E6%9C%89%E5%BA%8FI/"/>
-    <id>https://ke-tan.asia/2026/01/22/2026-01-22-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-3507-%E7%A7%BB%E9%99%A4%E6%9C%80%E5%B0%8F%E6%95%B0%E5%AF%B9%E4%BD%BF%E6%95%B0%E7%BB%84%E6%9C%89%E5%BA%8FI/</id>
+    <link href="https://tanke.asia/2026/01/22/2026-01-22-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-3507-%E7%A7%BB%E9%99%A4%E6%9C%80%E5%B0%8F%E6%95%B0%E5%AF%B9%E4%BD%BF%E6%95%B0%E7%BB%84%E6%9C%89%E5%BA%8FI/"/>
+    <id>https://tanke.asia/2026/01/22/2026-01-22-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-3507-%E7%A7%BB%E9%99%A4%E6%9C%80%E5%B0%8F%E6%95%B0%E5%AF%B9%E4%BD%BF%E6%95%B0%E7%BB%84%E6%9C%89%E5%BA%8FI/</id>
     <published>2026-01-21T16:00:00.000Z</published>
     <updated>2026-01-22T15:12:49.745Z</updated>
     
@@ -88,18 +88,18 @@
     
     
     
-    <category term="算法学习" scheme="https://ke-tan.asia/tags/algorithm/"/>
+    <category term="算法学习" scheme="https://tanke.asia/tags/algorithm/"/>
     
-    <category term="LeetCode" scheme="https://ke-tan.asia/tags/LeetCode/"/>
+    <category term="LeetCode" scheme="https://tanke.asia/tags/LeetCode/"/>
     
-    <category term="贪心" scheme="https://ke-tan.asia/tags/%E8%B4%AA%E5%BF%83/"/>
+    <category term="贪心" scheme="https://tanke.asia/tags/%E8%B4%AA%E5%BF%83/"/>
     
   </entry>
   
   <entry>
     <title>2026-01-22-牛客每日一题-二进制不同位数</title>
-    <link href="https://ke-tan.asia/2026/01/22/2026-01-22-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%8D%E5%90%8C%E4%BD%8D%E6%95%B0/"/>
-    <id>https://ke-tan.asia/2026/01/22/2026-01-22-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%8D%E5%90%8C%E4%BD%8D%E6%95%B0/</id>
+    <link href="https://tanke.asia/2026/01/22/2026-01-22-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%8D%E5%90%8C%E4%BD%8D%E6%95%B0/"/>
+    <id>https://tanke.asia/2026/01/22/2026-01-22-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%8D%E5%90%8C%E4%BD%8D%E6%95%B0/</id>
     <published>2026-01-21T16:00:00.000Z</published>
     <updated>2026-01-22T14:55:43.282Z</updated>
     
@@ -118,18 +118,18 @@
     
     
     
-    <category term="算法学习" scheme="https://ke-tan.asia/tags/algorithm/"/>
+    <category term="算法学习" scheme="https://tanke.asia/tags/algorithm/"/>
     
-    <category term="牛客" scheme="https://ke-tan.asia/tags/%E7%89%9B%E5%AE%A2/"/>
+    <category term="牛客" scheme="https://tanke.asia/tags/%E7%89%9B%E5%AE%A2/"/>
     
-    <category term="位运算" scheme="https://ke-tan.asia/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
+    <category term="位运算" scheme="https://tanke.asia/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
     
   </entry>
   
   <entry>
     <title>2026-01-21-牛客每日一题-静态区间和（前缀和）</title>
-    <link href="https://ke-tan.asia/2026/01/21/2026-01-21-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E9%9D%99%E6%80%81%E5%8C%BA%E9%97%B4%E5%92%8C%EF%BC%88%E5%89%8D%E7%BC%80%E5%92%8C%EF%BC%89/"/>
-    <id>https://ke-tan.asia/2026/01/21/2026-01-21-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E9%9D%99%E6%80%81%E5%8C%BA%E9%97%B4%E5%92%8C%EF%BC%88%E5%89%8D%E7%BC%80%E5%92%8C%EF%BC%89/</id>
+    <link href="https://tanke.asia/2026/01/21/2026-01-21-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E9%9D%99%E6%80%81%E5%8C%BA%E9%97%B4%E5%92%8C%EF%BC%88%E5%89%8D%E7%BC%80%E5%92%8C%EF%BC%89/"/>
+    <id>https://tanke.asia/2026/01/21/2026-01-21-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E9%9D%99%E6%80%81%E5%8C%BA%E9%97%B4%E5%92%8C%EF%BC%88%E5%89%8D%E7%BC%80%E5%92%8C%EF%BC%89/</id>
     <published>2026-01-20T16:00:00.000Z</published>
     <updated>2026-01-21T15:11:06.930Z</updated>
     
@@ -147,18 +147,18 @@
     
     
     
-    <category term="算法学习" scheme="https://ke-tan.asia/tags/algorithm/"/>
+    <category term="算法学习" scheme="https://tanke.asia/tags/algorithm/"/>
     
-    <category term="牛客" scheme="https://ke-tan.asia/tags/%E7%89%9B%E5%AE%A2/"/>
+    <category term="牛客" scheme="https://tanke.asia/tags/%E7%89%9B%E5%AE%A2/"/>
     
-    <category term="前缀和" scheme="https://ke-tan.asia/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
+    <category term="前缀和" scheme="https://tanke.asia/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
     
   </entry>
   
   <entry>
     <title>2026-01-20-LeetCode刷题笔记-3314-构造最小位运算数组I</title>
-    <link href="https://ke-tan.asia/2026/01/20/2026-01-20-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-3314-%E6%9E%84%E9%80%A0%E6%9C%80%E5%B0%8F%E4%BD%8D%E8%BF%90%E7%AE%97%E6%95%B0%E7%BB%84I/"/>
-    <id>https://ke-tan.asia/2026/01/20/2026-01-20-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-3314-%E6%9E%84%E9%80%A0%E6%9C%80%E5%B0%8F%E4%BD%8D%E8%BF%90%E7%AE%97%E6%95%B0%E7%BB%84I/</id>
+    <link href="https://tanke.asia/2026/01/20/2026-01-20-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-3314-%E6%9E%84%E9%80%A0%E6%9C%80%E5%B0%8F%E4%BD%8D%E8%BF%90%E7%AE%97%E6%95%B0%E7%BB%84I/"/>
+    <id>https://tanke.asia/2026/01/20/2026-01-20-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-3314-%E6%9E%84%E9%80%A0%E6%9C%80%E5%B0%8F%E4%BD%8D%E8%BF%90%E7%AE%97%E6%95%B0%E7%BB%84I/</id>
     <published>2026-01-19T16:00:00.000Z</published>
     <updated>2026-01-20T13:55:52.311Z</updated>
     
@@ -176,18 +176,18 @@
     
     
     
-    <category term="算法学习" scheme="https://ke-tan.asia/tags/algorithm/"/>
+    <category term="算法学习" scheme="https://tanke.asia/tags/algorithm/"/>
     
-    <category term="LeetCode" scheme="https://ke-tan.asia/tags/LeetCode/"/>
+    <category term="LeetCode" scheme="https://tanke.asia/tags/LeetCode/"/>
     
-    <category term="位运算" scheme="https://ke-tan.asia/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
+    <category term="位运算" scheme="https://tanke.asia/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
     
   </entry>
   
   <entry>
     <title>2026-01-20-牛客每日一题-小红删数字</title>
-    <link href="https://ke-tan.asia/2026/01/20/2026-01-20-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E5%B0%8F%E7%BA%A2%E5%88%A0%E6%95%B0%E5%AD%97/"/>
-    <id>https://ke-tan.asia/2026/01/20/2026-01-20-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E5%B0%8F%E7%BA%A2%E5%88%A0%E6%95%B0%E5%AD%97/</id>
+    <link href="https://tanke.asia/2026/01/20/2026-01-20-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E5%B0%8F%E7%BA%A2%E5%88%A0%E6%95%B0%E5%AD%97/"/>
+    <id>https://tanke.asia/2026/01/20/2026-01-20-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E5%B0%8F%E7%BA%A2%E5%88%A0%E6%95%B0%E5%AD%97/</id>
     <published>2026-01-19T16:00:00.000Z</published>
     <updated>2026-01-20T13:55:31.651Z</updated>
     
@@ -206,18 +206,18 @@
     
     
     
-    <category term="算法学习" scheme="https://ke-tan.asia/tags/algorithm/"/>
+    <category term="算法学习" scheme="https://tanke.asia/tags/algorithm/"/>
     
-    <category term="牛客" scheme="https://ke-tan.asia/tags/%E7%89%9B%E5%AE%A2/"/>
+    <category term="牛客" scheme="https://tanke.asia/tags/%E7%89%9B%E5%AE%A2/"/>
     
-    <category term="动态规划" scheme="https://ke-tan.asia/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    <category term="动态规划" scheme="https://tanke.asia/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
   </entry>
   
   <entry>
     <title>2026-01-20-论文阅读-Can-1B-LLM Surpass-405B-LLM?</title>
-    <link href="https://ke-tan.asia/2026/01/20/2026-01-20-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-Can-1B-LLM%20Surpass-405B-LLM/"/>
-    <id>https://ke-tan.asia/2026/01/20/2026-01-20-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-Can-1B-LLM%20Surpass-405B-LLM/</id>
+    <link href="https://tanke.asia/2026/01/20/2026-01-20-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-Can-1B-LLM%20Surpass-405B-LLM/"/>
+    <id>https://tanke.asia/2026/01/20/2026-01-20-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-Can-1B-LLM%20Surpass-405B-LLM/</id>
     <published>2026-01-19T16:00:00.000Z</published>
     <updated>2026-01-22T07:57:34.468Z</updated>
     
@@ -232,18 +232,18 @@
     
     
     
-    <category term="论文阅读" scheme="https://ke-tan.asia/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    <category term="论文阅读" scheme="https://tanke.asia/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
-    <category term="TTS(推理侧缩放)" scheme="https://ke-tan.asia/tags/TTS-%E6%8E%A8%E7%90%86%E4%BE%A7%E7%BC%A9%E6%94%BE/"/>
+    <category term="TTS(推理侧缩放)" scheme="https://tanke.asia/tags/TTS-%E6%8E%A8%E7%90%86%E4%BE%A7%E7%BC%A9%E6%94%BE/"/>
     
-    <category term="LLM" scheme="https://ke-tan.asia/tags/LLM/"/>
+    <category term="LLM" scheme="https://tanke.asia/tags/LLM/"/>
     
   </entry>
   
   <entry>
     <title>2026-01-19-LeetCode刷题笔记-1292-元素和小于等于阈值的正方形的最大边长</title>
-    <link href="https://ke-tan.asia/2026/01/19/2026-01-19-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-1292-%E5%85%83%E7%B4%A0%E5%92%8C%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8E%E9%98%88%E5%80%BC%E7%9A%84%E6%AD%A3%E6%96%B9%E5%BD%A2%E7%9A%84%E6%9C%80%E5%A4%A7%E8%BE%B9%E9%95%BF/"/>
-    <id>https://ke-tan.asia/2026/01/19/2026-01-19-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-1292-%E5%85%83%E7%B4%A0%E5%92%8C%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8E%E9%98%88%E5%80%BC%E7%9A%84%E6%AD%A3%E6%96%B9%E5%BD%A2%E7%9A%84%E6%9C%80%E5%A4%A7%E8%BE%B9%E9%95%BF/</id>
+    <link href="https://tanke.asia/2026/01/19/2026-01-19-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-1292-%E5%85%83%E7%B4%A0%E5%92%8C%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8E%E9%98%88%E5%80%BC%E7%9A%84%E6%AD%A3%E6%96%B9%E5%BD%A2%E7%9A%84%E6%9C%80%E5%A4%A7%E8%BE%B9%E9%95%BF/"/>
+    <id>https://tanke.asia/2026/01/19/2026-01-19-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-1292-%E5%85%83%E7%B4%A0%E5%92%8C%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8E%E9%98%88%E5%80%BC%E7%9A%84%E6%AD%A3%E6%96%B9%E5%BD%A2%E7%9A%84%E6%9C%80%E5%A4%A7%E8%BE%B9%E9%95%BF/</id>
     <published>2026-01-18T16:00:00.000Z</published>
     <updated>2026-01-19T16:13:28.152Z</updated>
     
@@ -261,18 +261,18 @@
     
     
     
-    <category term="算法学习" scheme="https://ke-tan.asia/tags/algorithm/"/>
+    <category term="算法学习" scheme="https://tanke.asia/tags/algorithm/"/>
     
-    <category term="LeetCode" scheme="https://ke-tan.asia/tags/LeetCode/"/>
+    <category term="LeetCode" scheme="https://tanke.asia/tags/LeetCode/"/>
     
-    <category term="二维前缀和" scheme="https://ke-tan.asia/tags/%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C/"/>
+    <category term="二维前缀和" scheme="https://tanke.asia/tags/%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C/"/>
     
   </entry>
   
   <entry>
     <title>2026-01-19-论文阅读-AgiBot</title>
-    <link href="https://ke-tan.asia/2026/01/19/2026-01-19-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-AgiBot/"/>
-    <id>https://ke-tan.asia/2026/01/19/2026-01-19-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-AgiBot/</id>
+    <link href="https://tanke.asia/2026/01/19/2026-01-19-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-AgiBot/"/>
+    <id>https://tanke.asia/2026/01/19/2026-01-19-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-AgiBot/</id>
     <published>2026-01-18T16:00:00.000Z</published>
     <updated>2026-01-20T05:18:24.789Z</updated>
     
@@ -287,16 +287,16 @@
     
     
     
-    <category term="论文阅读" scheme="https://ke-tan.asia/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    <category term="论文阅读" scheme="https://tanke.asia/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
-    <category term="具身智能" scheme="https://ke-tan.asia/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/"/>
+    <category term="具身智能" scheme="https://tanke.asia/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/"/>
     
   </entry>
   
   <entry>
     <title>2026-01-19-牛客每日一题-阅读理解</title>
-    <link href="https://ke-tan.asia/2026/01/19/2026-01-19-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3/"/>
-    <id>https://ke-tan.asia/2026/01/19/2026-01-19-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3/</id>
+    <link href="https://tanke.asia/2026/01/19/2026-01-19-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3/"/>
+    <id>https://tanke.asia/2026/01/19/2026-01-19-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3/</id>
     <published>2026-01-18T16:00:00.000Z</published>
     <updated>2026-01-19T15:46:08.549Z</updated>
     
@@ -315,18 +315,18 @@
     
     
     
-    <category term="算法学习" scheme="https://ke-tan.asia/tags/algorithm/"/>
+    <category term="算法学习" scheme="https://tanke.asia/tags/algorithm/"/>
     
-    <category term="牛客" scheme="https://ke-tan.asia/tags/%E7%89%9B%E5%AE%A2/"/>
+    <category term="牛客" scheme="https://tanke.asia/tags/%E7%89%9B%E5%AE%A2/"/>
     
-    <category term="哈希" scheme="https://ke-tan.asia/tags/%E5%93%88%E5%B8%8C/"/>
+    <category term="哈希" scheme="https://tanke.asia/tags/%E5%93%88%E5%B8%8C/"/>
     
   </entry>
   
   <entry>
     <title>2026-01-19-论文阅读-SAM2</title>
-    <link href="https://ke-tan.asia/2026/01/19/2026-01-19-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-SAM2/"/>
-    <id>https://ke-tan.asia/2026/01/19/2026-01-19-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-SAM2/</id>
+    <link href="https://tanke.asia/2026/01/19/2026-01-19-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-SAM2/"/>
+    <id>https://tanke.asia/2026/01/19/2026-01-19-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-SAM2/</id>
     <published>2026-01-18T16:00:00.000Z</published>
     <updated>2026-01-20T13:29:46.682Z</updated>
     
@@ -341,18 +341,18 @@
     
     
     
-    <category term="论文阅读" scheme="https://ke-tan.asia/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    <category term="论文阅读" scheme="https://tanke.asia/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
-    <category term="视频分割" scheme="https://ke-tan.asia/tags/%E8%A7%86%E9%A2%91%E5%88%86%E5%89%B2/"/>
+    <category term="视频分割" scheme="https://tanke.asia/tags/%E8%A7%86%E9%A2%91%E5%88%86%E5%89%B2/"/>
     
-    <category term="可提示视觉分割" scheme="https://ke-tan.asia/tags/%E5%8F%AF%E6%8F%90%E7%A4%BA%E8%A7%86%E8%A7%89%E5%88%86%E5%89%B2/"/>
+    <category term="可提示视觉分割" scheme="https://tanke.asia/tags/%E5%8F%AF%E6%8F%90%E7%A4%BA%E8%A7%86%E8%A7%89%E5%88%86%E5%89%B2/"/>
     
   </entry>
   
   <entry>
     <title>2026-01-18-LeetCode刷题笔记-1895-最大的幻方</title>
-    <link href="https://ke-tan.asia/2026/01/18/2026-01-18-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-1895-%E6%9C%80%E5%A4%A7%E7%9A%84%E5%B9%BB%E6%96%B9/"/>
-    <id>https://ke-tan.asia/2026/01/18/2026-01-18-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-1895-%E6%9C%80%E5%A4%A7%E7%9A%84%E5%B9%BB%E6%96%B9/</id>
+    <link href="https://tanke.asia/2026/01/18/2026-01-18-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-1895-%E6%9C%80%E5%A4%A7%E7%9A%84%E5%B9%BB%E6%96%B9/"/>
+    <id>https://tanke.asia/2026/01/18/2026-01-18-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-1895-%E6%9C%80%E5%A4%A7%E7%9A%84%E5%B9%BB%E6%96%B9/</id>
     <published>2026-01-17T16:00:00.000Z</published>
     <updated>2026-01-18T16:26:40.738Z</updated>
     
@@ -371,16 +371,16 @@
     
     
     
-    <category term="算法学习" scheme="https://ke-tan.asia/tags/algorithm/"/>
+    <category term="算法学习" scheme="https://tanke.asia/tags/algorithm/"/>
     
-    <category term="LeetCode" scheme="https://ke-tan.asia/tags/LeetCode/"/>
+    <category term="LeetCode" scheme="https://tanke.asia/tags/LeetCode/"/>
     
   </entry>
   
   <entry>
     <title>2026-01-18-牛客每日一题-护花使者</title>
-    <link href="https://ke-tan.asia/2026/01/18/2026-01-18-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E6%8A%A4%E8%8A%B1%E4%BD%BF%E8%80%85/"/>
-    <id>https://ke-tan.asia/2026/01/18/2026-01-18-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E6%8A%A4%E8%8A%B1%E4%BD%BF%E8%80%85/</id>
+    <link href="https://tanke.asia/2026/01/18/2026-01-18-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E6%8A%A4%E8%8A%B1%E4%BD%BF%E8%80%85/"/>
+    <id>https://tanke.asia/2026/01/18/2026-01-18-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E6%8A%A4%E8%8A%B1%E4%BD%BF%E8%80%85/</id>
     <published>2026-01-17T16:00:00.000Z</published>
     <updated>2026-01-18T16:23:46.517Z</updated>
     
@@ -399,16 +399,16 @@
     
     
     
-    <category term="算法学习" scheme="https://ke-tan.asia/tags/algorithm/"/>
+    <category term="算法学习" scheme="https://tanke.asia/tags/algorithm/"/>
     
-    <category term="牛客" scheme="https://ke-tan.asia/tags/%E7%89%9B%E5%AE%A2/"/>
+    <category term="牛客" scheme="https://tanke.asia/tags/%E7%89%9B%E5%AE%A2/"/>
     
   </entry>
   
   <entry>
     <title>2026-01-17-LeetCode刷题笔记-3047-求交集区域内的最大正方形面积</title>
-    <link href="https://ke-tan.asia/2026/01/17/2026-01-17-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-3047-%E6%B1%82%E4%BA%A4%E9%9B%86%E5%8C%BA%E5%9F%9F%E5%86%85%E7%9A%84%E6%9C%80%E5%A4%A7%E6%AD%A3%E6%96%B9%E5%BD%A2%E9%9D%A2%E7%A7%AF/"/>
-    <id>https://ke-tan.asia/2026/01/17/2026-01-17-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-3047-%E6%B1%82%E4%BA%A4%E9%9B%86%E5%8C%BA%E5%9F%9F%E5%86%85%E7%9A%84%E6%9C%80%E5%A4%A7%E6%AD%A3%E6%96%B9%E5%BD%A2%E9%9D%A2%E7%A7%AF/</id>
+    <link href="https://tanke.asia/2026/01/17/2026-01-17-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-3047-%E6%B1%82%E4%BA%A4%E9%9B%86%E5%8C%BA%E5%9F%9F%E5%86%85%E7%9A%84%E6%9C%80%E5%A4%A7%E6%AD%A3%E6%96%B9%E5%BD%A2%E9%9D%A2%E7%A7%AF/"/>
+    <id>https://tanke.asia/2026/01/17/2026-01-17-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-3047-%E6%B1%82%E4%BA%A4%E9%9B%86%E5%8C%BA%E5%9F%9F%E5%86%85%E7%9A%84%E6%9C%80%E5%A4%A7%E6%AD%A3%E6%96%B9%E5%BD%A2%E9%9D%A2%E7%A7%AF/</id>
     <published>2026-01-16T16:00:00.000Z</published>
     <updated>2026-01-17T15:56:43.402Z</updated>
     
@@ -426,16 +426,16 @@
     
     
     
-    <category term="算法学习" scheme="https://ke-tan.asia/tags/algorithm/"/>
+    <category term="算法学习" scheme="https://tanke.asia/tags/algorithm/"/>
     
-    <category term="LeetCode" scheme="https://ke-tan.asia/tags/LeetCode/"/>
+    <category term="LeetCode" scheme="https://tanke.asia/tags/LeetCode/"/>
     
   </entry>
   
   <entry>
     <title>2026-01-16-Neovim插件-CodeStats配置记录</title>
-    <link href="https://ke-tan.asia/2026/01/16/2026_01-16nvim%E6%8F%92%E4%BB%B6codestatus%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/"/>
-    <id>https://ke-tan.asia/2026/01/16/2026_01-16nvim%E6%8F%92%E4%BB%B6codestatus%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/</id>
+    <link href="https://tanke.asia/2026/01/16/2026_01-16nvim%E6%8F%92%E4%BB%B6codestatus%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/"/>
+    <id>https://tanke.asia/2026/01/16/2026_01-16nvim%E6%8F%92%E4%BB%B6codestatus%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/</id>
     <published>2026-01-15T16:00:00.000Z</published>
     <updated>2026-01-17T03:42:55.173Z</updated>
     
@@ -450,22 +450,22 @@
     
     
     
-    <category term="工具配置" scheme="https://ke-tan.asia/tags/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/"/>
+    <category term="工具配置" scheme="https://tanke.asia/tags/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/"/>
     
-    <category term="Neovim" scheme="https://ke-tan.asia/tags/Neovim/"/>
+    <category term="Neovim" scheme="https://tanke.asia/tags/Neovim/"/>
     
-    <category term="插件" scheme="https://ke-tan.asia/tags/%E6%8F%92%E4%BB%B6/"/>
+    <category term="插件" scheme="https://tanke.asia/tags/%E6%8F%92%E4%BB%B6/"/>
     
-    <category term="CodeStats" scheme="https://ke-tan.asia/tags/CodeStats/"/>
+    <category term="CodeStats" scheme="https://tanke.asia/tags/CodeStats/"/>
     
-    <category term="Windows" scheme="https://ke-tan.asia/tags/Windows/"/>
+    <category term="Windows" scheme="https://tanke.asia/tags/Windows/"/>
     
   </entry>
   
   <entry>
     <title>2026-01-13-论文阅读-AdvancesUavAvionics</title>
-    <link href="https://ke-tan.asia/2026/01/13/2026-01-13-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-AdvancesUavAvionics/"/>
-    <id>https://ke-tan.asia/2026/01/13/2026-01-13-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-AdvancesUavAvionics/</id>
+    <link href="https://tanke.asia/2026/01/13/2026-01-13-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-AdvancesUavAvionics/"/>
+    <id>https://tanke.asia/2026/01/13/2026-01-13-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-AdvancesUavAvionics/</id>
     <published>2026-01-12T16:00:00.000Z</published>
     <updated>2026-01-21T10:37:23.748Z</updated>
     
@@ -480,18 +480,18 @@
     
     
     
-    <category term="论文阅读" scheme="https://ke-tan.asia/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    <category term="论文阅读" scheme="https://tanke.asia/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
-    <category term="无人机(UAVs)" scheme="https://ke-tan.asia/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA-UAVs/"/>
+    <category term="无人机(UAVs)" scheme="https://tanke.asia/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA-UAVs/"/>
     
-    <category term="综述论文" scheme="https://ke-tan.asia/tags/%E7%BB%BC%E8%BF%B0%E8%AE%BA%E6%96%87/"/>
+    <category term="综述论文" scheme="https://tanke.asia/tags/%E7%BB%BC%E8%BF%B0%E8%AE%BA%E6%96%87/"/>
     
   </entry>
   
   <entry>
     <title>2026-01-12-云计算速成课-期末复习</title>
-    <link href="https://ke-tan.asia/2026/01/12/2026-01-12-%E4%BA%91%E8%AE%A1%E7%AE%97%E9%80%9F%E6%88%90%E8%AF%BE-%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/"/>
-    <id>https://ke-tan.asia/2026/01/12/2026-01-12-%E4%BA%91%E8%AE%A1%E7%AE%97%E9%80%9F%E6%88%90%E8%AF%BE-%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</id>
+    <link href="https://tanke.asia/2026/01/12/2026-01-12-%E4%BA%91%E8%AE%A1%E7%AE%97%E9%80%9F%E6%88%90%E8%AF%BE-%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/"/>
+    <id>https://tanke.asia/2026/01/12/2026-01-12-%E4%BA%91%E8%AE%A1%E7%AE%97%E9%80%9F%E6%88%90%E8%AF%BE-%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</id>
     <published>2026-01-11T16:00:00.000Z</published>
     <updated>2026-01-17T03:49:24.843Z</updated>
     
@@ -506,14 +506,14 @@
     
     
     
-    <category term="期末复习" scheme="https://ke-tan.asia/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/"/>
+    <category term="期末复习" scheme="https://tanke.asia/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/"/>
     
   </entry>
   
   <entry>
     <title>2026-01-12-欧拉公式通俗证明</title>
-    <link href="https://ke-tan.asia/2026/01/12/2026-01-12-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6-%E6%AC%A7%E6%8B%89%E5%85%AC%E5%BC%8F%E8%AF%81%E6%98%8E/"/>
-    <id>https://ke-tan.asia/2026/01/12/2026-01-12-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6-%E6%AC%A7%E6%8B%89%E5%85%AC%E5%BC%8F%E8%AF%81%E6%98%8E/</id>
+    <link href="https://tanke.asia/2026/01/12/2026-01-12-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6-%E6%AC%A7%E6%8B%89%E5%85%AC%E5%BC%8F%E8%AF%81%E6%98%8E/"/>
+    <id>https://tanke.asia/2026/01/12/2026-01-12-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6-%E6%AC%A7%E6%8B%89%E5%85%AC%E5%BC%8F%E8%AF%81%E6%98%8E/</id>
     <published>2026-01-11T16:00:00.000Z</published>
     <updated>2026-01-17T02:25:52.549Z</updated>
     
@@ -528,18 +528,18 @@
     
     
     
-    <category term="计算机图形学" scheme="https://ke-tan.asia/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    <category term="计算机图形学" scheme="https://tanke.asia/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
-    <category term="欧拉公式" scheme="https://ke-tan.asia/tags/%E6%AC%A7%E6%8B%89%E5%85%AC%E5%BC%8F/"/>
+    <category term="欧拉公式" scheme="https://tanke.asia/tags/%E6%AC%A7%E6%8B%89%E5%85%AC%E5%BC%8F/"/>
     
-    <category term="拓扑" scheme="https://ke-tan.asia/tags/%E6%8B%93%E6%89%91/"/>
+    <category term="拓扑" scheme="https://tanke.asia/tags/%E6%8B%93%E6%89%91/"/>
     
   </entry>
   
   <entry>
     <title>2026-01-06期末复习-计算机图形学简答题</title>
-    <link href="https://ke-tan.asia/2026/01/06/2026-01-06%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E7%AE%80%E7%AD%94%E9%A2%98/"/>
-    <id>https://ke-tan.asia/2026/01/06/2026-01-06%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E7%AE%80%E7%AD%94%E9%A2%98/</id>
+    <link href="https://tanke.asia/2026/01/06/2026-01-06%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E7%AE%80%E7%AD%94%E9%A2%98/"/>
+    <id>https://tanke.asia/2026/01/06/2026-01-06%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E7%AE%80%E7%AD%94%E9%A2%98/</id>
     <published>2026-01-05T16:00:00.000Z</published>
     <updated>2026-01-17T02:23:42.234Z</updated>
     
@@ -555,7 +555,7 @@
     
     
     
-    <category term="期末复习" scheme="https://ke-tan.asia/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/"/>
+    <category term="期末复习" scheme="https://tanke.asia/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/"/>
     
   </entry>
   

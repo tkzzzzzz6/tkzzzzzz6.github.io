@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>2026-01-20-LeetCode刷题笔记-3314-构造最小位运算数组I - TK的小站</title>
+  <link rel="stylesheet" href="/css/style.css">
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+<body>
+  <header>
+    <h1><a href="/">TK的小站</a></h1>
+    
+    <nav>
+      <a href="/">首页</a>
+      <a href="/archives/">归档</a>
+      <a href="/categories/">分类</a>
+      <a href="/tags/">标签</a>
+      <a href="/about/">关于</a>
+    </nav>
+    <hr>
+  </header>
+  <main>
+    <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>2026-01-20-LeetCode刷题笔记-3314-构造最小位运算数组I - TK的小站</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <h1><a href="/">TK的小站</a></h1>
+    
+    <nav>
+      <a href="/">首页</a>
+      <a href="/archives/">归档</a>
+      <a href="/categories/">分类</a>
+      <a href="/tags/">标签</a>
+      <a href="/about/">关于</a>
+    </nav>
+    <hr>
+  </header>
+  <main>
+
+
+<article class="post">
+  <h1>2026-01-20-LeetCode刷题笔记-3314-构造最小位运算数组I</h1>
+  <p class="post-meta">
+    发布于
+    <time datetime="2026-01-19T16:00:00.000Z">2026-01-20 00:00</time>
+    
+  </p>
+  <div class="post-content">
+    <h1 id="题目信息"><a href="#题目信息" class="headerlink" title="题目信息"></a>题目信息</h1><ul>
+<li>平台：LeetCode</li>
+<li>题目：3314. 构造最小位运算数组 I</li>
+<li>难度：Medium</li>
+<li>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/construct-the-minimum-bitwise-array-i/">Construct the Minimum Bitwise Array I</a></li>
+</ul>
+<hr>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个整数数组 nums（题面为素数数组），对每个 nums[i] 寻找最小的非负整数 x，使得 <code>x | (x + 1) == nums[i]</code>。若不存在这样的 x，返回 -1。</p>
+<hr>
+<h2 id="初步思路"><a href="#初步思路" class="headerlink" title="初步思路"></a>初步思路</h2><ol>
+<li>观察 <code>x | (x + 1)</code>：它会把 x 的“最右侧第一个 0”变成 1，因此结果必然以连续的 1 结尾。</li>
+<li>若 y = nums[i]，设 y 末尾连续 1 的个数为 k，则最小的 x 就是把这段连续 1 中最高位的那个 1 清掉。</li>
+<li>题面为素数数组，因此只有 y=2 为偶数且无解，其他 y 都是奇数可处理。</li>
+</ol>
+<hr>
+<h2 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h2><ul>
+<li>核心：统计 y 的末尾连续 1 的个数 k，然后 <code>x = y - (1 &lt;&lt; (k - 1))</code></li>
+<li>技巧：<code>x | (x + 1)</code> 的结果一定是奇数且以连续 1 结尾</li>
+<li>时间复杂度：O(n * k)，k 为末尾连续 1 的数量（总体很小）</li>
+<li>空间复杂度：O(1)（不含输出）</li>
+</ul>
+<hr>
+<h2 id="代码实现（Python）"><a href="#代码实现（Python）" class="headerlink" title="代码实现（Python）"></a>代码实现（Python）</h2><h3 id="解法一：统计末尾连续-1"><a href="#解法一：统计末尾连续-1" class="headerlink" title="解法一：统计末尾连续 1"></a>解法一：统计末尾连续 1</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> typing <span class="token keyword">import</span> List
+
+<span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">minBitwiseArray</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> nums<span class="token punctuation">:</span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        ans <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token keyword">for</span> num <span class="token keyword">in</span> nums<span class="token punctuation">:</span>
+            <span class="token keyword">if</span> num <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">:</span>
+                ans<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+                <span class="token keyword">continue</span>
+            k <span class="token operator">=</span> <span class="token number">0</span>
+            <span class="token keyword">while</span> num <span class="token operator">&amp;</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> k<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                k <span class="token operator">+=</span> <span class="token number">1</span>
+            ans<span class="token punctuation">.</span>append<span class="token punctuation">(</span>num <span class="token operator">-</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span>k <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> ans<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="解法二：位运算快速定位翻转位"><a href="#解法二：位运算快速定位翻转位" class="headerlink" title="解法二：位运算快速定位翻转位"></a>解法二：位运算快速定位翻转位</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> typing <span class="token keyword">import</span> List
+
+<span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">minBitwiseArray</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> nums<span class="token punctuation">:</span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        ans <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token keyword">for</span> num <span class="token keyword">in</span> nums<span class="token punctuation">:</span>
+            <span class="token keyword">if</span> num <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">:</span>
+                ans<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+                <span class="token keyword">continue</span>
+            t <span class="token operator">=</span> num <span class="token operator">^</span> <span class="token punctuation">(</span>num <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
+            bit <span class="token operator">=</span> <span class="token punctuation">(</span>t <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&gt;&gt;</span> <span class="token number">2</span>
+            ans<span class="token punctuation">.</span>append<span class="token punctuation">(</span>num <span class="token operator">^</span> bit<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> ans<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="总结与反思"><a href="#总结与反思" class="headerlink" title="总结与反思"></a>总结与反思</h2><ol>
+<li>关键在于“最右侧第一个 0 会被置 1”，因此结果以连续 1 结尾。</li>
+<li>可以用位运算快速定位要翻转的那一位</li>
+</ol>
+
+  </div>
+  
+    <p class="post-tags">
+      标签：
+      
+        <a href="/tags/algorithm/">算法学习</a>, 
+      
+        <a href="/tags/LeetCode/">LeetCode</a>, 
+      
+        <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/">位运算</a>
+      
+    </p>
+  
+</article>
+  </main>
+  <footer>
+    <hr>
+    <p>&copy; 2026 tkzzzzzz6</p>
+  </footer>
+</body>
+</html>
+
+
+  </main>
+  <footer>
+    <hr>
+    <p>&copy; 2026 tkzzzzzz6</p>
+  </footer>
+</body>
+</html>
