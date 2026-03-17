@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>2025-03-16-水“镜”安澜——基于YOLO11的智能溺水检测系统软件 V1.0 设计说明文档 - TK的小站</title>
-  <link rel="stylesheet" href="/css/style.css">
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2025-03-16-水“镜”安澜——基于YOLO11的智能溺水检测系统软件 V1.0 设计说明文档 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-03-16-水“镜”安澜——基于YOLO11的智能溺水检测系统软件 V1.0 设计说明文档"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
 <meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
@@ -119,53 +133,52 @@ mjx-container[display="true"] + br {
 }
 </style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
 </head>
-<body>
-  <header>
-    <h1><a href="/">TK的小站</a></h1>
-    
-    <nav>
-      <a href="/">首页</a>
-      <a href="/archives/">归档</a>
-      <a href="/categories/">分类</a>
-      <a href="/tags/">标签</a>
-      <a href="/about/">关于</a>
-    </nav>
-    <hr>
-  </header>
-  <main>
-    <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>2025-03-16-水“镜”安澜——基于YOLO11的智能溺水检测系统软件 V1.0 设计说明文档 - TK的小站</title>
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-  <header>
-    <h1><a href="/">TK的小站</a></h1>
-    
-    <nav>
-      <a href="/">首页</a>
-      <a href="/archives/">归档</a>
-      <a href="/categories/">分类</a>
-      <a href="/tags/">标签</a>
-      <a href="/about/">关于</a>
-    </nav>
-    <hr>
-  </header>
-  <main>
 
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/">工具配置</a><a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
 
-<article class="post">
-  <h1>2025-03-16-水“镜”安澜——基于YOLO11的智能溺水检测系统软件 V1.0 设计说明文档</h1>
-  <p class="post-meta">
-    发布于
-    <time datetime="2025-03-15T16:00:00.000Z">2025-03-16 00:00</time>
-    
-  </p>
-  <div class="post-content">
-    <blockquote>
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-03-16-水“镜”安澜——基于YOLO11的智能溺水检测系统软件 V1.0 设计说明文档</h2>
+            <div class="post-meta">
+                <time class="date">2025.03.16</time>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <blockquote>这篇文章上次修改于 367 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+        
+            <blockquote>
 <p>为了申请计算机软件著作权，我们考虑到时间充裕且预算有限，决定自行撰写之前开发的溺水检测系统的软件说明文档，而不是委托代理机构。我们将这份文档发布在我的博客上，供自己和有需要的大学同学参考，虽然可能使用频率不高。</p>
 </blockquote>
 <p style="background-color:rgb(75, 86, 135); padding: 10px; border: 1px solid red;">
@@ -459,29 +472,71 @@ mjx-container[display="true"] + br {
 <h3 id="程序将开始处理视频-并在检测到潜在溺水危险时发出警告。"><a href="#程序将开始处理视频-并在检测到潜在溺水危险时发出警告。" class="headerlink" title="程序将开始处理视频,并在检测到潜在溺水危险时发出警告。"></a>程序将开始处理视频,并在检测到潜在溺水危险时发出警告。</h3><h3 id="按-‘q’-键退出程序。"><a href="#按-‘q’-键退出程序。" class="headerlink" title="按 ‘q’ 键退出程序。"></a>按 ‘q’ 键退出程序。</h3><h1 id="四、项目总结"><a href="#四、项目总结" class="headerlink" title="四、项目总结"></a>四、项目总结</h1><p>在反思这个溺水检测项目时，我们意识到技术的进步不仅仅是为了创新，更是为了解决实际问题，保护人们的生命安全。我们的项目通过结合最新的人工智能技术和多种监控手段，旨在减少溺水事故，这是一个极具社会价值的目标。我们认识到，尽管技术提供了强大的工具，但真正的挑战在于如何将这些工具有效地应用于实际场景中，以及如何确保系统的稳定性和可靠性。未来，我们将继续优化算法，提高系统的响应速度和准确性，同时，我们也将探索如何降低成本，使这项技术能够更广泛地应用于各种水域，从而保护更多人的生命。</p>
 <p>在推广方面，我们认为教育和意识提升同样重要。如果可行的话，我们将与学校、社区和地方政府合作，提高公众对溺水风险的认识，并教育他们如何使用我们的系统。此外，我们也将通过各种媒体渠道，如社交媒体、公共讲座和行业会议，来展示我们的技术成果，以吸引更多的关注和支持。我们相信，通过技术的推广和公众意识的提高，我们可以共同构建一个更安全的水上环境。让人类拥有更美好的未来！</p>
 
-  </div>
-  
-    <p class="post-tags">
-      标签：
-      
-        <a href="/tags/development/">程序开发</a>
-      
-    </p>
-  
-</article>
-  </main>
-  <footer>
-    <hr>
-    <p>&copy; 2026 tkzzzzzz6</p>
-  </footer>
-</body>
-</html>
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2025/03/17/2025-03-17-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%B8%8E%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0/">2025-03-17-构造函数与析构函数</a></li>
+                
+                
+                    <li>下一篇: <a href="/2025/03/15/2025-03-15-%E4%BD%8D%E8%BF%90%E7%AE%97/">2025-03-15-位运算</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/development/" rel="tag">程序开发</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2026/03/17/2026-03-17-GitHub%20Pages%20%E9%83%A8%E7%BD%B2Hexo%E6%B7%BB%E5%8A%A0%E4%B8%AA%E6%80%A7%E5%8C%96%E5%9F%9F%E5%90%8D%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95(%E8%85%BE%E8%AE%AF%E4%BA%91%E5%9F%9F%E5%90%8D)/">2026-03-17-GitHub Pages 部署Hexo添加个性化域名的配置方法(腾讯云域名)</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/03/15/2026-03-15-%E5%9B%A0%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BD%91%E7%BB%9C%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98%E4%BB%8E%20GitHub%20%E5%B9%B3%E6%BB%91%E8%BF%81%E7%A7%BB%E8%87%B3%20Gitee%20%E7%AD%89%E5%9B%BD%E5%86%85%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%96%B9%E6%B3%95/">2026-03-15-因服务器网络访问问题从 GitHub 平滑迁移至 Gitee 等国内平台的方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/03/14/2026-03-14-Claude%20Code%E9%85%8D%E7%BD%AE%E7%81%AB%E5%B1%B1%E6%96%B9%E8%88%9FCoding%20Plan%EF%BC%88%E8%B1%86%E5%8C%85%EF%BC%89%E6%8C%87%E5%8D%97/">2026-03-14-Claude Code配置火山方舟Coding Plan（豆包）指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/01/22/2026-01-22-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%8D%E5%90%8C%E4%BD%8D%E6%95%B0/">2026-01-22-牛客每日一题-二进制不同位数</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/01/22/2026-01-22-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-3507-%E7%A7%BB%E9%99%A4%E6%9C%80%E5%B0%8F%E6%95%B0%E5%AF%B9%E4%BD%BF%E6%95%B0%E7%BB%84%E6%9C%89%E5%BA%8FI/">2026-01-22-LeetCode刷题笔记-3507-移除最小数对使数组有序I</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/01/21/2026-01-21-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E9%9D%99%E6%80%81%E5%8C%BA%E9%97%B4%E5%92%8C%EF%BC%88%E5%89%8D%E7%BC%80%E5%92%8C%EF%BC%89/">2026-01-21-牛客每日一题-静态区间和（前缀和）</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">一月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">十二月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">十一月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">十月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CLI-%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">CLI 工具</a> <a href="/tags/Claude-Code/" style="font-size: 10px;">Claude Code</a> <a href="/tags/CodeStats/" style="font-size: 10px;">CodeStats</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/LeetCode/" style="font-size: 17.78px;">LeetCode</a> <a href="/tags/Neovim/" style="font-size: 10px;">Neovim</a> <a href="/tags/TTS-%E6%8E%A8%E7%90%86%E4%BE%A7%E7%BC%A9%E6%94%BE/" style="font-size: 10px;">TTS(推理侧缩放)</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/vibe-coding/" style="font-size: 10px;">vibe coding</a> <a href="/tags/%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">二维前缀和</a> <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" style="font-size: 11.11px;">位运算</a> <a href="/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" style="font-size: 10px;">具身智能</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">前缀和</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 10px;">动态规划</a> <a href="/tags/%E5%8F%AF%E6%8F%90%E7%A4%BA%E8%A7%86%E8%A7%89%E5%88%86%E5%89%B2/" style="font-size: 10px;">可提示视觉分割</a> <a href="/tags/%E5%93%88%E5%B8%8C/" style="font-size: 10px;">哈希</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">工具配置</a> <a href="/tags/%E6%8B%93%E6%89%91/" style="font-size: 10px;">拓扑</a> <a href="/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">插件</a> <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA-UAVs/" style="font-size: 10px;">无人机(UAVs)</a> <a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" style="font-size: 12.22px;">期末复习</a> <a href="/tags/%E6%AC%A7%E6%8B%89%E5%85%AC%E5%BC%8F/" style="font-size: 10px;">欧拉公式</a> <a href="/tags/deep-learning/" style="font-size: 13.33px;">深度学习</a> <a href="/tags/%E7%89%9B%E5%AE%A2/" style="font-size: 13.33px;">牛客</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">环境配置</a> <a href="/tags/development/" style="font-size: 15.56px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 20px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 14.44px;">算法练习</a> <a href="/tags/%E7%BB%BC%E8%BF%B0%E8%AE%BA%E6%96%87/" style="font-size: 10px;">综述论文</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 10px;">网站</a> <a href="/tags/%E8%A7%86%E9%A2%91%E5%88%86%E5%89%B2/" style="font-size: 10px;">视频分割</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" style="font-size: 10px;">计算机图形学</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6-%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">计算机图形学 课程学习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 15.56px;">论文阅读</a> <a href="/tags/course/" style="font-size: 18.89px;">课程学习</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AE%9E%E9%AA%8C/" style="font-size: 10px;">课程实验</a> <a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 10px;">贪心</a> <a href="/tags/troubleshooting/" style="font-size: 16.67px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2026 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
 
 
-  </main>
-  <footer>
-    <hr>
-    <p>&copy; 2026 tkzzzzzz6</p>
-  </footer>
-</body>
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
 </html>
