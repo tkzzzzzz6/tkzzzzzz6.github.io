@@ -610,6 +610,31 @@ article h1:before{ font-weight: bold }
     margin-bottom: .5em;
 }
 
+/* - 友链列表 */
+.friends-list{ margin-bottom: 3em }
+
+.friend-item{
+    margin-bottom: 1.5em;
+    padding: 1.25em 0;
+}
+
+.friend-item:last-child{ margin-bottom: 0 }
+
+.friend-item .friend-avatar,
+.friend-item .friend-avatar img{
+    width: 4.5em;
+    height: 4.5em;
+}
+
+.friend-item .friend-avatar img{ object-fit: cover }
+
+.friend-item .author-info h4{
+    margin-bottom: .35em;
+    font-weight: normal;
+}
+
+.friend-item .author-info p{ margin: 0 }
+
 @media screen and (max-width: 800px){
     .post-author{
         margin-top: 6em;
