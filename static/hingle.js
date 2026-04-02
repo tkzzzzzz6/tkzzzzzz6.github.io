@@ -163,7 +163,7 @@ var Paul_Hingle = function (config) {
     else if(config.night){
         var hour = new Date().getHours();
 
-        if(hour <= 5 || hour >= 22){
+        if(hour <= 5 || hour >= 21){
             document.body.classList.add("dark-theme");
             document.cookie = "night=true;" + "path=/;" + "max-age=21600";
         }
