@@ -187,7 +187,26 @@ var Paul_Hingle = function (config) {
         form.onsubmit = function (ev) {
             ev.preventDefault();
 
-            window.open("https://www.baidu.com/s?wd=site:" + location.host + " " + input.value.trim());
+            var keyword = input.value.trim();
+            if(!keyword){
+                return;
+            }
+
+            var engine = (config.search_engine || "baidu").toLowerCase();
+            var query = "site:" + location.host + " " + keyword;
+            var url = "";
+
+            if(engine === "google"){
+                url = "https://www.google.com/search?q=" + encodeURIComponent(query);
+            }
+            else if(engine === "bing"){
+                url = "https://www.bing.com/search?q=" + encodeURIComponent(query);
+            }
+            else{
+                url = "https://www.baidu.com/s?wd=" + encodeURIComponent(query);
+            }
+
+            window.open(url);
         }
     }
 
