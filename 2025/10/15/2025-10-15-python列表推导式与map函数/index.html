@@ -3,7 +3,7 @@
   <head>
     
     <meta charset="UTF-8">
-    <title>2025-10-15-浏览器批量下载文件的方法 - TK的小站</title>
+    <title>2025-10-15-python列表推导式与map函数 - TK的小站</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
     <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
     
@@ -15,12 +15,11 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta property="og:site_name" content="TK的小站">
-    <meta property="og:title" content="2025-10-15-浏览器批量下载文件的方法"/>
+    <meta property="og:title" content="2025-10-15-python列表推导式与map函数"/>
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
-<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
-<style>mjx-container[jax="SVG"] {
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -132,7 +131,8 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style></head>
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
 
   <body>
     <header>
@@ -152,7 +152,7 @@ mjx-container[display="true"] + br {
         <div class="has-child">
             <a href>分类</a>
             <div class="sub-menu">
-                <a class="category-link" href="/categories/Papers-pile-or-pie/">Papers pile or pie?</a><a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a><a class="category-link" href="/categories/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/">工具配置</a><a class="category-link" href="/categories/%E6%88%91%E8%A6%81%E7%82%BC%E4%B8%B9-%E4%B8%B9%E6%B2%A1%E6%9C%89%E9%97%AE%E9%A2%98/">我要炼丹,丹没有问题</a><a class="category-link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a><a class="category-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a><a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%92%9F%E8%92%BB%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/">算法蒟蒻的成长记录</a><a class="category-link" href="/categories/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%AE%9E%E9%AA%8C/">课程学习与实验</a><a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
+                <a class="category-link" href="/categories/Papers-pile-or-pie/">Papers pile or pie?</a><a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a><a class="category-link" href="/categories/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/">工具配置</a><a class="category-link" href="/categories/%E6%88%91%E8%A6%81%E7%82%BC%E4%B8%B9-%E4%B8%B9%E6%B2%A1%E6%9C%89%E9%97%AE%E9%A2%98/">我要炼丹,丹没有问题</a><a class="category-link" href="/categories/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习</a><a class="category-link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a><a class="category-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a><a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%92%9F%E8%92%BB%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/">算法蒟蒻的成长记录</a><a class="category-link" href="/categories/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%AE%9E%E9%AA%8C/">课程学习与实验</a><a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
             </div>
         </div>
         
@@ -168,7 +168,7 @@ mjx-container[display="true"] + br {
     <main>
     <div class="wrap min">
         <section class="post-title">
-            <h2>2025-10-15-浏览器批量下载文件的方法</h2>
+            <h2>2025-10-15-python列表推导式与map函数</h2>
             <div class="post-meta">
                 <time class="date">2025.10.15</time>
             
@@ -178,38 +178,122 @@ mjx-container[display="true"] + br {
         </section>
         <article class="post-content">
         
-            <h1 id="2025-10-15-浏览器批量下载文件的方法"><a href="#2025-10-15-浏览器批量下载文件的方法" class="headerlink" title="2025-10-15-浏览器批量下载文件的方法"></a>2025-10-15-浏览器批量下载文件的方法</h1><blockquote>
-<p>参考资料<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_45447650/article/details/125786723">wget 的安装与使用（Windows）</a><br><a target="_blank" rel="noopener" href="https://www.reddit.com/r/techsupport/comments/1dsuawu/how_can_i_massdownload_all_the_files_in_the_links/?tl=zh-hans">我怎样才能批量下载一个网站链接里的所有文件？</a></p>
-</blockquote>
-<p>今天在下载课资料时,遇到了单个页面有多个文件资源链接需要批量下载的问题,通过查找资料,总结了以下几种方法:</p>
-<h2 id="方法一-使用浏览器扩展插件"><a href="#方法一-使用浏览器扩展插件" class="headerlink" title="方法一: 使用浏览器扩展插件"></a>方法一: 使用浏览器扩展插件</h2><ul>
-<li><p>浏览器插件:Instant Data Scraper:可以自动从任何网页中提取数据并导出为 Excel 或 CSV 文件。<a target="_blank" rel="noopener" href="https://chromewebstore.google.com/detail/instant-data-scraper/ofaokhiedipichpaobibbnahnkdoiiah?hl=zh-CN">下载链接</a></p>
-</li>
-<li><p>下载软件:IDM或者JDownloader 2</p>
-</li>
-</ul>
-<p>这里有两种思路,一种是将csv文件中的链接列全部复制,通过下载软件的通过剪贴板批量下载的功能进行批量下载,另一种是将对应的链接转化为csv格式的文件,再使用ai编写对应的下载的脚本</p>
-<p>这里我只介绍第一种思路下载软件通过剪贴板批量下载的思路</p>
-<ol>
-<li><p>使用Instant Data Scraper插件,提取网页中的链接,并选中和复制链接相关列<br><img src="http://t2z9ig7uo.hn-bkt.clouddn.com/blog/1760523559939.png" alt="1760523559939.png"></p>
-</li>
-<li><p>打开下载软件,在设置中找到“通过剪贴板监控”或类似选项,并启用它</p>
-</li>
-</ol>
-<ul>
-<li><p>IDM:任务-&gt;从剪贴板中添加批量下载<br><img src="http://t2z9ig7uo.hn-bkt.clouddn.com/blog/1760525166362.png" alt="1760525166362.png"></p>
-</li>
-<li><p>JDownloader 2:链接抓取器-&gt;ctrl+v 粘贴剪贴板内容<br><img src="http://t2z9ig7uo.hn-bkt.clouddn.com/blog/1760523940222.png" alt="1760523940222.png"></p>
-</li>
-</ul>
-<p>右键开始所有下载</p>
-<p><img src="http://t2z9ig7uo.hn-bkt.clouddn.com/blog/1760524005163.png" alt="1760524005163.png"></p>
-<h2 id="方法二-使用wget-r-命令批量下载"><a href="#方法二-使用wget-r-命令批量下载" class="headerlink" title="方法二:使用wget -r 命令批量下载"></a>方法二:使用wget -r 命令批量下载</h2><p>需要网站有robots.txt文件,且允许爬取,深度学习的数据集相关网站一般都允许爬取</p>
-<p>示例:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">wget</span> <span class="token parameter variable">-r</span> <span class="token parameter variable">-c</span> https://cdn.nohesi.gg/cars/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+            <h2 id="map函数-vs-列表推导式"><a href="#map函数-vs-列表推导式" class="headerlink" title="map函数 vs 列表推导式"></a>map函数 vs 列表推导式</h2><h2 id="1-map函数"><a href="#1-map函数" class="headerlink" title="1. map函数"></a>1. map函数</h2><h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token builtin">map</span><span class="token punctuation">(</span>function<span class="token punctuation">,</span> iterable<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>-c 选项表示断点续传<br><img src="http://t2z9ig7uo.hn-bkt.clouddn.com/blog/1760522349155.png" alt="1760522349155.png"></p>
-<p>如果你有更好的方法,欢迎在评论区留言分享</p>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 将字符串列表转换为整数列表</span>
+str_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"1"</span><span class="token punctuation">,</span> <span class="token string">"2"</span><span class="token punctuation">,</span> <span class="token string">"3"</span><span class="token punctuation">,</span> <span class="token string">"4"</span><span class="token punctuation">]</span>
+int_list <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">map</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">,</span> str_list<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>int_list<span class="token punctuation">)</span>  <span class="token comment"># [1, 2, 3, 4]</span>
+
+<span class="token comment"># 多个可迭代对象</span>
+nums1 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span>
+nums2 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">]</span>
+result <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">map</span><span class="token punctuation">(</span><span class="token keyword">lambda</span> x<span class="token punctuation">,</span> y<span class="token punctuation">:</span> x <span class="token operator">+</span> y<span class="token punctuation">,</span> nums1<span class="token punctuation">,</span> nums2<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span>  <span class="token comment"># [5, 7, 9]</span>
+
+<span class="token comment"># 在输入处理中的应用</span>
+a<span class="token punctuation">,</span> b <span class="token operator">=</span> <span class="token builtin">map</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment"># 输入 "10 20"</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span>  <span class="token comment"># 10 20</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="map函数的特点"><a href="#map函数的特点" class="headerlink" title="map函数的特点"></a>map函数的特点</h3><ul>
+<li><strong>惰性求值</strong>：返回的是迭代器，不是列表</li>
+<li><strong>需要显式转换</strong>：通常需要用 <code>list()</code> 转换为列表</li>
+<li><strong>函数式编程风格</strong>：更函数式，更简洁</li>
+</ul>
+<h2 id="2-列表推导式"><a href="#2-列表推导式" class="headerlink" title="2. 列表推导式"></a>2. 列表推导式</h2><h3 id="基本语法-1"><a href="#基本语法-1" class="headerlink" title="基本语法"></a>基本语法</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token punctuation">[</span>expression <span class="token keyword">for</span> item <span class="token keyword">in</span> iterable <span class="token keyword">if</span> condition<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="使用方法-1"><a href="#使用方法-1" class="headerlink" title="使用方法"></a>使用方法</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 将字符串列表转换为整数列表</span>
+str_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"1"</span><span class="token punctuation">,</span> <span class="token string">"2"</span><span class="token punctuation">,</span> <span class="token string">"3"</span><span class="token punctuation">,</span> <span class="token string">"4"</span><span class="token punctuation">]</span>
+int_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token keyword">for</span> x <span class="token keyword">in</span> str_list<span class="token punctuation">]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>int_list<span class="token punctuation">)</span>  <span class="token comment"># [1, 2, 3, 4]</span>
+
+<span class="token comment"># 带条件的转换</span>
+numbers <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"1"</span><span class="token punctuation">,</span> <span class="token string">"2"</span><span class="token punctuation">,</span> <span class="token string">"a"</span><span class="token punctuation">,</span> <span class="token string">"3"</span><span class="token punctuation">,</span> <span class="token string">"b"</span><span class="token punctuation">]</span>
+int_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token keyword">for</span> x <span class="token keyword">in</span> numbers <span class="token keyword">if</span> x<span class="token punctuation">.</span>isdigit<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>int_list<span class="token punctuation">)</span>  <span class="token comment"># [1, 2, 3]</span>
+
+<span class="token comment"># 多个变量的情况</span>
+a<span class="token punctuation">,</span> b <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token keyword">for</span> x <span class="token keyword">in</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span>  <span class="token comment"># 输入 "10 20"</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span>  <span class="token comment"># 10 20</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="列表推导式的特点"><a href="#列表推导式的特点" class="headerlink" title="列表推导式的特点"></a>列表推导式的特点</h3><ul>
+<li><strong>立即求值</strong>：直接返回列表</li>
+<li><strong>更Pythonic</strong>：被认为是更符合Python风格的写法</li>
+<li><strong>功能更强大</strong>：可以包含条件判断</li>
+</ul>
+<h2 id="3-对比示例"><a href="#3-对比示例" class="headerlink" title="3. 对比示例"></a>3. 对比示例</h2><h3 id="相同的功能，不同的写法"><a href="#相同的功能，不同的写法" class="headerlink" title="相同的功能，不同的写法"></a>相同的功能，不同的写法</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 将字符串列表转换为整数</span>
+strings <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"1"</span><span class="token punctuation">,</span> <span class="token string">"2"</span><span class="token punctuation">,</span> <span class="token string">"3"</span><span class="token punctuation">,</span> <span class="token string">"4"</span><span class="token punctuation">]</span>
+
+<span class="token comment"># 使用map</span>
+result1 <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">map</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">,</span> strings<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 使用列表推导式</span>
+result2 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token keyword">for</span> x <span class="token keyword">in</span> strings<span class="token punctuation">]</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>result1<span class="token punctuation">)</span>  <span class="token comment"># [1, 2, 3, 4]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>result2<span class="token punctuation">)</span>  <span class="token comment"># [1, 2, 3, 4]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="性能对比"><a href="#性能对比" class="headerlink" title="性能对比"></a>性能对比</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> time
+
+data <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1000000</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+
+<span class="token comment"># map函数</span>
+start <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
+result1 <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">map</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+time1 <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> start
+
+<span class="token comment"># 列表推导式</span>
+start <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
+result2 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token keyword">for</span> x <span class="token keyword">in</span> data<span class="token punctuation">]</span>
+time2 <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> start
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"map 用时: </span><span class="token interpolation"><span class="token punctuation">{</span>time1<span class="token punctuation">:</span><span class="token format-spec">.4f</span><span class="token punctuation">}</span></span><span class="token string">秒"</span></span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"列表推导式 用时: </span><span class="token interpolation"><span class="token punctuation">{</span>time2<span class="token punctuation">:</span><span class="token format-spec">.4f</span><span class="token punctuation">}</span></span><span class="token string">秒"</span></span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="4-实际应用场景"><a href="#4-实际应用场景" class="headerlink" title="4. 实际应用场景"></a>4. 实际应用场景</h2><h3 id="适合使用map的情况"><a href="#适合使用map的情况" class="headerlink" title="适合使用map的情况"></a>适合使用map的情况</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 简单的类型转换</span>
+numbers <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">map</span><span class="token punctuation">(</span><span class="token builtin">float</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">"1.1"</span><span class="token punctuation">,</span> <span class="token string">"2.2"</span><span class="token punctuation">,</span> <span class="token string">"3.3"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 使用内置函数</span>
+words <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"hello"</span><span class="token punctuation">,</span> <span class="token string">"world"</span><span class="token punctuation">]</span>
+lengths <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">map</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">,</span> words<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 函数式编程场景</span>
+<span class="token keyword">def</span> <span class="token function">square</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> x <span class="token operator">**</span> <span class="token number">2</span>
+
+squares <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">map</span><span class="token punctuation">(</span>square<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="适合使用列表推导式的情况"><a href="#适合使用列表推导式的情况" class="headerlink" title="适合使用列表推导式的情况"></a>适合使用列表推导式的情况</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 需要条件过滤</span>
+numbers <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token keyword">for</span> x <span class="token keyword">in</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">if</span> x<span class="token punctuation">.</span>isdigit<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+
+<span class="token comment"># 复杂的表达式</span>
+result <span class="token operator">=</span> <span class="token punctuation">[</span>x<span class="token operator">**</span><span class="token number">2</span> <span class="token keyword">for</span> x <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span> <span class="token keyword">if</span> x <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">]</span>
+
+<span class="token comment"># 嵌套循环</span>
+pairs <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span> <span class="token keyword">for</span> x <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token keyword">for</span> y <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="5-在输入处理中的具体应用"><a href="#5-在输入处理中的具体应用" class="headerlink" title="5. 在输入处理中的具体应用"></a>5. 在输入处理中的具体应用</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 读取多个数字</span>
+<span class="token comment"># 输入: "1 2 3 4 5"</span>
+data <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">map</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># 或者</span>
+data <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token keyword">for</span> x <span class="token keyword">in</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+
+<span class="token comment"># 读取多行数据</span>
+n <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+numbers <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span> _ <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># 两种写法都可以</span>
+    <span class="token comment"># a, b = map(int, input().split())</span>
+    a<span class="token punctuation">,</span> b <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token keyword">for</span> x <span class="token keyword">in</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    numbers<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="6-选择建议"><a href="#6-选择建议" class="headerlink" title="6. 选择建议"></a>6. 选择建议</h2><ul>
+<li><strong>简单转换</strong>：两者都可以，看个人喜好</li>
+<li><strong>需要条件过滤</strong>：优先选择列表推导式</li>
+<li><strong>函数式编程</strong>：优先选择map</li>
+<li><strong>可读性</strong>：列表推导式通常更易读</li>
+<li><strong>性能</strong>：在大多数情况下差异不大，map稍快一些</li>
+</ul>
 
         </article>
         <section class="post-near">
@@ -224,7 +308,7 @@ mjx-container[display="true"] + br {
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/troubleshooting/" rel="tag">问题解决</a>
+            <a class="-none-link" href="/tags/course/" rel="tag">课程学习</a>
             </section>
         
     
