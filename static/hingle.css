@@ -1050,3 +1050,89 @@ pre[class*="language-"].line-numbers {
     padding-right: 0.8em;
     text-align: right;
 }
+
+/* - 代码复制按钮 */
+.code-copy-wrap{
+    margin: 1em 0;
+    position: relative;
+    padding-top: 2.25em;
+}
+
+.code-copy-wrap > pre{
+    margin: 0;
+}
+
+.code-copy-btn{
+    top: .45em;
+    right: .5em;
+    z-index: 1;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+    font-size: .8em;
+    line-height: 1;
+    position: absolute;
+    border-radius: .25em;
+    padding: .5em .75em;
+    background: #6f9fc7;
+    background: var(--blue);
+    transition: background .2s, transform .2s, opacity .2s;
+}
+
+.code-copy-btn:hover{
+    background: #9fcff7;
+    background: var(--light-blue);
+}
+
+.code-copy-btn:focus-visible{
+    outline: 2px solid rgba(111, 159, 199, .5);
+    outline-offset: 2px;
+}
+
+.code-copy-btn.is-success{
+    background: #27a17e;
+}
+
+.code-copy-btn.is-error{
+    background: #d9534f;
+}
+
+.copy-toast{
+    left: 50%;
+    bottom: 1.5em;
+    color: #fff;
+    z-index: 20;
+    opacity: 0;
+    position: fixed;
+    font-size: .9em;
+    max-width: 92vw;
+    border-radius: 99px;
+    padding: .6em 1.1em;
+    pointer-events: none;
+    transform: translate(-50%, .8em);
+    background: rgba(39, 161, 126, .95);
+    transition: opacity .18s, transform .18s;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, .18);
+}
+
+.copy-toast.show{
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+.copy-toast.error{
+    background: rgba(217, 83, 79, .95);
+}
+
+@media screen and (max-width: 599px){
+    .code-copy-wrap{
+        padding-top: 2.35em;
+    }
+
+    .code-copy-btn{
+        top: .5em;
+        right: .45em;
+        font-size: .78em;
+        padding: .5em .72em;
+    }
+}
