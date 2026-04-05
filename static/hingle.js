@@ -256,6 +256,9 @@ var Paul_Hingle = function (config) {
                 }
 
                 isProgrammaticCopy = true;
+                var guardTimer = setTimeout(function () {
+                    isProgrammaticCopy = false;
+                }, 2000);
                 copyText(text).then(function () {
                     setButtonState("已复制", "is-success");
                     showToast("代码已复制", false);
@@ -263,6 +266,7 @@ var Paul_Hingle = function (config) {
                     setButtonState("失败", "is-error");
                     showToast("复制失败，请手动复制", true);
                 }).finally(function () {
+                    clearTimeout(guardTimer);
                     setTimeout(function () {
                         isProgrammaticCopy = false;
                     }, 120);
@@ -276,13 +280,13 @@ var Paul_Hingle = function (config) {
             return;
         }
 
-        document.addEventListener("copy", function () {
+        document.oncopy = function () {
             if(isProgrammaticCopy){
                 return;
             }
 
             ks.notice("感谢复制,希望内容对你有所帮助！", {color: "yellow", overlay: true, time: 2000});
-        });
+        };
     };
 
     // 返回页首
