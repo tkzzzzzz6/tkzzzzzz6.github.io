@@ -13,7 +13,7 @@
 var Paul_Hingle = function (config) {
     var body = document.body;
     var content = ks.select(".post-content:not(.is-special), .page-content:not(.is-special)");
-    var suppressCopyNotice = false;
+    var isProgrammaticCopy = false;
 
     // 菜单按钮
     this.header = function () {
@@ -132,18 +132,10 @@ var Paul_Hingle = function (config) {
     };
 
     this.copy_code = function () {
-        var blocks = content.querySelectorAll("pre[class*='language-'], pre.line-numbers");
+        var root = content || document;
+        var blocks = root.querySelectorAll("pre[class*='language-'], pre.line-numbers, figure.highlight pre, .highlight pre");
 
         var showToast = function (text, isError) {
-            if(window.ks && typeof ks.notice === "function"){
-                ks.notice(text, {
-                    color: isError ? "red" : "green",
-                    overlay: false,
-                    time: 1600
-                });
-                return;
-            }
-
             var oldToast = document.querySelector(".copy-toast");
             if(oldToast){
                 oldToast.parentNode.removeChild(oldToast);
@@ -209,17 +201,18 @@ var Paul_Hingle = function (config) {
 
             var code = pre.querySelector("code");
             if(!code){
-                return;
+                code = pre;
             }
 
             pre.setAttribute("data-copy-ready", "1");
 
-            var wrapper = pre.parentNode;
+            var block = pre.closest && pre.closest("figure.highlight") ? pre.closest("figure.highlight") : pre;
+            var wrapper = block.parentNode;
             if(!wrapper.classList || !wrapper.classList.contains("code-copy-wrap")){
                 wrapper = document.createElement("div");
                 wrapper.className = "code-copy-wrap";
-                pre.parentNode.insertBefore(wrapper, pre);
-                wrapper.appendChild(pre);
+                block.parentNode.insertBefore(wrapper, block);
+                wrapper.appendChild(block);
             }
 
             if(wrapper.querySelector(".code-copy-btn")){
@@ -262,7 +255,7 @@ var Paul_Hingle = function (config) {
                     return;
                 }
 
-                suppressCopyNotice = true;
+                isProgrammaticCopy = true;
                 copyText(text).then(function () {
                     setButtonState("已复制", "is-success");
                     showToast("代码已复制", false);
@@ -271,10 +264,24 @@ var Paul_Hingle = function (config) {
                     showToast("复制失败，请手动复制", true);
                 }).finally(function () {
                     setTimeout(function () {
-                        suppressCopyNotice = false;
+                        isProgrammaticCopy = false;
                     }, 120);
                 });
             });
+        });
+    };
+
+    this.copy_notice = function () {
+        if(!config.copyright){
+            return;
+        }
+
+        document.addEventListener("copy", function () {
+            if(isProgrammaticCopy){
+                return;
+            }
+
+            ks.notice("感谢复制,希望内容对你有所帮助！", {color: "yellow", overlay: true, time: 2000});
         });
     };
 
@@ -292,8 +299,9 @@ var Paul_Hingle = function (config) {
         this.tree();
         this.links();
         this.comment_list();
-        this.copy_code();
     }
+    this.copy_code();
+    this.copy_notice();
 
     // 返回页首
     window.addEventListener("scroll", this.to_top);
@@ -316,16 +324,6 @@ var Paul_Hingle = function (config) {
             document.body.classList.add("dark-theme");
             document.cookie = "night=true;" + "path=/;" + "max-age=21600";
         }
-    }
-
-    // 如果开启复制内容提示
-    if(config.copyright){
-        document.oncopy = function () {
-            if(suppressCopyNotice){
-                return;
-            }
-            ks.notice("感谢复制,希望内容对你有所帮助！", {color: "yellow", overlay: true, time: 2000})
-        };
     }
 
     //
