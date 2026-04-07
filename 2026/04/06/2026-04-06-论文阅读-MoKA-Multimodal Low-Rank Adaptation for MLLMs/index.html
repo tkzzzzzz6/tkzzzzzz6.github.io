@@ -208,7 +208,7 @@ mjx-container[display="true"] + br {
 <h3 id="C-模态共享的-B-矩阵（Unified-Alignment）"><a href="#C-模态共享的-B-矩阵（Unified-Alignment）" class="headerlink" title="C. 模态共享的 B 矩阵（Unified Alignment）"></a>C. 模态共享的 B 矩阵（Unified Alignment）</h3><p>最后，所有处理后的模态特征都通过<strong>同一个共享的矩阵 B</strong>投影回原始权重空间：</p>
 <ul>
 <li><strong>核心思想</strong>：在完成独立建模和深度交互后，进行统一的跨模态对齐。</li>
-<li><strong>优势</strong>：既保证了前面模块的独立性，又通过参数共享极大地控制了整体参数量，维持了 LoRA 参数高效的优点。<br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1775493600121.png" alt="1775493600121.png"><br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/moka-architecture.png" alt="MoKA 整体架构"></li>
+<li><strong>优势</strong>：既保证了前面模块的独立性，又通过参数共享极大地控制了整体参数量，维持了 LoRA 参数高效的优点。<br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1775493600121.png" alt="1775493600121.png"></li>
 </ul>
 <p>相比标准 LoRA 对所有模态使用相同的低秩参数，MoKA 通过“<strong>先分流处理 → 后深度交互 → 最后统一对齐</strong>”的三步设计，更好地适配了多模态场景的特性。</p>
 <h2 id="四、实验"><a href="#四、实验" class="headerlink" title="四、实验"></a>四、实验</h2><h3 id="1-实验设置"><a href="#1-实验设置" class="headerlink" title="1. 实验设置"></a>1. 实验设置</h3><p>覆盖了三个具有代表性的多模态任务场景，并且在多个主流 LLM 基座上验证了方法的通用性：</p>
@@ -225,7 +225,6 @@ mjx-container[display="true"] + br {
 <li><strong>参数效率优异</strong>：可训练参数占比仅从标准 LoRA 的 <strong>1.20%</strong> 微增至 **1.33%**，几乎没有额外的参数开销。</li>
 <li><strong>推理延迟可控</strong>：推理延迟仅为原来的 <strong>1.069x</strong>，工程性价比极高。</li>
 </ul>
-<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/moka-results.png" alt="MoKA 实验结果"></p>
 <h3 id="3-变体对比实验"><a href="#3-变体对比实验" class="headerlink" title="3.变体对比实验"></a>3.变体对比实验</h3><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1775518506597.png" alt="1775518506597.png"></p>
 <h3 id="3-消融实验验证"><a href="#3-消融实验验证" class="headerlink" title="3. 消融实验验证"></a>3. 消融实验验证</h3><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1775517878802.png" alt="1775517878802.png"></p>
 <ul>
