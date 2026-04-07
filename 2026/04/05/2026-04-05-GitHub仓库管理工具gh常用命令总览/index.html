@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2026-04-05-GitHub仓库管理工具gh常用命令总览 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2026-04-05-GitHub仓库管理工具gh常用命令总览"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 8.1.1"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/Papers-pile-or-pie/">Papers pile or pie?</a><a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a><a class="category-link" href="/categories/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/">工具配置</a><a class="category-link" href="/categories/%E6%88%91%E8%A6%81%E7%82%BC%E4%B8%B9-%E4%B8%B9%E6%B2%A1%E6%9C%89%E9%97%AE%E9%A2%98/">我要炼丹,丹没有问题</a><a class="category-link" href="/categories/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习</a><a class="category-link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a><a class="category-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a><a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%92%9F%E8%92%BB%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/">算法蒟蒻的成长记录</a><a class="category-link" href="/categories/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%AE%9E%E9%AA%8C/">课程学习与实验</a><a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2026-04-05-GitHub仓库管理工具gh常用命令总览</h2>
+            <div class="post-meta">
+                <time class="date">2026.04.05</time>
+            
+                <span class="category"><a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="GitHub-仓库管理工具-gh-常用命令总览"><a href="#GitHub-仓库管理工具-gh-常用命令总览" class="headerlink" title="GitHub 仓库管理工具 gh 常用命令总览"></a>GitHub 仓库管理工具 <code>gh</code> 常用命令总览</h1><p>平时我们在命令行里管理 GitHub 仓库时，如果只靠网页操作，很多流程都会显得有点碎。比如查看 PR、创建 Issue、切分支、拉取远程仓库信息、检查登录状态，这些动作来回切页面确实容易把人搞烦。</p>
+<p>这时候 <code>gh</code> 就很顺手了。它是 GitHub 官方提供的命令行工具，可以直接在终端里完成仓库、Issue、PR、Release、Actions 等常见操作。对于经常在服务器、WSL 或者终端开发环境里工作的同学来说，真的属于“装了就回不去”的那类工具。</p>
+<p>这篇文章把我平时高频使用的 <code>gh</code> 命令做一个整理，方便自己回头查，也方便读者快速上手。</p>
+<hr>
+<h2 id="一、gh-是什么"><a href="#一、gh-是什么" class="headerlink" title="一、gh 是什么"></a>一、<code>gh</code> 是什么</h2><p><code>gh</code> 是 GitHub CLI，也就是 GitHub 官方维护的命令行工具。</p>
+<p>它适合做的事情包括：</p>
+<ul>
+<li>在终端中登录 GitHub 账号</li>
+<li>克隆、查看和管理仓库</li>
+<li>创建、查看和合并 Pull Request</li>
+<li>创建、查看和关闭 Issue</li>
+<li>查看 GitHub Actions 工作流执行情况</li>
+<li>管理 Release、Gist 等资源</li>
+</ul>
+<p>如果你的工作流本身就偏命令行，那 <code>gh</code> 基本可以把不少网页操作搬回终端。</p>
+<hr>
+<h2 id="二、安装与登录"><a href="#二、安装与登录" class="headerlink" title="二、安装与登录"></a>二、安装与登录</h2><h3 id="1-安装-gh"><a href="#1-安装-gh" class="headerlink" title="1. 安装 gh"></a>1. 安装 <code>gh</code></h3><h4 id="跨平台安装（推荐）"><a href="#跨平台安装（推荐）" class="headerlink" title="跨平台安装（推荐）"></a>跨平台安装（推荐）</h4><p>如果你已经安装了 <code>x-cmd</code>，可以直接用它做跨平台安装，比较方便：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">x <span class="token function">install</span> gh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="不同平台下的安装"><a href="#不同平台下的安装" class="headerlink" title="不同平台下的安装"></a>不同平台下的安装</h4><p><strong>Windows（winget）</strong></p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">winget install <span class="token operator">--</span>id GitHub<span class="token punctuation">.</span><span class="token function">cli</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>Ubuntu / Debian</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> gh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>macOS（Homebrew）</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">brew <span class="token function">install</span> gh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>安装完成后先检查版本：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh <span class="token parameter variable">--version</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="2-登录-GitHub"><a href="#2-登录-GitHub" class="headerlink" title="2. 登录 GitHub"></a>2. 登录 GitHub</h3><p>首次使用通常先执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh auth login<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>然后按照提示选择：</p>
+<ul>
+<li>GitHub.com 或企业版实例</li>
+<li>HTTPS 或 SSH</li>
+<li>浏览器授权或 Token 授权</li>
+</ul>
+<p>查看当前登录状态：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh auth status<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>退出登录：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh auth <span class="token builtin class-name">logout</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<hr>
+<h2 id="三、gh-和-git-如何配合使用"><a href="#三、gh-和-git-如何配合使用" class="headerlink" title="三、gh 和 git 如何配合使用"></a>三、<code>gh</code> 和 <code>git</code> 如何配合使用</h2><p>很多人第一次接触 <code>gh</code> 时，都会有一个很自然的问题：</p>
+<p><strong>既然已经有了 <code>gh</code>，那它是不是可以直接替代 <code>git pull</code>、<code>git push</code>、<code>git commit</code> 这些命令？</strong></p>
+<p>答案是：<strong>不能完全替代。</strong></p>
+<p>更准确地说，<code>git</code> 和 <code>gh</code> 最适合的关系是“分工协作”：</p>
+<ul>
+<li><code>git</code> 负责本地版本控制和代码同步</li>
+<li><code>gh</code> 负责和 GitHub 平台交互</li>
+</ul>
+<p>你可以简单理解成：</p>
+<ul>
+<li><code>git</code> 管代码历史</li>
+<li><code>gh</code> 管 GitHub 事务</li>
+</ul>
+<p>例如下面这些动作，更适合交给 <code>git</code>：</p>
+<ul>
+<li><code>git add</code></li>
+<li><code>git commit</code></li>
+<li><code>git pull</code></li>
+<li><code>git push</code></li>
+<li><code>git reset</code></li>
+<li><code>git revert</code></li>
+</ul>
+<p>而下面这些动作，更适合交给 <code>gh</code>：</p>
+<ul>
+<li><code>gh auth login</code></li>
+<li><code>gh repo clone</code></li>
+<li><code>gh repo view</code></li>
+<li><code>gh issue list</code></li>
+<li><code>gh pr create</code></li>
+<li><code>gh pr view</code></li>
+<li><code>gh run list</code></li>
+</ul>
+<p>所以在日常开发中，最常见的方式并不是“只用 <code>gh</code>”或者“只用 <code>git</code>”，而是两者配合使用。</p>
+<h3 id="1-服务器里首次开发前，先配置-Git-身份"><a href="#1-服务器里首次开发前，先配置-Git-身份" class="headerlink" title="1. 服务器里首次开发前，先配置 Git 身份"></a>1. 服务器里首次开发前，先配置 Git 身份</h3><p>如果你是在服务器、WSL、新电脑或者新开的开发环境里第一次提交代码，建议先检查 Git 身份信息。</p>
+<p>查看当前配置：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> config <span class="token parameter variable">--global</span> user.name
+<span class="token function">git</span> config <span class="token parameter variable">--global</span> user.email<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>如果没有配置，就补上：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> config <span class="token parameter variable">--global</span> user.name <span class="token string">"your_name"</span>
+<span class="token function">git</span> config <span class="token parameter variable">--global</span> user.email <span class="token string">"your_email@example.com"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>你也可以直接查看所有全局配置：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> config <span class="token parameter variable">--global</span> <span class="token parameter variable">--list</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这里有两个实际开发中很容易踩坑的点：</p>
+<ul>
+<li>没有配置 <code>user.name</code> 和 <code>user.email</code> 时，提交可能直接报错</li>
+<li>邮箱如果和 GitHub 账号不匹配，贡献记录可能不会正确关联到你的账号</li>
+</ul>
+<p>如果你不想暴露真实邮箱，也可以在 GitHub 设置页里使用官方提供的 <code>noreply</code> 邮箱。</p>
+<h3 id="2-认证成功后，确认你使用的是哪种连接方式"><a href="#2-认证成功后，确认你使用的是哪种连接方式" class="headerlink" title="2. 认证成功后，确认你使用的是哪种连接方式"></a>2. 认证成功后，确认你使用的是哪种连接方式</h3><p>执行下面命令登录 GitHub：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh auth login<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>登录过程中通常会让你选择：</p>
+<ul>
+<li><code>HTTPS</code></li>
+<li><code>SSH</code></li>
+</ul>
+<p>这两种方式都能用，但建议你在同一台机器上尽量保持一致，不然有时候会出现“登录成功了，但推送方式和远程地址不匹配”的尴尬情况。</p>
+<p>克隆或进入仓库后，可以用下面命令检查远程地址：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> remote <span class="token parameter variable">-v</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果你看到的是：</p>
+<ul>
+<li><code>https://github.com/...</code>，说明当前仓库走的是 HTTPS</li>
+<li><code>git@github.com:...</code>，说明当前仓库走的是 SSH</li>
+</ul>
+<h3 id="3-一套最常见的-git-gh-配合工作流"><a href="#3-一套最常见的-git-gh-配合工作流" class="headerlink" title="3. 一套最常见的 git + gh 配合工作流"></a>3. 一套最常见的 <code>git + gh</code> 配合工作流</h3><p>下面这套流程，基本就是我自己比较推荐的终端开发方式，尤其适合服务器和远程环境：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 1. 配置 Git 身份</span>
+<span class="token function">git</span> config <span class="token parameter variable">--global</span> user.name <span class="token string">"your_name"</span>
+<span class="token function">git</span> config <span class="token parameter variable">--global</span> user.email <span class="token string">"your_email@example.com"</span>
+
+<span class="token comment"># 2. 登录 GitHub</span>
+gh auth login
+
+<span class="token comment"># 3. 克隆仓库</span>
+gh repo clone owner/repo
+
+<span class="token comment"># 4. 进入项目目录</span>
+<span class="token builtin class-name">cd</span> repo
+
+<span class="token comment"># 5. 新建功能分支</span>
+<span class="token function">git</span> checkout <span class="token parameter variable">-b</span> feature/demo
+
+<span class="token comment"># 6. 正常开发后提交</span>
+<span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
+<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"feat: add demo"</span>
+
+<span class="token comment"># 7. 推送到远程</span>
+<span class="token function">git</span> push <span class="token parameter variable">-u</span> origin feature/demo
+
+<span class="token comment"># 8. 创建 Pull Request</span>
+gh <span class="token function">pr</span> create
+
+<span class="token comment"># 9. 在浏览器中查看 PR</span>
+gh <span class="token function">pr</span> view <span class="token parameter variable">--web</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这套流程里分工其实很清楚：</p>
+<ul>
+<li><code>gh</code> 负责登录、克隆、提 PR、看 PR</li>
+<li><code>git</code> 负责分支、提交、拉取、推送、回退</li>
+</ul>
+<h3 id="4-那-gh-里有没有类似-git-pull-和-git-push-的命令？"><a href="#4-那-gh-里有没有类似-git-pull-和-git-push-的命令？" class="headerlink" title="4. 那 gh 里有没有类似 git pull 和 git push 的命令？"></a>4. 那 <code>gh</code> 里有没有类似 <code>git pull</code> 和 <code>git push</code> 的命令？</h3><p>这是最常被问到的问题之一。</p>
+<p>严格来说，<strong>日常开发中的 <code>pull</code> 和 <code>push</code>，还是应该优先使用 <code>git pull</code> 和 <code>git push</code>。</strong></p>
+<p>也就是说：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> pull
+<span class="token function">git</span> push<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>这两个动作仍然是 Git 自己的职责范围。</p>
+<p><code>gh</code> 并没有一个在日常开发里完全等价替代 <code>git push</code> 的核心命令。它更偏向：</p>
+<ul>
+<li>帮你登录 GitHub</li>
+<li>帮你 clone / fork 仓库</li>
+<li>帮你创建和查看 PR</li>
+<li>帮你查看 Actions 和 Issue</li>
+</ul>
+<p>有些同学会看到 <code>gh repo sync</code>，但这里要特别说明：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh repo <span class="token function">sync</span> owner/repo<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>它更偏向 <strong>同步 fork 仓库和上游仓库</strong>，并不是普通开发工作流里 <code>git pull</code> 的直接替代。<br>所以如果你只是想把远程最新代码拉到本地，老老实实用 <code>git pull</code> 就对了；如果你是想把本地分支推上去，也还是 <code>git push</code> 更直接。</p>
+<h3 id="5-版本回退和撤销修改，一般还是用-git"><a href="#5-版本回退和撤销修改，一般还是用-git" class="headerlink" title="5. 版本回退和撤销修改，一般还是用 git"></a>5. 版本回退和撤销修改，一般还是用 <code>git</code></h3><p>虽然本文主题是 <code>gh</code>，但只要讲工作流，就绕不开版本回退。</p>
+<p>这里我把最常见的几个场景一起整理一下。</p>
+<h4 id="场景-1：文件改乱了，但还没提交"><a href="#场景-1：文件改乱了，但还没提交" class="headerlink" title="场景 1：文件改乱了，但还没提交"></a>场景 1：文件改乱了，但还没提交</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> restore <span class="token operator">&lt;</span>file<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果想恢复当前目录下所有未提交修改：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> restore <span class="token builtin class-name">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="场景-2：已经-git-add-了，但不想暂存"><a href="#场景-2：已经-git-add-了，但不想暂存" class="headerlink" title="场景 2：已经 git add 了，但不想暂存"></a>场景 2：已经 <code>git add</code> 了，但不想暂存</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> restore <span class="token parameter variable">--staged</span> <span class="token operator">&lt;</span>file<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果要把所有暂存都撤掉：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> restore <span class="token parameter variable">--staged</span> <span class="token builtin class-name">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="场景-3：已经提交了，但想回到上一个版本"><a href="#场景-3：已经提交了，但想回到上一个版本" class="headerlink" title="场景 3：已经提交了，但想回到上一个版本"></a>场景 3：已经提交了，但想回到上一个版本</h4><p>保留工作区修改，只撤销提交：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> reset <span class="token parameter variable">--soft</span> HEAD~1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>连工作区一起强制回退：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> reset <span class="token parameter variable">--hard</span> HEAD~1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这个命令威力很大，<strong>如果你不确定，就别轻易对重要分支执行 <code>--hard</code>。</strong></p>
+<h4 id="场景-4：已经推送到远程了，但想安全撤销某次提交"><a href="#场景-4：已经推送到远程了，但想安全撤销某次提交" class="headerlink" title="场景 4：已经推送到远程了，但想安全撤销某次提交"></a>场景 4：已经推送到远程了，但想安全撤销某次提交</h4><p>这时候更推荐用：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> revert <span class="token operator">&lt;</span>commit_id<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>它不会粗暴改写历史，而是新建一个“反向提交”来撤销之前的修改。<br>如果这个分支已经被别人拉取、或者已经进入协作流程，通常优先选择 <code>revert</code>，会更稳。</p>
+<hr>
+<h2 id="四、仓库相关常用命令"><a href="#四、仓库相关常用命令" class="headerlink" title="四、仓库相关常用命令"></a>四、仓库相关常用命令</h2><h3 id="1-克隆仓库"><a href="#1-克隆仓库" class="headerlink" title="1. 克隆仓库"></a>1. 克隆仓库</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh repo clone owner/repo<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>例如：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh repo clone cli/cli<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果想克隆到指定目录：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh repo clone owner/repo my-local-dir<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="2-查看仓库信息"><a href="#2-查看仓库信息" class="headerlink" title="2. 查看仓库信息"></a>2. 查看仓库信息</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh repo view owner/repo<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>查看当前目录关联仓库的信息：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh repo view<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果想直接在浏览器打开仓库：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh repo view <span class="token parameter variable">--web</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="3-创建新仓库"><a href="#3-创建新仓库" class="headerlink" title="3. 创建新仓库"></a>3. 创建新仓库</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh repo create<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>也可以一步到位指定名称：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh repo create my-demo <span class="token parameter variable">--public</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>常见参数：</p>
+<ul>
+<li><code>--public</code>：创建公开仓库</li>
+<li><code>--private</code>：创建私有仓库</li>
+<li><code>--clone</code>：创建后直接克隆到本地</li>
+<li><code>--source .</code>：把当前目录作为仓库内容推送上去</li>
+</ul>
+<h3 id="4-Fork-仓库"><a href="#4-Fork-仓库" class="headerlink" title="4. Fork 仓库"></a>4. Fork 仓库</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh repo fork owner/repo<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果希望 fork 后顺手 clone 到本地：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh repo fork owner/repo <span class="token parameter variable">--clone</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="5-在浏览器中打开当前仓库"><a href="#5-在浏览器中打开当前仓库" class="headerlink" title="5. 在浏览器中打开当前仓库"></a>5. 在浏览器中打开当前仓库</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh repo view <span class="token parameter variable">--web</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这个命令很适合“终端里改完，网页里看一眼”这种场景。</p>
+<hr>
+<h2 id="五、Issue-相关命令"><a href="#五、Issue-相关命令" class="headerlink" title="五、Issue 相关命令"></a>五、Issue 相关命令</h2><h3 id="1-查看-Issue-列表"><a href="#1-查看-Issue-列表" class="headerlink" title="1. 查看 Issue 列表"></a>1. 查看 Issue 列表</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh issue list<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>查看指定仓库的 Issue：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh issue list <span class="token parameter variable">--repo</span> owner/repo<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>常见筛选：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh issue list <span class="token parameter variable">--state</span> <span class="token function">open</span>
+gh issue list <span class="token parameter variable">--assignee</span> @me
+gh issue list <span class="token parameter variable">--label</span> bug<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="2-查看某个-Issue"><a href="#2-查看某个-Issue" class="headerlink" title="2. 查看某个 Issue"></a>2. 查看某个 Issue</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh issue view <span class="token number">123</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>在浏览器中打开：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh issue view <span class="token number">123</span> <span class="token parameter variable">--web</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="3-创建-Issue"><a href="#3-创建-Issue" class="headerlink" title="3. 创建 Issue"></a>3. 创建 Issue</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh issue create<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>直接在命令行中指定标题和内容：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh issue create <span class="token parameter variable">--title</span> <span class="token string">"fix: 修复登录页按钮样式"</span> <span class="token parameter variable">--body</span> <span class="token string">"按钮 hover 状态异常，需要统一样式。"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="4-关闭-Issue"><a href="#4-关闭-Issue" class="headerlink" title="4. 关闭 Issue"></a>4. 关闭 Issue</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh issue close <span class="token number">123</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果要顺便留下关闭说明：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh issue close <span class="token number">123</span> <span class="token parameter variable">--comment</span> <span class="token string">"已在最新提交中修复。"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<hr>
+<h2 id="六、Pull-Request-相关命令"><a href="#六、Pull-Request-相关命令" class="headerlink" title="六、Pull Request 相关命令"></a>六、Pull Request 相关命令</h2><h3 id="1-查看-PR-列表"><a href="#1-查看-PR-列表" class="headerlink" title="1. 查看 PR 列表"></a>1. 查看 PR 列表</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh <span class="token function">pr</span> list<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>常见筛选方式：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh <span class="token function">pr</span> list <span class="token parameter variable">--state</span> <span class="token function">open</span>
+gh <span class="token function">pr</span> list <span class="token parameter variable">--author</span> @me
+gh <span class="token function">pr</span> list <span class="token parameter variable">--assignee</span> @me<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="2-查看某个-PR"><a href="#2-查看某个-PR" class="headerlink" title="2. 查看某个 PR"></a>2. 查看某个 PR</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh <span class="token function">pr</span> view <span class="token number">25</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>在浏览器打开：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh <span class="token function">pr</span> view <span class="token number">25</span> <span class="token parameter variable">--web</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>查看 PR diff：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh <span class="token function">pr</span> <span class="token function">diff</span> <span class="token number">25</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="3-创建-Pull-Request"><a href="#3-创建-Pull-Request" class="headerlink" title="3. 创建 Pull Request"></a>3. 创建 Pull Request</h3><p>先确保你已经把本地分支推送到远程，然后执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh <span class="token function">pr</span> create<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>也可以直接带参数：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh <span class="token function">pr</span> create <span class="token parameter variable">--title</span> <span class="token string">"feat: 新增文章搜索页"</span> <span class="token parameter variable">--body</span> <span class="token string">"补充搜索入口，并优化移动端布局。"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果想指定 base 分支：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh <span class="token function">pr</span> create <span class="token parameter variable">--base</span> main <span class="token parameter variable">--head</span> feature/search-page<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="4-检出某个-PR-到本地"><a href="#4-检出某个-PR-到本地" class="headerlink" title="4. 检出某个 PR 到本地"></a>4. 检出某个 PR 到本地</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh <span class="token function">pr</span> checkout <span class="token number">25</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这个命令在帮别人 review 代码时特别方便，不需要自己手动找远程分支名。</p>
+<h3 id="5-合并-PR"><a href="#5-合并-PR" class="headerlink" title="5. 合并 PR"></a>5. 合并 PR</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh <span class="token function">pr</span> merge <span class="token number">25</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>常见合并方式：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh <span class="token function">pr</span> merge <span class="token number">25</span> <span class="token parameter variable">--merge</span>
+gh <span class="token function">pr</span> merge <span class="token number">25</span> <span class="token parameter variable">--squash</span>
+gh <span class="token function">pr</span> merge <span class="token number">25</span> <span class="token parameter variable">--rebase</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="6-关闭-PR"><a href="#6-关闭-PR" class="headerlink" title="6. 关闭 PR"></a>6. 关闭 PR</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh <span class="token function">pr</span> close <span class="token number">25</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<hr>
+<h2 id="七、工作流与-Actions-相关命令"><a href="#七、工作流与-Actions-相关命令" class="headerlink" title="七、工作流与 Actions 相关命令"></a>七、工作流与 Actions 相关命令</h2><h3 id="1-查看-workflow-运行记录"><a href="#1-查看-workflow-运行记录" class="headerlink" title="1. 查看 workflow 运行记录"></a>1. 查看 workflow 运行记录</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh run list<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="2-查看某次运行详情"><a href="#2-查看某次运行详情" class="headerlink" title="2. 查看某次运行详情"></a>2. 查看某次运行详情</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh run view RUN_ID<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="3-查看日志"><a href="#3-查看日志" class="headerlink" title="3. 查看日志"></a>3. 查看日志</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh run view RUN_ID <span class="token parameter variable">--log</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="4-重新运行失败任务"><a href="#4-重新运行失败任务" class="headerlink" title="4. 重新运行失败任务"></a>4. 重新运行失败任务</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh run rerun RUN_ID<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="5-在浏览器打开-Actions-页面"><a href="#5-在浏览器打开-Actions-页面" class="headerlink" title="5. 在浏览器打开 Actions 页面"></a>5. 在浏览器打开 Actions 页面</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh run list <span class="token parameter variable">--web</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果你在维护博客自动部署、CI 检查或者测试流水线，这一组命令查问题很省时间。</p>
+<hr>
+<h2 id="八、Release-与其他实用命令"><a href="#八、Release-与其他实用命令" class="headerlink" title="八、Release 与其他实用命令"></a>八、Release 与其他实用命令</h2><h3 id="1-查看-Release-列表"><a href="#1-查看-Release-列表" class="headerlink" title="1. 查看 Release 列表"></a>1. 查看 Release 列表</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh release list<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="2-创建-Release"><a href="#2-创建-Release" class="headerlink" title="2. 创建 Release"></a>2. 创建 Release</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh release create v1.0.0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>带说明一起创建：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh release create v1.0.0 <span class="token parameter variable">--title</span> <span class="token string">"v1.0.0"</span> <span class="token parameter variable">--notes</span> <span class="token string">"首个正式版本发布。"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="3-下载-Release-附件"><a href="#3-下载-Release-附件" class="headerlink" title="3. 下载 Release 附件"></a>3. 下载 Release 附件</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh release download v1.0.0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="4-查看当前账号信息"><a href="#4-查看当前账号信息" class="headerlink" title="4. 查看当前账号信息"></a>4. 查看当前账号信息</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh api user<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="5-打开当前目录对应网页"><a href="#5-打开当前目录对应网页" class="headerlink" title="5. 打开当前目录对应网页"></a>5. 打开当前目录对应网页</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gh browse<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这个命令非常偷懒，但很好用。</p>
+<hr>
+<h2 id="九、我自己最常用的一组组合命令"><a href="#九、我自己最常用的一组组合命令" class="headerlink" title="九、我自己最常用的一组组合命令"></a>九、我自己最常用的一组组合命令</h2><p>如果你只是想先记住最常用的那几个，可以先从下面这些开始：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 登录与检查</span>
+gh auth login
+gh auth status
+
+<span class="token comment"># 仓库</span>
+gh repo clone owner/repo
+gh repo view <span class="token parameter variable">--web</span>
+
+<span class="token comment"># Issue</span>
+gh issue list
+gh issue create
+
+<span class="token comment"># Pull Request</span>
+gh <span class="token function">pr</span> list
+gh <span class="token function">pr</span> create
+gh <span class="token function">pr</span> view <span class="token number">12</span> <span class="token parameter variable">--web</span>
+gh <span class="token function">pr</span> checkout <span class="token number">12</span>
+gh <span class="token function">pr</span> merge <span class="token number">12</span> <span class="token parameter variable">--squash</span>
+
+<span class="token comment"># Actions</span>
+gh run list
+gh run view RUN_ID <span class="token parameter variable">--log</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="十、使用建议"><a href="#十、使用建议" class="headerlink" title="十、使用建议"></a>十、使用建议</h2><p>如果你是第一次在服务器里使用 GitHub 开发环境，我建议把下面这几个动作固定下来：</p>
+<ul>
+<li>先检查 <code>git config --global user.name</code> 和 <code>git config --global user.email</code></li>
+<li>再执行 <code>gh auth login</code></li>
+<li>克隆仓库后先看一眼 <code>git remote -v</code></li>
+<li>日常同步代码用 <code>git pull</code></li>
+<li>提交本地分支用 <code>git push</code></li>
+<li>Pull Request、Issue、Actions 这些 GitHub 事务再交给 <code>gh</code></li>
+</ul>
+<p>这样分工最清楚，也最不容易混乱。</p>
+<p><code>gh</code> 很强，但我建议别一开始就把所有子命令都背下来。先记住你当前工作流里最常用的 5 到 8 个命令就够了，比如：</p>
+<ul>
+<li><code>gh auth login</code></li>
+<li><code>gh repo view --web</code></li>
+<li><code>gh issue list</code></li>
+<li><code>gh pr list</code></li>
+<li><code>gh pr create</code></li>
+<li><code>gh pr checkout</code></li>
+<li><code>gh run list</code></li>
+</ul>
+<p>等你开始习惯在终端里处理 GitHub 事务之后，再慢慢补充其他命令，会比一次性硬记舒服得多。</p>
+<hr>
+<h2 id="十一、总结"><a href="#十一、总结" class="headerlink" title="十一、总结"></a>十一、总结</h2><p><code>gh</code> 本质上就是把 GitHub 上那些高频但重复的网页操作，压缩成了一条条终端命令。对于经常写代码、提 PR、看 CI、管仓库的人来说，它能明显减少上下文切换的成本。</p>
+<p>不过也要记住一点：**<code>gh</code> 很好用，但它不是 <code>git</code> 的替代品。** 更准确的用法，是让 <code>git</code> 负责代码历史和同步，让 <code>gh</code> 负责 GitHub 平台上的协作流程。两者搭配起来，体验才是完整的。</p>
+<p>如果你平时已经离不开 <code>git</code>，那我建议顺手把 <code>gh</code> 也装上。很多时候你会发现，原来一个浏览器里点半天的流程，在终端里一句命令就结束了，确实挺香。</p>
+<hr>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://cli.github.com/manual/">GitHub CLI 官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/cli/cli">GitHub CLI 官方仓库</a></li>
+</ul>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2026/04/06/2026-04-06-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-203-%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/">2026-04-06-LeetCode刷题笔记-203-移除链表元素</a></li>
+                
+                
+                    <li>下一篇: <a href="/2026/04/05/2026-04-05-%E5%A6%82%E4%BD%95%E5%9C%A8Hugging%20Face%E4%B8%8B%E8%BD%BD%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%B0%E6%9C%AC%E5%9C%B0/">2026-04-05-如何在Hugging Face下载模型和数据集到本地</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/CLI-%E5%B7%A5%E5%85%B7/" rel="tag">CLI 工具</a><a class="-none-link" href="/tags/GitHub/" rel="tag">GitHub</a><a class="-none-link" href="/tags/gh/" rel="tag">gh</a><a class="-none-link" href="/tags/%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" rel="tag">命令总结</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2026/04/07/2026-04-07-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-707-%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/">2026-04-07-LeetCode刷题笔记-707-设计链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/06/2026-04-06-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-MoKA-Multimodal%20Low-Rank%20Adaptation%20for%20MLLMs/">2026-04-06-论文阅读-MoKA-Multimodal Low-Rank Adaptation for MLLMs</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/06/2026-04-06-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-203-%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/">2026-04-06-LeetCode刷题笔记-203-移除链表元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-GitHub%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7gh%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E8%A7%88/">2026-04-05-GitHub仓库管理工具gh常用命令总览</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-%E5%A6%82%E4%BD%95%E5%9C%A8Hugging%20Face%E4%B8%8B%E8%BD%BD%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%B0%E6%9C%AC%E5%9C%B0/">2026-04-05-如何在Hugging Face下载模型和数据集到本地</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-209-%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/">2026-04-05-LeetCode刷题笔记-209-长度最小的子数组</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">四月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">一月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">十二月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">十一月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">十月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CLI-%E5%B7%A5%E5%85%B7/" style="font-size: 11.11px;">CLI 工具</a> <a href="/tags/CPP/" style="font-size: 10px;">CPP</a> <a href="/tags/Claude-Code/" style="font-size: 11.11px;">Claude Code</a> <a href="/tags/CodeStats/" style="font-size: 10px;">CodeStats</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hugging-Face/" style="font-size: 10px;">Hugging Face</a> <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/LeetCode/" style="font-size: 17.78px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/LoRA/" style="font-size: 10px;">LoRA</a> <a href="/tags/MLLM/" style="font-size: 10px;">MLLM</a> <a href="/tags/Neovim/" style="font-size: 10px;">Neovim</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/TTS-%E6%8E%A8%E7%90%86%E4%BE%A7%E7%BC%A9%E6%94%BE/" style="font-size: 10px;">TTS(推理侧缩放)</a> <a href="/tags/VS-Code/" style="font-size: 11.11px;">VS Code</a> <a href="/tags/WSL/" style="font-size: 10px;">WSL</a> <a href="/tags/Windows/" style="font-size: 11.11px;">Windows</a> <a href="/tags/gh/" style="font-size: 10px;">gh</a> <a href="/tags/vibe-coding/" style="font-size: 10px;">vibe coding</a> <a href="/tags/%E4%B9%B1%E7%A0%81/" style="font-size: 10px;">乱码</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/" style="font-size: 10px;">二分搜索</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">二维前缀和</a> <a href="/tags/%E4%BB%A3%E7%90%86/" style="font-size: 11.11px;">代理</a> <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" style="font-size: 11.11px;">位运算</a> <a href="/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" style="font-size: 10px;">具身智能</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">前缀和</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 10px;">动态规划</a> <a href="/tags/%E5%8F%82%E6%95%B0%E9%AB%98%E6%95%88%E5%BE%AE%E8%B0%83-PEFT/" style="font-size: 10px;">参数高效微调(PEFT)</a> <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" style="font-size: 11.11px;">双指针</a> <a href="/tags/%E5%8F%AF%E6%8F%90%E7%A4%BA%E8%A7%86%E8%A7%89%E5%88%86%E5%89%B2/" style="font-size: 10px;">可提示视觉分割</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" style="font-size: 10px;">命令总结</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 10px;">命令行</a> <a href="/tags/%E5%93%88%E5%B8%8C/" style="font-size: 10px;">哈希</a> <a href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/" style="font-size: 10px;">多模态</a> <a href="/tags/%E5%AD%97%E4%BD%93/" style="font-size: 10px;">字体</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">工具配置</a> <a href="/tags/%E6%8B%93%E6%89%91/" style="font-size: 10px;">拓扑</a> <a href="/tags/%E6%8C%87%E9%92%88/" style="font-size: 10px;">指针</a> <a href="/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">插件</a> <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/" style="font-size: 10px;">数据集</a> <a href="/tags/%E6%95%B0%E7%BB%84/" style="font-size: 10px;">数组</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA-UAVs/" style="font-size: 10px;">无人机(UAVs)</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" style="font-size: 12.22px;">期末复习</a> <a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">架构设计</a> <a href="/tags/%E6%A8%A1%E5%9E%8B%E4%B8%8B%E8%BD%BD/" style="font-size: 10px;">模型下载</a> <a href="/tags/%E6%A8%A1%E6%8B%9F/" style="font-size: 10px;">模拟</a> <a href="/tags/%E6%AC%A7%E6%8B%89%E5%85%AC%E5%BC%8F/" style="font-size: 10px;">欧拉公式</a> <a href="/tags/deep-learning/" style="font-size: 14.44px;">深度学习</a> <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" style="font-size: 10px;">滑动窗口</a> <a href="/tags/%E7%89%9B%E5%AE%A2/" style="font-size: 13.33px;">牛客</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 12.22px;">环境配置</a> <a href="/tags/development/" style="font-size: 14.44px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 20px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 13.33px;">算法练习</a> <a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 10px;">终端</a> <a href="/tags/%E7%BB%BC%E8%BF%B0%E8%AE%BA%E6%96%87/" style="font-size: 10px;">综述论文</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 10px;">网站</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 11.11px;">网络</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%A4%B4%E8%8A%82%E7%82%B9/" style="font-size: 10px;">虚拟头节点</a> <a href="/tags/%E8%A7%86%E9%A2%91%E5%88%86%E5%89%B2/" style="font-size: 10px;">视频分割</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" style="font-size: 10px;">计算机图形学</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6-%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">计算机图形学 课程学习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 15.56px;">论文阅读</a> <a href="/tags/course/" style="font-size: 18.89px;">课程学习</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AE%9E%E9%AA%8C/" style="font-size: 10px;">课程实验</a> <a href="/tags/%E8%B4%A8%E6%95%B0%E7%AD%9B/" style="font-size: 10px;">质数筛</a> <a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 10px;">贪心</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 11.11px;">链表</a> <a href="/tags/troubleshooting/" style="font-size: 16.67px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>
+                © 2026 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.
+                
+                    &nbsp;|&nbsp;
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+                        蜀ICP备2025165253号
+                    </a>
+                
+                
+            </p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true,"search_engine":"bing"});</script>
+
+<style>
+.police-beian{display:inline-flex;align-items:center;gap:4px}
+.police-icon{display:inline-block;width:16px;height:16px;background:#e91e63;border-radius:2px;opacity:.85}
+/* 说明：如需官方警徽图标，可将 .police-icon 的 background 设置为图片：
+   background:url('https://www.beian.gov.cn/img/ghs.png') no-repeat center/contain; */
+</style>
+
+  </body>
+</html>

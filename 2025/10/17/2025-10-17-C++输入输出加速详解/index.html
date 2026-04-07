@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2025-10-17-C++输入输出加速详解 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-10-17-C++输入输出加速详解"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 8.1.1"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/Papers-pile-or-pie/">Papers pile or pie?</a><a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a><a class="category-link" href="/categories/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/">工具配置</a><a class="category-link" href="/categories/%E6%88%91%E8%A6%81%E7%82%BC%E4%B8%B9-%E4%B8%B9%E6%B2%A1%E6%9C%89%E9%97%AE%E9%A2%98/">我要炼丹,丹没有问题</a><a class="category-link" href="/categories/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习</a><a class="category-link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a><a class="category-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a><a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%92%9F%E8%92%BB%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/">算法蒟蒻的成长记录</a><a class="category-link" href="/categories/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%AE%9E%E9%AA%8C/">课程学习与实验</a><a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-10-17-C++输入输出加速详解</h2>
+            <div class="post-meta">
+                <time class="date">2025.10.17</time>
+            
+                <span class="category"><a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%92%9F%E8%92%BB%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/">算法蒟蒻的成长记录</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45537774/article/details/106111199">C++ cin/cout加速 - CSDN博客</a></li>
+<li><a target="_blank" rel="noopener" href="https://oi-wiki.org/lang/csl/io/">输入输出优化 - OI Wiki</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/io/ios_base/sync_with_stdio">std::ios_base::sync_with_stdio - cppreference</a></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在刷算法题的时候，经常看到大佬们的代码里都会加这么几行：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">ios<span class="token double-colon punctuation">::</span><span class="token function">sync_with_stdio</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+cin<span class="token punctuation">.</span><span class="token function">tie</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+cout<span class="token punctuation">.</span><span class="token function">tie</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>一开始我也不太明白这是干什么的，只是机械地复制粘贴。后来遇到一道题，数据量特别大，不加这几行就TLE（超时），加了就AC了。这才意识到这几行代码的重要性，于是专门学习了一下。</p>
+<p>今天就来详细讲讲这三行”魔法代码”到底是什么，为什么能加速，以及使用时要注意什么。</p>
+<hr>
+<h2 id="为什么需要加速？"><a href="#为什么需要加速？" class="headerlink" title="为什么需要加速？"></a>为什么需要加速？</h2><p>在C++中，有两套输入输出系统：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>函数</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>C风格</strong></td>
+<td><code>scanf</code>, <code>printf</code></td>
+<td>速度快 ⚡</td>
+</tr>
+<tr>
+<td><strong>C++风格</strong></td>
+<td><code>cin</code>, <code>cout</code></td>
+<td>速度慢 🐌</td>
+</tr>
+</tbody></table>
+<p><strong>为什么cin/cout会慢？</strong></p>
+<p>默认情况下，cin/cout为了兼容C语言的scanf/printf，做了很多额外的同步工作。这导致在处理大量数据时，cin/cout可能比scanf/printf慢2-3倍！</p>
+<p><strong>举个例子：</strong></p>
+<p>假设要读入100万个整数：</p>
+<ul>
+<li>用<code>scanf</code>：可能只需要0.3秒</li>
+<li>用<code>cin</code>（不加速）：可能需要1秒</li>
+<li>用<code>cin</code>（加速后）：也能达到0.3秒左右</li>
+</ul>
+<p>在算法竞赛中，0.7秒的差距可能就是AC和TLE的区别！</p>
+<hr>
+<h2 id="三行代码详解"><a href="#三行代码详解" class="headerlink" title="三行代码详解"></a>三行代码详解</h2><h3 id="第一行：ios-sync-with-stdio-0"><a href="#第一行：ios-sync-with-stdio-0" class="headerlink" title="第一行：ios::sync_with_stdio(0)"></a>第一行：<code>ios::sync_with_stdio(0)</code></h3><h4 id="作用：取消C-C-流的同步"><a href="#作用：取消C-C-流的同步" class="headerlink" title="作用：取消C/C++流的同步"></a>作用：取消C/C++流的同步</h4><p><strong>默认情况（sync = true）：</strong></p>
+<p>C++的cin/cout和C的scanf/printf是<strong>同步</strong>的，这意味着：</p>
+<ul>
+<li>✅ 可以随意混用两种输入输出方式</li>
+<li>❌ 但cin/cout要保持与scanf/printf的同步，会变慢</li>
+</ul>
+<p><strong>设置为false后：</strong></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">ios<span class="token double-colon punctuation">::</span><span class="token function">sync_with_stdio</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 或者简写为</span>
+ios<span class="token double-colon punctuation">::</span><span class="token function">sync_with_stdio</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>✅ cin/cout速度大幅提升，接近scanf/printf</li>
+<li>❌ <strong>不能再混用</strong>cin/cout和scanf/printf</li>
+</ul>
+<h4 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// ❌ 错误用法：混用导致问题</span>
+ios<span class="token double-colon punctuation">::</span><span class="token function">sync_with_stdio</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+cin <span class="token operator">&gt;&gt;</span> x<span class="token punctuation">;</span>           <span class="token comment">// C++风格</span>
+<span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// C风格 - 不能这样！</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> z<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// C风格 - 不能这样！</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// ✅ 正确用法：统一用C++风格</span>
+ios<span class="token double-colon punctuation">::</span><span class="token function">sync_with_stdio</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+cin <span class="token operator">&gt;&gt;</span> x<span class="token punctuation">;</span>
+cin <span class="token operator">&gt;&gt;</span> y<span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> y <span class="token operator">&lt;&lt;</span> <span class="token string">"\n"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="形象比喻"><a href="#形象比喻" class="headerlink" title="形象比喻"></a>形象比喻</h4><p>想象有两条传送带：</p>
+<p><strong>同步模式（默认）：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">C传送带   ─┐
+           ├─→ 合并成一条，能混用但慢
+C++传送带 ─┘<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>不同步模式（加速）：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">C传送带   ──→ 各走各的，快但不能混用
+C++传送带 ──→<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<hr>
+<h3 id="第二行：cin-tie-0"><a href="#第二行：cin-tie-0" class="headerlink" title="第二行：cin.tie(0)"></a>第二行：<code>cin.tie(0)</code></h3><h4 id="作用：解除cin与cout的绑定"><a href="#作用：解除cin与cout的绑定" class="headerlink" title="作用：解除cin与cout的绑定"></a>作用：解除cin与cout的绑定</h4><p><strong>默认情况（绑定）：</strong></p>
+<p>cin和cout是<strong>绑定</strong>在一起的。每次使用cin输入之前，会<strong>自动刷新cout的缓冲区</strong>。</p>
+<p>这是为了保证交互式程序的正确性：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">cout <span class="token operator">&lt;&lt;</span> <span class="token string">"请输入你的年龄："</span><span class="token punctuation">;</span>
+cin <span class="token operator">&gt;&gt;</span> age<span class="token punctuation">;</span>  <span class="token comment">// 输入前会先把"请输入你的年龄："显示出来</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>解除绑定后：</strong></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">cin<span class="token punctuation">.</span><span class="token function">tie</span><span class="token punctuation">(</span><span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 或者简写为</span>
+cin<span class="token punctuation">.</span><span class="token function">tie</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>✅ 不再自动刷新cout，速度更快</li>
+<li>⚠️ 对于大多数算法题没有影响</li>
+<li>⚠️ 交互题可能需要手动刷新</li>
+</ul>
+<h4 id="什么时候需要手动刷新？"><a href="#什么时候需要手动刷新？" class="headerlink" title="什么时候需要手动刷新？"></a>什么时候需要手动刷新？</h4><p>对于<strong>交互题</strong>（需要实时输入输出的题目），可能需要：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">cout <span class="token operator">&lt;&lt;</span> answer <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>  <span class="token comment">// endl会自动刷新</span>
+<span class="token comment">// 或者</span>
+cout <span class="token operator">&lt;&lt;</span> answer <span class="token operator">&lt;&lt;</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
+cout<span class="token punctuation">.</span><span class="token function">flush</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 手动刷新</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="速度提升原理"><a href="#速度提升原理" class="headerlink" title="速度提升原理"></a>速度提升原理</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 默认情况（绑定）</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">1000000</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    cout <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>  <span class="token comment">// 输出</span>
+    cin <span class="token operator">&gt;&gt;</span> x<span class="token punctuation">;</span>          <span class="token comment">// 输入前自动刷新cout（慢！）</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 解除绑定后</span>
+cin<span class="token punctuation">.</span><span class="token function">tie</span><span class="token punctuation">(</span><span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">1000000</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    cout <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>  <span class="token comment">// 输出</span>
+    cin <span class="token operator">&gt;&gt;</span> x<span class="token punctuation">;</span>          <span class="token comment">// 不会自动刷新（快！）</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h3 id="第三行：cout-tie-0"><a href="#第三行：cout-tie-0" class="headerlink" title="第三行：cout.tie(0)"></a>第三行：<code>cout.tie(0)</code></h3><h4 id="作用：解除cout的绑定"><a href="#作用：解除cout的绑定" class="headerlink" title="作用：解除cout的绑定"></a>作用：解除cout的绑定</h4><p><strong>真相：这行基本没用！</strong></p>
+<p>cout默认就<strong>没有绑定</strong>任何流，所以这行代码：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">cout<span class="token punctuation">.</span><span class="token function">tie</span><span class="token punctuation">(</span><span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>写不写都一样，不会有任何性能提升。</p>
+<h4 id="为什么很多人还写？"><a href="#为什么很多人还写？" class="headerlink" title="为什么很多人还写？"></a>为什么很多人还写？</h4><p>主要有两个原因：</p>
+<ol>
+<li><strong>习惯性</strong>：复制模板时一起复制了</li>
+<li><strong>求心理安慰</strong>：反正写了也没坏处</li>
+</ol>
+<h4 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h4><p><strong>可以不写！</strong> 但写了也不会出错，看个人习惯。</p>
+<hr>
+<h2 id="完整使用模板"><a href="#完整使用模板" class="headerlink" title="完整使用模板"></a>完整使用模板</h2><h3 id="标准竞赛模板"><a href="#标准竞赛模板" class="headerlink" title="标准竞赛模板"></a>标准竞赛模板</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 输入输出加速</span>
+    ios<span class="token double-colon punctuation">::</span><span class="token function">sync_with_stdio</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cin<span class="token punctuation">.</span><span class="token function">tie</span><span class="token punctuation">(</span><span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// cout.tie(nullptr);  // 这行可以省略</span>
+    
+    <span class="token comment">// 你的代码</span>
+    <span class="token keyword">int</span> n<span class="token punctuation">;</span>
+    cin <span class="token operator">&gt;&gt;</span> n<span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> n <span class="token operator">&lt;&lt;</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>  <span class="token comment">// 用 \n 代替 endl（更快）</span>
+    
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="简化写法（逗号表达式）"><a href="#简化写法（逗号表达式）" class="headerlink" title="简化写法（逗号表达式）"></a>简化写法（逗号表达式）</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ios<span class="token double-colon punctuation">::</span><span class="token function">sync_with_stdio</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> cin<span class="token punctuation">.</span><span class="token function">tie</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token comment">// 你的代码</span>
+    
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这种写法利用了C++的逗号表达式，三个语句会依次执行，效果完全相同。</p>
+<hr>
+<h2 id="性能对比测试"><a href="#性能对比测试" class="headerlink" title="性能对比测试"></a>性能对比测试</h2><p>我自己测试了一下，读入100万个整数的耗时：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>耗时</th>
+<th>相对速度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>scanf/printf</code></td>
+<td>0.28秒</td>
+<td>基准（最快）⚡⚡⚡</td>
+</tr>
+<tr>
+<td><code>cin/cout</code>（不加速）</td>
+<td>0.89秒</td>
+<td>慢3倍 🐌</td>
+</tr>
+<tr>
+<td><code>cin/cout</code>（加速）</td>
+<td>0.31秒</td>
+<td>接近scanf ⚡⚡⚡</td>
+</tr>
+</tbody></table>
+<p>可以看到，加速后的cin/cout已经非常接近scanf/printf了！</p>
+<hr>
+<h2 id="注意事项与常见错误"><a href="#注意事项与常见错误" class="headerlink" title="注意事项与常见错误"></a>注意事项与常见错误</h2><h3 id="⚠️-注意1：不能混用C-C-输入输出"><a href="#⚠️-注意1：不能混用C-C-输入输出" class="headerlink" title="⚠️ 注意1：不能混用C/C++输入输出"></a>⚠️ 注意1：不能混用C/C++输入输出</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">ios<span class="token double-colon punctuation">::</span><span class="token function">sync_with_stdio</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// ✅ 可以这样</span>
+cin <span class="token operator">&gt;&gt;</span> x<span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> x<span class="token punctuation">;</span>
+
+<span class="token comment">// ❌ 不能这样</span>
+cin <span class="token operator">&gt;&gt;</span> x<span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 错误！输出可能乱序</span>
+
+<span class="token comment">// ❌ 也不能这样</span>
+<span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 错误！</span>
+cout <span class="token operator">&lt;&lt;</span> x<span class="token punctuation">;</span>
+
+<span class="token comment">// ❌ getchar也不行</span>
+<span class="token function">getchar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 错误！getchar是C函数</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>记住：加了加速后，只能用cin/cout，不能用任何C风格的输入输出函数！</strong></p>
+<h3 id="⚠️-注意2：用-n代替endl"><a href="#⚠️-注意2：用-n代替endl" class="headerlink" title="⚠️ 注意2：用\n代替endl"></a>⚠️ 注意2：用<code>\n</code>代替<code>endl</code></h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 推荐写法（快）</span>
+cout <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 不推荐写法（慢）</span>
+cout <span class="token operator">&lt;&lt;</span> x <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>原因：</strong> <code>endl</code>会强制刷新缓冲区，而<code>\n</code>不会。在循环中大量使用<code>endl</code>会严重影响性能。</p>
+<h3 id="⚠️-注意3：数据量小时可以不加"><a href="#⚠️-注意3：数据量小时可以不加" class="headerlink" title="⚠️ 注意3：数据量小时可以不加"></a>⚠️ 注意3：数据量小时可以不加</h3><ul>
+<li><strong>数据量 &lt; 10,000</strong>：加不加都行，差别不大</li>
+<li><strong>数据量 &gt; 100,000</strong>：建议加上</li>
+<li><strong>数据量 &gt; 1,000,000</strong>：必须加，否则可能TLE</li>
+</ul>
+<h3 id="⚠️-注意4：交互题要小心"><a href="#⚠️-注意4：交互题要小心" class="headerlink" title="⚠️ 注意4：交互题要小心"></a>⚠️ 注意4：交互题要小心</h3><p>对于需要实时交互的题目（比如猜数字游戏），可能需要手动刷新：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">ios<span class="token double-colon punctuation">::</span><span class="token function">sync_with_stdio</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+cin<span class="token punctuation">.</span><span class="token function">tie</span><span class="token punctuation">(</span><span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 输出后需要立即显示</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token string">"我猜50\n"</span><span class="token punctuation">;</span>
+cout<span class="token punctuation">.</span><span class="token function">flush</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 手动刷新</span>
+
+cin <span class="token operator">&gt;&gt;</span> response<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>或者对于交互题，干脆不加速：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 交互题可以不加这两行</span>
+<span class="token comment">// ios::sync_with_stdio(false);</span>
+<span class="token comment">// cin.tie(nullptr);</span>
+
+cout <span class="token operator">&lt;&lt;</span> <span class="token string">"我猜50"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>  <span class="token comment">// endl会自动刷新</span>
+cin <span class="token operator">&gt;&gt;</span> response<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="实战案例"><a href="#实战案例" class="headerlink" title="实战案例"></a>实战案例</h2><h3 id="案例1：大量数据读入"><a href="#案例1：大量数据读入" class="headerlink" title="案例1：大量数据读入"></a>案例1：大量数据读入</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ios<span class="token double-colon punctuation">::</span><span class="token function">sync_with_stdio</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cin<span class="token punctuation">.</span><span class="token function">tie</span><span class="token punctuation">(</span><span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">int</span> n<span class="token punctuation">;</span>
+    cin <span class="token operator">&gt;&gt;</span> n<span class="token punctuation">;</span>
+    
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token function">a</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        cin <span class="token operator">&gt;&gt;</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment">// 快速读入</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        cout <span class="token operator">&lt;&lt;</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>  <span class="token comment">// 快速输出</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="案例2：多组测试数据"><a href="#案例2：多组测试数据" class="headerlink" title="案例2：多组测试数据"></a>案例2：多组测试数据</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ios<span class="token double-colon punctuation">::</span><span class="token function">sync_with_stdio</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cin<span class="token punctuation">.</span><span class="token function">tie</span><span class="token punctuation">(</span><span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">int</span> T<span class="token punctuation">;</span>
+    cin <span class="token operator">&gt;&gt;</span> T<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>T<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> n<span class="token punctuation">,</span> k<span class="token punctuation">;</span>
+        cin <span class="token operator">&gt;&gt;</span> n <span class="token operator">&gt;&gt;</span> k<span class="token punctuation">;</span>
+        <span class="token comment">// 处理数据...</span>
+        cout <span class="token operator">&lt;&lt;</span> result <span class="token operator">&lt;&lt;</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="三行代码的作用总结"><a href="#三行代码的作用总结" class="headerlink" title="三行代码的作用总结"></a>三行代码的作用总结</h3><table>
+<thead>
+<tr>
+<th>代码</th>
+<th>作用</th>
+<th>重要性</th>
+<th>副作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ios::sync_with_stdio(false)</code></td>
+<td>取消C/C++流同步</td>
+<td>⭐⭐⭐ 很重要</td>
+<td>不能混用scanf/printf</td>
+</tr>
+<tr>
+<td><code>cin.tie(nullptr)</code></td>
+<td>解除cin与cout绑定</td>
+<td>⭐⭐ 有用</td>
+<td>交互题需要注意</td>
+</tr>
+<tr>
+<td><code>cout.tie(nullptr)</code></td>
+<td>解除cout绑定</td>
+<td>⭐ 基本没用</td>
+<td>无</td>
+</tr>
+</tbody></table>
+<h3 id="记忆口诀"><a href="#记忆口诀" class="headerlink" title="记忆口诀"></a>记忆口诀</h3><pre class="line-numbers language-none"><code class="language-none">sync 同步关，cin cout 更快跑
+tie 绑定解，输入输出不等待
+cout.tie 没啥用，写不写都无所谓<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="什么时候使用？"><a href="#什么时候使用？" class="headerlink" title="什么时候使用？"></a>什么时候使用？</h3><ul>
+<li>✅ <strong>算法竞赛</strong>：基本上都要加</li>
+<li>✅ <strong>大数据量题目</strong>（n &gt; 100,000）：必须加</li>
+<li>⚠️ <strong>交互题</strong>：谨慎使用，可能需要手动刷新</li>
+<li>❌ <strong>小数据量题目</strong>（n &lt; 10,000）：可以不加</li>
+</ul>
+<h3 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 标准竞赛模板</span>
+    ios<span class="token double-colon punctuation">::</span><span class="token function">sync_with_stdio</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cin<span class="token punctuation">.</span><span class="token function">tie</span><span class="token punctuation">(</span><span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token comment">// 记住：</span>
+    <span class="token comment">// 1. 只用 cin/cout，不用 scanf/printf</span>
+    <span class="token comment">// 2. 用 \n 代替 endl</span>
+    <span class="token comment">// 3. 不要混用 C/C++ 输入输出</span>
+    
+    <span class="token comment">// 你的代码...</span>
+    
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2025/10/18/2025-10-18-C++%E4%B8%AD%E6%B5%AE%E7%82%B9%E6%95%B0%E5%8F%96%E6%95%B4%EF%BC%9Afloor,%20ceil%E4%B8%8Eround/">2025-10-18-C++中浮点数取整：floor, ceil与round</a></li>
+                
+                
+                    <li>下一篇: <a href="/2025/10/15/2025-10-15-python%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E5%BC%8F%E4%B8%8Emap%E5%87%BD%E6%95%B0/">2025-10-15-python列表推导式与map函数</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/algorithm/" rel="tag">算法学习</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2026/04/07/2026-04-07-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-707-%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/">2026-04-07-LeetCode刷题笔记-707-设计链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/06/2026-04-06-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-MoKA-Multimodal%20Low-Rank%20Adaptation%20for%20MLLMs/">2026-04-06-论文阅读-MoKA-Multimodal Low-Rank Adaptation for MLLMs</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/06/2026-04-06-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-203-%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/">2026-04-06-LeetCode刷题笔记-203-移除链表元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-GitHub%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7gh%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E8%A7%88/">2026-04-05-GitHub仓库管理工具gh常用命令总览</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-%E5%A6%82%E4%BD%95%E5%9C%A8Hugging%20Face%E4%B8%8B%E8%BD%BD%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%B0%E6%9C%AC%E5%9C%B0/">2026-04-05-如何在Hugging Face下载模型和数据集到本地</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-209-%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/">2026-04-05-LeetCode刷题笔记-209-长度最小的子数组</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">四月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">一月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">十二月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">十一月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">十月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CLI-%E5%B7%A5%E5%85%B7/" style="font-size: 11.11px;">CLI 工具</a> <a href="/tags/CPP/" style="font-size: 10px;">CPP</a> <a href="/tags/Claude-Code/" style="font-size: 11.11px;">Claude Code</a> <a href="/tags/CodeStats/" style="font-size: 10px;">CodeStats</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hugging-Face/" style="font-size: 10px;">Hugging Face</a> <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/LeetCode/" style="font-size: 17.78px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/LoRA/" style="font-size: 10px;">LoRA</a> <a href="/tags/MLLM/" style="font-size: 10px;">MLLM</a> <a href="/tags/Neovim/" style="font-size: 10px;">Neovim</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/TTS-%E6%8E%A8%E7%90%86%E4%BE%A7%E7%BC%A9%E6%94%BE/" style="font-size: 10px;">TTS(推理侧缩放)</a> <a href="/tags/VS-Code/" style="font-size: 11.11px;">VS Code</a> <a href="/tags/WSL/" style="font-size: 10px;">WSL</a> <a href="/tags/Windows/" style="font-size: 11.11px;">Windows</a> <a href="/tags/gh/" style="font-size: 10px;">gh</a> <a href="/tags/vibe-coding/" style="font-size: 10px;">vibe coding</a> <a href="/tags/%E4%B9%B1%E7%A0%81/" style="font-size: 10px;">乱码</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/" style="font-size: 10px;">二分搜索</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">二维前缀和</a> <a href="/tags/%E4%BB%A3%E7%90%86/" style="font-size: 11.11px;">代理</a> <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" style="font-size: 11.11px;">位运算</a> <a href="/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" style="font-size: 10px;">具身智能</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">前缀和</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 10px;">动态规划</a> <a href="/tags/%E5%8F%82%E6%95%B0%E9%AB%98%E6%95%88%E5%BE%AE%E8%B0%83-PEFT/" style="font-size: 10px;">参数高效微调(PEFT)</a> <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" style="font-size: 11.11px;">双指针</a> <a href="/tags/%E5%8F%AF%E6%8F%90%E7%A4%BA%E8%A7%86%E8%A7%89%E5%88%86%E5%89%B2/" style="font-size: 10px;">可提示视觉分割</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" style="font-size: 10px;">命令总结</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 10px;">命令行</a> <a href="/tags/%E5%93%88%E5%B8%8C/" style="font-size: 10px;">哈希</a> <a href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/" style="font-size: 10px;">多模态</a> <a href="/tags/%E5%AD%97%E4%BD%93/" style="font-size: 10px;">字体</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">工具配置</a> <a href="/tags/%E6%8B%93%E6%89%91/" style="font-size: 10px;">拓扑</a> <a href="/tags/%E6%8C%87%E9%92%88/" style="font-size: 10px;">指针</a> <a href="/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">插件</a> <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/" style="font-size: 10px;">数据集</a> <a href="/tags/%E6%95%B0%E7%BB%84/" style="font-size: 10px;">数组</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA-UAVs/" style="font-size: 10px;">无人机(UAVs)</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" style="font-size: 12.22px;">期末复习</a> <a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">架构设计</a> <a href="/tags/%E6%A8%A1%E5%9E%8B%E4%B8%8B%E8%BD%BD/" style="font-size: 10px;">模型下载</a> <a href="/tags/%E6%A8%A1%E6%8B%9F/" style="font-size: 10px;">模拟</a> <a href="/tags/%E6%AC%A7%E6%8B%89%E5%85%AC%E5%BC%8F/" style="font-size: 10px;">欧拉公式</a> <a href="/tags/deep-learning/" style="font-size: 14.44px;">深度学习</a> <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" style="font-size: 10px;">滑动窗口</a> <a href="/tags/%E7%89%9B%E5%AE%A2/" style="font-size: 13.33px;">牛客</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 12.22px;">环境配置</a> <a href="/tags/development/" style="font-size: 14.44px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 20px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 13.33px;">算法练习</a> <a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 10px;">终端</a> <a href="/tags/%E7%BB%BC%E8%BF%B0%E8%AE%BA%E6%96%87/" style="font-size: 10px;">综述论文</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 10px;">网站</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 11.11px;">网络</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%A4%B4%E8%8A%82%E7%82%B9/" style="font-size: 10px;">虚拟头节点</a> <a href="/tags/%E8%A7%86%E9%A2%91%E5%88%86%E5%89%B2/" style="font-size: 10px;">视频分割</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" style="font-size: 10px;">计算机图形学</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6-%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">计算机图形学 课程学习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 15.56px;">论文阅读</a> <a href="/tags/course/" style="font-size: 18.89px;">课程学习</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AE%9E%E9%AA%8C/" style="font-size: 10px;">课程实验</a> <a href="/tags/%E8%B4%A8%E6%95%B0%E7%AD%9B/" style="font-size: 10px;">质数筛</a> <a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 10px;">贪心</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 11.11px;">链表</a> <a href="/tags/troubleshooting/" style="font-size: 16.67px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>
+                © 2026 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.
+                
+                    &nbsp;|&nbsp;
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+                        蜀ICP备2025165253号
+                    </a>
+                
+                
+            </p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true,"search_engine":"bing"});</script>
+
+<style>
+.police-beian{display:inline-flex;align-items:center;gap:4px}
+.police-icon{display:inline-block;width:16px;height:16px;background:#e91e63;border-radius:2px;opacity:.85}
+/* 说明：如需官方警徽图标，可将 .police-icon 的 background 设置为图片：
+   background:url('https://www.beian.gov.cn/img/ghs.png') no-repeat center/contain; */
+</style>
+
+  </body>
+</html>

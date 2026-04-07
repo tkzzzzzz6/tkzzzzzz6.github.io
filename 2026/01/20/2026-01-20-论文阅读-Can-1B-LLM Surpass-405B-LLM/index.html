@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2026-01-20-论文阅读-Can-1B-LLM Surpass-405B-LLM? - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2026-01-20-论文阅读-Can-1B-LLM Surpass-405B-LLM?"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 8.1.1"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/Papers-pile-or-pie/">Papers pile or pie?</a><a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a><a class="category-link" href="/categories/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/">工具配置</a><a class="category-link" href="/categories/%E6%88%91%E8%A6%81%E7%82%BC%E4%B8%B9-%E4%B8%B9%E6%B2%A1%E6%9C%89%E9%97%AE%E9%A2%98/">我要炼丹,丹没有问题</a><a class="category-link" href="/categories/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习</a><a class="category-link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a><a class="category-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a><a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%92%9F%E8%92%BB%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/">算法蒟蒻的成长记录</a><a class="category-link" href="/categories/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%AE%9E%E9%AA%8C/">课程学习与实验</a><a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2026-01-20-论文阅读-Can-1B-LLM Surpass-405B-LLM?</h2>
+            <div class="post-meta">
+                <time class="date">2026.01.20</time>
+            
+                <span class="category"><a class="category-link" href="/categories/Papers-pile-or-pie/">Papers pile or pie?</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="《Can-1B-LLM-Surpass-405B-LLM-Rethinking-Compute-Optimal-Test-Time-Scaling》"><a href="#《Can-1B-LLM-Surpass-405B-LLM-Rethinking-Compute-Optimal-Test-Time-Scaling》" class="headerlink" title="《Can 1B LLM Surpass 405B LLM? Rethinking Compute-Optimal Test-Time Scaling》"></a>《Can 1B LLM Surpass 405B LLM? Rethinking Compute-Optimal Test-Time Scaling》</h1><h2 id="一、论文基本信息"><a href="#一、论文基本信息" class="headerlink" title="一、论文基本信息"></a>一、论文基本信息</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.alphaxiv.org/abs/2502.06703?chatId=019be074-e9d0-7eed-bdf2-01fe34e3ea54">原文链接</a>,<a target="_blank" rel="noopener" href="https://hjfy.top/arxiv/2502.06703">翻译链接</a></li>
+<li>作者:Runze Liu1,2,∗, Junqi Gao1,3, Jian Zhao4, Kaiyan Zhang2, Xiu Li2, Biqing Qi1,†, Wanli Ouyang1 and Bowen Zhou1,2,†</li>
+</ul>
+<blockquote>
+<p>关键词:Test-Time Scaling (TTS),过程奖励模型(PRM),小语言模型(SLMs) 。  </p>
+</blockquote>
+<h2 id="二、研究背景与问题定义"><a href="#二、研究背景与问题定义" class="headerlink" title="二、研究背景与问题定义"></a>二、研究背景与问题定义</h2><h3 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h3><p>近年来，大语言模型（LLMs）在复杂推理任务上取得了显著进步。随着 OpenAI o1 等模型的出现，研究界开始关注如何通过增加推理侧的计算投入来突破模型原有性能的上限，这一方向被称为测试时缩放（Test-Time Scaling, TTS）。目前的 TTS 主要分为两大路径：一是通过强化学习训练模型生成长思维链（Internal TTS）；二是在预训练模型保持不变的情况下，利用外部搜索和验证机制（External TTS）来寻找最优解答。</p>
+<p>现有的外部 TTS 研究仍面临诸多挑战。首先，虽然增加计算量能提升性能，但如何根据不同的问题难度、策略模型（Policy Model）和验证模型（PRM）来分配有限的算力，实现“计算最优（Compute-Optimal）”仍缺乏系统性分析。当前的验证器（PRM）在面对非其训练分布的模型输出时，往往会出现“分布外（OOD）”失效问题，导致推理过程被错误的奖励信号误导。业界对于小型模型（如 1B 或 3B 规模）在极端计算缩放下的潜力上限尚不明确。</p>
+<h3 id="问题定义"><a href="#问题定义" class="headerlink" title="问题定义"></a>问题定义</h3><ol>
+<li>策略优化问题：在面对不同的策略模型、过程奖励模型（PRM）以及不同难度的任务时，如何选择并配置最优的 TTS 路径（如 Best-of-N、Beam Search 或 DVTS）以实现效率与性能的最佳平衡？</li>
+<li>性能边界问题：通过极端的测试时计算缩放，小型语言模型在处理复杂数学和竞赛级任务（如 MATH-500, AIME24）时，性能提升的极限在哪里？它们是否真的能够通过算力补偿，在逻辑推理能力上跨越参数规模的鸿沟，甚至超越 405B 等级的巨型模型或现有的顶尖推理模型（如 o1-preview）？</li>
+</ol>
+<h2 id="三、核心方法与设计"><a href="#三、核心方法与设计" class="headerlink" title="三、核心方法与设计"></a>三、核心方法与设计</h2><h3 id="A-推理搜索算法的多样化设计"><a href="#A-推理搜索算法的多样化设计" class="headerlink" title="A. 推理搜索算法的多样化设计"></a>A. 推理搜索算法的多样化设计</h3><p>论文详细评估并对比了三类主流的外部测试时缩放（TTS）算法，以应对不同计算预算下的搜索需求：</p>
+<ul>
+<li>**Best-of-N (BoN)**：这是一种并行采样策略，模型针对同一问题生成 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0" xmlns="http://www.w3.org/2000/svg" width="2.009ex" height="1.545ex" role="img" focusable="false" viewBox="0 -683 888 683"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D441" d="M234 637Q231 637 226 637Q201 637 196 638T191 649Q191 676 202 682Q204 683 299 683Q376 683 387 683T401 677Q612 181 616 168L670 381Q723 592 723 606Q723 633 659 637Q635 637 635 648Q635 650 637 660Q641 676 643 679T653 683Q656 683 684 682T767 680Q817 680 843 681T873 682Q888 682 888 672Q888 650 880 642Q878 637 858 637Q787 633 769 597L620 7Q618 0 599 0Q585 0 582 2Q579 5 453 305L326 604L261 344Q196 88 196 79Q201 46 268 46H278Q284 41 284 38T282 19Q278 6 272 0H259Q228 2 151 2Q123 2 100 2T63 2T46 1Q31 1 31 10Q31 14 34 26T39 40Q41 46 62 46Q130 49 150 85Q154 91 221 362L289 634Q287 635 234 637Z"></path></g></g></g></svg></mjx-container> 个完整的答案，再由验证器选出最优解。这种方法更适合逻辑推理链条较短或模型能力较强的场景。</li>
+<li>**束搜索 (Beam Search)**：这是一种逐步搜索策略，在推理的每个中间步骤生成多个分支，仅保留 PRM 评分最高的路径。这种方法能有效利用 PRM 的细粒度指导，适合逻辑严密且步骤较多的数学题。</li>
+<li><strong>多样化验证器树搜索 (DVTS)<strong>：为了克服 PRM 可能存在的评分偏差（如对特定路径的过度偏好），DVTS 通过引入路径多样性机制，在广度优先的基础上探索更多潜在的逻辑路径，防止搜索陷入“局部最优”的错误解中。<br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1769006784806.png" alt="1769006784806.png"><br>三种主流的外部推理侧缩放方法：</strong>Best-of-N</strong>（生成 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0" xmlns="http://www.w3.org/2000/svg" width="2.009ex" height="1.545ex" role="img" focusable="false" viewBox="0 -683 888 683"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D441" d="M234 637Q231 637 226 637Q201 637 196 638T191 649Q191 676 202 682Q204 683 299 683Q376 683 387 683T401 677Q612 181 616 168L670 381Q723 592 723 606Q723 633 659 637Q635 637 635 648Q635 650 637 660Q641 676 643 679T653 683Q656 683 684 682T767 680Q817 680 843 681T873 682Q888 682 888 672Q888 650 880 642Q878 637 858 637Q787 633 769 597L620 7Q618 0 599 0Q585 0 582 2Q579 5 453 305L326 604L261 344Q196 88 196 79Q201 46 268 46H278Q284 41 284 38T282 19Q278 6 272 0H259Q228 2 151 2Q123 2 100 2T63 2T46 1Q31 1 31 10Q31 14 34 26T39 40Q41 46 62 46Q130 49 150 85Q154 91 221 362L289 634Q287 635 234 637Z"></path></g></g></g></svg></mjx-container> 个答案后由 PRM 筛选）、<strong>Beam Search</strong>（在每个推理步骤由 PRM 选出最优的分支继续搜索）以及 <strong>DVTS</strong>（分组搜索,强制多样性,在树搜索中引入多样性权重以防止 PRM 陷入逻辑偏差,即“不把鸡蛋放在同一个篮子里的搜索策略”）。</li>
+</ul>
+<h3 id="B-过程奖励模型（PRM）的适配与评估"><a href="#B-过程奖励模型（PRM）的适配与评估" class="headerlink" title="B. 过程奖励模型（PRM）的适配与评估"></a>B. 过程奖励模型（PRM）的适配与评估</h3><p>研究重点考察了 PRM 在推理过程中的“判卷”效能。论文特别关注了 PRM 的<strong>分布外（OOD）问题</strong>，即当 PRM 用于验证一个它在训练阶段从未见过的小型策略模型时，其评分准确性会大幅下降。为此，设计中包含了多种参数规模（从 1.5B 到 72B）的 PRM，用于测试不同规模验证器对推理质量的影响。 </p>
+<h3 id="C-计算最优（Compute-Optimal）缩放策略"><a href="#C-计算最优（Compute-Optimal）缩放策略" class="headerlink" title="C. 计算最优（Compute-Optimal）缩放策略"></a>C. 计算最优（Compute-Optimal）缩放策略</h3><p>这是本文设计的核心创新点。研究者提出，最优的 TTS 策略并非固定不变，而是由以下三者决定的动态函数：</p>
+<ul>
+<li><strong>模型-验证器匹配</strong>：不同规模的 Policy Model 需要匹配相应强度的 PRM。</li>
+<li><strong>难度自适应</strong>：系统会根据题目难度自动切换搜索策略。例如，实验发现对于 3B 以下的小模型，Beam Search 这种“边走边查”的模式在处理难题时比直接生成完整答案（BoN）更为高效。</li>
+<li><strong>预算分配</strong>：研究通过大规模实验拟合出了计算预算与性能提升之间的缩放曲线，从而在特定推理资源下，指导模型选择生成答案的数量或搜索的深度。</li>
+</ul>
+<h2 id="四、实验"><a href="#四、实验" class="headerlink" title="四、实验"></a>四、实验</h2><h3 id="1-实验设置与任务选择"><a href="#1-实验设置与任务选择" class="headerlink" title="1. 实验设置与任务选择"></a>1. 实验设置与任务选择</h3><p>两个权威的数学竞赛级基准测试：</p>
+<ul>
+<li><strong>MATH-500</strong>：涵盖了从基础代数到复杂几何的五类难度等级，是评估模型分层推理能力的理想工具。</li>
+<li><strong>AIME24</strong>：2024年美国数学邀请赛试题。这类题目对逻辑链条的长度和严谨性要求极高，目前大多数 70B 及以上规模的模型在不进行搜索的情况下表现极差。</li>
+</ul>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1769064118211.png" alt="1769064118211.png"><br>Qwen2.5-72B-Instruct 在 MATH-500 数据集上的准确率分布，其中超过 76.2% 的题目表现极佳（准确率 &gt; 80%），证明了使用传统的“分位数”划分难度已不再适用，从而支持了论文提出改用<strong>绝对准确率阈值</strong>来重新定义题目难度的必要性。</p>
+<h3 id="2-核心实验结果"><a href="#2-核心实验结果" class="headerlink" title="2. 核心实验结果"></a>2. 核心实验结果</h3><p>实验结果刷新了业界对模型参数规模与能力之间关系的认知。通过采用“计算最优 TTS 策略”，小型模型展现出了惊人的爆发力：<br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1769061532703.png" alt="1769061532703.png"></p>
+<ul>
+<li><strong>1B 级模型</strong>：Llama-3.2-1B 在增加推理计算预算（<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.186ex" xmlns="http://www.w3.org/2000/svg" width="8.42ex" height="1.731ex" role="img" focusable="false" viewBox="0 -683 3721.6 765"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D441" d="M234 637Q231 637 226 637Q201 637 196 638T191 649Q191 676 202 682Q204 683 299 683Q376 683 387 683T401 677Q612 181 616 168L670 381Q723 592 723 606Q723 633 659 637Q635 637 635 648Q635 650 637 660Q641 676 643 679T653 683Q656 683 684 682T767 680Q817 680 843 681T873 682Q888 682 888 672Q888 650 880 642Q878 637 858 637Q787 633 769 597L620 7Q618 0 599 0Q585 0 582 2Q579 5 453 305L326 604L261 344Q196 88 196 79Q201 46 268 46H278Q284 41 284 38T282 19Q278 6 272 0H259Q228 2 151 2Q123 2 100 2T63 2T46 1Q31 1 31 10Q31 14 34 26T39 40Q41 46 62 46Q130 49 150 85Q154 91 221 362L289 634Q287 635 234 637Z"></path></g><g data-mml-node="mo" transform="translate(1165.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(2221.6,0)"><path data-c="35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"></path><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z" transform="translate(500,0)"></path><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z" transform="translate(1000,0)"></path></g></g></g></svg></mjx-container>）后，在 MATH-500 上的表现超越了参数量为其 400 余倍的 Llama-3.1-405B。 </li>
+<li><strong>3B 级模型超越 GPT-4o</strong>：在 AIME24 这一极难任务中，Llama-3.2-3B 利用最优 TTS 策略取得了 30.0% 的准确率，不仅远超 Llama-3.1-405B（23.3%），更直接击败了 GPT-4o（9.3%）。 </li>
+<li><strong>7B 级模型</strong>：经过 DeepSeek-R1 蒸馏的 7B 模型（DeepSeek-R1-Distill-7B）在 TTS 加持下，在 AIME24 上达到了 83.3% 的高分，超越了 OpenAI 的 o1 原生模型。</li>
+</ul>
+<h3 id="3-计算效率分析（FLOPS-对比）"><a href="#3-计算效率分析（FLOPS-对比）" class="headerlink" title="3. 计算效率分析（FLOPS 对比）"></a>3. 计算效率分析（FLOPS 对比）</h3><p>研究通过量化计算量（FLOPS）发现，小模型通过 TTS 提升性能的路径比单纯增大模型规模要经济得多。即便考虑了搜索过程中的额外采样开销，小模型的总计算开销（训练+推理）仍比大模型低 <strong>100</strong>左右的量级，且推理侧的 FLOPS 开销与 405B 级别的单次推理处于同一数量级。 (小模型重复推理百余次,也比大模型推理一次还省电)</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1769065869192.png" alt="1769065869192.png"></p>
+<h3 id="4-关键观察：不同难度的策略偏好"><a href="#4-关键观察：不同难度的策略偏好" class="headerlink" title="4. 关键观察：不同难度的策略偏好"></a>4. 关键观察：不同难度的策略偏好</h3><p>实验观察到 TTS 的收益曲线与题目难度高度相关：</p>
+<ul>
+<li><strong>简单题目</strong>：增加计算量边际收益递减极快，甚至可能因为 PRM 的误判引入噪声。</li>
+<li><strong>中等与高难度题目</strong>：TTS 的收益最为显著。对于此类题目，<strong>Beam Search（束搜索）</strong>在小模型上的表现显著优于 Best-of-N，证明了“分步验证”在处理复杂逻辑时的必要性。</li>
+</ul>
+<h3 id="5-发现-PRM-的天花板"><a href="#5-发现-PRM-的天花板" class="headerlink" title="5. 发现 PRM 的天花板"></a>5. 发现 PRM 的天花板</h3><p>实验也揭示了限制 TTS 性能进一步提升的瓶颈——<strong>过程奖励模型（PRM）的局限性</strong>。研究人员在分析错误案例时发现，即使是 72B 规模的强力 PRM，在面对小模型的推理步骤时仍会出现“过度批评”（将正确步骤判为错误）或“长度偏见”等问题。</p>
+<h2 id="五、创新点、贡献与改进空间"><a href="#五、创新点、贡献与改进空间" class="headerlink" title="五、创新点、贡献与改进空间"></a>五、创新点、贡献与改进空间</h2><h3 id="1-核心创新点：奖励感知的计算缩放-Reward-Aware-TTS"><a href="#1-核心创新点：奖励感知的计算缩放-Reward-Aware-TTS" class="headerlink" title="1. 核心创新点：奖励感知的计算缩放 (Reward-Aware TTS)"></a>1. 核心创新点：奖励感知的计算缩放 (Reward-Aware TTS)</h3><p>论文跳出了“增加采样次数就能提升性能”的传统思维，提出 TTS 策略必须是<strong>奖励感知</strong>的。研究发现，由于过程奖励模型（PRM）存在打分偏见（如倾向于长答案）和分布外（OOD）问题，最优的计算缩放不仅要考虑计算量，还必须针对特定 PRM 的特性来动态调整搜索算法（如在小模型上更倾向于使用 Beam Search 而非简单的 Best-of-N）。 </p>
+<h3 id="2-主要贡献：打破“参数至上”的思维定式"><a href="#2-主要贡献：打破“参数至上”的思维定式" class="headerlink" title="2. 主要贡献：打破“参数至上”的思维定式"></a>2. 主要贡献：打破“参数至上”的思维定式</h3><ul>
+<li><strong>跨级的性能飞跃</strong>：通过实证证明了 1B/3B 规模的模型在合理的 TTS 策略下可以超越 405B 等级的巨型模型。 </li>
+<li><strong>多维度的系统分析</strong>：提供了一个覆盖 0.5B 至 72B 不同规模模型、多类 PRM 以及多种搜索算法的详尽评测框架，为后续研究如何针对不同难度任务选择最优 TTS 路径提供了指导原则。 </li>
+<li><strong>极端任务的突破</strong>：在极难的 AIME24 任务上，通过 7B 蒸馏模型配合 TTS 击败了 o1 和 DeepSeek-R1。</li>
+</ul>
+<h3 id="3-局限性与改进空间"><a href="#3-局限性与改进空间" class="headerlink" title="3. 局限性与改进空间"></a>3. 局限性与改进空间</h3><ul>
+<li><strong>PRM 的鲁棒性瓶颈</strong>：实验暴露了当前 PRM 普遍存在“过度批评”和“错误忽视”等致命弱点，这直接限制了搜索算法的上限。未来需要开发更具泛化能力、对步骤逻辑更敏感的验证模型。 </li>
+<li><strong>推理延迟与实时性</strong>：虽然 TTS 大幅提升了准确率，但多路径搜索和重复采样显著增加了推理延迟。如何在保证性能的前提下，通过并行优化或动态提早停止（Early Stopping）来降低延迟是实际应用的关键。</li>
+<li><strong>任务覆盖范围</strong>：目前的研究集中在数学和逻辑竞赛，TTS 策略在代码生成、科学发现或多模态推理等更广泛领域是否具有适用性。</li>
+</ul>
+<h2 id="六、我的思考"><a href="#六、我的思考" class="headerlink" title="六、我的思考"></a>六、我的思考</h2><ol>
+<li><p>论文验证了“小模型+重(重复+重视)推理”可以跨级对标巨型模型，未来 AI 竞争将从参数规模竞赛转向推理算法的效率竞赛(参数规模增大的带来的边际效益性价比越来越低,上下文窗口和记忆检索也越来越重要)。</p>
+</li>
+<li><p>如果 3B 开源模型配合 TTS 就能在逻辑任务上超越 GPT-4o，那么如果一个有效的推理算法被提出,开源社区在推理能力上与顶尖大厂的差距将很快被填平。</p>
+</li>
+<li><p>既然 1B 模型能解决竞赛级数学题，未来在手机或电脑本地离线运行具备极强逻辑能力的 AI 是可能的(边缘端运行复杂推理),并且想数学等理化教育方面的突破可能会非常大。</p>
+</li>
+<li><p>未来最强的系统或许是像 DeepSeek-R1 这样既具备长思维能力，又在外部通过算法进行大规模验证的复合体。</p>
+<blockquote>
+<ul>
+<li>Internal CoT:模型在训练时就被教会了“在心里打草稿”，它吐出的每一段话都包含很长的思考过程。这种能力是模型自带的基因。</li>
+<li>External Search / TTS:通过外部算法，让模型多写几个版本，或者每走一步都让“验证器”审视一遍。这种能力是靠外部工具和计算量堆出来的。</li>
+</ul>
+</blockquote>
+</li>
+<li><p>虽然 TTS 性能惊人，但在需要实时交互的场景下，如何平衡搜索带来的数分钟延迟与答案准确性将是产品化的核心难题,因为有的简单的工具调用或者命令运行是不需要推理的,感觉这也是为什么各家推理模型都提供了长短思考的选择。</p>
+<blockquote>
+<p>现在大模型都在研究“路由器模型（Router Model）”来决定何时开启重推理</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="七、其他"><a href="#七、其他" class="headerlink" title="七、其他"></a>七、其他</h2><h3 id="可跟进的文献"><a href="#可跟进的文献" class="headerlink" title="可跟进的文献"></a>可跟进的文献</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://www.alphaxiv.org/abs/2408.03314">Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters</a>(证明了在某些任务中，扩展推理计算资源所带来的收益可以超过将模型参数规模扩大14倍的效果。)</li>
+<li><a target="_blank" rel="noopener" href="https://www.alphaxiv.org/abs/2501.02497">A Survey of Test-Time Compute: From Intuitive Inference to Deliberate Reasoning</a>(综述了大语言模型从“系统1”（直觉快思考）向“系统2”（深思熟虑的慢思考）转型的技术路径。)</li>
+<li><a target="_blank" rel="noopener" href="https://www.alphaxiv.org/abs/2412.21187">Do NOT Think That Much for 2+3=? On the Overthinking of o1-Like LLMs</a>(“过度思考”问题，模型在处理简单任务时消耗了过多不必要的计算资源)</li>
+<li><a target="_blank" rel="noopener" href="https://www.alphaxiv.org/abs/2503.18942">Video-T1: Test-Time Scaling for Video Generation</a>(将测试时缩放(TTS)从文本领域延伸到视频生成)</li>
+</ol>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2026/01/20/2026-01-20-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E5%B0%8F%E7%BA%A2%E5%88%A0%E6%95%B0%E5%AD%97/">2026-01-20-牛客每日一题-小红删数字</a></li>
+                
+                
+                    <li>下一篇: <a href="/2026/01/20/2026-01-20-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-3314-%E6%9E%84%E9%80%A0%E6%9C%80%E5%B0%8F%E4%BD%8D%E8%BF%90%E7%AE%97%E6%95%B0%E7%BB%84I/">2026-01-20-LeetCode刷题笔记-3314-构造最小位运算数组I</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/LLM/" rel="tag">LLM</a><a class="-none-link" href="/tags/TTS-%E6%8E%A8%E7%90%86%E4%BE%A7%E7%BC%A9%E6%94%BE/" rel="tag">TTS(推理侧缩放)</a><a class="-none-link" href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" rel="tag">论文阅读</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2026/04/07/2026-04-07-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-707-%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/">2026-04-07-LeetCode刷题笔记-707-设计链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/06/2026-04-06-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-MoKA-Multimodal%20Low-Rank%20Adaptation%20for%20MLLMs/">2026-04-06-论文阅读-MoKA-Multimodal Low-Rank Adaptation for MLLMs</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/06/2026-04-06-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-203-%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/">2026-04-06-LeetCode刷题笔记-203-移除链表元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-GitHub%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7gh%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E8%A7%88/">2026-04-05-GitHub仓库管理工具gh常用命令总览</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-%E5%A6%82%E4%BD%95%E5%9C%A8Hugging%20Face%E4%B8%8B%E8%BD%BD%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%B0%E6%9C%AC%E5%9C%B0/">2026-04-05-如何在Hugging Face下载模型和数据集到本地</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-209-%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/">2026-04-05-LeetCode刷题笔记-209-长度最小的子数组</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">四月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">一月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">十二月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">十一月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">十月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CLI-%E5%B7%A5%E5%85%B7/" style="font-size: 11.11px;">CLI 工具</a> <a href="/tags/CPP/" style="font-size: 10px;">CPP</a> <a href="/tags/Claude-Code/" style="font-size: 11.11px;">Claude Code</a> <a href="/tags/CodeStats/" style="font-size: 10px;">CodeStats</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hugging-Face/" style="font-size: 10px;">Hugging Face</a> <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/LeetCode/" style="font-size: 17.78px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/LoRA/" style="font-size: 10px;">LoRA</a> <a href="/tags/MLLM/" style="font-size: 10px;">MLLM</a> <a href="/tags/Neovim/" style="font-size: 10px;">Neovim</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/TTS-%E6%8E%A8%E7%90%86%E4%BE%A7%E7%BC%A9%E6%94%BE/" style="font-size: 10px;">TTS(推理侧缩放)</a> <a href="/tags/VS-Code/" style="font-size: 11.11px;">VS Code</a> <a href="/tags/WSL/" style="font-size: 10px;">WSL</a> <a href="/tags/Windows/" style="font-size: 11.11px;">Windows</a> <a href="/tags/gh/" style="font-size: 10px;">gh</a> <a href="/tags/vibe-coding/" style="font-size: 10px;">vibe coding</a> <a href="/tags/%E4%B9%B1%E7%A0%81/" style="font-size: 10px;">乱码</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/" style="font-size: 10px;">二分搜索</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">二维前缀和</a> <a href="/tags/%E4%BB%A3%E7%90%86/" style="font-size: 11.11px;">代理</a> <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" style="font-size: 11.11px;">位运算</a> <a href="/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" style="font-size: 10px;">具身智能</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">前缀和</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 10px;">动态规划</a> <a href="/tags/%E5%8F%82%E6%95%B0%E9%AB%98%E6%95%88%E5%BE%AE%E8%B0%83-PEFT/" style="font-size: 10px;">参数高效微调(PEFT)</a> <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" style="font-size: 11.11px;">双指针</a> <a href="/tags/%E5%8F%AF%E6%8F%90%E7%A4%BA%E8%A7%86%E8%A7%89%E5%88%86%E5%89%B2/" style="font-size: 10px;">可提示视觉分割</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" style="font-size: 10px;">命令总结</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 10px;">命令行</a> <a href="/tags/%E5%93%88%E5%B8%8C/" style="font-size: 10px;">哈希</a> <a href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/" style="font-size: 10px;">多模态</a> <a href="/tags/%E5%AD%97%E4%BD%93/" style="font-size: 10px;">字体</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">工具配置</a> <a href="/tags/%E6%8B%93%E6%89%91/" style="font-size: 10px;">拓扑</a> <a href="/tags/%E6%8C%87%E9%92%88/" style="font-size: 10px;">指针</a> <a href="/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">插件</a> <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/" style="font-size: 10px;">数据集</a> <a href="/tags/%E6%95%B0%E7%BB%84/" style="font-size: 10px;">数组</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA-UAVs/" style="font-size: 10px;">无人机(UAVs)</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" style="font-size: 12.22px;">期末复习</a> <a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">架构设计</a> <a href="/tags/%E6%A8%A1%E5%9E%8B%E4%B8%8B%E8%BD%BD/" style="font-size: 10px;">模型下载</a> <a href="/tags/%E6%A8%A1%E6%8B%9F/" style="font-size: 10px;">模拟</a> <a href="/tags/%E6%AC%A7%E6%8B%89%E5%85%AC%E5%BC%8F/" style="font-size: 10px;">欧拉公式</a> <a href="/tags/deep-learning/" style="font-size: 14.44px;">深度学习</a> <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" style="font-size: 10px;">滑动窗口</a> <a href="/tags/%E7%89%9B%E5%AE%A2/" style="font-size: 13.33px;">牛客</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 12.22px;">环境配置</a> <a href="/tags/development/" style="font-size: 14.44px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 20px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 13.33px;">算法练习</a> <a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 10px;">终端</a> <a href="/tags/%E7%BB%BC%E8%BF%B0%E8%AE%BA%E6%96%87/" style="font-size: 10px;">综述论文</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 10px;">网站</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 11.11px;">网络</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%A4%B4%E8%8A%82%E7%82%B9/" style="font-size: 10px;">虚拟头节点</a> <a href="/tags/%E8%A7%86%E9%A2%91%E5%88%86%E5%89%B2/" style="font-size: 10px;">视频分割</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" style="font-size: 10px;">计算机图形学</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6-%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">计算机图形学 课程学习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 15.56px;">论文阅读</a> <a href="/tags/course/" style="font-size: 18.89px;">课程学习</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AE%9E%E9%AA%8C/" style="font-size: 10px;">课程实验</a> <a href="/tags/%E8%B4%A8%E6%95%B0%E7%AD%9B/" style="font-size: 10px;">质数筛</a> <a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 10px;">贪心</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 11.11px;">链表</a> <a href="/tags/troubleshooting/" style="font-size: 16.67px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>
+                © 2026 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.
+                
+                    &nbsp;|&nbsp;
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+                        蜀ICP备2025165253号
+                    </a>
+                
+                
+            </p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true,"search_engine":"bing"});</script>
+
+<style>
+.police-beian{display:inline-flex;align-items:center;gap:4px}
+.police-icon{display:inline-block;width:16px;height:16px;background:#e91e63;border-radius:2px;opacity:.85}
+/* 说明：如需官方警徽图标，可将 .police-icon 的 background 设置为图片：
+   background:url('https://www.beian.gov.cn/img/ghs.png') no-repeat center/contain; */
+</style>
+
+  </body>
+</html>

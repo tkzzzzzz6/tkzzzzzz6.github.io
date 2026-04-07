@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2026-01-19-论文阅读-SAM2 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2026-01-19-论文阅读-SAM2"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 8.1.1"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/Papers-pile-or-pie/">Papers pile or pie?</a><a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a><a class="category-link" href="/categories/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/">工具配置</a><a class="category-link" href="/categories/%E6%88%91%E8%A6%81%E7%82%BC%E4%B8%B9-%E4%B8%B9%E6%B2%A1%E6%9C%89%E9%97%AE%E9%A2%98/">我要炼丹,丹没有问题</a><a class="category-link" href="/categories/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习</a><a class="category-link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a><a class="category-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a><a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%92%9F%E8%92%BB%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/">算法蒟蒻的成长记录</a><a class="category-link" href="/categories/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%AE%9E%E9%AA%8C/">课程学习与实验</a><a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2026-01-19-论文阅读-SAM2</h2>
+            <div class="post-meta">
+                <time class="date">2026.01.19</time>
+            
+                <span class="category"><a class="category-link" href="/categories/Papers-pile-or-pie/">Papers pile or pie?</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="SAM-2-Segment-Anything-in-Images-and-Videos"><a href="#SAM-2-Segment-Anything-in-Images-and-Videos" class="headerlink" title="SAM 2: Segment Anything in Images and Videos"></a>SAM 2: Segment Anything in Images and Videos</h1><h2 id="一、论文基本信息"><a href="#一、论文基本信息" class="headerlink" title="一、论文基本信息"></a>一、论文基本信息</h2><ul>
+<li>标题:《SAM 2: Segment Anything in Images and Videos》</li>
+<li><a target="_blank" rel="noopener" href="https://www.alphaxiv.org/abs/2408.00714?chatId=019bd986-fcbb-7498-830b-09647b86c2ed">原文链接</a>,<a target="_blank" rel="noopener" href="https://hjfy.top/arxiv/2408.00714">翻译链接</a></li>
+<li>作者:Meta FAIR</li>
+</ul>
+<blockquote>
+<p>关键词:图像分割,视频分割,视频处理,可提示视觉分割(PVS)。  </p>
+</blockquote>
+<h2 id="二、研究背景与问题定义"><a href="#二、研究背景与问题定义" class="headerlink" title="二、研究背景与问题定义"></a>二、研究背景与问题定义</h2><h3 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h3><ol>
+<li><p><strong>现有图像分割模型的成功与局限性：</strong>“Segment Anything (SA)”模型（即 SAM），实现了“可提示的”（promptable）图像分割，即用户可以通过简单的提示（如点击、画框）就能快速分割出图像中的任何物体。这为图像分割提供了一个“基础模型”。然而，<strong>SAM 只能处理静态图片</strong>，无法直接应用于动态的视频数据。</p>
+</li>
+<li><p><strong>视频数据在现实世界中的普遍性和重要性：</strong>现实世界中的视觉信息很大一部分以视频形式存在。在许多关键应用领域，如增强现实/虚拟现实 (AR/VR)、机器人技术、自动驾驶和视频编辑等，都需要对视频中的物体进行<strong>时空定位和分割</strong>，而不仅仅是图像级别的静态分割。</p>
+</li>
+<li><p><strong>视频分割相比图像分割的额外挑战：</strong></p>
+<ul>
+<li><strong>物体动态变化：</strong> 视频中的物体会发生运动、形变、遮挡、光照变化等，这使得在不同帧之间追踪和一致地分割同一物体变得非常困难。</li>
+<li><strong>视频质量问题：</strong> 视频可能因为相机抖动、模糊或低分辨率而质量较低，增加了分割难度。</li>
+<li><strong>效率要求：</strong> 视频包含大量帧，需要高效地处理，以实现实时或接近实时的分割。</li>
+</ul>
+</li>
+<li><p><strong>现有视频分割模型和数据集的不足：</strong> 尽管已经存在一些视频分割模型和数据集，但它们在提供像 SAM 在图像领域那样“分割一切视频中物体”的通用能力方面仍有欠缺。现有数据集在规模、多样性和标注稠密性方面可能不足以训练出能处理任意视频分割任务的通用模型。</p>
+</li>
+</ol>
+<p>SAM 2 的目标是构建一个能够统一处理图像和视频分割的通用模型，并为此构建了史上最大的视频分割数据集。</p>
+<h3 id="问题定义"><a href="#问题定义" class="headerlink" title="问题定义"></a>问题定义</h3><p><strong>如何构建一个统一的视觉分割系统，能够以“可提示”（promptable）的方式，对图像和视频中的任意物体进行准确、高效的时空分割。</strong></p>
+<ol>
+<li><p><strong>统一性 (Unified Model)：</strong> 目标是开发一个模型，而不是两个独立的模型，能够同时处理图像分割（将图像视为单帧视频）和视频分割任务。意味着模型需要具备处理时间维度信息的能力。</p>
+</li>
+<li><p><strong>可提示性 (Promptable)：</strong> 沿袭了原始 SAM 的交互式分割范式。用户通过提供简单的提示（例如，在视频的任何一帧上点击点、画框或提供初始掩码）来指定感兴趣的物体。</p>
+</li>
+<li><p><strong>任意物体分割 (Segment Anything)：</strong> 模型应该能够识别并分割视频中出现的任何视觉实体，无论其类别、大小、形状或复杂程度如何。这要求模型具有强大的泛化能力。</p>
+</li>
+<li><p><strong>时空分割 (Spatio-temporal Segmentation)：</strong> 对于视频而言，问题不仅仅是分割单帧图片中的物体，更重要的是要追踪并分割该物体在<strong>整个时间维度上</strong>的运动和变化。意味着模型需要输出在视频所有相关帧中一致的、准确的“掩码序列”（masklet）。</p>
+<blockquote>
+<p>Masklet (掩码序列) 指的是一个特定物体在视频中跨越多个帧的完整时空分割掩码序列。</p>
+<p>对于一个单帧图像，我们谈论的是一个“分割掩码”（mask）。<br>对于一个视频中的一个物体，Masklet 就是这个物体从出现到消失，在每一帧中对应的所有分割掩码的集合，形成一个连贯的时空轨迹。</p>
+</blockquote>
+</li>
+<li><p><strong>准确性和效率：</strong> 最终的分割结果需要高精度，并且处理过程要足够高效，尤其是对于视频数据，要能实现实时或接近实时的处理能力。</p>
+</li>
+</ol>
+<h2 id="三、核心方法-模型-系统设计"><a href="#三、核心方法-模型-系统设计" class="headerlink" title="三、核心方法 / 模型 / 系统设计"></a>三、核心方法 / 模型 / 系统设计</h2><h3 id="1-任务定义：可提示视觉分割-Promptable-Visual-Segmentation-PVS"><a href="#1-任务定义：可提示视觉分割-Promptable-Visual-Segmentation-PVS" class="headerlink" title="1. 任务定义：可提示视觉分割 (Promptable Visual Segmentation - PVS)"></a>1. 任务定义：可提示视觉分割 (Promptable Visual Segmentation - PVS)</h3><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1768883320068.png" alt="1768883320068.png"></p>
+<ul>
+<li><strong>泛化图像分割到视频：</strong> PVS 任务将图像分割的概念扩展到视频领域。用户在视频的任意一帧提供提示（点、框或掩码），模型则预测该物体在整个视频中的时空掩码（即 <strong>Masklet</strong>）。</li>
+<li><strong>迭代式细化：</strong> 如果模型预测的 Masklet 不够准确，用户可以在后续帧中提供更多提示来迭代地细化它。</li>
+</ul>
+<h3 id="2-模型架构：简单-Transformer-架构与流式记忆-Streaming-Memory"><a href="#2-模型架构：简单-Transformer-架构与流式记忆-Streaming-Memory" class="headerlink" title="2. 模型架构：简单 Transformer 架构与流式记忆 (Streaming Memory)"></a>2. 模型架构：简单 Transformer 架构与流式记忆 (Streaming Memory)</h3><p>SAM 2 的模型是基于一个<strong>简单、统一的 Transformer 架构</strong>，能够处理图像和视频数据。其关键特性是引入了“流式记忆”：</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1768883761402.png" alt="1768883761402.png"></p>
+<ul>
+<li><p><strong>图像编码器 (Image Encoder)：</strong> 类似于原始 SAM，用于提取输入图像或视频帧的视觉特征。论文中提到了使用 Hiera-B+ 和 Hiera-L 等编码器。</p>
+</li>
+<li><p><strong>提示编码器 (Prompt Encoder)：</strong> 用于编码用户提供的提示（点、框、掩码）。</p>
+</li>
+<li><p><strong>轻量级掩码解码器 (Lightweight Mask Decoder)：</strong> 接收图像特征、提示编码和记忆信息，然后预测输出掩码。</p>
+</li>
+<li><p><strong>流式记忆模块 (Streaming Memory Module)：</strong> 这是 SAM 2 区分于原始 SAM 的核心创新。</p>
+<ul>
+<li><p><strong>作用：</strong> 存储关于目标物体在之前帧中的信息和用户交互。</p>
+</li>
+<li><p><strong>工作原理：</strong> 当模型处理视频帧时，它会利用这个记忆模块来“回忆”之前帧中目标对象的外观、位置和上下文信息。</p>
+</li>
+<li><p><strong>记忆注意力 (Memory Attention)：</strong> 模型通过一个记忆注意力机制来关注和整合来自记忆的上下文信息，从而帮助预测当前帧的分割掩码。</p>
+</li>
+<li><p>在 SAM 2 的 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0" xmlns="http://www.w3.org/2000/svg" width="1.541ex" height="1.545ex" role="img" focusable="false" viewBox="0 -683 681 683"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D43F" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 217 683Q271 680 344 680Q485 680 506 683H518Q524 677 524 674T522 656Q517 641 513 637H475Q406 636 394 628Q387 624 380 600T313 336Q297 271 279 198T252 88L243 52Q243 48 252 48T311 46H328Q360 46 379 47T428 54T478 72T522 106T564 161Q580 191 594 228T611 270Q616 273 628 273H641Q647 264 647 262T627 203T583 83T557 9Q555 4 553 3T537 0T494 -1Q483 -1 418 -1T294 0H116Q32 0 32 10Q32 17 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path></g></g></g></svg></mjx-container> 个 Transformer 块中，它们是<strong>串联</strong>工作的：</p>
+<ol>
+<li><strong>先做自注意力：</strong> 模型先观察当前帧，弄清楚“这一帧里都有什么，边缘在哪里”。</li>
+<li><strong>再做交叉注意力：</strong> 模型拿着当前帧的特征，去翻看“记忆库”。它会比对：“这一帧里的这个形状，是不是就是前几帧用户点击过的那个杯子？”</li>
+<li><strong>循环往复：</strong> 每一层 Transformer 都在重复这个“看自己”和“看历史”的过程，最终精准地在当前帧勾勒出物体的 Mask。</li>
+</ol>
+</li>
+<li><p><strong>统一性：</strong> 当处理图像时，记忆模块为空，模型行为与原始 SAM 类似。这使得模型能够无缝地在图像和视频任务之间切换。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>实时视频处理：</strong> 这种流式架构允许模型逐帧处理视频，并通过记忆模块保持对目标的跟踪，从而实现实时或接近实时的视频分割。</p>
+</li>
+</ul>
+<h3 id="3-数据引擎：构建最大视频分割数据集-SA-V"><a href="#3-数据引擎：构建最大视频分割数据集-SA-V" class="headerlink" title="3. 数据引擎：构建最大视频分割数据集 SA-V"></a>3. 数据引擎：构建最大视频分割数据集 SA-V</h3><p>为了训练这个强大的通用模型，SAM 2 团队开发了一个<strong>“数据引擎”（data engine）</strong>，用于迭代地改进模型和收集迄今为止最大的视频分割数据集 <strong>SA-V</strong>。数据引擎分为几个阶段：</p>
+<ul>
+<li><strong>人机协作 (Human-in-the-Loop)：</strong> 模型预测初始分割，人类标注员根据预测结果进行修正。模型从这些修正中学习，然后生成更好的预测，形成一个正向循环。</li>
+<li><strong>多阶段标注协议：</strong><ul>
+<li><strong>Phase 1 (SAM only):</strong> 初始阶段，标注员使用原始 SAM 进行逐帧手动高质量标注，耗时较长。</li>
+<li><strong>Phase 2 (SAM + SAM 2 Mask):</strong> 引入早期 SAM 2 模型的预测作为辅助，标注员在此基础上进行修正，提高了效率。</li>
+<li><strong>Phase 3 (SAM 2 in the loop):</strong> SAM 2 模型在循环中发挥更大作用，能够利用记忆生成 Masklet，标注员主要进行精修。效率进一步提升，同时保持高标注质量。</li>
+</ul>
+</li>
+<li><strong>自动 Masklet 生成 (Auto Masklet Generation)：</strong> 为了增加数据的多样性和覆盖范围，模型会自动生成大量 Masklet 候选，并经过验证（过滤）后添加到数据集中。这有助于识别模型失败案例，并将其反馈给标注员进行修正。</li>
+<li><strong>大规模数据：</strong> 最终，SA-V 数据集包含超过 50.9K 视频和 642.6K Masklets，显著大于现有视频对象分割 (VOS) 数据集。</li>
+</ul>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1768884389158.png" alt="1768884389158.png"></p>
+<ul>
+<li>**Phase 1 (SAM per frame)**：仅使用原始 SAM 进行逐帧标注。每帧耗时 <strong>37.8 秒</strong>，且 <strong>100%</strong> 的帧需人工编辑（平均 4.8 次点击），属于高成本的基准构建阶段。</li>
+<li>**Phase 2 (SAM + SAM 2 Mask)**：引入具备初步掩码传播能力的早期模型。每帧耗时降至 <strong>7.4 秒</strong>（提速约 5 倍），需编辑帧比例降至 **23.25%**，大幅减轻了空间标注压力。</li>
+<li>**Phase 3 (SAM 2 fully-featured)**：使用带记忆模块的完整模型。每帧仅需 <strong>4.5 秒</strong>（比阶段 1 快 <strong>8.4 倍</strong>），仅有 <strong>19.04%</strong> 的帧需少量点击修正（2.68 次），实现了极高的自动化程度。</li>
+<li>**质量验证 (Mask Alignment Score)**：该项指标旨在回答“速度变快后质量是否下降”。以 Phase 1 的纯人工标注为金标准（100%），计算后续阶段结果与 Phase 1 的重合度（IoU &gt; 0.75 的比例）。结果显示：Phase 3 的整体对齐得分达到 **89.1%**，在大型物体（Large）上更达到了 **100%**。这证明了在效率提升 8 倍的同时，标注质量依然保持在极高水平。</li>
+</ul>
+<h3 id="4-训练策略"><a href="#4-训练策略" class="headerlink" title="4. 训练策略"></a>4. 训练策略</h3><ul>
+<li><strong>多源数据混合训练：</strong> SAM 2 不仅在 SA-V 数据集上训练，还结合了现有的视频对象分割 (VOS) 数据集和原始 SAM 使用的 SA-1B 图像分割数据集，以及内部许可的视频数据。这种混合训练策略增强了模型的泛化能力。</li>
+<li><strong>迭代式数据改进：</strong> 随着数据引擎阶段的推进，模型会不断地在新增的、更优质、更稠密的标注数据上进行训练，从而持续提升性能。</li>
+</ul>
+<p>在深度学习，特别是 Transformer 架构中，自注意力和交叉注意力是两类核心机制。它们的主要区别在于 <strong>Query (Q)、Key (K) 和 Value (V) 的来源。</strong></p>
+<h3 id="1-自注意力-Self-Attention"><a href="#1-自注意力-Self-Attention" class="headerlink" title="1. 自注意力 (Self-Attention)"></a>1. 自注意力 (Self-Attention)</h3><ul>
+<li><strong>原理：</strong> Q、K、V 全部来自于同一个输入序列。它计算序列内部每个元素与其他所有元素之间的相关性。</li>
+<li><strong>优点：</strong><ul>
+<li><strong>捕捉内部结构：</strong> 能够学习同一帧或同一句子内部的全局依赖关系（例如，理解图片中物体的一部分与另一部分属于同一个整体）。</li>
+<li><strong>特征增强：</strong> 让每个位置的特征都融合了整张图的上下文，变得更加丰富。</li>
+</ul>
+</li>
+<li><strong>缺点：</strong><ul>
+<li><strong>计算开销大：</strong> 复杂度是序列长度 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0" xmlns="http://www.w3.org/2000/svg" width="2.009ex" height="1.545ex" role="img" focusable="false" viewBox="0 -683 888 683"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D441" d="M234 637Q231 637 226 637Q201 637 196 638T191 649Q191 676 202 682Q204 683 299 683Q376 683 387 683T401 677Q612 181 616 168L670 381Q723 592 723 606Q723 633 659 637Q635 637 635 648Q635 650 637 660Q641 676 643 679T653 683Q656 683 684 682T767 680Q817 680 843 681T873 682Q888 682 888 672Q888 650 880 642Q878 637 858 637Q787 633 769 597L620 7Q618 0 599 0Q585 0 582 2Q579 5 453 305L326 604L261 344Q196 88 196 79Q201 46 268 46H278Q284 41 284 38T282 19Q278 6 272 0H259Q228 2 151 2Q123 2 100 2T63 2T46 1Q31 1 31 10Q31 14 34 26T39 40Q41 46 62 46Q130 49 150 85Q154 91 221 362L289 634Q287 635 234 637Z"></path></g></g></g></svg></mjx-container> 的平方 (<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="6.606ex" height="2.452ex" role="img" focusable="false" viewBox="0 -833.9 2919.8 1083.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="msup" transform="translate(1152,0)"><g data-mml-node="mi"><path data-c="1D441" d="M234 637Q231 637 226 637Q201 637 196 638T191 649Q191 676 202 682Q204 683 299 683Q376 683 387 683T401 677Q612 181 616 168L670 381Q723 592 723 606Q723 633 659 637Q635 637 635 648Q635 650 637 660Q641 676 643 679T653 683Q656 683 684 682T767 680Q817 680 843 681T873 682Q888 682 888 672Q888 650 880 642Q878 637 858 637Q787 633 769 597L620 7Q618 0 599 0Q585 0 582 2Q579 5 453 305L326 604L261 344Q196 88 196 79Q201 46 268 46H278Q284 41 284 38T282 19Q278 6 272 0H259Q228 2 151 2Q123 2 100 2T63 2T46 1Q31 1 31 10Q31 14 34 26T39 40Q41 46 62 46Q130 49 150 85Q154 91 221 362L289 634Q287 635 234 637Z"></path></g><g data-mml-node="mn" transform="translate(975.3,363) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g><g data-mml-node="mo" transform="translate(2530.8,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container>)。在处理高分辨率图像时，计算量非常惊人。</li>
+<li><strong>缺乏外部引导：</strong> 它只在“看自己”，无法引入外部参考信息。</li>
+</ul>
+</li>
+<li><strong>使用场景：</strong><ul>
+<li><strong>特征提取阶段：</strong> 在 SAM 2 中，当前帧进入模型后先做自注意力，目的是为了理解当前帧的视觉结构。</li>
+<li><strong>语义理解：</strong> NLP 中理解句子内部的语法关系。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="2-交叉注意力-Cross-Attention"><a href="#2-交叉注意力-Cross-Attention" class="headerlink" title="2. 交叉注意力 (Cross-Attention)"></a>2. 交叉注意力 (Cross-Attention)</h3><ul>
+<li><strong>原理：</strong> Q 来自当前输入（例如当前帧），而 K 和 V 来自另一个外部来源（例如记忆库中的历史帧）。</li>
+<li><strong>优点：</strong><ul>
+<li><strong>信息对齐与匹配：</strong> 能够非常有效地在一个序列中查找另一个序列的相关信息。它是“跨域”交流的桥梁。</li>
+<li><strong>聚焦能力：</strong> 让当前帧能够根据历史信息（提示、旧掩码）精准地定位目标物体。</li>
+</ul>
+</li>
+<li><strong>缺点：</strong><ul>
+<li><strong>依赖外部质量：</strong> 如果 K 和 V（记忆库）的信息是错误的或模糊的，交叉注意力的效果会大打折扣。</li>
+<li><strong>异步开销：</strong> 需要维护和处理额外的记忆数据，增加了系统设计的复杂度。</li>
+</ul>
+</li>
+<li><strong>使用场景：</strong><ul>
+<li><strong>跨时空匹配：</strong> <strong>SAM 2 的核心场景。</strong> 用当前帧作为 Q，去记忆库（K、V）里搜寻：“我要找的那个物体在这一帧的哪里？”</li>
+<li><strong>多模态融合：</strong> 比如根据文字提示（Q）去图像（K、V）中寻找对应的物体。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="总结对比"><a href="#总结对比" class="headerlink" title="总结对比"></a>总结对比</h3><table>
+<thead>
+<tr>
+<th align="left">特性</th>
+<th align="left">自注意力 (Self-Attention)</th>
+<th align="left">交叉注意力 (Cross-Attention)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Q, K, V 来源</strong></td>
+<td align="left">全部来自同一来源</td>
+<td align="left">Q 来自当前，K/V 来自外部</td>
+</tr>
+<tr>
+<td align="left"><strong>核心目的</strong></td>
+<td align="left">建模内部关系，增强自身特征</td>
+<td align="left">寻找相关性，引入外部上下文</td>
+</tr>
+<tr>
+<td align="left"><strong>打个比方</strong></td>
+<td align="left">独自思考，把知识点串联起来</td>
+<td align="left">查字典，把问题和答案对应起来</td>
+</tr>
+<tr>
+<td align="left"><strong>SAM 2 作用</strong></td>
+<td align="left">理解当前帧的画面布局</td>
+<td align="left">跨帧追踪，把物体“粘”在目标上</td>
+</tr>
+</tbody></table>
+<p>通过这种组合，SAM 2 既保持了对当前图像细节的敏感度（自注意力），又具备了跨越时间的稳定追踪能力（交叉注意力）。</p>
+<h2 id="四、实验"><a href="#四、实验" class="headerlink" title="四、实验"></a>四、实验</h2><h3 id="数据集对比"><a href="#数据集对比" class="headerlink" title="数据集对比"></a>数据集对比</h3><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1768880657325.png" alt="1768880657325.png"></p>
+<p>zero-shot(零样本实验)</p>
+<p>稠密标注(dense annotation):在一个图片或视频帧中，对几乎所有感兴趣的物体都进行了细致、全面的标注。<br>SAM2的目标是分割一切,是图像分割的通用模型,物体数量多,覆盖范围广,细节精度高,层级信息丰富</p>
+<p>评价指标:</p>
+<ul>
+<li>J&amp;F(越高越好):<br>Jaccard 相似度 (J)：也被称为 IoU (Intersection over Union)，它计算的是预测分割区域和真实分割区域的交集与并集的比值。它的值介于 0 到 1 之间，值越高表示预测结果与真实结果的重叠度越高，也就是分割得越准确。</li>
+</ul>
+<p>F-measure (F)：是准确率 (Precision) 和召回率 (Recall) 的调和平均值。它综合考虑了模型的查准率和查全率，能够更全面地评估分割结果的质量。F-measure 的值也介于 0 到 1 之间，值越高表示模型的分割效果越好。(区分准确率和召回率的方法,准确率（Precision） 的分母是 所有被模型预测为阳性 的。它问的是：在我“声称”的所有阳性中，有多少是“准确”的？<br>召回率（Recall） 的分母是 所有实际为阳性 的。它问的是：在所有“真实存在”的阳性中，模型“回忆”起了多少？,即准预测召实际)</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1768884314944.png" alt="1768884314944.png"></p>
+<p>SAM 2 的实验部分非常详尽，旨在证明其作为视频分割“基础模型”的通用能力。实验主要分为三个核心领域：<strong>可提示视频分割（PVS）</strong>、<strong>传统视频对象分割（VOS）</strong>以及<strong>静态图像分割</strong>。</p>
+<h3 id="1-Baseline（基准模型）"><a href="#1-Baseline（基准模型）" class="headerlink" title="1. Baseline（基准模型）"></a>1. Baseline（基准模型）</h3><p>由于 SAM 2 是首个真正意义上“分割一切”的视频基础模型，为了公平对比，作者构建了两个极强的组合式 Baseline，代表了当时的 SOTA（最先进）水平：</p>
+<ul>
+<li>**SAM + XMem++**：将原始 SAM 的图像分割能力与 XMem++（一种强力的长视频对象分割模型）结合。</li>
+<li><strong>SAM + Cutie</strong>：将 SAM 与 Cutie（目前顶级的视频对象分割模型，擅长处理复杂的物体交互）结合。</li>
+<li><strong>对比方式</strong>：在交互式任务中，先用 SAM 生成第一帧的掩码，然后用 XMem++ 或 Cutie 进行跨帧追踪；如果后续帧需要修正，再次调用 SAM。</li>
+</ul>
+<h3 id="2-实验领域与结果"><a href="#2-实验领域与结果" class="headerlink" title="2. 实验领域与结果"></a>2. 实验领域与结果</h3><h4 id="A-可提示视频分割-PVS-——-交互式评估"><a href="#A-可提示视频分割-PVS-——-交互式评估" class="headerlink" title="A. 可提示视频分割 (PVS) —— 交互式评估"></a>A. 可提示视频分割 (PVS) —— 交互式评估</h4><p>这是最贴近用户实际体验的设置。模型在处理视频时，允许在任意帧进行多次点击（3-click）修正。</p>
+<ul>
+<li><strong>实验设置</strong>：分为 <strong>Offline（离线）</strong> 和 <strong>Online（在线）</strong> 两种模式。离线模式允许模型反复查看全视频来寻找错误最大的帧进行修正；在线模式模拟人类一次性看完整段视频。</li>
+<li><strong>结果</strong>：SAM 2 在所有 9 个零样本（zero-shot）数据集上均显著优于“SAM + XMem++”和“SAM + Cutie”,SAM 2 达到同等精度所需的交互次数比 Baseline <strong>少 3 倍以上</strong>。。<br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1768884949227.png" alt="1768884949227.png"></li>
+</ul>
+<h4 id="B-半监督视频对象分割-VOS-——-传统任务"><a href="#B-半监督视频对象分割-VOS-——-传统任务" class="headerlink" title="B. 半监督视频对象分割 (VOS) —— 传统任务"></a>B. 半监督视频对象分割 (VOS) —— 传统任务</h4><p>这是视频分割的经典榜单，只给定第一帧的 Ground-truth 掩码，要求模型追踪全视频。</p>
+<ul>
+<li><strong>对比对象</strong>：STCN, SwinB-DeAOT, XMem, Cutie 等。</li>
+<li><strong>结果</strong>：在多个主流数据集（MOSE, DAVIS 2017, YouTube-VOS）上，SAM 2 全面超越了之前的 SOTA 模型。<br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1768885074208.png" alt="1768885074208.png"></li>
+<li><strong>SA-V Benchmark</strong>：在作者自己提出的更具挑战性的 SA-V 测试集上，SAM 2 的优势更加巨大（比最强 Baseline Cutie 高出约 15 个点），证明了传统模型在处理“非显著物体”和“复杂遮挡”时的乏力。</li>
+</ul>
+<h4 id="C-静态图像分割"><a href="#C-静态图像分割" class="headerlink" title="C. 静态图像分割"></a>C. 静态图像分割</h4><p>为了证明它是“统一模型”，作者在图像分割上也进行了测试。</p>
+<ul>
+<li><strong>对比对象</strong>：原始 SAM。</li>
+<li><strong>结果</strong>：<ul>
+<li><strong>精度更高</strong>：在 23 个数据集上，1-click mIoU 超过了 SAM。</li>
+<li><strong>速度更快</strong>：得益于更高效的 Hiera 图像编码器，SAM 2 的推理速度比 SAM <strong>快 6 倍</strong>。<br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1768885181618.png" alt="1768885181618.png"></li>
+</ul>
+</li>
+</ul>
+<h3 id="3-消融实验-Ablation-Studies"><a href="#3-消融实验-Ablation-Studies" class="headerlink" title="3. 消融实验 (Ablation Studies)"></a>3. 消融实验 (Ablation Studies)</h3><ul>
+<li>**数据量 (Figure 6)**：随着 SA-V 数据集规模的扩大，模型性能呈现清晰的“幂律”增长，且目前尚未看到饱和迹象，说明更多数据依然能让模型变强。</li>
+<li><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1768885287561.png" alt="1768885287561.png"></li>
+<li>**记忆模块 (Table 11)**：<ul>
+<li><strong>Object Pointers（对象指针）</strong>的作用巨大：加入后在长视频数据集（LVOSv2）上提升显著，证明轻量级的语义向量对解决“消失后再出现”问题至关重要。</li>
+<li><strong>对比 GRU</strong>：发现简单的 Transformer 结构比复杂的循环神经单元（GRU）效果更好且更简洁。</li>
+<li><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1768885255803.png" alt="1768885255803.png"></li>
+</ul>
+</li>
+</ul>
+<h2 id="五、创新点、贡献与改进空间"><a href="#五、创新点、贡献与改进空间" class="headerlink" title="五、创新点、贡献与改进空间"></a>五、创新点、贡献与改进空间</h2><h3 id="1-核心创新点-Key-Innovations"><a href="#1-核心创新点-Key-Innovations" class="headerlink" title="1. 核心创新点 (Key Innovations)"></a>1. 核心创新点 (Key Innovations)</h3><ul>
+<li><strong>统一的流式架构 (Unified Streaming Architecture)：</strong><br>打破了“图像分割模型 + 视频跟踪器”的传统组合模式。SAM 2 采用单体 Transformer 架构，通过<strong>记忆注意力机制 (Memory Attention)</strong> 实时融合过去的信息，实现了图像和视频在算法底层的完全统一。</li>
+<li><strong>流式记忆机制 (Streaming Memory Mechanism)：</strong><br>引入了由 <strong><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0" xmlns="http://www.w3.org/2000/svg" width="2.009ex" height="1.545ex" role="img" focusable="false" viewBox="0 -683 888 683"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D441" d="M234 637Q231 637 226 637Q201 637 196 638T191 649Q191 676 202 682Q204 683 299 683Q376 683 387 683T401 677Q612 181 616 168L670 381Q723 592 723 606Q723 633 659 637Q635 637 635 648Q635 650 637 660Q641 676 643 679T653 683Q656 683 684 682T767 680Q817 680 843 681T873 682Q888 682 888 672Q888 650 880 642Q878 637 858 637Q787 633 769 597L620 7Q618 0 599 0Q585 0 582 2Q579 5 453 305L326 604L261 344Q196 88 196 79Q201 46 268 46H278Q284 41 284 38T282 19Q278 6 272 0H259Q228 2 151 2Q123 2 100 2T63 2T46 1Q31 1 31 10Q31 14 34 26T39 40Q41 46 62 46Q130 49 150 85Q154 91 221 362L289 634Q287 635 234 637Z"></path></g></g></g></svg></mjx-container> 个最近帧</strong>、**<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0" xmlns="http://www.w3.org/2000/svg" width="2.378ex" height="1.545ex" role="img" focusable="false" viewBox="0 -683 1051 683"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D440" d="M289 629Q289 635 232 637Q208 637 201 638T194 648Q194 649 196 659Q197 662 198 666T199 671T201 676T203 679T207 681T212 683T220 683T232 684Q238 684 262 684T307 683Q386 683 398 683T414 678Q415 674 451 396L487 117L510 154Q534 190 574 254T662 394Q837 673 839 675Q840 676 842 678T846 681L852 683H948Q965 683 988 683T1017 684Q1051 684 1051 673Q1051 668 1048 656T1045 643Q1041 637 1008 637Q968 636 957 634T939 623Q936 618 867 340T797 59Q797 55 798 54T805 50T822 48T855 46H886Q892 37 892 35Q892 19 885 5Q880 0 869 0Q864 0 828 1T736 2Q675 2 644 2T609 1Q592 1 592 11Q592 13 594 25Q598 41 602 43T625 46Q652 46 685 49Q699 52 704 61Q706 65 742 207T813 490T848 631L654 322Q458 10 453 5Q451 4 449 3Q444 0 433 0Q418 0 415 7Q413 11 374 317L335 624L267 354Q200 88 200 79Q206 46 272 46H282Q288 41 289 37T286 19Q282 3 278 1Q274 0 267 0Q265 0 255 0T221 1T157 2Q127 2 95 1T58 0Q43 0 39 2T35 11Q35 13 38 25T43 40Q45 46 65 46Q135 46 154 86Q158 92 223 354T289 629Z"></path></g></g></g></svg></mjx-container> 个提示帧<strong>以及</strong>轻量级对象指针 (Object Pointers)** 组成的先进先出队列记忆库。这种设计允许模型在处理长视频时，既能保留初始定义的“锚点”，又能适应物体当前的外观变化，并有效处理物体消失后重现的情况。</li>
+<li><strong>多掩码预测与歧义处理：</strong><br>针对视频中的空间和时间歧义（例如点击一个零件是想分割零件还是整体），模型会在每一帧预测多个掩码，并选择 IoU 评分最高的进行传播，同时允许后续提示实时修正歧义。</li>
+</ul>
+<h3 id="2-主要贡献-Main-Contributions"><a href="#2-主要贡献-Main-Contributions" class="headerlink" title="2. 主要贡献 (Main Contributions)"></a>2. 主要贡献 (Main Contributions)</h3><ul>
+<li><strong>提出新任务 (PVS)：</strong><br>定义了<strong>可提示视觉分割 (Promptable Visual Segmentation)</strong> 任务，将交互式分割从静态图像领域推向了动态视频领域，支持在视频任意时间点进行多轮交互修正。</li>
+<li><strong>最大数据集 (SA-V)：</strong><br>发布了包含 <strong>50.9K 视频</strong>和 <strong>642.6K 掩码序列 (Masklets)</strong> 的数据集。其规模比现有同类数据集大一个数量级，且包含了大量具有挑战性的遮挡、复杂运动和非显著物体。</li>
+<li><strong>高效的数据引擎 (Data Engine)：</strong><br>展示了一套高效的人机协作标注系统。通过模型迭代辅助，将标注效率提升了 <strong>8.4 倍</strong>，证明了“模型引导标注 -&gt; 数据强化模型”这种闭环路径在视频领域的巨大成功。</li>
+<li><strong>卓越的性能与速度：</strong><br>在 17 个视频数据集的零样本测试中全面超越 SOTA。同时，其推理速度支持实时处理（B+ 版本达 44 FPS），且在图像分割上比原始 SAM 快 6 倍。</li>
+</ul>
+<h3 id="3-改进空间与局限性-Future-Work-Limitations"><a href="#3-改进空间与局限性-Future-Work-Limitations" class="headerlink" title="3. 改进空间与局限性 (Future Work & Limitations)"></a>3. 改进空间与局限性 (Future Work &amp; Limitations)</h3><ul>
+<li><strong>跨视频目标关联 (Inter-video Association)：</strong><br>目前的 SAM 2 擅长在单个视频内追踪物体。但在处理多个相关视频（如不同角度拍摄同一物体）时，如何实现跨视频的对象一致性仍有待研究。</li>
+<li><strong>极其细长物体的丢失：</strong><br>在处理非常细长的目标或极其剧烈的视角变换时，模型有时会丢失目标。</li>
+<li><strong>多目标交互时的混淆：</strong><br>在多个极其相似的物体频繁交叉、遮挡（如一群穿同样衣服的球员）时，记忆模块可能会出现身份分配错误。</li>
+<li><strong>计算资源需求：</strong><br>虽然模型支持实时推理，但在进行超长视频的复杂交互标注时，对显存的占用和对算力的需求对于普通移动设备或低端 GPU 仍是挑战。</li>
+<li><strong>幻觉与伪影：</strong><br>在极低分辨率或极强模糊的视频中，模型有时会生成不符合物理常识的掩码边缘（幻觉）。</li>
+</ul>
+<h2 id="六、我的思考"><a href="#六、我的思考" class="headerlink" title="六、我的思考"></a>六、我的思考</h2><ol>
+<li>实时性（44 FPS）是建立在 A100 这种高端显卡上的，边缘端的落地仍有挑战,要同时维护高分辨率的自注意力和庞大的记忆库，功耗和内存带宽可能是瓶颈,可以尝试边缘端实时视频分割的模型。</li>
+<li>有时,提出一个新任务比提出一个新模型更有价值</li>
+<li>模型复杂的话,可以采用”自顶向下”的写法,将Model单独列成一个大标题,各个模块用二级标题表示</li>
+<li>大型通用基座模型的消融实验基本上都是放在附录的,通过对数据量进行幂律分布分析,说明是数据量的作用还是真的模型起作用</li>
+<li>如果一张图左边很密，右边一定要有留白或者对应的文字说明。</li>
+<li>图注（Caption）有时要足够长，确保读者不看正文也能通过看图和读图注看懂大致意思。</li>
+</ol>
+<h2 id="七、其他"><a href="#七、其他" class="headerlink" title="七、其他"></a>七、其他</h2><h3 id="可跟进的文献"><a href="#可跟进的文献" class="headerlink" title="可跟进的文献"></a>可跟进的文献</h3><pre class="line-numbers language-bib" data-language="bib"><code class="language-bib">@misc{carionThu Nov 20 2025 18:59:56 GMT+0000 (Coordinated Universal Time)samsegmentanything,
+      title={SAM 3: Segment Anything with Concepts},
+      author={Nicolas Carion and Laura Gustafson and Yuan-Ting Hu and Shoubhik Debnath and Ronghang Hu and Didac Suris and Chaitanya Ryali and Kalyan Vasudev Alwala and Haitham Khedr and Andrew Huang and Jie Lei and Tengyu Ma and Baishan Guo and Arpit Kalla and Markus Marks and Joseph Greer and Meng Wang and Peize Sun and Roman Rädle and Triantafyllos Afouras and Effrosyni Mavroudi and Katherine Xu and Tsung-Han Wu and Yu Zhou and Liliane Momeni and Rishi Hazra and Shuangrui Ding and Sagar Vaze and Francois Porcher and Feng Li and Siyuan Li and Aishwarya Kamath and Ho Kei Cheng and Piotr Dollár and Nikhila Ravi and Kate Saenko and Pengchuan Zhang and Christoph Feichtenhofer},
+      year={Thu Nov 20 2025 18:59:56 GMT+0000 (Coordinated Universal Time)},
+      eprint={2511.16719},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2511.16719},
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2026/01/19/2026-01-19-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3/">2026-01-19-牛客每日一题-阅读理解</a></li>
+                
+                
+                    <li>下一篇: <a href="/2026/01/19/2026-01-19-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-AgiBot/">2026-01-19-论文阅读-AgiBot</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/%E5%8F%AF%E6%8F%90%E7%A4%BA%E8%A7%86%E8%A7%89%E5%88%86%E5%89%B2/" rel="tag">可提示视觉分割</a><a class="-none-link" href="/tags/%E8%A7%86%E9%A2%91%E5%88%86%E5%89%B2/" rel="tag">视频分割</a><a class="-none-link" href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" rel="tag">论文阅读</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2026/04/07/2026-04-07-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-707-%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/">2026-04-07-LeetCode刷题笔记-707-设计链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/06/2026-04-06-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-MoKA-Multimodal%20Low-Rank%20Adaptation%20for%20MLLMs/">2026-04-06-论文阅读-MoKA-Multimodal Low-Rank Adaptation for MLLMs</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/06/2026-04-06-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-203-%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/">2026-04-06-LeetCode刷题笔记-203-移除链表元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-GitHub%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7gh%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E8%A7%88/">2026-04-05-GitHub仓库管理工具gh常用命令总览</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-%E5%A6%82%E4%BD%95%E5%9C%A8Hugging%20Face%E4%B8%8B%E8%BD%BD%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%B0%E6%9C%AC%E5%9C%B0/">2026-04-05-如何在Hugging Face下载模型和数据集到本地</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-209-%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/">2026-04-05-LeetCode刷题笔记-209-长度最小的子数组</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">四月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">一月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">十二月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">十一月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">十月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CLI-%E5%B7%A5%E5%85%B7/" style="font-size: 11.11px;">CLI 工具</a> <a href="/tags/CPP/" style="font-size: 10px;">CPP</a> <a href="/tags/Claude-Code/" style="font-size: 11.11px;">Claude Code</a> <a href="/tags/CodeStats/" style="font-size: 10px;">CodeStats</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hugging-Face/" style="font-size: 10px;">Hugging Face</a> <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/LeetCode/" style="font-size: 17.78px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/LoRA/" style="font-size: 10px;">LoRA</a> <a href="/tags/MLLM/" style="font-size: 10px;">MLLM</a> <a href="/tags/Neovim/" style="font-size: 10px;">Neovim</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/TTS-%E6%8E%A8%E7%90%86%E4%BE%A7%E7%BC%A9%E6%94%BE/" style="font-size: 10px;">TTS(推理侧缩放)</a> <a href="/tags/VS-Code/" style="font-size: 11.11px;">VS Code</a> <a href="/tags/WSL/" style="font-size: 10px;">WSL</a> <a href="/tags/Windows/" style="font-size: 11.11px;">Windows</a> <a href="/tags/gh/" style="font-size: 10px;">gh</a> <a href="/tags/vibe-coding/" style="font-size: 10px;">vibe coding</a> <a href="/tags/%E4%B9%B1%E7%A0%81/" style="font-size: 10px;">乱码</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/" style="font-size: 10px;">二分搜索</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">二维前缀和</a> <a href="/tags/%E4%BB%A3%E7%90%86/" style="font-size: 11.11px;">代理</a> <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" style="font-size: 11.11px;">位运算</a> <a href="/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" style="font-size: 10px;">具身智能</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">前缀和</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 10px;">动态规划</a> <a href="/tags/%E5%8F%82%E6%95%B0%E9%AB%98%E6%95%88%E5%BE%AE%E8%B0%83-PEFT/" style="font-size: 10px;">参数高效微调(PEFT)</a> <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" style="font-size: 11.11px;">双指针</a> <a href="/tags/%E5%8F%AF%E6%8F%90%E7%A4%BA%E8%A7%86%E8%A7%89%E5%88%86%E5%89%B2/" style="font-size: 10px;">可提示视觉分割</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" style="font-size: 10px;">命令总结</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 10px;">命令行</a> <a href="/tags/%E5%93%88%E5%B8%8C/" style="font-size: 10px;">哈希</a> <a href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/" style="font-size: 10px;">多模态</a> <a href="/tags/%E5%AD%97%E4%BD%93/" style="font-size: 10px;">字体</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">工具配置</a> <a href="/tags/%E6%8B%93%E6%89%91/" style="font-size: 10px;">拓扑</a> <a href="/tags/%E6%8C%87%E9%92%88/" style="font-size: 10px;">指针</a> <a href="/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">插件</a> <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/" style="font-size: 10px;">数据集</a> <a href="/tags/%E6%95%B0%E7%BB%84/" style="font-size: 10px;">数组</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA-UAVs/" style="font-size: 10px;">无人机(UAVs)</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" style="font-size: 12.22px;">期末复习</a> <a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">架构设计</a> <a href="/tags/%E6%A8%A1%E5%9E%8B%E4%B8%8B%E8%BD%BD/" style="font-size: 10px;">模型下载</a> <a href="/tags/%E6%A8%A1%E6%8B%9F/" style="font-size: 10px;">模拟</a> <a href="/tags/%E6%AC%A7%E6%8B%89%E5%85%AC%E5%BC%8F/" style="font-size: 10px;">欧拉公式</a> <a href="/tags/deep-learning/" style="font-size: 14.44px;">深度学习</a> <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" style="font-size: 10px;">滑动窗口</a> <a href="/tags/%E7%89%9B%E5%AE%A2/" style="font-size: 13.33px;">牛客</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 12.22px;">环境配置</a> <a href="/tags/development/" style="font-size: 14.44px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 20px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 13.33px;">算法练习</a> <a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 10px;">终端</a> <a href="/tags/%E7%BB%BC%E8%BF%B0%E8%AE%BA%E6%96%87/" style="font-size: 10px;">综述论文</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 10px;">网站</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 11.11px;">网络</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%A4%B4%E8%8A%82%E7%82%B9/" style="font-size: 10px;">虚拟头节点</a> <a href="/tags/%E8%A7%86%E9%A2%91%E5%88%86%E5%89%B2/" style="font-size: 10px;">视频分割</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" style="font-size: 10px;">计算机图形学</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6-%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">计算机图形学 课程学习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 15.56px;">论文阅读</a> <a href="/tags/course/" style="font-size: 18.89px;">课程学习</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AE%9E%E9%AA%8C/" style="font-size: 10px;">课程实验</a> <a href="/tags/%E8%B4%A8%E6%95%B0%E7%AD%9B/" style="font-size: 10px;">质数筛</a> <a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 10px;">贪心</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 11.11px;">链表</a> <a href="/tags/troubleshooting/" style="font-size: 16.67px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>
+                © 2026 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.
+                
+                    &nbsp;|&nbsp;
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+                        蜀ICP备2025165253号
+                    </a>
+                
+                
+            </p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true,"search_engine":"bing"});</script>
+
+<style>
+.police-beian{display:inline-flex;align-items:center;gap:4px}
+.police-icon{display:inline-block;width:16px;height:16px;background:#e91e63;border-radius:2px;opacity:.85}
+/* 说明：如需官方警徽图标，可将 .police-icon 的 background 设置为图片：
+   background:url('https://www.beian.gov.cn/img/ghs.png') no-repeat center/contain; */
+</style>
+
+  </body>
+</html>

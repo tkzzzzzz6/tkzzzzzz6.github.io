@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2026-04-06-论文阅读-MoKA-Multimodal Low-Rank Adaptation for MLLMs - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2026-04-06-论文阅读-MoKA-Multimodal Low-Rank Adaptation for MLLMs"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 8.1.1"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/Papers-pile-or-pie/">Papers pile or pie?</a><a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a><a class="category-link" href="/categories/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/">工具配置</a><a class="category-link" href="/categories/%E6%88%91%E8%A6%81%E7%82%BC%E4%B8%B9-%E4%B8%B9%E6%B2%A1%E6%9C%89%E9%97%AE%E9%A2%98/">我要炼丹,丹没有问题</a><a class="category-link" href="/categories/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习</a><a class="category-link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a><a class="category-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a><a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%92%9F%E8%92%BB%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/">算法蒟蒻的成长记录</a><a class="category-link" href="/categories/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%AE%9E%E9%AA%8C/">课程学习与实验</a><a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2026-04-06-论文阅读-MoKA-Multimodal Low-Rank Adaptation for MLLMs</h2>
+            <div class="post-meta">
+                <time class="date">2026.04.06</time>
+            
+                <span class="category"><a class="category-link" href="/categories/Papers-pile-or-pie/">Papers pile or pie?</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="《MoKA-Multimodal-Low-Rank-Adaptation-for-MLLMs》"><a href="#《MoKA-Multimodal-Low-Rank-Adaptation-for-MLLMs》" class="headerlink" title="《MoKA: Multimodal Low-Rank Adaptation for MLLMs》"></a>《MoKA: Multimodal Low-Rank Adaptation for MLLMs》</h1><h2 id="一、论文基本信息"><a href="#一、论文基本信息" class="headerlink" title="一、论文基本信息"></a>一、论文基本信息</h2><ul>
+<li><strong>原文链接</strong>: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2506.05191">https://arxiv.org/abs/2506.05191</a> </li>
+<li><strong>项目主页</strong>: <a target="_blank" rel="noopener" href="https://gewu-lab.github.io/MokA">https://gewu-lab.github.io/MokA</a></li>
+<li><strong>作者</strong>: Yake Wei, Yu Miao, Dongzhan Zhou, Di Hu (中国人民大学、上海人工智能实验室)</li>
+<li><strong>会议</strong>: NeurIPS 2025 <strong>Oral Presentation</strong></li>
+</ul>
+<blockquote>
+<p>关键词: 多模态大语言模型 (MLLM), 低秩适配 (LoRA), 参数高效微调 (PEFT), 跨模态对齐, 模态异质性 。</p>
+</blockquote>
+<h2 id="二、研究背景与问题定义"><a href="#二、研究背景与问题定义" class="headerlink" title="二、研究背景与问题定义"></a>二、研究背景与问题定义</h2><h3 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h3><p>近年来，多模态大语言模型（MLLMs）在视觉语言、音频语言等任务上取得了巨大进展。当在多模态下游任务进行微调时，当前主流的多模态微调方法大多直接沿用了在纯文本大语言模型（LLMs）上发展出的微调策略，比如最经典的 LoRA。</p>
+<p>这种简单的“照搬”策略，实际上忽略了多模态场景的本质特性——不同模态之间存在显著的异质性，单模态信息的独立建模和跨模态交互建模同等重要。然而当前的微调范式往往没有并重地显式考量这一点，导致对非文本模态的利用存在潜在局限性。</p>
+<h3 id="问题定义"><a href="#问题定义" class="headerlink" title="问题定义"></a>问题定义</h3><ol>
+<li><strong>模态竞争问题</strong>：由于文本指令在微调中占据主导地位，共享的 LoRA 参数往往被文本特征“霸占”，导致非文本模态（图像、音频）被边缘化，无法充分发挥其信息价值。<br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1775493257889.png" alt="1775493257889.png"></li>
+<li><strong>缺乏深度对齐</strong>：标准 LoRA 无法在低秩空间内实现显式的任务导向跨模态交互，模型很多时候只是“假装”在看图/听音频，实际上在靠文本逻辑猜答案。</li>
+<li><strong>通用性问题</strong>：已有的多模态适配方法是否能够在不同模态组合（音频-视觉-文本、视觉-文本、语音-文本）和不同 LLM 基座（LLaMA、Qwen）上都保持稳定的性能提升？</li>
+</ol>
+<h2 id="三、核心方法与设计"><a href="#三、核心方法与设计" class="headerlink" title="三、核心方法与设计"></a>三、核心方法与设计</h2><p>MoKA（Multimodal low-rank Adaptation）在保留 LoRA 核心思想（参数高效）的基础上，重新设计了低秩矩阵的作用，兼顾了单模态信息独立建模和跨模态交互建模。整个框架包含三个关键模块：</p>
+<h3 id="A-模态特异的-A-矩阵（Unimodal-Adaptation）"><a href="#A-模态特异的-A-矩阵（Unimodal-Adaptation）" class="headerlink" title="A. 模态特异的 A 矩阵（Unimodal Adaptation）"></a>A. 模态特异的 A 矩阵（Unimodal Adaptation）</h3><p>MoKA 为每个模态设置<strong>独立的投影矩阵 A</strong>，而不是像标准 LoRA 那样所有模态共享同一套参数。</p>
+<ul>
+<li><strong>核心思想</strong>：物理隔离各模态的梯度更新，确保每种模态的信息压缩过程不会互相干扰，避免了“模态竞争”问题。</li>
+<li><strong>作用</strong>：实现真正的单模态信息独立建模，让非文本特征能够得到充分适配。<br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1775493392510.png" alt="1775493392510.png"></li>
+</ul>
+<h3 id="B-任务中心的跨模态注意力（Cross-modal-Interaction）"><a href="#B-任务中心的跨模态注意力（Cross-modal-Interaction）" class="headerlink" title="B. 任务中心的跨模态注意力（Cross-modal Interaction）"></a>B. 任务中心的跨模态注意力（Cross-modal Interaction）</h3><p>在完成单模态压缩后，MoKA 在低秩空间内引入<strong>显式的跨模态注意力机制</strong>：</p>
+<ul>
+<li><strong>设计</strong>：以非文本特征为 Query，文本特征（通常包含任务指令）为 Key 和 Value。</li>
+<li><strong>作用</strong>：让视觉/音频特征能够根据具体的任务指令动态调整融合权重，真正实现“带着问题看图片/听音频”，强化了任务导向的跨模态交互。<br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1775493539532.png" alt="1775493539532.png"></li>
+</ul>
+<h3 id="C-模态共享的-B-矩阵（Unified-Alignment）"><a href="#C-模态共享的-B-矩阵（Unified-Alignment）" class="headerlink" title="C. 模态共享的 B 矩阵（Unified Alignment）"></a>C. 模态共享的 B 矩阵（Unified Alignment）</h3><p>最后，所有处理后的模态特征都通过<strong>同一个共享的矩阵 B</strong>投影回原始权重空间：</p>
+<ul>
+<li><strong>核心思想</strong>：在完成独立建模和深度交互后，进行统一的跨模态对齐。</li>
+<li><strong>优势</strong>：既保证了前面模块的独立性，又通过参数共享极大地控制了整体参数量，维持了 LoRA 参数高效的优点。<br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1775493600121.png" alt="1775493600121.png"></li>
+</ul>
+<p>相比标准 LoRA 对所有模态使用相同的低秩参数，MoKA 通过“<strong>先分流处理 → 后深度交互 → 最后统一对齐</strong>”的三步设计，更好地适配了多模态场景的特性。</p>
+<h2 id="四、实验"><a href="#四、实验" class="headerlink" title="四、实验"></a>四、实验</h2><h3 id="1-实验设置"><a href="#1-实验设置" class="headerlink" title="1. 实验设置"></a>1. 实验设置</h3><p>覆盖了三个具有代表性的多模态任务场景，并且在多个主流 LLM 基座上验证了方法的通用性：</p>
+<ul>
+<li><strong>音频-视觉-文本</strong>：MUSIC-AVQA 数据集</li>
+<li><strong>视觉-文本</strong>：各类视觉问答基准，包括 POPE</li>
+<li><strong>语音-文本</strong>：AIR-Bench 数据集</li>
+<li><strong>基座模型</strong>：LLaMA 系列、Qwen 系列</li>
+</ul>
+<h3 id="2-核心实验结果"><a href="#2-核心实验结果" class="headerlink" title="2. 核心实验结果"></a>2. 核心实验结果</h3><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1775493920134.png" alt="1775493920134.png"></p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1775518199451.png" alt="1775518199451.png"></p>
+<ul>
+<li><strong>全面性能提升</strong>：在 MUSIC-AVQA 任务上，相比标准 LoRA 提升了约 <strong>2.3%</strong> 的准确率，在其他场景也都有 consistent 的提升。</li>
+<li><strong>参数效率优异</strong>：可训练参数占比仅从标准 LoRA 的 <strong>1.20%</strong> 微增至 **1.33%**，几乎没有额外的参数开销。</li>
+<li><strong>推理延迟可控</strong>：推理延迟仅为原来的 <strong>1.069x</strong>，工程性价比极高。</li>
+</ul>
+<h3 id="3-变体对比实验"><a href="#3-变体对比实验" class="headerlink" title="3.变体对比实验"></a>3.变体对比实验</h3><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1775518506597.png" alt="1775518506597.png"></p>
+<h3 id="3-消融实验验证"><a href="#3-消融实验验证" class="headerlink" title="3. 消融实验验证"></a>3. 消融实验验证</h3><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1775517878802.png" alt="1775517878802.png"></p>
+<ul>
+<li>去掉跨模态注意力后，性能出现明显下降 → 证明仅靠独立压缩无法实现深层语义对齐。</li>
+<li>模态特异 A 矩阵对性能提升贡献最大 → 验证了解决“模态竞争”问题的重要性。</li>
+</ul>
+<h3 id="4-效率分析"><a href="#4-效率分析" class="headerlink" title="4. 效率分析"></a>4. 效率分析</h3><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1775517987749.png" alt="1775517987749.png"></p>
+<h2 id="五、创新点、贡献与改进空间"><a href="#五、创新点、贡献与改进空间" class="headerlink" title="五、创新点、贡献与改进空间"></a>五、创新点、贡献与改进空间</h2><h3 id="1-核心创新点"><a href="#1-核心创新点" class="headerlink" title="1. 核心创新点"></a>1. 核心创新点</h3><ol>
+<li><strong>范式创新</strong>：打破了“直接将单模态 LoRA 迁移至多模态”的惯性思维，提出了“单模态独立适配 + 显式跨模态交互 + 统一对齐”的新范式。</li>
+<li><strong>精巧设计</strong>：在不显著增加参数量和推理延迟的前提下，通过对低秩矩阵角色的重新分配，解决了多模态微调中被长期忽视的模态异质性问题。</li>
+<li><strong>通用性强</strong>：在音视文、图文、音文三种不同场景，以及多个主流 LLM 基座上都验证了性能提升，证明了方法的普适性。</li>
+</ol>
+<h3 id="2-主要贡献"><a href="#2-主要贡献" class="headerlink" title="2. 主要贡献"></a>2. 主要贡献</h3><ul>
+<li><strong>揭示问题本质</strong>：通过实验揭示了标准 LoRA 在多模态场景下的失效模式——模态竞争导致非文本特征被边缘化。</li>
+<li><strong>提供简洁方案</strong>：MoKA 的改动非常小，易于实现，可以直接替换现有 MLLM 微调流程中的 LoRA 模块。</li>
+<li><strong>树立新标杆</strong>：为多模态参数高效微调领域提供了新的思考方向，即必须尊重模态异质性才能实现更好的融合。</li>
+</ul>
+<h3 id="3-局限性与改进空间"><a href="#3-局限性与改进空间" class="headerlink" title="3. 局限性与改进空间"></a>3. 局限性与改进空间</h3><ul>
+<li><strong>动态模态权重</strong>：目前模态融合的平衡因子需要手动设定，未来可以探索根据任务特性自适应调整。</li>
+<li><strong>长序列优化</strong>：在处理超长视频或极长音频时，跨模态注意力的计算效率和稳定性仍有提升空间。</li>
+<li><strong>更多模态扩展</strong>：可以进一步探索在具身智能场景中，对 LiDAR、IMU 等更多物理传感模态的适配效果。</li>
+</ul>
+<h2 id="六、我的思考"><a href="#六、我的思考" class="headerlink" title="六、我的思考"></a>六、我的思考</h2><ol>
+<li><p>论文中的 3 个backbone 都是自回归模型,如果更换 Audio,Visual,Text token的位置,是否会对结果产生影响呢,因为这三种模态的信息密度和 token 数量是不对称的?</p>
+</li>
+<li><p>对于多模态微调来说，融合太早不是一件好事。MoKA 让每个模态先在自己的空间里“管好自己”，再进行交互对齐，这种思路其实在很多领域都适用。</p>
+</li>
+<li><p>在具身智能场景中，机器人需要处理视觉、触觉、听觉、LiDAR 等多种传感器输入，MoKA 这种对每个模态独立建模的思想非常值得借鉴，未来很有可能在机器人端侧微调中发挥作用。</p>
+</li>
+<li><p>论文中的 X(times) 可以表示倍数,用于运行效率比较实验中</p>
+</li>
+<li><p>附录添加了对除了前面提及的 3 种模态,还添加了点云模态的数据集的测试,验证了模型的泛用性</p>
+</li>
+</ol>
+<h2 id="七、其他"><a href="#七、其他" class="headerlink" title="七、其他"></a>七、其他</h2><h3 id="可跟进的文献"><a href="#可跟进的文献" class="headerlink" title="可跟进的文献"></a>可跟进的文献</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2106.09685">LoRA: Low-Rank Adaptation of Large Language Models</a> - 标准 LoRA 原文，MoKA 的基础。</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2304.08480">Visual Instruction Tuning</a> - MLLM 指令微调的经典工作。</li>
+<li><a target="_blank" rel="noopener" href="https://blackforestlabs.ai/blog/flux-1/">Flux.1 [dev] Black Forest Labs</a> - 最近的文生图模型也使用了多模态注意力机制来处理文本条件，思路上有共通之处。</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2406.16185">LoRAMoE: Modality-Aware Mixture of LoRA Experts for Multimodal Adaptation</a> - 同样是针对多模态场景改进 LoRA 的工作，通过 MoE 架构让不同模态使用不同专家，与 MoKA “让模态分开处理”的核心思想有异曲同工之妙。</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2407.11583">HydraLoRA: Heterogeneous Low-Rank Adaptation for Multi-Task and Multi-Modal Learning</a> - 另一篇针对多模态/多任务场景的 LoRA 改进工作，探索了不同结构下的参数分配策略，可以对比学习不同的设计思路。</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2101.03961">Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity</a> - MoE 在大语言模型中应用的经典工作，系统化介绍了如何在 Transformer 中高效使用 Mixture of Experts 架构。</li>
+</ol>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2026/04/07/2026-04-07-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-707-%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/">2026-04-07-LeetCode刷题笔记-707-设计链表</a></li>
+                
+                
+                    <li>下一篇: <a href="/2026/04/06/2026-04-06-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-203-%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/">2026-04-06-LeetCode刷题笔记-203-移除链表元素</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/LoRA/" rel="tag">LoRA</a><a class="-none-link" href="/tags/MLLM/" rel="tag">MLLM</a><a class="-none-link" href="/tags/%E5%8F%82%E6%95%B0%E9%AB%98%E6%95%88%E5%BE%AE%E8%B0%83-PEFT/" rel="tag">参数高效微调(PEFT)</a><a class="-none-link" href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/" rel="tag">多模态</a><a class="-none-link" href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" rel="tag">论文阅读</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2026/04/07/2026-04-07-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-707-%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/">2026-04-07-LeetCode刷题笔记-707-设计链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/06/2026-04-06-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-MoKA-Multimodal%20Low-Rank%20Adaptation%20for%20MLLMs/">2026-04-06-论文阅读-MoKA-Multimodal Low-Rank Adaptation for MLLMs</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/06/2026-04-06-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-203-%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/">2026-04-06-LeetCode刷题笔记-203-移除链表元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-GitHub%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7gh%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E8%A7%88/">2026-04-05-GitHub仓库管理工具gh常用命令总览</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-%E5%A6%82%E4%BD%95%E5%9C%A8Hugging%20Face%E4%B8%8B%E8%BD%BD%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%B0%E6%9C%AC%E5%9C%B0/">2026-04-05-如何在Hugging Face下载模型和数据集到本地</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-209-%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/">2026-04-05-LeetCode刷题笔记-209-长度最小的子数组</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">四月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">一月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">十二月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">十一月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">十月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CLI-%E5%B7%A5%E5%85%B7/" style="font-size: 11.11px;">CLI 工具</a> <a href="/tags/CPP/" style="font-size: 10px;">CPP</a> <a href="/tags/Claude-Code/" style="font-size: 11.11px;">Claude Code</a> <a href="/tags/CodeStats/" style="font-size: 10px;">CodeStats</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hugging-Face/" style="font-size: 10px;">Hugging Face</a> <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/LeetCode/" style="font-size: 17.78px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/LoRA/" style="font-size: 10px;">LoRA</a> <a href="/tags/MLLM/" style="font-size: 10px;">MLLM</a> <a href="/tags/Neovim/" style="font-size: 10px;">Neovim</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/TTS-%E6%8E%A8%E7%90%86%E4%BE%A7%E7%BC%A9%E6%94%BE/" style="font-size: 10px;">TTS(推理侧缩放)</a> <a href="/tags/VS-Code/" style="font-size: 11.11px;">VS Code</a> <a href="/tags/WSL/" style="font-size: 10px;">WSL</a> <a href="/tags/Windows/" style="font-size: 11.11px;">Windows</a> <a href="/tags/gh/" style="font-size: 10px;">gh</a> <a href="/tags/vibe-coding/" style="font-size: 10px;">vibe coding</a> <a href="/tags/%E4%B9%B1%E7%A0%81/" style="font-size: 10px;">乱码</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/" style="font-size: 10px;">二分搜索</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">二维前缀和</a> <a href="/tags/%E4%BB%A3%E7%90%86/" style="font-size: 11.11px;">代理</a> <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" style="font-size: 11.11px;">位运算</a> <a href="/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" style="font-size: 10px;">具身智能</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">前缀和</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 10px;">动态规划</a> <a href="/tags/%E5%8F%82%E6%95%B0%E9%AB%98%E6%95%88%E5%BE%AE%E8%B0%83-PEFT/" style="font-size: 10px;">参数高效微调(PEFT)</a> <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" style="font-size: 11.11px;">双指针</a> <a href="/tags/%E5%8F%AF%E6%8F%90%E7%A4%BA%E8%A7%86%E8%A7%89%E5%88%86%E5%89%B2/" style="font-size: 10px;">可提示视觉分割</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" style="font-size: 10px;">命令总结</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 10px;">命令行</a> <a href="/tags/%E5%93%88%E5%B8%8C/" style="font-size: 10px;">哈希</a> <a href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/" style="font-size: 10px;">多模态</a> <a href="/tags/%E5%AD%97%E4%BD%93/" style="font-size: 10px;">字体</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">工具配置</a> <a href="/tags/%E6%8B%93%E6%89%91/" style="font-size: 10px;">拓扑</a> <a href="/tags/%E6%8C%87%E9%92%88/" style="font-size: 10px;">指针</a> <a href="/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">插件</a> <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/" style="font-size: 10px;">数据集</a> <a href="/tags/%E6%95%B0%E7%BB%84/" style="font-size: 10px;">数组</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA-UAVs/" style="font-size: 10px;">无人机(UAVs)</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" style="font-size: 12.22px;">期末复习</a> <a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">架构设计</a> <a href="/tags/%E6%A8%A1%E5%9E%8B%E4%B8%8B%E8%BD%BD/" style="font-size: 10px;">模型下载</a> <a href="/tags/%E6%A8%A1%E6%8B%9F/" style="font-size: 10px;">模拟</a> <a href="/tags/%E6%AC%A7%E6%8B%89%E5%85%AC%E5%BC%8F/" style="font-size: 10px;">欧拉公式</a> <a href="/tags/deep-learning/" style="font-size: 14.44px;">深度学习</a> <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" style="font-size: 10px;">滑动窗口</a> <a href="/tags/%E7%89%9B%E5%AE%A2/" style="font-size: 13.33px;">牛客</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 12.22px;">环境配置</a> <a href="/tags/development/" style="font-size: 14.44px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 20px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 13.33px;">算法练习</a> <a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 10px;">终端</a> <a href="/tags/%E7%BB%BC%E8%BF%B0%E8%AE%BA%E6%96%87/" style="font-size: 10px;">综述论文</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 10px;">网站</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 11.11px;">网络</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%A4%B4%E8%8A%82%E7%82%B9/" style="font-size: 10px;">虚拟头节点</a> <a href="/tags/%E8%A7%86%E9%A2%91%E5%88%86%E5%89%B2/" style="font-size: 10px;">视频分割</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" style="font-size: 10px;">计算机图形学</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6-%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">计算机图形学 课程学习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 15.56px;">论文阅读</a> <a href="/tags/course/" style="font-size: 18.89px;">课程学习</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AE%9E%E9%AA%8C/" style="font-size: 10px;">课程实验</a> <a href="/tags/%E8%B4%A8%E6%95%B0%E7%AD%9B/" style="font-size: 10px;">质数筛</a> <a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 10px;">贪心</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 11.11px;">链表</a> <a href="/tags/troubleshooting/" style="font-size: 16.67px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>
+                © 2026 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.
+                
+                    &nbsp;|&nbsp;
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+                        蜀ICP备2025165253号
+                    </a>
+                
+                
+            </p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true,"search_engine":"bing"});</script>
+
+<style>
+.police-beian{display:inline-flex;align-items:center;gap:4px}
+.police-icon{display:inline-block;width:16px;height:16px;background:#e91e63;border-radius:2px;opacity:.85}
+/* 说明：如需官方警徽图标，可将 .police-icon 的 background 设置为图片：
+   background:url('https://www.beian.gov.cn/img/ghs.png') no-repeat center/contain; */
+</style>
+
+  </body>
+</html>

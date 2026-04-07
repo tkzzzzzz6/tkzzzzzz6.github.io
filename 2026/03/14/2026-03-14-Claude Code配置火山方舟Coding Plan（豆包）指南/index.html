@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2026-03-14-Claude Code配置火山方舟Coding Plan（豆包）指南 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2026-03-14-Claude Code配置火山方舟Coding Plan（豆包）指南"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 8.1.1"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/Papers-pile-or-pie/">Papers pile or pie?</a><a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a><a class="category-link" href="/categories/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/">工具配置</a><a class="category-link" href="/categories/%E6%88%91%E8%A6%81%E7%82%BC%E4%B8%B9-%E4%B8%B9%E6%B2%A1%E6%9C%89%E9%97%AE%E9%A2%98/">我要炼丹,丹没有问题</a><a class="category-link" href="/categories/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习</a><a class="category-link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a><a class="category-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a><a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%92%9F%E8%92%BB%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/">算法蒟蒻的成长记录</a><a class="category-link" href="/categories/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%AE%9E%E9%AA%8C/">课程学习与实验</a><a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2026-03-14-Claude Code配置火山方舟Coding Plan（豆包）指南</h2>
+            <div class="post-meta">
+                <time class="date">2026.03.14</time>
+            
+                <span class="category"><a class="category-link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <p>国内很多租用的深度学习服务器要么无法稳定访问外网，要么访问速度较慢，而国内大模型的一大优势正是在这类环境下更容易调用。通过安装 Claude Code 并将其配置到火山方舟 Coding Plan，我们可以在无需科学上网的情况下，直接通过 Claude Code CLI 调用火山方舟上的最新豆包代码模型，实现文件操作、代码生成等能力：</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1773539930624.png" alt="1773539930624.png"></p>
+<h3 id="一、前置准备（必须先完成）"><a href="#一、前置准备（必须先完成）" class="headerlink" title="一、前置准备（必须先完成）"></a>一、前置准备（必须先完成）</h3><ol>
+<li><strong>订阅火山方舟Coding Plan</strong><br>访问火山方舟Coding Plan活动页按需订阅套餐（首月最低9.9元，也可先试用免费额度），订阅后才能正常调用模型<code>(当然,配置Alibaba coding Plan,Kimi coding Plan对应的操作都是类似的,只需要修改base_url和auth_token部分的信息即可</code>)。</li>
+<li><strong>获取API Key</strong><br>登录[火山方舟管理控制台]，依次点击「API Key管理」→「创建API Key」，自定义名称后创建，保存生成的API Key（后续配置需要用到）。</li>
+</ol>
+<hr>
+<h3 id="二、服务器环境依赖安装"><a href="#二、服务器环境依赖安装" class="headerlink" title="二、服务器环境依赖安装"></a>二、服务器环境依赖安装</h3><h2 id="Claude-Code依赖Node-js-18-和Git，以下以最常见的Linux服务器（Ubuntu-Debian、CentOS-RHEL）为例，本地-Mac-或者-Windows-系统可以参考文末补充说明：-Ubuntu-Debian-系统1-更新软件源2-安装Git3-安装高版本Node-js（推荐22-24-LTS版，最低要求18）使用NodeSource官方源安装，避免系统默认源版本过低：-CentOS-RHEL-系统1-安装Git2-安装Node-js-可选：加速npm安装如果npm下载速度慢，可以切换为国内淘宝源："><a href="#Claude-Code依赖Node-js-18-和Git，以下以最常见的Linux服务器（Ubuntu-Debian、CentOS-RHEL）为例，本地-Mac-或者-Windows-系统可以参考文末补充说明：-Ubuntu-Debian-系统1-更新软件源2-安装Git3-安装高版本Node-js（推荐22-24-LTS版，最低要求18）使用NodeSource官方源安装，避免系统默认源版本过低：-CentOS-RHEL-系统1-安装Git2-安装Node-js-可选：加速npm安装如果npm下载速度慢，可以切换为国内淘宝源：" class="headerlink" title="Claude Code依赖Node.js 18+和Git，以下以最常见的Linux服务器（Ubuntu/Debian、CentOS/RHEL）为例，本地 Mac 或者 Windows 系统可以参考文末补充说明：####  Ubuntu/Debian 系统1. 更新软件源2. 安装Git3. 安装高版本Node.js（推荐22/24 LTS版，最低要求18）使用NodeSource官方源安装，避免系统默认源版本过低：####  CentOS/RHEL 系统1. 安装Git2. 安装Node.js#### 可选：加速npm安装如果npm下载速度慢，可以切换为国内淘宝源："></a>Claude Code依赖<code>Node.js 18+</code>和<code>Git</code>，以下以最常见的Linux服务器（Ubuntu/Debian、CentOS/RHEL）为例，本地 Mac 或者 Windows 系统可以参考文末补充说明：<br>####  Ubuntu/Debian 系统<br>1. 更新软件源<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> update <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> <span class="token function">apt</span> upgrade <span class="token parameter variable">-y</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><br>2. 安装Git<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token function">git</span> <span class="token parameter variable">-y</span>
+<span class="token comment"># 验证安装，输出版本号即成功</span>
+<span class="token function">git</span> <span class="token parameter variable">--version</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><br>3. 安装高版本Node.js（推荐22/24 LTS版，最低要求18）<br>使用NodeSource官方源安装，避免系统默认源版本过低：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 先安装curl</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token function">curl</span> <span class="token parameter variable">-y</span>
+<span class="token comment">#  添加Node.js 22.x源（如果要装18/24版，把setup_22.x改成对应版本即可）</span>
+<span class="token function">curl</span> <span class="token parameter variable">-fsSL</span> https://deb.nodesource.com/setup_22.x <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token parameter variable">-E</span> <span class="token function">bash</span> -
+<span class="token comment"># 安装Node.js</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token parameter variable">-y</span> nodejs
+<span class="token comment"># 验证安装，输出版本号即成功</span>
+<span class="token function">node</span> <span class="token parameter variable">-v</span> <span class="token operator">&amp;&amp;</span> <span class="token function">npm</span> <span class="token parameter variable">-v</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>####  CentOS/RHEL 系统<br>1. 安装Git<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> dnf <span class="token function">install</span> <span class="token function">git</span> <span class="token parameter variable">-y</span> <span class="token comment"># CentOS 8+</span>
+<span class="token comment"># 或 sudo yum install git -y # CentOS 7</span>
+<span class="token function">git</span> <span class="token parameter variable">--version</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><br>2. 安装Node.js<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-fsSL</span> https://deb.nodesource.com/setup_22.x <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token parameter variable">-E</span> <span class="token function">bash</span> -
+<span class="token function">sudo</span> dnf <span class="token function">install</span> <span class="token parameter variable">-y</span> nodejs
+<span class="token function">node</span> <span class="token parameter variable">-v</span> <span class="token operator">&amp;&amp;</span> <span class="token function">npm</span> <span class="token parameter variable">-v</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><br>#### 可选：加速npm安装<br>如果npm下载速度慢，可以切换为国内淘宝源：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> config <span class="token builtin class-name">set</span> registry https://registry.npmmirror.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></h2><h3 id="三、安装Claude-Code-CLI"><a href="#三、安装Claude-Code-CLI" class="headerlink" title="三、安装Claude Code CLI"></a>三、安装Claude Code CLI</h3><h2 id="全局安装Claude-Code工具，Linux下需要加sudo获取全局权限："><a href="#全局安装Claude-Code工具，Linux下需要加sudo获取全局权限：" class="headerlink" title="全局安装Claude Code工具，Linux下需要加sudo获取全局权限："></a>全局安装Claude Code工具，Linux下需要加sudo获取全局权限：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">npm</span> <span class="token function">install</span> <span class="token parameter variable">-g</span> @anthropic-ai/claude-code
+<span class="token comment"># 验证安装，输出版本号即成功</span>
+claude <span class="token parameter variable">--version</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></h2><h3 id="四、配置对接火山方舟（优先环境变量方案，兼容高版本Claude-Code）"><a href="#四、配置对接火山方舟（优先环境变量方案，兼容高版本Claude-Code）" class="headerlink" title="四、配置对接火山方舟（优先环境变量方案，兼容高版本Claude Code）"></a>四、配置对接火山方舟（优先环境变量方案，兼容高版本Claude Code）</h3><h2 id="⚠️-注意：Claude-Code-v2-0-7x及以上版本-claude-settings-json配置可能不生效，推荐直接配置环境变量到Shell启动文件，稳定性更高。1-先查看当前使用的Shell类型：2-编辑Shell配置文件：3-在文件末尾追加以下配置，替换为之前申请的密钥：4-保存退出后，执行以下命令让配置生效：5-验证环境变量是否配置正确："><a href="#⚠️-注意：Claude-Code-v2-0-7x及以上版本-claude-settings-json配置可能不生效，推荐直接配置环境变量到Shell启动文件，稳定性更高。1-先查看当前使用的Shell类型：2-编辑Shell配置文件：3-在文件末尾追加以下配置，替换为之前申请的密钥：4-保存退出后，执行以下命令让配置生效：5-验证环境变量是否配置正确：" class="headerlink" title="⚠️ 注意：Claude Code v2.0.7x及以上版本~/.claude/settings.json配置可能不生效，推荐直接配置环境变量到Shell启动文件，稳定性更高。1. 先查看当前使用的Shell类型：2. 编辑Shell配置文件：3. 在文件末尾追加以下配置，替换<你的方舟API Key>为之前申请的密钥：4. 保存退出后，执行以下命令让配置生效：5. 验证环境变量是否配置正确："></a>⚠️ 注意：Claude Code v2.0.7x及以上版本<code>~/.claude/settings.json</code>配置可能不生效，<strong>推荐直接配置环境变量到Shell启动文件</strong>，稳定性更高。<br>1. 先查看当前使用的Shell类型：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">echo</span> <span class="token environment constant">$SHELL</span>
+<span class="token comment"># 输出/bin/bash对应配置.bashrc，输出/bin/zsh对应配置.zshrc</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><br>2. 编辑Shell配置文件：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 如果是bash</span>
+<span class="token function">nano</span> ~/.bashrc
+<span class="token comment"># 如果是zsh</span>
+<span class="token function">nano</span> ~/.zshrc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><br>3. 在文件末尾追加以下配置，替换<code>&lt;你的方舟API Key&gt;</code>为之前申请的密钥：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 火山方舟Coding Plan接口地址（Claude Code用这个，不要加/v3）</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">ANTHROPIC_BASE_URL</span><span class="token operator">=</span><span class="token string">"https://ark.cn-beijing.volces.com/api/coding"</span>
+<span class="token comment"># 替换为你自己的API Key</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">ANTHROPIC_AUTH_TOKEN</span><span class="token operator">=</span><span class="token string">"&lt;你的方舟API Key&gt;"</span>
+<span class="token comment"># 推荐填ark-code-latest，可自动适配方舟最新模型，无需本地修改配置</span>
+<span class="token comment"># 如果要固定用豆包预览版，也可以填doubao-seed-code-preview-latest</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">ANTHROPIC_MODEL</span><span class="token operator">=</span><span class="token string">"ark-code-latest"</span>
+<span class="token comment"># 禁用非必要流量，避免连接Anthropic官方地址报错</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC</span><span class="token operator">=</span><span class="token string">"1"</span>
+<span class="token comment"># 避免和本地Anthropic配置冲突</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">ANTHROPIC_API_KEY</span><span class="token operator">=</span><span class="token string">""</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>4. 保存退出后，执行以下命令让配置生效：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># bash执行</span>
+<span class="token builtin class-name">source</span> ~/.bashrc
+<span class="token comment"># zsh执行</span>
+<span class="token builtin class-name">source</span> ~/.zshrc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><br>5. 验证环境变量是否配置正确：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">echo</span> <span class="token variable">$ANTHROPIC_BASE_URL</span>
+<span class="token builtin class-name">echo</span> <span class="token variable">$ANTHROPIC_MODEL</span>
+<span class="token comment"># 输出对应配置值即生效</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></h2><h3 id="五、验证配置-测试使用"><a href="#五、验证配置-测试使用" class="headerlink" title="五、验证配置&测试使用"></a>五、验证配置&amp;测试使用</h3><ol>
+<li>新开一个终端窗口（或执行source后直接操作），输入<code>claude</code>启动工具：<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">claude<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>首次启动如果提示<code>Do you want to use this API key?</code>，选择<code>Yes</code>，之后提示目录权限选择信任即可。</li>
+<li>可以输入<code>/status</code>命令查看当前配置，确认模型正常加载即可。</li>
+<li>测试调用：可以输入简单指令比如<code>用Python写一个hello world</code>，如果能正常返回结果即配置成功。</li>
+</ol>
+<hr>
+<h3 id="六、如何使用最新豆包模型"><a href="#六、如何使用最新豆包模型" class="headerlink" title="六、如何使用最新豆包模型"></a>六、如何使用最新豆包模型</h3><h2 id="因为你配置的ANTHROPIC-MODEL为ark-code-latest，只需：1-登录-火山方舟Coding-Plan开通管理页面-2-直接选择最新的豆包代码模型（或开启Auto模式，方舟会根据场景自动选择最优的最新豆包模型）无需修改本地任何配置，切换后立即生效。"><a href="#因为你配置的ANTHROPIC-MODEL为ark-code-latest，只需：1-登录-火山方舟Coding-Plan开通管理页面-2-直接选择最新的豆包代码模型（或开启Auto模式，方舟会根据场景自动选择最优的最新豆包模型）无需修改本地任何配置，切换后立即生效。" class="headerlink" title="因为你配置的ANTHROPIC_MODEL为ark-code-latest，只需：1. 登录[火山方舟Coding Plan开通管理页面]2. 直接选择最新的豆包代码模型（或开启Auto模式，方舟会根据场景自动选择最优的最新豆包模型）无需修改本地任何配置，切换后立即生效。"></a>因为你配置的<code>ANTHROPIC_MODEL</code>为<code>ark-code-latest</code>，只需：<br>1. 登录[火山方舟Coding Plan开通管理页面]<br>2. 直接选择最新的豆包代码模型（或开启Auto模式，方舟会根据场景自动选择最优的最新豆包模型）<br>无需修改本地任何配置，切换后立即生效。</h2><h3 id="七、常见问题排查"><a href="#七、常见问题排查" class="headerlink" title="七、常见问题排查"></a>七、常见问题排查</h3><ol>
+<li><strong>配置不生效</strong>：确保执行了source命令，或新开终端窗口再尝试；如果之前用了<code>settings.json</code>配置，可以删除该文件，优先用环境变量。</li>
+<li><strong>启动报错连接失败</strong>：检查<code>ANTHROPIC_BASE_URL</code>是否正确，不要多加/v3；确认API Key填写正确，且已经订阅Coding Plan。</li>
+<li><strong>安装Claude Code报错</strong>：检查Node.js版本是否≥18，npm源是否正常，可以换国内源重试。</li>
+</ol>
+<hr>
+<h3 id="补充：Windows服务器配置"><a href="#补充：Windows服务器配置" class="headerlink" title="补充：Windows服务器配置"></a>补充：Windows服务器配置</h3><p>如果你的服务器是Windows系统，除了安装Node.js 18+和Git for Windows外，环境变量可以直接通过系统设置添加：</p>
+<ol>
+<li>搜索「编辑系统环境变量」→ 打开环境变量面板</li>
+<li>在「用户变量」区域新建3个变量：<ul>
+<li><code>ANTHROPIC_AUTH_TOKEN</code>：你的方舟API Key</li>
+<li><code>ANTHROPIC_BASE_URL</code>：<code>https://ark.cn-beijing.volces.com/api/coding</code></li>
+<li><code>ANTHROPIC_MODEL</code>：<code>ark-code-latest</code></li>
+</ul>
+</li>
+<li>保存后新开PowerShell/CMD窗口，输入<code>claude</code>启动即可。</li>
+</ol>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2026/03/15/2026-03-15-%E5%9B%A0%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BD%91%E7%BB%9C%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98%E4%BB%8E%20GitHub%20%E5%B9%B3%E6%BB%91%E8%BF%81%E7%A7%BB%E8%87%B3%20Gitee%20%E7%AD%89%E5%9B%BD%E5%86%85%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%96%B9%E6%B3%95/">2026-03-15-因服务器网络访问问题从 GitHub 平滑迁移至 Gitee 等国内平台的方法</a></li>
+                
+                
+                    <li>下一篇: <a href="/2026/01/22/2026-01-22-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-3507-%E7%A7%BB%E9%99%A4%E6%9C%80%E5%B0%8F%E6%95%B0%E5%AF%B9%E4%BD%BF%E6%95%B0%E7%BB%84%E6%9C%89%E5%BA%8FI/">2026-01-22-LeetCode刷题笔记-3507-移除最小数对使数组有序I</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/CLI-%E5%B7%A5%E5%85%B7/" rel="tag">CLI 工具</a><a class="-none-link" href="/tags/Claude-Code/" rel="tag">Claude Code</a><a class="-none-link" href="/tags/vibe-coding/" rel="tag">vibe coding</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2026/04/07/2026-04-07-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-707-%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/">2026-04-07-LeetCode刷题笔记-707-设计链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/06/2026-04-06-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-MoKA-Multimodal%20Low-Rank%20Adaptation%20for%20MLLMs/">2026-04-06-论文阅读-MoKA-Multimodal Low-Rank Adaptation for MLLMs</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/06/2026-04-06-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-203-%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/">2026-04-06-LeetCode刷题笔记-203-移除链表元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-GitHub%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7gh%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E8%A7%88/">2026-04-05-GitHub仓库管理工具gh常用命令总览</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-%E5%A6%82%E4%BD%95%E5%9C%A8Hugging%20Face%E4%B8%8B%E8%BD%BD%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%B0%E6%9C%AC%E5%9C%B0/">2026-04-05-如何在Hugging Face下载模型和数据集到本地</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-209-%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/">2026-04-05-LeetCode刷题笔记-209-长度最小的子数组</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">四月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">一月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">十二月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">十一月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">十月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CLI-%E5%B7%A5%E5%85%B7/" style="font-size: 11.11px;">CLI 工具</a> <a href="/tags/CPP/" style="font-size: 10px;">CPP</a> <a href="/tags/Claude-Code/" style="font-size: 11.11px;">Claude Code</a> <a href="/tags/CodeStats/" style="font-size: 10px;">CodeStats</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hugging-Face/" style="font-size: 10px;">Hugging Face</a> <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/LeetCode/" style="font-size: 17.78px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/LoRA/" style="font-size: 10px;">LoRA</a> <a href="/tags/MLLM/" style="font-size: 10px;">MLLM</a> <a href="/tags/Neovim/" style="font-size: 10px;">Neovim</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/TTS-%E6%8E%A8%E7%90%86%E4%BE%A7%E7%BC%A9%E6%94%BE/" style="font-size: 10px;">TTS(推理侧缩放)</a> <a href="/tags/VS-Code/" style="font-size: 11.11px;">VS Code</a> <a href="/tags/WSL/" style="font-size: 10px;">WSL</a> <a href="/tags/Windows/" style="font-size: 11.11px;">Windows</a> <a href="/tags/gh/" style="font-size: 10px;">gh</a> <a href="/tags/vibe-coding/" style="font-size: 10px;">vibe coding</a> <a href="/tags/%E4%B9%B1%E7%A0%81/" style="font-size: 10px;">乱码</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/" style="font-size: 10px;">二分搜索</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">二维前缀和</a> <a href="/tags/%E4%BB%A3%E7%90%86/" style="font-size: 11.11px;">代理</a> <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" style="font-size: 11.11px;">位运算</a> <a href="/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" style="font-size: 10px;">具身智能</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">前缀和</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 10px;">动态规划</a> <a href="/tags/%E5%8F%82%E6%95%B0%E9%AB%98%E6%95%88%E5%BE%AE%E8%B0%83-PEFT/" style="font-size: 10px;">参数高效微调(PEFT)</a> <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" style="font-size: 11.11px;">双指针</a> <a href="/tags/%E5%8F%AF%E6%8F%90%E7%A4%BA%E8%A7%86%E8%A7%89%E5%88%86%E5%89%B2/" style="font-size: 10px;">可提示视觉分割</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" style="font-size: 10px;">命令总结</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 10px;">命令行</a> <a href="/tags/%E5%93%88%E5%B8%8C/" style="font-size: 10px;">哈希</a> <a href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/" style="font-size: 10px;">多模态</a> <a href="/tags/%E5%AD%97%E4%BD%93/" style="font-size: 10px;">字体</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">工具配置</a> <a href="/tags/%E6%8B%93%E6%89%91/" style="font-size: 10px;">拓扑</a> <a href="/tags/%E6%8C%87%E9%92%88/" style="font-size: 10px;">指针</a> <a href="/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">插件</a> <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/" style="font-size: 10px;">数据集</a> <a href="/tags/%E6%95%B0%E7%BB%84/" style="font-size: 10px;">数组</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA-UAVs/" style="font-size: 10px;">无人机(UAVs)</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" style="font-size: 12.22px;">期末复习</a> <a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">架构设计</a> <a href="/tags/%E6%A8%A1%E5%9E%8B%E4%B8%8B%E8%BD%BD/" style="font-size: 10px;">模型下载</a> <a href="/tags/%E6%A8%A1%E6%8B%9F/" style="font-size: 10px;">模拟</a> <a href="/tags/%E6%AC%A7%E6%8B%89%E5%85%AC%E5%BC%8F/" style="font-size: 10px;">欧拉公式</a> <a href="/tags/deep-learning/" style="font-size: 14.44px;">深度学习</a> <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" style="font-size: 10px;">滑动窗口</a> <a href="/tags/%E7%89%9B%E5%AE%A2/" style="font-size: 13.33px;">牛客</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 12.22px;">环境配置</a> <a href="/tags/development/" style="font-size: 14.44px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 20px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 13.33px;">算法练习</a> <a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 10px;">终端</a> <a href="/tags/%E7%BB%BC%E8%BF%B0%E8%AE%BA%E6%96%87/" style="font-size: 10px;">综述论文</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 10px;">网站</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 11.11px;">网络</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%A4%B4%E8%8A%82%E7%82%B9/" style="font-size: 10px;">虚拟头节点</a> <a href="/tags/%E8%A7%86%E9%A2%91%E5%88%86%E5%89%B2/" style="font-size: 10px;">视频分割</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" style="font-size: 10px;">计算机图形学</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6-%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">计算机图形学 课程学习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 15.56px;">论文阅读</a> <a href="/tags/course/" style="font-size: 18.89px;">课程学习</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AE%9E%E9%AA%8C/" style="font-size: 10px;">课程实验</a> <a href="/tags/%E8%B4%A8%E6%95%B0%E7%AD%9B/" style="font-size: 10px;">质数筛</a> <a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 10px;">贪心</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 11.11px;">链表</a> <a href="/tags/troubleshooting/" style="font-size: 16.67px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>
+                © 2026 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.
+                
+                    &nbsp;|&nbsp;
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+                        蜀ICP备2025165253号
+                    </a>
+                
+                
+            </p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true,"search_engine":"bing"});</script>
+
+<style>
+.police-beian{display:inline-flex;align-items:center;gap:4px}
+.police-icon{display:inline-block;width:16px;height:16px;background:#e91e63;border-radius:2px;opacity:.85}
+/* 说明：如需官方警徽图标，可将 .police-icon 的 background 设置为图片：
+   background:url('https://www.beian.gov.cn/img/ghs.png') no-repeat center/contain; */
+</style>
+
+  </body>
+</html>

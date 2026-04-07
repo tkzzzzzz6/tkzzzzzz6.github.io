@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2026-01-19-论文阅读-AgiBot - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2026-01-19-论文阅读-AgiBot"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 8.1.1"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/Papers-pile-or-pie/">Papers pile or pie?</a><a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a><a class="category-link" href="/categories/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/">工具配置</a><a class="category-link" href="/categories/%E6%88%91%E8%A6%81%E7%82%BC%E4%B8%B9-%E4%B8%B9%E6%B2%A1%E6%9C%89%E9%97%AE%E9%A2%98/">我要炼丹,丹没有问题</a><a class="category-link" href="/categories/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习</a><a class="category-link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a><a class="category-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a><a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%92%9F%E8%92%BB%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/">算法蒟蒻的成长记录</a><a class="category-link" href="/categories/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%AE%9E%E9%AA%8C/">课程学习与实验</a><a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2026-01-19-论文阅读-AgiBot</h2>
+            <div class="post-meta">
+                <time class="date">2026.01.19</time>
+            
+                <span class="category"><a class="category-link" href="/categories/Papers-pile-or-pie/">Papers pile or pie?</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="AgiBot-World-Colosseo-Large-scale-Manipulation-Platform-for-Scalable-and-Intelligent-Embodied-Systems"><a href="#AgiBot-World-Colosseo-Large-scale-Manipulation-Platform-for-Scalable-and-Intelligent-Embodied-Systems" class="headerlink" title="AgiBot World Colosseo: Large-scale Manipulation Platform for Scalable and Intelligent Embodied Systems"></a>AgiBot World Colosseo: Large-scale Manipulation Platform for Scalable and Intelligent Embodied Systems</h1><h2 id="一、论文基本信息"><a href="#一、论文基本信息" class="headerlink" title="一、论文基本信息"></a>一、论文基本信息</h2><ul>
+<li>标题:《AgiBot World Colosseo: Large-scale Manipulation Platform for Scalable and Intelligent Embodied Systems》</li>
+<li><a target="_blank" rel="noopener" href="https://agibot-world.com/blog/agibot_go1.pdf">原文链接</a></li>
+<li>作者:Team AgiBot-World∗</li>
+</ul>
+<blockquote>
+<p>关键词:具身智能,ViLLA,人机协作,通用机器人。  </p>
+</blockquote>
+<h2 id="二、研究背景与问题定义"><a href="#二、研究背景与问题定义" class="headerlink" title="二、研究背景与问题定义"></a>二、研究背景与问题定义</h2><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1768815106758.png" alt="1768815106758.png"></p>
+<p>这篇论文的核心是一个大规模操纵平台,并配套高质量数据与通用策略:</p>
+<ul>
+<li>平台规模: 完全开源,1M+轨迹,3000+物体,217个任务</li>
+<li>采集方式: 远程控制(双臂机器人),人工评审</li>
+<li>传感配置: RGBD摄像头,视觉触觉传感器</li>
+<li>多场景任务适用:<ul>
+<li>后勤/物流</li>
+<li>多机器人协作</li>
+<li>视觉触觉</li>
+<li>双手工具使用</li>
+</ul>
+</li>
+<li>部署规模: 100台多功能人形机器人,完全开源</li>
+</ul>
+<p>Teleoperation(远程操作)说明:</p>
+<ul>
+<li>在数据收集过程中,熟练的远程操作员使用VR控制器或动作捕捉系统控制 Agibot G1 机器人,采集大量操纵演示数据。</li>
+<li>该方式可模拟人类精细操作,生成高质量操纵轨迹,尤其适用于复杂、长时或需要精细控制的任务。</li>
+<li>操作员技能水平和操作质量直接影响数据有效性,因此培训与标准化流程非常关键。</li>
+</ul>
+<h2 id="三、核心方法-模型-系统设计"><a href="#三、核心方法-模型-系统设计" class="headerlink" title="三、核心方法 / 模型 / 系统设计"></a>三、核心方法 / 模型 / 系统设计</h2><p>数据采集通过边云双端协同实现,需要人的远程操控进行训练,并进行手动评估。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1768815143756.png" alt="1768815143756.png"></p>
+<p>数据特征与训练框架:</p>
+<ul>
+<li>相比此前数据集,目标控制时间更长,平均约30s</li>
+<li>采用三阶段 Vision-Language-Latent-Action (ViLLA) 架构训练</li>
+<li>VLM Backbone: 使用了 InternVL2.5-2B 模型<br>三阶段要点:</li>
+<li>Stage 1: 在互联网规模的异构数据上训练编码器-解码器潜在动作模型(LAM),将连续图像映射到潜在动作空间,作为连接图文输入与机器人动作的中间表示。</li>
+<li>Stage 2: 用潜在动作作为伪标签训练潜在规划器,实现与机器人形态无关的长时规划,并利用预训练 VLM 的泛化能力。</li>
+<li>Stage 3: 引入动作专家(Action Expert),与潜在规划器联合训练,支持灵巧操作学习。</li>
+</ul>
+<h2 id="四、实验"><a href="#四、实验" class="headerlink" title="四、实验"></a>四、实验</h2><ul>
+<li>评估环境: 全部在真实物理环境进行,未使用仿真</li>
+<li>评估任务: 覆盖工具使用、柔性物体操作、人机交互、语言跟随<ul>
+<li>Restock Bag: 将零食从推车放到货架上</li>
+<li>Table Bussing: 清理桌面垃圾到垃圾桶</li>
+<li>Pour Water: 拿起水壶倒水进杯子</li>
+<li>Restock Beverage: 将饮料瓶放到货架上</li>
+<li>Fold Shorts: 将短裤折叠两次</li>
+<li>Wipe Table: 用海绵擦拭桌上的水渍</li>
+</ul>
+</li>
+<li>测试场景:<ul>
+<li>分布内(In-distribution / Seen): 训练中见过的场景</li>
+<li>分布外(Out-of-distribution / Unseen): 位置变化、视觉干扰物、语言指令变化</li>
+</ul>
+</li>
+<li>评分标准: 每个任务、场景、方法进行10次滚降测试(Rollouts),完全成功记1.0,部分成功记分,取平均归一化分数</li>
+</ul>
+<h3 id="Baseline"><a href="#Baseline" class="headerlink" title="Baseline"></a>Baseline</h3><p>为了验证 GO-1 模型与数据集质量,论文使用了以下对比基线:</p>
+<ol>
+<li>RDT-1B:<ul>
+<li>开源的基于扩散模型(Diffusion-based)的双臂操作基础模型,作为主要外部对比对象(Prior generalist policy)</li>
+</ul>
+</li>
+<li>GO-1 w/o Latent Planner(消融实验):<ul>
+<li>论文模型变体,去掉潜在规划器(Latent Planner)</li>
+<li>用于验证 ViLLA 架构中潜在规划器对长序列任务与泛化能力的重要性</li>
+</ul>
+</li>
+<li>基于 Open X-Embodiment(OXE) 训练的策略:<ul>
+<li>使用相同模型架构,分别在 AgiBot World 与 OXE 上预训练,用于对比数据质量</li>
+</ul>
+</li>
+</ol>
+<h3 id="核心实验结果与发现"><a href="#核心实验结果与发现" class="headerlink" title="核心实验结果与发现"></a>核心实验结果与发现</h3><p>实验结果主要回答三个问题:</p>
+<p>A. GO-1 是否是更强的通用策略?</p>
+<ul>
+<li>结果: GO-1 在所有任务中均大幅超越 RDT-1B 与不带潜在规划器的变体</li>
+<li>数据: 平均得分 RDT-1B 约0.36,不带规划器版本约0.49,完整版 GO-1 约0.66(参考图表数据)</li>
+<li>分析: 潜在规划器显著提升复杂任务(如叠短裤)性能,并增强对指令跟随(如补货饮料)的泛化能力</li>
+</ul>
+<p>B. AgiBot World 数据集是否比现有数据集(如 OXE)更有效?</p>
+<ul>
+<li>结果: 在 AgiBot World 上预训练的策略显著优于在 OXE 上训练的策略<br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1768827756835.png" alt="1768827756835.png"></li>
+<li>数据: 分布内成功率从0.47提升至0.77; 分布外(泛化)从0.38提升至0.67</li>
+<li>效率: 仅使用 AgiBot World Alpha(约236小时)也超过 OXE(约2000小时),证明高质量数据的重要性</li>
+</ul>
+<p>C. 数据规模与质量的影响(Scaling Laws &amp; Data Quality)</p>
+<ul>
+<li>规模法则(Data Scaling): 训练轨迹从9.2k增至1M,性能呈幂律(Power-law)增长,相关系数 r=0.97</li>
+<li>质量大于数量: 仅使用人工验证(Human-in-the-loop verified)高质量小数据集(528条)优于混合未验证数据的大数据集(1010条),得分提升0.18,强调 Human-in-the-loop 数据清洗机制</li>
+</ul>
+<h2 id="五、创新点与改进空间"><a href="#五、创新点与改进空间" class="headerlink" title="五、创新点与改进空间"></a>五、创新点与改进空间</h2><h3 id="创新点"><a href="#创新点" class="headerlink" title="创新点"></a>创新点</h3><ul>
+<li>AgiBot World 平台: 1M+轨迹、217任务、5类部署场景,规模较主流数据集(如 OXE)高一个数量级</li>
+<li>GO-1 + 潜在动作规划器: 提出通用策略 Genie Operator-1(GO-1),在多数据体上统一训练,性能较 prior arts 提升约32%</li>
+</ul>
+<h3 id="改进空间"><a href="#改进空间" class="headerlink" title="改进空间"></a>改进空间</h3><blockquote>
+<p>Limitation. All evaluations are conducted in real-world scenarios. We are currently developing the simulation environment, aligning with the real-world setup and aiming to reflect real-world policy deployment outcome. It would thereby facilitate fast and reproducible evaluation.</p>
+</blockquote>
+<ul>
+<li>所有评估在真实世界场景进行,正在开发仿真环境,目前复现不方便</li>
+</ul>
+<h2 id="六、我的思考"><a href="#六、我的思考" class="headerlink" title="六、我的思考"></a>六、我的思考</h2><ul>
+<li>传感器: 目前机器人多用视觉与触觉,部分用雷达/三维成像,是否还有其他类型传感器适合对应任务?</li>
+<li>数据特性: NLP/CV 发展快,但机器人训练数据异构、非结构化、碎片化,现实任务仍有很大空间</li>
+<li>保留1%失败恢复数据对鲁棒性的贡献?<ul>
+<li>采集中遥操作员可能失误(如掉落物体),AgiBot World 要求从错误中恢复并继续任务(不重置)</li>
+<li>研究团队保留轨迹并精细处理:<ul>
+<li>手动标注: 每条轨迹标注失败原因时间戳(failure reasons timestamps)</li>
+<li>策略对齐(Policy Alignment): 学习人类纠错动作,使策略更贴近人类意图,提升鲁棒性</li>
+<li>失败反思(Failure Reflection): 学习识别失败状态并恢复,真实场景意外(抓取滑脱)可补救</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>图表呈现: 关键数据可用不同背景标注,便于读者阅读<br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1768834047003.png" alt="1768834047003.png"></li>
+</ul>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2026/01/19/2026-01-19-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-SAM2/">2026-01-19-论文阅读-SAM2</a></li>
+                
+                
+                    <li>下一篇: <a href="/2026/01/18/2026-01-18-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-1895-%E6%9C%80%E5%A4%A7%E7%9A%84%E5%B9%BB%E6%96%B9/">2026-01-18-LeetCode刷题笔记-1895-最大的幻方</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" rel="tag">具身智能</a><a class="-none-link" href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" rel="tag">论文阅读</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2026/04/07/2026-04-07-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-707-%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/">2026-04-07-LeetCode刷题笔记-707-设计链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/06/2026-04-06-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-MoKA-Multimodal%20Low-Rank%20Adaptation%20for%20MLLMs/">2026-04-06-论文阅读-MoKA-Multimodal Low-Rank Adaptation for MLLMs</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/06/2026-04-06-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-203-%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/">2026-04-06-LeetCode刷题笔记-203-移除链表元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-GitHub%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7gh%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E8%A7%88/">2026-04-05-GitHub仓库管理工具gh常用命令总览</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-%E5%A6%82%E4%BD%95%E5%9C%A8Hugging%20Face%E4%B8%8B%E8%BD%BD%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%B0%E6%9C%AC%E5%9C%B0/">2026-04-05-如何在Hugging Face下载模型和数据集到本地</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-209-%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/">2026-04-05-LeetCode刷题笔记-209-长度最小的子数组</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">四月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">一月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">十二月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">十一月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">十月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CLI-%E5%B7%A5%E5%85%B7/" style="font-size: 11.11px;">CLI 工具</a> <a href="/tags/CPP/" style="font-size: 10px;">CPP</a> <a href="/tags/Claude-Code/" style="font-size: 11.11px;">Claude Code</a> <a href="/tags/CodeStats/" style="font-size: 10px;">CodeStats</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hugging-Face/" style="font-size: 10px;">Hugging Face</a> <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/LeetCode/" style="font-size: 17.78px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/LoRA/" style="font-size: 10px;">LoRA</a> <a href="/tags/MLLM/" style="font-size: 10px;">MLLM</a> <a href="/tags/Neovim/" style="font-size: 10px;">Neovim</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/TTS-%E6%8E%A8%E7%90%86%E4%BE%A7%E7%BC%A9%E6%94%BE/" style="font-size: 10px;">TTS(推理侧缩放)</a> <a href="/tags/VS-Code/" style="font-size: 11.11px;">VS Code</a> <a href="/tags/WSL/" style="font-size: 10px;">WSL</a> <a href="/tags/Windows/" style="font-size: 11.11px;">Windows</a> <a href="/tags/gh/" style="font-size: 10px;">gh</a> <a href="/tags/vibe-coding/" style="font-size: 10px;">vibe coding</a> <a href="/tags/%E4%B9%B1%E7%A0%81/" style="font-size: 10px;">乱码</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/" style="font-size: 10px;">二分搜索</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">二维前缀和</a> <a href="/tags/%E4%BB%A3%E7%90%86/" style="font-size: 11.11px;">代理</a> <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" style="font-size: 11.11px;">位运算</a> <a href="/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" style="font-size: 10px;">具身智能</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">前缀和</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 10px;">动态规划</a> <a href="/tags/%E5%8F%82%E6%95%B0%E9%AB%98%E6%95%88%E5%BE%AE%E8%B0%83-PEFT/" style="font-size: 10px;">参数高效微调(PEFT)</a> <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" style="font-size: 11.11px;">双指针</a> <a href="/tags/%E5%8F%AF%E6%8F%90%E7%A4%BA%E8%A7%86%E8%A7%89%E5%88%86%E5%89%B2/" style="font-size: 10px;">可提示视觉分割</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" style="font-size: 10px;">命令总结</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 10px;">命令行</a> <a href="/tags/%E5%93%88%E5%B8%8C/" style="font-size: 10px;">哈希</a> <a href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/" style="font-size: 10px;">多模态</a> <a href="/tags/%E5%AD%97%E4%BD%93/" style="font-size: 10px;">字体</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">工具配置</a> <a href="/tags/%E6%8B%93%E6%89%91/" style="font-size: 10px;">拓扑</a> <a href="/tags/%E6%8C%87%E9%92%88/" style="font-size: 10px;">指针</a> <a href="/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">插件</a> <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/" style="font-size: 10px;">数据集</a> <a href="/tags/%E6%95%B0%E7%BB%84/" style="font-size: 10px;">数组</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA-UAVs/" style="font-size: 10px;">无人机(UAVs)</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" style="font-size: 12.22px;">期末复习</a> <a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">架构设计</a> <a href="/tags/%E6%A8%A1%E5%9E%8B%E4%B8%8B%E8%BD%BD/" style="font-size: 10px;">模型下载</a> <a href="/tags/%E6%A8%A1%E6%8B%9F/" style="font-size: 10px;">模拟</a> <a href="/tags/%E6%AC%A7%E6%8B%89%E5%85%AC%E5%BC%8F/" style="font-size: 10px;">欧拉公式</a> <a href="/tags/deep-learning/" style="font-size: 14.44px;">深度学习</a> <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" style="font-size: 10px;">滑动窗口</a> <a href="/tags/%E7%89%9B%E5%AE%A2/" style="font-size: 13.33px;">牛客</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 12.22px;">环境配置</a> <a href="/tags/development/" style="font-size: 14.44px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 20px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 13.33px;">算法练习</a> <a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 10px;">终端</a> <a href="/tags/%E7%BB%BC%E8%BF%B0%E8%AE%BA%E6%96%87/" style="font-size: 10px;">综述论文</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 10px;">网站</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 11.11px;">网络</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%A4%B4%E8%8A%82%E7%82%B9/" style="font-size: 10px;">虚拟头节点</a> <a href="/tags/%E8%A7%86%E9%A2%91%E5%88%86%E5%89%B2/" style="font-size: 10px;">视频分割</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" style="font-size: 10px;">计算机图形学</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6-%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">计算机图形学 课程学习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 15.56px;">论文阅读</a> <a href="/tags/course/" style="font-size: 18.89px;">课程学习</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AE%9E%E9%AA%8C/" style="font-size: 10px;">课程实验</a> <a href="/tags/%E8%B4%A8%E6%95%B0%E7%AD%9B/" style="font-size: 10px;">质数筛</a> <a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 10px;">贪心</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 11.11px;">链表</a> <a href="/tags/troubleshooting/" style="font-size: 16.67px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>
+                © 2026 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.
+                
+                    &nbsp;|&nbsp;
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+                        蜀ICP备2025165253号
+                    </a>
+                
+                
+            </p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true,"search_engine":"bing"});</script>
+
+<style>
+.police-beian{display:inline-flex;align-items:center;gap:4px}
+.police-icon{display:inline-block;width:16px;height:16px;background:#e91e63;border-radius:2px;opacity:.85}
+/* 说明：如需官方警徽图标，可将 .police-icon 的 background 设置为图片：
+   background:url('https://www.beian.gov.cn/img/ghs.png') no-repeat center/contain; */
+</style>
+
+  </body>
+</html>

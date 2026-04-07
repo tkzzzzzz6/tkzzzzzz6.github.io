@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2026-3-21-深度学习包管理工具相关命令（持续更新） - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2026-3-21-深度学习包管理工具相关命令（持续更新）"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 8.1.1"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/Papers-pile-or-pie/">Papers pile or pie?</a><a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a><a class="category-link" href="/categories/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/">工具配置</a><a class="category-link" href="/categories/%E6%88%91%E8%A6%81%E7%82%BC%E4%B8%B9-%E4%B8%B9%E6%B2%A1%E6%9C%89%E9%97%AE%E9%A2%98/">我要炼丹,丹没有问题</a><a class="category-link" href="/categories/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习</a><a class="category-link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a><a class="category-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a><a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%92%9F%E8%92%BB%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/">算法蒟蒻的成长记录</a><a class="category-link" href="/categories/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%AE%9E%E9%AA%8C/">课程学习与实验</a><a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2026-3-21-深度学习包管理工具相关命令（持续更新）</h2>
+            <div class="post-meta">
+                <time class="date">2026.03.21</time>
+            
+                <span class="category"><a class="category-link" href="/categories/%E6%88%91%E8%A6%81%E7%82%BC%E4%B8%B9-%E4%B8%B9%E6%B2%A1%E6%9C%89%E9%97%AE%E9%A2%98/">我要炼丹,丹没有问题</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="为什么要写这篇"><a href="#为什么要写这篇" class="headerlink" title="为什么要写这篇"></a>为什么要写这篇</h1><p>深度学习环境最容易踩坑的点，不是模型本身，而是依赖冲突、CUDA 版本不匹配和跨机器复现失败。<br>这篇的目标是给出一套可落地的实践：</p>
+<ol>
+<li>用 Conda 管理 Python 与底层二进制依赖。</li>
+<li>用 uv 管理项目级 Python 包与锁文件。</li>
+<li>用一组验证与监控工具确保环境可用、可复现、可排障。</li>
+</ol>
+<h2 id="依赖文件怎么选"><a href="#依赖文件怎么选" class="headerlink" title="依赖文件怎么选"></a>依赖文件怎么选</h2><p>一般项目里常见三类文件：</p>
+<ol>
+<li>requirements.txt：传统 pip 依赖清单，简单直接。</li>
+<li>environment.yml：Conda 环境定义，适合包含 Python 之外的依赖。</li>
+<li>pyproject.toml + uv.lock：现代化依赖管理与锁定，团队协作更稳定。</li>
+</ol>
+<p>安装命令示例：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> <span class="token parameter variable">-r</span> requirements.txt
+<span class="token comment"># 或者</span>
+conda <span class="token function">env</span> create <span class="token parameter variable">-f</span> environment.yml
+<span class="token comment"># 如果你使用 uv</span>
+uv <span class="token function">sync</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Conda-相关命令"><a href="#Conda-相关命令" class="headerlink" title="Conda 相关命令"></a>Conda 相关命令</h2><h3 id="1-环境创建与激活"><a href="#1-环境创建与激活" class="headerlink" title="1) 环境创建与激活"></a>1) 环境创建与激活</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 创建环境（推荐固定主版本）</span>
+conda create <span class="token parameter variable">-n</span> dl <span class="token assign-left variable">python</span><span class="token operator">=</span><span class="token number">3.11</span> <span class="token parameter variable">-y</span>
+
+<span class="token comment"># 激活环境</span>
+conda activate dl
+
+<span class="token comment"># 查看当前环境列表</span>
+conda <span class="token function">env</span> list
+
+<span class="token comment"># 查看当前环境信息</span>
+conda info
+
+<span class="token comment"># 删除环境</span>
+conda remove <span class="token parameter variable">-n</span> dl <span class="token parameter variable">--all</span> <span class="token parameter variable">-y</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="2-包管理"><a href="#2-包管理" class="headerlink" title="2) 包管理"></a>2) 包管理</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 安装包</span>
+conda <span class="token function">install</span> numpy pandas <span class="token parameter variable">-y</span>
+
+<span class="token comment"># 指定频道安装</span>
+conda <span class="token function">install</span> pytorch torchvision torchaudio <span class="token parameter variable">-c</span> pytorch <span class="token parameter variable">-y</span>
+
+<span class="token comment"># 更新某个包</span>
+conda update numpy <span class="token parameter variable">-y</span>
+
+<span class="token comment"># 卸载包</span>
+conda remove pandas <span class="token parameter variable">-y</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="3-环境导出与复现"><a href="#3-环境导出与复现" class="headerlink" title="3) 环境导出与复现"></a>3) 环境导出与复现</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 导出完整环境（包含精确版本）</span>
+conda <span class="token function">env</span> <span class="token builtin class-name">export</span> <span class="token operator">&gt;</span> environment.yml
+
+<span class="token comment"># 按文件恢复环境</span>
+conda <span class="token function">env</span> create <span class="token parameter variable">-f</span> environment.yml<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="4-配置与加速"><a href="#4-配置与加速" class="headerlink" title="4) 配置与加速"></a>4) 配置与加速</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 查看当前 channels 配置</span>
+conda config <span class="token parameter variable">--show</span> channels
+
+<span class="token comment"># 设置严格频道优先级，减少不必要冲突</span>
+conda config <span class="token parameter variable">--set</span> channel_priority strict
+
+<span class="token comment"># 添加 conda-forge（按需）</span>
+conda config <span class="token parameter variable">--add</span> channels conda-forge
+
+<span class="token comment"># 查看配置来源</span>
+conda config --show-sources
+
+<span class="token comment"># 清理缓存</span>
+conda clean <span class="token parameter variable">--all</span> <span class="token parameter variable">-y</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="5-回滚与强复现"><a href="#5-回滚与强复现" class="headerlink" title="5) 回滚与强复现"></a>5) 回滚与强复现</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 查看环境历史版本</span>
+conda list <span class="token parameter variable">--revisions</span>
+
+<span class="token comment"># 回滚到指定修订版本</span>
+conda <span class="token function">install</span> <span class="token parameter variable">--revision</span> <span class="token number">3</span>
+
+<span class="token comment"># 仅导出手动安装过的依赖（轻量复现）</span>
+conda <span class="token function">env</span> <span class="token builtin class-name">export</span> --from-history <span class="token operator">&gt;</span> environment.min.yml
+
+<span class="token comment"># 导出显式包列表（强一致复现）</span>
+conda list <span class="token parameter variable">--explicit</span> <span class="token operator">&gt;</span> spec-file.txt
+
+<span class="token comment"># 用显式包列表创建环境</span>
+conda create <span class="token parameter variable">-n</span> dl-repro <span class="token parameter variable">--file</span> spec-file.txt
+
+<span class="token comment"># 删除环境</span>
+conda remove <span class="token parameter variable">-n</span> dl <span class="token parameter variable">--all</span> <span class="token parameter variable">-y</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="6-常见问题"><a href="#6-常见问题" class="headerlink" title="6) 常见问题"></a>6) 常见问题</h3><ol>
+<li>依赖求解很慢：优先减少频道数量，或改用 mamba/micromamba。</li>
+<li>冲突频繁：先固定 Python 主版本，再逐步安装核心包。</li>
+<li>GPU 包异常：优先查 PyTorch 官方版本矩阵，再安装对应 CUDA 版本。</li>
+</ol>
+<h2 id="uv-相关命令"><a href="#uv-相关命令" class="headerlink" title="uv 相关命令"></a>uv 相关命令</h2><h3 id="1-项目初始化与依赖安装"><a href="#1-项目初始化与依赖安装" class="headerlink" title="1) 项目初始化与依赖安装"></a>1) 项目初始化与依赖安装</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 初始化项目（生成 pyproject.toml）</span>
+uv init
+
+<span class="token comment"># 添加运行时依赖</span>
+uv <span class="token function">add</span> torch torchvision torchaudio
+
+<span class="token comment"># 添加开发依赖</span>
+uv <span class="token function">add</span> <span class="token parameter variable">--dev</span> pytest ruff
+
+<span class="token comment"># 同步依赖到当前环境</span>
+uv <span class="token function">sync</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="2-依赖维护"><a href="#2-依赖维护" class="headerlink" title="2) 依赖维护"></a>2) 依赖维护</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 删除依赖</span>
+uv remove torch
+
+<span class="token comment"># 锁定依赖</span>
+uv lock
+
+<span class="token comment"># 按锁文件同步，保证跨机器一致</span>
+uv <span class="token function">sync</span> <span class="token parameter variable">--frozen</span>
+
+<span class="token comment"># 导出 requirements.txt 风格锁定文件</span>
+uv <span class="token builtin class-name">export</span> <span class="token parameter variable">--format</span> requirements-txt <span class="token operator">&gt;</span> requirements.lock.txt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="3-Python-与诊断命令"><a href="#3-Python-与诊断命令" class="headerlink" title="3) Python 与诊断命令"></a>3) Python 与诊断命令</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 查看可用 Python 版本</span>
+uv python list
+
+<span class="token comment"># 安装指定 Python 版本</span>
+uv python <span class="token function">install</span> <span class="token number">3.11</span>
+
+<span class="token comment"># 在 uv 管理上下文中运行命令</span>
+uv run python <span class="token parameter variable">-V</span>
+
+<span class="token comment"># 查看依赖树</span>
+uv tree
+
+<span class="token comment"># 检查依赖是否存在元数据冲突</span>
+uv pip check
+
+<span class="token comment"># 清理 uv 缓存</span>
+uv cache prune<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="4-与-Conda-搭配的建议"><a href="#4-与-Conda-搭配的建议" class="headerlink" title="4) 与 Conda 搭配的建议"></a>4) 与 Conda 搭配的建议</h3><p>推荐分层管理：</p>
+<ol>
+<li>Conda 管 Python 版本和底座依赖。</li>
+<li>uv 管项目依赖和锁文件。</li>
+</ol>
+<p>这样做的优点是：安装快、冲突少、协作复现更稳定。</p>
+<h2 id="推荐工作流（Conda-uv）"><a href="#推荐工作流（Conda-uv）" class="headerlink" title="推荐工作流（Conda + uv）"></a>推荐工作流（Conda + uv）</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 1) 创建并激活基础环境</span>
+conda create <span class="token parameter variable">-n</span> dl <span class="token assign-left variable">python</span><span class="token operator">=</span><span class="token number">3.11</span> <span class="token parameter variable">-y</span>
+conda activate dl
+
+<span class="token comment"># 2) 初始化项目并安装依赖</span>
+uv init
+uv <span class="token function">add</span> torch torchvision torchaudio
+uv <span class="token function">add</span> <span class="token parameter variable">--dev</span> ruff pytest
+uv <span class="token function">sync</span>
+
+<span class="token comment"># 3) 验证环境</span>
+python <span class="token parameter variable">-c</span> <span class="token string">"import torch; print(torch.__version__); print(torch.cuda.is_available())"</span>
+
+<span class="token comment"># 4) 锁定依赖并提交</span>
+uv lock<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="一些好用的工具类"><a href="#一些好用的工具类" class="headerlink" title="一些好用的工具类"></a>一些好用的工具类</h2><p>这里推荐的是一些管理与系统检测常用工具：</p>
+<ol>
+<li>GPU 状态检测<ul>
+<li>gpustat：轻量级命令行工具，快速查看显存与进程。</li>
+<li>nvitop：更现代的 GPU 监控界面，Windows/Linux 都更友好。</li>
+</ul>
+</li>
+<li>依赖排障<ul>
+<li>pipdeptree：查看依赖树，定位冲突来源。</li>
+</ul>
+</li>
+<li>代码质量<ul>
+<li>ruff：高性能 Lint 与格式检查工具。</li>
+<li>pre-commit：提交前自动执行检查，减少低级错误。</li>
+</ul>
+</li>
+<li>实验追踪<ul>
+<li>wandb 或 mlflow：记录参数、指标、模型版本，便于对比实验结果。</li>
+</ul>
+</li>
+</ol>
+<p>对应安装命令示例：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># GPU 监控</span>
+pip <span class="token function">install</span> gpustat nvitop
+
+<span class="token comment"># 依赖排障</span>
+pip <span class="token function">install</span> pipdeptree
+
+<span class="token comment"># 代码质量</span>
+pip <span class="token function">install</span> ruff pre-commit
+
+<span class="token comment"># 实验追踪（二选一或都装）</span>
+pip <span class="token function">install</span> wandb mlflow<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="GPU-与环境诊断命令"><a href="#GPU-与环境诊断命令" class="headerlink" title="GPU 与环境诊断命令"></a>GPU 与环境诊断命令</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 查看 GPU 与驱动状态</span>
+nvidia-smi
+
+<span class="token comment"># 查看 CUDA 工具链版本（已安装时可用）</span>
+nvcc <span class="token parameter variable">--version</span>
+
+<span class="token comment"># 检查 PyTorch 与 CUDA 可用性</span>
+python <span class="token parameter variable">-c</span> <span class="token string">"import torch; print(torch.__version__); print(torch.version.cuda); print(torch.cuda.is_available())"</span>
+
+<span class="token comment"># 输出 PyTorch 环境诊断信息</span>
+python <span class="token parameter variable">-m</span> torch.utils.collect_env<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="依赖与质量校验命令"><a href="#依赖与质量校验命令" class="headerlink" title="依赖与质量校验命令"></a>依赖与质量校验命令</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 检查已安装包的依赖一致性</span>
+pip check
+
+<span class="token comment"># 输出依赖树并在冲突时返回非零状态</span>
+pipdeptree <span class="token parameter variable">--warn</span> fail
+
+<span class="token comment"># 代码检查</span>
+ruff check <span class="token builtin class-name">.</span>
+
+<span class="token comment"># 运行 pre-commit 全量检查</span>
+pre-commit run --all-files<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="最小排障清单"><a href="#最小排障清单" class="headerlink" title="最小排障清单"></a>最小排障清单</h2><ol>
+<li>先确认 Python 版本与项目要求一致。</li>
+<li>再确认 CUDA、驱动、PyTorch 三者匹配。</li>
+<li>如果 import 失败，先看依赖冲突，再看系统动态库。</li>
+<li>对团队项目，优先使用锁文件而不是手动安装。</li>
+</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li>Conda 文档：<a target="_blank" rel="noopener" href="https://docs.conda.io/">https://docs.conda.io/</a></li>
+<li>uv 文档：<a target="_blank" rel="noopener" href="https://docs.astral.sh/uv/">https://docs.astral.sh/uv/</a></li>
+<li>PyTorch 安装指引：<a target="_blank" rel="noopener" href="https://pytorch.org/get-started/locally/">https://pytorch.org/get-started/locally/</a></li>
+<li>NVIDIA 驱动与 CUDA：<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-downloads">https://developer.nvidia.com/cuda-downloads</a></li>
+</ol>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2026/03/22/2026-03-22-WSL-%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE-%E5%B0%86%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F%E5%88%87%E6%8D%A2%E4%B8%BA-mirrored-%E5%B9%B6%E4%BF%AE%E5%A4%8D-VS-Code-Server-%E4%B8%8B%E8%BD%BD%E5%A4%B1%E8%B4%A5%20copy/">2026-03-22-WSL-网络配置-将网络模式切换为-mirrored-并修复-VS-Code-Server-下载失败</a></li>
+                
+                
+                    <li>下一篇: <a href="/2026/03/18/2026-3-18-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-3070-%E5%85%83%E7%B4%A0%E5%92%8C%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8E%20k%20%E7%9A%84%E5%AD%90%E7%9F%A9%E9%98%B5%E7%9A%84%E6%95%B0%E7%9B%AE%20copy/">2026-3-18-LeetCode刷题笔记-3070-元素和小于等于 k 的子矩阵的数目</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/deep-learning/" rel="tag">深度学习</a><a class="-none-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2026/04/07/2026-04-07-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-707-%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/">2026-04-07-LeetCode刷题笔记-707-设计链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/06/2026-04-06-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-MoKA-Multimodal%20Low-Rank%20Adaptation%20for%20MLLMs/">2026-04-06-论文阅读-MoKA-Multimodal Low-Rank Adaptation for MLLMs</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/06/2026-04-06-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-203-%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/">2026-04-06-LeetCode刷题笔记-203-移除链表元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-GitHub%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7gh%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E8%A7%88/">2026-04-05-GitHub仓库管理工具gh常用命令总览</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-%E5%A6%82%E4%BD%95%E5%9C%A8Hugging%20Face%E4%B8%8B%E8%BD%BD%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%B0%E6%9C%AC%E5%9C%B0/">2026-04-05-如何在Hugging Face下载模型和数据集到本地</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-209-%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/">2026-04-05-LeetCode刷题笔记-209-长度最小的子数组</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">四月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">一月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">十二月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">十一月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">十月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CLI-%E5%B7%A5%E5%85%B7/" style="font-size: 11.11px;">CLI 工具</a> <a href="/tags/CPP/" style="font-size: 10px;">CPP</a> <a href="/tags/Claude-Code/" style="font-size: 11.11px;">Claude Code</a> <a href="/tags/CodeStats/" style="font-size: 10px;">CodeStats</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hugging-Face/" style="font-size: 10px;">Hugging Face</a> <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/LeetCode/" style="font-size: 17.78px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/LoRA/" style="font-size: 10px;">LoRA</a> <a href="/tags/MLLM/" style="font-size: 10px;">MLLM</a> <a href="/tags/Neovim/" style="font-size: 10px;">Neovim</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/TTS-%E6%8E%A8%E7%90%86%E4%BE%A7%E7%BC%A9%E6%94%BE/" style="font-size: 10px;">TTS(推理侧缩放)</a> <a href="/tags/VS-Code/" style="font-size: 11.11px;">VS Code</a> <a href="/tags/WSL/" style="font-size: 10px;">WSL</a> <a href="/tags/Windows/" style="font-size: 11.11px;">Windows</a> <a href="/tags/gh/" style="font-size: 10px;">gh</a> <a href="/tags/vibe-coding/" style="font-size: 10px;">vibe coding</a> <a href="/tags/%E4%B9%B1%E7%A0%81/" style="font-size: 10px;">乱码</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/" style="font-size: 10px;">二分搜索</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">二维前缀和</a> <a href="/tags/%E4%BB%A3%E7%90%86/" style="font-size: 11.11px;">代理</a> <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" style="font-size: 11.11px;">位运算</a> <a href="/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" style="font-size: 10px;">具身智能</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">前缀和</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 10px;">动态规划</a> <a href="/tags/%E5%8F%82%E6%95%B0%E9%AB%98%E6%95%88%E5%BE%AE%E8%B0%83-PEFT/" style="font-size: 10px;">参数高效微调(PEFT)</a> <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" style="font-size: 11.11px;">双指针</a> <a href="/tags/%E5%8F%AF%E6%8F%90%E7%A4%BA%E8%A7%86%E8%A7%89%E5%88%86%E5%89%B2/" style="font-size: 10px;">可提示视觉分割</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" style="font-size: 10px;">命令总结</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 10px;">命令行</a> <a href="/tags/%E5%93%88%E5%B8%8C/" style="font-size: 10px;">哈希</a> <a href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/" style="font-size: 10px;">多模态</a> <a href="/tags/%E5%AD%97%E4%BD%93/" style="font-size: 10px;">字体</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">工具配置</a> <a href="/tags/%E6%8B%93%E6%89%91/" style="font-size: 10px;">拓扑</a> <a href="/tags/%E6%8C%87%E9%92%88/" style="font-size: 10px;">指针</a> <a href="/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">插件</a> <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/" style="font-size: 10px;">数据集</a> <a href="/tags/%E6%95%B0%E7%BB%84/" style="font-size: 10px;">数组</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA-UAVs/" style="font-size: 10px;">无人机(UAVs)</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" style="font-size: 12.22px;">期末复习</a> <a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">架构设计</a> <a href="/tags/%E6%A8%A1%E5%9E%8B%E4%B8%8B%E8%BD%BD/" style="font-size: 10px;">模型下载</a> <a href="/tags/%E6%A8%A1%E6%8B%9F/" style="font-size: 10px;">模拟</a> <a href="/tags/%E6%AC%A7%E6%8B%89%E5%85%AC%E5%BC%8F/" style="font-size: 10px;">欧拉公式</a> <a href="/tags/deep-learning/" style="font-size: 14.44px;">深度学习</a> <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" style="font-size: 10px;">滑动窗口</a> <a href="/tags/%E7%89%9B%E5%AE%A2/" style="font-size: 13.33px;">牛客</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 12.22px;">环境配置</a> <a href="/tags/development/" style="font-size: 14.44px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 20px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 13.33px;">算法练习</a> <a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 10px;">终端</a> <a href="/tags/%E7%BB%BC%E8%BF%B0%E8%AE%BA%E6%96%87/" style="font-size: 10px;">综述论文</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 10px;">网站</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 11.11px;">网络</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%A4%B4%E8%8A%82%E7%82%B9/" style="font-size: 10px;">虚拟头节点</a> <a href="/tags/%E8%A7%86%E9%A2%91%E5%88%86%E5%89%B2/" style="font-size: 10px;">视频分割</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" style="font-size: 10px;">计算机图形学</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6-%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">计算机图形学 课程学习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 15.56px;">论文阅读</a> <a href="/tags/course/" style="font-size: 18.89px;">课程学习</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AE%9E%E9%AA%8C/" style="font-size: 10px;">课程实验</a> <a href="/tags/%E8%B4%A8%E6%95%B0%E7%AD%9B/" style="font-size: 10px;">质数筛</a> <a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 10px;">贪心</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 11.11px;">链表</a> <a href="/tags/troubleshooting/" style="font-size: 16.67px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>
+                © 2026 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.
+                
+                    &nbsp;|&nbsp;
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+                        蜀ICP备2025165253号
+                    </a>
+                
+                
+            </p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true,"search_engine":"bing"});</script>
+
+<style>
+.police-beian{display:inline-flex;align-items:center;gap:4px}
+.police-icon{display:inline-block;width:16px;height:16px;background:#e91e63;border-radius:2px;opacity:.85}
+/* 说明：如需官方警徽图标，可将 .police-icon 的 background 设置为图片：
+   background:url('https://www.beian.gov.cn/img/ghs.png') no-repeat center/contain; */
+</style>
+
+  </body>
+</html>

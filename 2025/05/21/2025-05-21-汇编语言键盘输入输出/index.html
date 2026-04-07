@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>2025-05-21-汇编语言键盘输入输出 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="2025-05-21-汇编语言键盘输入输出"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 8.1.1"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/Papers-pile-or-pie/">Papers pile or pie?</a><a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a><a class="category-link" href="/categories/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/">工具配置</a><a class="category-link" href="/categories/%E6%88%91%E8%A6%81%E7%82%BC%E4%B8%B9-%E4%B8%B9%E6%B2%A1%E6%9C%89%E9%97%AE%E9%A2%98/">我要炼丹,丹没有问题</a><a class="category-link" href="/categories/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习</a><a class="category-link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a><a class="category-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a><a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%92%9F%E8%92%BB%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/">算法蒟蒻的成长记录</a><a class="category-link" href="/categories/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%AE%9E%E9%AA%8C/">课程学习与实验</a><a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>2025-05-21-汇编语言键盘输入输出</h2>
+            <div class="post-meta">
+                <time class="date">2025.05.21</time>
+            
+                <span class="category"><a class="category-link" href="/categories/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%AE%9E%E9%AA%8C/">课程学习与实验</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <blockquote>这篇文章上次修改于 323 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+        
+            <h1 id="2025-05-21-汇编语言键盘输入输出"><a href="#2025-05-21-汇编语言键盘输入输出" class="headerlink" title="2025-05-21-汇编语言键盘输入输出"></a>2025-05-21-汇编语言键盘输入输出</h1><blockquote>
+<h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1></blockquote>
+<h1 id="任务-1"><a href="#任务-1" class="headerlink" title="任务 1"></a>任务 1</h1><blockquote>
+<p>把数据段中 1 维数组 AA_1 变量地址中连续 7 个数（1,3,5,7,2,4,6）读出，把每个数加 2 后再存入到数据段中 BB_1 数组开始的标号地址中去，并显示出 BB_1 数组中每个数来（之间用空格分开）</p>
+</blockquote>
+<h1 id="任务-2"><a href="#任务-2" class="headerlink" title="任务 2"></a>任务 2</h1><blockquote>
+<p>从键盘接收一个小写字母，然后找出它的前导字符和后续字符，再按顺序显示这三个字符。</p>
+</blockquote>
+<pre class="line-numbers language-armasm" data-language="armasm"><code class="language-armasm"><span class="token instruction keyword">CSEG</span> <span class="token instruction keyword">SEGMENT</span>
+    <span class="token instruction keyword">ASSUME</span> <span class="token instruction keyword">CS</span>:CSEG
+    <span class="token instruction keyword">ORG</span> 100H
+<span class="token instruction keyword">START</span>:
+      <span class="token comment">; 从键盘接收一个小写字母</span>
+      <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span><span class="token number">1</span>
+      <span class="token instruction keyword">INT</span> 21H
+
+      <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">DL</span><span class="token punctuation">,</span>AL
+      <span class="token instruction keyword">DEC</span> <span class="token instruction keyword">DL</span>
+  
+      <span class="token comment">; 设置循环次数</span>
+      <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">CX</span><span class="token punctuation">,</span><span class="token number">3</span>       <span class="token comment">; 设置循环次数</span>
+  
+LOOP1:
+      <span class="token comment">; 检查输入是否为小写字母</span>
+      <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">DL</span><span class="token punctuation">,</span><span class="token char">'a'</span>
+      <span class="token instruction keyword">JB</span> <span class="token instruction keyword">EXIT</span>        <span class="token comment">; 小于'a'就退出</span>
+      <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">DL</span><span class="token punctuation">,</span><span class="token char">'z'</span>
+      <span class="token instruction keyword">JA</span> <span class="token instruction keyword">EXIT</span>        <span class="token comment">; 大于'z'就退出</span>
+  
+      <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span><span class="token number">2</span>
+      <span class="token instruction keyword">INT</span> 21H
+  
+      <span class="token instruction keyword">ADD</span> <span class="token instruction keyword">DL</span><span class="token punctuation">,</span><span class="token number">1</span>
+
+      <span class="token instruction keyword">LOOP</span> LOOP1     <span class="token comment">; CX减1，若不为0则跳转到LOOP1继续循环</span>
+  
+<span class="token instruction keyword">EXIT</span>:
+      <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span>4CH
+      <span class="token instruction keyword">INT</span> 21H
+  
+<span class="token instruction keyword">CSEG</span> <span class="token instruction keyword">ENDS</span>
+      <span class="token directive property">END</span> <span class="token instruction keyword">START</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="1-指令-MOV-AH-02H-中-02H-的含义是？"><a href="#1-指令-MOV-AH-02H-中-02H-的含义是？" class="headerlink" title="(1) 指令 MOV AH, 02H 中 02H 的含义是？"></a>(1) 指令 MOV AH, 02H 中 02H 的含义是？</h2><p>在 x86 汇编中，<code>MOV AH, 02H</code> 指令将立即数 02H 存入 AH 寄存器。在 DOS 中断服务程序中，这个值有特殊含义：<strong>将 AH 设置为 02H 是为了调用 DOS 的 2 号功能 - 显示字符输出功能</strong>。</p>
+<p>当执行 <code>INT 21H</code> 中断调用时，系统会根据 AH 中的值来确定要执行的 DOS 功能。02H 功能会将 DL 寄存器中的 ASCII 字符显示到标准输出设备（通常是屏幕）上。</p>
+<h2 id="2-指令-ADD-DL-30H-的作用是什么？"><a href="#2-指令-ADD-DL-30H-的作用是什么？" class="headerlink" title="(2) 指令 ADD DL, 30H 的作用是什么？"></a>(2) 指令 ADD DL, 30H 的作用是什么？</h2><p>指令 <code>ADD DL, 30H</code> 的作用是<strong>将 DL 寄存器中的数值转换为对应的 ASCII 码字符</strong>。</p>
+<p>具体来说：</p>
+<ul>
+<li>30H 是 ASCII 码中数字’0’的十六进制表示</li>
+<li>当 DL 中存储的是一个 0-9 的数值时，加上 30H 后会变成对应数字的 ASCII 码</li>
+<li>例如：DL=3，执行 ADD DL,30H 后，DL=33H，这是数字’3’的 ASCII 码</li>
+</ul>
+<p>在这个程序中，由于 BB_1 数组中存储的是加 2 后的数值（3,5,7,9,4,6,8），需要将这些数值转换为 ASCII 码才能正确显示，否则会显示为不可见的控制字符。</p>
+<blockquote>
+<p>注意：这种转换方法只适用于单个十进制数字（0-9）。对于大于 9 的数字，这种简单的加 30H 方法会产生错误的字符。</p>
+</blockquote>
+<h2 id="3-除了参考程序中用的访问方式，还可以用什么方式访问-AA-1-数组里的元素？"><a href="#3-除了参考程序中用的访问方式，还可以用什么方式访问-AA-1-数组里的元素？" class="headerlink" title="(3) 除了参考程序中用的访问方式，还可以用什么方式访问 AA_1 数组里的元素？"></a>(3) 除了参考程序中用的访问方式，还可以用什么方式访问 AA_1 数组里的元素？</h2><p>参考程序中使用的是基于寄存器间接寻址方式（使用 SI 作为指针）来访问 AA_1 数组元素。除此之外，还可以使用以下方式：</p>
+<ol>
+<li><strong>直接寻址</strong>：</li>
+</ol>
+<pre class="line-numbers language-armasm" data-language="armasm"><code class="language-armasm"><span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> AA_1<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>    <span class="token comment">; 访问第一个元素</span>
+<span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> AA_1<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>    <span class="token comment">; 访问第二个元素</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ol>
+<li><strong>基址寻址</strong>：</li>
+</ol>
+<pre class="line-numbers language-armasm" data-language="armasm"><code class="language-armasm"><span class="token instruction keyword">MOV</span> <span class="token instruction keyword">BX</span><span class="token punctuation">,</span> OFFSET AA_1
+<span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>BX<span class="token punctuation">]</span>       <span class="token comment">; 访问第一个元素</span>
+<span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>BX<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span>     <span class="token comment">; 访问第二个元素</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li><strong>变址寻址</strong>：</li>
+</ol>
+<pre class="line-numbers language-armasm" data-language="armasm"><code class="language-armasm"><span class="token instruction keyword">MOV</span> <span class="token instruction keyword">SI</span><span class="token punctuation">,</span> <span class="token number">0</span>
+<span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> AA_1<span class="token punctuation">[</span>SI<span class="token punctuation">]</span>   <span class="token comment">; 访问第一个元素</span>
+<span class="token instruction keyword">INC</span> <span class="token instruction keyword">SI</span>
+<span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> AA_1<span class="token punctuation">[</span>SI<span class="token punctuation">]</span>   <span class="token comment">; 访问第二个元素</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li><strong>基址加变址寻址</strong>：</li>
+</ol>
+<pre class="line-numbers language-armasm" data-language="armasm"><code class="language-armasm"><span class="token instruction keyword">MOV</span> <span class="token instruction keyword">BX</span><span class="token punctuation">,</span> OFFSET AA_1
+<span class="token instruction keyword">MOV</span> <span class="token instruction keyword">SI</span><span class="token punctuation">,</span> <span class="token number">0</span>
+<span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>BX<span class="token operator">+</span>SI<span class="token punctuation">]</span>    <span class="token comment">; 访问第一个元素</span>
+<span class="token instruction keyword">INC</span> <span class="token instruction keyword">SI</span>
+<span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>BX<span class="token operator">+</span>SI<span class="token punctuation">]</span>    <span class="token comment">; 访问第二个元素</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li><strong>基址加变址加位移寻址</strong>：</li>
+</ol>
+<pre class="line-numbers language-armasm" data-language="armasm"><code class="language-armasm"><span class="token instruction keyword">MOV</span> <span class="token instruction keyword">BX</span><span class="token punctuation">,</span> OFFSET AA_1
+<span class="token instruction keyword">MOV</span> <span class="token instruction keyword">SI</span><span class="token punctuation">,</span> <span class="token number">1</span>
+<span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>BX<span class="token operator">+</span>SI<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>  <span class="token comment">; 访问第一个元素</span>
+<span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>BX<span class="token operator">+</span>SI<span class="token punctuation">]</span>    <span class="token comment">; 访问第二个元素</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="任务-3"><a href="#任务-3" class="headerlink" title="任务 3"></a>任务 3</h1><blockquote>
+<p>已知 DATAX 和 DATAY 单元各存放一个带符号字节数据，从键盘上接收加（＋）、减（－）、乘（*）或除（/）符号，然后完成相应运算，把结果显示在屏幕上。</p>
+</blockquote>
+<h2 id="求绝对值-基础模块"><a href="#求绝对值-基础模块" class="headerlink" title="求绝对值(基础模块)"></a>求绝对值(基础模块)</h2><pre class="line-numbers language-armasm" data-language="armasm"><code class="language-armasm"><span class="token directive property">DATA</span> <span class="token instruction keyword">SEGMENT</span>
+    num <span class="token instruction keyword">DB</span> <span class="token operator">-</span><span class="token number">6</span>         _<span class="token comment">; 8位有符号数_</span>
+    buf <span class="token instruction keyword">DB</span> <span class="token number">4</span> <span class="token instruction keyword">DUP</span><span class="token punctuation">(</span><span class="token operator">?</span><span class="token punctuation">)</span>   _<span class="token comment">; 最多3位+1_</span>
+<span class="token directive property">DATA</span> <span class="token instruction keyword">ENDS</span>
+
+<span class="token directive property">CODE</span> <span class="token instruction keyword">SEGMENT</span>
+    <span class="token instruction keyword">ASSUME</span> <span class="token instruction keyword">CS</span>:<span class="token directive property">CODE</span><span class="token punctuation">,</span> DS:<span class="token directive property">DATA</span>
+<span class="token instruction keyword">START</span>:
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AX</span><span class="token punctuation">,</span> <span class="token directive property">DATA</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">DS</span><span class="token punctuation">,</span> AX
+
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> num       _<span class="token comment">; 取数_</span>
+    <span class="token instruction keyword">CBW</span>               _<span class="token comment">; 符号扩展到AX_</span>
+
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> <span class="token number">0</span>
+    <span class="token instruction keyword">JGE</span> PRINT_DEC     _<span class="token comment">; 如果是正数，直接打印_</span>
+    <span class="token instruction keyword">NEG</span> <span class="token instruction keyword">AL</span>            _<span class="token comment">; 取绝对值_</span>
+    <span class="token instruction keyword">CBW</span>
+
+PRINT_DEC:
+    _<span class="token comment">; AX中为正数，转十进制_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">SI</span><span class="token punctuation">,</span> <span class="token number">0</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">BX</span><span class="token punctuation">,</span> <span class="token number">10</span>
+
+CONV_LOOP:
+    <span class="token instruction keyword">XOR</span> <span class="token instruction keyword">DX</span><span class="token punctuation">,</span> DX
+    <span class="token instruction keyword">DIV</span> <span class="token instruction keyword">BX</span>            _<span class="token comment">; AX / 10, 商-&gt;AX, 余数-&gt;DX_</span>
+    <span class="token instruction keyword">ADD</span> <span class="token instruction keyword">DL</span><span class="token punctuation">,</span> <span class="token char">'0'</span>
+    <span class="token instruction keyword">MOV</span> buf<span class="token punctuation">[</span>SI<span class="token punctuation">]</span><span class="token punctuation">,</span> DL
+    <span class="token instruction keyword">INC</span> <span class="token instruction keyword">SI</span>
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">AX</span><span class="token punctuation">,</span> <span class="token number">0</span>
+    <span class="token instruction keyword">JNZ</span> CONV_LOOP
+
+PRINT_LOOP:
+    <span class="token instruction keyword">DEC</span> <span class="token instruction keyword">SI</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">DL</span><span class="token punctuation">,</span> buf<span class="token punctuation">[</span>SI<span class="token punctuation">]</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span> <span class="token number">2</span>
+    <span class="token instruction keyword">INT</span> 21H
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">SI</span><span class="token punctuation">,</span> <span class="token number">0</span>
+    <span class="token instruction keyword">JNZ</span> PRINT_LOOP
+
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span> 4CH
+    <span class="token instruction keyword">INT</span> 21H
+<span class="token directive property">CODE</span> <span class="token instruction keyword">ENDS</span>
+    <span class="token directive property">END</span> <span class="token instruction keyword">START</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-armasm" data-language="armasm"><code class="language-armasm"><span class="token directive property">DATA</span> <span class="token instruction keyword">SEGMENT</span>
+    <span class="token instruction keyword">DATAX</span> <span class="token instruction keyword">DB</span> <span class="token number">6</span>      _<span class="token comment">; 带符号字节数据，负数_</span>
+    <span class="token instruction keyword">DATAY</span> <span class="token instruction keyword">DB</span> <span class="token operator">-</span><span class="token number">2</span>      _<span class="token comment">; 带符号字节数据，正数_</span>
+    <span class="token instruction keyword">RESULT</span> <span class="token instruction keyword">DB</span> <span class="token number">0</span>
+    <span class="token instruction keyword">BUF</span> <span class="token instruction keyword">DB</span> <span class="token number">4</span> <span class="token instruction keyword">DUP</span><span class="token punctuation">(</span><span class="token operator">?</span><span class="token punctuation">)</span>
+<span class="token directive property">DATA</span> <span class="token instruction keyword">ENDS</span>
+
+<span class="token instruction keyword">CSEG</span> <span class="token instruction keyword">SEGMENT</span>
+    <span class="token instruction keyword">ASSUME</span> <span class="token instruction keyword">CS</span>:CSEG<span class="token punctuation">,</span>DS:<span class="token directive property">DATA</span>
+<span class="token instruction keyword">START</span>:
+      <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AX</span><span class="token punctuation">,</span><span class="token directive property">DATA</span>
+      <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">DS</span><span class="token punctuation">,</span>AX
+
+      _<span class="token comment">;从键盘接收+,-,*,/_</span>
+      <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span><span class="token number">1</span>
+      <span class="token instruction keyword">INT</span> 21H
+
+      <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span><span class="token char">'+'</span>
+      <span class="token instruction keyword">JE</span> ADD_OP
+      <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span><span class="token char">'-'</span>
+      <span class="token instruction keyword">JE</span> SUB_OP
+      <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span><span class="token char">'*'</span>
+      <span class="token instruction keyword">JE</span> MUL_OP
+      <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span><span class="token char">'/'</span>
+      <span class="token instruction keyword">JE</span> DIV_OP
+
+ADD_OP:
+      <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span>DATAX
+      <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">BL</span><span class="token punctuation">,</span>DATAY
+      <span class="token instruction keyword">ADD</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span>BL
+      <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">RESULT</span><span class="token punctuation">,</span>AL
+      <span class="token instruction keyword">JMP</span> SHOW_RESULT  
+  
+SUB_OP:
+      <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span>DATAX
+      <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">BL</span><span class="token punctuation">,</span>DATAY
+      <span class="token instruction keyword">SUB</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span>BL
+      <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">RESULT</span><span class="token punctuation">,</span>AL
+      <span class="token instruction keyword">JMP</span> SHOW_RESULT  
+
+MUL_OP:
+_<span class="token comment">; 字节乘法： _</span>
+_<span class="token comment">; （AL）*（OPS8）→AX_</span>
+      <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span>DATAX
+      <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">BL</span><span class="token punctuation">,</span>DATAY
+      <span class="token instruction keyword">IMUL</span> <span class="token instruction keyword">BL</span>
+      <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">RESULT</span><span class="token punctuation">,</span>AL
+      <span class="token instruction keyword">JMP</span> SHOW_RESULT  
+
+DIV_OP:
+      <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span>DATAX
+      <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">BL</span><span class="token punctuation">,</span>DATAY
+      <span class="token instruction keyword">CBW</span> _<span class="token comment">;将AL符号扩展到AX_</span>
+      <span class="token instruction keyword">IDIV</span> <span class="token instruction keyword">BL</span>
+      <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">RESULT</span><span class="token punctuation">,</span>AL
+      <span class="token instruction keyword">JMP</span> SHOW_RESULT  
+
+_<span class="token comment">;难点在打印,将每次除以10,把余数入栈,然后出栈,打印_</span>
+SHOW_RESULT:
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> RESULT
+    <span class="token instruction keyword">CBW</span>
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> <span class="token number">0</span>
+    <span class="token instruction keyword">JGE</span> <span class="token instruction keyword">SHOW</span>
+    <span class="token instruction keyword">PUSH</span> <span class="token instruction keyword">AX</span>           _<span class="token comment">; 保存原始AL_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">DL</span><span class="token punctuation">,</span> <span class="token char">'-'</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span> <span class="token number">2</span>
+    <span class="token instruction keyword">INT</span> 21H
+    <span class="token instruction keyword">POP</span> <span class="token instruction keyword">AX</span>            _<span class="token comment">; 恢复AL_</span>
+    <span class="token instruction keyword">NEG</span> <span class="token instruction keyword">AL</span>
+    <span class="token instruction keyword">CBW</span>
+
+<span class="token instruction keyword">SHOW</span>:
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">SI</span><span class="token punctuation">,</span><span class="token number">0</span>            _<span class="token comment">; SI为BUF索引_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">BX</span><span class="token punctuation">,</span><span class="token number">10</span>
+
+CONV_LOOP:
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">DX</span><span class="token punctuation">,</span><span class="token number">0</span>
+    <span class="token instruction keyword">DIV</span> <span class="token instruction keyword">BX</span>
+    <span class="token instruction keyword">ADD</span> <span class="token instruction keyword">DL</span><span class="token punctuation">,</span><span class="token char">'0'</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">BUF</span><span class="token punctuation">[</span>SI<span class="token punctuation">]</span><span class="token punctuation">,</span>DL
+    <span class="token instruction keyword">INC</span> <span class="token instruction keyword">SI</span>
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">AX</span><span class="token punctuation">,</span><span class="token number">0</span>
+    <span class="token instruction keyword">JNZ</span> CONV_LOOP
+
+PRINT_LOOP:
+    <span class="token instruction keyword">DEC</span> <span class="token instruction keyword">SI</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">DL</span><span class="token punctuation">,</span>BUF<span class="token punctuation">[</span>SI<span class="token punctuation">]</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span><span class="token number">2</span>
+    <span class="token instruction keyword">INT</span> 21H
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">SI</span><span class="token punctuation">,</span><span class="token number">0</span>
+    <span class="token instruction keyword">JNZ</span> PRINT_LOOP
+    <span class="token instruction keyword">JMP</span> <span class="token instruction keyword">EXIT</span>
+
+<span class="token instruction keyword">EXIT</span>:
+      <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span>4CH
+      <span class="token instruction keyword">INT</span> 21H
+  
+<span class="token instruction keyword">CSEG</span> <span class="token instruction keyword">ENDS</span>
+      <span class="token directive property">END</span> <span class="token instruction keyword">START</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="程序逻辑流程图"><a href="#程序逻辑流程图" class="headerlink" title="程序逻辑流程图"></a>程序逻辑流程图</h2><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17478844701641747884469368.png" alt="17478844701641747884469368.png"></p>
+<blockquote>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3></blockquote>
+<ul>
+<li>当 RESULT 为负数时,我在打印结果的时候我们需要先打印’-’号,INT 21H 会把 AL 的值重新设置</li>
+<li>使用 IDIV BX 命令前需要我们将 AX 使用 CBW 命令将 AL 扩展为 AX</li>
+</ul>
+<h2 id="进一步的修改"><a href="#进一步的修改" class="headerlink" title="进一步的修改"></a>进一步的修改</h2><pre class="line-numbers language-armasm" data-language="armasm"><code class="language-armasm"><span class="token comment">; 简单计算器程序 - 对DATAX和DATAY中的有符号字节数据进行四则运算_</span>
+<span class="token comment">; 支持加(+)、减(-)、乘(*)、除(/)四种运算符_</span>
+
+.MODEL SMALL
+.STACK 100H
+
+.<span class="token directive property">DATA</span>
+<span class="token instruction keyword">DATAX</span>   <span class="token instruction keyword">DB</span>  <span class="token operator">?</span>           _<span class="token comment">; 第一个操作数_</span>
+<span class="token instruction keyword">DATAY</span>   <span class="token instruction keyword">DB</span>  <span class="token operator">?</span>           _<span class="token comment">; 第二个操作数_</span>
+MSG1    DB  'Input first number: $'
+MSG2    DB  0DH<span class="token punctuation">,</span> 0AH<span class="token punctuation">,</span> 'Input second number: $'
+MSG3    DB  0DH<span class="token punctuation">,</span> 0AH<span class="token punctuation">,</span> 'Input operator <span class="token punctuation">(</span><span class="token operator">+</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token punctuation">,</span> <span class="token operator">*</span><span class="token punctuation">,</span> <span class="token operator">/</span><span class="token punctuation">)</span>: $'
+MSG4    DB  0DH<span class="token punctuation">,</span> 0AH<span class="token punctuation">,</span> 'Result: $'
+MSG5    DB  0DH<span class="token punctuation">,</span> 0AH<span class="token punctuation">,</span> 'Division by zero<span class="token operator">!</span> $'
+<span class="token instruction keyword">TEMP</span>    <span class="token instruction keyword">DW</span>  <span class="token operator">?</span>           _<span class="token comment">; 临时存储乘法或除法结果_</span>
+NEG_FLAG DB  <span class="token number">0</span>           _<span class="token comment">; 负数标志 (1表示结果为负)_</span>
+<span class="token instruction keyword">BUF</span>     <span class="token instruction keyword">DB</span>  <span class="token number">6</span> <span class="token instruction keyword">DUP</span><span class="token punctuation">(</span><span class="token operator">?</span><span class="token punctuation">)</span>    _<span class="token comment">; 用于存储结果字符串_</span>
+NEG_INPUT DB <span class="token number">0</span>          _<span class="token comment">; 输入负号标志_</span>
+<span class="token instruction keyword">VALUE</span>     <span class="token instruction keyword">DB</span> <span class="token number">0</span>          _<span class="token comment">; 输入值_</span>
+
+.<span class="token directive property">CODE</span>
+<span class="token instruction keyword">MAIN</span> <span class="token directive property">PROC</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AX</span><span class="token punctuation">,</span> @<span class="token directive property">DATA</span>       _<span class="token comment">; 初始化数据段_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">DS</span><span class="token punctuation">,</span> AX
+
+    _<span class="token comment">; 显示第一条提示消息_</span>
+    <span class="token instruction keyword">LEA</span> <span class="token instruction keyword">DX</span><span class="token punctuation">,</span> MSG1
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span> 09H
+    <span class="token instruction keyword">INT</span> 21H
+
+    _<span class="token comment">; 输入第一个数字_</span>
+    <span class="token instruction keyword">CALL</span> INPUT_SIGNED_BYTE
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">DATAX</span><span class="token punctuation">,</span> AL
+
+    _<span class="token comment">; 显示第二条提示消息_</span>
+    <span class="token instruction keyword">LEA</span> <span class="token instruction keyword">DX</span><span class="token punctuation">,</span> MSG2
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span> 09H
+    <span class="token instruction keyword">INT</span> 21H
+
+    _<span class="token comment">; 输入第二个数字_</span>
+    <span class="token instruction keyword">CALL</span> INPUT_SIGNED_BYTE
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">DATAY</span><span class="token punctuation">,</span> AL
+
+    _<span class="token comment">; 显示操作符提示消息_</span>
+    <span class="token instruction keyword">LEA</span> <span class="token instruction keyword">DX</span><span class="token punctuation">,</span> MSG3
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span> 09H
+    <span class="token instruction keyword">INT</span> 21H
+
+    _<span class="token comment">; 输入操作符_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span> 01H
+    <span class="token instruction keyword">INT</span> 21H
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">BL</span><span class="token punctuation">,</span> AL          _<span class="token comment">; 保存操作符在BL中_</span>
+
+    _<span class="token comment">; 显示结果提示消息_</span>
+    <span class="token instruction keyword">LEA</span> <span class="token instruction keyword">DX</span><span class="token punctuation">,</span> MSG4
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span> 09H
+    <span class="token instruction keyword">INT</span> 21H
+
+    _<span class="token comment">; 根据操作符执行相应运算_</span>
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">BL</span><span class="token punctuation">,</span> <span class="token char">'+'</span>         _<span class="token comment">; 检查是否为加法_</span>
+    <span class="token instruction keyword">JE</span>  DO_ADD
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">BL</span><span class="token punctuation">,</span> <span class="token char">'-'</span>         _<span class="token comment">; 检查是否为减法_</span>
+    <span class="token instruction keyword">JE</span>  DO_SUB
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">BL</span><span class="token punctuation">,</span> <span class="token char">'*'</span>         _<span class="token comment">; 检查是否为乘法_</span>
+    <span class="token instruction keyword">JE</span>  DO_MUL
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">BL</span><span class="token punctuation">,</span> <span class="token char">'/'</span>         _<span class="token comment">; 检查是否为除法_</span>
+    <span class="token instruction keyword">JE</span>  DO_DIV
+    <span class="token instruction keyword">JMP</span> <span class="token instruction keyword">EXIT</span>            _<span class="token comment">; 如果不是有效操作符，直接退出_</span>
+
+DO_ADD:
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> DATAX       _<span class="token comment">; 加法运算_</span>
+    <span class="token instruction keyword">ADD</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> DATAY
+    <span class="token instruction keyword">JMP</span> DISPLAY_RESULT
+
+DO_SUB:
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> DATAX       _<span class="token comment">; 减法运算_</span>
+    <span class="token instruction keyword">SUB</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> DATAY
+    <span class="token instruction keyword">JMP</span> DISPLAY_RESULT
+
+DO_MUL:
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> DATAX       _<span class="token comment">; 乘法运算_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">BL</span><span class="token punctuation">,</span> DATAY
+    <span class="token instruction keyword">CALL</span> SIGNED_MUL
+    <span class="token instruction keyword">JMP</span> DISPLAY_AX
+
+DO_DIV:
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> DATAX       _<span class="token comment">; 除法运算_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">BL</span><span class="token punctuation">,</span> DATAY
+    <span class="token instruction keyword">CALL</span> SIGNED_DIV
+    <span class="token instruction keyword">JMP</span> DISPLAY_AX
+
+DISPLAY_RESULT:
+    _<span class="token comment">; 结果在AL中，转换为字符串并显示_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span> <span class="token number">0</span>           _<span class="token comment">; 清零AH，结果扩展到AX_</span>
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> <span class="token number">0</span>
+    <span class="token instruction keyword">JGE</span> <span class="token instruction keyword">POSITIVE</span>
+    <span class="token instruction keyword">NEG</span> <span class="token instruction keyword">AL</span>              _<span class="token comment">; 如果为负，取绝对值_</span>
+    <span class="token instruction keyword">MOV</span> NEG_FLAG<span class="token punctuation">,</span> <span class="token number">1</span>     _<span class="token comment">; 设置负数标志_</span>
+    <span class="token instruction keyword">JMP</span> <span class="token instruction keyword">CONTINUE</span>
+<span class="token instruction keyword">POSITIVE</span>:
+    <span class="token instruction keyword">MOV</span> NEG_FLAG<span class="token punctuation">,</span> <span class="token number">0</span>     _<span class="token comment">; 清除负数标志_</span>
+<span class="token instruction keyword">CONTINUE</span>:
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AX</span><span class="token punctuation">,</span> AX          _<span class="token comment">; AX中现在是结果的绝对值_</span>
+
+DISPLAY_AX:
+    _<span class="token comment">; 显示AX中的有符号结果_</span>
+    <span class="token instruction keyword">CALL</span> DISPLAY_SIGNED_NUM
+  
+<span class="token instruction keyword">EXIT</span>:
+    _<span class="token comment">; 程序结束_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span> 4CH
+    <span class="token instruction keyword">INT</span> 21H
+<span class="token instruction keyword">MAIN</span> <span class="token directive property">ENDP</span>
+
+_<span class="token comment">; 输入有符号字节的过程_</span>
+INPUT_SIGNED_BYTE <span class="token directive property">PROC</span>
+    _<span class="token comment">; 检查第一个字符是否为负号_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span> 01H
+    <span class="token instruction keyword">INT</span> 21H
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> <span class="token char">'-'</span>
+    <span class="token instruction keyword">JNE</span> CHECK_DIGIT1
+    <span class="token instruction keyword">MOV</span> NEG_INPUT<span class="token punctuation">,</span> <span class="token number">1</span>    _<span class="token comment">; 设置负号标志_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span> 01H         _<span class="token comment">; 再次读取一个字符_</span>
+    <span class="token instruction keyword">INT</span> 21H
+  
+CHECK_DIGIT1:
+    _<span class="token comment">; 检查输入字符是否为数字_</span>
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> <span class="token char">'0'</span>
+    <span class="token instruction keyword">JL</span> EXIT_INPUT       _<span class="token comment">; 如果小于'0'，不是数字_</span>
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> <span class="token char">'9'</span>
+    <span class="token instruction keyword">JG</span> EXIT_INPUT       _<span class="token comment">; 如果大于'9'，不是数字_</span>
+  
+    _<span class="token comment">; 转换为数值并保存_</span>
+    <span class="token instruction keyword">SUB</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> <span class="token char">'0'</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">VALUE</span><span class="token punctuation">,</span> AL
+  
+    _<span class="token comment">; 读取可能存在的第二个数字_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span> 01H
+    <span class="token instruction keyword">INT</span> 21H
+  
+    _<span class="token comment">; 检查第二个字符是否为数字_</span>
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> <span class="token char">'0'</span>
+    <span class="token instruction keyword">JL</span> EXIT_INPUT2      _<span class="token comment">; 如果小于'0'，不是数字_</span>
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> <span class="token char">'9'</span>
+    <span class="token instruction keyword">JG</span> EXIT_INPUT2      _<span class="token comment">; 如果大于'9'，不是数字_</span>
+  
+    _<span class="token comment">; 处理第二个数字_</span>
+    <span class="token instruction keyword">SUB</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> <span class="token char">'0'</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">BL</span><span class="token punctuation">,</span> VALUE       _<span class="token comment">; 将第一个数字移到BL_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">BH</span><span class="token punctuation">,</span> <span class="token number">0</span>           _<span class="token comment">; 清零BH_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">CX</span><span class="token punctuation">,</span> <span class="token number">10</span>
+    <span class="token instruction keyword">MUL</span> <span class="token instruction keyword">CX</span>              _<span class="token comment">; 将BX乘以10_</span>
+    <span class="token instruction keyword">ADD</span> <span class="token instruction keyword">BL</span><span class="token punctuation">,</span> AL          _<span class="token comment">; 加上第二个数字_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">VALUE</span><span class="token punctuation">,</span> BL
+    <span class="token instruction keyword">JMP</span> EXIT_INPUT
+  
+EXIT_INPUT2:
+    _<span class="token comment">; 如果第二个字符不是数字，将它放回缓冲区(模拟未读取)_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">DL</span><span class="token punctuation">,</span> AL
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span> 02H
+    <span class="token instruction keyword">INT</span> 21H
+  
+EXIT_INPUT:
+    _<span class="token comment">; 返回结果_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> VALUE
+    <span class="token instruction keyword">CMP</span> NEG_INPUT<span class="token punctuation">,</span> <span class="token number">1</span>
+    <span class="token instruction keyword">JNE</span> RETURN_INPUT
+    <span class="token instruction keyword">NEG</span> <span class="token instruction keyword">AL</span>              _<span class="token comment">; 如果有负号标志，取负值_</span>
+  
+RETURN_INPUT:
+    <span class="token instruction keyword">RET</span>
+INPUT_SIGNED_BYTE <span class="token directive property">ENDP</span>
+
+_<span class="token comment">; 有符号乘法过程 - 结果在AX中_</span>
+SIGNED_MUL <span class="token directive property">PROC</span>
+    _<span class="token comment">; 保存符号_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">CL</span><span class="token punctuation">,</span> AL          _<span class="token comment">; 保存第一个操作数_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">CH</span><span class="token punctuation">,</span> BL          _<span class="token comment">; 保存第二个操作数_</span>
+  
+    _<span class="token comment">; 取绝对值_</span>
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> <span class="token number">0</span>
+    <span class="token instruction keyword">JGE</span> ABS1_DONE
+    <span class="token instruction keyword">NEG</span> <span class="token instruction keyword">AL</span>
+ABS1_DONE:
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">BL</span><span class="token punctuation">,</span> <span class="token number">0</span>
+    <span class="token instruction keyword">JGE</span> ABS2_DONE
+    <span class="token instruction keyword">NEG</span> <span class="token instruction keyword">BL</span>
+ABS2_DONE:
+  
+    _<span class="token comment">; 执行无符号乘法_</span>
+    <span class="token instruction keyword">MUL</span> <span class="token instruction keyword">BL</span>              _<span class="token comment">; AX = AL * BL_</span>
+  
+    _<span class="token comment">; 确定结果符号_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">BH</span><span class="token punctuation">,</span> <span class="token number">0</span>           _<span class="token comment">; 清零BH_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">BL</span><span class="token punctuation">,</span> <span class="token number">0</span>           _<span class="token comment">; 假设结果为正_</span>
+  
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">CL</span><span class="token punctuation">,</span> <span class="token number">0</span>           _<span class="token comment">; 检查第一个操作数符号_</span>
+    <span class="token instruction keyword">JGE</span> CHECK_OP2_MUL
+    <span class="token instruction keyword">XOR</span> <span class="token instruction keyword">BL</span><span class="token punctuation">,</span> <span class="token number">1</span>           _<span class="token comment">; 翻转符号位_</span>
+  
+CHECK_OP2_MUL:
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">CH</span><span class="token punctuation">,</span> <span class="token number">0</span>           _<span class="token comment">; 检查第二个操作数符号_</span>
+    <span class="token instruction keyword">JGE</span> APPLY_SIGN_MUL
+    <span class="token instruction keyword">XOR</span> <span class="token instruction keyword">BL</span><span class="token punctuation">,</span> <span class="token number">1</span>           _<span class="token comment">; 翻转符号位_</span>
+  
+APPLY_SIGN_MUL:
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">BL</span><span class="token punctuation">,</span> <span class="token number">1</span>           _<span class="token comment">; 检查是否需要取负_</span>
+    <span class="token instruction keyword">JNE</span> RETURN_MUL
+    <span class="token instruction keyword">NEG</span> <span class="token instruction keyword">AX</span>              _<span class="token comment">; 对结果取负_</span>
+  
+RETURN_MUL:
+    <span class="token instruction keyword">RET</span>
+SIGNED_MUL <span class="token directive property">ENDP</span>
+
+_<span class="token comment">; 有符号除法过程 - 结果在AX中_</span>
+SIGNED_DIV <span class="token directive property">PROC</span>
+    _<span class="token comment">; 检查除数是否为零_</span>
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">BL</span><span class="token punctuation">,</span> <span class="token number">0</span>
+    <span class="token instruction keyword">JNE</span> NOT_ZERO_DIV
+  
+    _<span class="token comment">; 除数为零处理_</span>
+    <span class="token instruction keyword">LEA</span> <span class="token instruction keyword">DX</span><span class="token punctuation">,</span> MSG5        _<span class="token comment">; 显示除零错误消息_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span> 09H
+    <span class="token instruction keyword">INT</span> 21H
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AX</span><span class="token punctuation">,</span> <span class="token number">0</span>           _<span class="token comment">; 返回0_</span>
+    <span class="token instruction keyword">RET</span>
+  
+NOT_ZERO_DIV:
+    _<span class="token comment">; 保存符号_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">CL</span><span class="token punctuation">,</span> AL          _<span class="token comment">; 保存第一个操作数_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">CH</span><span class="token punctuation">,</span> BL          _<span class="token comment">; 保存第二个操作数_</span>
+  
+    _<span class="token comment">; 取绝对值_</span>
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">AL</span><span class="token punctuation">,</span> <span class="token number">0</span>
+    <span class="token instruction keyword">JGE</span> ABS1_DIV_DONE
+    <span class="token instruction keyword">NEG</span> <span class="token instruction keyword">AL</span>
+ABS1_DIV_DONE:
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">BL</span><span class="token punctuation">,</span> <span class="token number">0</span>
+    <span class="token instruction keyword">JGE</span> ABS2_DIV_DONE
+    <span class="token instruction keyword">NEG</span> <span class="token instruction keyword">BL</span>
+ABS2_DIV_DONE:
+  
+    _<span class="token comment">; 执行无符号除法_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span> <span class="token number">0</span>           _<span class="token comment">; 扩展AL到AX_</span>
+    <span class="token instruction keyword">DIV</span> <span class="token instruction keyword">BL</span>              _<span class="token comment">; AL = AX / BL, AH = AX % BL_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span> <span class="token number">0</span>           _<span class="token comment">; 清零AH(我们只关心商)_</span>
+  
+    _<span class="token comment">; 确定结果符号_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">BH</span><span class="token punctuation">,</span> <span class="token number">0</span>           _<span class="token comment">; 清零BH_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">BL</span><span class="token punctuation">,</span> <span class="token number">0</span>           _<span class="token comment">; 假设结果为正_</span>
+  
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">CL</span><span class="token punctuation">,</span> <span class="token number">0</span>           _<span class="token comment">; 检查第一个操作数符号_</span>
+    <span class="token instruction keyword">JGE</span> CHECK_OP2_DIV
+    <span class="token instruction keyword">XOR</span> <span class="token instruction keyword">BL</span><span class="token punctuation">,</span> <span class="token number">1</span>           _<span class="token comment">; 翻转符号位_</span>
+  
+CHECK_OP2_DIV:
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">CH</span><span class="token punctuation">,</span> <span class="token number">0</span>           _<span class="token comment">; 检查第二个操作数符号_</span>
+    <span class="token instruction keyword">JGE</span> APPLY_SIGN_DIV
+    <span class="token instruction keyword">XOR</span> <span class="token instruction keyword">BL</span><span class="token punctuation">,</span> <span class="token number">1</span>           _<span class="token comment">; 翻转符号位_</span>
+  
+APPLY_SIGN_DIV:
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">BL</span><span class="token punctuation">,</span> <span class="token number">1</span>           _<span class="token comment">; 检查是否需要取负_</span>
+    <span class="token instruction keyword">JNE</span> RETURN_DIV
+    <span class="token instruction keyword">NEG</span> <span class="token instruction keyword">AX</span>              _<span class="token comment">; 对结果取负_</span>
+  
+RETURN_DIV:
+    <span class="token instruction keyword">RET</span>
+SIGNED_DIV <span class="token directive property">ENDP</span>
+
+_<span class="token comment">; 显示有符号数字_</span>
+DISPLAY_SIGNED_NUM <span class="token directive property">PROC</span>
+    _<span class="token comment">; 检查符号_</span>
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">AX</span><span class="token punctuation">,</span> <span class="token number">0</span>
+    <span class="token instruction keyword">JGE</span> POS_NUM
+  
+    _<span class="token comment">; 显示负号_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">DL</span><span class="token punctuation">,</span> <span class="token char">'-'</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span> 02H
+    <span class="token instruction keyword">INT</span> 21H
+    <span class="token instruction keyword">NEG</span> <span class="token instruction keyword">AX</span>              _<span class="token comment">; 取绝对值_</span>
+  
+POS_NUM:
+    _<span class="token comment">; 将数字转换为字符串并显示_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">CX</span><span class="token punctuation">,</span> <span class="token number">0</span>           _<span class="token comment">; 初始化计数器_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">BX</span><span class="token punctuation">,</span> <span class="token number">10</span>          _<span class="token comment">; 基数(十进制)_</span>
+  
+    _<span class="token comment">; 将数字转换为字符串(逆序)_</span>
+CONVERT_LOOP:
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">DX</span><span class="token punctuation">,</span> <span class="token number">0</span>           _<span class="token comment">; 清零DX_</span>
+    <span class="token instruction keyword">DIV</span> <span class="token instruction keyword">BX</span>              _<span class="token comment">; AX / 10, 商在AX，余数在DX_</span>
+    <span class="token instruction keyword">PUSH</span> <span class="token instruction keyword">DX</span>             _<span class="token comment">; 保存余数_</span>
+    <span class="token instruction keyword">INC</span> <span class="token instruction keyword">CX</span>              _<span class="token comment">; 增加计数器_</span>
+    <span class="token instruction keyword">CMP</span> <span class="token instruction keyword">AX</span><span class="token punctuation">,</span> <span class="token number">0</span>           _<span class="token comment">; 检查商是否为0_</span>
+    <span class="token instruction keyword">JNE</span> CONVERT_LOOP    _<span class="token comment">; 如果不是0，继续转换_</span>
+  
+    _<span class="token comment">; 显示字符串(正序)_</span>
+DISPLAY_LOOP:
+    <span class="token instruction keyword">POP</span> <span class="token instruction keyword">DX</span>              _<span class="token comment">; 取出一个数字_</span>
+    <span class="token instruction keyword">ADD</span> <span class="token instruction keyword">DL</span><span class="token punctuation">,</span> <span class="token char">'0'</span>         _<span class="token comment">; 转换为ASCII_</span>
+    <span class="token instruction keyword">MOV</span> <span class="token instruction keyword">AH</span><span class="token punctuation">,</span> 02H         _<span class="token comment">; 显示字符功能_</span>
+    <span class="token instruction keyword">INT</span> 21H
+    <span class="token instruction keyword">LOOP</span> DISPLAY_LOOP   _<span class="token comment">; 循环直到所有数字显示完毕_</span>
+  
+    <span class="token instruction keyword">RET</span>
+DISPLAY_SIGNED_NUM <span class="token directive property">ENDP</span>
+
+<span class="token directive property">END</span> <span class="token instruction keyword">MAIN</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2025/06/01/2025-06-01-Hive%20%E6%8A%80%E6%9C%AF%E5%8F%8A%E5%BA%94%E7%94%A8%E4%BB%8B%E7%BB%8D/">2025-06-01-Hive 技术及应用介绍</a></li>
+                
+                
+                    <li>下一篇: <a href="/2025/05/17/2025-05-17-scBridge%20embraces%20cell%20heterogeneity%20in%20single-cell%20RNA-seq%20and%20ATAC-seq%20data%20integration/">2025-05-17-scBridge</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/course/" rel="tag">课程学习</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>ttkqwe</h4>
+                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2026/04/07/2026-04-07-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-707-%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/">2026-04-07-LeetCode刷题笔记-707-设计链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/06/2026-04-06-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-MoKA-Multimodal%20Low-Rank%20Adaptation%20for%20MLLMs/">2026-04-06-论文阅读-MoKA-Multimodal Low-Rank Adaptation for MLLMs</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/06/2026-04-06-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-203-%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/">2026-04-06-LeetCode刷题笔记-203-移除链表元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-GitHub%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7gh%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E8%A7%88/">2026-04-05-GitHub仓库管理工具gh常用命令总览</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-%E5%A6%82%E4%BD%95%E5%9C%A8Hugging%20Face%E4%B8%8B%E8%BD%BD%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%B0%E6%9C%AC%E5%9C%B0/">2026-04-05-如何在Hugging Face下载模型和数据集到本地</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/04/05/2026-04-05-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-209-%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/">2026-04-05-LeetCode刷题笔记-209-长度最小的子数组</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">四月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">一月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">十二月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">十一月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">十月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CLI-%E5%B7%A5%E5%85%B7/" style="font-size: 11.11px;">CLI 工具</a> <a href="/tags/CPP/" style="font-size: 10px;">CPP</a> <a href="/tags/Claude-Code/" style="font-size: 11.11px;">Claude Code</a> <a href="/tags/CodeStats/" style="font-size: 10px;">CodeStats</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hugging-Face/" style="font-size: 10px;">Hugging Face</a> <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/LeetCode/" style="font-size: 17.78px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/LoRA/" style="font-size: 10px;">LoRA</a> <a href="/tags/MLLM/" style="font-size: 10px;">MLLM</a> <a href="/tags/Neovim/" style="font-size: 10px;">Neovim</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/TTS-%E6%8E%A8%E7%90%86%E4%BE%A7%E7%BC%A9%E6%94%BE/" style="font-size: 10px;">TTS(推理侧缩放)</a> <a href="/tags/VS-Code/" style="font-size: 11.11px;">VS Code</a> <a href="/tags/WSL/" style="font-size: 10px;">WSL</a> <a href="/tags/Windows/" style="font-size: 11.11px;">Windows</a> <a href="/tags/gh/" style="font-size: 10px;">gh</a> <a href="/tags/vibe-coding/" style="font-size: 10px;">vibe coding</a> <a href="/tags/%E4%B9%B1%E7%A0%81/" style="font-size: 10px;">乱码</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/" style="font-size: 10px;">二分搜索</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">二维前缀和</a> <a href="/tags/%E4%BB%A3%E7%90%86/" style="font-size: 11.11px;">代理</a> <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" style="font-size: 11.11px;">位运算</a> <a href="/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" style="font-size: 10px;">具身智能</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">前缀和</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 10px;">动态规划</a> <a href="/tags/%E5%8F%82%E6%95%B0%E9%AB%98%E6%95%88%E5%BE%AE%E8%B0%83-PEFT/" style="font-size: 10px;">参数高效微调(PEFT)</a> <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" style="font-size: 11.11px;">双指针</a> <a href="/tags/%E5%8F%AF%E6%8F%90%E7%A4%BA%E8%A7%86%E8%A7%89%E5%88%86%E5%89%B2/" style="font-size: 10px;">可提示视觉分割</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" style="font-size: 10px;">命令总结</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 10px;">命令行</a> <a href="/tags/%E5%93%88%E5%B8%8C/" style="font-size: 10px;">哈希</a> <a href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/" style="font-size: 10px;">多模态</a> <a href="/tags/%E5%AD%97%E4%BD%93/" style="font-size: 10px;">字体</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">工具配置</a> <a href="/tags/%E6%8B%93%E6%89%91/" style="font-size: 10px;">拓扑</a> <a href="/tags/%E6%8C%87%E9%92%88/" style="font-size: 10px;">指针</a> <a href="/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">插件</a> <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/" style="font-size: 10px;">数据集</a> <a href="/tags/%E6%95%B0%E7%BB%84/" style="font-size: 10px;">数组</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA-UAVs/" style="font-size: 10px;">无人机(UAVs)</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" style="font-size: 12.22px;">期末复习</a> <a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">架构设计</a> <a href="/tags/%E6%A8%A1%E5%9E%8B%E4%B8%8B%E8%BD%BD/" style="font-size: 10px;">模型下载</a> <a href="/tags/%E6%A8%A1%E6%8B%9F/" style="font-size: 10px;">模拟</a> <a href="/tags/%E6%AC%A7%E6%8B%89%E5%85%AC%E5%BC%8F/" style="font-size: 10px;">欧拉公式</a> <a href="/tags/deep-learning/" style="font-size: 14.44px;">深度学习</a> <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" style="font-size: 10px;">滑动窗口</a> <a href="/tags/%E7%89%9B%E5%AE%A2/" style="font-size: 13.33px;">牛客</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 12.22px;">环境配置</a> <a href="/tags/development/" style="font-size: 14.44px;">程序开发</a> <a href="/tags/algorithm/" style="font-size: 20px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 13.33px;">算法练习</a> <a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 10px;">终端</a> <a href="/tags/%E7%BB%BC%E8%BF%B0%E8%AE%BA%E6%96%87/" style="font-size: 10px;">综述论文</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 10px;">网站</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 11.11px;">网络</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%A4%B4%E8%8A%82%E7%82%B9/" style="font-size: 10px;">虚拟头节点</a> <a href="/tags/%E8%A7%86%E9%A2%91%E5%88%86%E5%89%B2/" style="font-size: 10px;">视频分割</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" style="font-size: 10px;">计算机图形学</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6-%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">计算机图形学 课程学习</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 15.56px;">论文阅读</a> <a href="/tags/course/" style="font-size: 18.89px;">课程学习</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AE%9E%E9%AA%8C/" style="font-size: 10px;">课程实验</a> <a href="/tags/%E8%B4%A8%E6%95%B0%E7%AD%9B/" style="font-size: 10px;">质数筛</a> <a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 10px;">贪心</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 11.11px;">链表</a> <a href="/tags/troubleshooting/" style="font-size: 16.67px;">问题解决</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>
+                © 2026 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.
+                
+                    &nbsp;|&nbsp;
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+                        蜀ICP备2025165253号
+                    </a>
+                
+                
+            </p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true,"search_engine":"bing"});</script>
+
+<style>
+.police-beian{display:inline-flex;align-items:center;gap:4px}
+.police-icon{display:inline-block;width:16px;height:16px;background:#e91e63;border-radius:2px;opacity:.85}
+/* 说明：如需官方警徽图标，可将 .police-icon 的 background 设置为图片：
+   background:url('https://www.beian.gov.cn/img/ghs.png') no-repeat center/contain; */
+</style>
+
+  </body>
+</html>
