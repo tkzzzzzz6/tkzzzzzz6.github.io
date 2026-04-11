@@ -114,6 +114,34 @@
   </entry>
   
   <entry>
+    <title>2026-04-11-LeetCode刷题笔记-454-四数相加 II</title>
+    <link href="https://tanke.asia/2026/04/11/2026-04-11-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-454-%E5%9B%9B%E6%95%B0%E7%9B%B8%E5%8A%A0%20II/"/>
+    <id>https://tanke.asia/2026/04/11/2026-04-11-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-454-%E5%9B%9B%E6%95%B0%E7%9B%B8%E5%8A%A0%20II/</id>
+    <published>2026-04-10T16:00:00.000Z</published>
+    <updated>2026-04-11T03:25:47.519Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你四个整数数组 <code>nums1</code>、<code>nums2</code>、<code>nums3</code> 和 <code>nums4</code>，数组长度都为 <code>n</code>，请你计算有多少个元组 <code>(i, j, k, l)</code>，满足：</p><p><code>nums1[i] + nums2[j] + nums3[k] + nums4[l] == 0</code>。</p><hr><h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><p>暴力做法是四重循环，时间复杂度 <code>O(n^4)</code>，会直接超时。</p><p>这题的关键是把四数问题拆成两组两数问题：</p><ol><li>先遍历 <code>nums1</code> 和 <code>nums2</code>，统计所有 <code>a + b</code> 的出现次数，存入哈希表。</li><li>再遍历 <code>nums3</code> 和 <code>nums4</code>，设当前和为 <code>c + d</code>。</li><li>如果想让总和为 <code>0</code>，就需要 <code>a + b = -(c + d)</code>。</li><li>只要 <code>-(c + d)</code> 在哈希表里出现过，就把对应次数累加到答案里。</li></ol><p>这样可以把复杂度从 <code>O(n^4)</code> 降到 <code>O(n^2)</code>。</p><hr><h2 id="C-代码实现"><a href="#C-代码实现" class="headerlink" title="C++ 代码实现"></a>C++ 代码实现</h2><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span><span class="token keyword">public</span><span class="token operator">:</span>  <span class="token keyword">int</span> <span class="token function">fourSumCount</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token operator">&amp;</span>nums1<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token operator">&amp;</span>nums2<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token operator">&amp;</span>nums3<span class="token punctuation">,</span>                   vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token operator">&amp;</span>nums4<span class="token punctuation">)</span> <span class="token punctuation">{</span>    unordered_map<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">&gt;</span> umap<span class="token punctuation">;</span>    <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> a <span class="token operator">:</span> nums1<span class="token punctuation">)</span> <span class="token punctuation">{</span>      <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> b <span class="token operator">:</span> nums2<span class="token punctuation">)</span> <span class="token punctuation">{</span>        umap<span class="token punctuation">[</span>a <span class="token operator">+</span> b<span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>      <span class="token punctuation">}</span>    <span class="token punctuation">}</span>    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> c <span class="token operator">:</span> nums3<span class="token punctuation">)</span> <span class="token punctuation">{</span>      <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> d <span class="token operator">:</span> nums4<span class="token punctuation">)</span> <span class="token punctuation">{</span>        <span class="token keyword">auto</span> iter <span class="token operator">=</span> umap<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token punctuation">(</span>c <span class="token operator">+</span> d<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token keyword">if</span> <span class="token punctuation">(</span>iter <span class="token operator">!=</span> umap<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>          count <span class="token operator">+=</span> iter<span class="token operator">-&gt;</span>second<span class="token punctuation">;</span>        <span class="token punctuation">}</span>      <span class="token punctuation">}</span>    <span class="token punctuation">}</span>    <span class="token keyword">return</span> count<span class="token punctuation">;</span>  <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><hr><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><ul><li>时间复杂度：<code>O(n^2)</code>，两次双重循环。</li><li>空间复杂度：<code>O(n^2)</code>，最坏情况下哈希表需要存储 <code>n^2</code> 个两数和。</li></ul><hr><h2 id="易错点记录"><a href="#易错点记录" class="headerlink" title="易错点记录"></a>易错点记录</h2><ol><li>误写成 <code>umap[c + d]</code>，正确是去查 <code>-(c + d)</code>。</li><li>忘记哈希表存的是“出现次数”，不是只存是否出现。</li><li>结果累加时写成 <code>count++</code>，应当是 <code>count += umap[目标值]</code>。</li></ol><hr><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这题是哈希表降维打击的经典题型。把四数求和拆成两次两数求和，再用哈希表做频次统计，复杂度就能从 <code>O(n^4)</code> 直接降到 <code>O(n^2)</code>。以后遇到 <code>k</code> 数之和计数问题，也可以优先想一想这种“分组 + 哈希”思路。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;给你四个整数数组 &lt;code&gt;nums1&lt;/code&gt;、&lt;code&gt;nums2&lt;/code&gt;、&lt;code&gt;nums3&lt;/co</summary>
+      
+    
+    
+    
+    <category term="算法蒟蒻的成长记录" scheme="https://tanke.asia/categories/%E7%AE%97%E6%B3%95%E8%92%9F%E8%92%BB%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/"/>
+    
+    <category term="LeetCode" scheme="https://tanke.asia/categories/%E7%AE%97%E6%B3%95%E8%92%9F%E8%92%BB%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/LeetCode/"/>
+    
+    
+    <category term="LeetCode" scheme="https://tanke.asia/tags/LeetCode/"/>
+    
+    <category term="哈希表" scheme="https://tanke.asia/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/"/>
+    
+  </entry>
+  
+  <entry>
     <title>2026-04-10-LeetCode刷题笔记-19-删除链表倒数第N个节点</title>
     <link href="https://tanke.asia/2026/04/10/2026-04-10-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-19-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9/"/>
     <id>https://tanke.asia/2026/04/10/2026-04-10-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-19-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9/</id>
@@ -595,33 +623,6 @@
     <category term="GitHub Pages" scheme="https://tanke.asia/tags/GitHub-Pages/"/>
     
     <category term="网站" scheme="https://tanke.asia/tags/%E7%BD%91%E7%AB%99/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2026-03-15-因服务器网络访问问题从 GitHub 平滑迁移至 Gitee 等国内平台的方法</title>
-    <link href="https://tanke.asia/2026/03/15/2026-03-15-%E5%9B%A0%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BD%91%E7%BB%9C%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98%E4%BB%8E%20GitHub%20%E5%B9%B3%E6%BB%91%E8%BF%81%E7%A7%BB%E8%87%B3%20Gitee%20%E7%AD%89%E5%9B%BD%E5%86%85%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%96%B9%E6%B3%95/"/>
-    <id>https://tanke.asia/2026/03/15/2026-03-15-%E5%9B%A0%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BD%91%E7%BB%9C%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98%E4%BB%8E%20GitHub%20%E5%B9%B3%E6%BB%91%E8%BF%81%E7%A7%BB%E8%87%B3%20Gitee%20%E7%AD%89%E5%9B%BD%E5%86%85%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%96%B9%E6%B3%95/</id>
-    <published>2026-03-14T16:00:00.000Z</published>
-    <updated>2026-04-05T10:59:45.685Z</updated>
-    
-    <content type="html"><![CDATA[<p>在日常开发中，我们经常需要将代码仓库从 GitHub 迁移到 Gitee，以获得更快的访问速度。本文将教你如何优雅地修改远程源，并理清 <code>origin</code> 与 <code>upstream</code> 的关系。</p><h2 id="1-查看当前配置"><a href="#1-查看当前配置" class="headerlink" title="1. 查看当前配置"></a>1. 查看当前配置</h2><p>首先，在终端（Ubuntu/Windows/Mac 通用）进入项目目录，查看现有的远程仓库：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> remote <span class="token parameter variable">-v</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>你可能会看到类似下面的输出：</p><ul><li><code>origin</code>：指向你自己的仓库（GitHub）。</li><li><code>upstream</code>：指向原作者的仓库（如果你是 Fork 的项目）。</li></ul><h2 id="2-修改远程仓库地址"><a href="#2-修改远程仓库地址" class="headerlink" title="2. 修改远程仓库地址"></a>2. 修改远程仓库地址</h2><p>核心命令是重置 <code>origin</code>。直接将你的主要推送目标 <code>origin</code> 修改为 Gitee 地址：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> remote set-url origin https://gitee.com/你的用户名/你的仓库名称.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="3-upstream-和-origin？"><a href="#3-upstream-和-origin？" class="headerlink" title="3. upstream 和 origin？"></a>3. upstream 和 origin？</h2><p>如果你的仓库是从别人那里 Fork 来的，除了 <code>origin</code> 你还会看到一个 <code>upstream</code> 源。</p><ul><li><code>origin</code>：你自己的仓库，负责推送和拉取。</li><li><code>upstream</code>：原作者的仓库，负责同步更新。</li></ul><p>如图所示,在 vscode 中初次执行 <code>push</code> 命令的时候,会要求选择 push to 的仓库: </p><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1773543044252.png" alt="1773543044252.png"></p><h2 id="4-验证与首次推送"><a href="#4-验证与首次推送" class="headerlink" title="4. 验证与首次推送"></a>4. 验证与首次推送</h2><p>修改完成后，执行一次带参数的推送，重新建立本地分支与 Gitee 远程分支的绑定关系：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 检查地址是否已变更为 Gitee</span><span class="token function">git</span> remote <span class="token parameter variable">-v</span><span class="token comment"># 推送并关联分支（假设分支名为 main）</span><span class="token function">git</span> push <span class="token parameter variable">-u</span> origin main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><blockquote><p>小贴士：<code>-u</code> 参数只需执行一次。之后直接点击 VS Code 的同步按钮或输入 <code>git push</code> 即可。</p></blockquote><h2 id="5-常见问题：推送被拒绝（Rejected）？"><a href="#5-常见问题：推送被拒绝（Rejected）？" class="headerlink" title="5. 常见问题：推送被拒绝（Rejected）？"></a>5. 常见问题：推送被拒绝（Rejected）？</h2><p>如果 Gitee 仓库不是空的（例如自带 README），直接推送会报错。</p><p>解决方案：强制合并一次远程历史。</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 拉取并合并不相关的历史记录</span><span class="token function">git</span> pull origin main --allow-unrelated-histories<span class="token comment"># 再次推送</span><span class="token function">git</span> push origin main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="总结：跨平台通用逻辑"><a href="#总结：跨平台通用逻辑" class="headerlink" title="总结：跨平台通用逻辑"></a>总结：跨平台通用逻辑</h2><p>无论是在 Windows（PowerShell）、Ubuntu（Terminal）还是 macOS，Git 的底层命令完全一致。</p><ul><li>想换地址？用 <code>set-url</code>。</li><li>想断绝关系？用 <code>remove</code>。</li><li>想保持同步？保留 <code>upstream</code>。</li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;在日常开发中，我们经常需要将代码仓库从 GitHub 迁移到 Gitee，以获得更快的访问速度。本文将教你如何优雅地修改远程源，并理清 &lt;code&gt;origin&lt;/code&gt; 与 &lt;code&gt;upstream&lt;/code&gt; 的关系。&lt;/p&gt;
-&lt;h2 id=&quot;1-查看当前配置</summary>
-      
-    
-    
-    
-    <category term="进击的码农" scheme="https://tanke.asia/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/"/>
-    
-    
-    <category term="Git" scheme="https://tanke.asia/tags/Git/"/>
-    
-    <category term="环境配置" scheme="https://tanke.asia/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
     
   </entry>
   
