@@ -178,7 +178,7 @@ mjx-container[display="true"] + br {
         </section>
         <article class="post-content">
         
-            <blockquote>这篇文章上次修改于 426 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+            <blockquote>这篇文章上次修改于 429 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
         
             <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
 <li><a href="#-%E6%A6%82%E8%BF%B0">概述</a></li>
@@ -344,6 +344,24 @@ NLP_SECRET_KEY <span class="token operator">=</span> <span class="token string">
             <a class="-none-link" href="/tags/development/" rel="tag">程序开发</a>
             </section>
         
+    
+    
+        <section class="post-comments">
+            <div id="waline"></div>
+        </section>
+        <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+        <script type="module">
+        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+        init({
+            el: '#waline',
+            serverURL: 'https://waline-beryl-delta.vercel.app/',
+            path: '2025/02/10/2025-02-10-文言文背诵检测程序开发/',
+            lang: 'zh-CN',
+            dark: 'body.dark-theme'
+        });
+        </script>
+    
     
         <section class="post-author">
         

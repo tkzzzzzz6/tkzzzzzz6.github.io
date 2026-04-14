@@ -178,6 +178,8 @@ mjx-container[display="true"] + br {
         </section>
         <article class="post-content">
         
+            <blockquote>这篇文章上次修改于 182 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+        
             <h2 id="map函数-vs-列表推导式"><a href="#map函数-vs-列表推导式" class="headerlink" title="map函数 vs 列表推导式"></a>map函数 vs 列表推导式</h2><h2 id="1-map函数"><a href="#1-map函数" class="headerlink" title="1. map函数"></a>1. map函数</h2><h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token builtin">map</span><span class="token punctuation">(</span>function<span class="token punctuation">,</span> iterable<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 将字符串列表转换为整数列表</span>
@@ -311,6 +313,24 @@ numbers <span class="token operator">=</span> <span class="token punctuation">[<
             <a class="-none-link" href="/tags/course/" rel="tag">课程学习</a>
             </section>
         
+    
+    
+        <section class="post-comments">
+            <div id="waline"></div>
+        </section>
+        <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+        <script type="module">
+        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+        init({
+            el: '#waline',
+            serverURL: 'https://waline-beryl-delta.vercel.app/',
+            path: '2025/10/15/2025-10-15-python列表推导式与map函数/',
+            lang: 'zh-CN',
+            dark: 'body.dark-theme'
+        });
+        </script>
+    
     
         <section class="post-author">
         

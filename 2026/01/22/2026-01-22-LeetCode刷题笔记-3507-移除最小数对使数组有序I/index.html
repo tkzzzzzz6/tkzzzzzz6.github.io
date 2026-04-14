@@ -256,6 +256,24 @@ LastEditTime: 2026-01-22 22:47:28
             </section>
         
     
+    
+        <section class="post-comments">
+            <div id="waline"></div>
+        </section>
+        <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+        <script type="module">
+        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+        init({
+            el: '#waline',
+            serverURL: 'https://waline-beryl-delta.vercel.app/',
+            path: '2026/01/22/2026-01-22-LeetCode刷题笔记-3507-移除最小数对使数组有序I/',
+            lang: 'zh-CN',
+            dark: 'body.dark-theme'
+        });
+        </script>
+    
+    
         <section class="post-author">
         
             <figure class="author-avatar">

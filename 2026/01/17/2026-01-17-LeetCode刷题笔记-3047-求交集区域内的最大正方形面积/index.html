@@ -274,6 +274,24 @@ mjx-container[display="true"] + br {
             </section>
         
     
+    
+        <section class="post-comments">
+            <div id="waline"></div>
+        </section>
+        <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+        <script type="module">
+        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+        init({
+            el: '#waline',
+            serverURL: 'https://waline-beryl-delta.vercel.app/',
+            path: '2026/01/17/2026-01-17-LeetCode刷题笔记-3047-求交集区域内的最大正方形面积/',
+            lang: 'zh-CN',
+            dark: 'body.dark-theme'
+        });
+        </script>
+    
+    
         <section class="post-author">
         
             <figure class="author-avatar">

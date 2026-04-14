@@ -353,6 +353,24 @@ mjx-container[display="true"] + br {
             </section>
         
     
+    
+        <section class="post-comments">
+            <div id="waline"></div>
+        </section>
+        <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+        <script type="module">
+        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+        init({
+            el: '#waline',
+            serverURL: 'https://waline-beryl-delta.vercel.app/',
+            path: '2025/11/27/2025-11-27-LeetCode刷题笔记-3381-长度可被K整除的子数组的最大元素和/',
+            lang: 'zh-CN',
+            dark: 'body.dark-theme'
+        });
+        </script>
+    
+    
         <section class="post-author">
         
             <figure class="author-avatar">

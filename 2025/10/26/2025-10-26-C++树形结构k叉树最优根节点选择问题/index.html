@@ -604,6 +604,24 @@ for r from 1 to n:
             </section>
         
     
+    
+        <section class="post-comments">
+            <div id="waline"></div>
+        </section>
+        <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+        <script type="module">
+        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+        init({
+            el: '#waline',
+            serverURL: 'https://waline-beryl-delta.vercel.app/',
+            path: '2025/10/26/2025-10-26-C++树形结构k叉树最优根节点选择问题/',
+            lang: 'zh-CN',
+            dark: 'body.dark-theme'
+        });
+        </script>
+    
+    
         <section class="post-author">
         
             <figure class="author-avatar">

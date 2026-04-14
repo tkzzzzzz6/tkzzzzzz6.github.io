@@ -330,6 +330,24 @@ ERROR: Failed to download https://update.code.visualstudio.com/commit:ce099c1ed2
             </section>
         
     
+    
+        <section class="post-comments">
+            <div id="waline"></div>
+        </section>
+        <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+        <script type="module">
+        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+        init({
+            el: '#waline',
+            serverURL: 'https://waline-beryl-delta.vercel.app/',
+            path: '2026/03/22/2026-03-22-WSL-网络配置-将网络模式切换为-mirrored-并修复-VS-Code-Server-下载失败 copy/',
+            lang: 'zh-CN',
+            dark: 'body.dark-theme'
+        });
+        </script>
+    
+    
         <section class="post-author">
         
             <figure class="author-avatar">
