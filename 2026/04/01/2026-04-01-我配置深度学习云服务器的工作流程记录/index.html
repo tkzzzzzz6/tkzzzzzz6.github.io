@@ -168,17 +168,21 @@ mjx-container[display="true"] + br {
     <main>
     <div class="wrap min">
         <section class="post-title">
-            <h2>2026-04-01-我配置深度学习云服务器的工作流程记录</h2>
+            <h2>
+                2026-04-01-我配置深度学习云服务器的工作流程记录
+            </h2>
             <div class="post-meta">
-                <time class="date">2026.04.01</time>
-            
-                <span class="category"><a class="category-link" href="/categories/%E6%88%91%E8%A6%81%E7%82%BC%E4%B8%B9-%E4%B8%B9%E6%B2%A1%E6%9C%89%E9%97%AE%E9%A2%98/">我要炼丹,丹没有问题</a></span>
-            
+                <time class="date">
+                    2026.04.01
+                </time>
+                
+                    <span class="category"><a class="category-link" href="/categories/%E6%88%91%E8%A6%81%E7%82%BC%E4%B8%B9-%E4%B8%B9%E6%B2%A1%E6%9C%89%E9%97%AE%E9%A2%98/">我要炼丹,丹没有问题</a></span>
+                    
             </div>
         </section>
         <article class="post-content">
-        
-            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>每次买了新的云服务器炼丹，都需要重新配置一遍环境。这里记录一下我个人完整的配置流程，方便以后查阅，也分享给大家参考。</p>
+            
+                    <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>每次买了新的云服务器炼丹，都需要重新配置一遍环境。这里记录一下我个人完整的配置流程，方便以后查阅，也分享给大家参考。</p>
 <hr>
 <h2 id="一、基础工具安装"><a href="#一、基础工具安装" class="headerlink" title="一、基础工具安装"></a>一、基础工具安装</h2><p>首先将本地ssh公钥上传到服务器，确保后续可以免密登录(这里也可以使用SCP命令上传,但是麻烦一点)：</p>
 <blockquote>
@@ -373,52 +377,57 @@ uv pip <span class="token function">install</span> nvitop swanlab tensorboard
         <section class="post-near">
             <ul>
                 
-                    <li>上一篇: <a href="/2026/04/02/2026-04-02-%E8%A7%A3%E5%86%B3VSCode%E7%BB%88%E7%AB%AF%E5%9B%BE%E6%A0%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/">2026-04-02-解决VSCode终端图标乱码问题</a></li>
-                
-                
-                    <li>下一篇: <a href="/2026/04/01/2026-04-01-%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E6%A6%82%E5%BF%B5%E8%AF%A6%E8%A7%A3/">2026-04-01-正向代理与反向代理概念详解</a></li>
-                
+                    <li>上一篇: <a href="/2026/04/02/2026-04-02-%E8%A7%A3%E5%86%B3VSCode%E7%BB%88%E7%AB%AF%E5%9B%BE%E6%A0%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/">
+                            2026-04-02-解决VSCode终端图标乱码问题
+                        </a></li>
+                    
+                            
+                                <li>下一篇: <a href="/2026/04/01/2026-04-01-%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E6%A6%82%E5%BF%B5%E8%AF%A6%E8%A7%A3/">
+                                        2026-04-01-正向代理与反向代理概念详解
+                                    </a></li>
+                                
             </ul>
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/Claude-Code/" rel="tag">Claude Code</a><a class="-none-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a><a class="-none-link" href="/tags/deep-learning/" rel="tag">深度学习</a><a class="-none-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a>
+                <a class="-none-link" href="/tags/Claude-Code/" rel="tag">Claude Code</a><a class="-none-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a><a class="-none-link" href="/tags/deep-learning/" rel="tag">深度学习</a><a class="-none-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a>
             </section>
-        
-    
-    
-        <section class="post-comments">
-            <div id="waline"></div>
-        </section>
-        <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
-        <script type="module">
-        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+            
+                
+                    
+                        <section class="post-comments">
+                            <div id="waline"></div>
+                        </section>
+                        <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+                        <script type="module">
+                            import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
 
-        init({
-            el: '#waline',
-            serverURL: 'https://waline-beryl-delta.vercel.app/',
-            path: '2026/04/01/2026-04-01-我配置深度学习云服务器的工作流程记录/',
-            lang: 'zh-CN',
-            dark: 'body.dark-theme'
-        });
-        </script>
-    
-    
-        <section class="post-author">
-        
-            <figure class="author-avatar">
-                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
-            </figure>
-        
-            <div class="author-info">
-                <h4>ttkqwe</h4>
-                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
-            </div>
-        </section>
-    
+                            init({
+                                el: '#waline',
+                                serverURL: 'https://api.zcservice.houlang.cloud/comment/6520e9a4fab90b7bde8416fdc44c9290',
+                                path: '2026/04/01/2026-04-01-我配置深度学习云服务器的工作流程记录/',
+                                lang: 'zh-CN',
+                                dark: 'body.dark-theme'
+                            });
+                        </script>
+                        
+                            
+                                <section class="post-author">
+                                    
+                                        <figure class="author-avatar">
+                                            <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+                                        </figure>
+                                        
+                                            <div class="author-info">
+                                                <h4>
+                                                    ttkqwe
+                                                </h4>
+                                                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
+                                            </div>
+                                </section>
+                                
     </div>
 </main>
-
     <footer>
     <div class="buttons">
         <button class="to-top" href="#"></button>

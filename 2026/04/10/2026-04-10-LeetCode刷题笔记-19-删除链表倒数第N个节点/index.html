@@ -168,17 +168,21 @@ mjx-container[display="true"] + br {
     <main>
     <div class="wrap min">
         <section class="post-title">
-            <h2>2026-04-10-LeetCode刷题笔记-19-删除链表倒数第N个节点</h2>
+            <h2>
+                2026-04-10-LeetCode刷题笔记-19-删除链表倒数第N个节点
+            </h2>
             <div class="post-meta">
-                <time class="date">2026.04.10</time>
-            
-                <span class="category"><a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%92%9F%E8%92%BB%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/">算法蒟蒻的成长记录</a>，<a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%92%9F%E8%92%BB%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/LeetCode/">LeetCode</a></span>
-            
+                <time class="date">
+                    2026.04.10
+                </time>
+                
+                    <span class="category"><a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%92%9F%E8%92%BB%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/">算法蒟蒻的成长记录</a>，<a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%92%9F%E8%92%BB%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/LeetCode/">LeetCode</a></span>
+                    
             </div>
         </section>
         <article class="post-content">
-        
-            <h1 id="LeetCode-19-删除链表的倒数第-N-个节点"><a href="#LeetCode-19-删除链表的倒数第-N-个节点" class="headerlink" title="LeetCode 19. 删除链表的倒数第 N 个节点"></a>LeetCode 19. 删除链表的倒数第 N 个节点</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个链表，删除链表的倒数第 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex" xmlns="http://www.w3.org/2000/svg" width="1.357ex" height="1.025ex" role="img" focusable="false" viewBox="0 -442 600 453"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g></g></svg></mjx-container> 个结点，并且返回链表的头结点。</p>
+            
+                    <h1 id="LeetCode-19-删除链表的倒数第-N-个节点"><a href="#LeetCode-19-删除链表的倒数第-N-个节点" class="headerlink" title="LeetCode 19. 删除链表的倒数第 N 个节点"></a>LeetCode 19. 删除链表的倒数第 N 个节点</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个链表，删除链表的倒数第 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex" xmlns="http://www.w3.org/2000/svg" width="1.357ex" height="1.025ex" role="img" focusable="false" viewBox="0 -442 600 453"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g></g></svg></mjx-container> 个结点，并且返回链表的头结点。</p>
 <p>这题是链表双指针的经典题，核心难点在于：<strong>如何在一次遍历中定位到“待删除节点的前一个节点”</strong>。</p>
 <hr>
 <h2 id="解题思路：虚拟头节点-快慢指针"><a href="#解题思路：虚拟头节点-快慢指针" class="headerlink" title="解题思路：虚拟头节点 + 快慢指针"></a>解题思路：虚拟头节点 + 快慢指针</h2><p>为了统一处理“删除头结点”这种边界情况，先创建一个虚拟头节点 <code>dummy</code>，让 <code>dummy-&gt;next = head</code>。</p>
@@ -238,52 +242,57 @@ mjx-container[display="true"] + br {
         <section class="post-near">
             <ul>
                 
-                    <li>上一篇: <a href="/2026/04/11/2026-04-11-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-454-%E5%9B%9B%E6%95%B0%E7%9B%B8%E5%8A%A0%20II/">2026-04-11-LeetCode刷题笔记-454-四数相加 II</a></li>
-                
-                
-                    <li>下一篇: <a href="/2026/04/07/2026-04-07-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-707-%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/">2026-04-07-LeetCode刷题笔记-707-设计链表</a></li>
-                
+                    <li>上一篇: <a href="/2026/04/11/2026-04-11-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-454-%E5%9B%9B%E6%95%B0%E7%9B%B8%E5%8A%A0%20II/">
+                            2026-04-11-LeetCode刷题笔记-454-四数相加 II
+                        </a></li>
+                    
+                            
+                                <li>下一篇: <a href="/2026/04/07/2026-04-07-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-707-%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/">
+                                        2026-04-07-LeetCode刷题笔记-707-设计链表
+                                    </a></li>
+                                
             </ul>
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/LeetCode/" rel="tag">LeetCode</a><a class="-none-link" href="/tags/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/" rel="tag">快慢指针</a><a class="-none-link" href="/tags/%E9%93%BE%E8%A1%A8/" rel="tag">链表</a>
+                <a class="-none-link" href="/tags/LeetCode/" rel="tag">LeetCode</a><a class="-none-link" href="/tags/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/" rel="tag">快慢指针</a><a class="-none-link" href="/tags/%E9%93%BE%E8%A1%A8/" rel="tag">链表</a>
             </section>
-        
-    
-    
-        <section class="post-comments">
-            <div id="waline"></div>
-        </section>
-        <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
-        <script type="module">
-        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+            
+                
+                    
+                        <section class="post-comments">
+                            <div id="waline"></div>
+                        </section>
+                        <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+                        <script type="module">
+                            import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
 
-        init({
-            el: '#waline',
-            serverURL: 'https://waline-beryl-delta.vercel.app/',
-            path: '2026/04/10/2026-04-10-LeetCode刷题笔记-19-删除链表倒数第N个节点/',
-            lang: 'zh-CN',
-            dark: 'body.dark-theme'
-        });
-        </script>
-    
-    
-        <section class="post-author">
-        
-            <figure class="author-avatar">
-                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
-            </figure>
-        
-            <div class="author-info">
-                <h4>ttkqwe</h4>
-                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
-            </div>
-        </section>
-    
+                            init({
+                                el: '#waline',
+                                serverURL: 'https://api.zcservice.houlang.cloud/comment/6520e9a4fab90b7bde8416fdc44c9290',
+                                path: '2026/04/10/2026-04-10-LeetCode刷题笔记-19-删除链表倒数第N个节点/',
+                                lang: 'zh-CN',
+                                dark: 'body.dark-theme'
+                            });
+                        </script>
+                        
+                            
+                                <section class="post-author">
+                                    
+                                        <figure class="author-avatar">
+                                            <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+                                        </figure>
+                                        
+                                            <div class="author-info">
+                                                <h4>
+                                                    ttkqwe
+                                                </h4>
+                                                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
+                                            </div>
+                                </section>
+                                
     </div>
 </main>
-
     <footer>
     <div class="buttons">
         <button class="to-top" href="#"></button>

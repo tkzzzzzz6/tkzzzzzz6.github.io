@@ -168,17 +168,21 @@ mjx-container[display="true"] + br {
     <main>
     <div class="wrap min">
         <section class="post-title">
-            <h2>2026-03-14-Claude Code配置火山方舟Coding Plan（豆包）指南</h2>
+            <h2>
+                2026-03-14-Claude Code配置火山方舟Coding Plan（豆包）指南
+            </h2>
             <div class="post-meta">
-                <time class="date">2026.03.14</time>
-            
-                <span class="category"><a class="category-link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a></span>
-            
+                <time class="date">
+                    2026.03.14
+                </time>
+                
+                    <span class="category"><a class="category-link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a></span>
+                    
             </div>
         </section>
         <article class="post-content">
-        
-            <p>国内很多租用的深度学习服务器要么无法稳定访问外网，要么访问速度较慢，而国内大模型的一大优势正是在这类环境下更容易调用。通过安装 Claude Code 并将其配置到火山方舟 Coding Plan，我们可以在无需科学上网的情况下，直接通过 Claude Code CLI 调用火山方舟上的最新豆包代码模型，实现文件操作、代码生成等能力：</p>
+            
+                    <p>国内很多租用的深度学习服务器要么无法稳定访问外网，要么访问速度较慢，而国内大模型的一大优势正是在这类环境下更容易调用。通过安装 Claude Code 并将其配置到火山方舟 Coding Plan，我们可以在无需科学上网的情况下，直接通过 Claude Code CLI 调用火山方舟上的最新豆包代码模型，实现文件操作、代码生成等能力：</p>
 <p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1773539930624.png" alt="1773539930624.png"></p>
 <h3 id="一、前置准备（必须先完成）"><a href="#一、前置准备（必须先完成）" class="headerlink" title="一、前置准备（必须先完成）"></a>一、前置准备（必须先完成）</h3><ol>
 <li><strong>订阅火山方舟Coding Plan</strong><br>访问火山方舟Coding Plan活动页按需订阅套餐（首月最低9.9元，也可先试用免费额度），订阅后才能正常调用模型<code>(当然,配置Alibaba coding Plan,Kimi coding Plan对应的操作都是类似的,只需要修改base_url和auth_token部分的信息即可</code>)。</li>
@@ -248,52 +252,57 @@ claude <span class="token parameter variable">--version</span><span aria-hidden=
         <section class="post-near">
             <ul>
                 
-                    <li>上一篇: <a href="/2026/03/15/2026-03-15-%E5%9B%A0%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BD%91%E7%BB%9C%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98%E4%BB%8E%20GitHub%20%E5%B9%B3%E6%BB%91%E8%BF%81%E7%A7%BB%E8%87%B3%20Gitee%20%E7%AD%89%E5%9B%BD%E5%86%85%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%96%B9%E6%B3%95/">2026-03-15-因服务器网络访问问题从 GitHub 平滑迁移至 Gitee 等国内平台的方法</a></li>
-                
-                
-                    <li>下一篇: <a href="/2026/01/22/2026-01-22-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-3507-%E7%A7%BB%E9%99%A4%E6%9C%80%E5%B0%8F%E6%95%B0%E5%AF%B9%E4%BD%BF%E6%95%B0%E7%BB%84%E6%9C%89%E5%BA%8FI/">2026-01-22-LeetCode刷题笔记-3507-移除最小数对使数组有序I</a></li>
-                
+                    <li>上一篇: <a href="/2026/03/15/2026-03-15-%E5%9B%A0%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BD%91%E7%BB%9C%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98%E4%BB%8E%20GitHub%20%E5%B9%B3%E6%BB%91%E8%BF%81%E7%A7%BB%E8%87%B3%20Gitee%20%E7%AD%89%E5%9B%BD%E5%86%85%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%96%B9%E6%B3%95/">
+                            2026-03-15-因服务器网络访问问题从 GitHub 平滑迁移至 Gitee 等国内平台的方法
+                        </a></li>
+                    
+                            
+                                <li>下一篇: <a href="/2026/01/22/2026-01-22-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-3507-%E7%A7%BB%E9%99%A4%E6%9C%80%E5%B0%8F%E6%95%B0%E5%AF%B9%E4%BD%BF%E6%95%B0%E7%BB%84%E6%9C%89%E5%BA%8FI/">
+                                        2026-01-22-LeetCode刷题笔记-3507-移除最小数对使数组有序I
+                                    </a></li>
+                                
             </ul>
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/CLI-%E5%B7%A5%E5%85%B7/" rel="tag">CLI 工具</a><a class="-none-link" href="/tags/Claude-Code/" rel="tag">Claude Code</a><a class="-none-link" href="/tags/vibe-coding/" rel="tag">vibe coding</a>
+                <a class="-none-link" href="/tags/CLI-%E5%B7%A5%E5%85%B7/" rel="tag">CLI 工具</a><a class="-none-link" href="/tags/Claude-Code/" rel="tag">Claude Code</a><a class="-none-link" href="/tags/vibe-coding/" rel="tag">vibe coding</a>
             </section>
-        
-    
-    
-        <section class="post-comments">
-            <div id="waline"></div>
-        </section>
-        <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
-        <script type="module">
-        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+            
+                
+                    
+                        <section class="post-comments">
+                            <div id="waline"></div>
+                        </section>
+                        <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+                        <script type="module">
+                            import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
 
-        init({
-            el: '#waline',
-            serverURL: 'https://waline-beryl-delta.vercel.app/',
-            path: '2026/03/14/2026-03-14-Claude Code配置火山方舟Coding Plan（豆包）指南/',
-            lang: 'zh-CN',
-            dark: 'body.dark-theme'
-        });
-        </script>
-    
-    
-        <section class="post-author">
-        
-            <figure class="author-avatar">
-                <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
-            </figure>
-        
-            <div class="author-info">
-                <h4>ttkqwe</h4>
-                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
-            </div>
-        </section>
-    
+                            init({
+                                el: '#waline',
+                                serverURL: 'https://api.zcservice.houlang.cloud/comment/6520e9a4fab90b7bde8416fdc44c9290',
+                                path: '2026/03/14/2026-03-14-Claude Code配置火山方舟Coding Plan（豆包）指南/',
+                                lang: 'zh-CN',
+                                dark: 'body.dark-theme'
+                            });
+                        </script>
+                        
+                            
+                                <section class="post-author">
+                                    
+                                        <figure class="author-avatar">
+                                            <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/20250927100251272.jpg?imageSlim" alt="ttkqwe" />
+                                        </figure>
+                                        
+                                            <div class="author-info">
+                                                <h4>
+                                                    ttkqwe
+                                                </h4>
+                                                <p>计算机大三学生，喜欢研究一些乱七八糟的东西，目前研究方向是深度学习。本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
+                                            </div>
+                                </section>
+                                
     </div>
 </main>
-
     <footer>
     <div class="buttons">
         <button class="to-top" href="#"></button>
