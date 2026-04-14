@@ -335,9 +335,7 @@ mjx-container[display="true"] + br {
                                 dark: 'body.dark-theme'
                             });
 
-                            const refreshDelays = [1500, 5000];
-                            let refreshTimers = [];
-                            let refreshToken = 0;
+                            let refreshTimer = 0;
 
                             const setStatus = (text, hideAfterMs = 0) => {
                                 if (!statusEl) return;
@@ -353,52 +351,29 @@ mjx-container[display="true"] + br {
                                 }
                             };
 
-                            const clearRefreshTimers = () => {
-                                refreshTimers.forEach((timer) => window.clearTimeout(timer));
-                                refreshTimers = [];
+                            const clearRefreshTimer = () => {
+                                if (refreshTimer) {
+                                    window.clearTimeout(refreshTimer);
+                                    refreshTimer = 0;
+                                }
                             };
 
                             const scheduleRefresh = () => {
-                                refreshToken += 1;
-                                const currentToken = refreshToken;
-                                clearRefreshTimers();
+                                clearRefreshTimer();
                                 setStatus('评论已提交，正在刷新列表…');
-
-                                refreshTimers = refreshDelays.map((delay, index) =>
-                                    window.setTimeout(() => {
-                                        if (currentToken !== refreshToken) return;
-                                        walineInstance.update({ path: walinePath });
-
-                                        if (index === refreshDelays.length - 1) {
-                                            setStatus('如果暂未看到新评论，可能处于审核中。', 6000);
-                                        }
-                                    }, delay)
-                                );
+                                refreshTimer = window.setTimeout(() => {
+                                    walineInstance.update({ path: walinePath });
+                                }, 500);
                             };
 
-                            const originalFetch = window.fetch.bind(window);
-                            window.fetch = async (...args) => {
-                                const response = await originalFetch(...args);
-
-                                try {
-                                    const [input, initOptions] = args;
-                                    const requestUrl = typeof input === 'string'
-                                        ? input
-                                        : (input instanceof Request ? input.url : '');
-                                    const methodFromRequest = input instanceof Request ? input.method : undefined;
-                                    const method = (initOptions?.method || methodFromRequest || 'GET').toUpperCase();
-                                    const isWalineRequest = requestUrl.startsWith(walineServerURL);
-                                    const isCommentPost = /\/comment(?:\/|$|\?)/.test(requestUrl) || /\/api\/comment(?:\/|$|\?)/.test(requestUrl);
-
-                                    if (response.ok && method === 'POST' && isWalineRequest && isCommentPost) {
-                                        scheduleRefresh();
-                                    }
-                                } catch (_) {
-                                    // Ignore hook errors and keep native fetch behavior.
-                                }
-
-                                return response;
-                            };
+                            const walineRoot = document.querySelector('#waline');
+                            if (walineRoot) {
+                                walineRoot.addEventListener('submit', (event) => {
+                                    const form = event.target instanceof HTMLFormElement ? event.target : event.target?.closest?.('form');
+                                    if (!form) return;
+                                    scheduleRefresh();
+                                }, true);
+                            }
                         </script>
                         
                             
