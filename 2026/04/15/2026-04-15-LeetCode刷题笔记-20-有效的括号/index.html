@@ -182,7 +182,12 @@ mjx-container[display="true"] + br {
         </section>
         <article class="post-content">
             
-                    <h1 id="LeetCode-刷题笔记：20-有效的括号"><a href="#LeetCode-刷题笔记：20-有效的括号" class="headerlink" title="LeetCode 刷题笔记：20. 有效的括号"></a>LeetCode 刷题笔记：20. 有效的括号</h1><p>这道题的核心思路是用 <code>栈</code> 进行括号匹配。<br>当遇到左括号时，直接把它对应的右括号压入栈；遇到右括号时，直接与栈顶比较。<br>这样可以避免每次都去“成对取出后再比较”，代码更简洁。</p>
+                    <h1 id="LeetCode-刷题笔记：20-有效的括号"><a href="#LeetCode-刷题笔记：20-有效的括号" class="headerlink" title="LeetCode 刷题笔记：20. 有效的括号"></a>LeetCode 刷题笔记：20. 有效的括号</h1><p>核心思路是用 <code>栈</code> 进行括号匹配。</p>
+<blockquote>
+<p>一个核心的技巧:</p>
+<p>当遇到左括号时，直接把它对应的右括号压入栈；遇到右括号时，直接与栈顶比较。</p>
+<p>这样可以避免每次都去“成对取出后再比较”，代码更简洁。</p>
+</blockquote>
 <hr>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>遍历字符串 <code>s</code>：</p>
 <ul>
