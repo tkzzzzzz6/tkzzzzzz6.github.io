@@ -610,6 +610,86 @@ article h1:before{ font-weight: bold }
     margin-bottom: .5em;
 }
 
+/* - 友链列表 */
+.friends-list{
+    margin-bottom: 3em;
+    animation: fade-in-top .3s .2s backwards; -webkit-animation: fade-in-top .3s .2s backwards;
+}
+
+.friends-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5em;
+    margin-bottom: 2em;
+}
+
+.friend-card{
+    padding: 1.5em;
+    background: var(--light-background);
+    border: 1px solid var(--light-border);
+    border-radius: .5em;
+    text-align: center;
+    transition: all .3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .05);
+}
+
+.friend-card:hover{
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
+    transform: translateY(-2px);
+}
+
+.friend-card-avatar{
+    display: block;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1em;
+    border-radius: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.friend-card-avatar img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.friend-card-name{
+    margin: 0 0 .75em 0;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.friend-card-name a{
+    color: var(--blue);
+    text-decoration: none;
+}
+
+.friend-card-name a:hover{ color: var(--light-blue) }
+
+.friend-card-desc{
+    margin: 0;
+    font-size: .9em;
+    color: #888;
+    line-height: 1.5;
+}
+
+.dark-theme .friend-card-desc{ color: #aaa }
+
+@media screen and (max-width: 999px){
+    .friends-grid{ grid-template-columns: repeat(2, 1fr) }
+}
+
+@media screen and (max-width: 599px){
+    .friends-grid{ grid-template-columns: 1fr }
+    
+    .friend-card-avatar{
+        width: 60px;
+        height: 60px;
+    }
+}
+
 @media screen and (max-width: 800px){
     .post-author{
         margin-top: 6em;
@@ -971,85 +1051,88 @@ pre[class*="language-"].line-numbers {
     text-align: right;
 }
 
-/* 5 - 友链页
--------------------------------- */
-.friends-grid {
-    display: grid;
-    gap: 1.25em;
-    margin: 1.5em 0 2.5em;
-    grid-template-columns: repeat(auto-fill, minmax(14em, 1fr));
+/* - 代码复制按钮 */
+.code-copy-wrap{
+    margin: 1em 0;
+    position: relative;
+    padding-top: 2.25em;
 }
 
-.friend-card {
-    display: flex;
-    align-items: center;
-    gap: .875em;
-    padding: .875em 1em;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    background-color: var(--light-background);
-    color: inherit;
-    text-decoration: none;
-    transition: border-color .25s, box-shadow .25s, transform .2s;
-    animation: fade-in-top .3s backwards;
+.code-copy-wrap > pre{
+    margin: 0;
 }
 
-.friend-card:hover {
-    color: inherit;
-    border-color: var(--blue);
-    box-shadow: 0 4px 12px rgba(111, 159, 199, .2);
-    transform: translateY(-2px);
-}
-
-.friend-avatar {
-    width: 2.5em;
-    height: 2.5em;
-    flex-shrink: 0;
-    border-radius: 50%;
-    object-fit: cover;
-    background: var(--light-border);
-}
-
-.friend-info {
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    gap: .25em;
-}
-
-.friend-name {
-    font-weight: bold;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: var(--blue);
-    transition: color .25s;
-}
-
-.friend-card:hover .friend-name {
-    color: var(--light-blue);
-}
-
-.friend-desc {
+.code-copy-btn{
+    top: .45em;
+    right: .5em;
+    z-index: 1;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
     font-size: .8em;
-    color: #999;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+    line-height: 1;
+    position: absolute;
+    border-radius: .25em;
+    padding: .5em .75em;
+    background: #6f9fc7;
+    background: var(--blue);
+    transition: background .2s, transform .2s, opacity .2s;
 }
 
-.friends-extra {
-    margin-top: 2em;
-    padding-top: 1.5em;
-    border-top: 1px solid var(--border);
+.code-copy-btn:hover{
+    background: #9fcff7;
+    background: var(--light-blue);
 }
 
-/* - 夜间适配 */
-.dark-theme .friend-card {
-    background-color: var(--light-background);
+.code-copy-btn:focus-visible{
+    outline: 2px solid rgba(111, 159, 199, .5);
+    outline-offset: 2px;
 }
-.dark-theme .friend-card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, .35);
+
+.code-copy-btn.is-success{
+    background: #27a17e;
+}
+
+.code-copy-btn.is-error{
+    background: #d9534f;
+}
+
+.copy-toast{
+    left: 50%;
+    bottom: 1.5em;
+    color: #fff;
+    z-index: 20;
+    opacity: 0;
+    position: fixed;
+    font-size: .9em;
+    max-width: 92vw;
+    border-radius: 99px;
+    padding: .6em 1.1em;
+    pointer-events: none;
+    transform: translate(-50%, .8em);
+    background: rgba(39, 161, 126, .95);
+    transition: opacity .18s, transform .18s;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, .18);
+}
+
+.copy-toast.show{
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+.copy-toast.error{
+    background: rgba(217, 83, 79, .95);
+}
+
+@media screen and (max-width: 599px){
+    .code-copy-wrap{
+        padding-top: 2.35em;
+    }
+
+    .code-copy-btn{
+        top: .5em;
+        right: .45em;
+        font-size: .78em;
+        padding: .5em .72em;
+    }
 }
