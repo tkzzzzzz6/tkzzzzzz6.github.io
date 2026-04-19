@@ -196,9 +196,7 @@ mjx-container[display="true"] + br {
 <li>如果 p 是父亲的右子树，继续向上找，直到某个节点是其父亲的左子树。</li>
 </ul>
 <hr>
-<h2 id="关键思路图"><a href="#关键思路图" class="headerlink" title="关键思路图"></a>关键思路图</h2><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1776396874382.png" alt="1776396874382.png"></p>
-<hr>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<h2 id="关键思路图"><a href="#关键思路图" class="headerlink" title="关键思路图"></a>关键思路图</h2><h2 id=""><a href="#" class="headerlink" title=""></a><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1776562883418.png" alt="1776562883418.png"></h2><h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
     TreeNode<span class="token operator">*</span> <span class="token function">inorderSuccessor</span><span class="token punctuation">(</span>TreeNode<span class="token operator">*</span> p<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token comment">// 情况 1：p 有右子树，找右子树的最左节点</span>

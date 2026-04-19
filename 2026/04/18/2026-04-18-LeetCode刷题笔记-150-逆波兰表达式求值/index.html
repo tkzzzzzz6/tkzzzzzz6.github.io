@@ -189,8 +189,8 @@ mjx-container[display="true"] + br {
 <li>题目链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/evaluate-reverse-polish-notation/">逆波兰表达式求值</a></li>
 </ul>
 <hr>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个字符串数组 <code>tokens</code>，表示一个根据<strong>逆波兰表示法</strong>表示的算术表达式。</p>
-<p>请你计算该表达式，返回一个表示表达式值的整数。</p>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给一个字符串数组 <code>tokens</code>，表示一个根据<strong>逆波兰表示法</strong>表示的算术表达式。</p>
+<p>计算该表达式，返回一个表示表达式值的整数。</p>
 <p><strong>注意</strong>：</p>
 <ul>
 <li>有效的算符为 <code>'+'</code>、<code>'-'</code>、<code>'*'</code> 和 <code>'/'</code>。</li>
@@ -201,7 +201,7 @@ mjx-container[display="true"] + br {
 <li>答案及所有中间计算结果可以用 <strong>32 位</strong> 整数表示。</li>
 </ul>
 <hr>
-<h2 id="初步思路"><a href="#初步思路" class="headerlink" title="初步思路"></a>初步思路</h2><p>这道题的核心在于理解<strong>逆波兰表达式（后缀表达式）</strong>的计算方式。它的特点是：不需要考虑括号优先级，只要遇到运算符，就对前面最近的两个操作数进行运算即可。这种「后进先出」的特性天然适合用<strong>栈</strong>来实现。</p>
+<h2 id="初步思路"><a href="#初步思路" class="headerlink" title="初步思路"></a>初步思路</h2><p>核心在于理解<strong>逆波兰表达式（后缀表达式）</strong>的计算方式。它的特点是：不需要考虑括号优先级，只要遇到运算符，就对前面最近的两个操作数进行运算即可。这种「后进先出」的特性天然适合用<strong>栈</strong>来实现。</p>
 <hr>
 <h2 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h2><ul>
 <li>核心思想：<strong>栈模拟</strong></li>
@@ -233,7 +233,7 @@ mjx-container[display="true"] + br {
 <td>后序遍历</td>
 </tr>
 </tbody></table>
-<p>后缀表达式的优点：<strong>不需要括号，不需要考虑优先级</strong>，从左到右依次计算即可。</p>
+<p>后缀表达式的优点：<strong>不需要括号，不需要考虑优先级</strong>，从左到右依次计算即可，方便计算机依次计算。</p>
 <hr>
 <h2 id="代码实现（C-）"><a href="#代码实现（C-）" class="headerlink" title="代码实现（C++）"></a>代码实现（C++）</h2><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
@@ -290,7 +290,7 @@ mjx-container[display="true"] + br {
 </tbody></table>
 <hr>
 <h2 id="总结与反思"><a href="#总结与反思" class="headerlink" title="总结与反思"></a>总结与反思</h2><p>这道题是<strong>栈的经典应用</strong>之一，套路非常固定：遇到数字入栈，遇到运算符弹出两个数计算后再入栈。只要记住<strong>先弹出的是右操作数</strong>，顺序别搞反，基本就不会出错。</p>
-<p>从这道题也能感受到，<strong>栈非常擅长处理「相邻元素消除/计算」类的操作</strong>。类似的题目还有有效的括号、删除字符串中的所有相邻重复项等，都可以用类似的思路解决。</p>
+<p>从这道题也能感受到，<strong>栈非常擅长处理「相邻元素消除/计算」类的操作</strong>。类似的题目还有前面我们做过的有效的括号、删除字符串中的所有相邻重复项等，都可以用类似的思路解决。</p>
 
         </article>
         <section class="post-near">
