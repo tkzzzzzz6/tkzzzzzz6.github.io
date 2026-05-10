@@ -435,63 +435,39 @@ mjx-container[display="true"] + br {
                 
                     
                         <section class="post-comments">
-                            <div id="waline"></div>
-                            <p id="waline-refresh-status" style="display:none;margin-top:10px;font-size:0.92rem;opacity:0.85;"></p>
+                            <div id="giscus-container"></div>
                         </section>
-                        <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
-                        <script type="module">
-                            import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
-
-                            const walineServerURL = 'https://api.zcservice.houlang.cloud/comment/6520e9a4fab90b7bde8416fdc44c9290';
-                            const walinePath = '2025/06/02/2025-06-02-IP 地址规划及案例分析/';
-                            const statusEl = document.getElementById('waline-refresh-status');
-                            const walineInstance = init({
-                                el: '#waline',
-                                serverURL: walineServerURL,
-                                path: walinePath,
-                                lang: 'zh-CN',
-                                dark: 'body.dark-theme'
-                            });
-
-                            let refreshTimer = 0;
-
-                            const setStatus = (text, hideAfterMs = 0) => {
-                                if (!statusEl) return;
-                                statusEl.textContent = text;
-                                statusEl.style.display = text ? 'block' : 'none';
-                                if (hideAfterMs > 0) {
-                                    window.setTimeout(() => {
-                                        if (statusEl.textContent === text) {
-                                            statusEl.textContent = '';
-                                            statusEl.style.display = 'none';
-                                        }
-                                    }, hideAfterMs);
+                        <script>
+                            (function() {
+                                function getGiscusTheme() {
+                                    return document.body.classList.contains('dark-theme') ? 'dark' : 'light';
                                 }
-                            };
 
-                            const clearRefreshTimer = () => {
-                                if (refreshTimer) {
-                                    window.clearTimeout(refreshTimer);
-                                    refreshTimer = 0;
-                                }
-                            };
+                                const giscus = document.createElement('script');
+                                giscus.src = 'https://giscus.app/client.js';
+                                giscus.setAttribute('data-repo', 'tkzzzzzz6/my_hexo_blog');
+                                giscus.setAttribute('data-repo-id', 'R_kgDOP3Y_BA');
+                                giscus.setAttribute('data-category', 'Announcements');
+                                giscus.setAttribute('data-category-id', 'DIC_kwDOP3Y_BM4C8sQ1');
+                                giscus.setAttribute('data-mapping', 'pathname');
+                                giscus.setAttribute('data-reactions-enabled', '1');
+                                giscus.setAttribute('data-emit-metadata', '0');
+                                giscus.setAttribute('data-input-position', 'top');
+                                giscus.setAttribute('data-lang', 'zh-CN');
+                                giscus.setAttribute('data-theme', getGiscusTheme());
+                                giscus.setAttribute('crossorigin', 'anonymous');
+                                giscus.async = true;
+                                document.getElementById('giscus-container').appendChild(giscus);
 
-                            const scheduleRefresh = () => {
-                                clearRefreshTimer();
-                                setStatus('评论已提交，正在刷新列表…');
-                                refreshTimer = window.setTimeout(() => {
-                                    walineInstance.update({ path: walinePath });
-                                }, 500);
-                            };
-
-                            const walineRoot = document.querySelector('#waline');
-                            if (walineRoot) {
-                                walineRoot.addEventListener('submit', (event) => {
-                                    const form = event.target instanceof HTMLFormElement ? event.target : event.target?.closest?.('form');
-                                    if (!form) return;
-                                    scheduleRefresh();
-                                }, true);
-                            }
+                                new MutationObserver(function() {
+                                    var frame = document.querySelector('iframe.giscus-frame');
+                                    if (frame) {
+                                        frame.contentWindow.postMessage({
+                                            giscus: { setConfig: { theme: getGiscusTheme() } }
+                                        }, 'https://giscus.app');
+                                    }
+                                }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+                            })();
                         </script>
                         
                             
