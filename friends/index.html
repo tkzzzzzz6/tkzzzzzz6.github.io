@@ -19,7 +19,8 @@
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
-<meta name="generator" content="Hexo 8.1.1"><style>mjx-container[jax="SVG"] {
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+<style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -131,8 +132,7 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
-</head>
+</style></head>
 
   <body>
     <header>
@@ -245,6 +245,43 @@ mjx-container[display="true"] + br {
             </article>
             
                 
+                    <section class="post-comments">
+                        <div id="giscus-container"></div>
+                    </section>
+                    <script>
+                        (function() {
+                            function getGiscusTheme() {
+                                return document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+                            }
+
+                            const giscus = document.createElement('script');
+                            giscus.src = 'https://giscus.app/client.js';
+                            giscus.setAttribute('data-repo', 'tkzzzzzz6/my_hexo_blog');
+                            giscus.setAttribute('data-repo-id', 'R_kgDOP3Y_BA');
+                            giscus.setAttribute('data-category', 'Announcements');
+                            giscus.setAttribute('data-category-id', 'DIC_kwDOP3Y_BM4C8sQ1');
+                            giscus.setAttribute('data-mapping', 'pathname');
+                            giscus.setAttribute('data-reactions-enabled', '1');
+                            giscus.setAttribute('data-emit-metadata', '0');
+                            giscus.setAttribute('data-input-position', 'top');
+                            giscus.setAttribute('data-lang', 'zh-CN');
+                            giscus.setAttribute('data-loading', 'lazy');
+                            giscus.setAttribute('data-theme', getGiscusTheme());
+                            giscus.setAttribute('crossorigin', 'anonymous');
+                            giscus.async = true;
+                            document.getElementById('giscus-container').appendChild(giscus);
+
+                            new MutationObserver(function() {
+                                var frame = document.querySelector('iframe.giscus-frame');
+                                if (frame) {
+                                    frame.contentWindow.postMessage({
+                                        giscus: { setConfig: { theme: getGiscusTheme() } }
+                                    }, 'https://giscus.app');
+                                }
+                            }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+                        })();
+                    </script>
+                    
         </div>
     </main>
     <footer>
