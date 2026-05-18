@@ -6,7 +6,7 @@
   <link href="https://tanke.asia/atom.xml" rel="self"/>
   
   <link href="https://tanke.asia/"/>
-  <updated>2026-05-18T07:08:14.442Z</updated>
+  <updated>2026-05-18T07:16:36.978Z</updated>
   <id>https://tanke.asia/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://tanke.asia/2026/05/18/2026-05-18-yadm%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%92%8C%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/"/>
     <id>https://tanke.asia/2026/05/18/2026-05-18-yadm%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%92%8C%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/</id>
     <published>2026-05-17T16:00:00.000Z</published>
-    <updated>2026-05-18T07:08:14.442Z</updated>
+    <updated>2026-05-18T07:16:36.978Z</updated>
     
     <content type="html"><![CDATA[<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><p><code>yadm</code> 基于 Git，使用时会把 <code>$HOME</code> 当作工作目录，因此你可以在任意目录下管理 dotfiles。</p><h2 id="查看与对比"><a href="#查看与对比" class="headerlink" title="查看与对比"></a>查看与对比</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">man</span> yadmyadm statusyadm <span class="token function">diff</span>yadm <span class="token function">diff</span> <span class="token parameter variable">--cached</span>yadm list <span class="token parameter variable">-a</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><code>status</code> 查看仓库状态；<code>diff</code> 查看未提交改动；<code>diff --cached</code> 查看已暂存改动；<code>list -a</code> 查看所有受管理文件。</p><h2 id="同步与提交"><a href="#同步与提交" class="headerlink" title="同步与提交"></a>同步与提交</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yadm pushyadm fetchyadm commit <span class="token parameter variable">--amend</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p><code>push</code> 和 <code>fetch</code> 用于与远程仓库同步；<code>commit --amend</code> 用于修正上一次提交。</p><h2 id="文件与分支"><a href="#文件与分支" class="headerlink" title="文件与分支"></a>文件与分支</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yadm checkout -- <span class="token operator">&lt;</span>file<span class="token operator">&gt;</span>yadm checkout <span class="token parameter variable">-b</span> <span class="token operator">&lt;</span>branch-name<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p><code>checkout -- &lt;file&gt;</code> 放弃本地更改并恢复为 <code>HEAD</code> 版本；<code>checkout -b</code> 创建并切换到新分支。</p><h2 id="进阶功能"><a href="#进阶功能" class="headerlink" title="进阶功能"></a>进阶功能</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yadm altyadm encryptyadm decryptyadm decrypt <span class="token parameter variable">-l</span>yadm clone <span class="token parameter variable">--bootstrap</span> <span class="token operator">&lt;</span>URL<span class="token operator">&gt;</span>yadm remote <span class="token parameter variable">-v</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><code>alt</code> 用于匹配规则文件的符号链接；<code>encrypt</code> 和 <code>decrypt</code> 用于加密/解密配置文件；<code>clone --bootstrap</code> 用于克隆后自动初始化；<code>remote -v</code> 用于查看远程仓库信息。</p>]]></content>
     
@@ -34,15 +34,9 @@
     
     
     
-    <category term="环境同步" scheme="https://tanke.asia/tags/%E7%8E%AF%E5%A2%83%E5%90%8C%E6%AD%A5/"/>
-    
     <category term="dotfiles" scheme="https://tanke.asia/tags/dotfiles/"/>
     
-    <category term="linux" scheme="https://tanke.asia/tags/linux/"/>
-    
-    <category term="macos" scheme="https://tanke.asia/tags/macos/"/>
-    
-    <category term="wsl" scheme="https://tanke.asia/tags/wsl/"/>
+    <category term="环境配置同步" scheme="https://tanke.asia/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%90%8C%E6%AD%A5/"/>
     
   </entry>
   
