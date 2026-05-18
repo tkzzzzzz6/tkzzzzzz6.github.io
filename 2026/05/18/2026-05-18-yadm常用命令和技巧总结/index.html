@@ -3,7 +3,7 @@
   <head>
     
     <meta charset="UTF-8">
-    <title>2026-05-18-nvm常用命令和技巧总结 - TK的小站</title>
+    <title>2026-05-18-管理配置文件工具 yadm 常用命令和技巧总结 - TK的小站</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
     <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
     
@@ -15,11 +15,12 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta property="og:site_name" content="TK的小站">
-    <meta property="og:title" content="2026-05-18-nvm常用命令和技巧总结"/>
+    <meta property="og:title" content="2026-05-18-管理配置文件工具 yadm 常用命令和技巧总结"/>
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
-<meta name="generator" content="Hexo 8.1.1"><style>mjx-container[jax="SVG"] {
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+<style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -131,8 +132,7 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
-</head>
+</style></head>
 
   <body>
     <header>
@@ -169,21 +169,21 @@ mjx-container[display="true"] + br {
     <div class="wrap min">
         <section class="post-title">
             <h2>
-                2026-05-18-nvm常用命令和技巧总结
+                2026-05-18-管理配置文件工具 yadm 常用命令和技巧总结
             </h2>
             <div class="post-meta">
                 <time class="date">
                     2026.05.18
                 </time>
                 
-                <span class="word-count">字数：239</span>
-                <span class="reading-time">阅读时间：1 分钟</span>
+                <span class="word-count">字数：2.3k</span>
+                <span class="reading-time">阅读时间：10 分钟</span>
                 <span class="post-days">已发布 1 天</span>
             </div>
         </section>
         <article class="post-content">
             
-                    <h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><p><code>yadm</code> 基于 Git，使用时会把 <code>$HOME</code> 当作工作目录，因此你可以在任意目录下管理 dotfiles。</p>
+                    <h1 id="tldr-常用命令速记"><a href="#tldr-常用命令速记" class="headerlink" title="tldr:常用命令速记"></a>tldr:常用命令速记</h1><p><code>yadm</code> 基于 Git，使用时会把 <code>$HOME</code> 当作工作目录，因此你可以在任意目录下管理 dotfiles。</p>
 <h2 id="查看与对比"><a href="#查看与对比" class="headerlink" title="查看与对比"></a>查看与对比</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">man</span> yadm
 yadm status
 yadm <span class="token function">diff</span>
@@ -208,6 +208,411 @@ yadm clone <span class="token parameter variable">--bootstrap</span> <span class
 yadm remote <span class="token parameter variable">-v</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><code>alt</code> 用于匹配规则文件的符号链接；<code>encrypt</code> 和 <code>decrypt</code> 用于加密/解密配置文件；<code>clone --bootstrap</code> 用于克隆后自动初始化；<code>remote -v</code> 用于查看远程仓库信息。</p>
+<h1 id="详细介绍"><a href="#详细介绍" class="headerlink" title="详细介绍"></a>详细介绍</h1><p><strong>yadm</strong>（Yet Another Dotfiles Manager）是一个基于 Git 的 dotfiles 管理工具，直接以 <code>$HOME</code> 为工作目录，让你像管理代码一样管理配置文件。</p>
+<hr>
+<h2 id="一、yadm-是什么"><a href="#一、yadm-是什么" class="headerlink" title="一、yadm 是什么"></a>一、yadm 是什么</h2><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>基于 Git</strong></td>
+<td>所有操作底层都是 Git，学习成本极低</td>
+</tr>
+<tr>
+<td><strong>工作目录 = <code>$HOME</code></strong></td>
+<td>直接管理 <code>~/.bashrc</code>、<code>~/.vimrc</code> 等，无需创建额外目录</td>
+</tr>
+<tr>
+<td><strong>裸仓库</strong></td>
+<td>Git 仓库存在 <code>~/.local/share/yadm/repo.git</code>，不污染家目录</td>
+</tr>
+<tr>
+<td><strong>Alternates</strong></td>
+<td>根据 OS/主机名/用户自动切换不同版本的配置文件</td>
+</tr>
+<tr>
+<td><strong>Templates</strong></td>
+<td>用 Jinja/ESH 语法在配置文件中嵌入动态内容</td>
+</tr>
+<tr>
+<td><strong>Encryption</strong></td>
+<td>内置 GPG/OpenSSL 加密，安全同步 SSH 密钥等敏感文件</td>
+</tr>
+</tbody></table>
+<hr>
+<blockquote>
+<p>[!notice]</p>
+<p>由于 一些 api 密钥可能会保存在 zshrc 等文件中,这里推荐将 github 仓库设置成私密仓库,如果是公网服务器或者其他可信设备克隆配置的话,可以使用 ssh 协议克隆,这样可以避免网络连接和泄密的问题</p>
+<p>当然也可以使用 yadm 的加密功能,不过我暂时还不够熟悉,所以先搭建一个可以用的工作流,后续熟练了再补充</p>
+</blockquote>
+<h2 id="二、安装"><a href="#二、安装" class="headerlink" title="二、安装"></a>二、安装</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># macOS</span>
+brew <span class="token function">install</span> yadm
+
+<span class="token comment"># Ubuntu/Debian</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> yadm
+
+<span class="token comment"># Arch</span>
+<span class="token function">sudo</span> pacman <span class="token parameter variable">-S</span> yadm
+
+<span class="token comment"># 任意 Linux（无需 root，直接下载二进制）</span>
+<span class="token function">curl</span> <span class="token parameter variable">-fLo</span> /usr/local/bin/yadm https://github.com/TheLocehiliosan/yadm/raw/master/yadm
+<span class="token function">chmod</span> a+x /usr/local/bin/yadm<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="三、从零开始：初始化仓库"><a href="#三、从零开始：初始化仓库" class="headerlink" title="三、从零开始：初始化仓库"></a>三、从零开始：初始化仓库</h2><h3 id="3-1-新建仓库"><a href="#3-1-新建仓库" class="headerlink" title="3.1 新建仓库"></a>3.1 新建仓库</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 初始化 yadm 仓库（仓库在 ~/.local/share/yadm/repo.git）</span>
+yadm init
+
+<span class="token comment"># 添加你的配置文件</span>
+yadm <span class="token function">add</span> ~/.bashrc
+yadm <span class="token function">add</span> ~/.vimrc
+yadm <span class="token function">add</span> ~/.config/git/config
+
+<span class="token comment"># 提交</span>
+yadm commit <span class="token parameter variable">-m</span> <span class="token string">"Initial dotfiles"</span>
+
+<span class="token comment"># 添加远程并推送</span>
+yadm remote <span class="token function">add</span> origin https://github.com/yourname/dotfiles.git
+yadm push <span class="token parameter variable">-u</span> origin master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>💡 所有不认识的 <code>yadm xxx</code> 命令都会透传给 Git，所以 <code>yadm status</code>、<code>yadm diff</code>、<code>yadm log</code> 等全部和 Git 用法一样。</p>
+</blockquote>
+<p>我的 github仓库 <a target="_blank" rel="noopener" href="https://github.com/tkzzzzzz6/My_Dotfiles.git">https://github.com/tkzzzzzz6/My_Dotfiles.git</a></p>
+<h3 id="3-2-在新机器上克隆"><a href="#3-2-在新机器上克隆" class="headerlink" title="3.2 在新机器上克隆"></a>3.2 在新机器上克隆</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 克隆已有的 dotfiles 仓库</span>
+yadm clone https://github.com/yourname/dotfiles.git
+
+<span class="token comment"># 如果有冲突文件（本地已有同名配置），yadm 不会覆盖，需要手动解决</span>
+<span class="token comment"># 查看冲突：</span>
+yadm status
+
+<span class="token comment"># 强制使用仓库版本覆盖本地：</span>
+yadm checkout <span class="token parameter variable">--overwrite</span> -- ~/.bashrc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="四、日常使用（和-Git-完全一样）"><a href="#四、日常使用（和-Git-完全一样）" class="headerlink" title="四、日常使用（和 Git 完全一样）"></a>四、日常使用（和 Git 完全一样）</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yadm status                    <span class="token comment"># 查看哪些配置文件被修改</span>
+yadm <span class="token function">diff</span> ~/.bashrc            <span class="token comment"># 查看某个文件的改动</span>
+yadm <span class="token function">add</span> ~/.config/nvim/init.vim
+yadm commit <span class="token parameter variable">-m</span> <span class="token string">"Update nvim config"</span>
+yadm push
+yadm pull                      <span class="token comment"># 同步远程更新</span>
+yadm log <span class="token parameter variable">--oneline</span>             <span class="token comment"># 查看提交历史</span>
+yadm list                      <span class="token comment"># 列出所有被管理的文件</span>
+yadm list <span class="token parameter variable">-a</span>                   <span class="token comment"># 列出所有文件（包括 alternates 和 templates）</span>
+<span class="token function">git</span> <span class="token function">add</span> <span class="token parameter variable">-u</span> 来添加所有已经被追踪到文件<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="五、核心特性-1：Alternates（多系统适配）"><a href="#五、核心特性-1：Alternates（多系统适配）" class="headerlink" title="五、核心特性 1：Alternates（多系统适配）"></a>五、核心特性 1：Alternates（多系统适配）</h2><p>这是 yadm 最强大的功能。同一台机器上的 <code>~/.bashrc</code> 可以自动指向不同的实际文件，根据 <strong>OS / 主机名 / 用户 / class</strong> 等条件智能选择。</p>
+<h3 id="5-1-命名规则"><a href="#5-1-命名规则" class="headerlink" title="5.1 命名规则"></a>5.1 命名规则</h3><p>创建带后缀的文件，yadm 会自动创建符号链接：</p>
+<pre class="line-numbers language-none"><code class="language-none">文件名##&lt;条件&gt;[,&lt;条件&gt;,...]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="5-2-支持的匹配条件"><a href="#5-2-支持的匹配条件" class="headerlink" title="5.2 支持的匹配条件"></a>5.2 支持的匹配条件</h3><table>
+<thead>
+<tr>
+<th>条件</th>
+<th>缩写</th>
+<th>自动检测方式</th>
+<th>示例值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>template</code></td>
+<td><code>t</code></td>
+<td>模板处理器</td>
+<td><code>default</code>, <code>j2</code>, <code>esh</code></td>
+</tr>
+<tr>
+<td><code>user</code></td>
+<td><code>u</code></td>
+<td><code>id -u -n</code></td>
+<td><code>alice</code>, <code>bob</code></td>
+</tr>
+<tr>
+<td><code>hostname</code></td>
+<td><code>h</code></td>
+<td><code>uname -n</code></td>
+<td><code>macbook</code>, <code>server01</code></td>
+</tr>
+<tr>
+<td><code>class</code></td>
+<td><code>c</code></td>
+<td>手动设置</td>
+<td><code>work</code>, <code>personal</code></td>
+</tr>
+<tr>
+<td><code>distro</code></td>
+<td><code>d</code></td>
+<td><code>lsb_release -si</code></td>
+<td><code>Ubuntu</code>, <code>Arch</code></td>
+</tr>
+<tr>
+<td><code>distro_family</code></td>
+<td><code>f</code></td>
+<td><code>/etc/os-release</code> 的 <code>ID_LIKE</code></td>
+<td><code>debian</code>, <code>arch</code></td>
+</tr>
+<tr>
+<td><code>os</code></td>
+<td><code>o</code></td>
+<td><code>uname -s</code></td>
+<td><code>Linux</code>, <code>Darwin</code>, <code>WSL</code></td>
+</tr>
+<tr>
+<td><code>arch</code></td>
+<td><code>a</code></td>
+<td><code>uname -m</code></td>
+<td><code>x86_64</code>, <code>arm64</code></td>
+</tr>
+<tr>
+<td><code>default</code></td>
+<td>-</td>
+<td>无其他匹配时</td>
+<td><code>default</code></td>
+</tr>
+<tr>
+<td><code>extension</code></td>
+<td><code>e</code></td>
+<td>仅影响语法高亮</td>
+<td><code>.sh</code>, <code>.conf</code></td>
+</tr>
+</tbody></table>
+<h3 id="5-3-实际例子"><a href="#5-3-实际例子" class="headerlink" title="5.3 实际例子"></a>5.3 实际例子</h3><p>假设你的仓库中有这些文件：</p>
+<pre class="line-numbers language-none"><code class="language-none">~/.bashrc##default
+~/.bashrc##os.Darwin
+~/.bashrc##os.Linux
+~/.bashrc##os.Linux,hostname.ubuntu-server
+~/.bashrc##class.Work<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在不同机器上，yadm 会自动创建对应的符号链接：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># macOS 笔记本（hostname: macbook-pro）</span>
+~/.bashrc  -<span class="token operator">&gt;</span>  ~/.bashrc<span class="token comment">##os.Darwin</span>
+
+<span class="token comment"># 普通的 Linux 机器</span>
+~/.bashrc  -<span class="token operator">&gt;</span>  ~/.bashrc<span class="token comment">##os.Linux</span>
+
+<span class="token comment"># Linux 且 hostname 为 ubuntu-server</span>
+~/.bashrc  -<span class="token operator">&gt;</span>  ~/.bashrc<span class="token comment">##os.Linux,hostname.ubuntu-server</span>
+
+<span class="token comment"># 设置了 class 为 Work（见下文）</span>
+~/.bashrc  -<span class="token operator">&gt;</span>  ~/.bashrc<span class="token comment">##class.Work</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="5-4-设置-class（手动标记机器类型）"><a href="#5-4-设置-class（手动标记机器类型）" class="headerlink" title="5.4 设置 class（手动标记机器类型）"></a>5.4 设置 class（手动标记机器类型）</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yadm config local.class Work      <span class="token comment"># 标记为工作机</span>
+yadm config local.class Personal  <span class="token comment"># 标记为个人机</span>
+yadm config <span class="token parameter variable">--add</span> local.class Gaming  <span class="token comment"># 可设置多个 class</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>匹配优先级：<strong>条件越多越优先</strong>。<code>os.Linux,hostname.server</code> 会胜过 <code>os.Linux</code>。</p>
+</blockquote>
+<h3 id="5-5-关闭自动链接（如需手动控制）"><a href="#5-5-关闭自动链接（如需手动控制）" class="headerlink" title="5.5 关闭自动链接（如需手动控制）"></a>5.5 关闭自动链接（如需手动控制）</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yadm config yadm.auto-alt <span class="token boolean">false</span>
+<span class="token comment"># 需要时手动运行：</span>
+yadm alt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="六、核心特性-2：Templates（模板）"><a href="#六、核心特性-2：Templates（模板）" class="headerlink" title="六、核心特性 2：Templates（模板）"></a>六、核心特性 2：Templates（模板）</h2><p>用一个模板文件动态生成配置内容，适合需要在不同机器上嵌入不同值的场景。</p>
+<h3 id="6-1-支持的模板引擎"><a href="#6-1-支持的模板引擎" class="headerlink" title="6.1 支持的模板引擎"></a>6.1 支持的模板引擎</h3><table>
+<thead>
+<tr>
+<th>引擎</th>
+<th>后缀</th>
+<th>依赖</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>default</strong></td>
+<td><code>##template</code> 或 <code>##template.default</code></td>
+<td><code>awk</code></td>
+<td>yadm 内置，轻量，Jinja-like 语法</td>
+</tr>
+<tr>
+<td><strong>Jinja</strong></td>
+<td><code>##template.j2</code></td>
+<td><code>j2cli</code> 或 <code>envtpl</code></td>
+<td>功能强大的 Python 模板</td>
+</tr>
+<tr>
+<td><strong>ESH</strong></td>
+<td><code>##template.esh</code></td>
+<td><code>esh</code></td>
+<td>可在模板中执行 Shell 命令</td>
+</tr>
+</tbody></table>
+<h3 id="6-2-内置模板示例"><a href="#6-2-内置模板示例" class="headerlink" title="6.2 内置模板示例"></a>6.2 内置模板示例</h3><p>创建 <code>~/.gitconfig##template</code>：</p>
+<pre class="line-numbers language-none"><code class="language-none">{% if yadm.os == "Darwin" %}
+[name]
+    email = alice@company.com
+{% else %}
+[name]
+    email = alice@personal.com
+{% endif %}
+[core]
+    editor = vim<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>yadm 会自动处理成 <code>~/.gitconfig</code>：</p>
+<ul>
+<li>macOS 上：<code>email = alice@company.com</code></li>
+<li>其他系统：<code>email = alice@personal.com</code></li>
+</ul>
+<h3 id="6-3-模板中可用的变量"><a href="#6-3-模板中可用的变量" class="headerlink" title="6.3 模板中可用的变量"></a>6.3 模板中可用的变量</h3><pre class="line-numbers language-none"><code class="language-none">yadm.user          # 当前用户名
+yadm.hostname      # 主机名（短）
+yadm.os            # Linux / Darwin / WSL
+yadm.arch          # x86_64 / arm64
+yadm.distro        # Ubuntu / Arch / Fedora
+yadm.distro_family # debian / arch / rhel
+yadm.class         # 设置的 class
+yadm.classes       # 所有 class（空格分隔）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="七、核心特性-3：Encryption（加密）"><a href="#七、核心特性-3：Encryption（加密）" class="headerlink" title="七、核心特性 3：Encryption（加密）"></a>七、核心特性 3：Encryption（加密）</h2><p>安全同步 SSH 私钥、GPG 密钥等敏感文件。</p>
+<h3 id="7-1-配置要加密的文件列表"><a href="#7-1-配置要加密的文件列表" class="headerlink" title="7.1 配置要加密的文件列表"></a>7.1 配置要加密的文件列表</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 编辑加密列表</span>
+<span class="token function">cat</span> <span class="token operator">&gt;</span> ~/.config/yadm/encrypt <span class="token operator">&lt;&lt;</span> <span class="token string">'EOF'
+.ssh/id_rsa
+.ssh/id_ed25519
+.gnupg/secring.gpg
+.aws/credentials
+EOF</span>
+
+<span class="token comment"># 加密（会提示输入密码，生成 archive 文件）</span>
+yadm encrypt
+
+<span class="token comment"># 将加密后的 archive 提交到仓库</span>
+yadm <span class="token function">add</span> ~/.local/share/yadm/archive
+yadm <span class="token function">add</span> ~/.config/yadm/encrypt
+yadm commit <span class="token parameter variable">-m</span> <span class="token string">"Add encrypted secrets"</span>
+yadm push<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="7-2-解密"><a href="#7-2-解密" class="headerlink" title="7.2 解密"></a>7.2 解密</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 在新机器上克隆后解密：</span>
+yadm decrypt
+<span class="token comment"># 输入密码即可</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="7-3-使用-GPG-非对称加密（更安全）"><a href="#7-3-使用-GPG-非对称加密（更安全）" class="headerlink" title="7.3 使用 GPG 非对称加密（更安全）"></a>7.3 使用 GPG 非对称加密（更安全）</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 指定你的 GPG 公钥 ID</span>
+yadm config yadm.gpg-recipient YOUR_KEY_ID
+
+<span class="token comment"># 或用 ASK 交互式选择</span>
+yadm config yadm.gpg-recipient ASK
+
+<span class="token comment"># 这样 encrypt 时用公钥加密，decrypt 时用私钥自动解密，无需输密码</span>
+yadm encrypt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="7-4-切换加密引擎"><a href="#7-4-切换加密引擎" class="headerlink" title="7.4 切换加密引擎"></a>7.4 切换加密引擎</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yadm config yadm.cipher openssl   <span class="token comment"># 默认是 gpg</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<hr>
+<h2 id="八、Bootstrap（自动初始化脚本）"><a href="#八、Bootstrap（自动初始化脚本）" class="headerlink" title="八、Bootstrap（自动初始化脚本）"></a>八、Bootstrap（自动初始化脚本）</h2><p>在新机器上克隆 dotfiles 后自动安装软件、执行初始化。</p>
+<h3 id="8-1-创建-bootstrap-脚本"><a href="#8-1-创建-bootstrap-脚本" class="headerlink" title="8.1 创建 bootstrap 脚本"></a>8.1 创建 bootstrap 脚本</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> <span class="token operator">&gt;</span> ~/.config/yadm/bootstrap <span class="token operator">&lt;&lt;</span> <span class="token string">'EOF'
+#!/bin/bash
+
+echo "=== Bootstrapping dotfiles ==="
+
+# 安装 Homebrew（macOS）
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    brew bundle --file=~/.config/Brewfile
+fi
+
+# 安装 vim-plug
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+# 安装 vim 插件
+vim +PlugInstall +qall
+
+# 设置 shell
+chsh -s $(which zsh)
+
+echo "=== Done ==="
+EOF</span>
+
+<span class="token function">chmod</span> +x ~/.config/yadm/bootstrap
+yadm <span class="token function">add</span> ~/.config/yadm/bootstrap
+yadm commit <span class="token parameter variable">-m</span> <span class="token string">"Add bootstrap script"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="8-2-克隆时自动执行"><a href="#8-2-克隆时自动执行" class="headerlink" title="8.2 克隆时自动执行"></a>8.2 克隆时自动执行</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yadm clone https://github.com/yourname/dotfiles.git <span class="token parameter variable">--bootstrap</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>或克隆后手动执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yadm bootstrap<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<hr>
+<h2 id="九、常用配置"><a href="#九、常用配置" class="headerlink" title="九、常用配置"></a>九、常用配置</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 查看所有配置</span>
+yadm config <span class="token parameter variable">--list</span>
+
+<span class="token comment"># 关闭自动权限修复</span>
+yadm config yadm.auto-perms <span class="token boolean">false</span>
+
+<span class="token comment"># 使用硬拷贝代替符号链接（某些系统不支持 symlink）</span>
+yadm config yadm.alt-copy <span class="token boolean">true</span>
+
+<span class="token comment"># 加密后自动从 Git 追踪中排除（默认开启，防止误提交明文）</span>
+yadm config yadm.auto-exclude <span class="token boolean">true</span>
+
+<span class="token comment"># 显示未追踪文件（默认隐藏，避免 $HOME 下文件太多干扰）</span>
+yadm gitconfig <span class="token parameter variable">--unset</span> status.showUntrackedFiles<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="十、完整工作流示例"><a href="#十、完整工作流示例" class="headerlink" title="十、完整工作流示例"></a>十、完整工作流示例</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># ========== 第一台机器 ==========</span>
+yadm init
+yadm <span class="token function">add</span> ~/.bashrc ~/.vimrc ~/.config/git/config
+yadm commit <span class="token parameter variable">-m</span> <span class="token string">"Initial dotfiles"</span>
+yadm remote <span class="token function">add</span> origin https://github.com/yourname/dotfiles.git
+yadm push <span class="token parameter variable">-u</span> origin master
+
+<span class="token comment"># 添加 Mac 专用配置</span>
+<span class="token function">cp</span> ~/.bashrc ~/.bashrc<span class="token comment">##os.Darwin</span>
+yadm <span class="token function">add</span> ~/.bashrc<span class="token comment">##os.Darwin</span>
+yadm commit <span class="token parameter variable">-m</span> <span class="token string">"Add macOS-specific bashrc"</span>
+
+<span class="token comment"># 添加加密文件</span>
+<span class="token builtin class-name">echo</span> <span class="token string">".ssh/id_rsa"</span> <span class="token operator">&gt;&gt;</span> ~/.config/yadm/encrypt
+yadm encrypt
+yadm <span class="token function">add</span> ~/.config/yadm/encrypt ~/.local/share/yadm/archive
+yadm commit <span class="token parameter variable">-m</span> <span class="token string">"Add encrypted SSH key"</span>
+
+<span class="token comment"># ========== 第二台机器（Linux） ==========</span>
+yadm clone https://github.com/yourname/dotfiles.git
+yadm decrypt                    <span class="token comment"># 解密 SSH 密钥</span>
+yadm bootstrap                  <span class="token comment"># 运行初始化脚本</span>
+yadm alt                        <span class="token comment"># 自动创建正确的符号链接</span>
+<span class="token comment"># ~/.bashrc 自动指向 ~/.bashrc##os.Linux</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><table>
+<thead>
+<tr>
+<th>需求</th>
+<th>yadm 方案</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>管理 dotfiles</td>
+<td><code>yadm init</code> + <code>yadm add/commit/push</code></td>
+</tr>
+<tr>
+<td>多系统不同配置</td>
+<td>Alternates (<code>##os.Linux</code>, <code>##os.Darwin</code>)</td>
+</tr>
+<tr>
+<td>配置里嵌入动态值</td>
+<td>Templates (<code>##template</code>)</td>
+</tr>
+<tr>
+<td>安全同步 SSH/GPG 密钥</td>
+<td><code>yadm encrypt</code> / <code>yadm decrypt</code></td>
+</tr>
+<tr>
+<td>新机器一键初始化</td>
+<td><code>yadm clone &lt;url&gt; --bootstrap</code></td>
+</tr>
+<tr>
+<td>迁移到 yadm（已有 Git 仓库）</td>
+<td><code>yadm clone</code> 或直接 <code>yadm init</code> + 手动添加文件</td>
+</tr>
+</tbody></table>
+<p>yadm 的哲学是**”不要改变你的工作流，只改变你管理配置的方式”**。会用 Git 就会用 yadm，上手极快，但 Alternates + Templates + Encryption 的组合让它在处理复杂多机环境时非常强大。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://yadm.io/">yadm 官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://sspai.com/post/66894">使用 YADM 整理你的 dotfiles - 少数派</a></li>
+</ul>
 
         </article>
         <section class="post-near">
@@ -292,7 +697,7 @@ yadm remote <span class="token parameter variable">-v</span><span aria-hidden="t
             <div class="row">
                 <div class="col-m-4">
                     <h3 class="title-recent">最新文章：</h3>
-                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2026/05/18/2026-05-18-yadm%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%92%8C%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/">2026-05-18-nvm常用命令和技巧总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/05/14/2026-05-14-%E7%AC%AC%E4%B8%89%E6%AC%A1CCF%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BD%AF%E4%BB%B6%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81%E9%A2%98%E8%A7%A3(1-3)/">第三次CCF计算机软件能力认证题解(1-3)</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/05/12/2026-05-12-%E7%AC%AC%E4%BA%8C%E5%B1%8ACCF%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BD%AF%E4%BB%B6%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81%E9%A2%98%E8%A7%A3(1-4)/">第二届CCF计算机软件能力认证题解(1-4)</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/05/11/2026-05-11-%E7%AC%AC%E4%B8%80%E5%B1%8ACCF%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BD%AF%E4%BB%B6%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81%E9%A2%98%E8%A7%A3/">第一届CCF计算机软件能力认证题解</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/05/10/2026-05-10-13%E5%B9%B412%E6%9C%88CCF-CSP%E9%A2%98%E8%A7%A3/">13年12月CCF-CSP题解</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/05/06/2026-05-06-LeetCode-137-%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97II-%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%E8%A7%A3%E6%B3%95/">LeetCode 137 - 只出现一次的数字 II：有限状态机解法</a></li></ul>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2026/05/18/2026-05-18-yadm%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%92%8C%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/">2026-05-18-管理配置文件工具 yadm 常用命令和技巧总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/05/14/2026-05-14-%E7%AC%AC%E4%B8%89%E6%AC%A1CCF%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BD%AF%E4%BB%B6%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81%E9%A2%98%E8%A7%A3(1-3)/">第三次CCF计算机软件能力认证题解(1-3)</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/05/12/2026-05-12-%E7%AC%AC%E4%BA%8C%E5%B1%8ACCF%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BD%AF%E4%BB%B6%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81%E9%A2%98%E8%A7%A3(1-4)/">第二届CCF计算机软件能力认证题解(1-4)</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/05/11/2026-05-11-%E7%AC%AC%E4%B8%80%E5%B1%8ACCF%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BD%AF%E4%BB%B6%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81%E9%A2%98%E8%A7%A3/">第一届CCF计算机软件能力认证题解</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/05/10/2026-05-10-13%E5%B9%B412%E6%9C%88CCF-CSP%E9%A2%98%E8%A7%A3/">13年12月CCF-CSP题解</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/05/06/2026-05-06-LeetCode-137-%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97II-%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%E8%A7%A3%E6%B3%95/">LeetCode 137 - 只出现一次的数字 II：有限状态机解法</a></li></ul>
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-date">时光机：</h3>
