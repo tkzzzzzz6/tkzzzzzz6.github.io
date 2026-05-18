@@ -246,7 +246,7 @@ mjx-container[display="true"] + br {
         </a>
     
         
-        <a href="javascript:void(0)" title="点击复制 RSS 订阅地址" onclick="navigator.clipboard.writeText(location.origin+'/atom.xml').then(()=>{var t=document.createElement('div');t.textContent='RSS 订阅地址已复制';t.style.cssText='position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:8px 20px;border-radius:6px;z-index:9999;font-size:14px;';document.body.appendChild(t);setTimeout(()=>t.remove(),2000)})">
+        <a href="javascript:void(0)" title="点击复制 RSS 订阅地址" onclick="navigator.clipboard.writeText(location.origin+'/atom.xml').then(()=>{var oldToast=document.querySelector('.copy-toast');if(oldToast){oldToast.parentNode.removeChild(oldToast)}var t=document.createElement('div');t.className='copy-toast';t.textContent='RSS 订阅地址已复制';document.body.appendChild(t);requestAnimationFrame(function(){t.classList.add('show')});setTimeout(function(){t.classList.remove('show');setTimeout(function(){if(t.parentNode){t.parentNode.removeChild(t)}},180)},1600)})">
         
         
             <i class="fa fa-rss"></i>
