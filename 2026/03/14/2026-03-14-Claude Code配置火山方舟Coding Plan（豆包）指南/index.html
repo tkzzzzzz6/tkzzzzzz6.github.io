@@ -132,6 +132,8 @@ mjx-container[display="true"] + br {
   display: none;
 }
 </style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/hexo-obsidian-callout.css">
 </head>
 
   <body>
@@ -226,7 +228,7 @@ claude <span class="token parameter variable">--version</span><span aria-hidden=
 <span class="token comment"># zsh执行</span>
 <span class="token builtin class-name">source</span> ~/.zshrc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><br>5. 验证环境变量是否配置正确：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">echo</span> <span class="token variable">$ANTHROPIC_BASE_URL</span>
 <span class="token builtin class-name">echo</span> <span class="token variable">$ANTHROPIC_MODEL</span>
-<span class="token comment"># 输出对应配置值即生效</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></h2><h3 id="五、验证配置-测试使用"><a href="#五、验证配置-测试使用" class="headerlink" title="五、验证配置&测试使用"></a>五、验证配置&amp;测试使用</h3><ol>
+<span class="token comment"># 输出对应配置值即生效</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></h2><h3 id="五、验证配置-测试使用"><a href="#五、验证配置-测试使用" class="headerlink" title="五、验证配置&amp;测试使用"></a>五、验证配置&amp;测试使用</h3><ol>
 <li>新开一个终端窗口（或执行source后直接操作），输入<code>claude</code>启动工具：<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">claude<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 <li>首次启动如果提示<code>Do you want to use this API key?</code>，选择<code>Yes</code>，之后提示目录权限选择信任即可。</li>
 <li>可以输入<code>/status</code>命令查看当前配置，确认模型正常加载即可。</li>

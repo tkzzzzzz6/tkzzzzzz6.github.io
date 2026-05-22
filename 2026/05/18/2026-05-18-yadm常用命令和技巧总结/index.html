@@ -132,6 +132,8 @@ mjx-container[display="true"] + br {
   display: none;
 }
 </style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/hexo-obsidian-callout.css">
 </head>
 
   <body>
@@ -243,11 +245,8 @@ yadm remote <span class="token parameter variable">-v</span><span aria-hidden="t
 </tr>
 </tbody></table>
 <hr>
-<blockquote>
-<p>[!notice]</p>
-<p>由于 一些 api 密钥可能会保存在 zshrc 等文件中,这里推荐将 github 仓库设置成私密仓库,如果是公网服务器或者其他可信设备克隆配置的话,可以使用 ssh 协议克隆,这样可以避免网络连接和泄密的问题</p>
-<p>当然也可以使用 yadm 的加密功能,不过我暂时还不够熟悉,所以先搭建一个可以用的工作流,后续熟练了再补充</p>
-</blockquote>
+<div class="hexo-callout hexo-callout--note" data-callout="note" data-callout-color="#202A36"><div class="hexo-callout__header"><span class="hexo-callout__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h9l5 5v13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"></path><path d="M12 3v5h5"></path></svg></span><span class="hexo-callout__title">Note</span></div><div class="hexo-callout__content"><p>由于 一些 api 密钥可能会保存在 zshrc 等文件中,这里推荐将 github 仓库设置成私密仓库,如果是公网服务器或者其他可信设备克隆配置的话,可以使用 ssh 协议克隆,这样可以避免网络连接和泄密的问题</p>
+<p>当然也可以使用 yadm 的加密功能,不过我暂时还不够熟悉,所以先搭建一个可以用的工作流,后续熟练了再补充</p></div></div>
 <h2 id="二、安装"><a href="#二、安装" class="headerlink" title="二、安装"></a>二、安装</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># macOS</span>
 brew <span class="token function">install</span> yadm
 

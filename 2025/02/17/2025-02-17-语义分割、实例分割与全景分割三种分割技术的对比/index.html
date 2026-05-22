@@ -132,6 +132,8 @@ mjx-container[display="true"] + br {
   display: none;
 }
 </style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/hexo-obsidian-callout.css">
 </head>
 
   <body>
@@ -194,7 +196,7 @@ mjx-container[display="true"] + br {
 <p>随着技术的发展，Transformer 架构逐渐被引入到这些分割任务中，显著提升了模型的多尺度特征学习能力和整体性能。语义分割、实例分割和全景分割各有其独特的优势和应用场景，但在实际应用中，全景分割因其能够提供更完整的场景理解，逐渐成为研究和应用的热点方向。</p>
 <p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17402355054491740235504618.png" alt="17402355054491740235504618.png"></p>
 <table>
-<tr>
+<tbody><tr>
 <td>技术<br></td><td>方法简介<br></td><td>关注点<br></td></tr>
 <tr>
 <td>语义分割<br></td><td>为图像中的每个像素分配特定类别标签。<br></td><td>关注“stuff”部分<br></td></tr>
@@ -202,10 +204,10 @@ mjx-container[display="true"] + br {
 <td>实例分割<br></td><td>在图像中检测并区分不同的物体实例。<br></td><td>关注“things”部分<br></td></tr>
 <tr>
 <td>全景分割<br></td><td>结合语义分割和实例分割，为每个像素分配语义标签和实例标识符。<br></td><td>同时关注“things”和“stuff”部分<br></td></tr>
-</table>
+</tbody></table>
 
 <h1 id="评价指标"><a href="#评价指标" class="headerlink" title="评价指标"></a><strong>评价指标</strong></h1><table>
-<tr>
+<tbody><tr>
 <td>分割类型<br></td><td>评估指标<br></td><td>描述<br></td></tr>
 <tr>
 <td rowspan="4">语义分割<br></td><td>像素准确率（Pixel Accuracy）<br></td><td>计算所有像素中被正确分类的比例<br></td></tr>
@@ -227,7 +229,7 @@ mjx-container[display="true"] + br {
 <td>平均精度均值（mAP）<br></td><td>用于评估实例分割部分的性能<br></td></tr>
 <tr>
 <td>全景质量（Panoptic Quality, PQ）<br></td><td>综合考虑语义分割的准确性和实例分割的完整性，是全景分割特有的评估指标<br></td></tr>
-</table>
+</tbody></table>
 
 <p>这些指标各有侧重点，具体选择取决于任务需求和数据集特性。</p>
 <ol>

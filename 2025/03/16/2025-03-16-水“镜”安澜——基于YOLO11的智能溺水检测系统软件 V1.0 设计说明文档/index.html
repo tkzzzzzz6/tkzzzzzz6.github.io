@@ -132,6 +132,8 @@ mjx-container[display="true"] + br {
   display: none;
 }
 </style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/hexo-obsidian-callout.css">
 </head>
 
   <body>
@@ -201,7 +203,7 @@ mjx-container[display="true"] + br {
 <p>本项目旨在开发一个基于计算机视觉的智能溺水检测系统，利用深度学习技术实现对水域环境中人员行为的实时监控和分析。项目背景源于对提升水域安全管理效率和降低溺水事故发生率的迫切需求，通过采用先进的人工智能技术，为水域安全管理提供智能化的解决方案。</p>
 <p>本项目创新性地结合光学摄像头技术，实现高效、全天候的溺水检测系统。通过光学摄像头利用 YOLO11 模型进行河道水面的实例分割和人物的目标检测。系统可以通过计算水面与人物掩模的重合度，判断目标人物溺水状态，若超出设定重合度范围，自动判断其可能溺水，并及时发出警报。项目初衷在于应对夏季高发的溺水事故，传统人工检测存在注意力疲劳、反应时间长、视线受限等局限。项目旨在利用图像处理算法和 YOLO11 模型，研发一套智能溺水检测系统，实现实时监控、精准识别和快速响应。相较于已有的溺水检测方案，如青犀防溺水 AI 算法、DEWS 系统等，本项目方案在硬件和环境适应性上更为灵活。目前项目只适用于河道等地区青少年失足落水的情况，我们计算后期添加人物姿态评估算法，将人物的溺水状态精确到对应的姿态，提高系统的适用范围和准确率。</p>
 <h2 id="3-定义"><a href="#3-定义" class="headerlink" title="3. 定义"></a>3. 定义</h2><table>
-<tr>
+<tbody><tr>
 <td>专有名词<br></td><td>解释<br></td></tr>
 <tr>
 <td>YOLO (You Only Look Once)<br></td><td>一种高效的实时目标检测算法<br></td></tr>
@@ -213,10 +215,10 @@ mjx-container[display="true"] + br {
 <td>CUDA(Compute Unified Device Architecture)<br></td><td> NVIDIA推出的并行计算平台和编程模型<br></td></tr>
 <tr>
 <td>FPS (Frames Per Second)<br></td><td>每秒帧数，用于衡量视频处理和显示的性能<br></td></tr>
-</table>
+</tbody></table>
 
 <h2 id="4-参考资料"><a href="#4-参考资料" class="headerlink" title="4. 参考资料"></a>4. 参考资料</h2><table>
-<tr>
+<tbody><tr>
 <td>资料名称名称<br></td><td>解释<br></td></tr>
 <tr>
 <td>https://pytorch.org/docs/<br></td><td>PyTorch官方文档<br></td></tr>
@@ -230,7 +232,7 @@ mjx-container[display="true"] + br {
 <td>https://webcamtests.com/<br></td><td>开发过程中用于测试网络摄像头的情况<br></td></tr>
 <tr>
 <td>https://github.com/tkzzzzzz6/downing_detect<br></td><td>我们项目的github网址<br></td></tr>
-</table>
+</tbody></table>
 
 <h1 id="二、总体设计"><a href="#二、总体设计" class="headerlink" title="二、总体设计"></a>二、总体设计</h1><h2 id="需求概述"><a href="#需求概述" class="headerlink" title="需求概述"></a>需求概述</h2><p>我们的溺水检测项目旨在以高通 QCS6490 平台为边缘计算终端平台，通过结合人工智能技术和智能监控系统，实现高效、精准的溺水检测和预警。项目系统采用 YOLO11n 模型，高精度训练，提高 YOLO11 模型的精确度与鲁棒性。结合光学摄像头，能够在各种复杂环境和天气条件下提供全天候的高精度、低延迟、强适应的实时监控系统。我们的项目预计部署于泳池、海滩、湖泊以及河道等多种水域环境，以减少溺水事故的发生，目前项目只适用于河道等地区青少年失足落水的情况，我们计划后期添加人物姿态评估算法，将人物的溺水状态精确到对应的姿态，提高系统的适用范围和准确率。</p>
 <p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17421133300801742113329444.png" alt="17421133300801742113329444.png"></p>
@@ -239,9 +241,7 @@ mjx-container[display="true"] + br {
 <p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1742113187081Z9i6bqevRoBENmx5jrHcJXfAnsd.png" alt="1742113187081Z9i6bqevRoBENmx5jrHcJXfAnsd.png"><br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1742113238130VeKpbk1TNocTNxxj7UCclMhtnae.png" alt="1742113238130VeKpbk1TNocTNxxj7UCclMhtnae.png"></p>
 <h3 id="人员检测与跟踪"><a href="#人员检测与跟踪" class="headerlink" title="人员检测与跟踪"></a>人员检测与跟踪</h3><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17421133790801742113378366.png" alt="17421133790801742113378366.png"></p>
 <p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17421133980811742113397191.png" alt="17421133980811742113397191.png"><br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17421134100811742113409980.png" alt="17421134100811742113409980.png"><br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17421134220861742113421703.png" alt="17421134220861742113421703.png"><br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17421134910811742113490340.png" alt="17421134910811742113490340.png"><br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17421135220821742113521782.png" alt="17421135220821742113521782.png"><br><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17421135460841742113545806.png" alt="17421135460841742113545806.png"></p>
-<blockquote>
-<p>[!TIP]</p>
-</blockquote>
+<div class="hexo-callout hexo-callout--tip" data-callout="tip" data-callout-color="#1F3232"><div class="hexo-callout__header"><span class="hexo-callout__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 0-5 11.74V17a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-3.28A7 7 0 0 0 12 2z"></path><path d="M9 21h6"></path><path d="M10 17v4"></path><path d="M14 17v4"></path></svg></span><span class="hexo-callout__title">Tip</span></div></div>
 <ul>
 <li>添加随机高斯模糊，以帮助模型更灵活地适应摄像机焦点。</li>
 <li>灰度处理,合并颜色通道，使模型更快，并且对主体颜色不敏感。</li>
@@ -317,7 +317,7 @@ mjx-container[display="true"] + br {
 <h2 id="输入项目"><a href="#输入项目" class="headerlink" title="输入项目"></a>输入项目</h2><h3 id="视频文件"><a href="#视频文件" class="headerlink" title="视频文件"></a>视频文件</h3><p>系统能够处理多种格式的视频文件，包括但不限于 MP4、AVI 等常见格式。这些视频文件可以是预先录制的，也可以是实时生成的。系统支持从本地存储设备或网络位置读取视频文件，以供分析和处理。</p>
 <p>以下是我们溺水检测系统支持的视频格式类型:</p>
 <table>
-<tr>
+<tbody><tr>
 <td>格式<br></td><td>扩展名<br></td><td>描述<br></td></tr>
 <tr>
 <td>AVI<br></td><td>.avi<br></td><td>音频视频交错格式，支持多种编码方式<br></td></tr>
@@ -337,7 +337,7 @@ mjx-container[display="true"] + br {
 <td>MPEG<br></td><td>.mpeg<br></td><td>一种视频压缩标准，广泛使用<br></td></tr>
 <tr>
 <td>3GP<br></td><td>.3gp<br></td><td>移动设备视频格式<br></td></tr>
-</table>
+</tbody></table>
 
 <h3 id="摄像头检测"><a href="#摄像头检测" class="headerlink" title="摄像头检测"></a>摄像头检测</h3><h4 id="实时摄像头视频流"><a href="#实时摄像头视频流" class="headerlink" title="实时摄像头视频流"></a>实时摄像头视频流</h4><p>系统设计支持从实时摄像头视频流中获取数据。这包括物理摄像头（如 CCTV 摄像头）以及虚拟网络摄像头。对于虚拟网络摄像头，系统可以利用网络技术访问同一局域网内的平板和手机摄像头。这种设计提供了更大的灵活性，允许在没有物理摄像头的情况下，使用移动设备的摄像头作为监控设备。</p>
 <p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17421138440811742113843683.png" alt="17421138440811742113843683.png"></p>
@@ -428,7 +428,7 @@ mjx-container[display="true"] + br {
 <h3 id="资源文件：-resource"><a href="#资源文件：-resource" class="headerlink" title="资源文件：./resource/"></a>资源文件：<code>./resource/</code></h3><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17421140180851742114017407.png" alt="17421140180851742114017407.png"></p>
 <h3 id="源代码：-src"><a href="#源代码：-src" class="headerlink" title="源代码：./src/"></a>源代码：<code>./src/</code></h3><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/17421140290841742114028567.png" alt="17421140290841742114028567.png"></p>
 <h2 id="限制条件"><a href="#限制条件" class="headerlink" title="限制条件"></a>限制条件</h2><table>
-<tr>
+<tbody><tr>
 <td>- Python 3.8+运行环境<br></td></tr>
 <tr>
 <td>- CUDA支持（推荐）<br></td></tr>
@@ -436,7 +436,7 @@ mjx-container[display="true"] + br {
 <td>- 最小8GB内存<br></td></tr>
 <tr>
 <td>- 支持OpenCV的操作系统<br></td></tr>
-</table>
+</tbody></table>
 
 <h2 id="测试要点"><a href="#测试要点" class="headerlink" title="测试要点"></a>测试要点</h2><h3 id="视频处理性能测试"><a href="#视频处理性能测试" class="headerlink" title="视频处理性能测试"></a>视频处理性能测试</h3><p>视频处理性能测试旨在评估系统处理视频流的能力，包括实时性、帧率和视频质量。测试将模拟不同的视频输入条件，如不同的分辨率、帧率和编码格式，以确保系统能够在各种情况下稳定运行。</p>
 <ul>

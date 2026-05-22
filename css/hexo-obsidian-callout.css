@@ -1,0 +1,276 @@
+:root {
+  color-scheme: dark light;
+}
+
+.hexo-callout,
+details.hexo-callout {
+  --callout-bg: #1f2b39;
+  --callout-accent: rgba(255, 255, 255, 0.2);
+  --callout-icon-glow: rgba(255, 255, 255, 0.16);
+  --callout-text: #e9edf6;
+  --callout-muted: rgba(255, 255, 255, 0.65);
+  --callout-icon-size: 2.6rem;
+  --callout-radius: 1rem;
+  --callout-content-indent: calc(var(--callout-icon-size) + 0.9rem);
+
+  position: relative;
+  margin: 1.75rem 0;
+  padding: 1.1rem 1.35rem 1.35rem;
+  border-radius: var(--callout-radius);
+  background: var(--callout-bg);
+  color: var(--callout-text);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 24px 42px -28px rgba(15, 23, 42, 0.9);
+  overflow: hidden;
+}
+
+.hexo-callout::before,
+details.hexo-callout::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 65%);
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+.hexo-callout::after,
+details.hexo-callout::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: 6px;
+  border-radius: 999px;
+  background: var(--callout-accent);
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+.hexo-callout a {
+  color: inherit;
+  text-decoration-color: rgba(255, 255, 255, 0.35);
+  text-decoration-thickness: 2px;
+}
+
+.hexo-callout p {
+  margin: 0.4rem 0;
+  line-height: 1.65;
+}
+
+.hexo-callout__header,
+details.hexo-callout > .hexo-callout__summary {
+  display: grid;
+  grid-template-columns: var(--callout-icon-size) 1fr auto;
+  align-items: center;
+  column-gap: 0.85rem;
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+}
+
+.hexo-callout__summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.hexo-callout__summary::-webkit-details-marker {
+  display: none;
+}
+
+.hexo-callout__summary:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.65);
+  outline-offset: 4px;
+}
+
+.hexo-callout__icon {
+  width: var(--callout-icon-size);
+  height: var(--callout-icon-size);
+  border-radius: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.25), transparent 65%);
+  box-shadow: 0 12px 24px -18px rgba(15, 23, 42, 0.85);
+  position: relative;
+}
+
+.hexo-callout__icon::after {
+  content: "";
+  position: absolute;
+  inset: -16%;
+  border-radius: inherit;
+  background: var(--callout-icon-glow);
+  filter: blur(18px);
+  opacity: 0.75;
+  z-index: -1;
+}
+
+.hexo-callout__icon svg {
+  width: 1.45rem;
+  height: 1.45rem;
+}
+
+.hexo-callout__title {
+  color: inherit;
+}
+
+.hexo-callout__chevron {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  transition: transform 0.3s ease, background 0.25s ease;
+}
+
+.hexo-callout__chevron::before {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  border: 2px solid currentColor;
+  border-top: 0;
+  border-left: 0;
+  transform: rotate(45deg);
+}
+
+details.hexo-callout[open] > .hexo-callout__summary .hexo-callout__chevron {
+  transform: rotate(225deg);
+}
+
+.hexo-callout__summary:hover .hexo-callout__chevron {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.hexo-callout__content {
+  margin-top: 1rem;
+  margin-left: var(--callout-content-indent);
+  display: flow-root;
+}
+
+.hexo-callout__content > :first-child {
+  margin-top: 0;
+}
+
+.hexo-callout__content * + * {
+  margin-top: 0.75rem;
+}
+
+.hexo-callout__content ul,
+.hexo-callout__content ol {
+  padding-inline-start: 1.25rem;
+  margin: 0.5rem 0;
+}
+
+.hexo-callout__content blockquote {
+  border-inline-start: 4px solid rgba(255, 255, 255, 0.25);
+  padding-inline-start: 1rem;
+  margin-inline-start: 0;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.hexo-callout code,
+.hexo-callout pre {
+  background: rgba(15, 23, 42, 0.35);
+  color: #f8fbff;
+  border-radius: 0.55rem;
+}
+
+.hexo-callout pre {
+  padding: 0.85rem 1rem;
+  overflow-x: auto;
+}
+
+.hexo-callout code {
+  padding: 0.2rem 0.4rem;
+}
+
+/* Background + accent palette */
+.hexo-callout[data-callout="note"] {
+  --callout-bg: #202a36;
+  --callout-accent: #4b5c7b;
+}
+
+.hexo-callout[data-callout="abstract"],
+.hexo-callout[data-callout="tip"] {
+  --callout-bg: #1f3232;
+  --callout-accent: #3a5959;
+}
+
+.hexo-callout[data-callout="info"],
+.hexo-callout[data-callout="todo"],
+.hexo-callout[data-callout="example"] {
+  --callout-bg: #1f2b39;
+  --callout-accent: #33506b;
+}
+
+.hexo-callout[data-callout="success"] {
+  --callout-bg: #26342a;
+  --callout-accent: #44674e;
+}
+
+.hexo-callout[data-callout="question"] {
+  --callout-bg: #372b1f;
+  --callout-accent: #6a4b30;
+}
+
+.hexo-callout[data-callout="warning"] {
+  --callout-bg: #372b1f;
+  --callout-accent: #d99b3c;
+}
+
+.hexo-callout[data-callout="failure"],
+.hexo-callout[data-callout="danger"],
+.hexo-callout[data-callout="bug"] {
+  --callout-bg: #372426;
+  --callout-accent: #a9454f;
+}
+
+.hexo-callout[data-callout="quote"] {
+  --callout-bg: #2f2f2f;
+  --callout-accent: #7a7a7a;
+}
+
+/* Light theme refinement */
+@media (prefers-color-scheme: light) {
+  .hexo-callout,
+  details.hexo-callout {
+    --callout-text: #1e293b;
+    --callout-muted: rgba(15, 23, 42, 0.65);
+    color: var(--callout-text);
+    border-color: rgba(15, 23, 42, 0.08);
+  }
+
+  .hexo-callout__icon,
+  .hexo-callout__chevron {
+    background: rgba(15, 23, 42, 0.08);
+    color: inherit;
+  }
+
+  .hexo-callout__icon::after {
+    background: rgba(15, 23, 42, 0.08);
+  }
+
+  .hexo-callout a {
+    text-decoration-color: rgba(15, 23, 42, 0.3);
+  }
+}
+
+@media (max-width: 640px) {
+  .hexo-callout,
+  details.hexo-callout {
+    --callout-icon-size: 2.3rem;
+    --callout-content-indent: calc(var(--callout-icon-size) + 0.75rem);
+    padding: 0.95rem 1rem 1.1rem;
+  }
+
+  .hexo-callout__content {
+    margin-left: calc(var(--callout-icon-size) + 0.6rem);
+  }
+}

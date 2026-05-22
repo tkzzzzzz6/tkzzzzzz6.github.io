@@ -132,6 +132,8 @@ mjx-container[display="true"] + br {
   display: none;
 }
 </style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/hexo-obsidian-callout.css">
 </head>
 
   <body>
@@ -938,23 +940,23 @@ VGG_MEAN <span class="token operator">=</span> <span class="token punctuation">[
 <p>Unet 的好处我感觉是：网络层越深得到的特征图，有着更大的视野域，浅层卷积关注纹理特征，深层网络关注本质的那种特征，所以深层浅层特征都是有格子的意义的；另外一点是通过反卷积得到的更大的尺寸的特征图的边缘，是缺少信息的，毕竟每一次下采样提炼特征的同时，也必然会损失一些边缘特征，而失去的特征并不能从上采样中找回，因此通过特征的拼接，来实现边缘特征的一个找回。</p>
 <p>下面是一些与医学相关的数据集以及对应的提取码,有兴趣的同学可以下载下来跑一下。</p>
 <table>
+<tbody><tr>
+<td>**数据集名称**<br></td><td>**下载链接**</td><td>**提取码**<br></td></tr>
 <tr>
-<td>**数据集名称**<br></td><td>**下载链接**<td>**提取码**<br></td></td></tr>
+<td>Cell dataset (dsb2018)<br></td><td>https://pan.baidu.com/share/init?surl=BaVrzYdrSP78CwYaRzZr1w</td><td>5l54<br></td></tr>
 <tr>
-<td>Cell dataset (dsb2018)<br></td><td>https://pan.baidu.com/share/init?surl=BaVrzYdrSP78CwYaRzZr1w<td>5l54<br></td></td></tr>
+<td>Liver dataset<br></td><td>https://pan.baidu.com/share/init?surl=FljGCVzu7HPYpwAKvSVN4Q</td><td>5l88<br></td></tr>
 <tr>
-<td>Liver dataset<br></td><td>https://pan.baidu.com/share/init?surl=FljGCVzu7HPYpwAKvSVN4Q<td>5l88<br></td></td></tr>
+<td>Cell dataset (isbi)<br></td><td>https://pan.baidu.com/share/init?surl=FkfnhU-RnYFZti62-f8AVA</td><td>14rz<br></td></tr>
 <tr>
-<td>Cell dataset (isbi)<br></td><td>https://pan.baidu.com/share/init?surl=FkfnhU-RnYFZti62-f8AVA<td>14rz<br></td></td></tr>
+<td>Lung dataset<br></td><td>https://pan.baidu.com/share/init?surl=sLFRmtG2TOTEgUKniJf7AA</td><td>qdwo<br></td></tr>
 <tr>
-<td>Lung dataset<br></td><td>https://pan.baidu.com/share/init?surl=sLFRmtG2TOTEgUKniJf7AA<td>qdwo<br></td></td></tr>
+<td>Corneal Nerve dataset<br></td><td>https://pan.baidu.com/share/init?surl=T3-kS_FgYI6DeXv3n1I7bA</td><td>ih02<br></td></tr>
 <tr>
-<td>Corneal Nerve dataset<br></td><td>https://pan.baidu.com/share/init?surl=T3-kS_FgYI6DeXv3n1I7bA<td>ih02<br></td></td></tr>
+<td>Eye Vessels (DRIVE dataset)<br></td><td>https://pan.baidu.com/share/init?surl=UkMLmdbM61N8ecgnKlAsPg</td><td>f1ek<br></td></tr>
 <tr>
-<td>Eye Vessels (DRIVE dataset)<br></td><td>https://pan.baidu.com/share/init?surl=UkMLmdbM61N8ecgnKlAsPg<td>f1ek<br></td></td></tr>
-<tr>
-<td>Esophagus and Esophagus Cancer dataset (First Affiliated Hospital of Sun Yat-sen University)<br></td><td>https://pan.baidu.com/share/init?surl=0b5arIQjNpiggwdkgYNHXQ<td>hivm<br></td></td></tr>
-</table>
+<td>Esophagus and Esophagus Cancer dataset (First Affiliated Hospital of Sun Yat-sen University)<br></td><td>https://pan.baidu.com/share/init?surl=0b5arIQjNpiggwdkgYNHXQ</td><td>hivm<br></td></tr>
+</tbody></table>
 
 <h4 id="为什么-Unet-在医疗图像分割中表现好"><a href="#为什么-Unet-在医疗图像分割中表现好" class="headerlink" title="为什么 Unet 在医疗图像分割中表现好?"></a>为什么 Unet 在医疗图像分割中表现好?</h4><p>大多数医疗影像语义分割任务都会首先用 Unet 作为 baseline，当然上一章节讲解的 Unet 的优点肯定是可以当作这个问题的答案，这里谈一谈医疗影像的特点</p>
 <p>根据网友的讨论，得到的结果：</p>

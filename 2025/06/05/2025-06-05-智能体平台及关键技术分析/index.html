@@ -132,6 +132,8 @@ mjx-container[display="true"] + br {
   display: none;
 }
 </style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/hexo-obsidian-callout.css">
 </head>
 
   <body>
@@ -210,7 +212,7 @@ mjx-container[display="true"] + br {
 <hr>
 <h2 id="智能体平台架构"><a href="#智能体平台架构" class="headerlink" title="智能体平台架构"></a>智能体平台架构</h2><p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/1749365010853TNugbiS2LoHQawx44yacTxDcnoh.png" alt="1749365010853TNugbiS2LoHQawx44yacTxDcnoh.png"></p>
 <h3 id="感知模块-Perception"><a href="#感知模块-Perception" class="headerlink" title="感知模块 (Perception)"></a>感知模块 (Perception)</h3><p>负责从多源数据（传感器、API、日志等）中抽取特征，包括计算机视觉、语音识别和传感器数据处理。</p>
-<h3 id="推理与规划-Reasoning-Planning"><a href="#推理与规划-Reasoning-Planning" class="headerlink" title="推理与规划 (Reasoning & Planning)"></a>推理与规划 (Reasoning &amp; Planning)</h3><ul>
+<h3 id="推理与规划-Reasoning-Planning"><a href="#推理与规划-Reasoning-Planning" class="headerlink" title="推理与规划 (Reasoning &amp; Planning)"></a>推理与规划 (Reasoning &amp; Planning)</h3><ul>
 <li><strong>规则推理：</strong> 基于专家系统或逻辑规则进行决策。</li>
 <li><strong>规划算法：</strong> 使用 A*、蒙特卡洛树搜索等方法，生成跨阶段任务执行方案。</li>
 </ul>
@@ -219,8 +221,8 @@ mjx-container[display="true"] + br {
 <li>**强化学习 (RL)**：通过环境交互不断更新策略。</li>
 <li><strong>监督/无监督学习</strong>：利用历史数据训练分类、聚类模型，支持情境感知与预测。</li>
 </ul>
-<h3 id="执行与接口-Execution-Interface"><a href="#执行与接口-Execution-Interface" class="headerlink" title="执行与接口 (Execution & Interface)"></a>执行与接口 (Execution &amp; Interface)</h3><p>将决策转化为实际动作或 API 调用，包括机器人控制、网络请求与第三方服务集成。</p>
-<h3 id="通信与协调-Communication-Orchestration"><a href="#通信与协调-Communication-Orchestration" class="headerlink" title="通信与协调 (Communication & Orchestration)"></a>通信与协调 (Communication &amp; Orchestration)</h3><ul>
+<h3 id="执行与接口-Execution-Interface"><a href="#执行与接口-Execution-Interface" class="headerlink" title="执行与接口 (Execution &amp; Interface)"></a>执行与接口 (Execution &amp; Interface)</h3><p>将决策转化为实际动作或 API 调用，包括机器人控制、网络请求与第三方服务集成。</p>
+<h3 id="通信与协调-Communication-Orchestration"><a href="#通信与协调-Communication-Orchestration" class="headerlink" title="通信与协调 (Communication &amp; Orchestration)"></a>通信与协调 (Communication &amp; Orchestration)</h3><ul>
 <li><strong>Agent Communication Languages (ACL)：</strong> 如 FIPA-ACL、KQML，实现异构智能体间的消息交换。</li>
 <li><strong>分布式调度：</strong> 基于消息队列、Service Mesh 或 Kubernetes 框架，实现智能体群的负载均衡与高可用。</li>
 </ul>

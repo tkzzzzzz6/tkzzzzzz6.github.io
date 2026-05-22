@@ -132,6 +132,8 @@ mjx-container[display="true"] + br {
   display: none;
 }
 </style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/hexo-obsidian-callout.css">
 </head>
 
   <body>
@@ -204,12 +206,12 @@ mjx-container[display="true"] + br {
 <li>纯虚函数是为了实现一个接口，起到一个规范的作用，规范继承这个类的程序员必须实现这个函数。</li>
 </ul>
 <p>虚函数虚在所谓”推迟联编”或者”动态联编”上，一个类函数的调用并不是在编译时刻被确定的，而是在运行时刻被确定的。由于编写代码的时候并不能确定被调用的是基类的函数还是哪个派生类的函数，所以被成为”虚”函数。</p>
-<h1 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h1><p>虚函数可以让子类对象在运行时动态地继承和修改父类的成员函数，使得代码更加灵活、可重用，并且可以实现多态性和<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=227971983&content_type=Article&match_order=1&q=%E6%8A%BD%E8%B1%A1%E7%B1%BB&zhida_source=entity">抽象类</a>等高级特性。</p>
+<h1 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h1><p>虚函数可以让子类对象在运行时动态地继承和修改父类的成员函数，使得代码更加灵活、可重用，并且可以实现多态性和<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=227971983&amp;content_type=Article&amp;match_order=1&amp;q=%E6%8A%BD%E8%B1%A1%E7%B1%BB&amp;zhida_source=entity">抽象类</a>等高级特性。</p>
 <ol>
 <li>通过虚函数，可以实现多态性（Polymorphism），即同一个函数名可以在不同的子类中表现出不同的行为，这样可以提高代码的可重用性和灵活性。</li>
 <li>避免静态绑定，在使用父类指针或引用调用子类对象的成员函数时，如果没有使用虚函数，则会进行静态绑定（Static Binding），即只能调用父类的成员函数，无法调用子类特有的成员函数。</li>
-<li>虚函数的调用是<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=227971983&content_type=Article&match_order=1&q=%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A&zhida_source=entity">动态绑定</a>（Dynamic Binding）的，即在运行时根据指针或引用所指向的对象类型来选择调用哪个函数，从而实现动态多态性。</li>
-<li>抽象类是一种不能直接实例化的类，只能被其他类继承并实现其虚函数。通过定义<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=227971983&content_type=Article&match_order=1&q=%E7%BA%AF%E8%99%9A%E5%87%BD%E6%95%B0&zhida_source=entity">纯虚函数</a>（Pure Virtual Function），可以使得一个类成为抽象类，强制其子类必须实现该函数。</li>
+<li>虚函数的调用是<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=227971983&amp;content_type=Article&amp;match_order=1&amp;q=%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A&amp;zhida_source=entity">动态绑定</a>（Dynamic Binding）的，即在运行时根据指针或引用所指向的对象类型来选择调用哪个函数，从而实现动态多态性。</li>
+<li>抽象类是一种不能直接实例化的类，只能被其他类继承并实现其虚函数。通过定义<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=227971983&amp;content_type=Article&amp;match_order=1&amp;q=%E7%BA%AF%E8%99%9A%E5%87%BD%E6%95%B0&amp;zhida_source=entity">纯虚函数</a>（Pure Virtual Function），可以使得一个类成为抽象类，强制其子类必须实现该函数。</li>
 </ol>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 形状基类，定义了计算面积和周长的虚函数</span>
 <span class="token keyword">class</span> <span class="token class-name">Shape</span> <span class="token punctuation">{</span>

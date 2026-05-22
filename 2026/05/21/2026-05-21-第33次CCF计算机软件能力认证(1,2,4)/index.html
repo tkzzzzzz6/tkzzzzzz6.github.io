@@ -132,6 +132,8 @@ mjx-container[display="true"] + br {
   display: none;
 }
 </style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/hexo-obsidian-callout.css">
 </head>
 
   <body>
@@ -292,9 +294,7 @@ unordered_set<span class="token operator">&lt;</span>string<span class="token op
 
 <h1 id="4-十滴水"><a href="#4-十滴水" class="headerlink" title="4.十滴水"></a>4.十滴水</h1><h2 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h2><p>在一个一维网格水池中，初始有 <code>m</code> 个水坑，每个水坑的权值表示当前水滴数。每次向某个水坑滴入一滴水后，它的权值会加 1。当某个水坑的权值达到 <code>5</code> 时，该水坑会被删除，并且它左右相邻的水坑的权值都会加 1。请输出每次滴入水后，水池中剩余的水坑数。</p>
 <h2 id="思路-双向链表"><a href="#思路-双向链表" class="headerlink" title="思路:双向链表"></a>思路:双向链表</h2><p>每次处理时，只需要判断当前水坑左右两侧的两个水坑是否需要被删除即可；如果有新的水坑被删除，就继续检查它周围的相邻水坑，直到再也没有水坑需要删除为止。</p>
-<blockquote>
-<p>[!tip]<br>注意双向链表中节点的删除的方法,<code>r[L]</code>,表示L对应的左邻点,<code>l[R]</code>,表示R对应的右邻点</p>
-</blockquote>
+<div class="hexo-callout hexo-callout--tip" data-callout="tip" data-callout-color="#1F3232"><div class="hexo-callout__header"><span class="hexo-callout__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 0-5 11.74V17a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-3.28A7 7 0 0 0 12 2z"></path><path d="M9 21h6"></path><path d="M10 17v4"></path><path d="M14 17v4"></path></svg></span><span class="hexo-callout__title">Tip</span></div><div class="hexo-callout__content">注意双向链表中节点的删除的方法,<code>r[L]</code>,表示L对应的左邻点,<code>l[R]</code>,表示R对应的右邻点</div></div>
 <p>在水坑爆炸的过程中，指针可以单向移动，也就是先处理左边，再处理右边，这样可以显著减少重复计算。</p>
 <p>代码中先判断 R 再判断 L，再进行更新，从而实现 L 覆盖 R 的效果，保证遍历方向始终是单向的。</p>
 <ul>

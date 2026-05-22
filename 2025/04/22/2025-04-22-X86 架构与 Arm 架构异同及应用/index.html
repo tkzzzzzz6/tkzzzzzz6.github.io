@@ -132,6 +132,8 @@ mjx-container[display="true"] + br {
   display: none;
 }
 </style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/hexo-obsidian-callout.css">
 </head>
 
   <body>
@@ -271,7 +273,7 @@ STORE A, RA  ; 将寄存器中的结果写回内存<span aria-hidden="true" clas
 <p>为了更快地执行指令，这些流水线可以被设计成允许指令们不按照程序的顺序被执行(乱序执行)。一些巧妙的逻辑结构可以判断下一条指令是否依赖于当前的指令执行的结果。Intel 和 ARM 都提供乱序执行逻辑结构，可想而知，这种结构十分的复杂，复杂意味着更多的功耗。</p>
 <h1 id="X86-和-Arm-架构的比较及应用"><a href="#X86-和-Arm-架构的比较及应用" class="headerlink" title="X86 和 Arm 架构的比较及应用"></a>X86 和 Arm 架构的比较及应用</h1><p>X86 和 Arm 都是广泛使用的 CPU 架构，但它们的设计目标和应用场景不同。X86 通常提供更高的单线程性能，适合需要强大计算能力的任务，如视频编辑和科学计算。而 Arm 以低功耗著称，延长了移动设备和 IoT 设备的电池寿命。</p>
 <table>
-<tr>
+<tbody><tr>
 <td>**方面**<br></td><td>**X86 (CISC)**<br></td><td>**Arm (RISC)**<br></td></tr>
 <tr>
 <td>**指令集类型**<br></td><td>复杂指令集计算（CISC），指令复杂，每条可执行多个操作，编译器设计较简单，CPU 电路复杂。<br></td><td>精简指令集计算（RISC），指令简单，每条执行单一操作，CPU 电路较简单，需更多编译器优化。<br></td></tr>
@@ -289,7 +291,7 @@ STORE A, RA  ; 将寄存器中的结果写回内存<span aria-hidden="true" clas
 <td>**64 位计算**<br></td><td>x86-64（AMD 设计），IA64 为 Itanium，但 x86-64 更普及，无原生 32 位到 64 位转换。<br></td><td>ARMv8（2011）支持 AArch32/AArch64，切换无缝，向下兼容。<br></td></tr>
 <tr>
 <td>**异构计算**<br></td><td>传统双核/四核，性能和功耗一致，无 big.LITTLE。<br></td><td>big.LITTLE 架构，低功耗核和高性能核组合，适合动态负载（如游戏时高性能）。<br></td></tr>
-</table>
+</tbody></table>
 
 <h2 id="设计理念与应用领域"><a href="#设计理念与应用领域" class="headerlink" title="设计理念与应用领域"></a>设计理念与应用领域</h2><p>x86 架构起源于 1978 年的 Intel 8086 处理器，采用复杂指令集（CISC），目标是提供丰富的指令以简化编程，强调高性能与通用性，广泛应用于桌面 PC、笔记本以及服务器市场。</p>
 <p>ARM 架构最早于 1985 年推出，基于精简指令集（RISC）设计，强调指令简洁、高速流水线及低功耗，主要面向移动设备与嵌入式系统，如智能手机、平板、智能手表以及各类 IoT 设备。</p>
