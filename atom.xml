@@ -6,7 +6,7 @@
   <link href="https://tanke.asia/atom.xml" rel="self"/>
   
   <link href="https://tanke.asia/"/>
-  <updated>2026-05-22T11:12:10.839Z</updated>
+  <updated>2026-05-23T02:40:50.285Z</updated>
   <id>https://tanke.asia/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode刷题笔记-1752-检查数组是否经排序和轮转得到</title>
+    <link href="https://tanke.asia/2026/05/23/2026-05-22-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-33-%E6%90%9C%E7%B4%A2%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%20copy/"/>
+    <id>https://tanke.asia/2026/05/23/2026-05-22-LeetCode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-33-%E6%90%9C%E7%B4%A2%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%20copy/</id>
+    <published>2026-05-22T16:00:00.000Z</published>
+    <updated>2026-05-23T02:40:50.285Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1752-检查数组是否经排序和轮转得到"><a href="#1752-检查数组是否经排序和轮转得到" class="headerlink" title="1752.检查数组是否经排序和轮转得到"></a>1752.检查数组是否经排序和轮转得到</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个数组 nums 。nums 的源数组中，所有元素与 nums 相同，但 <code>按非递减顺序排列</code>。nums 中的元素可能会被轮转（向左移动）若干次。</p><h2 id="思路-遍历"><a href="#思路-遍历" class="headerlink" title="思路:遍历"></a>思路:遍历</h2><ul><li>时间复杂度：O(n)</li><li>空间复杂度：O(1)</li></ul><p>有序数组经过旋转得到的数组的性质</p><ol><li>旋转后的数组中，最多只有一个逆序对（这道题是前一个元素大于后一个元素）。</li><li>旋转后的数组的第一个元素和最后一个元素可以抽象成相邻的，也需要判断是否逆序</li></ol><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>    <span class="token keyword">def</span> <span class="token function">check</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> nums<span class="token punctuation">:</span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">bool</span><span class="token punctuation">:</span>        inversion_cnt <span class="token operator">=</span> <span class="token number">0</span> <span class="token keyword">if</span> nums<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">&gt;=</span> nums<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token keyword">else</span> <span class="token number">1</span>        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>            <span class="token keyword">if</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&gt;</span> nums<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span>                inversion_cnt <span class="token operator">+=</span> <span class="token number">1</span>                <span class="token keyword">if</span> inversion_cnt <span class="token operator">&gt;</span> <span class="token number">1</span><span class="token punctuation">:</span>                    <span class="token keyword">return</span> <span class="token boolean">False</span>        <span class="token keyword">return</span> <span class="token boolean">True</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="更优雅的解法"><a href="#更优雅的解法" class="headerlink" title="更优雅的解法"></a>更优雅的解法</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> itertools<span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>    <span class="token keyword">def</span> <span class="token function">check</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> nums<span class="token punctuation">:</span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">bool</span><span class="token punctuation">:</span>        is_sorted <span class="token operator">=</span> nums<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">&gt;=</span> nums<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>        <span class="token keyword">for</span> x<span class="token punctuation">,</span>y <span class="token keyword">in</span> pairwise<span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token punctuation">:</span>            <span class="token keyword">if</span> x <span class="token operator">&gt;</span> y<span class="token punctuation">:</span>                <span class="token keyword">if</span> <span class="token keyword">not</span> is_sorted<span class="token punctuation">:</span>                    <span class="token keyword">return</span> <span class="token boolean">False</span>                is_sorted <span class="token operator">=</span> <span class="token boolean">False</span>        <span class="token keyword">return</span> <span class="token boolean">True</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;1752-检查数组是否经排序和轮转得到&quot;&gt;&lt;a href=&quot;#1752-检查数组是否经排序和轮转得到&quot; class=&quot;headerlink&quot; title=&quot;1752.检查数组是否经排序和轮转得到&quot;&gt;&lt;/a&gt;1752.检查数组是否经排序和轮转得到&lt;/h1&gt;&lt;h2 i</summary>
+      
+    
+    
+    
+    <category term="算法蒟蒻的成长记录" scheme="https://tanke.asia/categories/%E7%AE%97%E6%B3%95%E8%92%9F%E8%92%BB%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/"/>
+    
+    <category term="LeetCode" scheme="https://tanke.asia/categories/%E7%AE%97%E6%B3%95%E8%92%9F%E8%92%BB%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/LeetCode/"/>
+    
+    
+    <category term="暴力" scheme="https://tanke.asia/tags/%E6%9A%B4%E5%8A%9B/"/>
+    
+    <category term="遍历" scheme="https://tanke.asia/tags/%E9%81%8D%E5%8E%86/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode刷题笔记-33-搜索旋转排序数组</title>
@@ -599,40 +627,6 @@
     
     
     <category term="Linux, 操作系统, 命令行, 实验" scheme="https://tanke.asia/tags/Linux-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%91%BD%E4%BB%A4%E8%A1%8C-%E5%AE%9E%E9%AA%8C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>AcWing刷题笔记-15-二维数组中的查找</title>
-    <link href="https://tanke.asia/2026/04/15/2026-04-15-AcWing%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-15-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9F%A5%E6%89%BE/"/>
-    <id>https://tanke.asia/2026/04/15/2026-04-15-AcWing%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-15-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9F%A5%E6%89%BE/</id>
-    <published>2026-04-14T16:00:00.000Z</published>
-    <updated>2026-04-27T23:54:31.366Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="AcWing-刷题笔记：15-二维数组中的查找"><a href="#AcWing-刷题笔记：15-二维数组中的查找" class="headerlink" title="AcWing 刷题笔记：15. 二维数组中的查找"></a>AcWing 刷题笔记：15. 二维数组中的查找</h1><p>这题看起来像“有序数组 + 查找”，很容易第一眼就想上二分。<br>但它的排序关系是“每行递增、每列递增”，并<strong>不保证</strong>上一行末尾小于下一行开头，所以不能把整个矩阵拉平后直接做二分。</p><hr><h2 id="题目特点"><a href="#题目特点" class="headerlink" title="题目特点"></a>题目特点</h2><p>给定一个二维数组：</p><ul><li>每一行从左到右递增。</li><li>每一列从上到下递增。</li></ul><p>判断目标值 <code>target</code> 是否在数组中出现。</p><hr><h2 id="正确思路"><a href="#正确思路" class="headerlink" title="正确思路"></a>正确思路</h2><p>从<strong>右上角</strong>开始查找（也可以从左下角，原理一样）。</p><p>设当前点为 <code>(i, j)</code>：</p><ul><li>如果 <code>array[i][j] == target</code>，直接返回 <code>true</code>。</li><li>如果 <code>array[i][j] &gt; target</code>，说明当前列下面元素更大，这一列不可能有答案，<code>j--</code> 向左走。</li><li>如果 <code>array[i][j] &lt; target</code>，说明当前行左侧元素更小，这一行不可能有答案，<code>i++</code> 向下走。</li></ul><p>每一步都能排除一整行或一整列，直到越界结束。</p><hr><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><ul><li>时间复杂度：<code>O(m + n)</code></li><li>空间复杂度：<code>O(1)</code></li></ul><p>其中 <code>m</code> 为行数，<code>n</code> 为列数。</p><hr><h2 id="C-代码实现"><a href="#C-代码实现" class="headerlink" title="C++ 代码实现"></a>C++ 代码实现</h2><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span><span class="token keyword">public</span><span class="token operator">:</span>    <span class="token keyword">bool</span> <span class="token function">searchArray</span><span class="token punctuation">(</span><span class="token keyword">const</span> vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;&gt;</span><span class="token operator">&amp;</span> array<span class="token punctuation">,</span> <span class="token keyword">int</span> target<span class="token punctuation">)</span> <span class="token punctuation">{</span>        <span class="token keyword">if</span> <span class="token punctuation">(</span>array<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">||</span> array<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>        <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>        <span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>array<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>        <span class="token keyword">while</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>array<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> j <span class="token operator">&gt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>            <span class="token keyword">if</span> <span class="token punctuation">(</span>array<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">==</span> target<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>            <span class="token keyword">if</span> <span class="token punctuation">(</span>array<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">&gt;</span> target<span class="token punctuation">)</span> <span class="token punctuation">{</span>                <span class="token operator">--</span>j<span class="token punctuation">;</span>            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>                <span class="token operator">++</span>i<span class="token punctuation">;</span>            <span class="token punctuation">}</span>        <span class="token punctuation">}</span>        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><hr><h2 id="易错点记录"><a href="#易错点记录" class="headerlink" title="易错点记录"></a>易错点记录</h2><ul><li>循环条件要写成 <code>j &gt;= 0</code>，否则会漏掉第 0 列。</li><li>参数建议用 <code>const vector&lt;vector&lt;int&gt;&gt;&amp;</code>，避免拷贝整个二维数组。</li><li>注意处理空数组和空行：<code>array.empty()</code> 或 <code>array[0].empty()</code>。</li></ul><hr><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这题是一个很经典的“<strong>利用单调性逐步缩小搜索空间</strong>”模型。<br>右上角策略的妙处在于：每次比较后，移动方向是唯一确定的，不会回头，也不会漏解。<br>以后遇到“行列分别有序”的二维查找题，优先考虑这种线性扫描思路，通常比硬套二分更稳。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;AcWing-刷题笔记：15-二维数组中的查找&quot;&gt;&lt;a href=&quot;#AcWing-刷题笔记：15-二维数组中的查找&quot; class=&quot;headerlink&quot; title=&quot;AcWing 刷题笔记：15. 二维数组中的查找&quot;&gt;&lt;/a&gt;AcWing 刷题笔记：15. </summary>
-      
-    
-    
-    
-    <category term="算法蒟蒻的成长记录" scheme="https://tanke.asia/categories/%E7%AE%97%E6%B3%95%E8%92%9F%E8%92%BB%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/"/>
-    
-    <category term="AcWing" scheme="https://tanke.asia/categories/%E7%AE%97%E6%B3%95%E8%92%9F%E8%92%BB%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/AcWing/"/>
-    
-    
-    <category term="双指针" scheme="https://tanke.asia/tags/%E5%8F%8C%E6%8C%87%E9%92%88/"/>
-    
-    <category term="AcWing" scheme="https://tanke.asia/tags/AcWing/"/>
-    
-    <category term="剑指 Offer" scheme="https://tanke.asia/tags/%E5%89%91%E6%8C%87-Offer/"/>
-    
-    <category term="二维数组" scheme="https://tanke.asia/tags/%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/"/>
-    
-    <category term="查找算法" scheme="https://tanke.asia/tags/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
