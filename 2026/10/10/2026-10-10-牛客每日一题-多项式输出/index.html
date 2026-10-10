@@ -132,7 +132,68 @@ mjx-container[display="true"] + br {
   display: none;
 }
 </style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
-</head>
+<style>
+.code-tabs{
+    margin: 1em 0;
+}
+.code-tabs-bar{
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid #ddd;
+    border-color: var(--border);
+    border-bottom: 0;
+    border-radius: .25em .25em 0 0;
+    border-radius: var(--radius) var(--radius) 0 0;
+    background: #fff;
+    background: var(--light-background);
+    overflow: hidden;
+}
+.code-tabs-tab{
+    margin: 0;
+    padding: .45em 1em;
+    color: inherit;
+    font: inherit;
+    font-size: .9em;
+    cursor: pointer;
+    border: 0;
+    border-right: 1px solid #ddd;
+    border-right-color: var(--border);
+    background: transparent;
+    transition: background .2s, color .2s;
+}
+.code-tabs-tab:last-child{
+    border-right: 0;
+}
+.code-tabs-tab:hover{
+    background: rgba(111, 159, 199, .12);
+}
+.code-tabs-tab.is-active{
+    color: #fff;
+    background: #6f9fc7;
+    background: var(--blue);
+}
+.code-tabs-tab:focus-visible{
+    outline: 2px solid rgba(111, 159, 199, .5);
+    outline-offset: -2px;
+}
+.code-tabs-panel[hidden]{
+    display: none;
+}
+.code-tabs-body > .code-tabs-panel > .code-copy-wrap{
+    margin: 0;
+}
+.code-tabs-body pre{
+    margin: 0;
+    border-radius: 0 0 .25em .25em;
+    border-radius: 0 0 var(--radius) var(--radius);
+}
+@media screen and (max-width: 599px){
+    .code-tabs-tab{
+        font-size: .82em;
+        padding: .45em .7em;
+    }
+}
+</style></head>
 
   <body>
     <header>
@@ -176,7 +237,7 @@ mjx-container[display="true"] + br {
                     2026.10.10
                 </time>
                 
-                <span class="word-count">字数：2.7k</span>
+                <span class="word-count">字数：2.8k</span>
                 <span class="reading-time">阅读时间：11 分钟</span>
                 <span class="post-days">已发布 1 天</span>
             </div>
@@ -368,8 +429,8 @@ cin<span class="token punctuation">.</span><span class="token function">tie</spa
 <li>空间复杂度：<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="4.844ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 2141 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(1152,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(1752,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container>（存系数数组与结果字符串）；采用边读边处理可降至 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="4.618ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 2041 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mn" transform="translate(1152,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mo" transform="translate(1652,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container></li>
 </ul>
 <hr>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>以下给出 C++、Python、Java、Go、Rust 五种语言的实现，逻辑完全一致。</p>
-<h3 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>以下给出 C++、Python、Java、Go、Rust 五种语言的实现，逻辑完全一致。切换上方的标签即可对比。</p>
+<div class="code-tabs" data-code-tabs=""><div class="code-tabs-bar" role="tablist"><button type="button" role="tab" class="code-tabs-tab is-active" id="code-tabs-0-tab-0" aria-controls="code-tabs-0-panel-0" aria-selected="true" tabindex="0">cpp</button><button type="button" role="tab" class="code-tabs-tab" id="code-tabs-0-tab-1" aria-controls="code-tabs-0-panel-1" aria-selected="false" tabindex="-1">python</button><button type="button" role="tab" class="code-tabs-tab" id="code-tabs-0-tab-2" aria-controls="code-tabs-0-panel-2" aria-selected="false" tabindex="-1">java</button><button type="button" role="tab" class="code-tabs-tab" id="code-tabs-0-tab-3" aria-controls="code-tabs-0-panel-3" aria-selected="false" tabindex="-1">go</button><button type="button" role="tab" class="code-tabs-tab" id="code-tabs-0-tab-4" aria-controls="code-tabs-0-panel-4" aria-selected="false" tabindex="-1">rust</button></div><div class="code-tabs-body"><div role="tabpanel" class="code-tabs-panel is-active" id="code-tabs-0-panel-0" aria-labelledby="code-tabs-0-tab-0"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;vector&gt;</span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string&gt;</span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cmath&gt;</span></span>
@@ -426,10 +487,7 @@ cin<span class="token punctuation">.</span><span class="token function">tie</spa
     cout <span class="token operator">&lt;&lt;</span> ans <span class="token operator">&lt;&lt;</span> <span class="token char">'\n'</span><span class="token punctuation">;</span>
 
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-<h3 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> sys
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div><div role="tabpanel" class="code-tabs-panel" hidden="" id="code-tabs-0-panel-1" aria-labelledby="code-tabs-0-tab-1"><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> sys
 
 
 <span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
@@ -472,10 +530,7 @@ cin<span class="token punctuation">.</span><span class="token function">tie</spa
 
 
 <span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
-    main<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-<h3 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">IOException</span></span><span class="token punctuation">;</span>
+    main<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div><div role="tabpanel" class="code-tabs-panel" hidden="" id="code-tabs-0-panel-2" aria-labelledby="code-tabs-0-tab-2"><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">IOException</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">ArrayList</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">List</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">StringJoiner</span></span><span class="token punctuation">;</span>
@@ -538,10 +593,7 @@ cin<span class="token punctuation">.</span><span class="token function">tie</spa
 
         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>joiner<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-<h3 id="Go"><a href="#Go" class="headerlink" title="Go"></a>Go</h3><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div><div role="tabpanel" class="code-tabs-panel" hidden="" id="code-tabs-0-panel-3" aria-labelledby="code-tabs-0-tab-3"><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
 <span class="token keyword">import</span> <span class="token punctuation">(</span>
 	<span class="token string">"bufio"</span>
@@ -612,10 +664,7 @@ cin<span class="token punctuation">.</span><span class="token function">tie</spa
 	<span class="token punctuation">}</span>
 
 	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>builder<span class="token punctuation">.</span><span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-<h3 id="Rust"><a href="#Rust" class="headerlink" title="Rust"></a>Rust</h3><pre class="line-numbers language-rust" data-language="rust"><code class="language-rust"><span class="token keyword">use</span> <span class="token namespace">std<span class="token punctuation">::</span>io<span class="token punctuation">::</span></span><span class="token punctuation">{</span><span class="token keyword">self</span><span class="token punctuation">,</span> <span class="token class-name">Read</span><span class="token punctuation">,</span> <span class="token class-name">Write</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div><div role="tabpanel" class="code-tabs-panel" hidden="" id="code-tabs-0-panel-4" aria-labelledby="code-tabs-0-tab-4"><pre class="line-numbers language-rust" data-language="rust"><code class="language-rust"><span class="token keyword">use</span> <span class="token namespace">std<span class="token punctuation">::</span>io<span class="token punctuation">::</span></span><span class="token punctuation">{</span><span class="token keyword">self</span><span class="token punctuation">,</span> <span class="token class-name">Read</span><span class="token punctuation">,</span> <span class="token class-name">Write</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 <span class="token keyword">fn</span> <span class="token function-definition function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">let</span> <span class="token keyword">mut</span> input <span class="token operator">=</span> <span class="token class-name">String</span><span class="token punctuation">::</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -668,7 +717,7 @@ cin<span class="token punctuation">.</span><span class="token function">tie</spa
 
     <span class="token macro property">print!</span><span class="token punctuation">(</span><span class="token string">"{}"</span><span class="token punctuation">,</span> output<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token namespace">io<span class="token punctuation">::</span></span><span class="token function">stdout</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">flush</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">unwrap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></div></div>
 
 <hr>
 <h2 id="测试与验证"><a href="#测试与验证" class="headerlink" title="测试与验证"></a>测试与验证</h2><table>
@@ -830,5 +879,60 @@ cin<span class="token punctuation">.</span><span class="token function">tie</spa
    background:url('https://www.beian.gov.cn/img/ghs.png') no-repeat center/contain; */
 </style>
 
-  </body>
+  <script>
+(function () {
+  var select = function (group, index, focus) {
+    var tabs = group.querySelectorAll('.code-tabs-tab');
+    var panels = group.querySelectorAll('.code-tabs-panel');
+    if (!tabs.length || !tabs[index]) return;
+
+    for (var i = 0; i < tabs.length; i++) {
+      var on = i === index;
+      tabs[i].classList.toggle('is-active', on);
+      tabs[i].setAttribute('aria-selected', on ? 'true' : 'false');
+      tabs[i].setAttribute('tabindex', on ? '0' : '-1');
+      if (panels[i]) {
+        panels[i].classList.toggle('is-active', on);
+        if (on) panels[i].removeAttribute('hidden');
+        else panels[i].setAttribute('hidden', '');
+      }
+    }
+
+    if (focus) tabs[index].focus();
+  };
+
+  document.addEventListener('click', function (ev) {
+    var tab = ev.target.closest && ev.target.closest('.code-tabs-tab');
+    if (!tab) return;
+
+    var group = tab.closest('.code-tabs');
+    if (!group) return;
+
+    var tabs = Array.prototype.slice.call(group.querySelectorAll('.code-tabs-tab'));
+    select(group, tabs.indexOf(tab), false);
+  });
+
+  // 左右方向键在 tab 之间移动，符合 WAI-ARIA 的 tablist 交互约定
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key !== 'ArrowRight' && ev.key !== 'ArrowLeft') return;
+
+    var tab = ev.target.closest && ev.target.closest('.code-tabs-tab');
+    if (!tab) return;
+
+    var group = tab.closest('.code-tabs');
+    if (!group) return;
+
+    var tabs = Array.prototype.slice.call(group.querySelectorAll('.code-tabs-tab'));
+    var index = tabs.indexOf(tab);
+    if (index < 0) return;
+
+    var next = ev.key === 'ArrowRight' ? index + 1 : index - 1;
+    if (next < 0) next = tabs.length - 1;
+    if (next >= tabs.length) next = 0;
+
+    ev.preventDefault();
+    select(group, next, true);
+  });
+})();
+</script></body>
 </html>
