@@ -1176,34 +1176,27 @@ main{
         pointer-events: none;
     }
 
-    /* 水平定位：正文 800px 居中，两侧各留出一个侧栏的宽度 */
+    /* 水平定位：以视口左右边缘为基准，保持比例间距。
+       比 3vw 稍大一点，让卡片往中间稍微靠拢，但不要太多。 */
     .home-side-left{
-        left: calc(50% - 400px - var(--home-side-gap) - var(--home-side-width));
+        left: 4.5vw;
     }
 
     .home-side-right{
-        left: calc(50% + 400px + var(--home-side-gap));
+        left: auto;
+        right: 4.5vw;
     }
 
     /* 卡片本身接管指针事件（容器是 none，避免空白处挡住正文选中）
-       背景保持透明，与改动前一致，仅保留细边框和轻微阴影以区分层级 */
+       背景完全透明，无边框无阴影，与改动前效果一致 */
     .side-card{
         position: absolute;
         width: 100%;
         pointer-events: auto;
         box-sizing: border-box;
         padding: 1em 1.1em;
-        border: 1px solid rgba(221, 221, 221, .45);
-        border-color: rgba(128, 128, 128, .2);
-        border-radius: var(--radius);
+        border: 0;
         background: transparent;
-        box-shadow: 0 4px 14px rgba(0, 0, 0, .06);
-        transition: border-color .3s, box-shadow .3s;
-    }
-
-    .dark-theme .side-card{
-        border-color: rgba(255, 255, 255, .12);
-        box-shadow: 0 4px 14px rgba(0, 0, 0, .18);
     }
 
     .side-title{
@@ -1212,7 +1205,7 @@ main{
         gap: .5em;
         margin: 0 0 .6em;
         color: var(--blue);
-        font-size: .95em;
+        font-size: 1em;
     }
 
     .side-title .fa{
@@ -1229,8 +1222,8 @@ main{
     .side-card ul li{
         overflow: hidden;
         margin-bottom: .45em;
-        font-size: .85em;
-        line-height: 1.5;
+        font-size: .88em;
+        line-height: 1.55;
         white-space: nowrap;
         text-overflow: ellipsis;
     }
@@ -1281,15 +1274,18 @@ main{
         flex: 0 0 auto;
     }
 
-    /* 标签云：增长靠换行控制，sticky 吸底 */
+    /* 标签云：从时光机下方开始，一直延伸到文章列表（main）底部。
+       去掉 max-height 和滚动条，让标签自然填充剩余空间。 */
     .side-tags{
-        top: 48vh;
-        /* 用 max-height + overflow 整体裁切即可。tagcloud 输出的是
-           一层平铺的 <a>，没有包裹元素，无法只让标签区滚动，
-           所以这里让整个卡片内容超出时可滚。 */
-        max-height: 42vh;
-        overflow-y: auto;
-        overscroll-behavior: contain;
+        top: calc(46vh + 1.5em);
+        bottom: 0;
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    .side-tags > a{
+        font-size: .92em;
+        line-height: 1.9;
     }
 
     /* 标签间距：tagcloud 生成的 <a> 之间只有空格，需要补一点行高，
@@ -1349,17 +1345,16 @@ main{
 /* 首页侧栏与 live2d 的避让
 --------------------------------------------------------------------
    live2d 配置为 position:left，会与左上角的「最新文章」卡片重叠。
-   这里仅在侧栏可见时（宽屏）把它下移到左下，与标签云分区错开；
+   这里仅在侧栏可见时（宽屏）把它下移到左下角，放在左侧侧栏与正文之间的
+   空白区域，完整显示原始大小，不遮挡侧栏或正文。
    窄屏侧栏隐藏时保持主题原有位置不变。
-
-   由于左侧空白区域不足 150px，这里用 scale(0.75) 把小人缩到约 112px 宽，
-   使其能完整显示在左侧侧栏与浏览器边缘之间，同时减少对正文遮挡。
 */
-@media screen and (min-width: 1440px){
+@media screen and (min-width: 1440px) and (max-width: 1599px){
     #live2d-widget,
     #L2Dwidget-container,
     .live2d-widget-container{
-        top: 55vh !important;
+        top: auto !important;
+        bottom: 0 !important;
         left: 0 !important;
         width: 110px !important;
         height: 220px !important;
@@ -1370,6 +1365,25 @@ main{
     #L2Dwidget-container canvas,
     .live2d-widget-container canvas{
         transform: scale(0.733);
-        transform-origin: left top;
+        transform-origin: left bottom;
+    }
+}
+
+@media screen and (min-width: 1600px){
+    #live2d-widget,
+    #L2Dwidget-container,
+    .live2d-widget-container{
+        top: auto !important;
+        bottom: 0 !important;
+        left: calc(4.5vw + var(--home-side-width) + .5em) !important;
+        width: 150px !important;
+        height: 300px !important;
+        overflow: visible;
+    }
+
+    #live2d-widget canvas,
+    #L2Dwidget-container canvas,
+    .live2d-widget-container canvas{
+        transform: none;
     }
 }
