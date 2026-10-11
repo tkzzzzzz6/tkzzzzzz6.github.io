@@ -1185,29 +1185,39 @@ main{
         left: calc(50% + 400px + var(--home-side-gap));
     }
 
-    /* 卡片本身接管指针事件（容器是 none，避免空白处挡住正文选中） */
+    /* 卡片本身接管指针事件（容器是 none，避免空白处挡住正文选中）
+       背景保持透明，与改动前一致，仅保留细边框和轻微阴影以区分层级 */
     .side-card{
         position: absolute;
         width: 100%;
         pointer-events: auto;
         box-sizing: border-box;
         padding: 1em 1.1em;
-        border: 1px solid #ddd;
-        border-color: var(--border);
+        border: 1px solid rgba(221, 221, 221, .45);
+        border-color: rgba(128, 128, 128, .2);
         border-radius: var(--radius);
-        background: rgba(255, 255, 255, .92);
-        backdrop-filter: blur(6px);
-        transition: border-color .3s, background .3s;
+        background: transparent;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, .06);
+        transition: border-color .3s, box-shadow .3s;
     }
 
     .dark-theme .side-card{
-        background: rgba(34, 34, 34, .92);
+        border-color: rgba(255, 255, 255, .12);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, .18);
     }
 
     .side-title{
+        display: flex;
+        align-items: center;
+        gap: .5em;
         margin: 0 0 .6em;
         color: var(--blue);
         font-size: .95em;
+    }
+
+    .side-title .fa{
+        opacity: .75;
+        font-size: .9em;
     }
 
     /* 列表样式：沿用 footer widget 的观感，收窄为侧栏尺寸 */
@@ -1341,11 +1351,25 @@ main{
    live2d 配置为 position:left，会与左上角的「最新文章」卡片重叠。
    这里仅在侧栏可见时（宽屏）把它下移到左下，与标签云分区错开；
    窄屏侧栏隐藏时保持主题原有位置不变。
+
+   由于左侧空白区域不足 150px，这里用 scale(0.75) 把小人缩到约 112px 宽，
+   使其能完整显示在左侧侧栏与浏览器边缘之间，同时减少对正文遮挡。
 */
 @media screen and (min-width: 1440px){
     #live2d-widget,
     #L2Dwidget-container,
     .live2d-widget-container{
-        top: 42vh !important;
+        top: 55vh !important;
+        left: 0 !important;
+        width: 110px !important;
+        height: 220px !important;
+        overflow: visible;
+    }
+
+    #live2d-widget canvas,
+    #L2Dwidget-container canvas,
+    .live2d-widget-container canvas{
+        transform: scale(0.733);
+        transform-origin: left top;
     }
 }
