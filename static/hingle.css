@@ -1148,7 +1148,7 @@ pre[class*="language-"].line-numbers {
    页面结构与改动前完全一致。
 */
 :root{
-    --home-side-width: 13em;
+    --home-side-width: 16em;
     --home-side-gap: 2.5em;
 }
 
@@ -1162,29 +1162,33 @@ main{
 }
 
 @media screen and (min-width: 1440px){
+    /* 侧栏容器本身不设高度，子卡片用 absolute 相对 main 定位。
+       top: 0 让 .side-timeline 的 top:1em 相对 main 生效；
+       标签云改为从顶部流式排布，避免 bottom 定位因父容器高度为 0 而落到视口外。 */
     .home-side{
         display: block;
         position: absolute;
         top: 0;
+        left: 0;
+        right: 0;
         width: var(--home-side-width);
-        /* 侧栏整体跟随正文顶部的垂直位置 */
+        height: 100%;
         pointer-events: none;
     }
 
-    /* 正文宽度 800px + 左右各一个侧栏 + 间距，水平居中 */
+    /* 水平定位：正文 800px 居中，两侧各留出一个侧栏的宽度 */
     .home-side-left{
         left: calc(50% - 400px - var(--home-side-gap) - var(--home-side-width));
-        right: auto;
     }
 
     .home-side-right{
-        right: calc(50% - 400px - var(--home-side-gap) - var(--home-side-width));
-        left: auto;
+        left: calc(50% + 400px + var(--home-side-gap));
     }
 
     /* 卡片本身接管指针事件（容器是 none，避免空白处挡住正文选中） */
     .side-card{
         position: absolute;
+        width: 100%;
         pointer-events: auto;
         box-sizing: border-box;
         padding: 1em 1.1em;
@@ -1250,26 +1254,38 @@ main{
     /* 时光机：唯一会无限增长的，必须限高 + 折叠，不做 sticky */
     .side-timeline{
         top: 1em;
-        left: 0;
-        right: 0;
+        max-height: 46vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* 列表区可滚动，标题与「展开更多」按钮始终留在卡片内 */
+    .side-timeline .archive-list{
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+
+    .side-more{
+        flex: 0 0 auto;
+    }
+
+    /* 标签云：增长靠换行控制，sticky 吸底 */
+    .side-tags{
+        top: 48vh;
+        /* 用 max-height + overflow 整体裁切即可。tagcloud 输出的是
+           一层平铺的 <a>，没有包裹元素，无法只让标签区滚动，
+           所以这里让整个卡片内容超出时可滚。 */
         max-height: 42vh;
         overflow-y: auto;
         overscroll-behavior: contain;
     }
 
-    /* 标签云：增长靠换行控制，sticky 吸底 */
-    .side-tags{
-        bottom: 1em;
-        left: 0;
-        right: 0;
-        position: sticky;
-    }
-
-    /* 标签云限高，超出部分可滚动 */
-    .side-tags > div{
-        max-height: 30vh;
-        overflow-y: auto;
-        overscroll-behavior: contain;
+    /* 标签间距：tagcloud 生成的 <a> 之间只有空格，需要补一点行高，
+       否则 77 个标签挤在一起看不清层次。 */
+    .side-tags > a{
+        line-height: 1.9;
     }
 
     /* 展开更多按钮 */
@@ -1299,18 +1315,18 @@ main{
 
     /* 滚动条：侧栏里默认滚动条太重，压细一点 */
     .side-timeline::-webkit-scrollbar,
-    .side-tags > div::-webkit-scrollbar{
+    .side-tags > a::-webkit-scrollbar{
         width: 5px;
     }
 
     .side-timeline::-webkit-scrollbar-thumb,
-    .side-tags > div::-webkit-scrollbar-thumb{
+    .side-tags > a::-webkit-scrollbar-thumb{
         border-radius: 99px;
         background: rgba(111, 159, 199, .5);
     }
 
     .side-timeline::-webkit-scrollbar-track,
-    .side-tags > div::-webkit-scrollbar-track{
+    .side-tags > a::-webkit-scrollbar-track{
         background: transparent;
     }
 }
