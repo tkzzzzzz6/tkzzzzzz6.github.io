@@ -163,9 +163,9 @@
     
     <category term="哈希" scheme="https://tanke.asia/tags/%E5%93%88%E5%B8%8C/"/>
     
-    <category term="滑动窗口" scheme="https://tanke.asia/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/"/>
-    
     <category term="双指针" scheme="https://tanke.asia/tags/%E5%8F%8C%E6%8C%87%E9%92%88/"/>
+    
+    <category term="滑动窗口" scheme="https://tanke.asia/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/"/>
     
   </entry>
   
@@ -386,11 +386,11 @@
     <category term="开发工具" scheme="https://tanke.asia/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"/>
     
     
+    <category term="Visual Studio" scheme="https://tanke.asia/tags/Visual-Studio/"/>
+    
     <category term="快捷键" scheme="https://tanke.asia/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     
     <category term="开发效率" scheme="https://tanke.asia/tags/%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/"/>
-    
-    <category term="Visual Studio" scheme="https://tanke.asia/tags/Visual-Studio/"/>
     
   </entry>
   
