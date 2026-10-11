@@ -1177,14 +1177,14 @@ main{
     }
 
     /* 水平定位：以视口左右边缘为基准，保持比例间距。
-       比 4.5vw 再稍大一点，让卡片继续往中间靠拢，但不要太多。 */
+       10vw 让卡片明显向中间靠拢。 */
     .home-side-left{
-        left: 6vw;
+        left: 10vw;
     }
 
     .home-side-right{
         left: auto;
-        right: 6vw;
+        right: 10vw;
     }
 
     /* 卡片本身接管指针事件（容器是 none，避免空白处挡住正文选中）
@@ -1205,7 +1205,7 @@ main{
         gap: .5em;
         margin: 0 0 .6em;
         color: var(--blue);
-        font-size: 1.05em;
+        font-size: 1.12em;
     }
 
     .side-title .fa{
@@ -1222,7 +1222,7 @@ main{
     .side-card ul li{
         overflow: hidden;
         margin-bottom: .45em;
-        font-size: .92em;
+        font-size: 1em;
         line-height: 1.6;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -1284,7 +1284,7 @@ main{
     }
 
     .side-tags > a{
-        font-size: .95em;
+        font-size: 1.02em;
         line-height: 1.9;
     }
 
@@ -1354,7 +1354,7 @@ main{
     #L2Dwidget-container,
     .live2d-widget-container{
         top: auto !important;
-        bottom: 0 !important;
+        bottom: 2.5em !important;
         left: 1em !important;
         width: 110px !important;
         height: 220px !important;
@@ -1374,7 +1374,7 @@ main{
     #L2Dwidget-container,
     .live2d-widget-container{
         top: auto !important;
-        bottom: 0 !important;
+        bottom: 3.5em !important;
         left: 1em !important;
         width: 150px !important;
         height: 300px !important;
