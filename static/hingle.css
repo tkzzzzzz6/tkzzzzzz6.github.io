@@ -1177,14 +1177,14 @@ main{
     }
 
     /* 水平定位：以视口左右边缘为基准，保持比例间距。
-       10vw 让卡片明显向中间靠拢。 */
+       8.5vw 让卡片稍微向两侧离开一点。 */
     .home-side-left{
-        left: 10vw;
+        left: 8.5vw;
     }
 
     .home-side-right{
         left: auto;
-        right: 10vw;
+        right: 8.5vw;
     }
 
     /* 卡片本身接管指针事件（容器是 none，避免空白处挡住正文选中）
