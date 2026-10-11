@@ -1136,3 +1136,200 @@ pre[class*="language-"].line-numbers {
         padding: .5em .72em;
     }
 }
+
+/* - 首页左右侧栏
+--------------------------------------------------------------------
+   四个块（最新文章 / 时光机 / 标签云 / live2d）悬浮在中间 wrap.min
+   （800px）之外的空白区域。定位基准是 body 而非 .wrap，这样侧栏
+   不会随 .wrap 一起被限制宽度。
+
+   断点说明：--home-side-gap 是侧栏与正文之间的安全间距，
+   --home-side-width 是侧栏自身宽度。窄屏（<1440px）下整体隐藏，
+   页面结构与改动前完全一致。
+*/
+:root{
+    --home-side-width: 13em;
+    --home-side-gap: 2.5em;
+}
+
+.home-side{
+    display: none;
+}
+
+/* main 作为侧栏的定位上下文，否则 absolute 会贴到 body 顶部 */
+main{
+    position: relative;
+}
+
+@media screen and (min-width: 1440px){
+    .home-side{
+        display: block;
+        position: absolute;
+        top: 0;
+        width: var(--home-side-width);
+        /* 侧栏整体跟随正文顶部的垂直位置 */
+        pointer-events: none;
+    }
+
+    /* 正文宽度 800px + 左右各一个侧栏 + 间距，水平居中 */
+    .home-side-left{
+        left: calc(50% - 400px - var(--home-side-gap) - var(--home-side-width));
+        right: auto;
+    }
+
+    .home-side-right{
+        right: calc(50% - 400px - var(--home-side-gap) - var(--home-side-width));
+        left: auto;
+    }
+
+    /* 卡片本身接管指针事件（容器是 none，避免空白处挡住正文选中） */
+    .side-card{
+        position: absolute;
+        pointer-events: auto;
+        box-sizing: border-box;
+        padding: 1em 1.1em;
+        border: 1px solid #ddd;
+        border-color: var(--border);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, .92);
+        backdrop-filter: blur(6px);
+        transition: border-color .3s, background .3s;
+    }
+
+    .dark-theme .side-card{
+        background: rgba(34, 34, 34, .92);
+    }
+
+    .side-title{
+        margin: 0 0 .6em;
+        color: var(--blue);
+        font-size: .95em;
+    }
+
+    /* 列表样式：沿用 footer widget 的观感，收窄为侧栏尺寸 */
+    .side-card ul{
+        margin: 0;
+        list-style: none;
+    }
+
+    .side-card ul li{
+        overflow: hidden;
+        margin-bottom: .45em;
+        font-size: .85em;
+        line-height: 1.5;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .side-card ul li:last-child{
+        margin-bottom: 0;
+    }
+
+    .side-card ul li:before{
+        opacity: .3;
+        content: "\f105";
+        margin-right: .5em;
+        font-family: "FontAwesome";
+    }
+
+    /* --- 滚动策略：三者不同 --- */
+
+    /* 最新文章：固定 6 条，永不增长，直接 sticky 吸顶 */
+    .side-recent{
+        top: 1em;
+        left: 0;
+        right: 0;
+        position: sticky;
+    }
+
+    /* 左下：为 live2d 立绘留空，避免卡片压住角色 */
+    .side-live2d-space{
+        display: none;
+    }
+
+    /* 时光机：唯一会无限增长的，必须限高 + 折叠，不做 sticky */
+    .side-timeline{
+        top: 1em;
+        left: 0;
+        right: 0;
+        max-height: 42vh;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+
+    /* 标签云：增长靠换行控制，sticky 吸底 */
+    .side-tags{
+        bottom: 1em;
+        left: 0;
+        right: 0;
+        position: sticky;
+    }
+
+    /* 标签云限高，超出部分可滚动 */
+    .side-tags > div{
+        max-height: 30vh;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+
+    /* 展开更多按钮 */
+    .side-more{
+        display: block;
+        width: 100%;
+        margin-top: .6em;
+        padding: .35em 0;
+        color: inherit;
+        font: inherit;
+        font-size: .8em;
+        cursor: pointer;
+        border: 0;
+        border-top: 1px solid #ddd;
+        border-top-color: var(--border);
+        background: transparent;
+        transition: color .2s, background .2s;
+    }
+
+    .side-more:hover{
+        color: var(--blue);
+    }
+
+    .dark-theme .side-more:hover{
+        color: var(--light-blue);
+    }
+
+    /* 滚动条：侧栏里默认滚动条太重，压细一点 */
+    .side-timeline::-webkit-scrollbar,
+    .side-tags > div::-webkit-scrollbar{
+        width: 5px;
+    }
+
+    .side-timeline::-webkit-scrollbar-thumb,
+    .side-tags > div::-webkit-scrollbar-thumb{
+        border-radius: 99px;
+        background: rgba(111, 159, 199, .5);
+    }
+
+    .side-timeline::-webkit-scrollbar-track,
+    .side-tags > div::-webkit-scrollbar-track{
+        background: transparent;
+    }
+}
+
+/* 窄屏（含平板）：侧栏整体隐藏，页面结构回到改动前的单栏 */
+@media screen and (max-width: 1439px){
+    .home-side{ display: none !important }
+}
+
+/* 首页侧栏与 live2d 的避让
+--------------------------------------------------------------------
+   live2d 配置为 position:left，会与左上角的「最新文章」卡片重叠。
+   这里仅在侧栏可见时（宽屏）把它下移到左下，与标签云分区错开；
+   窄屏侧栏隐藏时保持主题原有位置不变。
+*/
+@media screen and (min-width: 1440px){
+    #live2d-widget,
+    #L2Dwidget-container,
+    .live2d-widget-container{
+        top: 42vh !important;
+    }
+}

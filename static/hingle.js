@@ -289,6 +289,27 @@ var Paul_Hingle = function (config) {
         };
     };
 
+    // 首页侧栏「时光机」的展开更多
+    this.side_timeline = function () {
+        var btn = document.querySelector(".side-more");
+        if(!btn){
+            return;
+        }
+
+        var rest = btn.nextElementSibling;
+        if(!rest){
+            return;
+        }
+
+        btn.addEventListener("click", function () {
+            var expanded = btn.getAttribute("aria-expanded") === "true";
+
+            btn.setAttribute("aria-expanded", expanded ? "false" : "true");
+            rest.hidden = expanded;
+            btn.textContent = expanded ? "展开更多" : "收起";
+        });
+    };
+
     // 返回页首
     this.to_top = function () {
         var btn = document.getElementsByClassName("to-top")[0];
@@ -306,6 +327,7 @@ var Paul_Hingle = function (config) {
     }
     this.copy_code();
     this.copy_notice();
+    this.side_timeline();
 
     // 返回页首
     window.addEventListener("scroll", this.to_top);
