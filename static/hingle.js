@@ -310,13 +310,34 @@ var Paul_Hingle = function (config) {
         });
     };
 
-    // 返回页首
+    // 返回页首 + 顶部阅读进度条
     this.to_top = function () {
         var btn = document.getElementsByClassName("to-top")[0];
         var scroll = document.documentElement.scrollTop || document.body.scrollTop;
 
-        scroll >= window.innerHeight / 2 ? btn.classList.add("active") : btn.classList.remove("active");
+        if(btn){
+            scroll >= window.innerHeight / 2 ? btn.classList.add("active") : btn.classList.remove("active");
+        }
+
+        var progressBar = document.getElementsByClassName("reading-progress")[0];
+        if(progressBar){
+            var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            var percent = docHeight > 0 ? (scroll / docHeight) * 100 : 0;
+            progressBar.style.width = percent + "%";
+        }
     };
+
+    // 初始化返回顶部按钮点击事件
+    var toTopBtn = document.getElementsByClassName("to-top")[0];
+    if(toTopBtn){
+        toTopBtn.addEventListener("click", function () {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    }
+
+    // 初始化顶部阅读进度条
+    var progress = ks.create("div", { class: "reading-progress" });
+    document.body.appendChild(progress);
 
     this.header();
 

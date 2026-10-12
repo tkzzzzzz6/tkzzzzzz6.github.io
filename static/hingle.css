@@ -918,6 +918,17 @@ footer .to-top:before, footer .toggle-list:before{
     text-align: center;
     font-family: "FontAwesome";
 }
+.reading-progress{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--blue);
+    z-index: 9999;
+    transition: width .1s linear;
+}
+
 footer .toggle-list{
     display: none;
     margin-top: .5em;
