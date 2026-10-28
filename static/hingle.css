@@ -918,6 +918,104 @@ footer .to-top:before, footer .toggle-list:before{
     text-align: center;
     font-family: "FontAwesome";
 }
+.reading-progress{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--blue);
+    z-index: 9999;
+    transition: width .1s linear;
+}
+
+/* 文章页视频嵌入
+---------------------------------------------------------------- */
+.post-video{
+    margin: 2.5em 0;
+    padding: 1.25em;
+    border-radius: var(--radius);
+    background: var(--light-background);
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+    transition: border-color .3s, background-color .3s, box-shadow .3s;
+}
+
+.post-video h3{
+    margin: 0 0 1em;
+    font-size: 1.05em;
+    font-weight: normal;
+    color: var(--blue);
+    display: flex;
+    align-items: center;
+    gap: .5em;
+}
+
+.post-video .video-icon{
+    width: 1.15em;
+    height: 1.15em;
+    opacity: .85;
+    color: var(--blue);
+    transition: opacity .3s;
+}
+
+.dark-theme .post-video .video-icon{
+    opacity: .75;
+}
+
+.post-video .video-wrapper{
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: #000;
+    border: 1px solid var(--border);
+    transition: border-color .3s;
+}
+
+.post-video .video-wrapper iframe{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+.post-video .video-link{
+    margin: .9em 0 0;
+    text-align: center;
+    font-size: .875em;
+}
+
+.post-video .video-link a{
+    color: var(--blue);
+    opacity: .85;
+    transition: opacity .3s, color .3s;
+}
+.post-video .video-link a:hover{
+    opacity: 1;
+    color: var(--light-blue);
+}
+
+/* 深色模式适配 */
+.dark-theme .post-video{
+    background: rgba(255, 255, 255, .04);
+    border-color: var(--border);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
+}
+
+.dark-theme .post-video .video-wrapper{
+    background: #111;
+    border-color: #333;
+}
+
+.dark-theme .post-video .video-link a{
+    color: var(--light-blue);
+}
+
 footer .toggle-list{
     display: none;
     margin-top: .5em;
@@ -1134,5 +1232,256 @@ pre[class*="language-"].line-numbers {
         right: .45em;
         font-size: .78em;
         padding: .5em .72em;
+    }
+}
+
+/* - 首页左右侧栏
+--------------------------------------------------------------------
+   四个块（最新文章 / 时光机 / 标签云 / live2d）悬浮在中间 wrap.min
+   （800px）之外的空白区域。定位基准是 body 而非 .wrap，这样侧栏
+   不会随 .wrap 一起被限制宽度。
+
+   断点说明：--home-side-gap 是侧栏与正文之间的安全间距，
+   --home-side-width 是侧栏自身宽度。窄屏（<1440px）下整体隐藏，
+   页面结构与改动前完全一致。
+*/
+:root{
+    --home-side-width: 16em;
+    --home-side-gap: 2.5em;
+}
+
+.home-side{
+    display: none;
+}
+
+/* main 作为侧栏的定位上下文，否则 absolute 会贴到 body 顶部 */
+main{
+    position: relative;
+}
+
+@media screen and (min-width: 1440px){
+    /* 侧栏容器本身不设高度，子卡片用 absolute 相对 main 定位。
+       top: 0 让 .side-timeline 的 top:1em 相对 main 生效；
+       标签云改为从顶部流式排布，避免 bottom 定位因父容器高度为 0 而落到视口外。 */
+    .home-side{
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: var(--home-side-width);
+        height: 100%;
+        pointer-events: none;
+    }
+
+    /* 水平定位：以视口左右边缘为基准，保持比例间距。
+       8.5vw 让卡片稍微向两侧离开一点。 */
+    .home-side-left{
+        left: 8.5vw;
+    }
+
+    .home-side-right{
+        left: auto;
+        right: 8.5vw;
+    }
+
+    /* 卡片本身接管指针事件（容器是 none，避免空白处挡住正文选中）
+       背景完全透明，无边框无阴影，与改动前效果一致 */
+    .side-card{
+        position: absolute;
+        width: 100%;
+        pointer-events: auto;
+        box-sizing: border-box;
+        padding: 1em 1.1em;
+        border: 0;
+        background: transparent;
+    }
+
+    .side-title{
+        display: flex;
+        align-items: center;
+        gap: .5em;
+        margin: 0 0 .6em;
+        color: var(--blue);
+        font-size: 1.12em;
+    }
+
+    .side-title .fa{
+        opacity: .75;
+        font-size: .9em;
+    }
+
+    /* 列表样式：沿用 footer widget 的观感，收窄为侧栏尺寸 */
+    .side-card ul{
+        margin: 0;
+        list-style: none;
+    }
+
+    .side-card ul li{
+        overflow: hidden;
+        margin-bottom: .45em;
+        font-size: 1em;
+        line-height: 1.6;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .side-card ul li:last-child{
+        margin-bottom: 0;
+    }
+
+    .side-card ul li:before{
+        opacity: .3;
+        content: "\f105";
+        margin-right: .5em;
+        font-family: "FontAwesome";
+    }
+
+    /* --- 滚动策略：三者不同 --- */
+
+    /* 最新文章：固定 6 条，永不增长，直接 sticky 吸顶 */
+    .side-recent{
+        top: 1em;
+        left: 0;
+        right: 0;
+        position: sticky;
+    }
+
+    /* 左下：为 live2d 立绘留空，避免卡片压住角色 */
+    .side-live2d-space{
+        display: none;
+    }
+
+    /* 时光机：唯一会无限增长的，必须限高 + 折叠，不做 sticky */
+    .side-timeline{
+        top: 1em;
+        max-height: 46vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* 列表区可滚动，标题与「展开更多」按钮始终留在卡片内 */
+    .side-timeline .archive-list{
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+
+    .side-more{
+        flex: 0 0 auto;
+    }
+
+    /* 标签云：从时光机下方开始，一直延伸到文章列表（main）底部。
+       去掉 max-height 和滚动条，让标签自然填充剩余空间。 */
+    .side-tags{
+        top: calc(46vh + 1.5em);
+        bottom: 0;
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    .side-tags > a{
+        font-size: 1.02em;
+        line-height: 1.9;
+    }
+
+    /* 标签间距：tagcloud 生成的 <a> 之间只有空格，需要补一点行高，
+       否则 77 个标签挤在一起看不清层次。 */
+    .side-tags > a{
+        line-height: 1.9;
+    }
+
+    /* 展开更多按钮 */
+    .side-more{
+        display: block;
+        width: 100%;
+        margin-top: .6em;
+        padding: .35em 0;
+        color: inherit;
+        font: inherit;
+        font-size: .8em;
+        cursor: pointer;
+        border: 0;
+        border-top: 1px solid #ddd;
+        border-top-color: var(--border);
+        background: transparent;
+        transition: color .2s, background .2s;
+    }
+
+    .side-more:hover{
+        color: var(--blue);
+    }
+
+    .dark-theme .side-more:hover{
+        color: var(--light-blue);
+    }
+
+    /* 滚动条：侧栏里默认滚动条太重，压细一点 */
+    .side-timeline::-webkit-scrollbar,
+    .side-tags > a::-webkit-scrollbar{
+        width: 5px;
+    }
+
+    .side-timeline::-webkit-scrollbar-thumb,
+    .side-tags > a::-webkit-scrollbar-thumb{
+        border-radius: 99px;
+        background: rgba(111, 159, 199, .5);
+    }
+
+    .side-timeline::-webkit-scrollbar-track,
+    .side-tags > a::-webkit-scrollbar-track{
+        background: transparent;
+    }
+}
+
+/* 窄屏（含平板）：侧栏整体隐藏，页面结构回到改动前的单栏 */
+@media screen and (max-width: 1439px){
+    .home-side{ display: none !important }
+}
+
+/* 首页侧栏与 live2d 的避让
+--------------------------------------------------------------------
+   live2d 配置为 position:left，会与左上角的「最新文章」卡片重叠。
+   这里仅在侧栏可见时（宽屏）把它下移到左下角，放在左侧侧栏与正文之间的
+   空白区域，完整显示原始大小，不遮挡侧栏或正文。
+   窄屏侧栏隐藏时保持主题原有位置不变。
+*/
+@media screen and (min-width: 1440px) and (max-width: 1599px){
+    #live2d-widget,
+    #L2Dwidget-container,
+    .live2d-widget-container{
+        top: auto !important;
+        bottom: 2.5em !important;
+        left: 1em !important;
+        width: 110px !important;
+        height: 220px !important;
+        overflow: visible;
+    }
+
+    #live2d-widget canvas,
+    #L2Dwidget-container canvas,
+    .live2d-widget-container canvas{
+        transform: scale(0.733);
+        transform-origin: left bottom;
+    }
+}
+
+@media screen and (min-width: 1600px){
+    #live2d-widget,
+    #L2Dwidget-container,
+    .live2d-widget-container{
+        top: auto !important;
+        bottom: 3.5em !important;
+        left: 1em !important;
+        width: 150px !important;
+        height: 300px !important;
+        overflow: visible;
+    }
+
+    #live2d-widget canvas,
+    #L2Dwidget-container canvas,
+    .live2d-widget-container canvas{
+        transform: none;
     }
 }
