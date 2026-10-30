@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>大模型推理框架导读：从一次请求到 vLLM、SGLang 与分布式服务 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+    
+<link rel="stylesheet" href="/static/kico.css?v=1793166650177">
+<link rel="stylesheet" href="/static/hingle.css?v=1793166650177">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="大模型推理框架导读：从一次请求到 vLLM、SGLang 与分布式服务"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 8.1.1"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/hexo-obsidian-callout.css">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/Papers-pile-or-pie/">Papers pile or pie?</a><a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a><a class="category-link" href="/categories/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/">工具配置</a><a class="category-link" href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a><a class="category-link" href="/categories/%E6%88%91%E8%A6%81%E7%82%BC%E4%B8%B9-%E4%B8%B9%E6%B2%A1%E6%9C%89%E9%97%AE%E9%A2%98/">我要炼丹,丹没有问题</a><a class="category-link" href="/categories/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习</a><a class="category-link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a><a class="category-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a><a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%92%9F%E8%92%BB%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/">算法蒟蒻的成长记录</a><a class="category-link" href="/categories/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%AE%9E%E9%AA%8C/">课程学习与实验</a><a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>
+                大模型推理框架导读：从一次请求到 vLLM、SGLang 与分布式服务
+            </h2>
+            <div class="post-meta">
+                <time class="date">
+                    2026.10.29
+                </time>
+                
+                    <span class="category"><a class="category-link" href="/categories/Papers-pile-or-pie/">Papers pile or pie?</a></span>
+                    
+                <span class="word-count">字数：12.8k</span>
+                <span class="reading-time">阅读时间：45 分钟</span>
+                <span class="post-days">已发布 2 天</span>
+            </div>
+        </section>
+        <article class="post-content">
+            
+                    <p>模型已经训练好了，为什么还需要一个“推理框架”？直接调用一次 <code>model.generate()</code>，与把同一个模型交给 vLLM、SGLang 或 TensorRT-LLM，有什么实质区别？</p>
+<p>一个很好的切入点是同时想象三个用户：第一个人发来一句短问题，第二个人让模型总结一篇长文，第三个人正在进行多轮 Agent 任务，提示里包含历史、工具结果和系统说明。它们在不同时间到达，输入输出长度也不同。即使模型完全一样，系统仍要决定谁先算、谁和谁一起算、显存怎样分、哪些计算可以复用，以及什么时候把结果返回。</p>
+<p>推理框架研究的，正是模型变成可用服务时出现的这些问题。这篇文章以 vLLM、SGLang 为主线，从一次请求开始，逐步连接 GPU 内核、KV Cache、批处理、并行、分布式服务和推测解码。后半部分整理代表论文与技术博客，并给出可以动手验证的学习路线。</p>
+<span id="more"></span>
+
+<blockquote>
+<p><strong>阅读范围：</strong> 本文讨论大模型的推理执行与服务系统。资料核对截至 2026 年 10 月 29 日。原论文描述的是当时的设计与实验版本，当前框架通常已经吸收多项共同技术。正文中的教学例子不代表论文新增实验；自绘图用于解释机制，论文截图保留原始来源。</p>
+</blockquote>
+<p>如果刚进入这个方向，可以先读第 1—4 节，弄懂一次请求怎样经过系统；再读第 5—7 节，看计算、通信和缓存如何协同。第 8—9 节补充算法与 MoE 综合案例，第 10—12 节负责实验判断、阅读路线与资料索引，不必第一次就记住文末所有论文。</p>
+<h2 id="1-从一次请求开始：为什么推理是一个系统问题？"><a href="#1-从一次请求开始：为什么推理是一个系统问题？" class="headerlink" title="1. 从一次请求开始：为什么推理是一个系统问题？"></a>1. 从一次请求开始：为什么推理是一个系统问题？</h2><h3 id="1-1-请求到达之后，系统并不是立刻执行一次矩阵乘法"><a href="#1-1-请求到达之后，系统并不是立刻执行一次矩阵乘法" class="headerlink" title="1.1 请求到达之后，系统并不是立刻执行一次矩阵乘法"></a>1.1 请求到达之后，系统并不是立刻执行一次矩阵乘法</h3><p>一个常见的在线服务流程包括接收请求、构造聊天模板、分词、排队与调度、分配运行状态、执行模型、采样、反分词和流式返回。工具调用、结构化输出与多模态输入，还可能引入额外的处理环节。</p>
+<p>这些工作分布在 CPU、GPU、网络和存储之间。GPU 在等待下一批输入时，CPU 可能正在调度或处理 token；缓存已经存在，但还在另一个节点；模型计算很快，客户端却可能因为队列积压迟迟看不到第一个 token。因此，优化模型计算只是其中一部分。<a target="_blank" rel="noopener" href="https://docs.vllm.ai/en/latest/design/arch_overview/">vLLM 架构文档</a></p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/llm-inference-reading-20261029/inference-lifecycle-v2-af36973f29e5f647.png" alt="一次请求的两段计算：Prefill、逐步 Decode、KV 更新与 TTFT、TPOT"></p>
+<p>本文教学示意，使用图像生成工具辅助绘制。左侧处理已知输入并产生首 token，右侧继续逐步生成；图中的一个 KV 条目概括新增 token 在各层的缓存状态。下方时间线只解释 TTFT 与 TPOT，不表示实测时间比例。</p>
+<p>可以把推理系统看成四类协作对象：模型规定要做哪些计算；内核决定这些计算怎样在硬件上执行；引擎组织请求、批次与显存；服务系统再处理路由、多机资源和对外接口。研究者可以在不同层切入，但必须说明一项优化最终改变了哪段路径。</p>
+<h3 id="1-2-Prefill：处理已经知道的输入"><a href="#1-2-Prefill：处理已经知道的输入" class="headerlink" title="1.2 Prefill：处理已经知道的输入"></a>1.2 Prefill：处理已经知道的输入</h3><p>假设用户发送“请总结下面的文章”，后面附了几千个 token。由于这些输入已经全部给定，系统可以在满足因果注意力关系的前提下，并行处理输入位置，计算各层表示并建立 KV Cache。这一阶段通常称为 <strong>prefill</strong>。</p>
+<p>Prefill 不只是“把输入存一下”。输入仍然要经过模型各层的注意力、前馈网络等计算。长输入往往能形成较大的矩阵运算，让 GPU 的计算资源得到较充分利用。若系统命中了可复用的前缀，则只需要处理尚未缓存的部分，而不是无条件从头计算。</p>
+<h3 id="1-3-Decode：把新生成的内容接回模型"><a href="#1-3-Decode：把新生成的内容接回模型" class="headerlink" title="1.3 Decode：把新生成的内容接回模型"></a>1.3 Decode：把新生成的内容接回模型</h3><p>首个输出产生后，模型需要根据之前的内容继续生成。普通自回归解码中，每一步会处理新增 token，并把对应的 K、V 追加到缓存，重复这个过程，直到结束符或长度限制。</p>
+<p>严格地说，一轮前向处理的是上一轮已经采样出的 token：本轮计算写入这个输入 token 的 KV，并产生下一个 token 的分布。刚刚采样出的下一个 token，要到后续前向时才获得自己的 KV。把这层时序分清，就不会把“生成了文字”与“这些文字的缓存已经全部写好”混为一谈。</p>
+<p>对单条序列而言，后续生成依赖前面的结果，因此存在串行链条。GPU 可能只为每条序列处理很少的新 token，却需要读取大量模型权重与历史 KV。在常见的小 batch 工作区间，这很容易受到显存带宽限制。<a target="_blank" rel="noopener" href="https://jax-ml.github.io/scaling-book/inference/">推理计算与数据搬运分析</a></p>
+<p>这也是“输入很长”和“输出很长”不能混为一谈的原因：长输入主要增加 prefill 工作，长输出主要延长 decode 链条，而且不断增长的上下文还会影响后续注意力读取。实际瓶颈也会随模型、batch、上下文、精度与硬件变化，不能把“prefill 一定算力受限、decode 一定带宽受限”当成不需要测量的定律。</p>
+<h3 id="1-4-吞吐与用户等待，并不是同一个目标"><a href="#1-4-吞吐与用户等待，并不是同一个目标" class="headerlink" title="1.4 吞吐与用户等待，并不是同一个目标"></a>1.4 吞吐与用户等待，并不是同一个目标</h3><p>离线生成一百万条数据，我们可能更关心总任务多久完成；在线聊天则需要同时关心第一个字多久出现、输出是否持续流畅、少数慢请求有没有长时间卡住。系统设计中的“更快”，需要先说清楚是对谁、在哪种负载下更快。</p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>含义</th>
+<th>常见误读</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TTFT</td>
+<td>从相应计时起点到首个输出的时间</td>
+<td>直接把客户端 TTFT 当成纯 prefill kernel 耗时</td>
+</tr>
+<tr>
+<td>TPOT</td>
+<td>一个请求首 token 之后的平均每输出 token 时间</td>
+<td>与每次流式输出的间隔不加区分地混用</td>
+</tr>
+<tr>
+<td>ITL</td>
+<td>相邻输出 token 之间的时间间隔；部分工具按流式事件采集或估计</td>
+<td>一次返回多个 token 时，直接把块间隔当作逐 token 间隔</td>
+</tr>
+<tr>
+<td>端到端延迟</td>
+<td>从请求开始到完成的总时间</td>
+<td>只看生成速度，漏掉排队、CPU 与传输</td>
+</tr>
+<tr>
+<td>Throughput</td>
+<td>单位时间处理的请求数或 token 数</td>
+<td>不说明统计输入 token、输出 token 还是二者之和</td>
+</tr>
+<tr>
+<td>Goodput</td>
+<td>满足规定服务目标时可承载的有效处理能力</td>
+<td>直接用没有延迟约束的峰值吞吐替代</td>
+</tr>
+<tr>
+<td>P95 / P99</td>
+<td>较慢请求或事件对应的分位数</td>
+<td>只报平均值，掩盖尾部等待</td>
+</tr>
+</tbody></table>
+<p>对输出至少两个 token 的请求，在按 token 计时且口径一致时，可以用下面的关系帮助理解：</p>
+<p><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="33.422ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 14772.6 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="TeXAtom" transform="translate(617,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="45" d="M128 619Q121 626 117 628T101 631T58 634H25V680H597V676Q599 670 611 560T625 444V440H585V444Q584 447 582 465Q578 500 570 526T553 571T528 601T498 619T457 629T411 633T353 634Q266 634 251 633T233 622Q233 622 233 621Q232 619 232 497V376H286Q359 378 377 385Q413 401 416 469Q416 471 416 473V493H456V213H416V233Q415 268 408 288T383 317T349 328T297 330Q290 330 286 330H232V196V114Q232 57 237 52Q243 47 289 47H340H391Q428 47 452 50T505 62T552 92T584 146Q594 172 599 200T607 247T612 270V273H652V270Q651 267 632 137T610 3V0H25V46H58Q100 47 109 49T128 61V619Z"></path></g><g data-mml-node="mn" transform="translate(681,0)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><g data-mml-node="mi" transform="translate(1181,0)"><path data-c="45" d="M128 619Q121 626 117 628T101 631T58 634H25V680H597V676Q599 670 611 560T625 444V440H585V444Q584 447 582 465Q578 500 570 526T553 571T528 601T498 619T457 629T411 633T353 634Q266 634 251 633T233 622Q233 622 233 621Q232 619 232 497V376H286Q359 378 377 385Q413 401 416 469Q416 471 416 473V493H456V213H416V233Q415 268 408 288T383 317T349 328T297 330Q290 330 286 330H232V196V114Q232 57 237 52Q243 47 289 47H340H391Q428 47 452 50T505 62T552 92T584 146Q594 172 599 200T607 247T612 270V273H652V270Q651 267 632 137T610 3V0H25V46H58Q100 47 109 49T128 61V619Z"></path></g></g></g></g><g data-mml-node="mo" transform="translate(2261.4,0)"><path data-c="2248" d="M55 319Q55 360 72 393T114 444T163 472T205 482Q207 482 213 482T223 483Q262 483 296 468T393 413L443 381Q502 346 553 346Q609 346 649 375T694 454Q694 465 698 474T708 483Q722 483 722 452Q722 386 675 338T555 289Q514 289 468 310T388 357T308 404T224 426Q164 426 125 393T83 318Q81 289 69 289Q55 289 55 319ZM55 85Q55 126 72 159T114 210T163 238T205 248Q207 248 213 248T223 249Q262 249 296 234T393 179L443 147Q502 112 553 112Q609 112 649 141T694 220Q694 249 708 249T722 217Q722 153 675 104T555 55Q514 55 468 76T388 123T308 170T224 192Q164 192 125 159T83 84Q80 55 69 55Q55 55 55 85Z"></path></g><g data-mml-node="msub" transform="translate(3317.2,0)"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="TeXAtom" transform="translate(617,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="54" d="M36 443Q37 448 46 558T55 671V677H666V671Q667 666 676 556T685 443V437H645V443Q645 445 642 478T631 544T610 593Q593 614 555 625Q534 630 478 630H451H443Q417 630 414 618Q413 616 413 339V63Q420 53 439 50T528 46H558V0H545L361 3Q186 1 177 0H164V46H194Q264 46 283 49T309 63V339V550Q309 620 304 625T271 630H244H224Q154 630 119 601Q101 585 93 554T81 486T76 443V437H36V443Z"></path><path data-c="54" d="M36 443Q37 448 46 558T55 671V677H666V671Q667 666 676 556T685 443V437H645V443Q645 445 642 478T631 544T610 593Q593 614 555 625Q534 630 478 630H451H443Q417 630 414 618Q413 616 413 339V63Q420 53 439 50T528 46H558V0H545L361 3Q186 1 177 0H164V46H194Q264 46 283 49T309 63V339V550Q309 620 304 625T271 630H244H224Q154 630 119 601Q101 585 93 554T81 486T76 443V437H36V443Z" transform="translate(722,0)"></path><path data-c="46" d="M128 619Q121 626 117 628T101 631T58 634H25V680H582V676Q584 670 596 560T610 444V440H570V444Q563 493 561 501Q555 538 543 563T516 601T477 622T431 631T374 633H334H286Q252 633 244 631T233 621Q232 619 232 490V363H284Q287 363 303 363T327 364T349 367T372 373T389 385Q407 403 410 459V480H450V200H410V221Q407 276 389 296Q381 303 371 307T348 313T327 316T303 317T284 317H232V189L233 61Q240 54 245 52T270 48T333 46H360V0H348Q324 3 182 3Q51 3 36 0H25V46H58Q100 47 109 49T128 61V619Z" transform="translate(1444,0)"></path><path data-c="54" d="M36 443Q37 448 46 558T55 671V677H666V671Q667 666 676 556T685 443V437H645V443Q645 445 642 478T631 544T610 593Q593 614 555 625Q534 630 478 630H451H443Q417 630 414 618Q413 616 413 339V63Q420 53 439 50T528 46H558V0H545L361 3Q186 1 177 0H164V46H194Q264 46 283 49T309 63V339V550Q309 620 304 625T271 630H244H224Q154 630 119 601Q101 585 93 554T81 486T76 443V437H36V443Z" transform="translate(2097,0)"></path></g></g></g></g><g data-mml-node="mo" transform="translate(6199.7,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mo" transform="translate(7200,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="msub" transform="translate(7589,0)"><g data-mml-node="mi"><path data-c="1D441" d="M234 637Q231 637 226 637Q201 637 196 638T191 649Q191 676 202 682Q204 683 299 683Q376 683 387 683T401 677Q612 181 616 168L670 381Q723 592 723 606Q723 633 659 637Q635 637 635 648Q635 650 637 660Q641 676 643 679T653 683Q656 683 684 682T767 680Q817 680 843 681T873 682Q888 682 888 672Q888 650 880 642Q878 637 858 637Q787 633 769 597L620 7Q618 0 599 0Q585 0 582 2Q579 5 453 305L326 604L261 344Q196 88 196 79Q201 46 268 46H278Q284 41 284 38T282 19Q278 6 272 0H259Q228 2 151 2Q123 2 100 2T63 2T46 1Q31 1 31 10Q31 14 34 26T39 40Q41 46 62 46Q130 49 150 85Q154 91 221 362L289 634Q287 635 234 637Z"></path></g><g data-mml-node="TeXAtom" transform="translate(836,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="6F" d="M28 214Q28 309 93 378T250 448Q340 448 405 380T471 215Q471 120 407 55T250 -10Q153 -10 91 57T28 214ZM250 30Q372 30 372 193V225V250Q372 272 371 288T364 326T348 362T317 390T268 410Q263 411 252 411Q222 411 195 399Q152 377 139 338T126 246V226Q126 130 145 91Q177 30 250 30Z"></path><path data-c="75" d="M383 58Q327 -10 256 -10H249Q124 -10 105 89Q104 96 103 226Q102 335 102 348T96 369Q86 385 36 385H25V408Q25 431 27 431L38 432Q48 433 67 434T105 436Q122 437 142 438T172 441T184 442H187V261Q188 77 190 64Q193 49 204 40Q224 26 264 26Q290 26 311 35T343 58T363 90T375 120T379 144Q379 145 379 161T380 201T380 248V315Q380 361 370 372T320 385H302V431Q304 431 378 436T457 442H464V264Q464 84 465 81Q468 61 479 55T524 46H542V0Q540 0 467 -5T390 -11H383V58Z" transform="translate(500,0)"></path><path data-c="74" d="M27 422Q80 426 109 478T141 600V615H181V431H316V385H181V241Q182 116 182 100T189 68Q203 29 238 29Q282 29 292 100Q293 108 293 146V181H333V146V134Q333 57 291 17Q264 -10 221 -10Q187 -10 162 2T124 33T105 68T98 100Q97 107 97 248V385H18V422H27Z" transform="translate(1056,0)"></path></g></g></g></g><g data-mml-node="mo" transform="translate(9719,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mn" transform="translate(10719.2,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mo" transform="translate(11219.2,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mo" transform="translate(11608.2,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="msub" transform="translate(12052.8,0)"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="TeXAtom" transform="translate(617,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="54" d="M36 443Q37 448 46 558T55 671V677H666V671Q667 666 676 556T685 443V437H645V443Q645 445 642 478T631 544T610 593Q593 614 555 625Q534 630 478 630H451H443Q417 630 414 618Q413 616 413 339V63Q420 53 439 50T528 46H558V0H545L361 3Q186 1 177 0H164V46H194Q264 46 283 49T309 63V339V550Q309 620 304 625T271 630H244H224Q154 630 119 601Q101 585 93 554T81 486T76 443V437H36V443Z"></path><path data-c="50" d="M130 622Q123 629 119 631T103 634T60 637H27V683H214Q237 683 276 683T331 684Q419 684 471 671T567 616Q624 563 624 489Q624 421 573 372T451 307Q429 302 328 301H234V181Q234 62 237 58Q245 47 304 46H337V0H326Q305 3 182 3Q47 3 38 0H27V46H60Q102 47 111 49T130 61V622ZM507 488Q507 514 506 528T500 564T483 597T450 620T397 635Q385 637 307 637H286Q237 637 234 628Q231 624 231 483V342H302H339Q390 342 423 349T481 382Q507 411 507 488Z" transform="translate(722,0)"></path><path data-c="4F" d="M56 340Q56 423 86 494T164 610T270 680T388 705Q521 705 621 601T722 341Q722 260 693 191T617 75T510 4T388 -22T267 3T160 74T85 189T56 340ZM467 647Q426 665 388 665Q360 665 331 654T269 620T213 549T179 439Q174 411 174 354Q174 144 277 61Q327 20 385 20H389H391Q474 20 537 99Q603 188 603 354Q603 411 598 439Q577 592 467 647Z" transform="translate(1403,0)"></path><path data-c="54" d="M36 443Q37 448 46 558T55 671V677H666V671Q667 666 676 556T685 443V437H645V443Q645 445 642 478T631 544T610 593Q593 614 555 625Q534 630 478 630H451H443Q417 630 414 618Q413 616 413 339V63Q420 53 439 50T528 46H558V0H545L361 3Q186 1 177 0H164V46H194Q264 46 283 49T309 63V339V550Q309 620 304 625T271 630H244H224Q154 630 119 601Q101 585 93 554T81 486T76 443V437H36V443Z" transform="translate(2181,0)"></path></g></g></g></g></g></g></svg></mjx-container></p>
+<p>它提醒我们，减少首 token 等待与加快后续生成，都可能改善总体验。但客户端、服务端、流式分块与统计工具的定义需要对齐，实际分析应查对应实现。<a target="_blank" rel="noopener" href="https://docs.vllm.ai/en/latest/design/metrics/">vLLM 指标说明</a></p>
+<h3 id="1-5-常见项目分别位于哪一层？"><a href="#1-5-常见项目分别位于哪一层？" class="headerlink" title="1.5 常见项目分别位于哪一层？"></a>1.5 常见项目分别位于哪一层？</h3><p>初看资料时，最容易把“优化同一个模型”的项目都当成直接竞争者。下面这张表更适合建立位置感，学习重点是本文的建议，不是性能排名：</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>主要定位</th>
+<th>适合观察什么？</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://docs.vllm.ai/en/latest/design/arch_overview/">vLLM</a></td>
+<td>推理引擎与服务框架</td>
+<td>请求生命周期、调度、KV 管理与多卡执行</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://docs.sglang.io/">SGLang</a></td>
+<td>推理与服务框架</td>
+<td>前缀复用、缓存感知调度、结构化调用与并行</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://nvidia.github.io/TensorRT-LLM/architecture/overview.html">TensorRT-LLM</a></td>
+<td>面向 NVIDIA 平台的推理库与运行时</td>
+<td>内核、低精度执行、执行器与分布式组织</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://github.com/ggml-org/llama.cpp">llama.cpp</a></td>
+<td>C/C++ 推理实现</td>
+<td>本地部署、量化与不同硬件后端</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://llm.mlc.ai/docs/">MLC LLM</a></td>
+<td>编译与部署引擎</td>
+<td>跨平台编译、优化与模型部署</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://docs.nvidia.com/dynamo/latest/knowledge-base/overview">NVIDIA Dynamo</a></td>
+<td>分布式推理运行时</td>
+<td>路由、资源、KV 状态与不同推理后端的协作</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://docs.lmcache.ai/">LMCache</a></td>
+<td>KV Cache 基础设施</td>
+<td>KV 存储、加载、共享、压缩与引擎连接</td>
+</tr>
+</tbody></table>
+<p>FlashAttention、FlashInfer 更适合放到计算组件一层理解；Dynamo、LMCache 也不能只按一个模型前向函数来理解。它们可以进入同一套部署，在不同位置共同影响最终延迟。先分清层次，后面就更容易判断某篇论文改进了什么。</p>
+<h2 id="2-显存里有什么：权重、KV-Cache-与运行时空间"><a href="#2-显存里有什么：权重、KV-Cache-与运行时空间" class="headerlink" title="2. 显存里有什么：权重、KV Cache 与运行时空间"></a>2. 显存里有什么：权重、KV Cache 与运行时空间</h2><h3 id="2-1-模型能装进去，不代表还能服务很多用户"><a href="#2-1-模型能装进去，不代表还能服务很多用户" class="headerlink" title="2.1 模型能装进去，不代表还能服务很多用户"></a>2.1 模型能装进去，不代表还能服务很多用户</h3><p>显存不能只按参数量计算。除了模型权重，还需要存储 KV、计算中的临时张量，以及执行图、通信和内核工作区等运行时对象。具体分配方式因模型与框架而异，但“权重刚好放得下”与“可以容纳长上下文和高并发”是两件事。</p>
+<p>权重由许多请求共同使用，KV 则与请求的上下文状态紧密相关。增加并发通常意味着更多活跃序列；输入更长或生成更久，则意味着更多历史 token。没有相应复用或压缩时，这些都会增加 KV 容量需求。</p>
+<h3 id="2-2-KV-Cache-保存的是什么？"><a href="#2-2-KV-Cache-保存的是什么？" class="headerlink" title="2.2 KV Cache 保存的是什么？"></a>2.2 KV Cache 保存的是什么？</h3><p>在因果自注意力中，新 token 需要关注历史 token 的 Key、Value。历史位置的这些投影可以保存下来，后续无需为每一步重新处理整个前缀。查询向量 Q 通常只用于当前计算，因此常规自回归缓存重点保存 K、V。<a target="_blank" rel="noopener" href="https://huggingface.co/blog/kv-cache">从头实现 KV Cache</a></p>
+<p>KV Cache 是模型计算的中间状态。文本层面相同的一句话，如果处于不同前文或位置，它在模型中的状态可能不同。这一点会在后面的文档块复用中变得非常重要。</p>
+<h3 id="2-3-一个可以自己算的容量例子"><a href="#2-3-一个可以自己算的容量例子" class="headerlink" title="2.3 一个可以自己算的容量例子"></a>2.3 一个可以自己算的容量例子</h3><p>对于常规 MHA/GQA，假设所有活跃序列等长，KV 容量可以粗略写成：</p>
+<p><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -0.375ex" xmlns="http://www.w3.org/2000/svg" width="41.12ex" height="1.97ex" role="img" focusable="false" viewBox="0 -705 18175 870.6"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D440" d="M289 629Q289 635 232 637Q208 637 201 638T194 648Q194 649 196 659Q197 662 198 666T199 671T201 676T203 679T207 681T212 683T220 683T232 684Q238 684 262 684T307 683Q386 683 398 683T414 678Q415 674 451 396L487 117L510 154Q534 190 574 254T662 394Q837 673 839 675Q840 676 842 678T846 681L852 683H948Q965 683 988 683T1017 684Q1051 684 1051 673Q1051 668 1048 656T1045 643Q1041 637 1008 637Q968 636 957 634T939 623Q936 618 867 340T797 59Q797 55 798 54T805 50T822 48T855 46H886Q892 37 892 35Q892 19 885 5Q880 0 869 0Q864 0 828 1T736 2Q675 2 644 2T609 1Q592 1 592 11Q592 13 594 25Q598 41 602 43T625 46Q652 46 685 49Q699 52 704 61Q706 65 742 207T813 490T848 631L654 322Q458 10 453 5Q451 4 449 3Q444 0 433 0Q418 0 415 7Q413 11 374 317L335 624L267 354Q200 88 200 79Q206 46 272 46H282Q288 41 289 37T286 19Q282 3 278 1Q274 0 267 0Q265 0 255 0T221 1T157 2Q127 2 95 1T58 0Q43 0 39 2T35 11Q35 13 38 25T43 40Q45 46 65 46Q135 46 154 86Q158 92 223 354T289 629Z"></path></g><g data-mml-node="TeXAtom" transform="translate(1003,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="4B" d="M128 622Q121 629 117 631T101 634T58 637H25V683H36Q57 680 180 680Q315 680 324 683H335V637H313Q235 637 233 620Q232 618 232 462L233 307L379 449Q425 494 479 546Q518 584 524 591T531 607V608Q531 630 503 636Q501 636 498 636T493 637H489V683H499Q517 680 630 680Q704 680 716 683H722V637H708Q633 633 589 597Q584 592 495 506T406 419T515 254T631 80Q644 60 662 54T715 46H736V0H728Q719 3 615 3Q493 3 472 0H461V46H469Q515 46 515 72Q515 78 512 84L336 351Q332 348 278 296L232 251V156Q232 62 235 58Q243 47 302 46H335V0H324Q303 3 180 3Q45 3 36 0H25V46H58Q100 47 109 49T128 61V622Z"></path><path data-c="56" d="M114 620Q113 621 110 624T107 627T103 630T98 632T91 634T80 635T67 636T48 637H19V683H28Q46 680 152 680Q273 680 294 683H305V637H284Q223 634 223 620Q223 618 313 372T404 126L490 358Q575 588 575 597Q575 616 554 626T508 637H503V683H512Q527 680 627 680Q718 680 724 683H730V637H723Q648 637 627 596Q627 595 515 291T401 -14Q396 -22 382 -22H374H367Q353 -22 348 -14Q346 -12 231 303Q114 617 114 620Z" transform="translate(778,0)"></path></g></g></g></g><g data-mml-node="mo" transform="translate(2411.2,0)"><path data-c="2248" d="M55 319Q55 360 72 393T114 444T163 472T205 482Q207 482 213 482T223 483Q262 483 296 468T393 413L443 381Q502 346 553 346Q609 346 649 375T694 454Q694 465 698 474T708 483Q722 483 722 452Q722 386 675 338T555 289Q514 289 468 310T388 357T308 404T224 426Q164 426 125 393T83 318Q81 289 69 289Q55 289 55 319ZM55 85Q55 126 72 159T114 210T163 238T205 248Q207 248 213 248T223 249Q262 249 296 234T393 179L443 147Q502 112 553 112Q609 112 649 141T694 220Q694 249 708 249T722 217Q722 153 675 104T555 55Q514 55 468 76T388 123T308 170T224 192Q164 192 125 159T83 84Q80 55 69 55Q55 55 55 85Z"></path></g><g data-mml-node="mn" transform="translate(3467,0)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><g data-mml-node="mo" transform="translate(4189.2,0)"><path data-c="D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z"></path></g><g data-mml-node="mi" transform="translate(5189.5,0)"><path data-c="1D43F" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 217 683Q271 680 344 680Q485 680 506 683H518Q524 677 524 674T522 656Q517 641 513 637H475Q406 636 394 628Q387 624 380 600T313 336Q297 271 279 198T252 88L243 52Q243 48 252 48T311 46H328Q360 46 379 47T428 54T478 72T522 106T564 161Q580 191 594 228T611 270Q616 273 628 273H641Q647 264 647 262T627 203T583 83T557 9Q555 4 553 3T537 0T494 -1Q483 -1 418 -1T294 0H116Q32 0 32 10Q32 17 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path></g><g data-mml-node="mo" transform="translate(6092.7,0)"><path data-c="D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z"></path></g><g data-mml-node="mi" transform="translate(7092.9,0)"><path data-c="1D435" d="M231 637Q204 637 199 638T194 649Q194 676 205 682Q206 683 335 683Q594 683 608 681Q671 671 713 636T756 544Q756 480 698 429T565 360L555 357Q619 348 660 311T702 219Q702 146 630 78T453 1Q446 0 242 0Q42 0 39 2Q35 5 35 10Q35 17 37 24Q42 43 47 45Q51 46 62 46H68Q95 46 128 49Q142 52 147 61Q150 65 219 339T288 628Q288 635 231 637ZM649 544Q649 574 634 600T585 634Q578 636 493 637Q473 637 451 637T416 636H403Q388 635 384 626Q382 622 352 506Q352 503 351 500L320 374H401Q482 374 494 376Q554 386 601 434T649 544ZM595 229Q595 273 572 302T512 336Q506 337 429 337Q311 337 310 336Q310 334 293 263T258 122L240 52Q240 48 252 48T333 46Q422 46 429 47Q491 54 543 105T595 229Z"></path></g><g data-mml-node="mo" transform="translate(8074.1,0)"><path data-c="D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z"></path></g><g data-mml-node="mi" transform="translate(9074.3,0)"><path data-c="1D446" d="M308 24Q367 24 416 76T466 197Q466 260 414 284Q308 311 278 321T236 341Q176 383 176 462Q176 523 208 573T273 648Q302 673 343 688T407 704H418H425Q521 704 564 640Q565 640 577 653T603 682T623 704Q624 704 627 704T632 705Q645 705 645 698T617 577T585 459T569 456Q549 456 549 465Q549 471 550 475Q550 478 551 494T553 520Q553 554 544 579T526 616T501 641Q465 662 419 662Q362 662 313 616T263 510Q263 480 278 458T319 427Q323 425 389 408T456 390Q490 379 522 342T554 242Q554 216 546 186Q541 164 528 137T492 78T426 18T332 -20Q320 -22 298 -22Q199 -22 144 33L134 44L106 13Q83 -14 78 -18T65 -22Q52 -22 52 -14Q52 -11 110 221Q112 227 130 227H143Q149 221 149 216Q149 214 148 207T144 186T142 153Q144 114 160 87T203 47T255 29T308 24Z"></path></g><g data-mml-node="mo" transform="translate(9941.6,0)"><path data-c="D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z"></path></g><g data-mml-node="msub" transform="translate(10941.8,0)"><g data-mml-node="mi"><path data-c="1D43B" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 219 683Q260 681 355 681Q389 681 418 681T463 682T483 682Q499 682 499 672Q499 670 497 658Q492 641 487 638H485Q483 638 480 638T473 638T464 637T455 637Q416 636 405 634T387 623Q384 619 355 500Q348 474 340 442T328 395L324 380Q324 378 469 378H614L615 381Q615 384 646 504Q674 619 674 627T617 637Q594 637 587 639T580 648Q580 650 582 660Q586 677 588 679T604 682Q609 682 646 681T740 680Q802 680 835 681T871 682Q888 682 888 672Q888 645 876 638H874Q872 638 869 638T862 638T853 637T844 637Q805 636 794 634T776 623Q773 618 704 340T634 58Q634 51 638 51Q646 48 692 46H723Q729 38 729 37T726 19Q722 6 716 0H701Q664 2 567 2Q533 2 504 2T458 2T437 1Q420 1 420 10Q420 15 423 24Q428 43 433 45Q437 46 448 46H454Q481 46 514 49Q520 50 522 50T528 55T534 64T540 82T547 110T558 153Q565 181 569 198Q602 330 602 331T457 332H312L279 197Q245 63 245 58Q245 51 253 49T303 46H334Q340 38 340 37T337 19Q333 6 327 0H312Q275 2 178 2Q144 2 115 2T69 2T48 1Q31 1 31 10Q31 12 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path></g><g data-mml-node="TeXAtom" transform="translate(864,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="4B" d="M128 622Q121 629 117 631T101 634T58 637H25V683H36Q57 680 180 680Q315 680 324 683H335V637H313Q235 637 233 620Q232 618 232 462L233 307L379 449Q425 494 479 546Q518 584 524 591T531 607V608Q531 630 503 636Q501 636 498 636T493 637H489V683H499Q517 680 630 680Q704 680 716 683H722V637H708Q633 633 589 597Q584 592 495 506T406 419T515 254T631 80Q644 60 662 54T715 46H736V0H728Q719 3 615 3Q493 3 472 0H461V46H469Q515 46 515 72Q515 78 512 84L336 351Q332 348 278 296L232 251V156Q232 62 235 58Q243 47 302 46H335V0H324Q303 3 180 3Q45 3 36 0H25V46H58Q100 47 109 49T128 61V622Z"></path><path data-c="56" d="M114 620Q113 621 110 624T107 627T103 630T98 632T91 634T80 635T67 636T48 637H19V683H28Q46 680 152 680Q273 680 294 683H305V637H284Q223 634 223 620Q223 618 313 372T404 126L490 358Q575 588 575 597Q575 616 554 626T508 637H503V683H512Q527 680 627 680Q718 680 724 683H730V637H723Q648 637 627 596Q627 595 515 291T401 -14Q396 -22 382 -22H374H367Q353 -22 348 -14Q346 -12 231 303Q114 617 114 620Z" transform="translate(778,0)"></path></g></g></g></g><g data-mml-node="mo" transform="translate(13158.5,0)"><path data-c="D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z"></path></g><g data-mml-node="msub" transform="translate(14158.7,0)"><g data-mml-node="mi"><path data-c="1D437" d="M287 628Q287 635 230 637Q207 637 200 638T193 647Q193 655 197 667T204 682Q206 683 403 683Q570 682 590 682T630 676Q702 659 752 597T803 431Q803 275 696 151T444 3L430 1L236 0H125H72Q48 0 41 2T33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM703 469Q703 507 692 537T666 584T629 613T590 629T555 636Q553 636 541 636T512 636T479 637H436Q392 637 386 627Q384 623 313 339T242 52Q242 48 253 48T330 47Q335 47 349 47T373 46Q499 46 581 128Q617 164 640 212T683 339T703 469Z"></path></g><g data-mml-node="TeXAtom" transform="translate(861,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="68" d="M41 46H55Q94 46 102 60V68Q102 77 102 91T102 124T102 167T103 217T103 272T103 329Q103 366 103 407T103 482T102 542T102 586T102 603Q99 622 88 628T43 637H25V660Q25 683 27 683L37 684Q47 685 66 686T103 688Q120 689 140 690T170 693T181 694H184V367Q244 442 328 442Q451 442 463 329Q464 322 464 190V104Q464 66 466 59T477 49Q498 46 526 46H542V0H534L510 1Q487 2 460 2T422 3Q319 3 310 0H302V46H318Q379 46 379 62Q380 64 380 200Q379 335 378 343Q372 371 358 385T334 402T308 404Q263 404 229 370Q202 343 195 315T187 232V168V108Q187 78 188 68T191 55T200 49Q221 46 249 46H265V0H257L234 1Q210 2 183 2T145 3Q42 3 33 0H25V46H41Z"></path><path data-c="65" d="M28 218Q28 273 48 318T98 391T163 433T229 448Q282 448 320 430T378 380T406 316T415 245Q415 238 408 231H126V216Q126 68 226 36Q246 30 270 30Q312 30 342 62Q359 79 369 104L379 128Q382 131 395 131H398Q415 131 415 121Q415 117 412 108Q393 53 349 21T250 -11Q155 -11 92 58T28 218ZM333 275Q322 403 238 411H236Q228 411 220 410T195 402T166 381T143 340T127 274V267H333V275Z" transform="translate(556,0)"></path><path data-c="61" d="M137 305T115 305T78 320T63 359Q63 394 97 421T218 448Q291 448 336 416T396 340Q401 326 401 309T402 194V124Q402 76 407 58T428 40Q443 40 448 56T453 109V145H493V106Q492 66 490 59Q481 29 455 12T400 -6T353 12T329 54V58L327 55Q325 52 322 49T314 40T302 29T287 17T269 6T247 -2T221 -8T190 -11Q130 -11 82 20T34 107Q34 128 41 147T68 188T116 225T194 253T304 268H318V290Q318 324 312 340Q290 411 215 411Q197 411 181 410T156 406T148 403Q170 388 170 359Q170 334 154 320ZM126 106Q126 75 150 51T209 26Q247 26 276 49T315 109Q317 116 318 175Q318 233 317 233Q309 233 296 232T251 223T193 203T147 166T126 106Z" transform="translate(1000,0)"></path><path data-c="64" d="M376 495Q376 511 376 535T377 568Q377 613 367 624T316 637H298V660Q298 683 300 683L310 684Q320 685 339 686T376 688Q393 689 413 690T443 693T454 694H457V390Q457 84 458 81Q461 61 472 55T517 46H535V0Q533 0 459 -5T380 -11H373V44L365 37Q307 -11 235 -11Q158 -11 96 50T34 215Q34 315 97 378T244 442Q319 442 376 393V495ZM373 342Q328 405 260 405Q211 405 173 369Q146 341 139 305T131 211Q131 155 138 120T173 59Q203 26 251 26Q322 26 373 103V342Z" transform="translate(1500,0)"></path></g></g></g></g><g data-mml-node="mo" transform="translate(16745.7,0)"><path data-c="D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z"></path></g><g data-mml-node="mi" transform="translate(17746,0)"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g></g></g></svg></mjx-container></p>
+<table>
+<thead>
+<tr>
+<th>记号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0" xmlns="http://www.w3.org/2000/svg" width="1.541ex" height="1.545ex" role="img" focusable="false" viewBox="0 -683 681 683"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D43F" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 217 683Q271 680 344 680Q485 680 506 683H518Q524 677 524 674T522 656Q517 641 513 637H475Q406 636 394 628Q387 624 380 600T313 336Q297 271 279 198T252 88L243 52Q243 48 252 48T311 46H328Q360 46 379 47T428 54T478 72T522 106T564 161Q580 191 594 228T611 270Q616 273 628 273H641Q647 264 647 262T627 203T583 83T557 9Q555 4 553 3T537 0T494 -1Q483 -1 418 -1T294 0H116Q32 0 32 10Q32 17 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path></g></g></g></svg></mjx-container></td>
+<td>模型层数</td>
+</tr>
+<tr>
+<td><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0" xmlns="http://www.w3.org/2000/svg" width="1.717ex" height="1.545ex" role="img" focusable="false" viewBox="0 -683 759 683"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D435" d="M231 637Q204 637 199 638T194 649Q194 676 205 682Q206 683 335 683Q594 683 608 681Q671 671 713 636T756 544Q756 480 698 429T565 360L555 357Q619 348 660 311T702 219Q702 146 630 78T453 1Q446 0 242 0Q42 0 39 2Q35 5 35 10Q35 17 37 24Q42 43 47 45Q51 46 62 46H68Q95 46 128 49Q142 52 147 61Q150 65 219 339T288 628Q288 635 231 637ZM649 544Q649 574 634 600T585 634Q578 636 493 637Q473 637 451 637T416 636H403Q388 635 384 626Q382 622 352 506Q352 503 351 500L320 374H401Q482 374 494 376Q554 386 601 434T649 544ZM595 229Q595 273 572 302T512 336Q506 337 429 337Q311 337 310 336Q310 334 293 263T258 122L240 52Q240 48 252 48T333 46Q422 46 429 47Q491 54 543 105T595 229Z"></path></g></g></g></svg></mjx-container></td>
+<td>活跃序列数</td>
+</tr>
+<tr>
+<td><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.05ex" xmlns="http://www.w3.org/2000/svg" width="1.459ex" height="1.645ex" role="img" focusable="false" viewBox="0 -705 645 727"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D446" d="M308 24Q367 24 416 76T466 197Q466 260 414 284Q308 311 278 321T236 341Q176 383 176 462Q176 523 208 573T273 648Q302 673 343 688T407 704H418H425Q521 704 564 640Q565 640 577 653T603 682T623 704Q624 704 627 704T632 705Q645 705 645 698T617 577T585 459T569 456Q549 456 549 465Q549 471 550 475Q550 478 551 494T553 520Q553 554 544 579T526 616T501 641Q465 662 419 662Q362 662 313 616T263 510Q263 480 278 458T319 427Q323 425 389 408T456 390Q490 379 522 342T554 242Q554 216 546 186Q541 164 528 137T492 78T426 18T332 -20Q320 -22 298 -22Q199 -22 144 33L134 44L106 13Q83 -14 78 -18T65 -22Q52 -22 52 -14Q52 -11 110 221Q112 227 130 227H143Q149 221 149 216Q149 214 148 207T144 186T142 153Q144 114 160 87T203 47T255 29T308 24Z"></path></g></g></g></svg></mjx-container></td>
+<td>每条序列已经缓存的 token 数</td>
+</tr>
+<tr>
+<td><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.375ex" xmlns="http://www.w3.org/2000/svg" width="4.512ex" height="1.92ex" role="img" focusable="false" viewBox="0 -683 1994.5 848.6"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D43B" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 219 683Q260 681 355 681Q389 681 418 681T463 682T483 682Q499 682 499 672Q499 670 497 658Q492 641 487 638H485Q483 638 480 638T473 638T464 637T455 637Q416 636 405 634T387 623Q384 619 355 500Q348 474 340 442T328 395L324 380Q324 378 469 378H614L615 381Q615 384 646 504Q674 619 674 627T617 637Q594 637 587 639T580 648Q580 650 582 660Q586 677 588 679T604 682Q609 682 646 681T740 680Q802 680 835 681T871 682Q888 682 888 672Q888 645 876 638H874Q872 638 869 638T862 638T853 637T844 637Q805 636 794 634T776 623Q773 618 704 340T634 58Q634 51 638 51Q646 48 692 46H723Q729 38 729 37T726 19Q722 6 716 0H701Q664 2 567 2Q533 2 504 2T458 2T437 1Q420 1 420 10Q420 15 423 24Q428 43 433 45Q437 46 448 46H454Q481 46 514 49Q520 50 522 50T528 55T534 64T540 82T547 110T558 153Q565 181 569 198Q602 330 602 331T457 332H312L279 197Q245 63 245 58Q245 51 253 49T303 46H334Q340 38 340 37T337 19Q333 6 327 0H312Q275 2 178 2Q144 2 115 2T69 2T48 1Q31 1 31 10Q31 12 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path></g><g data-mml-node="TeXAtom" transform="translate(864,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="4B" d="M128 622Q121 629 117 631T101 634T58 637H25V683H36Q57 680 180 680Q315 680 324 683H335V637H313Q235 637 233 620Q232 618 232 462L233 307L379 449Q425 494 479 546Q518 584 524 591T531 607V608Q531 630 503 636Q501 636 498 636T493 637H489V683H499Q517 680 630 680Q704 680 716 683H722V637H708Q633 633 589 597Q584 592 495 506T406 419T515 254T631 80Q644 60 662 54T715 46H736V0H728Q719 3 615 3Q493 3 472 0H461V46H469Q515 46 515 72Q515 78 512 84L336 351Q332 348 278 296L232 251V156Q232 62 235 58Q243 47 302 46H335V0H324Q303 3 180 3Q45 3 36 0H25V46H58Q100 47 109 49T128 61V622Z"></path><path data-c="56" d="M114 620Q113 621 110 624T107 627T103 630T98 632T91 634T80 635T67 636T48 637H19V683H28Q46 680 152 680Q273 680 294 683H305V637H284Q223 634 223 620Q223 618 313 372T404 126L490 358Q575 588 575 597Q575 616 554 626T508 637H503V683H512Q527 680 627 680Q718 680 724 683H730V637H723Q648 637 627 596Q627 595 515 291T401 -14Q396 -22 382 -22H374H367Q353 -22 348 -14Q346 -12 231 303Q114 617 114 620Z" transform="translate(778,0)"></path></g></g></g></g></g></g></svg></mjx-container></td>
+<td>KV 头数，GQA 下不必等于查询头数</td>
+</tr>
+<tr>
+<td><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.357ex" xmlns="http://www.w3.org/2000/svg" width="5.35ex" height="1.902ex" role="img" focusable="false" viewBox="0 -683 2364.8 840.8"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D437" d="M287 628Q287 635 230 637Q207 637 200 638T193 647Q193 655 197 667T204 682Q206 683 403 683Q570 682 590 682T630 676Q702 659 752 597T803 431Q803 275 696 151T444 3L430 1L236 0H125H72Q48 0 41 2T33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM703 469Q703 507 692 537T666 584T629 613T590 629T555 636Q553 636 541 636T512 636T479 637H436Q392 637 386 627Q384 623 313 339T242 52Q242 48 253 48T330 47Q335 47 349 47T373 46Q499 46 581 128Q617 164 640 212T683 339T703 469Z"></path></g><g data-mml-node="TeXAtom" transform="translate(861,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="68" d="M41 46H55Q94 46 102 60V68Q102 77 102 91T102 124T102 167T103 217T103 272T103 329Q103 366 103 407T103 482T102 542T102 586T102 603Q99 622 88 628T43 637H25V660Q25 683 27 683L37 684Q47 685 66 686T103 688Q120 689 140 690T170 693T181 694H184V367Q244 442 328 442Q451 442 463 329Q464 322 464 190V104Q464 66 466 59T477 49Q498 46 526 46H542V0H534L510 1Q487 2 460 2T422 3Q319 3 310 0H302V46H318Q379 46 379 62Q380 64 380 200Q379 335 378 343Q372 371 358 385T334 402T308 404Q263 404 229 370Q202 343 195 315T187 232V168V108Q187 78 188 68T191 55T200 49Q221 46 249 46H265V0H257L234 1Q210 2 183 2T145 3Q42 3 33 0H25V46H41Z"></path><path data-c="65" d="M28 218Q28 273 48 318T98 391T163 433T229 448Q282 448 320 430T378 380T406 316T415 245Q415 238 408 231H126V216Q126 68 226 36Q246 30 270 30Q312 30 342 62Q359 79 369 104L379 128Q382 131 395 131H398Q415 131 415 121Q415 117 412 108Q393 53 349 21T250 -11Q155 -11 92 58T28 218ZM333 275Q322 403 238 411H236Q228 411 220 410T195 402T166 381T143 340T127 274V267H333V275Z" transform="translate(556,0)"></path><path data-c="61" d="M137 305T115 305T78 320T63 359Q63 394 97 421T218 448Q291 448 336 416T396 340Q401 326 401 309T402 194V124Q402 76 407 58T428 40Q443 40 448 56T453 109V145H493V106Q492 66 490 59Q481 29 455 12T400 -6T353 12T329 54V58L327 55Q325 52 322 49T314 40T302 29T287 17T269 6T247 -2T221 -8T190 -11Q130 -11 82 20T34 107Q34 128 41 147T68 188T116 225T194 253T304 268H318V290Q318 324 312 340Q290 411 215 411Q197 411 181 410T156 406T148 403Q170 388 170 359Q170 334 154 320ZM126 106Q126 75 150 51T209 26Q247 26 276 49T315 109Q317 116 318 175Q318 233 317 233Q309 233 296 232T251 223T193 203T147 166T126 106Z" transform="translate(1000,0)"></path><path data-c="64" d="M376 495Q376 511 376 535T377 568Q377 613 367 624T316 637H298V660Q298 683 300 683L310 684Q320 685 339 686T376 688Q393 689 413 690T443 693T454 694H457V390Q457 84 458 81Q461 61 472 55T517 46H535V0Q533 0 459 -5T380 -11H373V44L365 37Q307 -11 235 -11Q158 -11 96 50T34 215Q34 315 97 378T244 442Q319 442 376 393V495ZM373 342Q328 405 260 405Q211 405 173 369Q146 341 139 305T131 211Q131 155 138 120T173 59Q203 26 251 26Q322 26 373 103V342Z" transform="translate(1500,0)"></path></g></g></g></g></g></g></svg></mjx-container></td>
+<td>每个头的维度</td>
+</tr>
+<tr>
+<td><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex" xmlns="http://www.w3.org/2000/svg" width="0.971ex" height="1.595ex" role="img" focusable="false" viewBox="0 -694 429 705"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g></g></g></svg></mjx-container></td>
+<td>一个缓存元素占多少字节</td>
+</tr>
+</tbody></table>
+<p>前面的 2 表示 K、V 两份。实际长度不等时，可以把 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.05ex" xmlns="http://www.w3.org/2000/svg" width="5.942ex" height="1.645ex" role="img" focusable="false" viewBox="0 -705 2626.4 727"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D435" d="M231 637Q204 637 199 638T194 649Q194 676 205 682Q206 683 335 683Q594 683 608 681Q671 671 713 636T756 544Q756 480 698 429T565 360L555 357Q619 348 660 311T702 219Q702 146 630 78T453 1Q446 0 242 0Q42 0 39 2Q35 5 35 10Q35 17 37 24Q42 43 47 45Q51 46 62 46H68Q95 46 128 49Q142 52 147 61Q150 65 219 339T288 628Q288 635 231 637ZM649 544Q649 574 634 600T585 634Q578 636 493 637Q473 637 451 637T416 636H403Q388 635 384 626Q382 622 352 506Q352 503 351 500L320 374H401Q482 374 494 376Q554 386 601 434T649 544ZM595 229Q595 273 572 302T512 336Q506 337 429 337Q311 337 310 336Q310 334 293 263T258 122L240 52Q240 48 252 48T333 46Q422 46 429 47Q491 54 543 105T595 229Z"></path></g><g data-mml-node="mo" transform="translate(981.2,0)"><path data-c="D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z"></path></g><g data-mml-node="mi" transform="translate(1981.4,0)"><path data-c="1D446" d="M308 24Q367 24 416 76T466 197Q466 260 414 284Q308 311 278 321T236 341Q176 383 176 462Q176 523 208 573T273 648Q302 673 343 688T407 704H418H425Q521 704 564 640Q565 640 577 653T603 682T623 704Q624 704 627 704T632 705Q645 705 645 698T617 577T585 459T569 456Q549 456 549 465Q549 471 550 475Q550 478 551 494T553 520Q553 554 544 579T526 616T501 641Q465 662 419 662Q362 662 313 616T263 510Q263 480 278 458T319 427Q323 425 389 408T456 390Q490 379 522 342T554 242Q554 216 546 186Q541 164 528 137T492 78T426 18T332 -20Q320 -22 298 -22Q199 -22 144 33L134 44L106 13Q83 -14 78 -18T65 -22Q52 -22 52 -14Q52 -11 110 221Q112 227 130 227H143Q149 221 149 216Q149 214 148 207T144 186T142 153Q144 114 160 87T203 47T255 29T308 24Z"></path></g></g></g></svg></mjx-container> 换成各序列长度之和；共享、分页尾部、量化与其他结构还会影响实际分配。</p>
+<p>下面是一个教学算例，不指代某个具体模型的实测配置：32 层、8 个 KV 头、头维度 128、BF16、8192 token，单条序列的 KV 大约为：</p>
+<p><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -0.462ex" xmlns="http://www.w3.org/2000/svg" width="58.134ex" height="2.057ex" role="img" focusable="false" viewBox="0 -705 25695.3 909"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><g data-mml-node="mo" transform="translate(722.2,0)"><path data-c="D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z"></path></g><g data-mml-node="mn" transform="translate(1722.4,0)"><path data-c="33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"></path><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z" transform="translate(500,0)"></path></g><g data-mml-node="mo" transform="translate(2944.7,0)"><path data-c="D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z"></path></g><g data-mml-node="mn" transform="translate(3944.9,0)"><path data-c="38" d="M70 417T70 494T124 618T248 666Q319 666 374 624T429 515Q429 485 418 459T392 417T361 389T335 371T324 363L338 354Q352 344 366 334T382 323Q457 264 457 174Q457 95 399 37T249 -22Q159 -22 101 29T43 155Q43 263 172 335L154 348Q133 361 127 368Q70 417 70 494ZM286 386L292 390Q298 394 301 396T311 403T323 413T334 425T345 438T355 454T364 471T369 491T371 513Q371 556 342 586T275 624Q268 625 242 625Q201 625 165 599T128 534Q128 511 141 492T167 463T217 431Q224 426 228 424L286 386ZM250 21Q308 21 350 55T392 137Q392 154 387 169T375 194T353 216T330 234T301 253T274 270Q260 279 244 289T218 306L210 311Q204 311 181 294T133 239T107 157Q107 98 150 60T250 21Z"></path><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z" transform="translate(500,0)"></path><path data-c="39" d="M352 287Q304 211 232 211Q154 211 104 270T44 396Q42 412 42 436V444Q42 537 111 606Q171 666 243 666Q245 666 249 666T257 665H261Q273 665 286 663T323 651T370 619T413 560Q456 472 456 334Q456 194 396 97Q361 41 312 10T208 -22Q147 -22 108 7T68 93T121 149Q143 149 158 135T173 96Q173 78 164 65T148 49T135 44L131 43Q131 41 138 37T164 27T206 22H212Q272 22 313 86Q352 142 352 280V287ZM244 248Q292 248 321 297T351 430Q351 508 343 542Q341 552 337 562T323 588T293 615T246 625Q208 625 181 598Q160 576 154 546T147 441Q147 358 152 329T172 282Q197 248 244 248Z" transform="translate(1000,0)"></path><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z" transform="translate(1500,0)"></path></g><g data-mml-node="mo" transform="translate(6167.1,0)"><path data-c="D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z"></path></g><g data-mml-node="mn" transform="translate(7167.3,0)"><path data-c="38" d="M70 417T70 494T124 618T248 666Q319 666 374 624T429 515Q429 485 418 459T392 417T361 389T335 371T324 363L338 354Q352 344 366 334T382 323Q457 264 457 174Q457 95 399 37T249 -22Q159 -22 101 29T43 155Q43 263 172 335L154 348Q133 361 127 368Q70 417 70 494ZM286 386L292 390Q298 394 301 396T311 403T323 413T334 425T345 438T355 454T364 471T369 491T371 513Q371 556 342 586T275 624Q268 625 242 625Q201 625 165 599T128 534Q128 511 141 492T167 463T217 431Q224 426 228 424L286 386ZM250 21Q308 21 350 55T392 137Q392 154 387 169T375 194T353 216T330 234T301 253T274 270Q260 279 244 289T218 306L210 311Q204 311 181 294T133 239T107 157Q107 98 150 60T250 21Z"></path></g><g data-mml-node="mo" transform="translate(7889.6,0)"><path data-c="D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z"></path></g><g data-mml-node="mn" transform="translate(8889.8,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z" transform="translate(500,0)"></path><path data-c="38" d="M70 417T70 494T124 618T248 666Q319 666 374 624T429 515Q429 485 418 459T392 417T361 389T335 371T324 363L338 354Q352 344 366 334T382 323Q457 264 457 174Q457 95 399 37T249 -22Q159 -22 101 29T43 155Q43 263 172 335L154 348Q133 361 127 368Q70 417 70 494ZM286 386L292 390Q298 394 301 396T311 403T323 413T334 425T345 438T355 454T364 471T369 491T371 513Q371 556 342 586T275 624Q268 625 242 625Q201 625 165 599T128 534Q128 511 141 492T167 463T217 431Q224 426 228 424L286 386ZM250 21Q308 21 350 55T392 137Q392 154 387 169T375 194T353 216T330 234T301 253T274 270Q260 279 244 289T218 306L210 311Q204 311 181 294T133 239T107 157Q107 98 150 60T250 21Z" transform="translate(1000,0)"></path></g><g data-mml-node="mo" transform="translate(10612,0)"><path data-c="D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z"></path></g><g data-mml-node="mn" transform="translate(11612.2,0)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><g data-mml-node="mo" transform="translate(12390,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(13445.8,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z" transform="translate(500,0)"></path><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" transform="translate(778,0)"></path><path data-c="37" d="M55 458Q56 460 72 567L88 674Q88 676 108 676H128V672Q128 662 143 655T195 646T364 644H485V605L417 512Q408 500 387 472T360 435T339 403T319 367T305 330T292 284T284 230T278 162T275 80Q275 66 275 52T274 28V19Q270 2 255 -10T221 -22Q210 -22 200 -19T179 0T168 40Q168 198 265 368Q285 400 349 489L395 552H302Q128 552 119 546Q113 543 108 522T98 479L95 458V455H55V458Z" transform="translate(1278,0)"></path><path data-c="33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z" transform="translate(1778,0)"></path><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z" transform="translate(2278,0)"></path><path data-c="37" d="M55 458Q56 460 72 567L88 674Q88 676 108 676H128V672Q128 662 143 655T195 646T364 644H485V605L417 512Q408 500 387 472T360 435T339 403T319 367T305 330T292 284T284 230T278 162T275 80Q275 66 275 52T274 28V19Q270 2 255 -10T221 -22Q210 -22 200 -19T179 0T168 40Q168 198 265 368Q285 400 349 489L395 552H302Q128 552 119 546Q113 543 108 522T98 479L95 458V455H55V458Z" transform="translate(2556,0)"></path><path data-c="34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z" transform="translate(3056,0)"></path><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z" transform="translate(3556,0)"></path><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z" transform="translate(4056,0)"></path><path data-c="38" d="M70 417T70 494T124 618T248 666Q319 666 374 624T429 515Q429 485 418 459T392 417T361 389T335 371T324 363L338 354Q352 344 366 334T382 323Q457 264 457 174Q457 95 399 37T249 -22Q159 -22 101 29T43 155Q43 263 172 335L154 348Q133 361 127 368Q70 417 70 494ZM286 386L292 390Q298 394 301 396T311 403T323 413T334 425T345 438T355 454T364 471T369 491T371 513Q371 556 342 586T275 624Q268 625 242 625Q201 625 165 599T128 534Q128 511 141 492T167 463T217 431Q224 426 228 424L286 386ZM250 21Q308 21 350 55T392 137Q392 154 387 169T375 194T353 216T330 234T301 253T274 270Q260 279 244 289T218 306L210 311Q204 311 181 294T133 239T107 157Q107 98 150 60T250 21Z" transform="translate(4334,0)"></path><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z" transform="translate(4834,0)"></path><path data-c="34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z" transform="translate(5334,0)"></path></g><g data-mml-node="mtext" transform="translate(19279.8,0)"><path data-c="A0" d=""></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(19529.8,0)"><g data-mml-node="mi"><path data-c="62" d="M307 -11Q234 -11 168 55L158 37Q156 34 153 28T147 17T143 10L138 1L118 0H98V298Q98 599 97 603Q94 622 83 628T38 637H20V660Q20 683 22 683L32 684Q42 685 61 686T98 688Q115 689 135 690T165 693T176 694H179V543Q179 391 180 391L183 394Q186 397 192 401T207 411T228 421T254 431T286 439T323 442Q401 442 461 379T522 216Q522 115 458 52T307 -11ZM182 98Q182 97 187 90T196 79T206 67T218 55T233 44T250 35T271 29T295 26Q330 26 363 46T412 113Q424 148 424 212Q424 287 412 323Q385 405 300 405Q270 405 239 390T188 347L182 339V98Z"></path><path data-c="79" d="M69 -66Q91 -66 104 -80T118 -116Q118 -134 109 -145T91 -160Q84 -163 97 -166Q104 -168 111 -168Q131 -168 148 -159T175 -138T197 -106T213 -75T225 -43L242 0L170 183Q150 233 125 297Q101 358 96 368T80 381Q79 382 78 382Q66 385 34 385H19V431H26L46 430Q65 430 88 429T122 428Q129 428 142 428T171 429T200 430T224 430L233 431H241V385H232Q183 385 185 366L286 112Q286 113 332 227L376 341V350Q376 365 366 373T348 383T334 385H331V431H337H344Q351 431 361 431T382 430T405 429T422 429Q477 429 503 431H508V385H497Q441 380 422 345Q420 343 378 235T289 9T227 -131Q180 -204 113 -204Q69 -204 44 -177T19 -116Q19 -89 35 -78T69 -66Z" transform="translate(556,0)"></path><path data-c="74" d="M27 422Q80 426 109 478T141 600V615H181V431H316V385H181V241Q182 116 182 100T189 68Q203 29 238 29Q282 29 292 100Q293 108 293 146V181H333V146V134Q333 57 291 17Q264 -10 221 -10Q187 -10 162 2T124 33T105 68T98 100Q97 107 97 248V385H18V422H27Z" transform="translate(1084,0)"></path><path data-c="65" d="M28 218Q28 273 48 318T98 391T163 433T229 448Q282 448 320 430T378 380T406 316T415 245Q415 238 408 231H126V216Q126 68 226 36Q246 30 270 30Q312 30 342 62Q359 79 369 104L379 128Q382 131 395 131H398Q415 131 415 121Q415 117 412 108Q393 53 349 21T250 -11Q155 -11 92 58T28 218ZM333 275Q322 403 238 411H236Q228 411 220 410T195 402T166 381T143 340T127 274V267H333V275Z" transform="translate(1473,0)"></path><path data-c="73" d="M295 316Q295 356 268 385T190 414Q154 414 128 401Q98 382 98 349Q97 344 98 336T114 312T157 287Q175 282 201 278T245 269T277 256Q294 248 310 236T342 195T359 133Q359 71 321 31T198 -10H190Q138 -10 94 26L86 19L77 10Q71 4 65 -1L54 -11H46H42Q39 -11 33 -5V74V132Q33 153 35 157T45 162H54Q66 162 70 158T75 146T82 119T101 77Q136 26 198 26Q295 26 295 104Q295 133 277 151Q257 175 194 187T111 210Q75 227 54 256T33 318Q33 357 50 384T93 424T143 442T187 447H198Q238 447 268 432L283 424L292 431Q302 440 314 448H322H326Q329 448 335 442V310L329 304H301Q295 310 295 316Z" transform="translate(1917,0)"></path></g></g><g data-mml-node="mo" transform="translate(22118.6,0)"><path data-c="2248" d="M55 319Q55 360 72 393T114 444T163 472T205 482Q207 482 213 482T223 483Q262 483 296 468T393 413L443 381Q502 346 553 346Q609 346 649 375T694 454Q694 465 698 474T708 483Q722 483 722 452Q722 386 675 338T555 289Q514 289 468 310T388 357T308 404T224 426Q164 426 125 393T83 318Q81 289 69 289Q55 289 55 319ZM55 85Q55 126 72 159T114 210T163 238T205 248Q207 248 213 248T223 249Q262 249 296 234T393 179L443 147Q502 112 553 112Q609 112 649 141T694 220Q694 249 708 249T722 217Q722 153 675 104T555 55Q514 55 468 76T388 123T308 170T224 192Q164 192 125 159T83 84Q80 55 69 55Q55 55 55 85Z"></path></g><g data-mml-node="mn" transform="translate(23174.3,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mtext" transform="translate(23674.3,0)"><path data-c="A0" d=""></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(23924.3,0)"><g data-mml-node="mi"><path data-c="47" d="M56 342Q56 428 89 500T174 615T283 681T391 705Q394 705 400 705T408 704Q499 704 569 636L582 624L612 663Q639 700 643 704Q644 704 647 704T653 705H657Q660 705 666 699V419L660 413H626Q620 419 619 430Q610 512 571 572T476 651Q457 658 426 658Q401 658 376 654T316 633T254 592T205 519T177 411Q173 369 173 335Q173 259 192 201T238 111T302 58T370 31T431 24Q478 24 513 45T559 100Q562 110 562 160V212Q561 213 557 216T551 220T542 223T526 225T502 226T463 227H437V273H449L609 270Q715 270 727 273H735V227H721Q674 227 668 215Q666 211 666 108V6Q660 0 657 0Q653 0 639 10Q617 25 600 42L587 54Q571 27 524 3T406 -22Q317 -22 238 22T108 151T56 342Z"></path><path data-c="69" d="M69 609Q69 637 87 653T131 669Q154 667 171 652T188 609Q188 579 171 564T129 549Q104 549 87 564T69 609ZM247 0Q232 3 143 3Q132 3 106 3T56 1L34 0H26V46H42Q70 46 91 49Q100 53 102 60T104 102V205V293Q104 345 102 359T88 378Q74 385 41 385H30V408Q30 431 32 431L42 432Q52 433 70 434T106 436Q123 437 142 438T171 441T182 442H185V62Q190 52 197 50T232 46H255V0H247Z" transform="translate(785,0)"></path><path data-c="42" d="M131 622Q124 629 120 631T104 634T61 637H28V683H229H267H346Q423 683 459 678T531 651Q574 627 599 590T624 512Q624 461 583 419T476 360L466 357Q539 348 595 302T651 187Q651 119 600 67T469 3Q456 1 242 0H28V46H61Q103 47 112 49T131 61V622ZM511 513Q511 560 485 594T416 636Q415 636 403 636T371 636T333 637Q266 637 251 636T232 628Q229 624 229 499V374H312L396 375L406 377Q410 378 417 380T442 393T474 417T499 456T511 513ZM537 188Q537 239 509 282T430 336L329 337H229V200V116Q229 57 234 52Q240 47 334 47H383Q425 47 443 53Q486 67 511 104T537 188Z" transform="translate(1063,0)"></path></g></g></g></g></svg></mjx-container></p>
+<p>这个结果还不包含权重和其他运行时开销。MLA、滑动窗口与混合注意力等结构需要按自己的缓存形式重新分析，不能机械套用。<a target="_blank" rel="noopener" href="https://jax-ml.github.io/scaling-book/transformers/">Transformer 的计算与存储分析</a></p>
+<h3 id="2-4-PagedAttention：先把空间管理好"><a href="#2-4-PagedAttention：先把空间管理好" class="headerlink" title="2.4 PagedAttention：先把空间管理好"></a>2.4 PagedAttention：先把空间管理好</h3><p>传统实现如果为每条序列提前预留一大段连续空间，可能浪费尚未生成的部分；不断增长与释放的序列，也会让管理变得困难。<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2309.06180">PagedAttention</a> 将 KV 按固定大小分块，通过块表把逻辑位置映射到物理空间，支持非连续存放和按需分配。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/llm-inference-reading-20261029/kv-cache-map-94b26ecc24881e50.png" alt="分页 KV 的逻辑块、物理块与共享关系"></p>
+<p>本文教学示意，使用图像生成工具辅助绘制。左图回答“存在哪里”，右图回答“复用什么”；两者可以组合。映射编号仅用于举例，与后面的原论文截图不是同一个请求实例。分页管理、前缀共享与量化分别解决不同问题。</p>
+<p>可以借用操作系统页表的直觉：程序看到连续的逻辑地址，不要求所有物理页相邻。但这里讨论的是推理引擎的 KV 管理，并不是说 GPU 会自动借助操作系统替框架完成所有换入换出。</p>
+<p>共享也是重要的一部分。多个生成分支可以暂时共享没有改变的缓存块，只有需要写入不同内容时才分配独立空间。分页降低了空间浪费和重复存储，进而可能允许系统承载更多请求。它不会凭空消除每个独立 token 需要保存的信息。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/llm-inference-reading-20261029/paper-pagedattention-3d00f0930da13c51.png" alt="PagedAttention 原论文中的内存组织示意"></p>
+<p>来源：<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2309.06180v1#page=6">vLLM / PagedAttention 原论文 v1，PDF 第 6 页</a>，Figure 6。左边是请求的逻辑 KV 块，中间是块表，右边是 GPU 物理块。图中逻辑 Block 0、1、2 分别映射到物理 Block 7、1、3；生成推进时，块表还记录各块已填充的槽位。截图保留完整原图及图注。</p>
+<p>读图时应区分三件事：请求自己的逻辑 token 顺序、GPU 上块的实际存放位置，以及多个序列是否共享了某些块。理解这一层之后，才更容易看懂框架里的 block manager、引用计数与缓存淘汰。</p>
+<h2 id="3-一个引擎怎样运转：调度器、缓存管理器与执行器"><a href="#3-一个引擎怎样运转：调度器、缓存管理器与执行器" class="headerlink" title="3. 一个引擎怎样运转：调度器、缓存管理器与执行器"></a>3. 一个引擎怎样运转：调度器、缓存管理器与执行器</h2><h3 id="3-1-不必一开始就从模型层源码读起"><a href="#3-1-不必一开始就从模型层源码读起" class="headerlink" title="3.1 不必一开始就从模型层源码读起"></a>3.1 不必一开始就从模型层源码读起</h3><p>阅读大型框架时，一个常见困难是入口很多：HTTP 服务、异步队列、多进程通信、模型加载和 CUDA 内核混在一起。比较有效的方法，是先跟踪“一条请求从进入到完成”的状态变化，再看每个组件负责的决策。</p>
+<p>以下分工是便于阅读的概括，具体类名、进程边界和接口需对照框架版本：</p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>它主要决定什么？</th>
+<th>阅读时寻找的证据</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>前端与输入处理</td>
+<td>怎样把用户请求变成模型输入</td>
+<td>模板、分词、参数校验、取消与返回路径</td>
+</tr>
+<tr>
+<td>调度器</td>
+<td>本轮执行哪些请求、处理多少 token</td>
+<td>等待/运行队列、优先级、token budget、抢占</td>
+</tr>
+<tr>
+<td>KV 管理器</td>
+<td>运行状态放在哪里、哪些能复用</td>
+<td>块分配、命中、引用、释放、淘汰、加载</td>
+</tr>
+<tr>
+<td>执行器与 worker</td>
+<td>怎样把一批工作送到设备</td>
+<td>多进程/多卡控制、输入准备、执行与同步</td>
+</tr>
+<tr>
+<td>Model runner</td>
+<td>怎样调用模型并组织执行</td>
+<td>模型前向、注意力后端、执行图、输出处理</td>
+</tr>
+<tr>
+<td>内核与通信库</td>
+<td>底层运算和数据交换怎样完成</td>
+<td>算子选择、数据布局、通信与计算重叠</td>
+</tr>
+</tbody></table>
+<p><strong>调度器决定算什么，缓存管理器决定状态怎样提供，执行路径决定这些工作怎样变成硬件操作。</strong> 它们不是完全独立的：缓存不足会限制调度，调度方式会改变每轮形状，形状变化又影响内核效率。</p>
+<h3 id="3-2-用三个请求追踪一次决策"><a href="#3-2-用三个请求追踪一次决策" class="headerlink" title="3.2 用三个请求追踪一次决策"></a>3.2 用三个请求追踪一次决策</h3><p>下面继续使用教学例子。请求 A 已经在生成短回答；B 刚送来一篇长文章；C 与先前请求共享一段较长系统提示。</p>
+<p>调度器可能希望让 A 继续 decode，同时给 B 分配一部分 prefill 预算。KV 管理器发现 C 的相同前缀仍然存在，于是 C 不必完整重算。执行路径把本轮选中的工作组织成适合内核处理的输入，再运行前向、采样并更新状态。</p>
+<p>若显存不够，系统还需要决定暂缓哪些请求、是否抢占已有请求，以及采用什么恢复方式。不同版本和配置可能选择重算、卸载或其他策略，不能仅凭“有分页”就推断具体行为。</p>
+<p>因此，源码阅读时不要只找一个叫 scheduler 的文件。还应观察决策如何影响块分配、张量形状、CPU/GPU 同步与下一轮状态。<a target="_blank" rel="noopener" href="https://vllm.ai/blog/2025-09-05-anatomy-of-vllm">Inside vLLM</a> 是把这些组件串起来的良好入口。</p>
+<h3 id="3-3-CPU-开销也可能成为瓶颈"><a href="#3-3-CPU-开销也可能成为瓶颈" class="headerlink" title="3.3 CPU 开销也可能成为瓶颈"></a>3.3 CPU 开销也可能成为瓶颈</h3><p>当 GPU 工作较短、模型较小或执行已经高度优化时，CPU 准备批次、处理队列和搬运元数据的时间可能变得显著。重叠调度尝试在 GPU 执行当前批次时，让 CPU 准备下一批，减少设备等待。</p>
+<p><a target="_blank" rel="noopener" href="https://www.lmsys.org/blog/2025-12-17-minisgl/">Mini-SGLang</a> 的价值之一，就是用相对精简的实现展示这种协作。读代码时可以问：CPU 何时知道下一步需要什么？哪些信息必须等待 GPU 结果？通过什么机制避免 CPU 的下一轮准备与设备状态不一致？这些问题也提醒我们，“GPU 利用率低”未必只需要更快的数学内核。</p>
+<h2 id="4-请求怎样一起算：连续批处理、分块-Prefill-与前缀缓存"><a href="#4-请求怎样一起算：连续批处理、分块-Prefill-与前缀缓存" class="headerlink" title="4. 请求怎样一起算：连续批处理、分块 Prefill 与前缀缓存"></a>4. 请求怎样一起算：连续批处理、分块 Prefill 与前缀缓存</h2><h3 id="4-1-Orca：把调度粒度推进到生成迭代"><a href="#4-1-Orca：把调度粒度推进到生成迭代" class="headerlink" title="4.1 Orca：把调度粒度推进到生成迭代"></a>4.1 Orca：把调度粒度推进到生成迭代</h3><p>固定 batch 的困难在于输出长度事先未知。若一个请求很快结束，另一个还要生成几百个 token，新请求仍等待整个 batch 结束，就可能同时浪费吞吐与增加排队。</p>
+<p><a target="_blank" rel="noopener" href="https://www.usenix.org/conference/osdi22/presentation/yu">Orca</a> 用 iteration-level scheduling 改变这一点：每一轮生成之后，系统都有机会移出完成请求、加入新请求。其原设计还通过 selective batching 区分适合共同执行的运算与按请求处理的注意力部分。</p>
+<p>理解它时，重点不是背术语，而是看调度边界从“一段完整生成”变成“一次迭代”之后，哪些资源能被重新安排。连续批处理的收益，也来自能够更及时地让有用工作填补空闲位置。</p>
+<h3 id="4-2-连续批处理之后，长输入仍会打断流式输出"><a href="#4-2-连续批处理之后，长输入仍会打断流式输出" class="headerlink" title="4.2 连续批处理之后，长输入仍会打断流式输出"></a>4.2 连续批处理之后，长输入仍会打断流式输出</h3><p>现在加入 B 的长文章。如果系统一次做完 B 的全部 prefill，A 虽然已经在 decode，也可能要等待较长的一轮计算才能产生下一个 token。用户看到的就是回答突然停顿。</p>
+<p>这正是 <a target="_blank" rel="noopener" href="https://www.usenix.org/conference/osdi24/presentation/agrawal">Sarathi-Serve</a> 研究的重要问题。它将 prefill 切成较小的块，结合受控的 token budget 与已有 decode，调节每轮工作量。它还讨论流水并行中工作量差异带来的空泡。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/llm-inference-reading-20261029/paper-sarathi-1f829aead4051606.png" alt="Sarathi-Serve 原论文 Figure 7：四种调度方式的时间线比较"></p>
+<p>来源：<a target="_blank" rel="noopener" href="https://www.usenix.org/system/files/osdi24-agrawal.pdf#page=7">Sarathi-Serve，OSDI 2024，PDF 第 7 页</a>，Figure 7。A、B、C、D 是不同请求；下标 d 表示 decode，p 表示完整 prefill，p 后的数字表示同一请求的不同 prefill 分块。TBT 衡量相邻输出 token 之间的等待。最后一行展示把输入块与已有 decode 组合的调度思路。截图保留完整原图注；基线名称指论文当时的实现与对照配置。</p>
+<p>这张图可以从“一个长 prefill 到来时，已有 decode 有没有被拖住”开始读，再看不同阶段能否被更均衡地放进执行轮次。它解释调度机制；图中基线属于论文当时的实现与实验环境，不能据此判断当前版本框架缺少什么功能。</p>
+<p>具体可以沿着 A、B 两个已经在生成的请求看：前两行中，C、D 的长输入进入之后，A、B 的下一次输出要等待较长工作结束；第三行优先完成旧请求，新输入则要等；最后一行把长输入切成小块，持续与 decode 组合。图里的“No stalls”指论文讨论的调度现象，不表示每个请求从此没有排队、抖动或其他开销。</p>
+<p>分块不是免费午餐。块过大，可能仍然带来明显 decode 干扰；块过小，也可能增加启动、访存或管理开销。新请求自己的 prefill 还会被分散到多轮，TTFT 与已有请求的流畅度之间需要协调。</p>
+<p>读这类论文，建议把“本轮处理的输入 token 数”和“本轮活跃请求数”分开。相同 batch size 不代表相同计算量，token budget 往往更接近实际执行粒度。</p>
+<h3 id="4-3-SGLang：相关请求之间，哪些前缀已经算过？"><a href="#4-3-SGLang：相关请求之间，哪些前缀已经算过？" class="headerlink" title="4.3 SGLang：相关请求之间，哪些前缀已经算过？"></a>4.3 SGLang：相关请求之间，哪些前缀已经算过？</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2312.07104">SGLang</a> 的出发点还包括结构化的多次模型调用：一个程序可能生成多个分支、多轮对话或带约束的输出。这些调用不一定相互独立，往往共享系统提示、示例或历史。</p>
+<p>RadixAttention 用 radix tree 等机制组织 token 前缀及其 KV，并与缓存感知调度配合。一个请求到来时，系统寻找已有匹配前缀，让后续计算从未缓存的部分继续。早期论文还包含面向语言模型程序的前端表达与约束生成机制，不能把整篇工作缩成“一个 trie”。</p>
+<p>例如，十个问题都以相同的产品手册开头，前缀复用就可能减少重复 prefill。但若把同一手册放到不同前文之后，或者对内容重新排序，不能仅凭文本片段相同就断言旧 KV 仍然等价可用。</p>
+<h3 id="4-4-三种技术，三个不同的问题"><a href="#4-4-三种技术，三个不同的问题" class="headerlink" title="4.4 三种技术，三个不同的问题"></a>4.4 三种技术，三个不同的问题</h3><table>
+<thead>
+<tr>
+<th>技术</th>
+<th>直接目标</th>
+<th>它不会自动解决什么？</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>连续批处理</td>
+<td>在迭代之间加入、移出请求，维持有效工作</td>
+<td>长 prefill 对 decode 的干扰、跨请求重复计算</td>
+</tr>
+<tr>
+<td>分块 prefill</td>
+<td>控制一次输入处理的执行粒度</td>
+<td>相同前缀是否已缓存、缓存应该保存多久</td>
+</tr>
+<tr>
+<td>前缀缓存</td>
+<td>复用已经计算过的相同 token 前缀</td>
+<td>显存容量无限增长、所有新输入的调度冲突</td>
+</tr>
+<tr>
+<td>分页 KV 管理</td>
+<td>按块分配、映射与共享运行状态</td>
+<td>任意文档块的跨上下文无损复用</td>
+</tr>
+</tbody></table>
+<p>现代框架通常把多种机制组合起来。vLLM 与 SGLang 的早期论文帮助我们理解设计动机，但当前版本不能用互斥标签概括。一个更好的比较方式，是画出两者当前的请求路径，再定位某项机制落在哪个组件。</p>
+<h2 id="5-Attention-怎样算得更快：FlashAttention-与-FlashInfer"><a href="#5-Attention-怎样算得更快：FlashAttention-与-FlashInfer" class="headerlink" title="5. Attention 怎样算得更快：FlashAttention 与 FlashInfer"></a>5. Attention 怎样算得更快：FlashAttention 与 FlashInfer</h2><h3 id="5-1-少搬数据，有时比少做几次加法更重要"><a href="#5-1-少搬数据，有时比少做几次加法更重要" class="headerlink" title="5.1 少搬数据，有时比少做几次加法更重要"></a>5.1 少搬数据，有时比少做几次加法更重要</h3><p>普通注意力会涉及 QK 相乘、softmax，再与 V 相乘。如果把完整分数矩阵写入显存、再读回来继续处理，会产生很大的中间存储与数据搬运。</p>
+<p><a target="_blank" rel="noopener" href="https://papers.neurips.cc/paper_files/paper/2022/hash/67d57c32e20fd0a7a302cb81d36e40d5-Abstract-Conference.html">FlashAttention</a> 从 IO 角度重新组织计算：把数据分块放进较快的片上存储，结合在线 softmax，尽量不把完整注意力中间矩阵落到 HBM。它计算的仍然是相应的精确注意力形式，重点在数据流，而非把 dense Attention 的二次运算直接变成线性。</p>
+<p>可以把它理解成在工作台上一次处理一小批材料，及时汇总结果，而不是把所有中间材料搬到远处仓库再搬回来。这个比喻只能帮助理解数据移动，真实内核还涉及精度、并行、布局和同步。</p>
+<h3 id="5-2-FlashAttention-2-与-3：算法之后，还有工作划分与硬件协同"><a href="#5-2-FlashAttention-2-与-3：算法之后，还有工作划分与硬件协同" class="headerlink" title="5.2 FlashAttention-2 与 3：算法之后，还有工作划分与硬件协同"></a>5.2 FlashAttention-2 与 3：算法之后，还有工作划分与硬件协同</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2307.08691">FlashAttention-2</a> 进一步减少非矩阵运算，改善 thread block 和 warp 之间的工作划分。即使已经减少 HBM 读写，GPU 仍可能因为并行度不足、共享内存通信等原因没有充分运行。</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2407.08608">FlashAttention-3</a> 则利用 Hopper 的异步计算与数据搬运能力，研究重叠执行与低精度处理。它适合放到第二轮阅读：先理解 FA1 的 IO 动机，再看 FA2 的并行划分，最后看新硬件怎样影响算法实现。</p>
+<p>这些工作也说明，某个内核在特定 GPU 上有效，不表示它会在所有硬件、模型和形状上获得相同比例的收益。</p>
+<h3 id="5-3-为什么还需要-FlashInfer？"><a href="#5-3-为什么还需要-FlashInfer？" class="headerlink" title="5.3 为什么还需要 FlashInfer？"></a>5.3 为什么还需要 FlashInfer？</h3><p>服务系统面对的不只是整齐的训练张量：各请求长度不同，KV 可能分页存放，prefill、decode、追加输入的查询长度不同，还存在 GQA 等注意力变体。<a target="_blank" rel="noopener" href="https://proceedings.mlsys.org/paper_files/paper/2025/hash/dbf02b21d77409a2db30e56866a8ab3a-Abstract-Conference.html">FlashInfer</a> 围绕这类服务负载提供可定制的注意力引擎，处理布局适配、动态负载均衡、执行计划和内核效率。</p>
+<p>面向一个规则形状的高效运算，与面向许多动态请求持续组织高效运算，需要处理不同问题。框架可能根据硬件、模型和执行阶段选择不同后端。</p>
+<table>
+<thead>
+<tr>
+<th>阅读对象</th>
+<th>首先理解的层次</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FlashAttention</td>
+<td>一次注意力计算的数据流与 IO</td>
+</tr>
+<tr>
+<td>FlashAttention-2 / 3</td>
+<td>GPU 工作划分、异步执行与硬件能力</td>
+</tr>
+<tr>
+<td>FlashInfer</td>
+<td>动态服务形状、KV 布局和可定制注意力执行</td>
+</tr>
+<tr>
+<td>vLLM / SGLang</td>
+<td>请求、缓存、调度与模型执行的整体组织</td>
+</tr>
+</tbody></table>
+<p>所以，PagedAttention 与 FlashAttention 可以配合，FlashInfer 也可以成为完整引擎调用的组件。看到 benchmark 前，先确认比较对象是不是同一层。</p>
+<h2 id="6-从单卡到集群：并行、通信与-P-D-分离"><a href="#6-从单卡到集群：并行、通信与-P-D-分离" class="headerlink" title="6. 从单卡到集群：并行、通信与 P/D 分离"></a>6. 从单卡到集群：并行、通信与 P/D 分离</h2><h3 id="6-1-“用了多张卡”，可能是完全不同的事情"><a href="#6-1-“用了多张卡”，可能是完全不同的事情" class="headerlink" title="6.1 “用了多张卡”，可能是完全不同的事情"></a>6.1 “用了多张卡”，可能是完全不同的事情</h3><p>模型太大、请求太多、上下文太长，都可能需要多卡，但相应拆分方式不同。</p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>主要怎样拆？</th>
+<th>需要关注的代价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数据并行 / 多副本</td>
+<td>多份模型分别处理请求</td>
+<td>请求路由、负载不均、缓存局部性</td>
+</tr>
+<tr>
+<td>张量并行 TP</td>
+<td>把层内矩阵等计算分到多个设备</td>
+<td>层间或层内通信、通信频率与拓扑</td>
+</tr>
+<tr>
+<td>流水并行 PP</td>
+<td>不同设备负责不同层或阶段</td>
+<td>流水空泡、各阶段工作量是否均衡</td>
+</tr>
+<tr>
+<td>专家并行 EP</td>
+<td>把 MoE 专家分布在不同设备</td>
+<td>token 路由、跨设备交换、专家负载不均</td>
+</tr>
+<tr>
+<td>上下文相关并行</td>
+<td>把长序列相关工作或状态分散处理</td>
+<td>注意力与 KV 的交换、切分和同步策略</td>
+</tr>
+</tbody></table>
+<p>它们可以组合。增加设备一方面提供更多容量与计算，另一方面引入通信、同步与调度成本。单看 GPU 数量，很难解释为什么某个配置更快。<a target="_blank" rel="noopener" href="https://jax-ml.github.io/scaling-book/inference/">推理并行分析</a></p>
+<h3 id="6-2-P-D-分离：让两种工作分别配置资源"><a href="#6-2-P-D-分离：让两种工作分别配置资源" class="headerlink" title="6.2 P/D 分离：让两种工作分别配置资源"></a>6.2 P/D 分离：让两种工作分别配置资源</h3><p>Prefill 与 decode 的执行特征不同，把它们长期混在同一资源池中，可能使长输入影响正在输出的请求，也限制两阶段独立选择并行方式。</p>
+<p><a target="_blank" rel="noopener" href="https://www.usenix.org/conference/osdi24/presentation/zhong-yinmin">DistServe</a> 将两者分开，分别优化资源与并行配置，并把同时满足 TTFT、TPOT 目标的 goodput 放到中心。<a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/research/publication/splitwise-efficient-generative-llm-inference-using-phase-splitting/">Splitwise</a> 也研究阶段分离，更突出不同机器配置带来的吞吐、成本与功耗权衡。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/llm-inference-reading-20261029/pd-tradeoff-0f4d3f1f8c4af50a.png" alt="P/D 分离的收益与代价：两类资源池之间必须传输 KV"></p>
+<p>本文教学示意，使用图像生成工具辅助绘制。图中的设备数量仅表示资源池，不对应等资源性能实验；KV 传输、排队和容量配置会影响实际收益。</p>
+<p>分离以后，一个阶段可以采用更适合自己的 batch 和并行策略，也可以分别扩容。但 prefill 产生的状态必须送到 decode 一侧，网络不够快时，节省的计算干扰可能被传输与等待抵消。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/llm-inference-reading-20261029/paper-distserve-5cb1a6deb1897b2a.png" alt="DistServe 原论文 Figure 8：ShareGPT 负载下的服务目标满足率比较"></p>
+<p>来源：<a target="_blank" rel="noopener" href="https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf#page=11">DistServe，OSDI 2024，PDF 第 11 页</a>，Figure 8。三列依次为 OPT-13B、66B、175B 在 ShareGPT 聊天负载上的结果；上排改变每 GPU 请求到达率，下排改变 SLO Scale。原图、坐标轴、图例和图注均完整保留。</p>
+<p>读这张图应先看资源是否对齐，再看服务目标、到达率和网络条件。它用 SLO 满足率展示：负载增加时，有多少请求仍能满足规定的延迟要求；图中的 90% 参考线用于讨论相应可承载负载。不同子图的约束和横轴需要分别阅读，不能只比较曲线最高点。这里呈现的是论文当时的版本与负载，不是 2026 年框架排名。</p>
+<p>上排横轴是每 GPU 的请求到达率，纵轴是满足 SLO 的请求比例；在给定服务要求下，曲线与 90% 水平参考线对应的边界，帮助判断系统能够承受的负载。下排横轴的 SLO Scale 从左到右减小，表示延迟要求逐渐收紧。它问的是“同样负载下，要求还能严格到什么程度”，不是 token 生成速度。</p>
+<p>原论文 §6.1 使用 FP16 OPT、ShareGPT 请求内容与 Poisson 到达过程；测试床为 4 节点、32 张 A100-80GB，节点内 NVLink、节点间 25 Gbps。各列与各方法按自己的配置使用设备，上排请求到达率按所用 GPU 数归一化。90% 是这一组实验选择的满足率目标；更换目标、模型、负载或网络后，需要重新比较。</p>
+<p>把无延迟约束的离线吞吐，直接当成在线服务能承受的负载，会错过这类研究真正要解决的问题。</p>
+<h3 id="6-3-分离之后，KV-成为跨节点资源"><a href="#6-3-分离之后，KV-成为跨节点资源" class="headerlink" title="6.3 分离之后，KV 成为跨节点资源"></a>6.3 分离之后，KV 成为跨节点资源</h3><p><a target="_blank" rel="noopener" href="https://www.usenix.org/conference/fast25/presentation/qin">Mooncake</a> 进一步把 KV 放在系统中心：利用 CPU 内存、SSD 与网络组织分布式缓存池，让调度考虑缓存在哪、能复用多少、节点负载如何以及是否满足服务目标。</p>
+<p>如果请求的历史 KV 在节点 X，把请求发到空闲节点 Y，可能需要重新计算或搬运；留在 X，又可能排队更久。最少排队、最少传输和最高缓存命中，未必总指向同一个节点。</p>
+<p>这让“请求路由”从简单的均匀分配，变成带状态的资源决策。缓存命中率也不能单独代表系统收益：命中了远端但加载缓慢的缓存，可能不如本地重算；热门缓存集中在少数节点，还可能加剧负载不均。</p>
+<h3 id="6-4-多轮-Agent-又带来新问题"><a href="#6-4-多轮-Agent-又带来新问题" class="headerlink" title="6.4 多轮 Agent 又带来新问题"></a>6.4 多轮 Agent 又带来新问题</h3><p>第一轮长输入与后续仅追加少量内容的请求，未必应该采用相同路径。<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2603.13358">PPD</a> 研究 append-prefill：当 decode 节点已经有历史 KV，后续轮次是否可以在那里处理新增输入，避免反复传输。</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2602.21548">DualPath</a> 则提醒我们，高缓存命中并不一定消除瓶颈。计算被省掉后，从外部存储加载大量 KV 可能成为主要成本；其设计利用不同节点的数据路径分摊存储带宽。该工作按本次核对信息仍列为预印本。</p>
+<p>所以，分布式推理不只是把单卡引擎复制许多份，还要管理状态位置、数据通路和请求关联。<a target="_blank" rel="noopener" href="https://docs.nvidia.com/dynamo/latest/knowledge-base/overview">NVIDIA Dynamo 架构</a>与<a target="_blank" rel="noopener" href="https://vllm.ai/blog/2026-09-29-disaggregated-serving-guide">分离式服务实践</a>可以帮助把论文概念连接到实际运行时。</p>
+<h2 id="7-从前缀到文档块：缓存如何连接-RAG-与-Agent？"><a href="#7-从前缀到文档块：缓存如何连接-RAG-与-Agent？" class="headerlink" title="7. 从前缀到文档块：缓存如何连接 RAG 与 Agent？"></a>7. 从前缀到文档块：缓存如何连接 RAG 与 Agent？</h2><h3 id="7-1-相同文档，不一定对应相同-KV"><a href="#7-1-相同文档，不一定对应相同-KV" class="headerlink" title="7.1 相同文档，不一定对应相同 KV"></a>7.1 相同文档，不一定对应相同 KV</h3><p>假设知识库有文档 A、B。一个问题的提示按 A→B 组织，另一个按 B→A 组织。文本块 A 虽然没有修改，但它所处的位置和前文已经改变。模型的因果依赖、位置编码与层间表示会影响其 KV，因此不能简单把各文档独立计算后的缓存任意拼接。</p>
+<p>这是教学例子，但它恰好概括了从前缀复用迈向文档块复用时的困难：前缀匹配通常要求相应 token 历史一致；RAG 则经常让相同知识以不同组合出现。</p>
+<h3 id="7-2-CacheGen：复用以后，搬运可能变贵"><a href="#7-2-CacheGen：复用以后，搬运可能变贵" class="headerlink" title="7.2 CacheGen：复用以后，搬运可能变贵"></a>7.2 CacheGen：复用以后，搬运可能变贵</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2310.07240">CacheGen</a> 研究 KV 压缩与流式传输。缓存状态比原始文本大得多，从远端取缓存不一定便宜。系统需要比较加载与解码压缩状态的成本，以及把文本交给 GPU 重算的成本，再结合带宽调整策略。</p>
+<p>因此，“有缓存就用”不是足够的资源策略。真正关心的是省下多少计算、付出多少存储与传输，以及压缩是否影响质量。GPU 更强、网络相对更慢时，重算的吸引力可能增加。</p>
+<h3 id="7-3-CacheBlend：重算一部分，恢复块之间的关系"><a href="#7-3-CacheBlend：重算一部分，恢复块之间的关系" class="headerlink" title="7.3 CacheBlend：重算一部分，恢复块之间的关系"></a>7.3 CacheBlend：重算一部分，恢复块之间的关系</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2405.16444">CacheBlend</a> 关注非前缀文本块的 KV 复用，通过选择一部分 token 重算，修复跨块注意力，并将重算与缓存加载流水重叠。</p>
+<p>可以把它理解成：已有文档块状态仍有利用价值，但需要花一些工作让它适应新的组合。哪些 token 值得重算、重算多少才够、加载与计算能否重叠，都是具体设计问题。实验质量接近完整 prefill，不等于每个浮点值和生成 token 都严格相同。</p>
+<h3 id="7-4-Cache-Craft：缓存本身也需要管理"><a href="#7-4-Cache-Craft：缓存本身也需要管理" class="headerlink" title="7.4 Cache-Craft：缓存本身也需要管理"></a>7.4 Cache-Craft：缓存本身也需要管理</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2502.15734">Cache-Craft</a> 在文档块复用基础上，进一步讨论可复用性判断、选择性修复、缓存变体与存储淘汰。一个文档块可能在不同上下文中留下多个版本，系统要决定保存哪个、用哪个、何时加载，以及修复到什么程度。</p>
+<p>这很适合连接数据库与系统思维：缓存不是只有“命中/没命中”两个状态，也包含状态质量、重算成本、更新频率、存储层级和使用收益。</p>
+<table>
+<thead>
+<tr>
+<th>路线</th>
+<th>首先回答的问题</th>
+<th>需要一起报告的代价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>相同前缀复用</td>
+<td>已经计算过的前缀还能用吗？</td>
+<td>命中、缓存容量、淘汰与路由</td>
+</tr>
+<tr>
+<td>KV 压缩与传输</td>
+<td>如何更便宜地保存和搬运状态？</td>
+<td>编解码、网络、精度与质量</td>
+</tr>
+<tr>
+<td>文档块融合</td>
+<td>前文变化后怎样修复旧 KV？</td>
+<td>选择性重算、加载、输出质量</td>
+</tr>
+<tr>
+<td>缓存变体管理</td>
+<td>多个旧状态中哪个更值得复用？</td>
+<td>判断、元数据、存储与管理成本</td>
+</tr>
+</tbody></table>
+<h3 id="7-5-与-Agent-Memory-的连接点"><a href="#7-5-与-Agent-Memory-的连接点" class="headerlink" title="7.5 与 Agent Memory 的连接点"></a>7.5 与 Agent Memory 的连接点</h3><p>可以分成两层理解：语义层决定哪些事实、经验与历史值得进入上下文；计算层决定这些内容进入模型时，哪些已有状态可以复用。前者产生的摘要、更新和重排，会改变后者的可复用条件。</p>
+<p>因此，一个自然的研究问题是：记忆条目更新后，怎样识别需要失效和重算的部分？另一个问题是：资源有限时，应优先保存语义价值高、复用频繁的内容，还是重算成本高的状态？这些是本文的研究思考，不代表前述论文已经解决了所有动态记忆场景。</p>
+<p>设计实验时，应把过期知识造成的错误，与近似 KV 复用造成的偏差分开。只测缓存命中率，既不能证明回答可靠，也不能充分解释端到端延迟。</p>
+<h2 id="8-两条容易混在一起的加速路线：量化与推测解码"><a href="#8-两条容易混在一起的加速路线：量化与推测解码" class="headerlink" title="8. 两条容易混在一起的加速路线：量化与推测解码"></a>8. 两条容易混在一起的加速路线：量化与推测解码</h2><h3 id="8-1-量化：每个值更小，怎样转化成执行收益？"><a href="#8-1-量化：每个值更小，怎样转化成执行收益？" class="headerlink" title="8.1 量化：每个值更小，怎样转化成执行收益？"></a>8.1 量化：每个值更小，怎样转化成执行收益？</h3><p>量化减少表示精度，可能降低权重容量、内存读取和运算成本，但具体收益取决于量化对象与硬件支持。权重量化、激活量化和 KV 量化改变的对象不同，不能把“用了 4 bit”当成整个系统所有张量都是 4 bit。</p>
+<p><a target="_blank" rel="noopener" href="https://proceedings.mlsys.org/paper_files/paper/2024/hash/42a452cbafa9dd64e9ba4aa95cc1ef21-Abstract-Conference.html">AWQ</a> 利用激活统计识别重要通道，通过通道缩放保护它们，研究低比特权重量化与相应执行实现。<a target="_blank" rel="noopener" href="https://proceedings.mlr.press/v202/xiao23c.html">SmoothQuant</a> 则通过离线缩放处理激活异常值带来的困难，支持权重和激活的 W8A8 计算。</p>
+<p>把它们对读，有助于区分“少读权重”和“利用低精度矩阵运算”。前者可能对带宽敏感的 decode 很重要，后者在矩阵计算较充分的场景有不同价值。实际仍要结合 kernel、反量化、batch 与模型精度测量，不能用理论字节压缩比直接代替实测加速比。</p>
+<h3 id="8-2-推测解码：多做一些便宜工作，减少昂贵的串行步骤"><a href="#8-2-推测解码：多做一些便宜工作，减少昂贵的串行步骤" class="headerlink" title="8.2 推测解码：多做一些便宜工作，减少昂贵的串行步骤"></a>8.2 推测解码：多做一些便宜工作，减少昂贵的串行步骤</h3><p><a target="_blank" rel="noopener" href="https://proceedings.mlr.press/v202/leviathan23a.html">经典推测解码论文</a> 的基本思路，是先由较便宜的模型提出多个候选 token，再由目标模型并行验证。适当的接受与修正采样规则能够保持目标分布，同时尝试一次推进多个 token。</p>
+<p>可以用一个教学比喻理解：助手先起草一小段，负责最终标准的人一次检查多个位置。关键不是“草稿大概像就直接通过”，而是存在明确的验证与采样机制；草稿若经常被拒绝，额外工作反而可能拖慢系统。</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2503.01840">EAGLE-3</a> 利用目标模型不同层的特征，训练草稿模型并在训练中考虑连续生成时的行为。阅读时应看草稿质量怎样影响接受长度，也要看草稿本身增加了多少计算、存储和实现复杂度。</p>
+<h3 id="8-3-为什么单请求收益不能直接外推到高并发？"><a href="#8-3-为什么单请求收益不能直接外推到高并发？" class="headerlink" title="8.3 为什么单请求收益不能直接外推到高并发？"></a>8.3 为什么单请求收益不能直接外推到高并发？</h3><p>低并发时，大模型每一步可能没有把所有计算资源用满，额外的草稿与并行验证有机会提高利用率。高并发下，原本的 batch 已经更充分，额外工作可利用的余量会改变。相同方案的低延迟收益与系统吞吐收益，可能差别很大。</p>
+<p>这说明“减少一次串行生成的时间”与“单位时间服务更多用户”需要不同对照。还要区分基础解码算法、草稿模型训练和生产框架实现：算法上成立的分布保持性质，并不能代替具体实现的正确性测试。</p>
+<h2 id="9-把它们放进一个真实系统：MoE、模型结构与硬件"><a href="#9-把它们放进一个真实系统：MoE、模型结构与硬件" class="headerlink" title="9. 把它们放进一个真实系统：MoE、模型结构与硬件"></a>9. 把它们放进一个真实系统：MoE、模型结构与硬件</h2><p>MoE 模型只让每个 token 进入部分专家，可以减少相应计算，但专家分布在不同设备时，会带来 token 路由、发送与汇聚、专家负载不均等问题。总参数量、每 token 激活量、模型存储容量与跨设备通信，需要分别考虑。</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2505.09343">DeepSeek-V3 系统分析</a> 是一个综合案例：MLA 改变注意力状态的存储，MoE 改变计算与通信组织，P/D 分离允许两阶段采用不同配置，计算通信重叠与网络拓扑又影响最终效率。它展示的不是某一个开关，而是模型与硬件协同设计。</p>
+<p>读这种工业经验，最好把三类内容分开记录：已经测量的系统结果、对瓶颈的分析，以及对未来硬件的建议。特定模型与集群上的配置，也不自动成为所有 MoE 的最优配置。</p>
+<p>这也解释了为什么推理框架很难用一个数字排名。换成另一种注意力结构、另一种专家数量、另一组网络，原来的瓶颈可能移动，后端与调度策略也可能需要改变。</p>
+<h2 id="10-怎样读实验：确认“更快”的含义"><a href="#10-怎样读实验：确认“更快”的含义" class="headerlink" title="10. 怎样读实验：确认“更快”的含义"></a>10. 怎样读实验：确认“更快”的含义</h2><h3 id="10-1-先找相同条件，再看结果曲线"><a href="#10-1-先找相同条件，再看结果曲线" class="headerlink" title="10.1 先找相同条件，再看结果曲线"></a>10.1 先找相同条件，再看结果曲线</h3><p>一篇系统论文的性能结果，至少需要放回以下条件中理解：模型与版本、精度、设备数量、输入输出分布、请求到达方式、缓存状态、服务目标，以及基线版本与配置。</p>
+<table>
+<thead>
+<tr>
+<th>如果条件变了</th>
+<th>可能影响的判断</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>输出长度变短</td>
+<td>端到端延迟下降，但不一定说明 decode 每步更快</td>
+</tr>
+<tr>
+<td>共享前缀变多</td>
+<td>缓存收益提高，不能直接外推独立请求</td>
+</tr>
+<tr>
+<td>从冷缓存变成热缓存</td>
+<td>TTFT 可能明显变化，需要分别报告</td>
+</tr>
+<tr>
+<td>GPU 数量增加</td>
+<td>吞吐提高，仍需比较资源与单位成本</td>
+</tr>
+<tr>
+<td>到达率降低</td>
+<td>排队减少，不能直接证明调度更好</td>
+</tr>
+<tr>
+<td>基线缺少关键优化</td>
+<td>得到的优势可能来自配置差异</td>
+</tr>
+<tr>
+<td>质量标准降低</td>
+<td>速度提升需要与输出退化一起报告</td>
+</tr>
+</tbody></table>
+<p>这里并不是要求每项工作覆盖所有情况，而是帮助我们判断结论适用于什么范围。不同论文的“若干倍”通常不能横向拼成排行榜。</p>
+<h3 id="10-2-负载要覆盖不同瓶颈"><a href="#10-2-负载要覆盖不同瓶颈" class="headerlink" title="10.2 负载要覆盖不同瓶颈"></a>10.2 负载要覆盖不同瓶颈</h3><p>一个学习用实验可以固定模型与硬件，分别构造三组请求：短输入长输出、长输入短输出、相同长前缀加不同问题。它们分别帮助观察 decode、prefill，以及跨请求复用。</p>
+<p>再逐步增加并发或到达率，记录 TTFT、TPOT/ITL、端到端 P95/P99、吞吐、KV 使用与命中情况。输入、输出与命中条件都应固定或明确控制，才能看到系统从一个瓶颈转向另一个瓶颈。</p>
+<p>若做 P/D 分离，还应记录 KV 传输字节与时间、两侧队列和资源利用率；若做近似缓存或量化，则必须加入任务质量。只给 GPU 利用率或命中率，往往不足以解释最终体验。</p>
+<h3 id="10-3-消融要能回答具体问题"><a href="#10-3-消融要能回答具体问题" class="headerlink" title="10.3 消融要能回答具体问题"></a>10.3 消融要能回答具体问题</h3><table>
+<thead>
+<tr>
+<th>想验证什么？</th>
+<th>可以设置的对照</th>
+<th>主要排除的混淆</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>前缀缓存是否有用</td>
+<td>相同请求序列，开关缓存，并区分冷/热状态</td>
+<td>收益是否来自重复输入与预热条件</td>
+</tr>
+<tr>
+<td>分块是否改善干扰</td>
+<td>不同块大小，同样到达流与资源</td>
+<td>只是改变了调度预算，还是确实改善权衡</td>
+</tr>
+<tr>
+<td>分离是否值得</td>
+<td>相同总 GPU 下比较混合与分离执行</td>
+<td>多用了资源、换了硬件或基线过弱</td>
+</tr>
+<tr>
+<td>KV 复用是否值得</td>
+<td>完整重算、前缀复用、文档块复用</td>
+<td>传输与修复成本是否抵消了计算节省</td>
+</tr>
+<tr>
+<td>推测解码是否有效</td>
+<td>同样目标模型和请求，统计接受长度与总成本</td>
+<td>只报告最有利 batch 下的单请求结果</td>
+</tr>
+<tr>
+<td>量化是否改善系统</td>
+<td>同样质量评估与可比硬件，拆开容量和延迟收益</td>
+<td>字节更少是否真的变成更快执行</td>
+</tr>
+</tbody></table>
+<p>一个好的负结果同样有价值：缓存命中却因为传输变慢，分离后尾延迟改善但 TTFT 恶化，或量化节省显存却没有提高吞吐，都能帮助定位设计成立的条件。<a target="_blank" rel="noopener" href="https://vllm.ai/blog/2026-09-29-disaggregated-serving-guide">分离式服务实践</a>就提供了这种从收益与代价两侧看系统的视角。</p>
+<h2 id="11-阅读与动手路线：从会用框架到能解释设计"><a href="#11-阅读与动手路线：从会用框架到能解释设计" class="headerlink" title="11. 阅读与动手路线：从会用框架到能解释设计"></a>11. 阅读与动手路线：从会用框架到能解释设计</h2><h3 id="第一阶段：弄懂执行与资源"><a href="#第一阶段：弄懂执行与资源" class="headerlink" title="第一阶段：弄懂执行与资源"></a>第一阶段：弄懂执行与资源</h3><p>先读 <a target="_blank" rel="noopener" href="https://huggingface.co/blog/tngtech/llm-performance-prefill-decode-concurrent-requests">Prefill/Decode 博客</a>、<a target="_blank" rel="noopener" href="https://huggingface.co/blog/kv-cache">KV Cache 教程</a>与<a target="_blank" rel="noopener" href="https://huggingface.co/blog/continuous_batching">连续批处理教程</a>。这一阶段不用记住很多论文，应该能画出普通自回归生成循环，说明权重和 KV 的区别，并自己算一个容量例子。</p>
+<p>可以用小型 PyTorch 代码追踪张量形状：输入序列在 prefill 时是什么长度，decode 时新增了什么，缓存在哪一层追加。目标是理解机制，而不是一开始就复现大型框架的速度。</p>
+<h3 id="第二阶段：理解单机引擎"><a href="#第二阶段：理解单机引擎" class="headerlink" title="第二阶段：理解单机引擎"></a>第二阶段：理解单机引擎</h3><p>按 <strong>Orca → PagedAttention → Sarathi-Serve → SGLang</strong> 阅读，再结合 <a target="_blank" rel="noopener" href="https://vllm.ai/blog/2025-09-05-anatomy-of-vllm">Inside vLLM</a>。每篇只做一张小笔记：原先瓶颈是什么、改变了哪个组件、带来什么新开销、用什么对照证明。</p>
+<p>之后读 <a target="_blank" rel="noopener" href="https://www.lmsys.org/blog/2025-12-17-minisgl/">Mini-SGLang</a>，沿着一条请求找入口、队列、调度、KV 管理、执行和返回。它是教育与原型实现入口，不必把精简代码视为生产系统所有边界条件的完整替代。</p>
+<h3 id="第三阶段：选择内核或分布式支线"><a href="#第三阶段：选择内核或分布式支线" class="headerlink" title="第三阶段：选择内核或分布式支线"></a>第三阶段：选择内核或分布式支线</h3><p>若更喜欢 GPU 与编译，读 FlashAttention 系列、FlashInfer，并学习内存层次、算术强度、线程工作划分和 profiling。若更喜欢操作系统、网络与资源管理，读 DistServe、Splitwise、Mooncake，重点看通信与状态如何影响调度。</p>
+<p>两条支线可以相互连接，但不必同时从最深处开始。一个针对注意力形状的内核优化，最终仍需要进入服务负载测试；一个优秀调度策略，也需要知道它产生的形状在硬件上怎样执行。</p>
+<h3 id="第四阶段：接到具体负载与自己的问题"><a href="#第四阶段：接到具体负载与自己的问题" class="headerlink" title="第四阶段：接到具体负载与自己的问题"></a>第四阶段：接到具体负载与自己的问题</h3><p>关注 RAG 与 Agent，可以继续读 CacheGen、CacheBlend、Cache-Craft、PPD 与 DualPath；关注低延迟生成，可以读经典推测解码与 EAGLE-3；关注本地部署或资源约束，可以对读 AWQ 与 SmoothQuant。</p>
+<p>做第一个小实验时，选择现有硬件能稳定运行的模型，固定条件，先验证一条明确问题，例如“相同前缀比例如何改变 TTFT 和可承载负载”。保留配置、版本、到达流、原始记录与质量结果。先得到可信的曲线，再决定是否需要提出新机制。</p>
+<h3 id="如果暂时只读三篇博客、四篇论文"><a href="#如果暂时只读三篇博客、四篇论文" class="headerlink" title="如果暂时只读三篇博客、四篇论文"></a>如果暂时只读三篇博客、四篇论文</h3><p>博客选 <strong>Prefill/Decode → Inside vLLM → Mini-SGLang</strong>；论文选 <strong>Orca → PagedAttention → Sarathi-Serve → SGLang</strong>。这是本文偏系统实现的入门建议，之后再根据兴趣分支。</p>
+<p>若主要目标是理解缓存与 Agent Memory 的交叉，我会优先接上 <strong>Mooncake → CacheBlend → Cache-Craft</strong>。它们分别帮助理解状态在哪、跨上下文怎样复用，以及缓存如何被长期管理。</p>
+<h2 id="12-资料索引：论文、博客与文档各用来做什么？"><a href="#12-资料索引：论文、博客与文档各用来做什么？" class="headerlink" title="12. 资料索引：论文、博客与文档各用来做什么？"></a>12. 资料索引：论文、博客与文档各用来做什么？</h2><p>论文帮助理解问题定义、设计与证据；博客帮助建立直觉、连接实现；当前文档负责确认接口与支持范围。下面采用已核对的正式标题或常用简称，首次公开年份与正式会议可能不同，不把两者混成一个日期。</p>
+<h3 id="12-1-服务引擎、调度与注意力内核"><a href="#12-1-服务引擎、调度与注意力内核" class="headerlink" title="12.1 服务引擎、调度与注意力内核"></a>12.1 服务引擎、调度与注意力内核</h3><table>
+<thead>
+<tr>
+<th>资料</th>
+<th>年份与正式信息</th>
+<th>本文中的位置</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://www.usenix.org/conference/osdi22/presentation/yu">Orca: A Distributed Serving System for Transformer-Based Generative Models</a></td>
+<td>OSDI 2022</td>
+<td>迭代级调度与批处理</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2309.06180">Efficient Memory Management for Large Language Model Serving with PagedAttention</a></td>
+<td>SOSP 2023</td>
+<td>vLLM 的分页 KV 管理</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2312.07104">SGLang: Efficient Execution of Structured Language Model Programs</a></td>
+<td>2023 首稿，NeurIPS 2024</td>
+<td>结构化调用、RadixAttention 与前缀复用</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.usenix.org/conference/osdi24/presentation/agrawal">Taming Throughput-Latency Tradeoff in LLM Inference with Sarathi-Serve</a></td>
+<td>OSDI 2024</td>
+<td>分块 prefill 与混合调度</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://papers.neurips.cc/paper_files/paper/2022/hash/67d57c32e20fd0a7a302cb81d36e40d5-Abstract-Conference.html">FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness</a></td>
+<td>NeurIPS 2022</td>
+<td>注意力 IO 与分块</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2307.08691">FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning</a></td>
+<td>2023 首稿，ICLR 2024</td>
+<td>GPU 工作划分</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2407.08608">FlashAttention-3: Fast and Accurate Attention with Asynchrony and Low-precision</a></td>
+<td>NeurIPS 2024</td>
+<td>异步执行与硬件协同</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://proceedings.mlsys.org/paper_files/paper/2025/hash/dbf02b21d77409a2db30e56866a8ab3a-Abstract-Conference.html">FlashInfer: Efficient and Customizable Attention Engine for LLM Inference Serving</a></td>
+<td>MLSys 2025</td>
+<td>动态服务负载下的注意力执行</td>
+</tr>
+</tbody></table>
+<h3 id="12-2-分布式、缓存与算法路线"><a href="#12-2-分布式、缓存与算法路线" class="headerlink" title="12.2 分布式、缓存与算法路线"></a>12.2 分布式、缓存与算法路线</h3><table>
+<thead>
+<tr>
+<th>资料</th>
+<th>年份与正式信息</th>
+<th>本文中的位置</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://www.usenix.org/conference/osdi24/presentation/zhong-yinmin">DistServe: Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving</a></td>
+<td>OSDI 2024</td>
+<td>延迟目标下的 P/D 分离</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/research/publication/splitwise-efficient-generative-llm-inference-using-phase-splitting/">Splitwise: Efficient Generative LLM Inference Using Phase Splitting</a></td>
+<td>2023 首稿，ISCA 2024</td>
+<td>阶段与硬件配置</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.usenix.org/conference/fast25/presentation/qin">Mooncake: Trading More Storage for Less Computation — A KVCache-centric Architecture for Serving LLM Chatbot</a></td>
+<td>相关首稿 2024，FAST 2025</td>
+<td>采用 FAST 正式标题；分布式 KV 池</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2310.07240">CacheGen: KV Cache Compression and Streaming for Fast Large Language Model Serving</a></td>
+<td>2023 首稿，SIGCOMM 2024</td>
+<td>KV 编码与传输</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2405.16444">CacheBlend: Fast Large Language Model Serving for RAG with Cached Knowledge Fusion</a></td>
+<td>2024 首稿，EuroSys 2025</td>
+<td>文档块融合与重算</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2502.15734">Cache-Craft: Managing Chunk-Caches for Efficient Retrieval-Augmented Generation</a></td>
+<td>SIGMOD 2025</td>
+<td>文档块缓存管理</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://proceedings.mlr.press/v202/leviathan23a.html">Fast Inference from Transformers via Speculative Decoding</a></td>
+<td>ICML 2023</td>
+<td>推测解码基础</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2503.01840">EAGLE-3: Scaling up Inference Acceleration of Large Language Models via Training-Time Test</a></td>
+<td>NeurIPS 2025</td>
+<td>草稿生成与接受长度</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://proceedings.mlsys.org/paper_files/paper/2024/hash/42a452cbafa9dd64e9ba4aa95cc1ef21-Abstract-Conference.html">AWQ: Activation-aware Weight Quantization for On-Device LLM Compression and Acceleration</a></td>
+<td>2023 首稿，MLSys 2024</td>
+<td>采用会议正式标题；低比特权重量化</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://proceedings.mlr.press/v202/xiao23c.html">SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models</a></td>
+<td>2022 首稿，ICML 2023</td>
+<td>权重与激活 W8A8</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2505.09343">Insights into DeepSeek-V3: Scaling Challenges and Reflections on Hardware for AI Architectures</a></td>
+<td>ISCA 2025 Industry Track</td>
+<td>模型、通信与硬件综合案例</td>
+</tr>
+</tbody></table>
+<h3 id="12-3-综述与近期多轮负载研究"><a href="#12-3-综述与近期多轮负载研究" class="headerlink" title="12.3 综述与近期多轮负载研究"></a>12.3 综述与近期多轮负载研究</h3><table>
+<thead>
+<tr>
+<th>资料</th>
+<th>年份与状态</th>
+<th>适合怎样使用？</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2404.14294">A Survey on Efficient Inference for Large Language Models</a></td>
+<td>2024</td>
+<td>覆盖数据、模型与系统层的广泛地图</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://aclanthology.org/2025.inlg-main.32/">Taming the Titans: A Survey of Efficient LLM Inference Serving</a></td>
+<td>INLG 2025</td>
+<td>补全单实例与集群服务视角</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://aclanthology.org/2026.findings-acl.1916/">Towards Efficient Large Language Model Serving: A Survey on System-Aware KV Cache Optimization</a></td>
+<td>Findings of ACL 2026</td>
+<td>梳理 KV 调度、放置、迁移、表示与保留</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2603.13358">Not All Prefills Are Equal: PPD Disaggregation for Multi-turn LLM Serving</a></td>
+<td>2026，页面标注 ICML 2026</td>
+<td>多轮追加输入与 KV 位置</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2602.21548">DualPath: Breaking the Storage Bandwidth Bottleneck in Agentic LLM Inference</a></td>
+<td>2026 预印本</td>
+<td>多轮负载下的 KV 存储带宽</td>
+</tr>
+</tbody></table>
+<h3 id="12-4-博客与在线教材"><a href="#12-4-博客与在线教材" class="headerlink" title="12.4 博客与在线教材"></a>12.4 博客与在线教材</h3><p>下表用中文短名提示主题，原始标题与实现细节可从链接继续查阅。</p>
+<table>
+<thead>
+<tr>
+<th>资料</th>
+<th>来源与日期</th>
+<th>建议读法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://huggingface.co/blog/tngtech/llm-performance-prefill-decode-concurrent-requests">Prefill / Decode：并发请求的性能</a></td>
+<td>TNG 作者团队，2025-04-16</td>
+<td>入门，先看阶段、并发与指标；发布于 Hugging Face 平台</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://huggingface.co/blog/kv-cache">从零实现 KV Cache（nanoVLM）</a></td>
+<td>Hugging Face，2025-06-04</td>
+<td>入门至中级，跟踪张量与生成循环</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://huggingface.co/blog/continuous_batching">连续批处理：从原理理解执行</a></td>
+<td>Hugging Face，2025-11-25</td>
+<td>中级，理解不等长序列与动态调度</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://vllm.ai/blog/2023-06-20-vllm">vLLM 首发：PagedAttention</a></td>
+<td>vLLM 团队，2023-06-20</td>
+<td>分页 KV 的直观教材，实验属于历史版本</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://vllm.ai/blog/2025-09-05-anatomy-of-vllm">Inside vLLM：源码导读</a></td>
+<td>Aleksa Gordić，官方收录 2025-09-05</td>
+<td>源码主线，分析 V1 与 2025 年提交 <code>42172ad</code></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.lmsys.org/blog/2024-01-17-sglang/">SGLang 首发：RadixAttention</a></td>
+<td>LMSYS，2024-01-17</td>
+<td>理解早期 SGLang 的问题与复用模式</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.lmsys.org/blog/2025-12-17-minisgl/">Mini-SGLang：精简引擎实现</a></td>
+<td>LMSYS，2025-12-17</td>
+<td>精简代码入口，适合追踪请求与重叠调度</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://vllm.ai/blog/2026-09-29-disaggregated-serving-guide">vLLM：分离式服务实践</a></td>
+<td>Martin Hickey / IBM Research，2026-09-29</td>
+<td>P/D 实践与代价，文中面向 vLLM <code>v0.31.0+</code></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://crfm.stanford.edu/2023/07/17/flash2.html">FlashAttention-2 作者解读</a></td>
+<td>Tri Dao / Stanford CRFM，2023-07-17</td>
+<td>进入 GPU 内核与数据流</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://flashinfer.ai/2024/02/02/introduce-flashinfer.html">FlashInfer：服务中的注意力</a></td>
+<td>FlashInfer 团队，2024-02-02</td>
+<td>理解不同查询长度、KV 布局和算术强度</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://jax-ml.github.io/scaling-book/inference/">Transformer 推理详解</a></td>
+<td>How To Scale Your Model，2025-02-04</td>
+<td>更完整的推理计算、内存与并行分析</td>
+</tr>
+</tbody></table>
+<p>其中 Inside vLLM 的<a target="_blank" rel="noopener" href="https://www.aleksagordic.com/blog/vllm">作者原发版本</a>日期为 2025 年 8 月 29 日，表中链接是 vLLM 官方收录版本。学习源码时最好固定提交；真正部署时再查询当前文档，不直接照搬旧文参数。</p>
+<h3 id="12-5-当前项目文档入口"><a href="#12-5-当前项目文档入口" class="headerlink" title="12.5 当前项目文档入口"></a>12.5 当前项目文档入口</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://docs.vllm.ai/en/latest/design/arch_overview/">vLLM 架构</a>与<a target="_blank" rel="noopener" href="https://docs.vllm.ai/en/latest/usage/metrics/">生产指标</a>。</li>
+<li><a target="_blank" rel="noopener" href="https://docs.sglang.io/">SGLang 文档</a>。</li>
+<li><a target="_blank" rel="noopener" href="https://nvidia.github.io/TensorRT-LLM/architecture/overview.html">TensorRT-LLM 架构</a>。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ggml-org/llama.cpp">llama.cpp 仓库</a>。</li>
+<li><a target="_blank" rel="noopener" href="https://llm.mlc.ai/docs/">MLC LLM 文档</a>，用于了解编译与跨平台部署路线。</li>
+<li><a target="_blank" rel="noopener" href="https://docs.nvidia.com/dynamo/latest/knowledge-base/overview">NVIDIA Dynamo 总体架构</a>。</li>
+<li><a target="_blank" rel="noopener" href="https://docs.lmcache.ai/">LMCache 文档</a>，用于连接 KV 存储、复用与引擎集成。</li>
+</ul>
+<h2 id="留给下次回看的几句话"><a href="#留给下次回看的几句话" class="headerlink" title="留给下次回看的几句话"></a>留给下次回看的几句话</h2><p><strong>Orca 看调度粒度，PagedAttention 看空间管理，Sarathi 看 prefill/decode 干扰，SGLang 看前缀复用，FlashAttention 看数据流，DistServe 看阶段分离，Mooncake 看跨节点状态，Cache-Craft 看文档块缓存管理。</strong></p>
+<p>读懂推理框架，最终是能沿着请求、计算与状态三条线解释系统：本轮为什么选择这些工作，KV 为什么放在这里，数据为什么需要搬运，以及这项优化怎样改变质量、等待和资源成本。把每个技术放回它解决的瓶颈，再通过受控实验判断收益，论文和源码就更容易连成一张可用的地图。</p>
+
+        </article>
+
+        
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2026/10/29/2026-10-29-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-RSI%E6%96%B9%E5%90%91%E5%AF%BC%E8%AF%BB%E4%B8%8E%E8%AE%BA%E6%96%87%E5%9C%B0%E5%9B%BE/">
+                            RSI 方向导读：从自我反思、技能演化到递归自我改进
+                        </a></li>
+                    
+                            
+                                <li>下一篇: <a href="/2026/10/28/2026-10-28-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-HydraLoRA/">
+                                        HydraLoRA 论文阅读：为什么多个 LoRA 可以共享 A，却保留不同的 B？
+                                    </a></li>
+                                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+                <a class="-none-link" href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/" rel="tag">人工智能基础设施</a><a class="-none-link" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8E%A8%E7%90%86/" rel="tag">大模型推理</a><a class="-none-link" href="/tags/%E6%8E%A8%E7%90%86%E6%A1%86%E6%9E%B6/" rel="tag">推理框架</a><a class="-none-link" href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" rel="tag">论文阅读</a><a class="-none-link" href="/tags/%E9%94%AE%E5%80%BC%E7%BC%93%E5%AD%98/" rel="tag">键值缓存</a>
+            </section>
+            
+                
+                    
+                        <section class="post-comments">
+                            <div id="giscus-container"></div>
+                        </section>
+                        <script>
+                            (function() {
+                                function getGiscusTheme() {
+                                    return document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+                                }
+
+                                const giscus = document.createElement('script');
+                                giscus.src = 'https://giscus.app/client.js';
+                                giscus.setAttribute('data-repo', 'tkzzzzzz6/my_hexo_blog');
+                                giscus.setAttribute('data-repo-id', 'R_kgDOP3Y_BA');
+                                giscus.setAttribute('data-category', 'Announcements');
+                                giscus.setAttribute('data-category-id', 'DIC_kwDOP3Y_BM4C8sQ1');
+                                giscus.setAttribute('data-mapping', 'pathname');
+                                giscus.setAttribute('data-reactions-enabled', '1');
+                                giscus.setAttribute('data-emit-metadata', '0');
+                                giscus.setAttribute('data-input-position', 'top');
+                                giscus.setAttribute('data-lang', 'zh-CN');
+                                giscus.setAttribute('data-loading', 'lazy');
+                                giscus.setAttribute('data-theme', getGiscusTheme());
+                                giscus.setAttribute('crossorigin', 'anonymous');
+                                giscus.async = true;
+                                document.getElementById('giscus-container').appendChild(giscus);
+
+                                new MutationObserver(function() {
+                                    var frame = document.querySelector('iframe.giscus-frame');
+                                    if (frame) {
+                                        frame.contentWindow.postMessage({
+                                            giscus: { setConfig: { theme: getGiscusTheme() } }
+                                        }, 'https://giscus.app');
+                                    }
+                                }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+                            })();
+                        </script>
+                        
+                            
+                                <section class="post-author">
+                                    
+                                        <figure class="author-avatar">
+                                            <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/avator.jpeg" alt="ttkqwe" />
+                                        </figure>
+                                        
+                                            <div class="author-info">
+                                                <h4>
+                                                    ttkqwe
+                                                </h4>
+                                                <p>BUG 制造机，菜，但爱折腾(¦3[▓▓] zzZ。<br> 本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
+                                            </div>
+                                </section>
+                                
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        
+        
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2026/10/29/2026-10-29-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-RSI%E6%96%B9%E5%90%91%E5%AF%BC%E8%AF%BB%E4%B8%8E%E8%AE%BA%E6%96%87%E5%9C%B0%E5%9B%BE/">RSI 方向导读：从自我反思、技能演化到递归自我改进</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/10/29/2026-10-30-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8E%A8%E7%90%86%E6%A1%86%E6%9E%B6%E5%AF%BC%E8%AF%BB%E4%B8%8E%E8%AE%BA%E6%96%87%E5%9C%B0%E5%9B%BE/">大模型推理框架导读：从一次请求到 vLLM、SGLang 与分布式服务</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/10/28/2026-10-28-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-HydraLoRA/">HydraLoRA 论文阅读：为什么多个 LoRA 可以共享 A，却保留不同的 B？</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/10/28/2026-10-28-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E5%88%86%E7%BB%84%E8%83%8C%E5%8C%85/">牛客每日一题-【模板】分组背包</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/10/21/2026-10-21-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92/">牛客每日一题-杨辉三角</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/10/20/2026-10-20-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E7%9F%A9%E9%98%B5%E6%B8%B8%E6%88%8F/">牛客每日一题-矩阵游戏</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/10/">十月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/09/">九月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/08/">八月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/07/">七月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/06/">六月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/05/">五月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">四月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">一月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">十二月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">十一月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">十月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/08/">八月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/AcWing/" style="font-size: 12.5px;">AcWing</a> <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/CLI-%E5%B7%A5%E5%85%B7/" style="font-size: 10.83px;">CLI 工具</a> <a href="/tags/CPP/" style="font-size: 10.83px;">CPP</a> <a href="/tags/CSP/" style="font-size: 12.5px;">CSP</a> <a href="/tags/Claude-Code/" style="font-size: 10.83px;">Claude Code</a> <a href="/tags/CodeStats/" style="font-size: 10px;">CodeStats</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/FastDeploy/" style="font-size: 10px;">FastDeploy</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hugging-Face/" style="font-size: 10px;">Hugging Face</a> <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/LeetCode/" style="font-size: 19.17px;">LeetCode</a> <a href="/tags/LeetCode-225/" style="font-size: 10px;">LeetCode-225</a> <a href="/tags/Linux/" style="font-size: 10.83px;">Linux</a> <a href="/tags/Linux-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%91%BD%E4%BB%A4%E8%A1%8C-%E5%AE%9E%E9%AA%8C/" style="font-size: 10px;">Linux, 操作系统, 命令行, 实验</a> <a href="/tags/LoRA/" style="font-size: 10px;">LoRA</a> <a href="/tags/MLLM/" style="font-size: 10px;">MLLM</a> <a href="/tags/Neovim/" style="font-size: 10px;">Neovim</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/PV%E6%93%8D%E4%BD%9C/" style="font-size: 10px;">PV操作</a> <a href="/tags/PaddleOCR/" style="font-size: 10px;">PaddleOCR</a> <a href="/tags/TTS-%E6%8E%A8%E7%90%86%E4%BE%A7%E7%BC%A9%E6%94%BE/" style="font-size: 10px;">TTS(推理侧缩放)</a> <a href="/tags/TopK/" style="font-size: 10px;">TopK</a> <a href="/tags/Trie-%E5%AD%97%E5%85%B8%E6%A0%91/" style="font-size: 10px;">Trie 字典树</a> <a href="/tags/VS-Code/" style="font-size: 11.67px;">VS Code</a> <a href="/tags/Visual-Studio/" style="font-size: 10px;">Visual Studio</a> <a href="/tags/WSL/" style="font-size: 10px;">WSL</a> <a href="/tags/Windows/" style="font-size: 11.67px;">Windows</a> <a href="/tags/dotfiles/" style="font-size: 10px;">dotfiles</a> <a href="/tags/gh/" style="font-size: 10px;">gh</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nvm/" style="font-size: 10px;">nvm</a> <a href="/tags/vibe-coding/" style="font-size: 10px;">vibe coding</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86/" style="font-size: 10px;">中序遍历</a> <a href="/tags/%E4%B9%B1%E7%A0%81/" style="font-size: 10px;">乱码</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/" style="font-size: 10px;">二分搜索</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10.83px;">二分查找</a> <a href="/tags/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/" style="font-size: 10px;">二分答案</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86/" style="font-size: 10px;">二叉树的遍历</a> <a href="/tags/%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">二维前缀和</a> <a href="/tags/%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/" style="font-size: 10px;">二维数组</a> <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/" style="font-size: 10px;">人工智能基础设施</a> <a href="/tags/%E4%BB%A3%E7%90%86/" style="font-size: 10.83px;">代理</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/" style="font-size: 10px;">代码随想录</a> <a href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/" style="font-size: 10px;">优先队列</a> <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" style="font-size: 12.5px;">位运算</a> <a href="/tags/%E4%BD%8E%E7%A7%A9%E9%80%82%E5%BA%94/" style="font-size: 10px;">低秩适应</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" style="font-size: 10px;">信息安全</a> <a href="/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" style="font-size: 10px;">具身智能</a> <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 10px;">内网穿透</a> <a href="/tags/%E5%88%86%E7%BB%84%E8%83%8C%E5%8C%85/" style="font-size: 10px;">分组背包</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">前缀和</a> <a href="/tags/%E5%89%8D%E7%BC%80%E6%A0%91/" style="font-size: 10px;">前缀树</a> <a href="/tags/%E5%89%91%E6%8C%87-Offer/" style="font-size: 10px;">剑指 Offer</a> <a href="/tags/%E5%89%91%E6%8C%87-offer/" style="font-size: 10.83px;">剑指 offer</a> <a href="/tags/%E5%89%AA%E7%BB%B3%E5%AD%90/" style="font-size: 10px;">剪绳子</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 13.33px;">动态规划</a> <a href="/tags/%E5%8F%82%E6%95%B0%E9%AB%98%E6%95%88%E5%BE%AE%E8%B0%83/" style="font-size: 10px;">参数高效微调</a> <a href="/tags/%E5%8F%82%E6%95%B0%E9%AB%98%E6%95%88%E5%BE%AE%E8%B0%83-PEFT/" style="font-size: 10px;">参数高效微调(PEFT)</a> <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" style="font-size: 14.17px;">双指针</a> <a href="/tags/%E5%8F%AF%E6%8F%90%E7%A4%BA%E8%A7%86%E8%A7%89%E5%88%86%E5%89%B2/" style="font-size: 10px;">可提示视觉分割</a> <a href="/tags/%E5%90%8E%E7%BB%A7%E8%8A%82%E7%82%B9/" style="font-size: 10px;">后继节点</a> <a href="/tags/%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">后缀表达式</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" style="font-size: 10px;">命令总结</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 10px;">命令行</a> <a href="/tags/%E5%93%88%E5%B8%8C/" style="font-size: 11.67px;">哈希</a> <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" style="font-size: 13.33px;">哈希表</a> <a href="/tags/%E5%9B%BE%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/" style="font-size: 10px;">图最短路径</a> <a href="/tags/%E5%A0%86/" style="font-size: 10px;">堆</a> <a href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/" style="font-size: 10px;">多模态</a> <a href="/tags/%E5%A4%9A%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E9%97%AE%E9%A2%98/" style="font-size: 10px;">多源最短路问题</a> <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8E%A8%E7%90%86/" style="font-size: 10px;">大模型推理</a> <a href="/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" style="font-size: 10px;">大语言模型</a> <a href="/tags/%E5%AD%97%E4%BD%93/" style="font-size: 10px;">字体</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 11.67px;">字符串</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/" style="font-size: 10.83px;">字符串匹配</a> <a href="/tags/%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/" style="font-size: 10px;">容斥原理</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">工具配置</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a> <a href="/tags/%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/" style="font-size: 11.67px;">开发效率</a> <a href="/tags/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/" style="font-size: 10.83px;">快慢指针</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size: 10.83px;">快捷键</a> <a href="/tags/%E5%BF%AB%E9%80%9F%E5%B9%82/" style="font-size: 10.83px;">快速幂</a> <a href="/tags/%E6%8B%93%E6%89%91/" style="font-size: 10px;">拓扑</a> <a href="/tags/%E6%8C%87%E9%92%88/" style="font-size: 10px;">指针</a> <a href="/tags/%E6%8D%A2%E6%A0%B9-DP/" style="font-size: 10px;">换根 DP</a> <a href="/tags/%E6%8E%A8%E7%90%86%E6%A1%86%E6%9E%B6/" style="font-size: 10px;">推理框架</a> <a href="/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">插件</a> <a href="/tags/%E6%8F%92%E4%BB%B6%E6%89%93%E5%8C%85/" style="font-size: 10px;">插件打包</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">操作系统</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%A8%A1%E6%8B%9F/" style="font-size: 10px;">数据结构模拟</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/" style="font-size: 10px;">数据集</a> <a href="/tags/%E6%95%B0%E7%BB%84/" style="font-size: 10.83px;">数组</a> <a href="/tags/%E6%95%B0%E7%BB%84%E5%93%88%E5%B8%8C/" style="font-size: 10.83px;">数组哈希</a> <a href="/tags/%E6%95%B0%E8%AE%BA/" style="font-size: 10px;">数论</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA-UAVs/" style="font-size: 10px;">无人机(UAVs)</a> <a href="/tags/%E6%97%A5%E5%B8%B8/" style="font-size: 10px;">日常</a> <a href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93/" style="font-size: 10px;">智能体</a> <a href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93%E8%AE%B0%E5%BF%86/" style="font-size: 10px;">智能体记忆</a> <a href="/tags/%E6%9A%B4%E5%8A%9B/" style="font-size: 10px;">暴力</a> <a href="/tags/%E6%9A%B4%E5%8A%9B%E6%9E%9A%E4%B8%BE/" style="font-size: 10px;">暴力枚举</a> <a href="/tags/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/" style="font-size: 10px;">有效的括号</a> <a href="/tags/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA/" style="font-size: 10px;">有限状态机</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">服务器配置</a> <a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" style="font-size: 12.5px;">期末复习</a> <a href="/tags/%E6%9E%9A%E4%B8%BE/" style="font-size: 11.67px;">枚举</a> <a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">架构设计</a> <a href="/tags/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/" style="font-size: 10px;">查找算法</a> <a href="/tags/%E6%A0%88/" style="font-size: 12.5px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 10px;">树</a> <a href="/tags/%E6%A0%91%E5%BD%A2-DP/" style="font-size: 10px;">树形 DP</a> <a href="/tags/%E6%A8%A1%E5%9E%8B%E4%B8%8B%E8%BD%BD/" style="font-size: 10px;">模型下载</a> <a href="/tags/%E6%A8%A1%E6%8B%9F/" style="font-size: 13.33px;">模拟</a> <a href="/tags/%E6%A8%A1%E8%BF%90%E7%AE%97/" style="font-size: 10px;">模运算</a> <a href="/tags/%E6%AC%A7%E6%8B%89%E5%85%AC%E5%BC%8F/" style="font-size: 10px;">欧拉公式</a> <a href="/tags/deep-learning/" style="font-size: 15px;">深度学习</a> <a href="/tags/%E6%B7%B7%E5%90%88%E4%B8%93%E5%AE%B6/" style="font-size: 10px;">混合专家</a> <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" style="font-size: 10.83px;">滑动窗口</a> <a href="/tags/%E6%BB%9A%E5%8A%A8%E6%95%B0%E7%BB%84/" style="font-size: 10px;">滚动数组</a> <a href="/tags/%E7%89%9B%E5%AE%A2/" style="font-size: 17.5px;">牛客</a> <a href="/tags/%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9/" style="font-size: 10px;">状态压缩</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/" style="font-size: 10px;">环境变量</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 12.5px;">环境配置</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%90%8C%E6%AD%A5/" style="font-size: 10px;">环境配置同步</a> <a href="/tags/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/" style="font-size: 10px;">环形链表</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E9%BB%91%E5%AE%A2%E6%9D%BE%E6%89%93%E5%8D%A1/" style="font-size: 10px;">百度黑客松打卡</a> <a href="/tags/development/" style="font-size: 15px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/algorithm/" style="font-size: 20px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 14.17px;">算法练习</a> <a href="/tags/%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">线索二叉树</a> <a href="/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/" style="font-size: 10.83px;">组合数学</a> <a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 10px;">终端</a> <a href="/tags/%E7%BB%88%E7%AB%AF%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">终端工具</a> <a href="/tags/%E7%BB%BC%E8%BF%B0%E8%AE%BA%E6%96%87/" style="font-size: 10px;">综述论文</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 10px;">网站</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10.83px;">网络</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">网络配置</a> <a href="/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" style="font-size: 10px;">背包问题</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E7%A0%94%E7%A9%B6/" style="font-size: 10px;">自动化研究</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%A4%B4%E8%8A%82%E7%82%B9/" style="font-size: 11.67px;">虚拟头节点</a> <a href="/tags/%E8%A7%86%E9%A2%91%E5%88%86%E5%89%B2/" style="font-size: 10px;">视频分割</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" style="font-size: 10px;">计算机图形学</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6-%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">计算机图形学 课程学习</a> <a href="/tags/%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">记录</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 16.67px;">论文阅读</a> <a href="/tags/course/" style="font-size: 18.33px;">课程学习</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AE%9E%E9%AA%8C/" style="font-size: 10px;">课程实验</a> <a href="/tags/%E8%B4%A8%E5%9B%A0%E6%95%B0%E5%88%86%E8%A7%A3/" style="font-size: 10px;">质因数分解</a> <a href="/tags/%E8%B4%A8%E6%95%B0%E7%AD%9B/" style="font-size: 10px;">质数筛</a> <a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 12.5px;">贪心</a> <a href="/tags/%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">逆波兰表达式</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 11.67px;">递归</a> <a href="/tags/%E9%80%92%E5%BD%92%E8%87%AA%E6%88%91%E6%94%B9%E8%BF%9B/" style="font-size: 10px;">递归自我改进</a> <a href="/tags/%E9%81%8D%E5%8E%86/" style="font-size: 10px;">遍历</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 14.17px;">链表</a> <a href="/tags/%E9%94%AE%E5%80%BC%E7%BC%93%E5%AD%98/" style="font-size: 10px;">键值缓存</a> <a href="/tags/troubleshooting/" style="font-size: 15.83px;">问题解决</a> <a href="/tags/%E9%98%9F%E5%88%97/" style="font-size: 10px;">队列</a>
+                </div>
+            </div>
+        </section>
+        
+        <section class="sub-footer">
+            <p>
+                © 2026 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.
+                
+                    &nbsp;|&nbsp;
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+                        蜀ICP备2025165253号
+                    </a>
+                
+                
+            </p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true,"search_engine":"bing"});</script>
+
+<style>
+.police-beian{display:inline-flex;align-items:center;gap:4px}
+.police-icon{display:inline-block;width:16px;height:16px;background:#e91e63;border-radius:2px;opacity:.85}
+/* 说明：如需官方警徽图标，可将 .police-icon 的 background 设置为图片：
+   background:url('https://www.beian.gov.cn/img/ghs.png') no-repeat center/contain; */
+</style>
+
+  </body>
+</html>
