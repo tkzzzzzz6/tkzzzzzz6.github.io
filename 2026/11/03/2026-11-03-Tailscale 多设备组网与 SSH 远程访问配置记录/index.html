@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>Tailscale 多设备组网与 SSH 远程访问配置记录 - TK的小站</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+    
+<link rel="stylesheet" href="/static/kico.css?v=1793166650177">
+<link rel="stylesheet" href="/static/hingle.css?v=1793166650177">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="TK的小站">
+    <meta property="og:title" content="Tailscale 多设备组网与 SSH 远程访问配置记录"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 8.1.1"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="TK的小站" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/hexo-obsidian-callout.css">
+</head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>TK的小站</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a href>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/Papers-pile-or-pie/">Papers pile or pie?</a><a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a><a class="category-link" href="/categories/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/">工具配置</a><a class="category-link" href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a><a class="category-link" href="/categories/%E6%88%91%E8%A6%81%E7%82%BC%E4%B8%B9-%E4%B8%B9%E6%B2%A1%E6%9C%89%E9%97%AE%E9%A2%98/">我要炼丹,丹没有问题</a><a class="category-link" href="/categories/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习</a><a class="category-link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a><a class="category-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a><a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E8%92%9F%E8%92%BB%E7%9A%84%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/">算法蒟蒻的成长记录</a><a class="category-link" href="/categories/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%AE%9E%E9%AA%8C/">课程学习与实验</a><a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+            <a href="/tools">工具推荐</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>
+                Tailscale 多设备组网与 SSH 远程访问配置记录
+            </h2>
+            <div class="post-meta">
+                <time class="date">
+                    2026.11.03
+                </time>
+                
+                    <span class="category"><a class="category-link" href="/categories/%E8%BF%9B%E5%87%BB%E7%9A%84%E7%A0%81%E5%86%9C/">进击的码农</a></span>
+                    
+                <span class="word-count">字数：7k</span>
+                <span class="reading-time">阅读时间：26 分钟</span>
+                <span class="post-days">已发布 1 天</span>
+            </div>
+        </section>
+        <article class="post-content">
+            
+                    <h1 id="Tailscale-多设备组网与-SSH-远程访问配置记录"><a href="#Tailscale-多设备组网与-SSH-远程访问配置记录" class="headerlink" title="Tailscale 多设备组网与 SSH 远程访问配置记录"></a>Tailscale 多设备组网与 SSH 远程访问配置记录</h1><p>平时在笔记本、Windows 台式机和 Linux 服务器之间切换，最麻烦的往往不是某一条连接命令，而是这些设备根本不在同一个网络里。今天能在局域网里连上，明天换个地方，就得重新找入口、核对映射端口。</p>
+<p>之前整理过 <a href="/2026/09/28/2026-09-28-Frp%20%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/" title="Frp-内网穿透配置记录">frp 内网穿透配置记录</a>。这次换一个思路：先用 Tailscale 把设备接入同一个虚拟网络，再通过 SSH 访问终端；需要查看 Windows 桌面时，再使用 RDP 或会话影子功能 <code>/shadow</code>。</p>
+<p>这篇把安装、登录、SSH 公钥认证和常见排障整理到一起，方便自己回头查，也给第一次配置的同学一个可以按顺序操作的参考。</p>
+<blockquote>
+<p><strong>参数提示</strong>：本文的设备名、用户名、IP 和公钥内容均为示例，实际使用时需要替换。Linux 登录卡住的案例只记录已观察到的现象与后续诊断方法，不把尚未验证的处理方案写成成功经验。</p>
+</blockquote>
+<span id="more"></span>
+
+<hr>
+<h2 id="📌-快速速查表"><a href="#📌-快速速查表" class="headerlink" title="📌 快速速查表"></a>📌 快速速查表</h2><table>
+<thead>
+<tr>
+<th align="left">操作场景</th>
+<th align="left">核心命令</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Linux 首次登录</strong></td>
+<td align="left"><code>sudo tailscale up</code></td>
+<td align="left">返回浏览器认证链接</td>
+</tr>
+<tr>
+<td align="left"><strong>显示登录二维码</strong></td>
+<td align="left"><code>sudo tailscale up --qr</code></td>
+<td align="left">在支持该参数的版本中使用</td>
+</tr>
+<tr>
+<td align="left"><strong>查看设备状态</strong></td>
+<td align="left"><code>tailscale status</code></td>
+<td align="left">检查登录状态和可见设备</td>
+</tr>
+<tr>
+<td align="left"><strong>查看本机地址</strong></td>
+<td align="left"><code>tailscale ip -4</code></td>
+<td align="left">获取 Tailscale IPv4 地址</td>
+</tr>
+<tr>
+<td align="left"><strong>检查设备通路</strong></td>
+<td align="left"><code>tailscale ping 100.90.0.20</code></td>
+<td align="left">测试到目标 Tailscale 节点的连接</td>
+</tr>
+<tr>
+<td align="left"><strong>SSH 登录 Linux</strong></td>
+<td align="left"><code>ssh dev@100.90.0.30</code></td>
+<td align="left">使用目标机器的系统账号</td>
+</tr>
+<tr>
+<td align="left"><strong>生成 SSH 密钥</strong></td>
+<td align="left"><code>ssh-keygen -t ed25519 -C "laptop-to-linux"</code></td>
+<td align="left">在发起连接的电脑上执行</td>
+</tr>
+<tr>
+<td align="left"><strong>查看后台日志</strong></td>
+<td align="left"><code>sudo journalctl -u tailscaled -n 60 --no-pager</code></td>
+<td align="left">适用于使用 systemd 的 Linux</td>
+</tr>
+<tr>
+<td align="left"><strong>普通远程桌面</strong></td>
+<td align="left"><code>mstsc /v:100.90.0.20 /prompt</code></td>
+<td align="left">在 Windows 客户端执行</td>
+</tr>
+<tr>
+<td align="left"><strong>查看已有桌面会话</strong></td>
+<td align="left"><code>mstsc /v:100.90.0.20 /shadow:1 /control /prompt</code></td>
+<td align="left">会话 ID、权限和目标策略需匹配</td>
+</tr>
+</tbody></table>
+<p>速查表中的命令属于不同阶段，下面按“先组网、再开服务、最后配认证”的顺序展开。</p>
+<hr>
+<h2 id="一、先分清-Tailscale、SSH-和远程桌面的分工"><a href="#一、先分清-Tailscale、SSH-和远程桌面的分工" class="headerlink" title="一、先分清 Tailscale、SSH 和远程桌面的分工"></a>一、先分清 Tailscale、SSH 和远程桌面的分工</h2><h3 id="1-Tailscale-解决设备之间的网络连接"><a href="#1-Tailscale-解决设备之间的网络连接" class="headerlink" title="1. Tailscale 解决设备之间的网络连接"></a>1. Tailscale 解决设备之间的网络连接</h3><p>Tailscale 基于 WireGuard 建立加密连接，为设备分配 Tailscale IP。设备加入同一个 tailnet 后，在访问规则允许的前提下，可以通过这些地址相互访问。</p>
+<p>它通常不需要自己准备公网服务器，也不需要逐项配置路由器端口转发。设备会尝试建立直连；直连条件不满足时，可以通过中继连接，速度和延迟取决于实际路径。不能把“组网成功”直接理解成“无论在哪里都和局域网一样快”。</p>
+<h3 id="2-SSH-和-RDP-提供具体的远程访问能力"><a href="#2-SSH-和-RDP-提供具体的远程访问能力" class="headerlink" title="2. SSH 和 RDP 提供具体的远程访问能力"></a>2. SSH 和 RDP 提供具体的远程访问能力</h3><table>
+<thead>
+<tr>
+<th align="left">工具或功能</th>
+<th align="left">负责什么</th>
+<th align="left">常见用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Tailscale</td>
+<td align="left">设备组网与网络访问控制</td>
+<td align="left">让不同网络中的电脑互相可达</td>
+</tr>
+<tr>
+<td align="left">OpenSSH</td>
+<td align="left">终端登录、远程命令、文件传输</td>
+<td align="left">开发、服务器管理、VS Code Remote - SSH</td>
+</tr>
+<tr>
+<td align="left">普通 RDP</td>
+<td align="left">登录远程 Windows 桌面</td>
+<td align="left">远程使用桌面软件</td>
+</tr>
+<tr>
+<td align="left">RDP Shadow</td>
+<td align="left">查看或控制已有的用户会话</td>
+<td align="left">协助排障、演示正在操作的桌面</td>
+</tr>
+</tbody></table>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/tailscale-remote-access-20261103/01-tailscale-network-services-17233423a918d1b8.png" alt="Tailscale 连接 Windows 与 Linux，网络、服务和账号权限需要分别确认"></p>
+<p><em>图 1：先确认网络通路，再检查服务与账号权限。图中 IP 为示例，连线不表示所有流量都必须经过中心服务器。自制教学示意图，AI 辅助绘制。</em></p>
+<p>比如从 Windows 笔记本登录 Linux 服务器，整个过程可以写成：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Windows 笔记本
+  → Tailscale 网络通路
+  → Linux 的 OpenSSH 服务
+  → Linux 账号认证
+  → 进入远程终端<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>装好 Tailscale，不会自动替目标电脑安装 OpenSSH，也不会自动赋予远程桌面权限。</strong> 网络、服务、账号是三个需要分别确认的环节。<a target="_blank" rel="noopener" href="https://tailscale.com/docs/how-to/connect-to-devices">官方设备连接说明</a></p>
+<h3 id="3-普通-OpenSSH-与-Tailscale-SSH-要区分"><a href="#3-普通-OpenSSH-与-Tailscale-SSH-要区分" class="headerlink" title="3. 普通 OpenSSH 与 Tailscale SSH 要区分"></a>3. 普通 OpenSSH 与 Tailscale SSH 要区分</h3><p>本文主要使用的是：<strong>Tailscale 负责网络，系统的 OpenSSH 负责 SSH 认证。</strong> 因此仍然需要配置 <code>sshd</code>、系统账号和公钥。</p>
+<p>官方另外提供了一个名为 <strong>Tailscale SSH</strong> 的功能，由 Tailscale 管理 SSH 的身份认证和授权，配置方式与手动维护 <code>authorized_keys</code> 不同。不要把它与“通过 Tailscale IP 连接普通 SSH 服务”混为一谈。</p>
+<p>如果只是想保留现有的 OpenSSH 配置和开发工具习惯，可以先按本文的普通 OpenSSH 路线配置。<a target="_blank" rel="noopener" href="https://tailscale.com/docs/features/tailscale-ssh">Tailscale SSH 官方说明</a></p>
+<hr>
+<h2 id="二、安装-Tailscale，并把设备接入同一个网络"><a href="#二、安装-Tailscale，并把设备接入同一个网络" class="headerlink" title="二、安装 Tailscale，并把设备接入同一个网络"></a>二、安装 Tailscale，并把设备接入同一个网络</h2><h3 id="1-先约定设备信息"><a href="#1-先约定设备信息" class="headerlink" title="1. 先约定设备信息"></a>1. 先约定设备信息</h3><p>下面用三台设备举例：</p>
+<table>
+<thead>
+<tr>
+<th align="left">设备</th>
+<th align="left">系统</th>
+<th align="left">Tailscale IP 示例</th>
+<th align="left">系统用户名示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">laptop</td>
+<td align="left">Windows</td>
+<td align="left"><code>100.90.0.10</code></td>
+<td align="left"><code>alice</code></td>
+</tr>
+<tr>
+<td align="left">desktop</td>
+<td align="left">Windows</td>
+<td align="left"><code>100.90.0.20</code></td>
+<td align="left"><code>alice</code></td>
+</tr>
+<tr>
+<td align="left">linux-host</td>
+<td align="left">Ubuntu</td>
+<td align="left"><code>100.90.0.30</code></td>
+<td align="left"><code>dev</code></td>
+</tr>
+</tbody></table>
+<p>这些地址要以实际分配结果为准。Tailscale 的 IPv4 地址使用 <code>100.64.0.0/10</code> 地址空间，并不是所有 <code>100.*</code> 地址都属于 Tailscale。</p>
+<p>另外，<strong>Tailscale 登录账号与目标电脑的系统用户名不是同一个概念</strong>。浏览器中登录的身份负责加入 tailnet；<code>ssh dev@...</code> 中的 <code>dev</code> 是 Linux 上实际存在的用户。</p>
+<h3 id="2-Windows-安装与登录"><a href="#2-Windows-安装与登录" class="headerlink" title="2. Windows 安装与登录"></a>2. Windows 安装与登录</h3><ol>
+<li>从 <a target="_blank" rel="noopener" href="https://tailscale.com/download/windows">Tailscale Windows 下载页</a>下载安装程序。</li>
+<li>安装后打开托盘里的 Tailscale 图标，选择登录。</li>
+<li>在浏览器中完成认证，让自己的设备加入同一个 tailnet。</li>
+<li>在 <a target="_blank" rel="noopener" href="https://login.tailscale.com/admin/machines">设备管理页面</a>检查设备是否在线；如果网络开启了设备审批，还需要完成审批。</li>
+</ol>
+<p>为了方便初次配置，自己的几台设备可以使用同一个 Tailscale 账号登录。团队协作时则应使用成员邀请、设备共享和访问规则，不需要共享个人账号密码。</p>
+<p>Windows 上可以运行：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">tailscale status
+tailscale ip <span class="token operator">-</span>4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>如果希望 Windows 注销或重启后仍能连接 Tailscale，在托盘菜单中启用 <strong>Preferences → Run unattended</strong>。这只保持组网服务在线，不会自动登录 Windows，也不会自动产生可供 Shadow 查看的桌面。<a target="_blank" rel="noopener" href="https://tailscale.com/docs/install/windows">Windows 安装说明</a>、<a target="_blank" rel="noopener" href="https://tailscale.com/docs/how-to/run-unattended">无人值守运行说明</a></p>
+<h3 id="3-Linux-终端安装与登录"><a href="#3-Linux-终端安装与登录" class="headerlink" title="3. Linux 终端安装与登录"></a>3. Linux 终端安装与登录</h3><p>Ubuntu、Debian 等主流发行版可以使用官方安装脚本：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-fsSL</span> https://tailscale.com/install.sh <span class="token operator">|</span> <span class="token function">sh</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果更习惯逐项添加软件源，也可以使用 <a target="_blank" rel="noopener" href="https://pkgs.tailscale.com/stable/">官方软件包页面</a>中对应发行版的安装命令。</p>
+<p>对于使用 systemd 的普通 Linux 主机，安装后检查服务并发起登录：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> <span class="token parameter variable">--now</span> tailscaled
+<span class="token function">sudo</span> tailscale up<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>正常情况下，终端会返回一个认证链接。把链接复制到自己电脑或手机的浏览器中，登录正确的 Tailscale 账号并确认添加设备即可。<strong>浏览器不需要运行在这台 Linux 上。</strong></p>
+<p>支持二维码参数的版本也可以运行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> tailscale up <span class="token parameter variable">--qr</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>登录后检查：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">tailscale status
+tailscale <span class="token function">ip</span> <span class="token parameter variable">-4</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>Linux 上的 <code>tailscaled</code> 作为后台服务运行。服务正常且登录状态有效时，关闭 SSH 终端不会让设备退出 Tailscale，不需要添加 Windows 专用的 <code>--unattended</code> 参数。<a target="_blank" rel="noopener" href="https://tailscale.com/docs/install/linux">Linux 安装说明</a>、<a target="_blank" rel="noopener" href="https://tailscale.com/docs/reference/tailscale-cli/up">命令参数说明</a></p>
+<h3 id="4-验证两台设备是否真正可达"><a href="#4-验证两台设备是否真正可达" class="headerlink" title="4. 验证两台设备是否真正可达"></a>4. 验证两台设备是否真正可达</h3><p>在 laptop 上测试 linux-host：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">tailscale <span class="token function">ping</span> <span class="token number">100.90</span>.0.30<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>输出可以帮助判断当前走的是直连还是中继。然后再测试具体服务，例如 Windows 上检查 Linux 的 SSH 端口：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Test-NetConnection</span> 100<span class="token punctuation">.</span>90<span class="token punctuation">.</span>0<span class="token punctuation">.</span>30 <span class="token operator">-</span>Port 22<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>两种检查的含义不同：</p>
+<ul>
+<li><code>tailscale status</code> 能看到设备，说明获得了相应的设备信息，不保证每个服务都能访问。</li>
+<li><code>tailscale ping</code> 成功，说明节点通路可用，不代表 SSH 账号认证成功。</li>
+<li>TCP 22 可连接，说明该端口存在可用通路，后面仍可能因账号或密钥而被拒绝。</li>
+</ul>
+<p>设备不可达时，需要同时看 Tailscale 访问规则和目标系统防火墙。已有自定义规则的 tailnet，不能仅因为设备属于同一个账号就假定所有流量都放行。</p>
+<hr>
+<h2 id="三、开启目标电脑上的-OpenSSH-服务"><a href="#三、开启目标电脑上的-OpenSSH-服务" class="headerlink" title="三、开启目标电脑上的 OpenSSH 服务"></a>三、开启目标电脑上的 OpenSSH 服务</h2><h3 id="1-目标是-Ubuntu-Debian"><a href="#1-目标是-Ubuntu-Debian" class="headerlink" title="1. 目标是 Ubuntu / Debian"></a>1. 目标是 Ubuntu / Debian</h3><p>在被连接的 Linux 上执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> update
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> openssh-server
+<span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> <span class="token parameter variable">--now</span> <span class="token function">ssh</span>
+<span class="token function">sudo</span> systemctl status <span class="token function">ssh</span> --no-pager<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Ubuntu / Debian 常见服务名是 <code>ssh</code>；其他发行版可能使用 <code>sshd</code>，不要把服务名当作跨发行版固定写法。</p>
+<p>如果只希望示例中的 laptop 访问 linux-host 的 SSH，应在 Tailscale 的访问规则中限定这个连接方向和 TCP 22 端口，并检查是否有其他更宽的规则已经允许访问。</p>
+<p>系统防火墙也需要结合实际配置检查。尤其是 Linux 上的 UFW：Tailscale 默认会管理自己的 netfilter 规则，它们可能先于 UFW 规则处理隧道流量，不能假定给 UFW 添加一条来源规则，就能限制所有 tailnet 内的访问。这里不需要为了教程额外启用防火墙，也不要在现有远程连接中盲目修改全局策略。<a target="_blank" rel="noopener" href="https://tailscale.com/docs/reference/netfilter-modes">Tailscale netfilter 模式说明</a></p>
+<p>然后在 laptop 上先测试一次普通登录：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> dev@100.90.0.30<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>首次连接时，核对目标主机的 SSH 指纹，再确认信任。已经通过其他可信方式登录服务器时，可以在服务器上查看对应主机公钥的指纹，例如 Ed25519 主机密钥：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ssh-keygen <span class="token parameter variable">-lf</span> /etc/ssh/ssh_host_ed25519_key.pub<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果协商使用的是其他类型的主机密钥，应核对对应类型的指纹。不要用关闭主机身份检查来掩盖指纹变化。<a target="_blank" rel="noopener" href="https://documentation.ubuntu.com/server/how-to/security/openssh-server/">Ubuntu OpenSSH 配置说明</a></p>
+<h3 id="2-目标是-Windows"><a href="#2-目标是-Windows" class="headerlink" title="2. 目标是 Windows"></a>2. 目标是 Windows</h3><p>在目标 Windows 的管理员 PowerShell 中检查 OpenSSH Server：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Get-WindowsCapability</span> <span class="token operator">-</span>Online <span class="token operator">-</span>Name OpenSSH<span class="token punctuation">.</span>Server*<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>只有尚未安装时，才执行：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Add-WindowsCapability</span> <span class="token operator">-</span>Online <span class="token operator">-</span>Name OpenSSH<span class="token punctuation">.</span>Server~~~~0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1<span class="token punctuation">.</span>0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>安装后启动并设置自动运行：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Start-Service</span> sshd
+<span class="token function">Set-Service</span> <span class="token operator">-</span>Name sshd <span class="token operator">-</span>StartupType Automatic
+<span class="token function">Get-Service</span> sshd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>同时检查安装程序创建的 <code>OpenSSH-Server-In-TCP</code> 防火墙规则及其地址范围是否符合自己的访问需求：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Get-NetFirewallRule</span> <span class="token operator">-</span>Name OpenSSH-Server-In-TCP<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>有 SSH 客户端，不代表已经安装并启动 SSH 服务端。只有被连接的 Windows 才需要这里的服务端配置；单纯拿 Windows 去登录 Linux，不需要为此开启 Windows 的 <code>sshd</code>。<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse">微软 OpenSSH 安装说明</a></p>
+<hr>
+<h2 id="四、配置-SSH-公钥认证，减少重复输入密码"><a href="#四、配置-SSH-公钥认证，减少重复输入密码" class="headerlink" title="四、配置 SSH 公钥认证，减少重复输入密码"></a>四、配置 SSH 公钥认证，减少重复输入密码</h2><h3 id="1-密钥生成在哪一端？"><a href="#1-密钥生成在哪一端？" class="headerlink" title="1. 密钥生成在哪一端？"></a>1. 密钥生成在哪一端？</h3><p>先确定连接方向：A 想登录 B，就由 A 保存私钥，把 A 的公钥部署到 B 的目标账号。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/tailscale-remote-access-20261103/02-ssh-public-key-authentication-e80e659be80c7436.png" alt="SSH 公钥部署与登录校验关系，私钥留在客户端，目标 Linux 账号保存客户端公钥"></p>
+<p><em>图 2：公钥部署与实际登录验证是两个步骤，私钥不在网络中发送。图中仅示例 Linux 授权路径，Windows 的路径差异见下文。自制教学示意图，AI 辅助绘制。</em></p>
+<p>如果还希望 B 反过来登录 A，再为反方向配置一套授权即可。单向访问不要求两边都生成密钥，更不需要把同一份私钥复制到所有设备上。</p>
+<h3 id="2-在发起连接的电脑上生成密钥"><a href="#2-在发起连接的电脑上生成密钥" class="headerlink" title="2. 在发起连接的电脑上生成密钥"></a>2. 在发起连接的电脑上生成密钥</h3><p>先检查是否已有可用密钥，避免覆盖：</p>
+<p>Linux / macOS：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ls</span> <span class="token parameter variable">-l</span> ~/.ssh/id_ed25519*<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>Windows PowerShell：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Get-ChildItem</span> <span class="token string">"<span class="token variable">$env</span>:USERPROFILE\.ssh\id_ed25519*"</span> <span class="token operator">-</span>ErrorAction SilentlyContinue<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>没有密钥时，在客户端生成：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ssh-keygen <span class="token parameter variable">-t</span> ed25519 <span class="token parameter variable">-C</span> <span class="token string">"laptop-to-linux"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>交互过程中可以选择保存位置，并给私钥设置口令。<strong>“不再输入服务器账号密码”不等于“私钥必须不设口令”。</strong> 设置口令后，可以通过 <code>ssh-agent</code> 管理解锁状态。</p>
+<p>对于已经运行 SSH agent 的 Linux / macOS 会话，可以加入密钥：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ssh-add ~/.ssh/id_ed25519<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果提示无法连接 agent，先检查当前桌面或终端是否已提供 agent；需要时可以在当前 Linux shell 中启动：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">eval</span> <span class="token string">"<span class="token variable"><span class="token variable">$(</span>ssh-agent <span class="token parameter variable">-s</span><span class="token variable">)</span></span>"</span>
+ssh-add ~/.ssh/id_ed25519<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>Windows 可以在管理员 PowerShell 中启动 agent 服务：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Set-Service</span> <span class="token operator">-</span>Name ssh-agent <span class="token operator">-</span>StartupType Automatic
+<span class="token function">Start-Service</span> ssh-agent<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>再回到实际发起连接的 Windows 用户下添加自己的密钥：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">ssh-add <span class="token string">"<span class="token variable">$env</span>:USERPROFILE\.ssh\id_ed25519"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>注意区分 <code>id_ed25519</code> 与 <code>id_ed25519.pub</code>：前者是私钥，后者是可以部署到目标电脑的公钥。<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement">微软 SSH 密钥管理说明</a></p>
+<h3 id="3-把公钥部署到-Linux-目标账号"><a href="#3-把公钥部署到-Linux-目标账号" class="headerlink" title="3. 把公钥部署到 Linux 目标账号"></a>3. 把公钥部署到 Linux 目标账号</h3><p>在安装了 <code>ssh-copy-id</code> 的 Linux / macOS 客户端上，可以执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ssh-copy-id <span class="token parameter variable">-i</span> ~/.ssh/id_ed25519.pub dev@100.90.0.30<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这一步通常需要输入一次目标账号密码。macOS 上如果没有 <code>ssh-copy-id</code>，可以另行安装，或者采用手动复制方式，不必假定每套系统都预装了它。</p>
+<p>Windows PowerShell 可以把公钥通过 SSH 写入 Linux：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Get-Content</span> <span class="token string">"<span class="token variable">$env</span>:USERPROFILE\.ssh\id_ed25519.pub"</span> <span class="token punctuation">|</span> ssh dev@100<span class="token punctuation">.</span>90<span class="token punctuation">.</span>0<span class="token punctuation">.</span>30 <span class="token string">"umask 077; mkdir -p ~/.ssh &amp;&amp; chmod 700 ~/.ssh &amp;&amp; cat &gt;&gt; ~/.ssh/authorized_keys &amp;&amp; chmod 600 ~/.ssh/authorized_keys"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>也可以手动复制 <code>.pub</code> 文件的整行内容，在 Linux 目标账号下追加到 <code>~/.ssh/authorized_keys</code>，每把公钥单独一行。不要覆盖已经存在的其他授权。</p>
+<p>最后验证：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> <span class="token parameter variable">-i</span> ~/.ssh/id_ed25519 dev@100.90.0.30<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果已经解锁了私钥，可以进一步用非交互模式检查：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> <span class="token parameter variable">-o</span> <span class="token assign-left variable">BatchMode</span><span class="token operator">=</span>yes dev@100.90.0.30 <span class="token string">"hostname; whoami"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>带口令的私钥尚未解锁时，<code>BatchMode=yes</code> 也可能失败，所以不能仅凭这个测试失败就断定服务器拒绝了公钥。</p>
+<h3 id="4-Windows-目标账号的公钥路径有区别"><a href="#4-Windows-目标账号的公钥路径有区别" class="headerlink" title="4. Windows 目标账号的公钥路径有区别"></a>4. Windows 目标账号的公钥路径有区别</h3><p>Windows OpenSSH 默认配置需要区分普通用户和管理员组用户：</p>
+<table>
+<thead>
+<tr>
+<th align="left">目标账号类型</th>
+<th align="left">默认公钥授权文件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">标准用户</td>
+<td align="left"><code>C:\Users\目标用户名\.ssh\authorized_keys</code></td>
+</tr>
+<tr>
+<td align="left">本地 Administrators 组成员</td>
+<td align="left"><code>C:\ProgramData\ssh\administrators_authorized_keys</code></td>
+</tr>
+</tbody></table>
+<p>最终以目标机器的 <code>C:\ProgramData\ssh\sshd_config</code> 为准，尤其要检查 <code>Match Group administrators</code> 与 <code>AuthorizedKeysFile</code> 配置。</p>
+<p>对于标准用户，在该目标用户自己的会话中创建 <code>.ssh</code> 目录并编辑 <code>authorized_keys</code>，追加客户端的公钥即可。</p>
+<p>对于默认规则下的管理员组用户，在目标 Windows 的管理员 PowerShell 中操作：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token variable">$keyFile</span> = <span class="token string">"<span class="token variable">$env</span>:ProgramData\ssh\administrators_authorized_keys"</span>
+<span class="token function">New-Item</span> <span class="token operator">-</span>ItemType Directory <span class="token operator">-</span>Path <span class="token string">"<span class="token variable">$env</span>:ProgramData\ssh"</span> <span class="token operator">-</span>Force <span class="token punctuation">|</span> <span class="token function">Out-Null</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">-not</span> <span class="token punctuation">(</span><span class="token function">Test-Path</span> <span class="token operator">-</span>LiteralPath <span class="token variable">$keyFile</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">New-Item</span> <span class="token operator">-</span>ItemType File <span class="token operator">-</span>Path <span class="token variable">$keyFile</span> <span class="token punctuation">|</span> <span class="token function">Out-Null</span>
+<span class="token punctuation">}</span>
+notepad <span class="token variable">$keyFile</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在记事本里追加客户端公钥，保持一行一把公钥并保存。这个管理员授权文件需要限制为 Administrators 与 SYSTEM 可访问。中文 Windows 可以使用 SID，避免组名本地化带来的差异：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">icacls <span class="token variable">$keyFile</span> <span class="token operator">/</span>inheritance:r
+icacls <span class="token variable">$keyFile</span> <span class="token operator">/</span>grant:r <span class="token string">'*S-1-5-32-544:F'</span> <span class="token string">'*S-1-5-18:F'</span>
+icacls <span class="token variable">$keyFile</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>上述命令移除继承，并设置这两个主体的权限；如果文件原本有额外的显式授权，它们不会被自动全部删除，需要结合最后的输出检查并按实际情况处理。</p>
+<p><strong>不要假定 <code>ssh-copy-id</code> 会自动处理 Windows 管理员的特殊路径和权限。</strong> 这一步可以直接参考 <a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement">微软 Windows 公钥部署说明</a>。</p>
+<h3 id="5-配置-SSH-别名"><a href="#5-配置-SSH-别名" class="headerlink" title="5. 配置 SSH 别名"></a>5. 配置 SSH 别名</h3><p>Linux / macOS 的客户端配置文件是 <code>~/.ssh/config</code>，Windows 通常是 <code>%USERPROFILE%\.ssh\config</code>。例如：</p>
+<pre class="line-numbers language-ssh-config" data-language="ssh-config"><code class="language-ssh-config">Host linux-work
+    HostName 100.90.0.30
+    User dev
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes
+    ServerAliveInterval 60
+    ServerAliveCountMax 3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>以后可以直接使用：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> linux-work
+<span class="token function">scp</span> ./notes.txt linux-work:~/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>VS Code 安装 Remote - SSH 扩展后，也可以使用这个别名连接远程开发环境。使用实际的 Tailscale IP 或已配置好的 MagicDNS 名称，不要把示例别名误认为已经存在的 DNS 记录。</p>
+<hr>
+<h2 id="五、Linux-执行-tailscale-up-后一直没有登录链接，怎么排查？"><a href="#五、Linux-执行-tailscale-up-后一直没有登录链接，怎么排查？" class="headerlink" title="五、Linux 执行 tailscale up 后一直没有登录链接，怎么排查？"></a>五、Linux 执行 tailscale up 后一直没有登录链接，怎么排查？</h2><p>遇到没有登录链接、命令一直等待的情况，可以先按下面的顺序检查，再根据输出决定是否修改配置。</p>
+<p><img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/tailscale-remote-access-20261103/03-linux-login-troubleshooting-845fa401de444f19.png" alt="Linux Tailscale 登录无链接时，从后台服务、注册日志、HTTPS 测试到控制协议对照的排查流程"></p>
+<p><em>图 3：普通 HTTPS 请求返回 302，不能证明控制连接正常或设备已经注册。这里展示的是排查路径，本文案例的最终原因仍待定位。自制教学示意图，AI 辅助绘制。</em></p>
+<h3 id="1-先区分“没有输出”和“正在等待密码”"><a href="#1-先区分“没有输出”和“正在等待密码”" class="headerlink" title="1. 先区分“没有输出”和“正在等待密码”"></a>1. 先区分“没有输出”和“正在等待密码”</h3><p>Linux 输入 <code>sudo</code> 密码时通常不会显示字符或星号，这是正常现象。但如果密码已经输入完成，命令长时间没有登录链接，就需要检查后台服务。</p>
+<p>这次遇到的现象是：执行 <code>tailscale login</code>、<code>tailscale up</code> 和 <code>tailscale up --qr</code>，都停在空行；按下 <code>Ctrl+C</code> 后显示：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">^Ccontext canceled<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这里的 <code>context canceled</code> 是取消命令后的结果。单靠它看不出登录为什么卡住，反复切换这几个登录命令也不会补充多少诊断信息。</p>
+<h3 id="2-检查服务状态和后台日志"><a href="#2-检查服务状态和后台日志" class="headerlink" title="2. 检查服务状态和后台日志"></a>2. 检查服务状态和后台日志</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> systemctl status tailscaled --no-pager <span class="token parameter variable">-l</span>
+<span class="token function">sudo</span> journalctl <span class="token parameter variable">-u</span> tailscaled <span class="token parameter variable">-n</span> <span class="token number">60</span> --no-pager<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>这次实际观察到的是：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Active: active (running)
+Status: "Needs login: "
+
+register request: Post "https://controlplane.tailscale.com/machine/register":
+connection attempts aborted by context: context deadline exceeded<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这说明服务进程正在运行，但注册请求没有及时完成。此时修改 SSH 公钥、重启 <code>sshd</code>，或者继续配置 RDP 权限，都不会处理注册连接本身的问题。<a target="_blank" rel="noopener" href="https://tailscale.com/docs/features/logging?tab=linux">官方日志查看说明</a></p>
+<h3 id="3-分别检查代理访问与显式直连"><a href="#3-分别检查代理访问与显式直连" class="headerlink" title="3. 分别检查代理访问与显式直连"></a>3. 分别检查代理访问与显式直连</h3><p>查看当前终端的代理变量：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">printenv</span> https_proxy HTTPS_PROXY http_proxy HTTP_PROXY ALL_PROXY all_proxy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果输出包含代理账号密码，分享排障信息时遮住凭据。本文案例中，终端使用的 HTTP 代理地址是 <code>http://127.0.0.1:7890</code>。</p>
+<p>先测试当前环境下的 HTTPS 访问：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-I</span> --connect-timeout <span class="token number">5</span> --max-time <span class="token number">15</span> https://controlplane.tailscale.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果出现：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">HTTP/1.1 200 Connection established
+HTTP/2 302<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>前一行说明 HTTP 代理建立了 CONNECT 隧道，后一行是目标网站返回的重定向响应。</p>
+<p>然后绕过 curl 的显式代理设置再测试：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">--noproxy</span> <span class="token string">'*'</span> <span class="token parameter variable">-I</span> --connect-timeout <span class="token number">5</span> --max-time <span class="token number">15</span> https://controlplane.tailscale.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这里的“绕过代理”针对 curl 的显式代理设置，不会自动绕过系统中的透明代理、TUN 路由或上游网关。</p>
+<p>本次排查中，两种方式都获得了 <code>HTTP/2 302</code>。因此，不能把“后台没有继承终端代理”直接写成已经确认的故障原因。</p>
+<h3 id="4-curl-能访问，不等于控制协议能连接"><a href="#4-curl-能访问，不等于控制协议能连接" class="headerlink" title="4. curl 能访问，不等于控制协议能连接"></a>4. curl 能访问，不等于控制协议能连接</h3><p>普通网页请求与 Tailscale 注册使用的控制连接并不等价。curl 与 Tailscale 还可能在代理环境、地址选择、TLS 实现和连接升级等方面存在差异。</p>
+<p>接下来可以使用官方代码中提供的 <code>ts2021</code> 诊断命令。先检查版本和本机帮助：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">tailscale version
+tailscale debug ts2021 <span class="token parameter variable">--help</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><code>debug</code> 子命令属于诊断接口，官方源码明确说明它不是稳定接口。不同版本可能没有该子命令或某个参数；不支持时保留版本和原报错，不要继续照搬后面的选项。<a target="_blank" rel="noopener" href="https://github.com/tailscale/tailscale/blob/main/cmd/tailscale/cli/debug.go">官方诊断命令源码</a></p>
+<p>如果本机支持，可以做两次对照。下面使用 Linux 的 <code>timeout</code> 限制等待时间，不修改永久环境配置。</p>
+<p><strong>第一次：清除本次诊断进程的代理变量。</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">env</span> <span class="token parameter variable">-u</span> HTTP_PROXY <span class="token parameter variable">-u</span> HTTPS_PROXY <span class="token parameter variable">-u</span> ALL_PROXY <span class="token punctuation">\</span>
+    <span class="token parameter variable">-u</span> http_proxy <span class="token parameter variable">-u</span> https_proxy <span class="token parameter variable">-u</span> all_proxy <span class="token punctuation">\</span>
+    <span class="token function">timeout</span> 40s tailscale debug ts2021 <span class="token parameter variable">--verbose</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>第二次：明确使用已经确认可用的本机 HTTP 代理。</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">env</span> <span class="token parameter variable">-u</span> ALL_PROXY <span class="token parameter variable">-u</span> all_proxy <span class="token punctuation">\</span>
+    <span class="token assign-left variable">HTTP_PROXY</span><span class="token operator">=</span>http://127.0.0.1:7890 <span class="token punctuation">\</span>
+    <span class="token assign-left variable">HTTPS_PROXY</span><span class="token operator">=</span>http://127.0.0.1:7890 <span class="token punctuation">\</span>
+    <span class="token assign-left variable">http_proxy</span><span class="token operator">=</span>http://127.0.0.1:7890 <span class="token punctuation">\</span>
+    <span class="token assign-left variable">https_proxy</span><span class="token operator">=</span>http://127.0.0.1:7890 <span class="token punctuation">\</span>
+    <span class="token assign-left variable">NO_PROXY</span><span class="token operator">=</span>localhost,127.0.0.1 <span class="token punctuation">\</span>
+    <span class="token assign-left variable">no_proxy</span><span class="token operator">=</span>localhost,127.0.0.1 <span class="token punctuation">\</span>
+    <span class="token function">timeout</span> 40s tailscale debug ts2021 <span class="token parameter variable">--verbose</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>代理地址按实际情况替换。<code>127.0.0.1</code> 指运行这些命令的 Linux 自己；如果代理在另一台电脑上，不能直接套用这个地址。</p>
+<p>这两次诊断在当前用户的终端中执行，测试的是诊断进程自身的连接，不会替后台完成登录，也不完整复现后台注册时的全部状态。</p>
+<table>
+<thead>
+<tr>
+<th align="left">对照结果</th>
+<th align="left">可以继续检查什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">直连失败、代理成功</td>
+<td align="left">让后台服务使用相同代理，再验证注册</td>
+</tr>
+<tr>
+<td align="left">两种都失败</td>
+<td align="left">根据输出判断失败在获取公钥、TLS 握手还是控制连接</td>
+</tr>
+<tr>
+<td align="left">直连成功、后台失败</td>
+<td align="left">核对后台环境、版本与完整注册日志</td>
+</tr>
+<tr>
+<td align="left">两种都成功</td>
+<td align="left">回到后台登录流程检查，不能仅凭诊断成功宣布注册成功</td>
+</tr>
+</tbody></table>
+<h3 id="5-只有证据支持时，才修改后台代理"><a href="#5-只有证据支持时，才修改后台代理" class="headerlink" title="5. 只有证据支持时，才修改后台代理"></a>5. 只有证据支持时，才修改后台代理</h3><p><code>tailscaled</code> 由 systemd 启动，不会自动继承当前 shell 的代理变量。官方 Linux 服务文件会读取 <code>/etc/default/tailscaled</code>，因此可以在确实需要代理时，通过这个文件配置。<a target="_blank" rel="noopener" href="https://github.com/tailscale/tailscale/blob/main/cmd/tailscaled/tailscaled.service">服务文件源码</a>、<a target="_blank" rel="noopener" href="https://github.com/tailscale/tailscale/issues/10235">官方仓库相关讨论</a></p>
+<p>先用 <code>systemctl cat tailscaled</code> 检查本机实际的 <code>EnvironmentFile</code> 设置。确认使用这个文件后，保留原有 <code>PORT</code>、<code>FLAGS</code> 等内容，在其中添加或修改：</p>
+<pre class="line-numbers language-ini" data-language="ini"><code class="language-ini"><span class="token key attr-name">HTTP_PROXY</span><span class="token punctuation">=</span><span class="token value attr-value">"<span class="token inner-value">http://127.0.0.1:7890</span>"</span>
+<span class="token key attr-name">HTTPS_PROXY</span><span class="token punctuation">=</span><span class="token value attr-value">"<span class="token inner-value">http://127.0.0.1:7890</span>"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>不要使用只提供 SOCKS 服务的端口去冒充 HTTP 代理。已有 <code>NO_PROXY</code> / <code>no_proxy</code> 等配置时，也应检查它们是否让控制服务器绕过代理。</p>
+<p>修改环境文件后，重启服务并重新登录：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> systemctl restart tailscaled
+<span class="token function">sudo</span> tailscale up <span class="token parameter variable">--timeout</span><span class="token operator">=</span>30s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>截至本文整理时，上述案例尚未取得控制协议对照测试和后续登录成功的结果。</strong> 已确认的只有后台注册超时、普通 HTTPS 的代理与显式直连测试均可返回响应；后台代理配置是按测试结果选择的处理分支，不是已经验证的修复结论。</p>
+<hr>
+<h2 id="六、组网以后，如何使用-Windows-RDP-Shadow？"><a href="#六、组网以后，如何使用-Windows-RDP-Shadow？" class="headerlink" title="六、组网以后，如何使用 Windows RDP Shadow？"></a>六、组网以后，如何使用 Windows RDP Shadow？</h2><h3 id="1-普通-RDP-与-Shadow-的区别"><a href="#1-普通-RDP-与-Shadow-的区别" class="headerlink" title="1. 普通 RDP 与 Shadow 的区别"></a>1. 普通 RDP 与 Shadow 的区别</h3><p>普通 RDP 用于登录远程 Windows 桌面，可能创建或重新连接自己的会话。Shadow 则连接指定的已有用户会话，适合查看对方正在操作的内容。</p>
+<p>在支持远程桌面主机的 Windows 版本中开启远程桌面，并确认账号具备所需权限。Windows 家庭版可以作为客户端，但不提供内置远程桌面主机功能。<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/remotepc/remote-desktop-allow-access">微软远程桌面配置说明</a></p>
+<p>在目标 Windows 上运行：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">quser<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>例如输出：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">用户名    会话名      ID    状态
+alice     console      1    运行中<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>这是示例会话，实际使用时重新查询 ID。随后在另一台 Windows 上执行：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">mstsc <span class="token operator">/</span>v:100<span class="token punctuation">.</span>90<span class="token punctuation">.</span>0<span class="token punctuation">.</span>20 <span class="token operator">/</span>shadow:1 <span class="token operator">/</span>control <span class="token operator">/</span>prompt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><code>/shadow:1</code> 指定会话，<code>/control</code> 请求鼠标键盘控制，<code>/prompt</code> 提示输入连接凭据。去掉 <code>/control</code> 后仅查看。组网不会取消目标电脑的认证、Shadow 权限或用户确认策略。</p>
+<h3 id="2-目标电脑上的控制规则"><a href="#2-目标电脑上的控制规则" class="headerlink" title="2. 目标电脑上的控制规则"></a>2. 目标电脑上的控制规则</h3><p>在目标电脑中打开 <code>gpedit.msc</code>，找到：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">计算机配置 → 管理模板 → Windows 组件 → 远程桌面服务
+→ 远程桌面会话主机 → 连接
+→ 设置远程桌面服务用户会话的远程控制规则<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>可以根据协助需求选择“经用户允许完全控制”或“经用户允许查看会话”。组织管理的电脑以实际生效策略为准。</p>
+<p><code>/noConsentPrompt</code> 只有在目标策略允许无需确认时才适用，不能绕过账号认证或强行覆盖目标策略。<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-terminalserver#ts_remotecontrol_2">微软策略说明</a></p>
+<h3 id="3-为什么普通-RDP-端口映射不能直接套给-Shadow？"><a href="#3-为什么普通-RDP-端口映射不能直接套给-Shadow？" class="headerlink" title="3. 为什么普通 RDP 端口映射不能直接套给 Shadow？"></a>3. 为什么普通 RDP 端口映射不能直接套给 Shadow？</h3><p>普通 RDP 可以使用 <code>mstsc /v:入口地址:映射端口</code>。但 Shadow 建立连接时还涉及远程管理接口和桌面共享连接，不能假定把 <code>3389</code> 映射出去就能覆盖它需要的全部通信。<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-tsts/48650711-3fe3-43ec-856e-930fd638ea21">微软 Shadow 接口定义</a></p>
+<p>这次实际使用中，局域网 Shadow 可以连接，而带映射端口的入口报“此计算机名无效”。这只能作为症状记录，不能仅凭这一条报错就断言所有系统版本都不支持某种语法。</p>
+<p>通过 Tailscale 时，直接使用目标设备的 Tailscale IP，并按需检查目标防火墙中的 SMB 管理通路及 Shadow 相关规则。单独测试 TCP 3389 成功，也不能证明这些通路都正常。</p>
+<p>另外，小米路由器中要求填写“服务器、用户名、密码”的 PPTP/L2TP“添加服务”页面，是连接已有 VPN 服务器的入口；这个页面本身不会替你创建一个供外部设备接入的 VPN 服务器。两端直接安装 Tailscale 时，不需要填写它。</p>
+<h3 id="4-mstsc-常用参数与-Windows-快捷键"><a href="#4-mstsc-常用参数与-Windows-快捷键" class="headerlink" title="4. mstsc 常用参数与 Windows 快捷键"></a>4. mstsc 常用参数与 Windows 快捷键</h3><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>/v:主机</code></td>
+<td align="left">指定目标；普通 RDP 可附加端口</td>
+</tr>
+<tr>
+<td align="left"><code>/prompt</code></td>
+<td align="left">连接时提示输入凭据</td>
+</tr>
+<tr>
+<td align="left"><code>/f</code></td>
+<td align="left">普通远程桌面全屏启动</td>
+</tr>
+<tr>
+<td align="left"><code>/w:1600 /h:900</code></td>
+<td align="left">设置普通远程桌面窗口尺寸</td>
+</tr>
+<tr>
+<td align="left"><code>/multimon</code></td>
+<td align="left">普通远程桌面使用多个本地显示器</td>
+</tr>
+<tr>
+<td align="left"><code>/l</code></td>
+<td align="left">列出本地显示器 ID</td>
+</tr>
+<tr>
+<td align="left"><code>/admin</code></td>
+<td align="left">服务器管理会话，不会额外赋予管理员权限</td>
+</tr>
+<tr>
+<td align="left"><code>/edit "连接.rdp"</code></td>
+<td align="left">编辑已保存的连接配置</td>
+</tr>
+<tr>
+<td align="left"><code>/shadow:ID</code></td>
+<td align="left">查看指定的已有会话</td>
+</tr>
+<tr>
+<td align="left"><code>/control</code></td>
+<td align="left">Shadow 时请求控制鼠标键盘</td>
+</tr>
+<tr>
+<td align="left"><code>/noConsentPrompt</code></td>
+<td align="left">目标策略允许时不请求用户确认</td>
+</tr>
+<tr>
+<td align="left"><code>/?</code></td>
+<td align="left">查看本机 mstsc 支持的参数</td>
+</tr>
+</tbody></table>
+<p>显示、多屏等普通 RDP 选项不能保证在 Shadow 中同样生效。<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/mstsc">mstsc 官方参数说明</a></p>
+<p>Windows 快捷键也由客户端单独处理。普通 RDP 可以进入“显示选项 → 本地资源 → 键盘”，把“应用 Windows 组合键”设置为“在远程计算机上”。对应 <code>.rdp</code> 配置是：</p>
+<pre class="line-numbers language-ini" data-language="ini"><code class="language-ini">keyboardhook:i:1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>默认值 <code>2</code> 表示仅全屏时把组合键发送给远端，<code>0</code> 表示在本机处理。<code>/control</code> 本身不会强制接管全部系统快捷键；Shadow 是否遵循同样的设置，要在实际版本中验证。<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows/win32/termserv/terminal-services-shortcut-keys">微软快捷键说明</a>、<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/azure/virtual-desktop/rdp-properties">RDP 属性说明</a></p>
+<hr>
+<h2 id="七、常见问题与验证顺序"><a href="#七、常见问题与验证顺序" class="headerlink" title="七、常见问题与验证顺序"></a>七、常见问题与验证顺序</h2><table>
+<thead>
+<tr>
+<th align="left">现象</th>
+<th align="left">优先检查</th>
+<th align="left">不能直接推出什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>tailscale up</code> 不返回链接</td>
+<td align="left"><code>tailscaled</code> 状态、注册日志、控制连接</td>
+<td align="left">不能直接认定是 SSH 密钥问题</td>
+</tr>
+<tr>
+<td align="left">curl 首页返回 <code>302</code></td>
+<td align="left">再检查实际控制协议连接</td>
+<td align="left">不能认定设备注册成功</td>
+</tr>
+<tr>
+<td align="left">状态列表能看到设备</td>
+<td align="left"><code>tailscale ping</code>、访问规则、系统防火墙</td>
+<td align="left">不能认定所有服务已放行</td>
+</tr>
+<tr>
+<td align="left">SSH <code>Connection refused</code></td>
+<td align="left"><code>sshd</code> 是否监听、端口与拒绝规则</td>
+<td align="left">不能仅归因于“设备没组网”</td>
+</tr>
+<tr>
+<td align="left">SSH <code>Permission denied</code></td>
+<td align="left">系统用户名、密钥、授权路径及权限</td>
+<td align="left">不代表 Tailscale 网络一定有问题</td>
+</tr>
+<tr>
+<td align="left">SSH 主机指纹变化</td>
+<td align="left">目标身份、系统重装或地址复用情况</td>
+<td align="left">不应直接关闭主机身份检查</td>
+</tr>
+<tr>
+<td align="left">普通 RDP 能用，Shadow 失败</td>
+<td align="left">活动会话、控制权限、策略及相关网络通路</td>
+<td align="left">不能只看 3389 是否能连通</td>
+</tr>
+</tbody></table>
+<p>排查 SSH 认证时，可以使用详细输出：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> <span class="token parameter variable">-vvv</span> dev@100.90.0.30<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>排查登录状态时，则回到：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">tailscale status
+<span class="token function">sudo</span> journalctl <span class="token parameter variable">-u</span> tailscaled <span class="token parameter variable">-n</span> <span class="token number">60</span> --no-pager<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>这两个方向不要混在一起。先确认卡在哪一层，再修改对应配置，通常比同时改 DNS、代理、SSH 和防火墙更容易找到原因。</p>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Tailscale 把不同网络里的设备接起来，OpenSSH 决定能否进入终端，RDP 和 Shadow 则负责不同的桌面访问场景。配置时先验证组网，再检查目标服务，最后处理系统账号和密钥，会更容易判断每一步是否完成。</p>
+<p>这次排查也提醒我，命令输出要按它实际证明的内容来理解：服务在运行不等于已经登录，curl 能打开网页不等于控制连接正常，局域网里可用的 Shadow 也不等于单端口转发后一定可用。把这些边界记清楚，后面再遇到同类问题，至少知道下一条命令应该查哪里。</p>
+<hr>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://tailscale.com/docs/install/linux">Tailscale 官方 Linux 安装说明</a></li>
+<li><a target="_blank" rel="noopener" href="https://tailscale.com/docs/how-to/connect-to-devices">Tailscale 设备连接与故障检查</a></li>
+<li><a target="_blank" rel="noopener" href="https://tailscale.com/docs/features/tailscale-ssh">Tailscale 官方 SSH 功能说明</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/tailscale/tailscale">Tailscale Linux 服务与诊断命令源码</a></li>
+<li><a target="_blank" rel="noopener" href="https://man.openbsd.org/ssh_config">OpenSSH 客户端配置手册</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement">微软 Windows OpenSSH 公钥管理说明</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/mstsc">微软 mstsc 参数文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/QiYongchuan/MyGitBlog/issues/148">QiYongchuan：Tailscale + SSH 多设备并网完整教程</a>：作为选题参考，本文另行核对官方文档，并补充本次实际排障中的证据边界。</li>
+</ul>
+
+        </article>
+
+        
+        <section class="post-near">
+            <ul>
+                
+                        <li>上一篇: 看完啦 (つд⊂)</li>
+                        
+                            
+                                <li>下一篇: <a href="/2026/10/29/2026-10-29-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-RSI%E6%96%B9%E5%90%91%E5%AF%BC%E8%AF%BB%E4%B8%8E%E8%AE%BA%E6%96%87%E5%9C%B0%E5%9B%BE/">
+                                        RSI 方向导读：从自我反思、技能演化到递归自我改进
+                                    </a></li>
+                                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+                <a class="-none-link" href="/tags/Linux/" rel="tag">Linux</a><a class="-none-link" href="/tags/Tailscale/" rel="tag">Tailscale</a><a class="-none-link" href="/tags/%E7%BB%88%E7%AB%AF%E5%B7%A5%E5%85%B7/" rel="tag">终端工具</a><a class="-none-link" href="/tags/troubleshooting/" rel="tag">问题解决</a>
+            </section>
+            
+                
+                    
+                        <section class="post-comments">
+                            <div id="giscus-container"></div>
+                        </section>
+                        <script>
+                            (function() {
+                                function getGiscusTheme() {
+                                    return document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+                                }
+
+                                const giscus = document.createElement('script');
+                                giscus.src = 'https://giscus.app/client.js';
+                                giscus.setAttribute('data-repo', 'tkzzzzzz6/my_hexo_blog');
+                                giscus.setAttribute('data-repo-id', 'R_kgDOP3Y_BA');
+                                giscus.setAttribute('data-category', 'Announcements');
+                                giscus.setAttribute('data-category-id', 'DIC_kwDOP3Y_BM4C8sQ1');
+                                giscus.setAttribute('data-mapping', 'pathname');
+                                giscus.setAttribute('data-reactions-enabled', '1');
+                                giscus.setAttribute('data-emit-metadata', '0');
+                                giscus.setAttribute('data-input-position', 'top');
+                                giscus.setAttribute('data-lang', 'zh-CN');
+                                giscus.setAttribute('data-loading', 'lazy');
+                                giscus.setAttribute('data-theme', getGiscusTheme());
+                                giscus.setAttribute('crossorigin', 'anonymous');
+                                giscus.async = true;
+                                document.getElementById('giscus-container').appendChild(giscus);
+
+                                new MutationObserver(function() {
+                                    var frame = document.querySelector('iframe.giscus-frame');
+                                    if (frame) {
+                                        frame.contentWindow.postMessage({
+                                            giscus: { setConfig: { theme: getGiscusTheme() } }
+                                        }, 'https://giscus.app');
+                                    }
+                                }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+                            })();
+                        </script>
+                        
+                            
+                                <section class="post-author">
+                                    
+                                        <figure class="author-avatar">
+                                            <img src="https://tk-pichost-1325224430.cos.ap-chengdu.myqcloud.com/blog/avator.jpeg" alt="ttkqwe" />
+                                        </figure>
+                                        
+                                            <div class="author-info">
+                                                <h4>
+                                                    ttkqwe
+                                                </h4>
+                                                <p>BUG 制造机，菜，但爱折腾(¦3[▓▓] zzZ。<br> 本站未注明转载的文章均为原创，并采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow">CC BY-NC-SA 4.0</a> 授权协议，<span style="color: #E91E63">转载请注明来源</span>，谢谢！</p>
+                                            </div>
+                                </section>
+                                
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <button class="to-top" href="#"></button>
+    </div>
+    <div class="wrap min">
+        
+        
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2026/11/03/2026-11-03-Tailscale%20%E5%A4%9A%E8%AE%BE%E5%A4%87%E7%BB%84%E7%BD%91%E4%B8%8E%20SSH%20%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/">Tailscale 多设备组网与 SSH 远程访问配置记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/10/29/2026-10-29-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-RSI%E6%96%B9%E5%90%91%E5%AF%BC%E8%AF%BB%E4%B8%8E%E8%AE%BA%E6%96%87%E5%9C%B0%E5%9B%BE/">RSI 方向导读：从自我反思、技能演化到递归自我改进</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/10/29/2026-10-30-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8E%A8%E7%90%86%E6%A1%86%E6%9E%B6%E5%AF%BC%E8%AF%BB%E4%B8%8E%E8%AE%BA%E6%96%87%E5%9C%B0%E5%9B%BE/">大模型推理框架导读：从一次请求到 vLLM、SGLang 与分布式服务</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/10/28/2026-10-28-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-HydraLoRA/">HydraLoRA 论文阅读：为什么多个 LoRA 可以共享 A，却保留不同的 B？</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/10/28/2026-10-28-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E5%88%86%E7%BB%84%E8%83%8C%E5%8C%85/">牛客每日一题-【模板】分组背包</a></li><li class="post-list-item"><a class="post-list-link" href="/2026/10/21/2026-10-21-%E7%89%9B%E5%AE%A2%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92/">牛客每日一题-杨辉三角</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/11/">十一月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/10/">十月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/09/">九月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/08/">八月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/07/">七月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/06/">六月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/05/">五月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">四月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">一月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">十二月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">十一月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">十月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/08/">八月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/07/">七月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">六月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/05/">五月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/04/">四月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/AcWing/" style="font-size: 12.73px;">AcWing</a> <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/CLI-%E5%B7%A5%E5%85%B7/" style="font-size: 10.91px;">CLI 工具</a> <a href="/tags/CPP/" style="font-size: 10.91px;">CPP</a> <a href="/tags/CSP/" style="font-size: 12.73px;">CSP</a> <a href="/tags/Claude-Code/" style="font-size: 10.91px;">Claude Code</a> <a href="/tags/CodeStats/" style="font-size: 10px;">CodeStats</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/FastDeploy/" style="font-size: 10px;">FastDeploy</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hugging-Face/" style="font-size: 10px;">Hugging Face</a> <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/LeetCode/" style="font-size: 19.09px;">LeetCode</a> <a href="/tags/LeetCode-225/" style="font-size: 10px;">LeetCode-225</a> <a href="/tags/Linux/" style="font-size: 11.82px;">Linux</a> <a href="/tags/Linux-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%91%BD%E4%BB%A4%E8%A1%8C-%E5%AE%9E%E9%AA%8C/" style="font-size: 10px;">Linux, 操作系统, 命令行, 实验</a> <a href="/tags/LoRA/" style="font-size: 10px;">LoRA</a> <a href="/tags/MLLM/" style="font-size: 10px;">MLLM</a> <a href="/tags/Neovim/" style="font-size: 10px;">Neovim</a> <a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a> <a href="/tags/PV%E6%93%8D%E4%BD%9C/" style="font-size: 10px;">PV操作</a> <a href="/tags/PaddleOCR/" style="font-size: 10px;">PaddleOCR</a> <a href="/tags/TTS-%E6%8E%A8%E7%90%86%E4%BE%A7%E7%BC%A9%E6%94%BE/" style="font-size: 10px;">TTS(推理侧缩放)</a> <a href="/tags/Tailscale/" style="font-size: 10px;">Tailscale</a> <a href="/tags/TopK/" style="font-size: 10px;">TopK</a> <a href="/tags/Trie-%E5%AD%97%E5%85%B8%E6%A0%91/" style="font-size: 10px;">Trie 字典树</a> <a href="/tags/VS-Code/" style="font-size: 11.82px;">VS Code</a> <a href="/tags/Visual-Studio/" style="font-size: 10px;">Visual Studio</a> <a href="/tags/WSL/" style="font-size: 10px;">WSL</a> <a href="/tags/Windows/" style="font-size: 11.82px;">Windows</a> <a href="/tags/dotfiles/" style="font-size: 10px;">dotfiles</a> <a href="/tags/gh/" style="font-size: 10px;">gh</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nvm/" style="font-size: 10px;">nvm</a> <a href="/tags/vibe-coding/" style="font-size: 10px;">vibe coding</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86/" style="font-size: 10px;">中序遍历</a> <a href="/tags/%E4%B9%B1%E7%A0%81/" style="font-size: 10px;">乱码</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/" style="font-size: 10px;">二分搜索</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10.91px;">二分查找</a> <a href="/tags/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/" style="font-size: 10px;">二分答案</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86/" style="font-size: 10px;">二叉树的遍历</a> <a href="/tags/%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">二维前缀和</a> <a href="/tags/%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/" style="font-size: 10px;">二维数组</a> <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/" style="font-size: 10px;">人工智能基础设施</a> <a href="/tags/%E4%BB%A3%E7%90%86/" style="font-size: 10.91px;">代理</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/" style="font-size: 10px;">代码随想录</a> <a href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/" style="font-size: 10px;">优先队列</a> <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" style="font-size: 12.73px;">位运算</a> <a href="/tags/%E4%BD%8E%E7%A7%A9%E9%80%82%E5%BA%94/" style="font-size: 10px;">低秩适应</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" style="font-size: 10px;">信息安全</a> <a href="/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/" style="font-size: 10px;">具身智能</a> <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 10px;">内网穿透</a> <a href="/tags/%E5%88%86%E7%BB%84%E8%83%8C%E5%8C%85/" style="font-size: 10px;">分组背包</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 10px;">前缀和</a> <a href="/tags/%E5%89%8D%E7%BC%80%E6%A0%91/" style="font-size: 10px;">前缀树</a> <a href="/tags/%E5%89%91%E6%8C%87-Offer/" style="font-size: 10px;">剑指 Offer</a> <a href="/tags/%E5%89%91%E6%8C%87-offer/" style="font-size: 10.91px;">剑指 offer</a> <a href="/tags/%E5%89%AA%E7%BB%B3%E5%AD%90/" style="font-size: 10px;">剪绳子</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 13.64px;">动态规划</a> <a href="/tags/%E5%8F%82%E6%95%B0%E9%AB%98%E6%95%88%E5%BE%AE%E8%B0%83/" style="font-size: 10px;">参数高效微调</a> <a href="/tags/%E5%8F%82%E6%95%B0%E9%AB%98%E6%95%88%E5%BE%AE%E8%B0%83-PEFT/" style="font-size: 10px;">参数高效微调(PEFT)</a> <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" style="font-size: 14.55px;">双指针</a> <a href="/tags/%E5%8F%AF%E6%8F%90%E7%A4%BA%E8%A7%86%E8%A7%89%E5%88%86%E5%89%B2/" style="font-size: 10px;">可提示视觉分割</a> <a href="/tags/%E5%90%8E%E7%BB%A7%E8%8A%82%E7%82%B9/" style="font-size: 10px;">后继节点</a> <a href="/tags/%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">后缀表达式</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" style="font-size: 10px;">命令总结</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 10px;">命令行</a> <a href="/tags/%E5%93%88%E5%B8%8C/" style="font-size: 11.82px;">哈希</a> <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" style="font-size: 13.64px;">哈希表</a> <a href="/tags/%E5%9B%BE%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/" style="font-size: 10px;">图最短路径</a> <a href="/tags/%E5%A0%86/" style="font-size: 10px;">堆</a> <a href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/" style="font-size: 10px;">多模态</a> <a href="/tags/%E5%A4%9A%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E9%97%AE%E9%A2%98/" style="font-size: 10px;">多源最短路问题</a> <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8E%A8%E7%90%86/" style="font-size: 10px;">大模型推理</a> <a href="/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" style="font-size: 10px;">大语言模型</a> <a href="/tags/%E5%AD%97%E4%BD%93/" style="font-size: 10px;">字体</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 11.82px;">字符串</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/" style="font-size: 10.91px;">字符串匹配</a> <a href="/tags/%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/" style="font-size: 10px;">容斥原理</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">工具配置</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a> <a href="/tags/%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/" style="font-size: 11.82px;">开发效率</a> <a href="/tags/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/" style="font-size: 10.91px;">快慢指针</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size: 10.91px;">快捷键</a> <a href="/tags/%E5%BF%AB%E9%80%9F%E5%B9%82/" style="font-size: 10.91px;">快速幂</a> <a href="/tags/%E6%8B%93%E6%89%91/" style="font-size: 10px;">拓扑</a> <a href="/tags/%E6%8C%87%E9%92%88/" style="font-size: 10px;">指针</a> <a href="/tags/%E6%8D%A2%E6%A0%B9-DP/" style="font-size: 10px;">换根 DP</a> <a href="/tags/%E6%8E%A8%E7%90%86%E6%A1%86%E6%9E%B6/" style="font-size: 10px;">推理框架</a> <a href="/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">插件</a> <a href="/tags/%E6%8F%92%E4%BB%B6%E6%89%93%E5%8C%85/" style="font-size: 10px;">插件打包</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">操作系统</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/mathematical-modeling/" style="font-size: 10px;">数学建模</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%A8%A1%E6%8B%9F/" style="font-size: 10px;">数据结构模拟</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/" style="font-size: 10px;">数据集</a> <a href="/tags/%E6%95%B0%E7%BB%84/" style="font-size: 10.91px;">数组</a> <a href="/tags/%E6%95%B0%E7%BB%84%E5%93%88%E5%B8%8C/" style="font-size: 10.91px;">数组哈希</a> <a href="/tags/%E6%95%B0%E8%AE%BA/" style="font-size: 10px;">数论</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA-UAVs/" style="font-size: 10px;">无人机(UAVs)</a> <a href="/tags/%E6%97%A5%E5%B8%B8/" style="font-size: 10px;">日常</a> <a href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93/" style="font-size: 10px;">智能体</a> <a href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93%E8%AE%B0%E5%BF%86/" style="font-size: 10px;">智能体记忆</a> <a href="/tags/%E6%9A%B4%E5%8A%9B/" style="font-size: 10px;">暴力</a> <a href="/tags/%E6%9A%B4%E5%8A%9B%E6%9E%9A%E4%B8%BE/" style="font-size: 10px;">暴力枚举</a> <a href="/tags/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/" style="font-size: 10px;">有效的括号</a> <a href="/tags/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA/" style="font-size: 10px;">有限状态机</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">服务器配置</a> <a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" style="font-size: 12.73px;">期末复习</a> <a href="/tags/%E6%9E%9A%E4%B8%BE/" style="font-size: 11.82px;">枚举</a> <a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">架构设计</a> <a href="/tags/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/" style="font-size: 10px;">查找算法</a> <a href="/tags/%E6%A0%88/" style="font-size: 12.73px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 10px;">树</a> <a href="/tags/%E6%A0%91%E5%BD%A2-DP/" style="font-size: 10px;">树形 DP</a> <a href="/tags/%E6%A8%A1%E5%9E%8B%E4%B8%8B%E8%BD%BD/" style="font-size: 10px;">模型下载</a> <a href="/tags/%E6%A8%A1%E6%8B%9F/" style="font-size: 13.64px;">模拟</a> <a href="/tags/%E6%A8%A1%E8%BF%90%E7%AE%97/" style="font-size: 10px;">模运算</a> <a href="/tags/%E6%AC%A7%E6%8B%89%E5%85%AC%E5%BC%8F/" style="font-size: 10px;">欧拉公式</a> <a href="/tags/deep-learning/" style="font-size: 15.45px;">深度学习</a> <a href="/tags/%E6%B7%B7%E5%90%88%E4%B8%93%E5%AE%B6/" style="font-size: 10px;">混合专家</a> <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" style="font-size: 10.91px;">滑动窗口</a> <a href="/tags/%E6%BB%9A%E5%8A%A8%E6%95%B0%E7%BB%84/" style="font-size: 10px;">滚动数组</a> <a href="/tags/%E7%89%9B%E5%AE%A2/" style="font-size: 17.27px;">牛客</a> <a href="/tags/%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9/" style="font-size: 10px;">状态压缩</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/" style="font-size: 10px;">环境变量</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 12.73px;">环境配置</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%90%8C%E6%AD%A5/" style="font-size: 10px;">环境配置同步</a> <a href="/tags/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/" style="font-size: 10px;">环形链表</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E9%BB%91%E5%AE%A2%E6%9D%BE%E6%89%93%E5%8D%A1/" style="font-size: 10px;">百度黑客松打卡</a> <a href="/tags/development/" style="font-size: 15.45px;">程序开发</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/algorithm/" style="font-size: 20px;">算法学习</a> <a href="/tags/algorithm-practice/" style="font-size: 14.55px;">算法练习</a> <a href="/tags/%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">线索二叉树</a> <a href="/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/" style="font-size: 10.91px;">组合数学</a> <a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 10px;">终端</a> <a href="/tags/%E7%BB%88%E7%AB%AF%E5%B7%A5%E5%85%B7/" style="font-size: 10.91px;">终端工具</a> <a href="/tags/%E7%BB%BC%E8%BF%B0%E8%AE%BA%E6%96%87/" style="font-size: 10px;">综述论文</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 10px;">网站</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10.91px;">网络</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">网络配置</a> <a href="/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" style="font-size: 10px;">背包问题</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E7%A0%94%E7%A9%B6/" style="font-size: 10px;">自动化研究</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%A4%B4%E8%8A%82%E7%82%B9/" style="font-size: 11.82px;">虚拟头节点</a> <a href="/tags/%E8%A7%86%E9%A2%91%E5%88%86%E5%89%B2/" style="font-size: 10px;">视频分割</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" style="font-size: 10px;">计算机图形学</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6-%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">计算机图形学 课程学习</a> <a href="/tags/%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">记录</a> <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" style="font-size: 16.36px;">论文阅读</a> <a href="/tags/course/" style="font-size: 18.18px;">课程学习</a> <a href="/tags/%E8%AF%BE%E7%A8%8B%E5%AE%9E%E9%AA%8C/" style="font-size: 10px;">课程实验</a> <a href="/tags/%E8%B4%A8%E5%9B%A0%E6%95%B0%E5%88%86%E8%A7%A3/" style="font-size: 10px;">质因数分解</a> <a href="/tags/%E8%B4%A8%E6%95%B0%E7%AD%9B/" style="font-size: 10px;">质数筛</a> <a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 12.73px;">贪心</a> <a href="/tags/%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">逆波兰表达式</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 11.82px;">递归</a> <a href="/tags/%E9%80%92%E5%BD%92%E8%87%AA%E6%88%91%E6%94%B9%E8%BF%9B/" style="font-size: 10px;">递归自我改进</a> <a href="/tags/%E9%81%8D%E5%8E%86/" style="font-size: 10px;">遍历</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 14.55px;">链表</a> <a href="/tags/%E9%94%AE%E5%80%BC%E7%BC%93%E5%AD%98/" style="font-size: 10px;">键值缓存</a> <a href="/tags/troubleshooting/" style="font-size: 16.36px;">问题解决</a> <a href="/tags/%E9%98%9F%E5%88%97/" style="font-size: 10px;">队列</a>
+                </div>
+            </div>
+        </section>
+        
+        <section class="sub-footer">
+            <p>
+                © 2026 <a href="/">TK的小站</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.
+                
+                    &nbsp;|&nbsp;
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+                        蜀ICP备2025165253号
+                    </a>
+                
+                
+            </p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true,"search_engine":"bing"});</script>
+
+<style>
+.police-beian{display:inline-flex;align-items:center;gap:4px}
+.police-icon{display:inline-block;width:16px;height:16px;background:#e91e63;border-radius:2px;opacity:.85}
+/* 说明：如需官方警徽图标，可将 .police-icon 的 background 设置为图片：
+   background:url('https://www.beian.gov.cn/img/ghs.png') no-repeat center/contain; */
+</style>
+
+  </body>
+</html>
