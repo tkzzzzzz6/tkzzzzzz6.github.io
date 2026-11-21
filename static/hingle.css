@@ -1485,3 +1485,264 @@ main{
         transform: none;
     }
 }
+
+/* - 每日一题索引页
+-------------------------------- */
+
+/* -- 工具条：平台筛选 + 搜索 + 计数 */
+.daily-tools{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .75em 1em;
+    margin-bottom: 2em;
+    animation: fade-in-top .3s both;
+    -webkit-animation: fade-in-top .3s both;
+}
+
+.daily-chips{
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5em;
+}
+
+.daily-chip{
+    cursor: pointer;
+    padding: 0 .9em;
+    color: inherit;
+    font: inherit;
+    font-weight: 300;
+    line-height: 1.9em;
+    background: var(--light-background);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    transition: color .3s, border-color .3s, background .3s;
+}
+
+.daily-chip em{
+    margin-left: .4em;
+    font-size: .85em;
+    font-style: normal;
+    opacity: .55;
+}
+
+.daily-chip:hover{ color: var(--blue); border-color: var(--blue) }
+
+.daily-chip.is-active{
+    color: #fff;
+    background: var(--blue);
+    border-color: var(--blue);
+}
+
+.daily-chip.is-active em{ opacity: .8 }
+
+.daily-search{ flex: 1 1 12em }
+
+.daily-search input{
+    width: 100%;
+    padding: .4em 1em;
+    color: inherit;
+    font: inherit;
+    background: var(--light-background);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    transition: border-color .3s;
+}
+
+.daily-search input:focus{ outline: none; border-color: var(--blue) }
+
+.daily-count{
+    margin: 0;
+    font-size: .85em;
+    white-space: nowrap;
+    opacity: .65;
+}
+
+.daily-empty{
+    padding: 2em 0;
+    text-align: center;
+    opacity: .7;
+}
+
+/* -- 月份分组 */
+.daily-month{ margin-bottom: 2em }
+.daily-month[hidden]{ display: none }
+
+.daily-month-title{ margin: 0 0 .75em }
+
+.daily-month-toggle{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 0 .5em;
+    cursor: pointer;
+    color: #6e8aad;
+    font: inherit;
+    font-weight: 400;
+    text-align: left;
+    background: none;
+    border: 0;
+    border-bottom: 1px solid var(--light-border);
+}
+
+.daily-month-toggle::after{
+    content: "\f0d7";
+    margin-left: .75em;
+    font-family: "FontAwesome";
+    font-size: .8em;
+    opacity: .5;
+}
+
+.daily-month-toggle em{
+    margin-left: auto;
+    font-size: .8em;
+    font-style: normal;
+    opacity: .6;
+}
+
+.daily-list{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.daily-item{
+    padding: .6em 0;
+    border-bottom: 1px dashed var(--light-border);
+}
+
+.daily-item[hidden]{ display: none }
+.daily-item:last-child{ border-bottom: 0 }
+
+.daily-link{
+    display: flex;
+    align-items: baseline;
+    gap: .6em;
+    color: inherit;
+}
+
+.daily-date{
+    flex: 0 0 auto;
+    font-size: .85em;
+    font-variant-numeric: tabular-nums;
+    opacity: .55;
+}
+
+.daily-name{
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-bottom: 1px dashed transparent;
+    transition: color .3s, border-color .3s;
+}
+
+.daily-link:hover .daily-name{
+    color: var(--blue);
+    border-bottom-color: currentColor;
+}
+
+.daily-tags{
+    flex: 0 0 auto;
+    display: flex;
+    gap: .35em;
+}
+
+.daily-tag{
+    padding: 0 .5em;
+    font-size: .75em;
+    font-style: normal;
+    line-height: 1.9em;
+    white-space: nowrap;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    opacity: .75;
+}
+
+.daily-tag-platform{
+    color: var(--blue);
+    border-color: currentColor;
+    opacity: 1;
+}
+
+.daily-summary{
+    margin: .3em 0 0;
+    font-size: .8em;
+    opacity: .6;
+}
+
+.daily-digest{
+    margin: .3em 0 0;
+    font-size: .8em;
+    opacity: .75;
+}
+
+/* -- 首页底部的入口卡 */
+.daily-entry{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    margin-top: 3em;
+    padding: 1.25em;
+    color: inherit;
+    background: var(--light-background);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: border-color .3s, transform .3s;
+}
+
+.daily-entry:hover{
+    border-color: var(--blue);
+    transform: translateY(-2px);
+}
+
+.daily-entry-icon{
+    font-size: 1.5em;
+    color: var(--blue);
+}
+
+.daily-entry-text{
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: .2em;
+    min-width: 0;
+}
+
+.daily-entry-text strong{
+    font-size: 1.05em;
+    font-weight: 400;
+}
+
+.daily-entry-text em{
+    font-size: .8em;
+    font-style: normal;
+    opacity: .6;
+}
+
+.daily-entry-arrow{
+    color: var(--blue);
+    font-size: 1.25em;
+}
+
+@media screen and (max-width: 768px){
+    .daily-tools{ gap: .5em }
+
+    .daily-search{ flex-basis: 100% }
+
+    .daily-count{ margin-left: auto }
+
+    .daily-link{ align-items: flex-start }
+
+    .daily-name{ white-space: normal }
+
+    /* 窄屏只保留平台标签，题目标签让位给标题 */
+    .daily-tag:not(.daily-tag-platform){ display: none }
+
+    /* 月份折叠：默认展开最近两个月，其余点标题展开 */
+    .daily-month:not(.is-open) .daily-list{ display: none }
+
+    .daily-month:not(.is-open) .daily-month-toggle::after{ content: "\f0da" }
+}

@@ -1,0 +1,78 @@
+# Windows OpenSSH + google-colab-cli 0.7.5
+# Merge only the profiles you need into your existing ~/.ssh/config.
+# GPU options affect creation only. Existing sessions are reused.
+# A new GPU session consumes compute units. Availability is not guaranteed.
+# Host key checks are relaxed for temporary runtimes; see the article.
+
+Host colab
+  HostName colab-runtime
+  User root
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+  ProxyCommand colab ssh --proxy-mode -s colab --identity ~/.ssh/id_ed25519
+  StrictHostKeyChecking no
+  UserKnownHostsFile NUL
+  ServerAliveInterval 30
+  ServerAliveCountMax 3
+  ConnectTimeout 60
+
+Host colab-g4
+  HostName colab-runtime
+  User root
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+  ProxyCommand colab ssh --proxy-mode -s colab-g4 --gpu G4 --identity ~/.ssh/id_ed25519
+  StrictHostKeyChecking no
+  UserKnownHostsFile NUL
+  ServerAliveInterval 30
+  ServerAliveCountMax 3
+  ConnectTimeout 120
+
+Host colab-h100
+  HostName colab-runtime
+  User root
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+  ProxyCommand colab ssh --proxy-mode -s colab-h100 --gpu H100 --identity ~/.ssh/id_ed25519
+  StrictHostKeyChecking no
+  UserKnownHostsFile NUL
+  ServerAliveInterval 30
+  ServerAliveCountMax 3
+  ConnectTimeout 120
+
+Host colab-a100
+  HostName colab-runtime
+  User root
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+  ProxyCommand colab ssh --proxy-mode -s colab-a100 --gpu A100 --identity ~/.ssh/id_ed25519
+  StrictHostKeyChecking no
+  UserKnownHostsFile NUL
+  ServerAliveInterval 30
+  ServerAliveCountMax 3
+  ConnectTimeout 120
+
+Host colab-l4
+  HostName colab-runtime
+  User root
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+  ProxyCommand colab ssh --proxy-mode -s colab-l4 --gpu L4 --identity ~/.ssh/id_ed25519
+  StrictHostKeyChecking no
+  UserKnownHostsFile NUL
+  ServerAliveInterval 30
+  ServerAliveCountMax 3
+  ConnectTimeout 120
+
+Host colab-t4
+  HostName colab-runtime
+  User root
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+  ProxyCommand colab ssh --proxy-mode -s colab-t4 --gpu T4 --identity ~/.ssh/id_ed25519
+  StrictHostKeyChecking no
+  UserKnownHostsFile NUL
+  ServerAliveInterval 30
+  ServerAliveCountMax 3
+  ConnectTimeout 120
+
